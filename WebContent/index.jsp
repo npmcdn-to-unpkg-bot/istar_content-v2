@@ -53,7 +53,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<h2>Sign In</h2>
 				<p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a> to registration.</p>
 			</div>
-<form action="/auth/login" name="login_form">
+<form action="<%=baseURL %>auth/login" name="login_form">
 			<div class="input-group margin-bottom-20">
 				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 				<input type="text" class="form-control" placeholder="Email" name="email">
