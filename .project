@@ -3,6 +3,7 @@
 	<name>istar_content</name>
 	<comment></comment>
 	<projects>
+		<project>istardao</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
