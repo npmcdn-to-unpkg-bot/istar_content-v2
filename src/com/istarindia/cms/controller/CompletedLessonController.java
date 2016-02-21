@@ -18,6 +18,7 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.LessonService;
 
 /**
@@ -67,9 +68,14 @@ public class CompletedLessonController extends HttpServlet {
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getId().toString());
 			list_to_be_displayed.add(embed_list);
-		}	
+		}
+		
+		if(list_to_be_displayed.size() ==0 ) {
+			list_to_be_displayed = CMSRegistry.getSimulatedList(7);
+		}
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content_admin/completed_lesson.jsp");
+		request.getRequestDispatcher("/content_admin/completed_lesson.jsp").forward(request, response);
+		//response.getD sendRedirect(request.getContextPath() + "/content_admin/completed_lesson.jsp");
 		
 	}
 

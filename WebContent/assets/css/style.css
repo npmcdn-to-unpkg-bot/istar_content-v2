@@ -33,13 +33,7 @@ body.header-fixed-space-v2 {
 		padding-top: 0;
 	}
 }
-
-p,
-li,
-li a,
-label {
- color: #555;
-}
+ 
 
 a {
  color: #72c02c;

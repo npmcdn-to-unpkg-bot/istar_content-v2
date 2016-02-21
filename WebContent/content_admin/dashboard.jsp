@@ -35,8 +35,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/animate.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
-  <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 
 
 
@@ -52,7 +52,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
-				<div class="breadcrumbs">
+		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left">Content Admin Dashboard</h1>
 				<ul class="pull-right breadcrumb">
@@ -65,120 +65,100 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<section id="processes" class="g-bg-dark-blue1">
-		<div class="container content-md g-text-height-md">
+				<div class="container content-md g-text-height-md">
 
-			<div class="row g-mb-60 text-center g-heading-v7">
-				<div class="col-sm-8 col-sm-offset-2">
-					<h2 class="h2 color-light">
-						<span class="block-name">Work Process</span>
-						<span class="g-text-height-lg">Step By Step</span>
-					</h2>
-				</div>
-			</div>
+					<div class="row g-mb-60 text-center g-heading-v7">
+						<div class="col-sm-8 col-sm-offset-2">
+							<h2 class="h2 color-light">
+								<span class="block-name">Work Process</span> <span class="g-text-height-lg">Step By Step</span>
+							</h2>
+						</div>
+					</div>
 
-			<div class="row g-mb-20">
-				<div class="col-md-6 g-mb-20 steps-v1--lspace">
-					<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-						<li>
-							<h3 class="heading-sm h3">
-								<span><a class="btn-u " href="<%=baseURL %>completed_lesson">View</a></span>   All Completed Lessons
-							</h3>
-						</li>
-						<li><p>This will let you view all tasks which are assigned to Content Developers
-</p></li>
-						<li class="steps-v1__block g-rounded-50x">
-							<i class="steps-v1__icon icon-fire"></i>
-							<img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt="">
-						</li>
-					</ul>
-				</div>
+					<div class="row g-mb-20">
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>completed_lesson">View All Completed Lessons</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are assigned to Content Developers</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
 
-				<div class="col-md-6 steps-v1--rspace">
-					<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-						<li>
-							<h3 class="heading-sm h3">
-								<span>STEP 2.</span>See all Tasks in Progress
-							</h3>
-						</li>
-						<li><p>Sed feugiat porttitor nunc, non dignissim ipsum  vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
-						<li class="steps-v1__block g-rounded-50x">
-							<i class="steps-v1__icon icon-energy"></i>
-							<img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt="">
-						</li>
-					</ul>
-				</div>
-			</div>
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<span>STEP 2.</span>See all Tasks in Progress
+									</h3>
+								</li>
+								<li><p>Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+					</div>
 
-			<div class="row g-mb-50">
-				<div class="col-md-6 g-mb-20 steps-v1--lspace">
-					<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-						<li>
-							<h3 class="heading-sm h3">
-								<span>STEP 3.</span>See All tasks which are completed
-							</h3>
-						</li>
-						<li><p>Sed feugiat porttitor nunc, non dignissim ipsum  vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
-						<li class="steps-v1__block g-rounded-50x">
-							<i class="steps-v1__icon icon-rocket"></i>
-							<img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt="">
-						</li>
-					</ul>
-				</div>
+					<div class="row g-mb-50">
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<span>STEP 3.</span>See All tasks which are completed
+									</h3>
+								</li>
+								<li><p>Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-rocket"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
 
-				<div class="col-md-6 steps-v1--rspace">
-					<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-						<li>
-							<h3 class="heading-sm h3">
-								<span>STEP 4.</span>See All Tasks which are not assigned
-							</h3>
-						</li>
-						<li><p>Sed feugiat porttitor nunc, non dignissim ipsum  vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
-						<li class="steps-v1__block g-rounded-50x">
-							<i class="steps-v1__icon icon-layers"></i>
-							<img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt="">
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="row g-mb-50">
-				<div class="col-md-6 g-mb-20 steps-v1--lspace">
-					<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-						<li>
-							<h3 class="heading-sm h3">
-								<span>STEP 3.</span>PRODUCTION
-							</h3>
-						</li>
-						<li><p>Sed feugiat porttitor nunc, non dignissim ipsum  vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
-						<li class="steps-v1__block g-rounded-50x">
-							<i class="steps-v1__icon icon-rocket"></i>
-							<img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt="">
-						</li>
-					</ul>
-				</div>
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<span>STEP 4.</span>See All Tasks which are not assigned
+									</h3>
+								</li>
+								<li><p>Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-layers"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+					</div>
 
-				<div class="col-md-6 steps-v1--rspace">
-					<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-						<li>
-							<h3 class="heading-sm h3">
-								<span>STEP 4.</span>HAPPTY CLIENT
-							</h3>
-						</li>
-						<li><p>Sed feugiat porttitor nunc, non dignissim ipsum  vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
-						<li class="steps-v1__block g-rounded-50x">
-							<i class="steps-v1__icon icon-layers"></i>
-							<img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt="">
-						</li>
-					</ul>
-				</div>
-			</div>
+					<div class="row g-mb-50">
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<span>STEP 3.</span>PRODUCTION
+									</h3>
+								</li>
+								<li><p>Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-rocket"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
 
-			
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<span>STEP 4.</span>HAPPTY CLIENT
+									</h3>
+								</li>
+								<li><p>Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-layers"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+					</div>
+
+
+				</div>
+			</section>
 		</div>
-	</section>
-		</div>
-		
-		
+
+
 		<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
