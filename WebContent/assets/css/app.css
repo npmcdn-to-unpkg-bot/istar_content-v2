@@ -2181,6 +2181,7 @@ img.image-md {
 .height-400 { min-height: 400px;}
 .height-450 { min-height: 450px;}
 .height-500 { min-height: 500px !important;}
+.height-1000 { min-height: 1000px !important;}
 
 /*Spaces
 ------------------------------------*/
