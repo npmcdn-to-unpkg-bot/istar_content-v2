@@ -13,11 +13,11 @@ import com.istarindia.apps.services.PresentationService;
  * Servlet implementation class TeacherNotesPreview
  */
 @WebServlet("/teacher_notes_preview")
-public class TeacherNotesPreview extends HttpServlet {
+public class TeacherNotesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public TeacherNotesPreview() {
+    public TeacherNotesController() {
         super();
         // TODO Auto-generated constructor stub
     }
