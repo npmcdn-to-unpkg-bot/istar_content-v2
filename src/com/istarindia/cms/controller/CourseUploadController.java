@@ -23,7 +23,7 @@ import com.istarindia.apps.services.CourseService;
 /**
  * Servlet implementation class CourseUploadController
  */
-@WebServlet("/course_upload_controller")
+@WebServlet("/course_upload")
 public class CourseUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/** The Constant MEMORY_THRESHOLD. */

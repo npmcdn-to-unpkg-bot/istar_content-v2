@@ -20,7 +20,7 @@ import com.istarindia.apps.services.LessonService;
 /**
  * Servlet implementation class CreateLessonController
  */
-@WebServlet("/create_lesson_controller")
+@WebServlet("/create_lesson")
 public class CreateLessonController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

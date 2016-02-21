@@ -20,7 +20,7 @@ import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
 
-@WebServlet("/not_published_controller")
+@WebServlet("/not_published")
 public class NotPublishedController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

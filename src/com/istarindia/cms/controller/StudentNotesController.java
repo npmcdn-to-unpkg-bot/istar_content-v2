@@ -12,7 +12,7 @@ import com.istarindia.apps.services.PresentationService;
 /**
  * Servlet implementation class StudentNotesController
  */
-@WebServlet("/student_notes_controller")
+@WebServlet("/student_notes")
 public class StudentNotesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

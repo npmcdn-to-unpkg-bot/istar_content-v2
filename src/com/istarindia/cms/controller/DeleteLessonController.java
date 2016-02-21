@@ -12,7 +12,7 @@ import com.istarindia.apps.services.LessonService;
 /**
  * Servlet implementation class DeleteLessonController
  */
-@WebServlet("/delete_lesson_controller")
+@WebServlet("/delete_lesson")
 public class DeleteLessonController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
