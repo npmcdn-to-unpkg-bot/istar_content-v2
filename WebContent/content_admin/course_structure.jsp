@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.dao.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -44,6 +45,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet" href="//static.jstree.com/3.2.1/assets/dist/themes/default/style.min.css" />
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
@@ -81,9 +83,28 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<button type="submit" class="btn-u">Submit</button>
 				</footer>
 			</form>
+
+			<div id="jstree2" class="demo">
+				<ul>
+					<% CourseDAO dao = new CourseDAO();
+								for (int i =0; i< dao.findAll().size();i++) {
+								%>
+					<li>All Courses
+						<ul>
+							<li data-jstree='{ "opened" : true }'><%=((Course)dao.findAll().get(i)).getCourseName() %>
+								<ul>
+									<% for (int j =0; j< ((Course)dao.findAll().get(i)).getModules().size();j++) { %>
+									<li><%=((Module)((Course)dao.findAll().get(i)).getModules().toArray()[i]).getModuleName() %></li>
+									<% } %>
+								</ul></li>
+						</ul>
+					</li>
+					<% } %>
+				</ul>
+			</div>
 		</div>
 
-
+		<div class="container-fluid height-1000" style="padding: 0px !important"></div>
 		<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
@@ -99,10 +120,29 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jstree/jstree.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
+
+			$('#jstree2').jstree();
+			/* 
+
+			{'plugins':["wholerow","checkbox"], 'core' : {
+				'data' : [
+					{
+						"text" : "Same but with checkboxes",
+						"children" : [
+							{ "text" : "initially selected", "state" : { "selected" : true } },
+							{ "text" : "custom icon URL", "icon" : "//jstree.com/tree-icon.png" },
+							{ "text" : "initially open", "state" : { "opened" : true }, "children" : [ "Another node" ] },
+							{ "text" : "custom icon class", "icon" : "glyphicon glyphicon-leaf" }
+						]
+					},
+					"And wholerow selection"
+				]
+			}}*/
+
 		});
 	</script>
 	<!--[if lt IE 9]>
