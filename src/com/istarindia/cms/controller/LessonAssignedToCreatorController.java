@@ -20,30 +20,23 @@ import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
 
-/**
- * Servlet implementation class CreatedLessonController
- */
-@WebServlet("/created_lesson")
-public class CreatedLessonController extends HttpServlet {
+
+@WebServlet("/lesson_assigned")
+public class LessonAssignedToCreatorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreatedLessonController() {
+    
+    public LessonAssignedToCreatorController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
-		//id, lessonName, session, module, course, assigned_to, reviewed_by, mobile preview, desktop preview, deletelesson
+		//id, lessonName, session, module, course,  review_by, start working		
 		//these values can be accessed in jsp page to render the data 
-		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.CREATED);
+		List<Lesson> lessons= new LessonService().getAllLessonAssignedTO_ContentCreator(user.getId(), StatusTypes.CONTENT_ASSIGNED);
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
@@ -53,7 +46,7 @@ public class CreatedLessonController extends HttpServlet {
 			embed_list.add(lesson.getCmsession().getModule().getModuleName());
 			embed_list.add(lesson.getCmsession().getModule().getCourse().getCourseName());
 			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
-			embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());
+			
 			List <TaskReviewer> taskreview = new TaskReviewerDAO().findByProperty("task", task);
 			if(taskreview.size()>0)
 			{
@@ -68,15 +61,13 @@ public class CreatedLessonController extends HttpServlet {
 			else
 			{
 				embed_list.add("reviewer not assigned");
-			}
-			embed_list.add(lesson.getId().toString());
-			embed_list.add(lesson.getId().toString());
-			embed_list.add(lesson.getId().toString());
+			}	
+			embed_list.add(lesson.getId().toString()); //start working will change status to "DRAFT"
+			
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content_admin/created_lesson.jsp");
-		
+		response.sendRedirect(request.getContextPath() + "/content/assigned_lesson.jsp");
 	}
 
 	/**

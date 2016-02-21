@@ -50,14 +50,20 @@ public class LessonDisapprovedController extends HttpServlet {
 			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
 			
 			List <TaskReviewer> taskreview = new TaskReviewerDAO().findByProperty("task", task);
-			StringBuffer buff = new StringBuffer();
-			for(TaskReviewer review : taskreview)
+			if(taskreview.size()>0)
 			{
-				buff.append(review.getContentReviewer().getName());
-				buff.append("("+review.getStatus()+")");
-				buff.append(",");
+				StringBuffer buff = new StringBuffer();
+				for(TaskReviewer review : taskreview)
+				{
+					buff.append(review.getContentReviewer().getName());
+					buff.append(",");
+				}
+				embed_list.add(buff.toString());
 			}
-			embed_list.add(buff.toString()); //reviewed by
+			else
+			{
+				embed_list.add("reviewer not assigned");
+			}
 			embed_list.add(lesson.getId().toString());//view mobile preview
 			embed_list.add(lesson.getId().toString()); // view desktop preview
 			embed_list.add(lesson.getId().toString());// view comment time line

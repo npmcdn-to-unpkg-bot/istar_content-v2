@@ -50,13 +50,20 @@ public class CompletedLessonController extends HttpServlet {
 			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
 			embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());
 			List <TaskReviewer> taskreview = new TaskReviewerDAO().findByProperty("task", task);
-			StringBuffer buff = new StringBuffer();
-			for(TaskReviewer review : taskreview)
+			if(taskreview.size()>0)
 			{
-				buff.append(review.getContentReviewer().getName());
-				buff.append(",");
+				StringBuffer buff = new StringBuffer();
+				for(TaskReviewer review : taskreview)
+				{
+					buff.append(review.getContentReviewer().getName());
+					buff.append(",");
+				}
+				embed_list.add(buff.toString());
 			}
-			embed_list.add(buff.toString());
+			else
+			{
+				embed_list.add("reviewer not assigned");
+			}
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getId().toString());
 			list_to_be_displayed.add(embed_list);
