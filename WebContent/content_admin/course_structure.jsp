@@ -1,4 +1,4 @@
-<%@page import="com.istarindia.apps.dao.*"%>
+<%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -86,20 +86,27 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 			<div id="jstree2" class="demo">
 				<ul>
-					<% CourseDAO dao = new CourseDAO();
-								for (int i =0; i< dao.findAll().size();i++) {
+					<li data-jstree='{ "opened" : true }'>All Courses <% CourseDAO dao = new CourseDAO();
+					List<Course> courseList = 	dao.findAll();			
+					for (Course course : courseList) {
 								%>
-					<li>All Courses
+
 						<ul>
-							<li data-jstree='{ "opened" : true }'><%=((Course)dao.findAll().get(i)).getCourseName() %>
+							<li data-jstree='{ "opened" : true }'><%=course.getCourseName() %>
 								<ul>
-									<% for (int j =0; j< ((Course)dao.findAll().get(i)).getModules().size();j++) { %>
-									<li><%=((Module)((Course)dao.findAll().get(i)).getModules().toArray()[i]).getModuleName() %></li>
+									<% for (Module module : course.getModules()) { %>
+									<li data-jstree='{ "opened" : true }'><%=module.getModuleName() %>
+									<ul>
+									
+									<% for (Cmsession iStarSession : module.getCmsessions()) { %>
+										<li data-jstree='{ "opened" : true }'><%=iStarSession.getTitle() %></li>
+										<% } %>
+									</ul>
+
+
 									<% } %>
 								</ul></li>
-						</ul>
-					</li>
-					<% } %>
+						</ul> <% } %></li>
 				</ul>
 			</div>
 		</div>
@@ -126,23 +133,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			App.init();
 
 			$('#jstree2').jstree();
-			/* 
-
-			{'plugins':["wholerow","checkbox"], 'core' : {
-				'data' : [
-					{
-						"text" : "Same but with checkboxes",
-						"children" : [
-							{ "text" : "initially selected", "state" : { "selected" : true } },
-							{ "text" : "custom icon URL", "icon" : "//jstree.com/tree-icon.png" },
-							{ "text" : "initially open", "state" : { "opened" : true }, "children" : [ "Another node" ] },
-							{ "text" : "custom icon class", "icon" : "glyphicon glyphicon-leaf" }
-						]
-					},
-					"And wholerow selection"
-				]
-			}}*/
-
+			
 		});
 	</script>
 	<!--[if lt IE 9]>
