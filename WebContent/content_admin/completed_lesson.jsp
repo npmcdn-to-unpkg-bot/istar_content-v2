@@ -71,13 +71,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<table class="table" id="datatable_fixed_column">
 						<thead>
 							<tr>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Filter Name" /></th>
+								<th><input type="text" class="form-control" placeholder="" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Session" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Module" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Course" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Creator" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Reviewer" /></th>
 
 							</tr>
 							<tr>
@@ -86,7 +86,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<th class="hidden-sm">Session Title</th>
 								<th>Module Title</th>
 								<th>Course Title</th>
-								<th>Assigned To</th>
+								<th>Created By</th>
 								<th>Reviewers</th>
 							</tr>
 						</thead>

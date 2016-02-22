@@ -36,6 +36,7 @@ public class PublishedLessonController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
 		//id, lessonName, session, module, course, createdby, reviewed_by, mobile preview, desktop preview
 		List<Lesson> lessons= new LessonService().getPublishedLessons();
@@ -69,7 +70,7 @@ public class PublishedLessonController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content/published_lesson.jsp");
+		response.sendRedirect(request.getContextPath() + "/"+user.getUserType().toLowerCase()+"/published_lesson.jsp");
 		
 	}
 

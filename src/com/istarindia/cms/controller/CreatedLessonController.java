@@ -75,8 +75,8 @@ public class CreatedLessonController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content_admin/created_lesson.jsp");
 		
+		request.getRequestDispatcher("/content_admin/created_lesson.jsp").forward(request, response);
 	}
 
 	/**

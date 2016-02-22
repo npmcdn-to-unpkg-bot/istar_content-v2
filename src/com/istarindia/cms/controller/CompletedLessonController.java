@@ -39,6 +39,7 @@ public class CompletedLessonController extends HttpServlet {
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
 		//id, lessonName, session, module, course, created_by, reviewed_by, mobile preview, desktop preview
 		//these values can be accessed in jsp page to render the data 
+		System.out.println(">>>>>"+user.getEmail());
 		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.COMPLETED);
 		for(Lesson lesson : lessons)
 		{

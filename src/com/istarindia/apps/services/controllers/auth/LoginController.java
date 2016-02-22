@@ -56,7 +56,8 @@ public class LoginController extends IStarBaseServelet {
 			request.setAttribute("msg", "Missing Username or password");
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 			rd.forward(request, response);
-		}response.getWriter().append("Served at: ").append(request.getContextPath());
+		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

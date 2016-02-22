@@ -64,12 +64,14 @@ public class CreateLessonController extends HttpServlet {
 			Lesson lesson= (Lesson) service.createLesson(cmsession_id, duration, lessonType, tags, title, "dtype", ite, user.getId());
 			
 			request.setAttribute("lesson", lesson);
-			response.sendRedirect(request.getContextPath() + "/lesson/edit_lesson.jsp");
+			//response.sendRedirect(request.getContextPath() + "/lesson/edit_lesson.jsp");
+			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 		}
 		else
 		{
 			request.setAttribute("errMsg", "Mandatory Fields Missing");
-			response.sendRedirect(request.getContextPath() + "/lesson/new_lesson.jsp");
+			//response.sendRedirect(request.getContextPath() + "/lesson/new_lesson.jsp");
+			request.getRequestDispatcher("/lesson/new_lesson.jsp").forward(request, response);
 		}
 		
 	}
