@@ -54,10 +54,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Content Admin Dashboard</h1>
+				<h1 class="pull-left">Content Creator Dashboard</h1>
 				<ul class="pull-right breadcrumb">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Admin </a></li>
+					<li><a href="">Content Creator </a></li>
 					<li class="active">Dashboard</li>
 				</ul>
 			</div>
@@ -81,10 +81,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>created_lesson">View All Created Lessons</a>
+										<a href="<%=baseURL %>lesson_assigned">View All Assigned Lessons</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all lessons created by Content Admin.</p></li>
+								<li><p>This will let you view all lessons assigned by Content Admin.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
@@ -92,7 +92,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>draft_lesson">View All Lessons in Progress</a>
+										<a href="<%=baseURL %>draft_lesson_creator">View All Lessons in Progress</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons which are in progress by Content Developer.</p></li>
@@ -109,10 +109,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>completed_lesson">View All Completed Lessons</a>
+										<a href="<%=baseURL %>lesson_disapproved">View All Disapproved Lessons</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all tasks which are completed by Content Developers.</p></li>
+								<li><p>This will let you view all lessons which are disapproved by Content Reviewer.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
@@ -121,27 +121,17 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>review_pending">View All Lessons with Pending Review</a>
+										<a href="<%=baseURL %>review_pending">View All Approved Lessons</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all tasks which are completed by Content Developers and review by Content Reviewer is pending.</p></li>
+								<li><p>This will let you view all tasks which are completed by Content Developers and approved by Content Reviewer and ready to be published.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
 					</div>
 
 					<div class="row g-mb-50">
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>not_published">View All Lessons to be Published</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all lessons which are ready to be published by Content Admin.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
+						
 						
 						
 						<div class="col-md-6 steps-v1--rspace">
