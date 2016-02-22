@@ -20,6 +20,8 @@ import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.task.TaskManager;
+import com.istarindia.apps.services.task.TaskManagerFactory;
 
 /**
  * Servlet implementation class CompletedLessonController
@@ -52,6 +54,8 @@ public class CompletedLessonController extends HttpServlet {
 			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
 			embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());
 			List <TaskReviewer> taskreview = new TaskReviewerDAO().findByProperty("task", task);
+			
+			
 			if(taskreview.size()>0)
 			{
 				StringBuffer buff = new StringBuffer();
@@ -66,6 +70,9 @@ public class CompletedLessonController extends HttpServlet {
 			{
 				embed_list.add("reviewer not assigned");
 			}
+			
+			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
+			embed_list.add(manager.getTaskStatusForm(task));
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getId().toString());
 			list_to_be_displayed.add(embed_list);
@@ -76,7 +83,6 @@ public class CompletedLessonController extends HttpServlet {
 		}
 		request.setAttribute("lessons", list_to_be_displayed);
 		request.getRequestDispatcher("/content_admin/completed_lesson.jsp").forward(request, response);
-		//response.getD sendRedirect(request.getContextPath() + "/content_admin/completed_lesson.jsp");
 		
 	}
 
