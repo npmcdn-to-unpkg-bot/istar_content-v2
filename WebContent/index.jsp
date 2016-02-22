@@ -66,7 +66,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 			<div class="checkbox">
 				<label>
-					<input type="checkbox">
+					<input type="checkbox" name="remmber_me">
 					<p>Always stay signed in</p>
 				</label>
 			</div>

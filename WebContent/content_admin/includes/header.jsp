@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -24,7 +25,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								Course(s)
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="index.html">View Course Structure</a></li>
+								<li><a href="/content/content_admin/course_structure.jsp">View Course Structure</a></li>
 
 								
 							</ul>
@@ -600,25 +601,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						<!-- Demo Pages -->
 						<li class="dropdown">
 							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-								Demos
+								Welcome <%=((IstarUser)request.getAttribute("user")).getName() %>
 							</a>
-							<ul class="dropdown-menu pull-right">
-								<li><a href="One-Pages/Architecture/index.html">Architecture</a></li>
-								<li><a href="One-Pages/Travel/index.html">Travel</a></li>
-								<li><a href="One-Pages/App/index.html">Mobile App</a></li>
-								<li><a href="One-Pages/Shipping/index.html">Shipping</a></li>
-								<li><a href="One-Pages/Agency/index.html">Agency</a></li>
-								<li><a href="One-Pages/Spa/index.html">Spa</a></li>
-								<li><a href="One-Pages/Lawyer/index.html">Lawyer</a></li>
-								<li><a href="One-Pages/Business/index.html">Business</a></li>
-								<li><a href="Landing-Pages/Wealth/index.html">Wealth</a></li>
-								<li><a href="Landing-Pages/Consulting/index.html">Consulting</a></li>
-								<li><a href="One-Pages/Hero-Fashion/index.html">Hero Fashion</a></li>
-								<li><a href="One-Pages/Hero-Gym/index.html">Hero Gym</a></li>
-								<li><a href="One-Pages/Hero-Photography/index.html">Hero Photography</a></li>
-								<li><a href="One-Pages/Hero-Restaurant/index.html">Hero Restaurant</a></li>
-								<li><a href="One-Pages/Hero-WebApp/index-dark.html">Hero Web App Dark</a></li>
-								<li><a href="One-Pages/Hero-WebApp/index.html">Hero Web App Light</a></li>
+							<ul class="dropdown-menu">
+								<li><a href="/content/auth/logout">View Course Structure</a></li>
+
+								
 							</ul>
 						</li>
 						<!-- End Demo Pages -->

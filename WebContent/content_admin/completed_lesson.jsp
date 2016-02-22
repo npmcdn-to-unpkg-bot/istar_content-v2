@@ -1,3 +1,10 @@
+<%@page import="com.istarindia.apps.StatusTypes"%>
+<%@page import="com.istarindia.apps.services.task.TaskManagerFactory"%>
+<%@page import="com.istarindia.apps.services.task.TaskManager"%>
+<%@page import="com.istarindia.apps.services.task.TaskStage"%>
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+
+<%@page import="org.omg.CosNaming.IstringHelper"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 
 <% String url = request.getRequestURL().toString();
@@ -88,6 +95,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<th>Course Title</th>
 								<th>Created By</th>
 								<th>Reviewers</th>
+								<th>Task Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -100,6 +108,24 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<td><%=item.get(4) %></td>
 								<td><%=item.get(5) %></td>
 								<td><%=item.get(6) %></td>
+								<td>
+								<%
+								IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+								TaskManager manager  = new TaskManagerFactory().getManager(StatusTypes.CREATED);
+								List<TaskStage> stages = manager.getAllStages();
+ 								for(TaskStage stage : stages)
+ 								{
+ 									if(stage.getName().equalsIgnoreCase(StatusTypes.COMPLETED))
+									{
+ 										int []nextstages = stage.getValidNextStages();	
+									}
+ 									
+ 									
+ 								}
+								
+								%>
+								
+								</td>
 							</tr>
 							<% } %>
 						</tbody>
