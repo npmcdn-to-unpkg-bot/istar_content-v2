@@ -69,7 +69,9 @@ public class NotPublishedController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content_admin/not_published_lesson.jsp");
+		request.getRequestDispatcher("/content_admin/not_published_lesson.jsp").forward(request, response);
+
+		//response.sendRedirect(request.getContextPath() + "/content_admin/not_published_lesson.jsp");
 		
 	}
 

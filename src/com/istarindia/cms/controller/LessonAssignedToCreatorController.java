@@ -67,7 +67,8 @@ public class LessonAssignedToCreatorController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content/assigned_lesson.jsp");
+	
+		request.getRequestDispatcher("/content/assigned_lesson.jsp").forward(request, response);
 	}
 
 	/**

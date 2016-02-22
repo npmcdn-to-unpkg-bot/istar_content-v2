@@ -62,7 +62,8 @@ public class EditLessonController extends HttpServlet {
 			Lesson lesson= (Lesson) service.updateLesson(lesson_id,cmsession_id, duration, lessonType, tags, title, "dtype", ite);
 			
 			request.setAttribute("lesson", lesson);
-			response.sendRedirect(request.getContextPath() + "/lesson/edit_lesson.jsp");
+			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+			//response.sendRedirect(request.getContextPath() + "/lesson/edit_lesson.jsp");
 		}
 		
 	}

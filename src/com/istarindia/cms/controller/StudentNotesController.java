@@ -32,7 +32,9 @@ public class StudentNotesController extends HttpServlet {
 		{
 			String notes = new PresentationService().getStudentNotesForPreview(Integer.parseInt(request.getParameter("lesson_id")));
 			request.setAttribute("notes", notes);
-			response.sendRedirect(request.getContextPath() +"lesson/student_notes_preview.jsp");
+			request.getRequestDispatcher("lesson/student_notes_preview.jsp").forward(request, response);
+
+			//response.sendRedirect(request.getContextPath() +"lesson/student_notes_preview.jsp");
 		}
 		catch(NullPointerException ex)
 		{

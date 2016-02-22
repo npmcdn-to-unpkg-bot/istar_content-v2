@@ -70,7 +70,9 @@ public class PublishedLessonController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/"+user.getUserType().toLowerCase()+"/published_lesson.jsp");
+		request.getRequestDispatcher( "/"+user.getUserType().toLowerCase()+"/published_lesson.jsp").forward(request, response);
+
+		//response.sendRedirect(request.getContextPath() + "/"+user.getUserType().toLowerCase()+"/published_lesson.jsp");
 		
 	}
 

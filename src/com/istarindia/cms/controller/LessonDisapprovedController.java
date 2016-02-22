@@ -72,7 +72,9 @@ public class LessonDisapprovedController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		response.sendRedirect(request.getContextPath() + "/content/disapproved_lesson.jsp");
+		request.getRequestDispatcher("/content/disapproved_lesson.jsp").forward(request, response);
+
+		
 	}
 
 	/**

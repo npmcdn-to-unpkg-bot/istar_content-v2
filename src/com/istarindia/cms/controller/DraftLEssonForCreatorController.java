@@ -73,7 +73,7 @@ public class DraftLEssonForCreatorController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		request.getRequestDispatcher("/content/draft_lesson.jsp").forward(request, response);
+		request.getRequestDispatcher("/content_creator/draft_lesson.jsp").forward(request, response);
 	}
 
 	/**

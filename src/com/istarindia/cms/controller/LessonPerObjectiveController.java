@@ -76,7 +76,9 @@ public class LessonPerObjectiveController extends HttpServlet {
 				list_to_be_displayed.add(embed_list);
 			}	
 			request.setAttribute("lessons", list_to_be_displayed);
-			response.sendRedirect(request.getContextPath() + "/learning_objective/view_learning_obj.jsp");
+			request.getRequestDispatcher("/learning_objective/view_learning_obj.jsp").forward(request, response);
+
+			//response.sendRedirect(request.getContextPath() + "/learning_objective/view_learning_obj.jsp");
 		}
 		
 	}
