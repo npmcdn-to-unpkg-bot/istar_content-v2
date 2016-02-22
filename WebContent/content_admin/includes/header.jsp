@@ -600,9 +600,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 						<!-- Demo Pages -->
 						<li class="dropdown">
-							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-								Welcome <%=((IstarUser)request.getAttribute("user")).getName() %>
-							</a>
 							<ul class="dropdown-menu">
 								<li><a href="/content/auth/logout">View Course Structure</a></li>
 

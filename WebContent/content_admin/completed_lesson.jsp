@@ -108,24 +108,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<td><%=item.get(4) %></td>
 								<td><%=item.get(5) %></td>
 								<td><%=item.get(6) %></td>
-								<td>
-								<%
-								IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-								TaskManager manager  = new TaskManagerFactory().getManager(StatusTypes.CREATED);
-								List<TaskStage> stages = manager.getAllStages();
- 								for(TaskStage stage : stages)
- 								{
- 									if(stage.getName().equalsIgnoreCase(StatusTypes.COMPLETED))
-									{
- 										int []nextstages = stage.getValidNextStages();	
-									}
- 									
- 									
- 								}
-								
-								%>
-								
-								</td>
+								<td><%=item.get(7) %></td>
 							</tr>
 							<% } %>
 						</tbody>
