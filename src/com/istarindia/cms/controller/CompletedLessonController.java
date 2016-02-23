@@ -72,7 +72,7 @@ public class CompletedLessonController extends HttpServlet {
 			}
 			
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
-			embed_list.add(manager.getTaskStatusForm(task));
+			embed_list.add(manager.getTaskStatusForm(task,user));
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getId().toString());
 			list_to_be_displayed.add(embed_list);
