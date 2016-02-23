@@ -67,7 +67,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<form action="/content/course_upload" class="sky-form" method="post" enctype="multipart/form-data">
+			<form action="<%=baseURL %>course_upload" class="sky-form" method="post" enctype="multipart/form-data">
 				<header>General Unify Forms</header>
 
 				<fieldset>
