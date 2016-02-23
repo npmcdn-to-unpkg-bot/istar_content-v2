@@ -89,6 +89,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<th>Course Title</th>
 								<th>Created By</th>
 								<th>Reviewers</th>
+								<th>Task Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,6 +102,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<td><%=item.get(4) %></td>
 								<td><%=item.get(5) %></td>
 								<td><%=item.get(6) %></td>
+								<td><%=item.get(7) %></td>
 							</tr>
 							<% } %>
 						</tbody>

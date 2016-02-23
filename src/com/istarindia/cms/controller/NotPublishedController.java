@@ -19,6 +19,8 @@ import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.task.TaskManager;
+import com.istarindia.apps.services.task.TaskManagerFactory;
 
 @WebServlet("/not_published")
 public class NotPublishedController extends HttpServlet {
@@ -38,7 +40,7 @@ public class NotPublishedController extends HttpServlet {
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
 		//id, lessonName, session, module, course, assigned_to, reviewed_by, mobile preview, desktop preview
 		//these values can be accessed in jsp page to render the data 
-		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.APPROVED);
+		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.REQUEST_FOR_PUBLISH);
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
@@ -64,6 +66,8 @@ public class NotPublishedController extends HttpServlet {
 			{
 				embed_list.add("reviewer not assigned");
 			}
+			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
+			embed_list.add(manager.getTaskStatusForm(task,user));
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getId().toString());
 			list_to_be_displayed.add(embed_list);

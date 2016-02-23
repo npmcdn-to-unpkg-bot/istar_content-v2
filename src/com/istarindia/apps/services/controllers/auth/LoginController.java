@@ -1,10 +1,12 @@
 package com.istarindia.apps.services.controllers.auth;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.services.CMSRegistry;
+import com.istarindia.apps.services.UserService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -40,10 +43,39 @@ public class LoginController extends IStarBaseServelet {
 				IstarUserDAO dao = new IstarUserDAO();
 				IstarUser user = dao.findByEmail(request.getParameter("email")).get(0);
 				if (user.getPassword().equalsIgnoreCase(request.getParameter("password"))) {
-					request.getSession().setAttribute("user", user);
-					CMSRegistry.writeAuditLog("User Logged in ->" + ((IstarUser) request.getSession().getAttribute("user")).getEmail(), user.getId());
-					request.setAttribute("msg", "Welcome to iStar, " + user.getName());
-					response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+					System.out.println("---------->"+ request.getParameter("remember"));
+					boolean remember = false ;
+					 try {
+					if(request.getParameter("remember").equalsIgnoreCase("on")) {
+						remember = true;
+					}} catch(NullPointerException npe) {}
+					 
+					 if(remember)
+					 {
+						 	System.out.println("----------> Remeber ME ");
+							UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+							String uuid = uid.randomUUID().toString();
+							Cookie c = new Cookie("user_authorization_token", uuid);
+							c.setMaxAge(365 * 24 * 60 * 60); // one year
+							response.addCookie(c);
+							
+							request.getSession().setAttribute("user", user);
+
+							UserService service = new UserService();
+							service.saveSessionToken(uuid, user.getId());
+							CMSRegistry.writeAuditLog("User Logged in ->" + ((IstarUser) request.getSession().getAttribute("user")).getEmail(), user.getId());
+							request.setAttribute("msg", "Welcome to iStar, " + user.getName());
+							response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+					 }
+					 else
+					 {
+						 request.getSession().setAttribute("user", user);
+						 CMSRegistry.writeAuditLog("User Logged in ->" + ((IstarUser) request.getSession().getAttribute("user")).getEmail(), user.getId());
+							request.setAttribute("msg", "Welcome to iStar, " + user.getName());
+							response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+					 }	 
+					
+					
 				}
 			} catch (java.lang.IndexOutOfBoundsException e) {
 				e.printStackTrace();

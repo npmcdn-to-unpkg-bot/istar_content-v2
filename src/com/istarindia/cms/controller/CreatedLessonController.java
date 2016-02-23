@@ -46,9 +46,11 @@ public class CreatedLessonController extends HttpServlet {
 		//id, lessonName, session, module, course, assigned_to, reviewed_by, mobile preview, desktop preview, deletelesson
 		//these values can be accessed in jsp page to render the data 
 		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.CREATED);
+		System.out.println(">>>>>>total lessons"+lessons.size());
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
+			System.out.println(">>>>>>> lesson id ="+lesson.getId());
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getTitle());
 			embed_list.add(lesson.getCmsession().getTitle());
