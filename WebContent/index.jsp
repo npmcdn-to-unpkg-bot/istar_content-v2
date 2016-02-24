@@ -1,30 +1,16 @@
-<%@page import="com.istarindia.apps.services.UserService"%>
-<%@page import="com.istarindia.apps.dao.IstarUser"%>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="com.istarindia.apps.services.UserService"%><%@page import="com.istarindia.apps.dao.IstarUser"%><%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-/* 
-	 if(request.getCookies()!=null)
-	{
-		IstarUser user = (IstarUser)new UserService().isValidUser(request.getCookies());
-		if(user!=null)
-		{
-			request.getSession().setAttribute("user", user);
-			response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
-		}
-		else
-		{
-			request.setAttribute("msg", "Login again to continue");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);	
-		}	
-	}  */
 
+if (!(session.getAttribute("user") == null)) {
+	
+	String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
+	response.sendRedirect(url1);
+}
 
 %>
 <title>Login/Registration | iStar Skill Development</title>

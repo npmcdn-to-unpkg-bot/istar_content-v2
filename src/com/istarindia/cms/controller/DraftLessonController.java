@@ -43,8 +43,6 @@ public class DraftLessonController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
-		//id, lessonName, session, module, course, assigned_to, reviewed_by, mobile preview, desktop preview
-		//these values can be accessed in jsp page to render the data 
 		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.DRAFT);
 		for(Lesson lesson : lessons)
 		{
