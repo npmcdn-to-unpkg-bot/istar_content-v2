@@ -105,16 +105,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-<<<<<<< HEAD
-=======
-										<form class="form-inline" role="form" class="sky-form" action="<%=baseURL%>assign_creator" method="POST"  onsubmit="myFunction()">
-					
-					<div class="panel panel-grey margin-bottom-40">
-						<div class="panel-body">
-													<input type="hidden" name="selected_items" />
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 
-<<<<<<< HEAD
 					<button class="btn-u" data-toggle="modal" data-target="#myModal">Modal Form Sample</button>
 					<div id="html1">
 						<ul>
@@ -168,7 +159,7 @@
 							<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 						</div>
 						<div class="modal-body">
-							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/course/assignment">
+							<form class="form-horizontal" role="form" onsubmit="myFunction()">
 								<input type="hidden" id="selected_items" name="selected_items" />
 								<div class="form-group">
 									<label for="inputEmail1" class="col-lg-4 control-label">Choose User to Assign</label>
@@ -183,19 +174,7 @@
 											%>
 										</select>
 									</div>
-=======
-								<div class="form-group">
-									<label class="select">Select Contnet Developer</label>
-								<select name="assign_user">
-								<% for(IstarUser user : CMSRegistry.getCUsers()) { %>
-									<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
-								<% } %>
-								</select>
-								<i></i>
-							
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 								</div>
-<<<<<<< HEAD
 								<div class="form-group">
 									<label for="inputPassword1" class="col-lg-4 control-label">Select Content Reviewer</label>
 									<div class="col-lg-10">
@@ -238,53 +217,10 @@
 						</div>
 						<div class="modal-footer">
 							<button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
-=======
-									<label class="select">Select Contnet Reviewer</label>
-								<select name="review_user">
-								<% for(IstarUser user : CMSRegistry.getCRUsers()) { %>
-									<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
-								<% } %>
-								</select>
-								<i></i>
-							
-								
-								<button type="submit" class="btn-u btn-u-default">Sign in</button>
-							</form>
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 						</div>
 					</div>
-						
-							
-							
-						<div id="html1">
-							<ul>
-								<li id="none"   data-jstree='{"opened":true}'>All Courses
-									<ul>
-										<% CourseDAO dao = new  CourseDAO();
-										for(Course course : (List<Course>)dao.findAll()) {
-										%>
-										<li id="course_<%=course.getId() %>"     data-jstree='{"opened":true}'><%=course.getCourseName() %>
-											<ul>
-												<% for(Module module : course.getModules()) { %>
-												<li id="module_<%=module.getId() %>" data-jstree='{"opened":true}'><%=module.getModuleName() %>
-												
-												<% for(Cmsession session1 : module.getCmsessions()) { %>
-												<li  id="session_<%=session1.getId() %>" data-jstree='{"opened":true}'><%=session1.getTitle() %>
-												
-												<% } %>
-												</li>
-											<% } %>
-											</ul>
-										</li>
-										<% } %>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</form>
 				</div>
 			</div>
-<<<<<<< HEAD
 			</form>
 			<!-- JS Global Compulsory -->
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
@@ -296,11 +232,7 @@
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
-=======
-		</div>
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 
-<<<<<<< HEAD
 			<!-- JS Customization -->
 			<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 			<!-- JS Page Level -->
@@ -310,13 +242,7 @@
 					var selectedElmsIds = $('#html1').jstree("get_selected");
 					$('#selected_items').val(selectedElmsIds);
 					console.log(selectedElmsIds);
-=======
-		<div class="container-fluid height-1000" style="padding: 0px !important"></div>
-		<jsp:include page="includes/footer.jsp"></jsp:include>
-	</div>
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 
-<<<<<<< HEAD
 				}
 				jQuery(document).ready(function() {
 					App.init();
@@ -332,49 +258,10 @@
 						"plugins" : [ "checkbox" ]
 					});
 					$('#selected_items').val("aaaa");
-=======
 
-	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
-
-	<!-- JS Customization -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			App.init();
-			$('#html1').jstree({
-				"core" : {
-					"themes" : {
-						"variant" : "large"
-					}
-				},
-				"checkbox" : {
-					"keep_selected_style" : false
-				},
-				"plugins" : [ "checkbox" ]
-			});
-			var selectedElmsIds = $('#html1').jstree("get_selected");
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
-
-<<<<<<< HEAD
 				});
 			</script>
 			<!--[if lt IE 9]>
-=======
-		});
-	</script>
-	<!--[if lt IE 9]>
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
