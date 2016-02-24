@@ -112,6 +112,79 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 				</div>
+				
+					<div class="row g-mb-20">
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>task_created_for_reviewer">View Tasks Disapproved</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are disapproved by Content Reviewer.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						<%-- 
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>task_draft_for_reviewer">View All Draft Task</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are in draft state .</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+					</div> --%>
+					<div class="row g-mb-50">
+						
+					</div>
+
+
+				</div>
+				
+					<%-- <div class="row g-mb-20">
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>task_created_for_reviewer">View Tasks Completed</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are completed by Content Creator.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>task_draft_for_reviewer">View All Task Ready To Be Published</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks are approved by Content Reviewer and redy to be published.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						
+					</div>
+
+						
+
+					
+
+					<div class="row g-mb-50">
+						
+					</div>
+
+
+				</div> --%>
+				
+				
+				
 			</section>
 		</div>
 

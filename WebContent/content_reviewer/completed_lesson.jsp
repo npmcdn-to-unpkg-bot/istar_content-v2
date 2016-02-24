@@ -1,3 +1,10 @@
+<%@page import="com.istarindia.apps.StatusTypes"%>
+<%@page import="com.istarindia.apps.services.task.TaskManagerFactory"%>
+<%@page import="com.istarindia.apps.services.task.TaskManager"%>
+<%@page import="com.istarindia.apps.services.task.TaskStage"%>
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+
+<%@page import="org.omg.CosNaming.IstringHelper"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 
 <% String url = request.getRequestURL().toString();
@@ -55,11 +62,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">All published lessons</h1>
+				<h1 class="pull-left">All completed Tasks</h1>
 				<ul class="pull-right breadcrumb">
 					<li><a href="index.html">Home</a></li>
 					<li><a href="">Content Reviewer </a></li>
-					<li class="active">All published lessons</li>
+					<li class="active">All completed Tasks</li>
 				</ul>
 			</div>
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
@@ -78,8 +85,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<th><input type="text" class="form-control" placeholder="Search By Course" /></th>
 								<th><input type="text" class="form-control" placeholder="Search By Creator" /></th>
 								<th><input type="text" class="form-control" placeholder="Search By Reviewer" /></th>
-								
-								
+
 							</tr>
 							<tr>
 								<th>#</th>
@@ -89,6 +95,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<th>Course Title</th>
 								<th>Created By</th>
 								<th>Reviewers</th>
+								<th>Task Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,6 +108,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<td><%=item.get(4) %></td>
 								<td><%=item.get(5) %></td>
 								<td><%=item.get(6) %></td>
+								<td><%=item.get(7) %></td>
 							</tr>
 							<% } %>
 						</tbody>
