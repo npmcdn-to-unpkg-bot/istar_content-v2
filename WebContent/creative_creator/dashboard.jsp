@@ -9,7 +9,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Creative Creator Dashboard | iStar CMS</title>
+<title>Creative Reviewer Dashboard | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -54,19 +54,63 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Creative Creator Dashboard</h1>
+				<h1 class="pull-left">Content Reviewer Dashboard</h1>
 				<ul class="pull-right breadcrumb">
-					<li><a href="upload_media.jsp">Upload</a></li>
-					<li><a href="dashboard.jsp">Dashboard</a></li>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="">Content Reviewer </a></li>
+					<li class="active">Dashboard</li>
 				</ul>
 			</div>
 			<!--/container-->
 		</div>
-		
+		<div class="container-fluid height-1000" style="padding: 0px !important">
+			<section id="processes" class="g-bg-dark-blue1">
+				<div class="container content-md g-text-height-md">
 
+					<div class="row g-mb-60 text-center g-heading-v7">
+						<div class="col-sm-8 col-sm-offset-2">
+							<h2 class="h2 color-light">
+								<span class="block-name">Work Process</span> <span class="g-text-height-lg">Step By Step</span>
+							</h2>
+						</div>
+					</div>
 
-		<div class="margin-bottom-60"></div>		
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+					<div class="row g-mb-20">
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>task_pending">Pending tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are pending</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>tasks_completed">Completed tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks completed</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						
+					</div>
+					<div class="row g-mb-50">	
+					</div>
+				</div>
+				
+					<div class="row g-mb-50">
+					</div>
+				</div>	
+			</section>
+		</div>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
 
