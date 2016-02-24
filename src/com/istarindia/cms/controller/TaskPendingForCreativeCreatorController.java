@@ -24,7 +24,7 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
 /**
  * Servlet implementation class MediaUploadController
  */
-@WebServlet("/tasks_completed")
+@WebServlet("/tasks_pending")
 public class TaskPendingForCreativeCreatorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static File fileUploadPath;

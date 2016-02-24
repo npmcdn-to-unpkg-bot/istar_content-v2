@@ -81,7 +81,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>task_pending">Pending tasks</a>
+										<a href="<%=baseURL %>tasks_pending">Pending tasks</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are pending</p></li>
