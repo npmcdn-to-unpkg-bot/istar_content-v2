@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.services.LessonService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
@@ -44,7 +45,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
-    <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
@@ -71,7 +72,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
-				<div class="col-md-3">
+				
+				
+				
+				
+				<div class="col-md-6">
 					<form action="/content/update_lesson" id="sky-form4" class="sky-form" novalidate="novalidate">
 						<input type="hidden" name="lesson_id" value="<%=lesson.getId() %>" /> <input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId() %>" />
 						<fieldset>
@@ -93,21 +98,33 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<label class="input"> <input value="<%=lesson.getTitle() %>" type="text" name="title" placeholder="Title of Lesson"> <b class="tooltip tooltip-bottom-right">The title of the lesson</b>
 								</label>
 							</section>
-							
+
 							<section>
-								<label class="input"> 
-								<input data-role="tagsinput" value="<%=lesson.getTags() %>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson">
-								 <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
+								<label class="input"> <input data-role="tagsinput" value="<%=lesson.getTags() %>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 								</label>
 							</section>
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn-u">Create Presentation</button>
-							<button type="submit" class="btn-u">Create Game</button>
-							<button type="submit" class="btn-u">Create Assessment</button>
+							<button type="submit" class="btn-u">Update Lesson</button>
 						</footer>
 					</form>
+
+					
 				</div>
+				
+				
+				<div class="col-md-6">
+					<% if(LessonService.isEmptyLesson(lesson)) { %>
+						<div class="alert alert-warning fade in text-center">
+							<h4>Please Create a Presentation/Assessment/Game</h4>
+							<p>
+								<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
+							</p>
+						</div>
+						<% } else { %>
+							<a class="btn-u btn-u-xs btn-u-orange" href="<%=LessonService.getEditURL(lesson)%>">Create a Presentation</a>
+						<% }  %>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -123,11 +140,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
-	<!-- JS Customization -->    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-	
+	<!-- JS Customization -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
-	    <script src="<%=baseURL %>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
-	
+	<script src="<%=baseURL %>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
+
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
 
