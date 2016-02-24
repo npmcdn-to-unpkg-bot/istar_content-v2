@@ -8,8 +8,8 @@
 <!--<![endif]-->
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-
-	/* if(request.getCookies()!=null)
+/* 
+	 if(request.getCookies()!=null)
 	{
 		IstarUser user = (IstarUser)new UserService().isValidUser(request.getCookies());
 		if(user!=null)
@@ -23,7 +23,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 			rd.forward(request, response);	
 		}	
-	} */
+	}  */
 
 
 %>
