@@ -18,6 +18,8 @@ import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.task.TaskManager;
+import com.istarindia.apps.services.task.TaskManagerFactory;
 
 /**
  * Servlet implementation class ApprovedLessonForCreatorController
@@ -67,7 +69,11 @@ public class ApprovedLessonForCreatorController extends HttpServlet {
 			else
 			{
 				embed_list.add("reviewer not assigned");
-			}	
+			}
+			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
+			System.out.println(">>>task is >> "+task.getStatus());
+			embed_list.add(manager.getTaskStatusForm(task,user));
+			System.out.println(manager.getTaskStatusForm(task,user));
 			embed_list.add(lesson.getId().toString()); //request for publish
 			
 			list_to_be_displayed.add(embed_list);

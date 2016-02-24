@@ -121,7 +121,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>review_pending">View All Approved Lessons</a>
+										<a href="<%=baseURL %>approved_lesson_creator">View All Approved Lessons</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are completed by Content Developers and approved by Content Reviewer and ready to be published.</p></li>

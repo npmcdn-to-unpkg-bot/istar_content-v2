@@ -101,7 +101,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<td><%=item.get(4) %></td>
 								<td><%=item.get(5) %></td>
 								
-								<td></td>
+								<td><%=item.get(6) %></td>
 							</tr>
 							<% } %>
 						</tbody>

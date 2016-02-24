@@ -20,6 +20,8 @@ import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.task.TaskManager;
+import com.istarindia.apps.services.task.TaskManagerFactory;
 
 
 @WebServlet("/lesson_assigned_reviewer")
@@ -50,7 +52,8 @@ public class LessonAssignedToReviewerController extends HttpServlet {
 			
 			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
 			embed_list.add(new ContentCreatorDAO().findById(task.getActorId()).getName());
-			
+			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
+			embed_list.add(manager.getTaskStatusForm(task,user));
 			embed_list.add(lesson.getId().toString()); //review the lesson
 			
 			list_to_be_displayed.add(embed_list);

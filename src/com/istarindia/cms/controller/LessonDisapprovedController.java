@@ -19,6 +19,8 @@ import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.task.TaskManager;
+import com.istarindia.apps.services.task.TaskManagerFactory;
 
 /**
  * Servlet implementation class LessonDisapprovedController
@@ -38,7 +40,7 @@ public class LessonDisapprovedController extends HttpServlet {
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
 		//id, lessonName, session, module, course,  reviewed_by, mobile preview, desktop preview,view_comment_timeline, edit lesson
 		//these values can be accessed in jsp page to render the data 
-		List<Lesson> lessons= new LessonService().getAllLessonAssignedBy_ContentAdmin(user.getId(), StatusTypes.APPROVED);
+		List<Lesson> lessons= new LessonService().getAllLessonDisApprovedByReviewer(user.getId());
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
@@ -64,6 +66,8 @@ public class LessonDisapprovedController extends HttpServlet {
 			{
 				embed_list.add("reviewer not assigned");
 			}
+			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
+			embed_list.add(manager.getTaskStatusForm(task,user));
 			embed_list.add(lesson.getId().toString());//view mobile preview
 			embed_list.add(lesson.getId().toString()); // view desktop preview
 			embed_list.add(lesson.getId().toString());// view comment time line
@@ -72,7 +76,7 @@ public class LessonDisapprovedController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		request.getRequestDispatcher("/content/disapproved_lesson.jsp").forward(request, response);
+		request.getRequestDispatcher("/content_creator/disapproved_lesson.jsp").forward(request, response);
 
 		
 	}
