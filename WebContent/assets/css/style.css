@@ -80,3 +80,24 @@ a:hover {
 #jstree2 li {
   margin: 10px 0;
 }
+
+
+#frame_htc_one_emulator {
+  width: 360px;
+    height: 640px;
+    margin: 173px 0 0 119px;
+    /* left: -4px; */
+    border: 1px solid red;
+}
+}
+.frame_scroller {
+    display: inline-block;
+    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+}
+
+#htc_one_emulator {
+    background-image: url("http://mobiletest.me/themes/sky/phones/HTC_One_portrait.png");
+    width: 599px;
+    height: 1024px;
+}
