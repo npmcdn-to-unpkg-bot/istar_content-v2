@@ -1,7 +1,10 @@
+<%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+<%
+	String url = request.getRequestURL().toString();
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
+			+ request.getContextPath() + "/";
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -25,34 +28,36 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/style.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/headers/header-default.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/footers/footer-v1.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/headers/header-default.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/animate.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-<link rel="stylesheet" href="dist/themes/default/style.min.css" />
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
 
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
-<link rel="stylesheet" href="//static.jstree.com/3.2.1/assets/dist/themes/default/style.min.css" />
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+
+
+
+
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
 
 <body>
-
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
@@ -74,7 +79,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="<%=baseURL %>course_upload" class="sky-form" method="post" enctype="multipart/form-data">
+					<form action="<%=baseURL%>course_upload" class="sky-form" method="post" enctype="multipart/form-data">
 
 						<fieldset>
 							<section>
@@ -100,170 +105,163 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</h3>
 				</div>
 				<div class="panel-body">
-					<div class="tab-v1">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">Assign Content Creators</a></li>
-							<li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">Assign Content Reviewer</a></li>
 
+					<button class="btn-u" data-toggle="modal" data-target="#myModal">Modal Form Sample</button>
+					<div id="html1">
+						<ul>
+							<li id="none" data-jstree='{"opened":true}'>All Courses
+								<ul>
+									<%
+										CourseDAO dao = new CourseDAO();
+										for (Course course : (List<Course>) dao.findAll()) {
+									%>
+									<li id="course_<%=course.getId()%>" data-jstree='{"opened":true}'><%=course.getCourseName()%>
+										<ul>
+											<%
+												for (Module module : course.getModules()) {
+											%>
+											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getModuleName()%> <%
+ 												for (Cmsession session1 : module.getCmsessions()) {
+ 											%>
+											<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%> 
+										 <ul>
+										 <% for (Lesson lesson : session1.getLessons()) { %>
+										 <li id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %>
+										<span class="label label-purple rounded-2x"> Assigned to - <%=lesson.getAsignee() %></span>
+										<span>&nbsp;&nbsp;&nbsp;</span>
+										<span class="label rounded label-sea"> Reviewer - <%=lesson.getREviewers() %></span>
+										 </li>
+										 <%
+												}
+											%></ul>
+										 </li><%
+										 	}
+										 %>
+											<%
+												}
+											%>
+										</ul></li>
+									<%
+										}
+									%>
+								</ul>
+							</li>
 						</ul>
-						<div class="tab-content">
-							<div class="tab-pane fade active in" id="home">
-								<div class="row">
-									<form class="form-inline" role="form" class="sky-form" action="<%=baseURL %>assign_creator" method="POST">
-										<div class="form-group">
-											<label class="sr-only" for="exampleInputEmail2">Please choose Content Creator</label> <select name=creator_id>
-												<option value="0">Choose name</option>
-												<option value="1">Alexandra</option>
-												<option value="2">Alice</option>
-												<option value="3">Anastasia</option>
-												<option value="4">Avelina</option>
-											</select>
-										</div>
-										<button type="submit" class="btn-u btn-u-default">Sign in</button>
-										<div id="jstree2" class="demo">
-											<ul>
-												<li>All Courses <% CourseDAO dao = new CourseDAO();
-														List<Course> courseList = 	dao.findAll();			
-														for (Course course : courseList) {
-																	%>
-													<ul>
+					</div>
 
-														<li><input type="checkbox" class="course_selector" name="course_<%=course.getId() %>"> 
-														<label for="tall"><%=course.getCourseName() %></label>
-
-															<ul>
-																<% for (Module module : course.getModules()) { %>
-																<li><input type="checkbox" class="module_selector" name="module_<%=module.getId() %>">
-																<label for="tall"><%=module.getModuleName() %></label>
-																	<ul>
-
-																		<% for (Cmsession iStarSession : module.getCmsessions()) { %>
-																		<li><input type="checkbox" class="iStarSession_selector" name="iStarSession_<%=iStarSession.getId() %>">
-																<label for="tall"><%=iStarSession.getTitle() %></label>
-
-																			<ul>
-																				<% for (Lesson lesson : iStarSession.getLessons()) { %>
-																				<li><input type="checkbox" class="iStarLesson_selector" name="iStarSession_<%=lesson.getId() %>">
-																<label for="tall"><%=iStarSession.getTitle() %></label>
-																			</ul></li>
-
-
-																		<% } %>
-																	</ul> <% } %>
-															</ul></li>
-													</ul> <% } %></li>
-											</ul>
-										</div>
-									</form>
+				</div>
+			</div>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+							<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/course/assignment">
+								<input type="hidden" id="selected_items" name="selected_items" />
+								<div class="form-group">
+									<label for="inputEmail1" class="col-lg-4 control-label">Choose User to Assign</label>
+									<div class="col-lg-6">
+										<select name="assign_user" class="form-control input-lg">
+											<%
+												for (IstarUser user : CMSRegistry.getCUsers()) {
+											%>
+											<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
+											<%
+												}
+											%>
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="tab-pane fade" id="profile">
-								<div id="jstree3" class="demo">
-									<ul>
-										<li data-jstree='{ "opened" : true }'>All Courses <%
-													for (Course course : courseList) {
-																%>
-											<ul>
-												<li data-jstree='{ "opened" : true }'><%=course.getCourseName() %>
-													<ul>
-														<% for (Module module : course.getModules()) { %>
-														<li data-jstree='{ "opened" : true }'><%=module.getModuleName() %>
-															<ul>
-
-																<% for (Cmsession iStarSession : module.getCmsessions()) { %>
-																<li data-jstree='{ "opened" : true }'><%=iStarSession.getTitle() %>
-
-																	<ul>
-																		<% for (Lesson lesson : iStarSession.getLessons()) { %>
-																		<li data-jstree='{ "opened" : true }'><%=lesson.getTitle() %> <% } %>
-																	</ul></li>
-
-
-																<% } %>
-															</ul> <% } %>
-													</ul></li>
-											</ul> <% } %></li>
-									</ul>
+								<div class="form-group">
+									<label for="inputPassword1" class="col-lg-4 control-label">Select Content Reviewer</label>
+									<div class="col-lg-10">
+										<select name="review_user" class="form-control input-lg" multiple="multiple">
+											<%
+												for (IstarUser user : CMSRegistry.getCRUsers()) {
+											%>
+											<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
+											<%
+												}
+											%>
+										</select>
+									</div>
 								</div>
-							</div>
+								<!-- <div class="form-group">
+									<label for="inputEmail1" class="col-lg-2 control-label">Number of Presentations</label>
+									<div class="col-lg-10">
+										<input type="number" class="form-control" id="inputEmail1" name="no_of_ppt" placeholder="Number of Presentations">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail1" class="col-lg-2 control-label">Number of Games</label>
+									<div class="col-lg-10">
+										<input type="number" class="form-control" id="inputEmail1" placeholder="Number of Games" name="no_of_games">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail1" class="col-lg-2 control-label">Number of Assessment</label>
+									<div class="col-lg-10">
+										<input type="number" class="form-control" id="inputEmail1" placeholder="Number of Assessment" name="no_of_assessment">
+									</div>
+								</div> -->
+								<div class="form-group">
+									<div class="col-lg-offset-2 col-lg-10">
+										<button type="submit" class="btn-u btn-u-green">Assign & Create</button>
+									</div>
+								</div>
+							</form>
 
+						</div>
+						<div class="modal-footer">
+							<button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
+			<!-- JS Global Compulsory -->
+			<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+			<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+			<script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
-			<div class="container-fluid height-1000" style="padding: 0px !important"></div>
-			<jsp:include page="includes/footer.jsp"></jsp:include>
-		</div>
+			<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+			<!-- JS Implementing Plugins -->
+			<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+			<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+			<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 
+			<!-- JS Customization -->
+			<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
+			<!-- JS Page Level -->
+			<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+			<script type="text/javascript">
+				function myFunction() {
+					var selectedElmsIds = $('#html1').jstree("get_selected");
+					$('#selected_items').val(selectedElmsIds);
+					console.log(selectedElmsIds);
 
-		<!-- JS Global Compulsory -->
-		<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
-		<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<!-- JS Implementing Plugins -->
-		<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
-		<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
-		<!-- JS Customization -->
-		<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
-		<!-- JS Page Level -->
-		<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-		<script type="text/javascript">
-		jQuery(document).ready(function() {
-			App.init();
+				}
+				jQuery(document).ready(function() {
+					App.init();
+					$('#html1').jstree({
+						"core" : {
+							"themes" : {
+								"variant" : "large"
+							}
+						},
+						"checkbox" : {
+							"keep_selected_style" : false
+						},
+						"plugins" : [ "checkbox" ]
+					});
+					$('#selected_items').val("aaaa");
 
-			$('input[type="checkbox"]').change(function(e) {
-
-				  var checked = $(this).prop("checked"),
-				      container = $(this).parent(),
-				      siblings = container.siblings();
-
-				  container.find('input[type="checkbox"]').prop({
-				    indeterminate: false,
-				    checked: checked
-				  });
-
-				  function checkSiblings(el) {
-
-				    var parent = el.parent().parent(),
-				        all = true;
-
-				    el.siblings().each(function() {
-				      return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
-				    });
-
-				    if (all && checked) {
-
-				      parent.children('input[type="checkbox"]').prop({
-				        indeterminate: false,
-				        checked: checked
-				      });
-
-				      checkSiblings(parent);
-
-				    } else if (all && !checked) {
-
-				      parent.children('input[type="checkbox"]').prop("checked", checked);
-				      parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
-				      checkSiblings(parent);
-
-				    } else {
-
-				      el.parents("li").children('input[type="checkbox"]').prop({
-				        indeterminate: true,
-				        checked: false
-				      });
-
-				    }
-
-				  }
-
-				  checkSiblings(container);
 				});
-			
-		});
-	</script>
-		<!--[if lt IE 9]>
+			</script>
+			<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
