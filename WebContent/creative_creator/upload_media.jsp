@@ -92,7 +92,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<!--/container-->
 			<div class="container content">
 				<div class="row">
-				<form action="/media_upload" class="sky-form">
+				<form action="<%=baseURL%>media_upload" class="sky-form" method="post" enctype="multipart/form-data">
 					<div class="col-md-4">
 						<header>Select Folder</header>
 

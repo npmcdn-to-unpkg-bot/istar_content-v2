@@ -29,6 +29,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								
 							</ul>
 						</li>
+						<li>
+						<a href="view_gallery.jsp" > Gallery </a>
+						</li>
 						<!-- End Home -->
 
 						<!-- Pages -->
