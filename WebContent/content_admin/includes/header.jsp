@@ -6,6 +6,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+System.out.println(request.getSession().getAttribute("user"));
+try {
+if (request.getSession().getAttribute("user").toString().equalsIgnoreCase("null")) {
+	response.sendRedirect("/content/index.jsp");
+}} catch(NullPointerException npe) {
+	response.sendRedirect("/content/index.jsp");
+}
 %><div class="header">
 	<div class="container-fluid ">
 		<!-- Logo -->

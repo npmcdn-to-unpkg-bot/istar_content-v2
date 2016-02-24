@@ -25,6 +25,7 @@ import com.istarindia.apps.role.Menu;
 public class CMSRegistry {
 
 	public static Menu menu;
+	public static ArrayList<String> slideTemplates = new ArrayList<>();
 	static {
 		try {
 
@@ -38,6 +39,10 @@ public class CMSRegistry {
 		  } catch (JAXBException e) {
 			e.printStackTrace();
 		  }
+		
+		slideTemplates.add("Title.jsp");
+		
+		
 	}
 	public static CMSFolder root = CMSFolder.init();
 	public static void writeAuditLog(String string, Integer id) {

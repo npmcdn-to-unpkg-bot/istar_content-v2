@@ -66,30 +66,8 @@ public class UpdateLessonController extends IStarBaseServelet {
 					ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
 				}
 			}
-			/*
-			 * <option value="Presentation">Presentation</option> <option
-			 * value="Assessment">Assessment</option> <option
-			 * value="Game">Game</option>
-			 */
-			Lesson lesson = (new LessonDAO()).findById(lesson_id);
-			switch (lessonType) {
-			case "Presentation":
-				new PresentationService().createPresentation(cmsession_id, duration, tags, title, "", null, user.getId(), lesson.getId());
-				lesson.setLessonType(LessonTypes.PRESENTATION);
-				//lesson = (Presentaion) lesson;
-				break;
-			case "Assessment":
-				lesson.setLessonType(LessonTypes.ASSESSMENT);
-				//lesson = (Assessment) lesson;
-				break;
-			case "Game":
-				lesson.setLessonType(LessonTypes.GAME);
-				//lesson = (Game) lesson;
-				break;
-			}
-
 			LessonService service = new LessonService();
-			lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, lessonType, tags, title, "dtype",
+			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, lessonType, tags, title, "dtype",
 					ite);
 
 			request.setAttribute("lesson", lesson);
