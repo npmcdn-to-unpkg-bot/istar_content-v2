@@ -179,7 +179,7 @@ public class MediaUploadController extends HttpServlet {
 		} finally {
 
 		}
-		request.getRequestDispatcher("/media/media_upload.jsp").forward(request, response);
+		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
 	}
 
 	
