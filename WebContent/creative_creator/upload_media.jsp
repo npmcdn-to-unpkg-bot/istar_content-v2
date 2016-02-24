@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@page import="com.istarindia.apps.services.CMSRegistry"%>
+<%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
 
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
@@ -10,7 +13,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Content Reviewer Dashboard | iStar CMS</title>
+<title>Upload media | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -36,17 +39,19 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/animate.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
+
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 </head>
 
 <body>
@@ -54,131 +59,188 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All Created Tasks</h1>
+			<div class="container">
+				<h1 class="pull-left">Upload media</h1>
 				<ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Reviewer </a></li>
-					<li class="active">All Created Tasks</li>
+					<li><a href="upload_media.jsp">Upload</a></li>
+					<li><a href="dashboard.jsp">Dashboard</a></li>
 				</ul>
 			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
-		</div>
-		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-red margin-bottom-40" style="margin: 20px">
-				<div class="panel-heading"></div>
-				<div class="panel-body">
-					<table class="table" id="datatable_fixed_column">
-						<thead>
-							<tr>
-								<th></th>
-								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Session" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Module" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Course" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Creator" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Reviewer" /></th>
-								<th></th>	
-							</tr>
-							<tr>
-								<th>#</th>
-								<th>Title</th>
-								<th class="hidden-sm">Session Title</th>
-								<th>Module Title</th>
-								<th>Course Title</th>
-								<th>Created By</th>
-								<th>Reviewers</th>
-								<th>Task Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for(ArrayList<String> item : items) { %>
-							<tr>
-								<td><%=item.get(0) %></td>
-								<td><%=item.get(1) %></td>
-								<td class="hidden-sm"><%=item.get(2) %></td>
-								<td><%=item.get(3) %></td>
-								<td><%=item.get(4) %></td>
-								<td><%=item.get(5) %></td>
-								<td><%=item.get(6) %></td>
-								<td><%=item.get(7) %></td>
-							</tr>
-							<% } %>
-						</tbody>
-					</table>
+			<!--/container-->
+			<div class="container content">
+				<div class="row">
+					<!-- Begin Sidebar Menu -->
+
+					<!-- End Sidebar Menu -->
+
+					<!-- Begin Content -->
+					<div class="col-md-4">
+						<!-- General Unify Forms -->
+						<form action="#" class="sky-form">
+							<header>Select Folder</header>
+
+							<fieldset>
+								<section>
+									<label class="label">Text input</label> <label class="input">
+										<input type="text">
+									</label>
+								</section>
+
+								<section>
+									<label class="label">File input</label> <label for="file"
+										class="input input-file">
+										<div class="button">
+											<input type="file" id="file"
+												onchange="this.parentNode.nextSibling.value = this.value">Browse
+										</div> <input type="text" readonly="">
+									</label>
+								</section>
+							</fieldset>
+
+						</form>
+						<div class="margin-bottom-60"></div>
+
+					</div>
+					<!-- End Content -->
+					<div class="col-md-4">
+						<!-- General Unify Forms -->
+						<form action="#" class="sky-form">
+							<header>Select Session</header>
+
+							<fieldset>
+
+								<div class="panel panel-grey margin-bottom-40">
+									<div class="panel-body">
+										<input type="hidden" name="selected_items" />
+
+
+										<div id="html1">
+											<ul>
+												<li id="none" data-jstree='{"opened":true}'>All Courses
+													<ul>
+														<%
+															CourseDAO dao = new CourseDAO();
+															for (Course course : (List<Course>)dao.findAll()) {
+														%>
+														<li id="course_<%=course.getId()%>"
+															data-jstree='{"opened":true}'><%=course.getCourseName()%>
+															<ul>
+																<%
+																	for (Module module : course.getModules()) {
+																%>
+																<li id="module_<%=module.getId()%>"
+																	data-jstree='{"opened":true}'><%=module.getModuleName()%>
+
+																	<%
+																		for (Cmsession session1 : module.getCmsessions()) {
+																	%>
+																<li id="session_<%=session1.getId()%>"
+																	data-jstree='{"opened":true}'><%=session1.getTitle()%>
+
+																	<%
+																		}
+																	%></li>
+																<%
+																	}
+																%>
+															</ul></li>
+														<%
+															}
+														%>
+													</ul>
+												</li>
+											</ul>
+										</div>
+
+									</div>
+							</fieldset>
+
+						</form>
+						<!-- General Unify Forms -->
+
+						<div class="margin-bottom-60"></div>
+
+					</div>
+					<div class="col-md-4">
+						<!-- General Unify Forms -->
+						<form action="#" class="sky-form">
+							<header>Media details</header>
+
+							<fieldset>
+								<section>
+									<label class="label">Title</label> <label class="input">
+										<input type="text">
+									</label>
+								</section>
+
+								<section>
+									<label class="label">Tags</label> <label class="input">
+										<input type="text">
+									</label>
+								</section>
+
+								<section>
+									<label class="label">File input</label> <label for="file"
+										class="input input-file">
+										<div class="button">
+											<input type="file" id="file"
+												onchange="this.parentNode.nextSibling.value = this.value">Browse
+										</div> <input type="text" readonly="">
+									</label>
+								</section>
+							</fieldset>
+
+							<footer>
+								<button type="submit" class="btn-u">Upload</button>
+							</footer>
+						</form>
+						<!-- General Unify Forms -->
+
+						<div class="margin-bottom-60"></div>
+
+					</div>
 				</div>
 			</div>
 		</div>
-
 
 		<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
+
 	<!-- JS Customization -->
-	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
-	jQuery(document).ready(function() {
+		jQuery(document).ready(function() {
 			App.init();
-
-			 var otable =  $('#datatable_fixed_column').DataTable({
-				 
-					"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
-							"t"+
-							"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-					"autoWidth" : true,
-					"preDrawCallback" : function() {
-						// Initialize the responsive datatables helper once.
-						if (!responsiveHelper_datatable_fixed_column) {
-							responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-						}
-					},
-					"rowCallback" : function(nRow) {
-						responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-					},
-					"drawCallback" : function(oSettings) {
-						responsiveHelper_datatable_fixed_column.respond();
-					}		
-					// custom toolbar
-				    //$("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-				    	   
-				    // Apply the filter
-				    
-
-			    });
-				   
-				 $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
-				        otable
-				            .column( $(this).parent().index()+':visible' )
-				            .search( this.value )
-				            .draw();
-				            
-				    });
+			StyleSwitcher.initStyleSwitcher();
+			$('#html1').jstree({
+				"core" : {
+					"themes" : {
+						"variant" : "large"
+					}
+				},
+				"checkbox" : {
+					"keep_selected_style" : false
+				},
+				"plugins" : [ "checkbox" ]
+			});
+			var selectedElmsIds = $('#html1').jstree("get_selected");
 		});
-	</script>
+	
+</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
