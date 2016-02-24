@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.services.TaskService;
+import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 @WebServlet("/assign_creator")
-public class AssignCreatorController extends HttpServlet {
+public class AssignCreatorController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -22,7 +23,8 @@ public class AssignCreatorController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		printParams(request);
+		System.out.println(request.getParameter("creator_id)"));
 		if(request.getParameterMap().containsKey("courses") && request.getParameterMap().containsKey("creator_id"))
 		{
 			String course[] = request.getParameterValues("courses");

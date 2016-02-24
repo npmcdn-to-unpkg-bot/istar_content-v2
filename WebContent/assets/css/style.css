@@ -70,3 +70,13 @@ a:hover {
   margin-right: auto !important;
   background: url(../img/patterns/15.png) repeat;
 }
+
+
+
+#jstree2 ul { 
+  list-style: none;
+  margin: 5px 20px;
+}
+#jstree2 li {
+  margin: 10px 0;
+}

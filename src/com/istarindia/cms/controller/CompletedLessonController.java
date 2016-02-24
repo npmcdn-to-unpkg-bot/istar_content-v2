@@ -78,9 +78,9 @@ public class CompletedLessonController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}
 		
-		if(list_to_be_displayed.size() ==0 ) {
+		/*if(list_to_be_displayed.size() ==0 ) {
 			list_to_be_displayed = CMSRegistry.getSimulatedList(7);
-		}
+		}*/
 		request.setAttribute("lessons", list_to_be_displayed);
 		request.getRequestDispatcher("/content_admin/completed_lesson.jsp").forward(request, response);
 		

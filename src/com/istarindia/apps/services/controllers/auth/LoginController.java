@@ -1,6 +1,8 @@
 package com.istarindia.apps.services.controllers.auth;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -53,16 +55,26 @@ public class LoginController extends IStarBaseServelet {
 					 if(remember)
 					 {
 						 	System.out.println("----------> Remeber ME ");
-							UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
-							String uuid = uid.randomUUID().toString();
-							Cookie c = new Cookie("user_authorization_token", uuid);
+						 	MessageDigest md = MessageDigest.getInstance("MD5");
+					        md.update(request.getParameter("email").toString().getBytes());
+					        
+					        byte byteData[] = md.digest();
+					 
+					        //convert the byte to hex format method 1
+					        StringBuffer sb = new StringBuffer();
+					        for (int i = 0; i < byteData.length; i++) {
+					         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+					        }
+							//UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
+							//String uuid = uid.randomUUID().toString();
+							Cookie c = new Cookie("user_authorization_token", sb.toString());
 							c.setMaxAge(365 * 24 * 60 * 60); // one year
 							response.addCookie(c);
 							
 							request.getSession().setAttribute("user", user);
 
 							UserService service = new UserService();
-							service.saveSessionToken(uuid, user.getId());
+							service.saveSessionToken(sb.toString(), user.getId());
 							CMSRegistry.writeAuditLog("User Logged in ->" + ((IstarUser) request.getSession().getAttribute("user")).getEmail(), user.getId());
 							request.setAttribute("msg", "Welcome to iStar, " + user.getName());
 							response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
@@ -82,6 +94,9 @@ public class LoginController extends IStarBaseServelet {
 				request.setAttribute("msg", "Missing Username or password");
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 				rd.forward(request, response);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		} else {
