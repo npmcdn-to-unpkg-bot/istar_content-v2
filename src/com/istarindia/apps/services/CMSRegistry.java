@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.istarindia.apps.cmsutils.CMSFolder;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 
@@ -17,6 +18,7 @@ import com.istarindia.apps.dao.IstarUserDAO;
  */
 public class CMSRegistry {
 
+	public static CMSFolder root = CMSFolder.init();
 	public static void writeAuditLog(String string, Integer id) {
 		// TODO Auto-generated method stub
 		
