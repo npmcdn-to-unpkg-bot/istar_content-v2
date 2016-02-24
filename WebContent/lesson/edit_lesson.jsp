@@ -102,7 +102,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							</section>
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn-u">Update Lesson Details</button>
+							<button type="submit" class="btn-u">Create Presentation</button>
+							<button type="submit" class="btn-u">Create Game</button>
+							<button type="submit" class="btn-u">Create Assessment</button>
 						</footer>
 					</form>
 				</div>
