@@ -119,7 +119,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>task_created_for_reviewer">View Tasks Disapproved</a>
+										<a href="<%=baseURL %>/task_disapproved_for_reviewer">View Tasks Disapproved</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are disapproved by Content Reviewer.</p></li>

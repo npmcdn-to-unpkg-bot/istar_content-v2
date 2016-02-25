@@ -29,7 +29,7 @@ public class CMSRegistry {
 	static {
 		try {
 
-			File file = new File("C:\\Users\\Vaibhav\\workspace\\istar_content\\src\\menu.xml");
+			File file = new File("C:\\Users\\mak\\git\\istar_content\\src\\menu.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Menu.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -67,7 +67,9 @@ public class CMSRegistry {
 		IstarUserDAO dao = new IstarUserDAO();
 		ArrayList<IstarUser> items = new ArrayList<>();
 		for (IstarUser user : (ArrayList<IstarUser>)dao.findByProperty("userType", "CONTENT_CREATOR")) {
+			System.out.println("user here is >>"+user.getClass().toString());
 			if(user.getClass().toString().endsWith("ContentCreator")) {
+				System.out.println("user here is >>"+user.getEmail());
 				items.add(user);
 				
 			}
@@ -78,11 +80,13 @@ public class CMSRegistry {
 	public static ArrayList<IstarUser> getCRUsers() {
 		IstarUserDAO dao = new IstarUserDAO();
 		ArrayList<IstarUser> items = new ArrayList<>();
-		for (IstarUser user : (ArrayList<IstarUser>)dao.findByProperty("userType", "CONTENT_CREATOR")) {
-			if(user.getClass().toString().endsWith("ContentReviewer")) {
+		for (IstarUser user : (ArrayList<IstarUser>)dao.findByProperty("userType", "CONTENT_REVIEWER")) {
+			//System.out.println("user here is >>"+user.getClass().toString());
+			//if(user.getClass().toString().endsWith("ContentReviewer")) {
+				//System.out.println("user here is >>"+user.getEmail());
 				items.add(user);
 				
-			}
+			//}
 		}
 		return items;	}
 

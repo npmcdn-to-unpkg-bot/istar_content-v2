@@ -118,7 +118,7 @@ public class CourseUploadController extends HttpServlet {
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath() + "/content");	
+			response.sendRedirect(request.getContextPath() + "/istar_content");	
 		}	
 		
 	}

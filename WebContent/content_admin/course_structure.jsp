@@ -159,7 +159,7 @@
 							<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 						</div>
 						<div class="modal-body">
-							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/course/assignment">
+							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/istar_content/course/assignment">
 								<input type="hidden" id="selected_items" name="selected_items" />
 								<div class="form-group">
 									<label for="inputEmail1" class="col-lg-4 control-label">Choose User to Assign</label>

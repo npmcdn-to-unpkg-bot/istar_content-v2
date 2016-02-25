@@ -67,10 +67,10 @@ public class LoginController extends IStarBaseServelet {
 					        }
 							//UUID uid = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 							//String uuid = uid.randomUUID().toString();
-							Cookie c = new Cookie("user_authorization_token", sb.toString());
+							Cookie c = new Cookie("token", "makpra");
 							c.setMaxAge(365 * 24 * 60 * 60); // one year
 							response.addCookie(c);
-							
+							System.out.println(">>>>>"+c.getName());
 							request.getSession().setAttribute("user", user);
 
 							UserService service = new UserService();

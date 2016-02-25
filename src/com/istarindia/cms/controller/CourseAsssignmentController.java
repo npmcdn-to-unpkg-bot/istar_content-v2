@@ -55,7 +55,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 			System.out.println(assign);
 		}
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect(request.getContextPath() + "/content_admin/course_structure.jsp");	
 	}
 
 	private void assignLesson(String assign, String content_id, String[] reviewer) {
