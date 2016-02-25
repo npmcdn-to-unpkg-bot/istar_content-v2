@@ -145,6 +145,19 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>created_media_content_creator">View All Media tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are created by Content Developers.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+					
 					</div>
 
 					<div class="row g-mb-50">

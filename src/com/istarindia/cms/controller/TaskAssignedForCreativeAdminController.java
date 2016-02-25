@@ -56,7 +56,6 @@ public class TaskAssignedForCreativeAdminController extends HttpServlet {
 			embed_list.add(task.getItemType());
 			embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());
 			embed_list.add(task.getStatus());
-			embed_list.add(image.getId().toString()); //request for publish
 			
 			list_to_be_displayed.add(embed_list);
 		}	
