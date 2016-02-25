@@ -24,6 +24,11 @@
     	<child_links display_name="Assigned" url="/istar_content/lesson_assigned_reviewer" valid_roles="content_reviewer"/>
     	<child_links display_name="Disapproved" url="/istar_content/task_disapproved_for_reviewer" valid_roles="content_reviewer"/>
     	
+    	<child_links display_name="Created" url="/istar_content/created_media" valid_roles="creative_admin,content_creator"/>
+    	<child_links display_name="Assigned" url="/istar_content/assigned_media" valid_roles="creative_admin,content_creator,creative_creator"/>
+ 		<child_links display_name="Completed" url="/istar_content/completed_media" valid_roles="creative_admin,content_creator,creative_creator"/>
+ 		<child_links display_name="Approved" url="/istar_content/approved_media" valid_roles="creative_admin,content_creator,creative_creator,content_admin"/>
+		<child_links display_name="Published" url="/istar_content/published_media" valid_roles="creative_admin,content_creator,creative_creator,content_admin"/>
     </parent_links>
-    
+   
 </menu>
