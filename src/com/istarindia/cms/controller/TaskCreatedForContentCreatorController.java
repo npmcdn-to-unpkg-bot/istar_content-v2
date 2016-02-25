@@ -44,25 +44,22 @@ public class TaskCreatedForContentCreatorController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
-		List<Image> images= new MediaService().getAllImagesAssignedTO_CreativeCreator(user.getId(),  StatusTypes.COMPLETED);
+		List<Image> images= new MediaService().getAllImagesCreatedByContentCreator(user.getId());
 		for(Image image : images)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
 			embed_list.add(image.getId().toString());
 			embed_list.add(image.getTitle());
+			embed_list.add(image.getDescription());
 			Task task = new TaskDAO().findByItemId(image.getId()).get(0);
+			embed_list.add(task.getItemType());
 			embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());
+			embed_list.add(task.getStatus());
 			
-			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
-			embed_list.add(manager.getTaskStatusForm(task,user));
-		
-			embed_list.add(image.getId().toString());
-			embed_list.add(image.getId().toString());
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("images", list_to_be_displayed);
-		
-		request.getRequestDispatcher("/content_reviewer/completed_lesson.jsp").forward(request, response);
+		request.getRequestDispatcher("/media/media_list.jsp").forward(request, response);
 	}
 
 	/**

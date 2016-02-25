@@ -9,7 +9,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Creative Reviewer Dashboard | iStar CMS</title>
+<title>Creative Admin Dashboard | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -54,10 +54,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Content Reviewer Dashboard</h1>
+				<h1 class="pull-left">Creative Admin Dashboard</h1>
 				<ul class="pull-right breadcrumb">
-					<li><a href="<%=baseURL%>upload_media.jsp">Upload</a></li>
-					<li><a href="<%=baseURL%>dashboard.jsp">Dashboard</a></li>
+				<ul class="pull-right breadcrumb">
+					<li><a href="<%=baseURL%>creative_admin/dashboard.jsp">Dashboard</a></li>
 				</ul>
 			</div>
 			<!--/container-->

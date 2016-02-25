@@ -73,7 +73,7 @@ public class CMSFolder {
 
 			for (CMSFolder level1 : rootFolder.children) {
 				for (CMSFolder level2 : level1.children) {
-					System.out.println(level2.getDbFolder().getName());
+					//System.out.println(level2.getDbFolder().getName());
 				}
 			}
 			return rootFolder;
