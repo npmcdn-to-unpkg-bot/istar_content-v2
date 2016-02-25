@@ -18,6 +18,7 @@ import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.LessonTypes;
 import com.istarindia.apps.dao.*;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.PresentationService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -47,7 +48,9 @@ public class UpdateLessonController extends IStarBaseServelet {
 		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id")
 				&& request.getParameterMap().containsKey("duration")
 				&& request.getParameterMap().containsKey("lessonType")
-				&& request.getParameterMap().containsKey("title")) {
+				&& request.getParameterMap().containsKey("title")) 
+		
+		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
 			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
 			int duration = Integer.parseInt(request.getParameter("duration"));
@@ -71,6 +74,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 			Lesson lesson = (new LessonDAO()).findById(lesson_id);
 			switch (lessonType) {
 			case "Presentation":
+				new PresentationService().createPresentation(cmsession_id, duration, tags, title, "", null, user.getId(), lesson.getId());
 				lesson.setLessonType(LessonTypes.PRESENTATION);
 				//lesson = (Presentaion) lesson;
 				break;

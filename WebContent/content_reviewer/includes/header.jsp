@@ -4,7 +4,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 %><div class="header">
 			<div class="container-fluid ">
 				<!-- Logo -->
-				<a class="logo" href="/">
+				<a class="logo" href="/content/index.jsp">
 					<img src="<%=baseURL %>assets/img/logo1-default.png" alt="Logo">
 				</a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">

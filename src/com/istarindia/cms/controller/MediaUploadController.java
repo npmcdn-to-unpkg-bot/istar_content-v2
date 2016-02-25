@@ -19,12 +19,15 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.MediaTypes;
+import com.istarindia.apps.dao.Folder;
 import com.istarindia.apps.dao.FolderItems;
 import com.istarindia.apps.dao.FolderItemsDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
+import com.istarindia.apps.services.CMSUtils;
+import com.istarindia.apps.services.FolderService;
 
 /**
  * Servlet implementation class MediaUploadController
@@ -44,14 +47,14 @@ public class MediaUploadController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
 		}
@@ -179,9 +182,8 @@ public class MediaUploadController extends HttpServlet {
 		} finally {
 
 		}
-		request.getRequestDispatcher("/media/media_upload.jsp").forward(request, response);
+		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
 	}
-
 	
 	private String getMimeType(File file) {
 		String mimetype = "";
@@ -202,6 +204,20 @@ public class MediaUploadController extends HttpServlet {
 			suffix = filename.substring(pos + 1);
 		}
 		return suffix;
+	}
+
+	public String getFolderTree() {
+		// TODO Auto-generated method stub
+		//System.out.println(CMSFolder.init());
+		StringBuffer sb = new StringBuffer();
+		sb = CMSUtils.getAllFolders();
+		
+		FolderService d = new FolderService(); 
+		Folder root = d.getRootFolder();
+		StringBuffer sb1 = new StringBuffer();
+		System.out.println(d.getFolderRecursively(root,sb1));
+		return sb1.toString();
+		
 	}
 
 }

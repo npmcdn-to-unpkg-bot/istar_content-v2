@@ -1,10 +1,30 @@
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
+<%@page import="com.istarindia.apps.dao.*"%>
+<%@page import="java.util.*"%>
+<%@page import="com.istarindia.apps.cmsutils.CMSFolder"%>
+<%@page import="com.istarindia.apps.services.CMSUtils"%>
+<%@page import="com.istarindia.apps.services.FolderService"%>
+<%@page import="com.istarindia.cms.controller.MediaUploadController"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+%>
+<%!
+	private String getFolderTree() {
+		// TODO Auto-generated method stub
+		//System.out.println(CMSFolder.init());
+		StringBuffer sb = new StringBuffer();
+		sb = CMSUtils.getAllFolders();
+		
+		FolderService d = new FolderService(); 
+		Folder root = d.getRootFolder();
+		StringBuffer sb1 = new StringBuffer();
+		System.out.println(d.getFolderRecursively(root,sb1));
+		return sb1.toString();
+		
+	}
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -52,6 +72,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+
 </head>
 
 <body>
@@ -66,55 +88,45 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<li><a href="dashboard.jsp">Dashboard</a></li>
 				</ul>
 			</div>
+			</div>
 			<!--/container-->
 			<div class="container content">
 				<div class="row">
-					<!-- Begin Sidebar Menu -->
-
-					<!-- End Sidebar Menu -->
-
-					<!-- Begin Content -->
+				<form action="<%=baseURL%>media_upload" class="sky-form" method="post" enctype="multipart/form-data">
 					<div class="col-md-4">
-						<!-- General Unify Forms -->
-						<form action="#" class="sky-form">
-							<header>Select Folder</header>
+						<header>Select Folder</header>
 
-							<fieldset>
-								<section>
-									<label class="label">Text input</label> <label class="input">
-										<input type="text">
-									</label>
-								</section>
+						<fieldset>
+							<div class="panel panel-grey margin-bottom-40">
+								<div class="panel-body">
+									<input type="hidden" name="folders" />
 
-								<section>
-									<label class="label">File input</label> <label for="file"
-										class="input input-file">
-										<div class="button">
-											<input type="file" id="file"
-												onchange="this.parentNode.nextSibling.value = this.value">Browse
-										</div> <input type="text" readonly="">
-									</label>
-								</section>
-							</fieldset>
+									<div id="html1">
 
-						</form>
+
+										<ul>
+											<%=getFolderTree()%>
+
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</fieldset>
+
 						<div class="margin-bottom-60"></div>
-
 					</div>
-					<!-- End Content -->
 					<div class="col-md-4">
 						<!-- General Unify Forms -->
-						<form action="#" class="sky-form">
 							<header>Select Session</header>
 
 							<fieldset>
 
 								<div class="panel panel-grey margin-bottom-40">
 									<div class="panel-body">
-										<input type="hidden" name="selected_items" />
+										<input type="hidden" name="session" />
 
-
-										<div id="html1">
+										<div id="html2">
 											<ul>
 												<li id="none" data-jstree='{"opened":true}'>All Courses
 													<ul>
@@ -153,52 +165,55 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 										</div>
 
 									</div>
+									</div>
 							</fieldset>
-
-						</form>
-						<!-- General Unify Forms -->
-
 						<div class="margin-bottom-60"></div>
 
 					</div>
 					<div class="col-md-4">
-						<!-- General Unify Forms -->
-						<form action="#" class="sky-form">
+						
 							<header>Media details</header>
 
 							<fieldset>
 								<section>
-									<label class="label">Title</label> <label class="input">
-										<input type="text">
+									<label class="label">Title</label> 
+									<label class="input">
+										<input type="text" name="title">
 									</label>
 								</section>
 
 								<section>
-									<label class="label">Tags</label> <label class="input">
-										<input type="text">
+									<label class="label">Description</label> 
+									<label class="input">
+										<input type="text" name="description">
 									</label>
 								</section>
 
 								<section>
-									<label class="label">File input</label> <label for="file"
-										class="input input-file">
+									<label class="label">Tags</label> 
+									<label class="input">
+										<input type="text" name="tags" data-role="tagsinput" class="tagcontainer" >
+									</label>
+								</section>
+
+								<section>
+									<label class="label">File input</label> <label for="file" class="input input-file">
 										<div class="button">
-											<input type="file" id="file"
-												onchange="this.parentNode.nextSibling.value = this.value">Browse
+										<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
 										</div> <input type="text" readonly="">
 									</label>
+									
 								</section>
 							</fieldset>
 
 							<footer>
 								<button type="submit" class="btn-u">Upload</button>
 							</footer>
-						</form>
-						<!-- General Unify Forms -->
 
 						<div class="margin-bottom-60"></div>
 
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -216,7 +231,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
-
+ 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/tagz/bootstrap-tagsinput.js" charset="utf-8"></script>
 	<!-- JS Customization -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
@@ -238,6 +253,19 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				"plugins" : [ "checkbox" ]
 			});
 			var selectedElmsIds = $('#html1').jstree("get_selected");
+			
+			$('#html2').jstree({
+				"core" : {
+					"themes" : {
+						"variant" : "large"
+					}
+				},
+				"checkbox" : {
+					"keep_selected_style" : false
+				},
+				"plugins" : [ "checkbox" ]
+			});
+			var selectedElmsIds = $('#html2').jstree("get_selected");
 		});
 	
 </script>
