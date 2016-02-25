@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.services.CMSRegistry;
@@ -36,7 +40,26 @@ public class LogoutController extends IStarBaseServelet {
 		// TODO Auto-generated method stub
 		printParams(request);
 			try {
+				
+				IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+				IstarUserDAO dao = new IstarUserDAO();
+				Session session = dao.getSession();
+				Transaction tx = null;
+				try {
+					user.setIstarAuthorizationToken("");
+					tx = session.beginTransaction();
+					dao.attachDirty(user);
+					tx.commit();
+				} catch (HibernateException e) {
+					if (tx != null)
+						tx.rollback();
+					e.printStackTrace();
+				} finally {
+					session.close();
+				}
+				
 				request.getSession().removeAttribute("user");
+				
 					request.setAttribute("msg", "You are successfully Logged out.");
 					response.sendRedirect(request.getContextPath() + "/index.jsp");
 				

@@ -9,20 +9,20 @@
     	
     </parent_links>
     <parent_links display_name="Task">
-        <child_links display_name="Created" url="/istar_content/created_lesson" valid_roles="content_admin"/>
-    	<child_links display_name="Inprogress" url="/istar_content/draft_lesson" valid_roles="content_admin"/>
-    	<child_links display_name="Completed" url="/istar_content/completed_lesson" valid_roles="content_admin"/>
-    	<child_links display_name="Not Reviewed" url="/istar_content/review_pending" valid_roles="content_admin"/>
-    	<child_links display_name="Requested to Publish" url="/istar_content/not_published" valid_roles="content_admin"/>
-    	<child_links display_name="Published" url="published_lesson" valid_roles="content_admin,content_creator,content_reviewer"/>
+    <child_links display_name="Created" url="/content/created_lesson" valid_roles="content_admin"/>
+    	<child_links display_name="Inprogress" url="/content/draft_lesson" valid_roles="content_admin"/>
+    	<child_links display_name="Completed" url="/content/completed_lesson" valid_roles="content_admin"/>
+    	<child_links display_name="Not Reviewed" url="/content/review_pending" valid_roles="content_admin"/>
+    	<child_links display_name="Requested to Publish" url="/content/not_published" valid_roles="content_admin"/>
+    	<child_links display_name="Published" url="/content/published_lesson" valid_roles="content_admin,content_creator,content_reviewer"/>
     	
-    	<child_links display_name="Assigned" url="/istar_content/lesson_assigned" valid_roles="content_creator"/>
-    	<child_links display_name="Inprogress" url="/istar_content/draft_lesson_creator" valid_roles="content_creator"/>
-    	<child_links display_name="Disapproved" url="/istar_content/lesson_disapproved" valid_roles="content_creator"/>
-    	<child_links display_name="Approved" url="/istar_content/approved_lesson_creator" valid_roles="content_creator"/>
+		<child_links display_name="Assigned" url="/content/lesson_assigned" valid_roles="content_creator"/>
+    	<child_links display_name="Inprogress" url="/content/draft_lesson_creator" valid_roles="content_creator"/>
+    	<child_links display_name="Disapproved" url="/content/lesson_disapproved" valid_roles="content_creator"/>
+    	<child_links display_name="Approved" url="/content/approved_lesson_creator" valid_roles="content_creator"/>
     	
-    	<child_links display_name="Assigned" url="/istar_content/lesson_assigned_reviewer" valid_roles="content_reviewer"/>
-    	<child_links display_name="Disapproved" url="/istar_content/task_disapproved_for_reviewer" valid_roles="content_reviewer"/>
+    	<child_links display_name="Assigned" url="/content/lesson_assigned_reviewer" valid_roles="content_reviewer"/>
+    	<child_links display_name="Disapproved" url="/content/task_disapproved_for_reviewer" valid_roles="content_reviewer"/>
     	
     	<child_links display_name="Created" url="/istar_content/created_media_content_creator" valid_roles="content_creator"/>
     	<child_links display_name="Published" url="/istar_content/published_media_content_creator" valid_roles="content_creator"/>
@@ -37,5 +37,17 @@
  		<child_links display_name="Not reviewed" url="/istar_content/completed_media" valid_roles="creative_creator"/>
  		<child_links display_name="Published" url="/istar_content/pubilshed_media" valid_roles="creative_creator"/>
     </parent_links>
+   
+   
+    
+     <parent_links display_name="My Account">
+        <child_links display_name="View Profile" url="" valid_roles="content_admin,content_creator,content_reviewer"/>
+    	<child_links display_name="Dashboard" url="/content/content_admin/dashboard.jsp" valid_roles="content_admin"/>	
+    	<child_links display_name="Dashboard" url="/content/content_creator/dashboard.jsp" valid_roles="content_creator"/>	
+    	<child_links display_name="Dashboard" url="/content/content_reviewer/dashboard.jsp" valid_roles="content_reviewer"/>	
+    	    	<child_links display_name="Logout" url="/content/auth/logout" valid_roles="content_admin,content_creator,content_reviewer"/>	
+    	
+    </parent_links>
+   
    
 </menu>

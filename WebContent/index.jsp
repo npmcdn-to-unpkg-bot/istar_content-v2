@@ -5,7 +5,29 @@
 <!--<![endif]-->
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+Cookie[] cookies=request.getCookies();
+if(cookies!=null)
+{
+	System.out.println("yes cookie");
 
+	String token="";
+	for (Cookie cookie : cookies) {
+      	System.out.println(">>"+cookie.getName());
+      	token = cookie.getValue();
+        if(cookie.getName().equals("token")) {
+          token = cookie.getValue();
+      	System.out.println("token>>"+token);
+        }
+        else
+        {
+          	System.out.println(">>"+token);
+        }	
+     }	
+}
+else
+{
+	System.out.println("no cookie");
+	}	
 if (!(session.getAttribute("user") == null)) {
 	
 	String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";

@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.apps.services.TaskService;
 
 /**
  * Servlet implementation class EditLessonController
@@ -35,6 +39,11 @@ public class EditLessonController extends HttpServlet {
 		/*	inputs in request
 		 * Integer cmsession_id, Integer duration, String lessonType, String tags, String title, 
 		String[] learningObjectives*/
+		TaskDAO dao = new TaskDAO();
+		Task task = dao.findByItemId(Integer.parseInt(request.getParameter("lesson_id"))).get(0);
+		
+		new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
+		
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		String  tags="";
 		String learningObjectives[];
