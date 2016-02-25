@@ -14,6 +14,7 @@ import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
+import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.services.LessonService;
 
 /**
@@ -38,13 +39,9 @@ public class EditLessonController extends HttpServlet {
 		String  tags="";
 		String learningObjectives[];
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
-		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id") && request.getParameterMap().containsKey("duration") 
-			&& request.getParameterMap().containsKey("lessonType") && request.getParameterMap().containsKey("title")  )
+		if (request.getParameterMap().containsKey("lesson_id"))
 		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
-			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
-			int duration = Integer.parseInt("duration");
-			String lessonType = request.getParameter("lessonType");
 			String title = request.getParameter("title");
 			if(request.getParameterMap().containsKey("tags"))
 			{
@@ -59,11 +56,10 @@ public class EditLessonController extends HttpServlet {
 				}
 			}
 			LessonService service = new LessonService();
-			Lesson lesson= (Lesson) service.updateLesson(lesson_id,cmsession_id, duration, lessonType, tags, title, "dtype", ite);
+			Lesson lesson= (new LessonDAO()).findById(lesson_id);
 			
 			request.setAttribute("lesson", lesson);
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
-			//response.sendRedirect(request.getContextPath() + "/lesson/edit_lesson.jsp");
 		}
 		
 	}
