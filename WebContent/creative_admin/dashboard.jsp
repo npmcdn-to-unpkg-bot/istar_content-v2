@@ -56,9 +56,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<div class="container">
 				<h1 class="pull-left">Content Reviewer Dashboard</h1>
 				<ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Reviewer </a></li>
-					<li class="active">Dashboard</li>
+					<li><a href="<%=baseURL%>upload_media.jsp">Upload</a></li>
+					<li><a href="<%=baseURL%>dashboard.jsp">Dashboard</a></li>
 				</ul>
 			</div>
 			<!--/container-->

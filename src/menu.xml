@@ -10,7 +10,7 @@
     </parent_links>
     <parent_links display_name="Task">
         <child_links display_name="Created" url="/istar_content/created_lesson" valid_roles="content_admin"/>
-    	<child_links display_name="Inprogress" url="/istar_content/%>draft_lesson" valid_roles="content_admin"/>
+    	<child_links display_name="Inprogress" url="/istar_content/draft_lesson" valid_roles="content_admin"/>
     	<child_links display_name="Completed" url="/istar_content/completed_lesson" valid_roles="content_admin"/>
     	<child_links display_name="Not Reviewed" url="/istar_content/review_pending" valid_roles="content_admin"/>
     	<child_links display_name="Requested to Publish" url="/istar_content/not_published" valid_roles="content_admin"/>
@@ -24,11 +24,18 @@
     	<child_links display_name="Assigned" url="/istar_content/lesson_assigned_reviewer" valid_roles="content_reviewer"/>
     	<child_links display_name="Disapproved" url="/istar_content/task_disapproved_for_reviewer" valid_roles="content_reviewer"/>
     	
-    	<child_links display_name="Created" url="/istar_content/created_media" valid_roles="creative_admin,content_creator"/>
-    	<child_links display_name="Assigned" url="/istar_content/assigned_media" valid_roles="creative_admin,content_creator,creative_creator"/>
- 		<child_links display_name="Completed" url="/istar_content/completed_media" valid_roles="creative_admin,content_creator,creative_creator"/>
- 		<child_links display_name="Approved" url="/istar_content/approved_media" valid_roles="creative_admin,content_creator,creative_creator,content_admin"/>
-		<child_links display_name="Published" url="/istar_content/published_media" valid_roles="creative_admin,content_creator,creative_creator,content_admin"/>
+    	<child_links display_name="Created" url="/istar_content/created_media" valid_roles="content_creator"/>
+    	<child_links display_name="Published" url="/istar_content/published_media_content_creator" valid_roles="content_creator"/>
+    	
+    	<child_links display_name="Not assigned" url="/istar_content/to_be_assigned_media" valid_roles="creative_admin"/>
+    	<child_links display_name="Assigned" url="/istar_content/assigned_media_creative_admin" valid_roles="creative_admin"/>
+    	<child_links display_name="Not reviewed" url="/istar_content/completed_media_creative_admin" valid_roles="creative_admin"/>
+    	<child_links display_name="Published" url="/istar_content/published_media_creative_admin" valid_roles="creative_admin"/>
+    	
+    	<child_links display_name="Assigned" url="/istar_content/assigned_media" valid_roles="creative_creator"/>
+		<child_links display_name="Inprogress" url="/istar_content/draft_media" valid_roles="creative_creator"/>
+ 		<child_links display_name="Not reviewed" url="/istar_content/completed_media" valid_roles="creative_creator"/>
+ 		<child_links display_name="Published" url="/istar_content/pubilshed_media" valid_roles="creative_creator"/>
     </parent_links>
    
 </menu>
