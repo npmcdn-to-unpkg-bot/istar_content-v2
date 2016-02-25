@@ -19,12 +19,12 @@
     	<child_links display_name="Assigned" url="/istar_content/lesson_assigned" valid_roles="content_creator"/>
     	<child_links display_name="Inprogress" url="/istar_content/draft_lesson_creator" valid_roles="content_creator"/>
     	<child_links display_name="Disapproved" url="/istar_content/lesson_disapproved" valid_roles="content_creator"/>
-    	<child_links display_name="Approved" url="/istar_contentapproved_lesson_creator" valid_roles="content_creator"/>
+    	<child_links display_name="Approved" url="/istar_content/approved_lesson_creator" valid_roles="content_creator"/>
     	
     	<child_links display_name="Assigned" url="/istar_content/lesson_assigned_reviewer" valid_roles="content_reviewer"/>
     	<child_links display_name="Disapproved" url="/istar_content/task_disapproved_for_reviewer" valid_roles="content_reviewer"/>
     	
-    	<child_links display_name="Created" url="/istar_content/created_media" valid_roles="content_creator"/>
+    	<child_links display_name="Created" url="/istar_content/created_media_content_creator" valid_roles="content_creator"/>
     	<child_links display_name="Published" url="/istar_content/published_media_content_creator" valid_roles="content_creator"/>
     	
     	<child_links display_name="Not assigned" url="/istar_content/to_be_assigned_media" valid_roles="creative_admin"/>
