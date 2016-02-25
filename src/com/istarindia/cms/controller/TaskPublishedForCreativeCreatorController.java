@@ -24,7 +24,7 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
 /**
  * Servlet implementation class ApprovedLessonForCreatorController
  */
-@WebServlet("/published_media_content_creator")
+@WebServlet("/published_media_creative_creator")
 public class TaskPublishedForCreativeCreatorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
