@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.istarindia.apps.cmsutils.CMSFolder;
+
 /**
  * @author Vaibhav
  *
  */
 public class CMSRegistry {
 
+	public static CMSFolder root = CMSFolder.init();
+	
 	public static void writeAuditLog(String string, Integer id) {
 		// TODO Auto-generated method stub
 		
