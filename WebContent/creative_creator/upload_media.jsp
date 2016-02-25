@@ -13,15 +13,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 %>
 <%!
 	private String getFolderTree() {
-		// TODO Auto-generated method stub
-		//System.out.println(CMSFolder.init());
 		StringBuffer sb = new StringBuffer();
 		sb = CMSUtils.getAllFolders();
 		
 		FolderService d = new FolderService(); 
 		Folder root = d.getRootFolder();
 		StringBuffer sb1 = new StringBuffer();
-		System.out.println(d.getFolderRecursively(root,sb1));
+		d.getFolderRecursively(root,sb1);
 		return sb1.toString();
 		
 	}
@@ -92,7 +90,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<!--/container-->
 			<div class="container content">
 				<div class="row">
-				<form action="<%=baseURL%>media_upload" class="sky-form" method="post" enctype="multipart/form-data">
+				<form action="<%=baseURL%>media_upload" class="sky-form" method="POST" enctype="multipart/form-data">
 					<div class="col-md-4">
 						<header>Select Folder</header>
 
