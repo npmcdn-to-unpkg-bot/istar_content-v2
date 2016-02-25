@@ -68,7 +68,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 			}
 			LessonService service = new LessonService();
 			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration,  tags, title, "dtype",
-					ite);
+	ite);
 
 			request.setAttribute("lesson", lesson);
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);

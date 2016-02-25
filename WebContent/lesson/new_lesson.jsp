@@ -1,9 +1,13 @@
 <%@page import="com.istarindia.apps.services.LessonService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@page import="com.istarindia.apps.dao.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+<%
+	String url = request.getRequestURL().toString();
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
+			+ request.getContextPath() + "/";
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -24,35 +28,50 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="shortcut icon" href="favicon.ico">
 
 <!-- Web Fonts -->
-<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+<link rel='stylesheet' type='text/css'
+	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/headers/header-default.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/footers/footer-v1.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/headers/header-default.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/animate.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
 
 <body>
@@ -68,55 +87,86 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<li class="active">Create Lesson</li>
 				</ul>
 			</div>
-			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
+
 		</div>
-		<div class="container-fluid height-1000" style="padding: 0px !important">
+		<div class="container-fluid height-1000"
+			style="padding: 0px !important">
 			<div class="row">
-				
-				<div class="col-md-6">
-					<form action="/content/create_lesson" id="sky-form4" class="sky-form" novalidate="novalidate">
-						
+				<form action="/content/create_lesson" id="sky-form4" class="sky-form" novalidate="novalidate" onsubmit="myFunction()">
+					<input type="hidden" id="selected_items" name="selected_items" />
+					<div class="col-md-6">
+					<div class="alert alert-warning fade in text-center">
 						<fieldset>
-							
 							<section>
-							<label>Title of Lesson</label>
-								<label class="input"> <input value="" type="text" name="title" placeholder="Title of Lesson"> <b class="tooltip tooltip-bottom-right">The title of the lesson</b>
-								</label>
-							</section>
-							
-							<section>
-							<label>Duration of Lesson</label>
-								<label class="input"> <input value="" type="number" name="duration" placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
+								<label>Title of Lesson</label> <label class="input"> <input
+									value="" type="text" name="title" placeholder="Title of Lesson">
+									<b class="tooltip tooltip-bottom-right">The title of the
+										lesson*</b>
 								</label>
 							</section>
 							<section>
-							<label> Tags</label>
-								<label class="input"> <input data-role="tagsinput" value="" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
+								<label>Duration of Lesson*</label> <label class="input">
+									<input value="" type="number" name="duration"
+									placeholder="Duration of Lesson"> <b
+									class="tooltip tooltip-bottom-right">The duration of the
+										lesson</b>
 								</label>
 							</section>
 							<section>
-							<label> Session</label>
-								<label class="input"> 
-								<select>
-								<option value="">course-module-Session 1</option>
-								</select> <b class="tooltip tooltip-bottom-right">Select a session for the lesson</b>
+								<label> Tags</label> <label class="input"> <input
+									data-role="tagsinput" value="" type="text" name="Tags"
+									class="tagcontainer" placeholder="Tags of Lesson"> <b
+									class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 								</label>
 							</section>
+
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn-u">Update Lesson</button>
+							<button type="submit" class="btn-u">Create Lesson</button>
 						</footer>
-					</form>
-
 					
-				</div>
-				<div class="col-md-6">
-					form to select session
+
 					</div>
-				
-			
+				</div>
+					<div class="col-md-6">
+					
+					<div class="alert alert-warning fade in text-center">
+							<h4>Select session associated with the lesson*</h4>
+						
+						</div>
+					<div id="html1">
+						<ul>
+							<li id="none" data-jstree='{"opened":true}'>All Courses
+								<ul>
+									<%CourseDAO dao = new CourseDAO();
+							for (Course course : (List<Course>) dao.findAll()) {%>
+									<li id="course_<%=course.getId()%>"
+										data-jstree='{"opened":true}'><%=course.getCourseName()%>
+										<ul>
+											<%for (Module module : course.getModules()) {%>
+											<li id="module_<%=module.getId()%>"
+												data-jstree='{"opened":true}'><%=module.getModuleName()%>
+												<ul>
+													<%for (Cmsession session1 : module.getCmsessions()) {%>
+													<li id="session_<%=session1.getId()%>"
+														data-jstree='{"opened":true}'><%=session1.getTitle()%>
+
+													</li>
+
+													<%}%>
+												</ul></li>
+											<%}%>
+										</ul></li>
+									<%}%>
+								</ul>
+							</li>
+						</ul>
+					</div>
 			</div>
+			</form>
+
 		</div>
+	</div>
 	</div>
 	</div>
 	<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
@@ -124,21 +174,54 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 	<!-- JS Customization -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
+		type="text/javascript" charset="utf-8"></script>
 
-	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
-	<script src="<%=baseURL %>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
+	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
+		type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript">
+		function myFunction() {
+			var selectedElmsIds = $('#html1').jstree("get_selected");
+			$('#selected_items').val(selectedElmsIds);
+			console.log(selectedElmsIds);
 
+		}
+		jQuery(document).ready(function() {
+			App.init();
+			$('#html1').jstree({
+				"core" : {
+					"themes" : {
+						"variant" : "large"
+					}
+				},
+				"checkbox" : {
+					"keep_selected_style" : false
+				},
+				"plugins" : [ "checkbox" ]
+			});
+			$('#selected_items').val("aaaa");
+
+		});
+	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>

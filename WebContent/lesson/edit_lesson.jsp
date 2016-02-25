@@ -119,6 +119,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<a class="btn-u btn-u-xs btn-u-orange" href="<%=LessonService.getEditURL(lesson)%>">Create a Presentation</a>
 						<% }  %>
 					</div>
+					</div>
+					
 			</div>
 		</div>
 	</div>
