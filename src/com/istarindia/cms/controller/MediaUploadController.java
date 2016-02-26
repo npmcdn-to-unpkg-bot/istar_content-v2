@@ -50,19 +50,22 @@ public class MediaUploadController extends IStarBaseServelet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		printParams(request);
-		System.out.println(request.getParameter("title"));
-		System.out.println(request.getParameter("tags"));
-System.out.println("I am here");		
-		/*if (!ServletFileUpload.isMultipartContent(request)) {
+		
+		System.out.println("I am here");		
+		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
 		}
 		Image transientInstance2 = new Image();
 		ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
-		//	JSONArray json = new JSONArray();
-		String tags = request.getParameter("tags");
-		String description = request.getParameter("description");
-		String[] folder_list = (String[]) request.getAttribute("folder");
-
+		
+		String tags ="";
+		String description ="";
+		String title ="";
+		
+		String folders[] = null;
+		int cmsession_id=0;
+		
+		
 		try {
 			List<FileItem> items = uploadHandler.parseRequest(request);
 			for (FileItem item : items) {
@@ -70,8 +73,8 @@ System.out.println("I am here");
 					File file = new File(fileUploadPath, item.getName());
 					System.out.println(file.getAbsolutePath());
 					item.write(file);
-					System.out.println("ytem name "+item.getName());
-					System.out.println("ytem size "+item.getSize());
+					System.out.println("item name "+item.getName());
+					System.out.println("item size "+item.getSize());
 					System.out.println("url "+"upload?getfile=" + item.getName());
 					System.out.println("thumb url "+"upload?getthumb=" + item.getName());
 					System.out.println("delt url "+"upload?delfile=" + item.getName());
@@ -112,13 +115,13 @@ System.out.println("I am here");
 						Transaction tx = null;
 						try {
 							tx = session.beginTransaction();
-							transientInstance2.setTitle(item.getName());
-							transientInstance2.setDescription("This is a sample descirption.");
+							transientInstance2.setTitle(title);
+							transientInstance2.setDescription(description);
 							transientInstance2.setUrl("upload?getfile=" + item.getName());
 							transientInstance2.setDeleteUrl("upload?delfile=" + item.getName());
 							transientInstance2.setThumbnailUrl("upload?getthumb=" + item.getName());
 							transientInstance2.setTags(tags);
-							transientInstance2.setDescription(description);
+							transientInstance2.setSessionid(cmsession_id);
 							
 							dao.save(transientInstance2);
 							tx.commit();
@@ -132,13 +135,13 @@ System.out.println("I am here");
 						
 						System.out.println("-------tags---------->" + tags);
 						
-						FolderItemsDAO itemDAO = new FolderItemsDAO();
-					//	FolderItems item2 = new FolderItems();
 						
-						for(String folder_id : folder_list)
+						
+						for(String folder_id : folders)
 						{
 							System.out.println("----------------->" + folder_id);
 							
+							FolderItemsDAO itemDAO = new FolderItemsDAO();
 							FolderItems item2 = new FolderItems();
 							
 							item2.setFolderId(Integer.parseInt(folder_id));
@@ -166,9 +169,21 @@ System.out.println("I am here");
 						tags = item.getString();
 					} else if (item.getFieldName().equalsIgnoreCase("description")) {
 						description = item.getString();
-					} else if (item.getFieldName().equalsIgnoreCase("folder_list")) {
-						//folder_list = item.g;
+					} else if (item.getFieldName().equalsIgnoreCase("selected_items2")) {
+						folders = item.getString().split(",");
+						
+					}else if (item.getFieldName().equalsIgnoreCase("title")) {
+						title = item.getString();
+					}else if (item.getFieldName().equalsIgnoreCase("selected_items")) {
+
+						for (String cmsession : item.getString().split(",")) {
+							if(cmsession.startsWith("session_")) {
+								cmsession_id = Integer.parseInt(cmsession.replace("session_", ""));
+							}
+							System.out.println("session is "+cmsession);
+						}
 					}
+					
 				}
 				request.setAttribute("msg", "Image with title " + transientInstance2.getTitle() + " and " + transientInstance2.getUrl() + " created. ");
 
@@ -180,7 +195,7 @@ System.out.println("I am here");
 		} finally {
 
 		}
-		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);*/
+		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
 	}
 
 	/**

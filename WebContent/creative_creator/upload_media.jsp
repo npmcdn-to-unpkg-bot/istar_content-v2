@@ -73,8 +73,7 @@
 
 <!-- CSS Theme -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/default.css"
-	id="style_color">
+	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet"
 	href="<%=baseURL%>assets/css/theme-skins/dark.css">
 
@@ -100,7 +99,9 @@
 		<!--/container-->
 		<div class="container content">
 			<div class="row">
-				<form action="<%=baseURL%>media_upload" class="sky-form" method="POST" novalidate="novalidate" onsubmit="myFunction()" enctype="multipart/form-data">
+				<form action="<%=baseURL%>media_upload" class="sky-form"
+					method="POST" novalidate="novalidate" onsubmit="myFunction()"
+					enctype="multipart/form-data">
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<input type="hidden" id="selected_items2" name="selected_items2" />
 					<div class="col-md-4">
@@ -109,7 +110,7 @@
 						<fieldset>
 							<div class="panel panel-grey margin-bottom-40">
 								<div class="panel-body">
-									
+
 
 									<div id="html2">
 
@@ -134,7 +135,7 @@
 
 							<div class="panel panel-grey margin-bottom-40">
 								<div class="panel-body">
-									
+
 
 									<div id="html1">
 										<ul>
@@ -196,7 +197,7 @@
 
 							<section>
 								<label class="label">Description</label> <label class="input">
-									<input type="text" name="description">
+									 <TEXTAREA NAME="description" ROWS="5" cols="50"></TEXTAREA>
 								</label>
 							</section>
 
@@ -212,7 +213,7 @@
 									class="input input-file">
 									<div class="button">
 										<input type="file" id="file"
-											onchange="this.parentNode.nextSibling.value = this.value">Browse
+											name="file">Browse
 									</div> <input type="text" readonly="">
 								</label>
 
