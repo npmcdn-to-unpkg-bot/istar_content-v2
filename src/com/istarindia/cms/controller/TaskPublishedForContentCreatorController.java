@@ -45,7 +45,7 @@ public class TaskPublishedForContentCreatorController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
-		List<Image> images= new MediaService().getAllImagesCreatedByContentCreator(user.getId(),StatusTypes.PUBLISHED);
+		List<Image> images= new MediaService().getAllImagesCreatedByContentCreator(user.getId());
 		for(Image image : images)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
