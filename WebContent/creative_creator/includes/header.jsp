@@ -23,6 +23,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<div class="container">
 <ul class="nav navbar-nav">
 				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  { %>
+				
+				
 				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %> </a>
 					<ul class="dropdown-menu">
 					<% for(ChildLink child :  parent.getChildren())  {

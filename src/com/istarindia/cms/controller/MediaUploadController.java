@@ -28,12 +28,13 @@ import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.CMSUtils;
 import com.istarindia.apps.services.FolderService;
+import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
  * Servlet implementation class MediaUploadController
  */
 @WebServlet("/media_upload")
-public class MediaUploadController extends HttpServlet {
+public class MediaUploadController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
 	public static File fileUploadPath;
     /**
@@ -48,14 +49,11 @@ public class MediaUploadController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!ServletFileUpload.isMultipartContent(request)) {
+		printParams(request);
+		System.out.println(request.getParameter("title"));
+		System.out.println(request.getParameter("tags"));
+System.out.println("I am here");		
+		/*if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
 		}
 		Image transientInstance2 = new Image();
@@ -182,7 +180,14 @@ public class MediaUploadController extends HttpServlet {
 		} finally {
 
 		}
-		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
+		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);*/
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 	
 	private String getMimeType(File file) {

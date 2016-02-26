@@ -52,8 +52,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 	<div class="wrapper">
 	<jsp:include page="includes/header.jsp"></jsp:include>
-<<<<<<< HEAD
-=======
+
 		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left">Content Creator Dashboard</h1>
@@ -61,7 +60,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			</div>
 			<!--/container-->
 		</div>
->>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
+
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<section id="processes" class="g-bg-dark-blue1">
 				<div class="container content-md g-text-height-md">
