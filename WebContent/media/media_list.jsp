@@ -52,12 +52,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <body>
 
 	<div class="wrapper">
-		<jsp:include page="includes/header.jsp"></jsp:include>
+			<jsp:include page="../content_creator/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">All Created Tasks</h1>
 			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("images");  %>
+			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="panel panel-red margin-bottom-40" style="margin: 20px">
@@ -68,19 +68,17 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<tr>
 								<th></th>
 								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Description" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Type" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Actor" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Task Name" /></th>
+								<th><input type="text" class="form-control" placeholder="Search By Assignee" /></th>
 								<th><input type="text" class="form-control" placeholder="Search By Status" /></th>
 								<th></th>	
 							</tr>
 							<tr>
 								<th>#</th>
-								<th>Title</th>
-								<th>Description</th>
-								<th>Type</th>
-								<th>Actor</th>
-								<th>Status</th>
+								<th>Media Title</th>
+								<th>Task Name</th>
+								<th>Assigned To</th>
+								<th>Task Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -91,7 +89,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<td><%=item.get(2) %></td>
 								<td><%=item.get(3) %></td>
 								<td><%=item.get(4) %></td>
-								<td><%=item.get(5) %></td>
+								<td></td>
 							</tr>
 							<% } %>
 						</tbody>

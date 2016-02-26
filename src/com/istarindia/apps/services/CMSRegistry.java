@@ -29,7 +29,11 @@ public class CMSRegistry {
 	static {
 		try {
 
+<<<<<<< HEAD
+			File file = new File("/Users/mvsuryateja/git/content/istar_content/src/menu.xml");
+=======
 			File file = new File("C:\\Users\\admin-server\\git\\istar_content\\src\\menu.xml");
+>>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
 			JAXBContext jaxbContext = JAXBContext.newInstance(Menu.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
