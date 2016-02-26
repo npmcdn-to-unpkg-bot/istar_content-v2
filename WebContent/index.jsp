@@ -6,28 +6,35 @@
 <!--<![endif]-->
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-
-Cookie[] cookies=request.getCookies();
-if(cookies!=null)
-{	
-	for(Cookie c : cookies)
-	{
-		if(c.getName().equalsIgnoreCase("token"))
+if(request.getSession().getAttribute("user")!=null)
+{
+	String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
+	response.sendRedirect(url1);
+}else
+{
+	Cookie[] cookies=request.getCookies();
+	if(cookies!=null)
+	{	
+		for(Cookie c : cookies)
 		{
-			if(new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).size()>0)
+			if(c.getName().equalsIgnoreCase("token"))
 			{
-				IstarUser user = new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).get(0);
-					System.out.println("came in index");
-					request.getSession().setAttribute("user", user);
-					String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
-					response.sendRedirect(url1);
+				if(new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).size()>0)
+				{
+					IstarUser user = new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).get(0);
+						System.out.println("came in index");
+						request.getSession().setAttribute("user", user);
+						String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
+						response.sendRedirect(url1);
+					
+				}
 				
 			}
-			
 		}
-	}
 
-}
+	}
+}	
+
 %>
 <title>Login/Registration | iStar Skill Development</title>
 
@@ -83,7 +90,7 @@ if(cookies!=null)
 			</div>
 			<div class="input-group margin-bottom-20">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="text" class="form-control" placeholder="Password"  name="password">
+				<input type="password" class="form-control" placeholder="Password"  name="password">
 			</div>
 			<hr>
 

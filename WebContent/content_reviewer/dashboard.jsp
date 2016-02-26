@@ -55,11 +55,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left">Content Reviewer Dashboard</h1>
-				<ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Reviewer </a></li>
-					<li class="active">Dashboard</li>
-				</ul>
+				
 			</div>
 			<!--/container-->
 		</div>

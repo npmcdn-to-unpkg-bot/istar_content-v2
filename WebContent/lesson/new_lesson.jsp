@@ -81,11 +81,11 @@
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">Create Lesson</h1>
-				<ul class="pull-right breadcrumb">
+				<!-- <ul class="pull-right breadcrumb">
 					<li><a href="/">Home</a></li>
 					<li><a href="">Content Admin </a></li>
 					<li class="active">Create Lesson</li>
-				</ul>
+				</ul> -->
 			</div>
 
 		</div>

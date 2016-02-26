@@ -8,15 +8,16 @@
 try{
 if (request.getSession().getAttribute("user")==null) {
 	System.out.println("redirecting to index");
-	
-	response.sendRedirect("/content/index.jsp");
+	String url1 = "/content/"+ "index.jsp";
+	request.getRequestDispatcher(url1).forward(request, response);
 	
 	System.out.println("came back to header");
 }
 }catch(NullPointerException ex)
 {
-	
-	response.sendRedirect("/content/index.jsp");
+	System.out.println("npe");
+	String url1 = "/content/"+ "index.jsp";
+	request.getRequestDispatcher(url1).forward(request, response);
 }
 String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";

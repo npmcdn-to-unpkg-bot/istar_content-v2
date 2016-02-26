@@ -51,14 +51,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <body>
 
 	<div class="wrapper">
+	<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left">Content Creator Dashboard</h1>
-				<ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Creator </a></li>
-					<li class="active">Dashboard</li>
-				</ul>
+				
 			</div>
 			<!--/container-->
 		</div>

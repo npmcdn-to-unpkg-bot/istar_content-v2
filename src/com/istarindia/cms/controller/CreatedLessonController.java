@@ -50,7 +50,7 @@ public class CreatedLessonController extends HttpServlet {
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
-			System.out.println(">>>>>>> lesson id ="+lesson.getId());
+		//	System.out.println(">>>>>>> lesson id ="+lesson.getId());
 			embed_list.add(lesson.getId().toString());
 			embed_list.add(lesson.getTitle());
 			embed_list.add(lesson.getCmsession().getTitle());

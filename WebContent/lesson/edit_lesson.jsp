@@ -62,11 +62,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">Edit Lesson</h1>
-				<ul class="pull-right breadcrumb">
+				<!-- <ul class="pull-right breadcrumb">
 					<li><a href="/">Home</a></li>
 					<li><a href="">Content Admin </a></li>
 					<li class="active">Edit Lesson</li>
-				</ul>
+				</ul> -->
 			</div>
 			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
 		</div>
@@ -116,7 +116,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							</p>
 						</div>
 						<% } else { %>
-							<a class="btn-u btn-u-xs btn-u-orange" href="<%=LessonService.getEditURL(lesson)%>">Edit Presentation</a>
+							<a class="btn-u btn-u-xs btn-u-orange" href="<%=LessonService.getEditURL(lesson)%>">Create a Presentation</a>
 						<% }  %>
 					</div>
 					</div>

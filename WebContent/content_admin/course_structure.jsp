@@ -63,11 +63,7 @@
 		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
-				<ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Admin </a></li>
-					<li class="active">Dashboard</li>
-				</ul>
+				
 			</div>
 			<!--/container-->
 		</div>

@@ -56,11 +56,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">All Tasks Disapproved By Reviewers</h1>
-				<ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Creator </a></li>
-					<li class="active">All Tasks Disapproved</li>
-				</ul>
+				
 			</div>
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>

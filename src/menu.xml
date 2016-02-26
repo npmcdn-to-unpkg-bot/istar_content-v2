@@ -31,6 +31,7 @@
     	<child_links display_name="Assigned" url="/content/assigned_media_creative_admin" valid_roles="creative_admin"/>
     	<child_links display_name="Not reviewed" url="/content/completed_media_creative_admin" valid_roles="creative_admin"/>
     	<child_links display_name="Published" url="/content/published_media_creative_admin" valid_roles="creative_admin"/>
+    	
 
     	<child_links display_name="Assigned" url="/content/assigned_media" valid_roles="creative_creator"/>
 		<child_links display_name="Inprogress" url="/content/draft_media" valid_roles="creative_creator"/>

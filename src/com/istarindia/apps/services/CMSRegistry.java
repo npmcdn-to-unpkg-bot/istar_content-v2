@@ -29,7 +29,7 @@ public class CMSRegistry {
 	static {
 		try {
 
-			File file = new File("C:\\Users\\mak\\git\\istar_content\\src\\menu.xml");
+			File file = new File("C:\\Users\\admin-server\\git\\istar_content\\src\\menu.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Menu.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
