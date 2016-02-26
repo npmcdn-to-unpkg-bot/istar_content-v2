@@ -62,7 +62,7 @@
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Content Admin Dashboard</h1>
+				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
 				<ul class="pull-right breadcrumb">
 					<li><a href="index.html">Home</a></li>
 					<li><a href="">Content Admin </a></li>
@@ -83,7 +83,7 @@
 
 						<fieldset>
 							<section>
-								<label class="label">File input</label> <label for="file" class="input input-file">
+								<label class="label">File input   &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color:RED">here</a>  )</label><label for="file" class="input input-file">
 									<div class="button">
 										<input name="file" type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
 									</div> <input type="text" readonly="">
@@ -106,7 +106,7 @@
 				</div>
 				<div class="panel-body">
 
-					<button class="btn-u" data-toggle="modal" data-target="#myModal">Modal Form Sample</button>
+					<button class="btn-u" data-toggle="modal" data-target="#myModal">Select Creator and Reviewer</button>
 					<div id="html1">
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses
@@ -120,7 +120,8 @@
 											<%
 												for (Module module : course.getModules()) {
 											%>
-											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getModuleName()%> <%
+											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getModuleName()%>
+											<ul> <%
  												for (Cmsession session1 : module.getCmsessions()) {
  											%>
 											<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%> 
@@ -134,13 +135,17 @@
 										 <%
 												}
 											%></ul>
-										 </li><%
+										 </li>
+										 
+										 <%
 										 	}
-										 %>
+										 %></ul>
+										 </li>
 											<%
 												}
 											%>
-										</ul></li>
+										</ul>
+										</li>
 									<%
 										}
 									%>
@@ -159,7 +164,7 @@
 							<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 						</div>
 						<div class="modal-body">
-							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/istar_content/course/assignment">
+							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/course/assignment">
 								<input type="hidden" id="selected_items" name="selected_items" />
 								<div class="form-group">
 									<label for="inputEmail1" class="col-lg-4 control-label">Choose User to Assign</label>

@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.dao.IstarUserDAO"%>
 <%@page import="com.istarindia.apps.services.UserService"%><%@page import="com.istarindia.apps.dao.IstarUser"%><%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <!--[if !IE]><!-->
@@ -6,12 +7,27 @@
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
-if (!(session.getAttribute("user") == null)) {
-	
-	String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
-	response.sendRedirect(url1);
-}
+Cookie[] cookies=request.getCookies();
+if(cookies!=null)
+{	
+	for(Cookie c : cookies)
+	{
+		if(c.getName().equalsIgnoreCase("token"))
+		{
+			if(new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).size()>0)
+			{
+				IstarUser user = new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).get(0);
+					System.out.println("came in index");
+					request.getSession().setAttribute("user", user);
+					String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
+					response.sendRedirect(url1);
+				
+			}
+			
+		}
+	}
 
+}
 %>
 <title>Login/Registration | iStar Skill Development</title>
 

@@ -43,7 +43,7 @@ public class TaskDisapprovedForReviewer extends HttpServlet {
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
 		//id, lessonName, session, module, course,  reviewed_by, mobile preview, desktop preview,view_comment_timeline, edit lesson
 		//these values can be accessed in jsp page to render the data 
-		List<Lesson> lessons= new LessonService().getAllLessonDisApprovedByReviewer(user.getId());
+		List<Lesson> lessons= new LessonService().getAllLessonDisApprovedForReviewer(user.getId());
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();

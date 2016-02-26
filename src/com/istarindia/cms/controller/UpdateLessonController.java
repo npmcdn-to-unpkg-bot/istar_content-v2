@@ -47,18 +47,18 @@ public class UpdateLessonController extends IStarBaseServelet {
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
 		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id")
 				&& request.getParameterMap().containsKey("duration")
-				&& request.getParameterMap().containsKey("lessonType")
+				
 				&& request.getParameterMap().containsKey("title")) 
 		
 		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
 			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
 			int duration = Integer.parseInt(request.getParameter("duration"));
-			String lessonType = request.getParameter("lessonType");
+			
 
 			String title = request.getParameter("title");
-			if (request.getParameterMap().containsKey("tags")) {
-				tags = request.getParameter("tags");
+			if (request.getParameterMap().containsKey("Tags")) {
+				tags = request.getParameter("Tags");
 			}
 			if (request.getParameterMap().containsKey("learningObjectives")) {
 				learningObjectives = (String[]) request.getParameterMap().get("learningObjectives");
@@ -67,8 +67,8 @@ public class UpdateLessonController extends IStarBaseServelet {
 				}
 			}
 			LessonService service = new LessonService();
-			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, lessonType, tags, title, "dtype",
-					ite);
+			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration,  tags, title, "dtype",
+	ite);
 
 			request.setAttribute("lesson", lesson);
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
