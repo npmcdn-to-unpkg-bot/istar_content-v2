@@ -42,8 +42,6 @@ public class LogoutController extends IStarBaseServelet {
 		printParams(request);
 			try {
 				
-				
-				
 				IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 				IstarUserDAO dao = new IstarUserDAO();
 				Session session = dao.getSession();
@@ -51,7 +49,7 @@ public class LogoutController extends IStarBaseServelet {
 				try {
 					user.setIstarAuthorizationToken("");
 					tx = session.beginTransaction();
-					dao.attachDirty(user);
+					dao.attachDirty(user);;
 					tx.commit();
 				} catch (HibernateException e) {
 					if (tx != null)
@@ -60,13 +58,11 @@ public class LogoutController extends IStarBaseServelet {
 				} finally {
 					session.close();
 				}
-				Cookie cookie = new Cookie("token", "");
-
-				cookie.setMaxAge(0); 
-
-				response.addCookie(cookie);
-				request.getSession().removeAttribute("user");
 				
+			//	Cookie cookie = new Cookie("token", "");
+				//cookie.setMaxAge(0); 
+				//response.addCookie(cookie);
+				request.getSession().removeAttribute("user");
 					request.setAttribute("msg", "You are successfully Logged out.");
 					response.sendRedirect(request.getContextPath() + "/index.jsp");
 				

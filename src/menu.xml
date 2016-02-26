@@ -31,20 +31,13 @@
     	<child_links display_name="Assigned" url="/content/assigned_media_creative_admin" valid_roles="creative_admin"/>
     	<child_links display_name="Not reviewed" url="/content/completed_media_creative_admin" valid_roles="creative_admin"/>
     	<child_links display_name="Published" url="/content/published_media_creative_admin" valid_roles="creative_admin"/>
-    	
-<<<<<<< HEAD
-    	<child_links display_name="Assigned" url="/istar_content/assigned_media" valid_roles="creative_creator"/>
-		<child_links display_name="Inprogress" url="/istar_content/draft_media" valid_roles="creative_creator"/>
- 		<child_links display_name="Not reviewed" url="/istar_content/completed_media" valid_roles="creative_creator"/>
- 		<child_links display_name="Published" url="/istar_content/pubilshed_media" valid_roles="creative_creator"/>
-   </parent_links>
-=======
+
     	<child_links display_name="Assigned" url="/content/assigned_media" valid_roles="creative_creator"/>
 		<child_links display_name="Inprogress" url="/content/draft_media" valid_roles="creative_creator"/>
  		<child_links display_name="Not reviewed" url="/content/completed_media" valid_roles="creative_creator"/>
  		<child_links display_name="Published" url="/content/pubilshed_media" valid_roles="creative_creator"/>
     </parent_links>
->>>>>>> e7e9b36db41b82d070e7344ab660b586450f3324
+
    
    
     
