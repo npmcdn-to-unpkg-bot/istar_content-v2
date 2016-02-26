@@ -83,7 +83,7 @@
 
 						<fieldset>
 							<section>
-								<label class="label">File input</label> <label for="file" class="input input-file">
+								<label class="label">File input   &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color:RED">here</a>  )</label><label for="file" class="input input-file">
 									<div class="button">
 										<input name="file" type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
 									</div> <input type="text" readonly="">
@@ -106,7 +106,7 @@
 				</div>
 				<div class="panel-body">
 
-					<button class="btn-u" data-toggle="modal" data-target="#myModal">Modal Form Sample</button>
+					<button class="btn-u" data-toggle="modal" data-target="#myModal">Select Creator and Reviewer</button>
 					<div id="html1">
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses

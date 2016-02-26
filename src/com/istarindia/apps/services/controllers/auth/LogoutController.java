@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,8 @@ public class LogoutController extends IStarBaseServelet {
 		printParams(request);
 			try {
 				
+				
+				
 				IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 				IstarUserDAO dao = new IstarUserDAO();
 				Session session = dao.getSession();
@@ -57,7 +60,11 @@ public class LogoutController extends IStarBaseServelet {
 				} finally {
 					session.close();
 				}
-				
+				Cookie cookie = new Cookie("token", "");
+
+				cookie.setMaxAge(0); 
+
+				response.addCookie(cookie);
 				request.getSession().removeAttribute("user");
 				
 					request.setAttribute("msg", "You are successfully Logged out.");

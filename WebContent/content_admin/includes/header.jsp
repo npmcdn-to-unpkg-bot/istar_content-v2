@@ -4,15 +4,24 @@
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.dao.IstarUser"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-//System.out.println(request.getSession().getAttribute("user"));
-try {
-if (request.getSession().getAttribute("user").toString().equalsIgnoreCase("null")) {
-	response.sendRedirect("/content/index.jsp");
-}} catch(NullPointerException npe) {
-	response.sendRedirect("/content/index.jsp");
+<%
+try{
+if (request.getSession().getAttribute("user")==null) {
+	System.out.println("redirecting to index");
+	String url1 = "/content/"+ "index.jsp";
+	request.getRequestDispatcher(url1).forward(request, response);
+	
+	System.out.println("came back to header");
 }
+}catch(NullPointerException ex)
+{
+	String url1 = "/content/"+ "index.jsp";
+	request.getRequestDispatcher(url1).forward(request, response);
+}
+String url = request.getRequestURL().toString();
+String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+System.out.println("session user1 ="+request.getSession().getAttribute("user"));
+
 %><div class="header">
 	<div class="container-fluid ">
 		<!-- Logo -->
