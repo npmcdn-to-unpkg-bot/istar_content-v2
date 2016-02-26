@@ -36,6 +36,6 @@
 		<child_links display_name="Inprogress" url="/istar_content/draft_media" valid_roles="creative_creator"/>
  		<child_links display_name="Not reviewed" url="/istar_content/completed_media" valid_roles="creative_creator"/>
  		<child_links display_name="Published" url="/istar_content/pubilshed_media" valid_roles="creative_creator"/>
-    </parent_links>
+   </parent_links>
    
 </menu>
