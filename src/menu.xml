@@ -26,18 +26,20 @@
     	<child_links display_name="Disapproved" url="/content/task_disapproved_for_reviewer" valid_roles="content_reviewer"/>
     	
     	<child_links display_name="Created" url="/content/created_media_content_creator" valid_roles="content_creator"/>
-    	<child_links display_name="Published" url="/content/published_media_content_creator" valid_roles="content_creator"/>
+    	<child_links display_name="Published Media" url="/content/published_media_creative_creator" valid_roles="content_creator"/>
     	
     	<child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin"/>
-    	
+    	<child_links display_name="Inprogress" url="/content/task_draft_creative_admin" valid_roles="creative_admin"/>
     	<child_links display_name="Not reviewed" url="/content/completed_media_creative_admin" valid_roles="creative_admin"/>
-    	<child_links display_name="Published" url="/content/published_media_creative_creator" valid_roles="creative_admin"/>
+    	<child_links display_name="Published Media" url="/content/published_media_creative_creator" valid_roles="creative_admin"/>
     	
 
     	<child_links display_name="Assigned" url="/content/assigned_media" valid_roles="creative_creator"/>
 		<child_links display_name="Inprogress" url="/content/draft_media" valid_roles="creative_creator"/>
  		<child_links display_name="Not reviewed" url="/content/completed_media" valid_roles="creative_creator"/>
- 		<child_links display_name="Published" url="/content/published_media_creative_creator" valid_roles="creative_creator"/>
+ 		<child_links display_name="Disapproved" url="/content/disapproved" valid_roles="creative_creator"/>
+ 		
+ 		<child_links display_name="Published Media" url="/content/published_media_creative_creator" valid_roles="creative_creator"/>
     </parent_links>
 
    

@@ -69,7 +69,7 @@ public class MediaUploadController extends IStarBaseServelet {
 		
 		int item_id=0;
 		String folders[] = null;
-		int cmsession_id=0;
+		
 		
 		
 		try {
@@ -101,7 +101,7 @@ public class MediaUploadController extends IStarBaseServelet {
 							transientInstance.setTags(tags);
 							
 							
-							transientInstance.setSessionId(cmsession_id);
+						
 							dao.attachDirty(transientInstance);
 							tx.commit();
 						} catch (HibernateException e) {
@@ -155,7 +155,7 @@ public class MediaUploadController extends IStarBaseServelet {
 							transientInstance2.setDeleteUrl("upload?delfile=" + item.getName());
 							transientInstance2.setThumbnailUrl("upload?getthumb=" + item.getName());
 							transientInstance2.setTags(tags);
-							transientInstance2.setSessionid(cmsession_id);
+							
 							
 							dao.attachDirty(transientInstance2);
 							tx.commit();
@@ -204,15 +204,8 @@ public class MediaUploadController extends IStarBaseServelet {
 					}  else if (item.getFieldName().equalsIgnoreCase("selected_items2")) {
 						folders = item.getString().split(",");
 						
-					}else if (item.getFieldName().equalsIgnoreCase("selected_items")) {
-
-						for (String cmsession : item.getString().split(",")) {
-							if(cmsession.startsWith("session_")) {
-								cmsession_id = Integer.parseInt(cmsession.replace("session_", ""));
-							}
-							System.out.println("session is "+cmsession);
-						}
-					}else if (item.getFieldName().equalsIgnoreCase("item_id")) {
+					}
+					else if (item.getFieldName().equalsIgnoreCase("item_id")) {
 						item_id = Integer.parseInt(item.getString());
 					}
 					

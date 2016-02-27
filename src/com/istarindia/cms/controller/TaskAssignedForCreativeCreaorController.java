@@ -56,28 +56,30 @@ public class TaskAssignedForCreativeCreaorController extends HttpServlet {
 		/*
 		 * id, title, task name, and action
 		 * */
-			embed_list.add(task.getId().toString());
+			embed_list.add(task.getId().toString());//0
 			
 			
 			if(task.getItemType().equals("IMAGE"))
 			{
 				Image img = new ImageDAO().findById(task.getItemId());
 				
-				embed_list.add("IMAGE");
-				embed_list.add(img.getTitle());
+				embed_list.add("IMAGE");//1
+				embed_list.add(img.getTitle());//2
+				embed_list.add(img.getDescription());//3
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
 				Video vid = new VideoDAO().findById(task.getItemId());
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
+				embed_list.add(vid.getDescription());
 			}	
 			
 			
 			
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
 			System.out.println(">>>task is >> "+task.getStatus());
-			embed_list.add(manager.getTaskStatusForm(task,user));
+			embed_list.add(manager.getTaskStatusForm(task,user));//4
 			System.out.println(manager.getTaskStatusForm(task,user));
 			
 			

@@ -41,7 +41,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
-
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
@@ -67,10 +68,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
+			<form action="/content/create_task" id="sky-form4" class="sky-form" novalidate="novalidate" method="POST">
+			<input type="hidden" id="selected_items" name="selected_items" />
 			<div class="row">
 				
 				<div class="col-md-6">
-					<form action="/content/create_task" id="sky-form4" class="sky-form" novalidate="novalidate">
+					
 						
 						<fieldset>
 						
@@ -104,15 +107,71 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						<footer>
 							<button type="submit" class="btn-u">Create Task</button>
 						</footer>
-					</form>
+					
 
 					
 				</div>
 				
-				
+					<div class="col-md-4">
+						<!-- General Unify Forms -->
+						<header>Select Session</header>
+
+						<fieldset>
+
+							<div class="panel panel-grey margin-bottom-40" style="border:0">
+								<div class="panel-body">
+
+
+									<div id="html1">
+										<ul>
+											<li id="none" data-jstree='{"opened":true}'>All Courses
+												<ul>
+													<%
+														CourseDAO dao = new CourseDAO();
+														for (Course course : (List<Course>) dao.findAll()) {
+													%>
+													<li id="course_<%=course.getId()%>"
+														data-jstree='{"opened":true}'><%=course.getCourseName()%>
+														<ul>
+															<%
+																for (Module module : course.getModules()) {
+															%>
+															<li id="module_<%=module.getId()%>"
+																data-jstree='{"opened":true}'><%=module.getModuleName()%>
+																<ul>
+																	<%
+																		for (Cmsession session1 : module.getCmsessions()) {
+																	%>
+																	<li id="session_<%=session1.getId()%>"
+																		data-jstree='{"opened":true}'><%=session1.getTitle()%>
+
+																	</li>
+
+																	<%
+																		}
+																	%>
+																</ul></li>
+															<%
+																}
+															%>
+														</ul></li>
+													<%
+														}
+													%>
+												</ul>
+											</li>
+										</ul>
+									</div>
+
+								</div>
+							</div>
+						</fieldset>
+						<div class="margin-bottom-60"></div>
+
+					</div>
 				
 					</div>
-					
+					</form>
 			</div>
 		</div>
 	</div>
@@ -126,9 +185,36 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
+	
+	<script type="text/javascript">
+				function myFunction() {
+					var selectedElmsIds = $('#html1').jstree("get_selected");
+					$('#selected_items').val(selectedElmsIds);
+					console.log(selectedElmsIds);
+
+				}
+				jQuery(document).ready(function() {
+					App.init();
+					$('#html1').jstree({
+						"core" : {
+							"themes" : {
+								"variant" : "large"
+							}
+						},
+						"checkbox" : {
+							"keep_selected_style" : false
+						},
+						"plugins" : [ "checkbox" ]
+					});
+					$('#selected_items').val("aaaa");
+
+				});
+			</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>

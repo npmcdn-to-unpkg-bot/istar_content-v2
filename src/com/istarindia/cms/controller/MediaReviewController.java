@@ -2,6 +2,7 @@ package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import com.istarindia.apps.MediaTypes;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.MediaReview;
+import com.istarindia.apps.dao.MediaReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
@@ -43,11 +46,23 @@ public class MediaReviewController extends HttpServlet {
 		if(task.getItemType().equalsIgnoreCase(MediaTypes.IMAGE))
 		{
 			Image image = new ImageDAO().findById(task.getItemId());
+			
 			details.add(image.getTitle());
 			details.add(image.getDescription());
 			details.add(image.getTags());
 			details.add(new CmsessionDAO().findById(image.getSessionid()).getTitle());
 			details.add(image.getUrl());
+			List <MediaReview> media_review= new MediaReviewDAO().findByProperty("task",task);
+			StringBuffer sb = new StringBuffer();
+			if(media_review.size()>0)
+			{
+				for(MediaReview review: media_review)
+				{
+					sb.append(review.getComment()+",");
+				}
+			}
+			details.add(sb.toString());
+			details.add(task.getId().toString());
 		}
 		else if(task.getItemType().equalsIgnoreCase(MediaTypes.VIDEO))
 		{
@@ -57,6 +72,17 @@ public class MediaReviewController extends HttpServlet {
 			details.add(video.getTags());
 			details.add(new CmsessionDAO().findById(video.getSessionId()).getTitle());
 			details.add(video.getUrl());
+			List <MediaReview> media_review= new MediaReviewDAO().findByProperty("task",task);
+			StringBuffer sb = new StringBuffer();
+			if(media_review.size()>0)
+			{
+				for(MediaReview review: media_review)
+				{
+					sb.append(review.getComment()+",");
+				}
+			}
+			details.add(sb.toString());
+			details.add(task.getId().toString());
 		}
 		
 		request.setAttribute("media_details", details);

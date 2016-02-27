@@ -132,7 +132,7 @@
 
 						<div class="margin-bottom-60"></div>
 					</div>
-					<div class="col-md-4">
+				<%-- 	<div class="col-md-4">
 						<!-- General Unify Forms -->
 						<header>Select Session</header>
 
@@ -188,7 +188,7 @@
 						</fieldset>
 						<div class="margin-bottom-60"></div>
 
-					</div>
+					</div> --%>
 					<div class="col-md-4">
 
 						<header>Media details</header>

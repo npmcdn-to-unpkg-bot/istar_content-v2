@@ -80,7 +80,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>tasks_pending">Pending tasks</a>
+										<a href="<%=baseURL %>assigned_media">Assigned tasks</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are pending</p></li>
@@ -92,7 +92,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>tasks_completed">Completed tasks</a>
+										<a href="<%=baseURL %>draft_media">Inprogress tasks</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks completed</p></li>
@@ -104,6 +104,53 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</div>
 				</div>
 				
+				<div class="row g-mb-20">
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>completed_media">Not Reviewed tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are pending</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>disapproved">Disapproved tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks completed</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						
+					</div>
+					<div class="row g-mb-50">	
+					</div>
+				</div>
+				<div class="row g-mb-20">
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>published_media_creative_creator">Published tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are pending</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+					
+					<div class="row g-mb-50">	
+					</div>
+				</div>
 					<div class="row g-mb-50">
 					</div>
 				</div>	

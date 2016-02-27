@@ -81,29 +81,35 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<div class="col-sm-6 sm-margin-bottom-30">
 							<fieldset>
 							
-<form action="/content/media_review_admin" id="sky-form4" class="sky-form" novalidate="novalidate">
+			<form action="/content/media_review_by_admin"  novalidate="novalidate">
+			<input type="hidden" name="task_id" value="<%=details.get(6)%>">
 							<section>
-								<label style="font-size: 20px">Tags:</label> 
+								<label style="font-size: 17px; font-family:"Open Sans", Arial, sans-serif;">Tags:</label> 
 								<label class="input">
 									<%=details.get(2) %>
 								</label>
 							</section>
 
 							<section>
-								<label style="font-size: 20px">Session:</label> <label class="input">
+								<label style="font-size: 17px; font-family:"Open Sans", Arial, sans-serif;">Session:</label> <label >
 									<%=details.get(3) %>
 								</label>
 
 							</section>
-							
 							<section>
-								<label style="font-size: 20px" > Comment</label> <label class="input">
+								<label style="font-size: 17px; font-family:"Open Sans", Arial, sans-serif;">Previous Comments:</label> <label >
+									<%=details.get(5) %>
+								</label>
+
+							</section>
+							<section>
+								<label style="font-size: 17px; font-family:"Open Sans", Arial, sans-serif;" > Comment</label> <label class="input">
 								 <TEXTAREA NAME="comment" ROWS="5" cols="75"></TEXTAREA>
 								</label>
 							</section>
 							
 							<footer>
-							<button type="submit" class="btn-u" name="button" value="APPROVED">Approve</button> <button type="submit" name="button" class="btn-u" value="DISAPPROVED">Disapprove</button>
+							<button type="submit" class="btn-u" name="button" value="APPROVED">Approve</button> <button type="submit" name="button" class="btn-u" value="DIS_APPROVED">Disapprove</button>
 						
 							</footer>
 							</form>

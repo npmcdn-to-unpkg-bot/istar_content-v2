@@ -40,8 +40,15 @@ public class CreateTaskController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameterMap().containsKey("media_type") && request.getParameterMap().containsKey("description") && request.getParameterMap().containsKey("title"))
+		if(request.getParameterMap().containsKey("media_type") && request.getParameterMap().containsKey("description") && request.getParameterMap().containsKey("title") && request.getParameterMap().containsKey("selected_items"))
 		{
+			int cmsession_id=0;
+			for (String cmsession : request.getParameter("selected_items").split(",")) {
+				if(cmsession.startsWith("session_")) {
+					cmsession_id = Integer.parseInt(cmsession.replace("session_", ""));
+				}
+				System.out.println("session is "+cmsession);
+			
 			IstarUser user =((IstarUser)request.getSession().getAttribute("user"));
 			int item_id=0;
 			String desc = request.getParameter("description");
@@ -53,6 +60,7 @@ public class CreateTaskController extends HttpServlet {
 				Image img = new Image();
 				img.setDescription(desc);
 				img.setTitle(title);
+				img.setSessionid(cmsession_id);
 				Session session = dao.getSession();
 				Transaction tx = null;
 				try {
@@ -76,6 +84,7 @@ public class CreateTaskController extends HttpServlet {
 				Video vid = new Video();
 				vid.setDescription(desc);
 				vid.setTitle(title);
+				vid.setSessionId(cmsession_id);
 				Session session = dao.getSession();
 				Transaction tx = null;
 				try {
@@ -100,7 +109,7 @@ public class CreateTaskController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/media/create_task.jsp");		
 			}
 	}
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
