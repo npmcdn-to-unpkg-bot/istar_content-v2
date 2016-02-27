@@ -54,7 +54,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<jsp:include page="includes/header.jsp"></jsp:include>
 
 		<div class="breadcrumbs">
-			<div class="container">
+			<div class="container-fluid">
 				<h1 class="pull-left">Content Creator Dashboard</h1>
 				
 			</div>

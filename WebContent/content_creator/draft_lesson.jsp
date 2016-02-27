@@ -40,6 +40,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
@@ -61,10 +62,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-red margin-bottom-40" style="margin: 20px">
+			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
 				<div class="panel-heading"></div>
 				<div class="panel-body">
-					<table class="table" id="datatable_fixed_column">
+					<table class="table" id="datatable_fixed_column" width="100%">
 						<thead>
 							<tr>
 								<th></th>
