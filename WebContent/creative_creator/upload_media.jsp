@@ -102,6 +102,7 @@
 				<form action="<%=baseURL%>media_upload" class="sky-form"
 					method="POST" novalidate="novalidate" onsubmit="myFunction()"
 					enctype="multipart/form-data">
+					<>
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<input type="hidden" id="selected_items2" name="selected_items2" />
 					<div class="col-md-4">
