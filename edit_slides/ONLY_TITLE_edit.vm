@@ -1,0 +1,10 @@
+<header>Tempalate with only Title</header>
+<input name-"template" value="ONLY_TITLE">
+<fieldset>
+	<section>
+		<label class="label">Title</label>
+		<label class="input">
+			<input type="text" name="title">
+		</label>
+	</section>
+</fieldset>

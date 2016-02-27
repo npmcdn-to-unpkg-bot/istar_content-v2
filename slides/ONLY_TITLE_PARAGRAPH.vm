@@ -1,0 +1,4 @@
+<section  class="ONLY_TITLE_TABLE_PARAGRAPH" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+	<h2>$slide.getTitle()</h2>
+	<p>$slide.getParagraph()</p>
+</section>
