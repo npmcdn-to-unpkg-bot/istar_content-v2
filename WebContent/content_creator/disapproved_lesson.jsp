@@ -61,7 +61,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-red margin-bottom-40" style="margin: 20px">
+			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
 				<div class="panel-heading"></div>
 				<div class="panel-body">
 					<table class="table" id="datatable_fixed_column">

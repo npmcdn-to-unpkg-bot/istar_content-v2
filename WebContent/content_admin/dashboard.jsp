@@ -58,7 +58,7 @@ for (Cookie cookie : request.getCookies())
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container">
+			<div class="container-fluid">
 				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
 				<!-- <ul class="pull-right breadcrumb">
 					<li><a href="index.html">Home</a></li>

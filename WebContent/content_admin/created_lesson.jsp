@@ -61,43 +61,43 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-red margin-bottom-40" style="margin: 20px">
+			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
 				<div class="panel-heading"></div>
 				<div class="panel-body">
 					<table class="table" id="datatable_fixed_column">
 						<thead>
 							<tr>
-								<th  style="max-width: 30px !important" ></th>
-								<th  style="max-width: 100px !important"><input type="text" class="form-control" placeholder="Search By Title" /></th>
-								<th  style="max-width: 100px !important" ><input type="text" class="form-control" placeholder="Search By Session" /></th>
-								<th  style="max-width: 100px !important" ><input type="text" class="form-control" placeholder="Search By Module" /></th>
-								<th  style="max-width: 100px !important" ><input type="text" class="form-control" placeholder="Search By Course" /></th>
-								<th  style="max-width: 100px !important" ><input type="text" class="form-control" placeholder="Search By Creator" /></th>
-								<th  style="max-width: 100px !important" ><input type="text" class="form-control" placeholder="Search By Reviewer" /></th>
+								<th></th>
+								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
+								<th ><input type="text" class="form-control" placeholder="Search By Session" /></th>
+								<th ><input type="text" class="form-control" placeholder="Search By Module" /></th>
+								<th ><input type="text" class="form-control" placeholder="Search By Course" /></th>
+								<th ><input type="text" class="form-control" placeholder="Search By Creator" /></th>
+								<th ><input type="text" class="form-control" placeholder="Search By Reviewer" /></th>
 								<th></th>	
 							</tr>
 							<tr>
-								<th  style="max-width: 30px !important" >#</th>
+								<th>#</th>
 								<th style="max-width: 100px !important" >Title</th>
-								<th  style="max-width: 100px !important" >Session Title</th>
-								<th  style="max-width: 100px !important" >Module Title</th>
-								<th  style="max-width: 100px !important" >Course Title</th>
-								<th  style="max-width: 100px !important" >Created By</th>
-								<th  style="max-width: 100px !important" >Reviewers</th>
-								<th  style="max-width: 100px !important" >Task Action</th>
+								<th >Session Title</th>
+								<th >Module Title</th>
+								<th >Course Title</th>
+								<th >Created By</th>
+								<th >Reviewers</th>
+								<th >Task Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<% for(ArrayList<String> item : items) { %>
 							<tr>
-								<td  style="max-width: 30px !important" ><%=item.get(0) %></td>
-								<td  style="max-width: 100px !important"><%=item.get(1) %></td>
-								<td  style="max-width: 100px !important" ><%=item.get(2) %></td>
-								<td  style="max-width: 100px !important" ><%=item.get(3) %></td>
-								<td  style="max-width: 100px !important" ><%=item.get(4) %></td>
-								<td  style="max-width: 100px !important" ><%=item.get(5) %></td>
-								<td  style="max-width: 100px !important" ><%=item.get(6) %></td>
-								<td  style="max-width: 100px !important" ><%=item.get(7) %></td>
+								<td><%=item.get(0) %></td>
+								<td><%=item.get(1) %></td>
+								<td ><%=item.get(2) %></td>
+								<td ><%=item.get(3) %></td>
+								<td ><%=item.get(4) %></td>
+								<td ><%=item.get(5) %></td>
+								<td ><%=item.get(6) %></td>
+								<td ><%=item.get(7) %></td>
 							</tr>
 							<% } %>
 						</tbody>
@@ -140,39 +140,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	jQuery(document).ready(function() {
 			App.init();
 
-			 var otable =  $('#datatable_fixed_column').DataTable({
-				 
-					"sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>"+
-							"t"+
-							"<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-					"autoWidth" : true,
-					"preDrawCallback" : function() {
-						// Initialize the responsive datatables helper once.
-						if (!responsiveHelper_datatable_fixed_column) {
-							responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-						}
-					},
-					"rowCallback" : function(nRow) {
-						responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-					},
-					"drawCallback" : function(oSettings) {
-						responsiveHelper_datatable_fixed_column.respond();
-					}		
-					// custom toolbar
-				    //$("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-				    	   
-				    // Apply the filter
-				    
-
-			    });
-				   
-				 $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
-				        otable
-				            .column( $(this).parent().index()+':visible' )
-				            .search( this.value )
-				            .draw();
-				            
-				    });
 		});
 	</script>
 	<!--[if lt IE 9]>

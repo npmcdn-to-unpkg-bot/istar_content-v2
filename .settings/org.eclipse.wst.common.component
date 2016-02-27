@@ -5,7 +5,7 @@
         <dependent-module archiveName="istardao.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/istardao/istardao">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="context-root" value="istar_content"/>
         <property name="java-output-path" value="/istar_content/build/classes"/>
+        <property name="context-root" value="content"/>
     </wb-module>
 </project-modules>
