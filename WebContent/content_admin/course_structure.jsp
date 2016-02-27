@@ -123,10 +123,12 @@
 											<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%> 
 										 <ul>
 										 <% for (Lesson lesson : session1.getLessons()) { %>
-										 <li id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %>
-										<span class="label label-purple rounded-2x"> Assigned to - <%=lesson.getAsignee() %></span>
+										 <li  style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %>
+										<span class="label label-purple rounded-2x" > Assigned to - <%=lesson.getAsignee() %></span>
 										<span>&nbsp;&nbsp;&nbsp;</span>
 										<span class="label rounded label-sea"> Reviewer - <%=lesson.getREviewers() %></span>
+										<span>&nbsp;&nbsp;&nbsp;</span>
+										<span class="label rounded label-sea"> Status - <%=lesson.getStatus() %></span>
 										 </li>
 										 <%
 												}

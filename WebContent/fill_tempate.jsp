@@ -1,3 +1,5 @@
+<%@page import="com.istarindia.cms.lessons.CMSSlide"%>
+<%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.services.LessonService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
@@ -66,7 +68,7 @@
 		<jsp:include page="/content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">Edit/Create Slide</h1>
+				<h1 class="pull-left">Edit/Create Slide - fill_tempate.jsp?ppt_id=1&slide_type=ONLY_TITLE</h1>
 				<ul class="pull-right breadcrumb">
 					<li><a href="/">Home</a></li>
 					<li><a href="">Content Admin </a></li>
@@ -75,29 +77,59 @@
 			</div>
 			<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+			LessonUtils utils = new LessonUtils();
+			// if Slide ID is Empty create a new Slide 
+			// if its availble pass that slide ID 
+			
+			CMSSlide slide = new CMSSlide();
+			slide.setTemplateName(request.getParameter("slide_type"));
 			%>
 		</div>
 		<div class="container-fluid height-1000 content profile" style="padding: 0px !important">
-			<form action="/content/create_slide" name="" method="POST" class="sky-form">
-			
-			
-			<div class="row">
+			<form action="/content/create_slide" name="" method="GET" class="sky-form">
+				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>"> <input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
+				<div class="row">
+					<div class="col-md-5">
+						<%=utils.getEditProfileEdit(slide) %>
+						<fieldset>
+							<section>
+								<label class="label">Select Slide Transition</label> <label class="select"> <select name="slideTransition">
+										<option value="None">None</option>
+										<option value="Fade">Fade</option>
+										<option value="Slide">Slide</option>
+										<option value="Convex">Convex</option>
+										<option value="Concave">Concave</option>
+										<option value="Zoom">Zoom</option>
+								</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="label">Select Background Transition</label> <label class="select"> <select name="backgroundTransition">
+										<option value="None">None</option>
+										<option value="Fade">Fade</option>
+										<option value="Slide">Slide</option>
+										<option value="Convex">Convex</option>
+										<option value="Concave">Concave</option>
+										<option value="Zoom">Zoom</option>
+								</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="label">Select Slide Background color</label> <label class="select">
+								 <input type="color" name="backgroundColor" value="#b5533c">
+								</label>
+							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn-u">Submit</button>
+						</footer>
+					</div>
 
-				<div class="col-md-5">
-				<% String editFileName =  "slides/edit_"+request.getParameter("slide_type").toString();
-				String previewFileName =  "slides/preview_"+request.getParameter("slide_type").toString();%>
-				<jsp:include page="<%=editFileName %>"></jsp:include>
+					<div class="col-md-6"></div>
+
 				</div>
 
-				<div class="col-md-6">
-				
-				<jsp:include page="<%=previewFileName %>"></jsp:include>
-				
-				</div>
 
-			</div>
-			
-			
 			</form>
 
 		</div>
@@ -124,7 +156,7 @@
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
-	
+
 	<script type="text/javascript">
 $( document ).ready(function() {
 	tinymce.init({
