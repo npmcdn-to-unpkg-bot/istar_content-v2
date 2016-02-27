@@ -4,7 +4,11 @@
 	<section>
 		<label class="label">Title</label>
 		<label class="input">
-			<input type="text" name="title">
+			#if($slide.getTitle() )
+			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			#else 
+			<input type="text" name="title" placeholder=" Please enter title" >
+			#end			
 		</label>
 	</section>
 </fieldset>

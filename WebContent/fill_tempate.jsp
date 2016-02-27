@@ -77,15 +77,17 @@
 			</div>
 			<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-			LessonUtils utils = new LessonUtils();
-			// if Slide ID is Empty create a new Slide 
-			// if its availble pass that slide ID 
-			
-			CMSSlide slide = new CMSSlide();
-			slide.setTemplateName(request.getParameter("slide_type"));
+				LessonUtils utils = new LessonUtils();
+				CMSSlide slide = new CMSSlide();
+				if(request.getParameterMap().containsKey("slide_id")) {
+					SlideDAO dao = new SlideDAO();
+					slide = (new LessonUtils()).convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
+				} else {
+					slide.setTemplateName(request.getParameter("slide_type"));
+				}
 			%>
 		</div>
-		<div class="container-fluid height-1000 content profile" style="padding: 0px !important">
+		<div class="container-fluid height-2000 content profile" style="padding: 0px !important">
 			<form action="/content/create_slide" name="" method="GET" class="sky-form">
 				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>"> <input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
 				<div class="row">
@@ -93,7 +95,8 @@
 						<%=utils.getEditProfileEdit(slide) %>
 						<fieldset>
 							<section>
-								<label class="label">Select Slide Transition</label> <label class="select"> <select name="slideTransition">
+								<label class="label">Select Slide Transition</label> <label class="select"> 
+								<select name="slideTransition" value="<%=slide.getTransition() %>">
 										<option value="None">None</option>
 										<option value="Fade">Fade</option>
 										<option value="Slide">Slide</option>
@@ -159,9 +162,9 @@
 
 	<script type="text/javascript">
 $( document ).ready(function() {
-	tinymce.init({
+	 tinymce.init({
 		  selector: 'textarea',
-		  height: 500,
+		  height: 100,
 		  plugins: [
 		    'advlist autolink lists link image charmap print preview anchor',
 		    'searchreplace visualblocks code fullscreen',

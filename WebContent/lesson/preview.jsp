@@ -21,11 +21,11 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-<link rel="stylesheet" href="css/reveal.css">
-<link rel="stylesheet" href="css/theme/black.css" id="theme">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/black.css" id="theme">
 
 <!-- Code syntax highlighting -->
-<link rel="stylesheet" href="lib/css/zenburn.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
 <link href="mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" />
 <!-- Printing and PDF exports -->
 <script>
@@ -50,8 +50,8 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+		<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
+		<script src="<%=baseURL %>assets/plugins/reveal/js/reveal.js"></script>
 
 		<script>
 
