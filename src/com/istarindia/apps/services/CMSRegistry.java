@@ -20,6 +20,7 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.cmsutils.CMSFolder;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
@@ -104,6 +105,18 @@ public class CMSRegistry {
 		return items;
 	}
 
+	public static ArrayList<IstarUser> getCreativeCreators() {
+		IstarUserDAO dao = new IstarUserDAO();
+		ArrayList<IstarUser> items = new ArrayList<>();
+		for (IstarUser user : (ArrayList<IstarUser>)dao.findByProperty("userType", UserTypes.CREATIVE_CREATOR)) {
+			System.out.println("user here is >>"+user.getClass().toString());
+				System.out.println("user here is >>"+user.getEmail());
+				items.add(user);
+			
+		}
+		return items;
+	}
+	
 	public static Boolean checkloginStatus(HttpServletRequest request) {
 		boolean status = false;
 		Enumeration attrs = request.getSession().getAttributeNames();

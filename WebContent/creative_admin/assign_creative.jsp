@@ -81,55 +81,36 @@
 					<button class="btn-u" data-toggle="modal" data-target="#myModal">Select Creative Creator</button>
 					<div id="html1">
 						<ul>
-							<li id="none" data-jstree='{"opened":true}'>All Courses
+							<li id="none" data-jstree='{"opened":true}'>Tasks Not Assigned
 								<ul>
 									<%
-										CourseDAO dao = new CourseDAO();
-										for (Course course : (List<Course>) dao.findAll()) {
-									%>
-									<li id="course_<%=course.getId()%>" data-jstree='{"opened":false}'><%=course.getCourseName()%>
-										<ul>
-											<%
-												for (Module module : course.getModules()) {
+										TaskDAO dao = new TaskDAO();
+										for (Task task : (List<Task>) dao.findByItemType("IMAGE")) {
+												Image img = new ImageDAO().findById(task.getItemId());
+												if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
+												{
 											%>
-											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getModuleName()%>
-											<ul> <%
- 												for (Cmsession session1 : module.getCmsessions()) {
- 											%>
-											<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%> 
-										 <ul>
-										 <% for (Image image : new MediaService().getImagesUnderSessionId(session1.getId(), StatusTypes.CREATED)) { %>
-										 <li id="image_<%=image.getId()%>" data-jstree='{"opened":true}'><%="IMAGE > " +image.getTitle() %>
-										<span class="label label-purple rounded-2x"> Assigned to - <%=image.getAsignee() %></span>
-										
 									
-										 </li>
-										 <%
+									<li id="task_<%=task.getId()%>" data-jstree='{"opened":true}'><span class="label label-purple rounded-2x"><%=task.getTaskName()%> > <%=img.getTitle()%></span>
+									
+									
+									<% 		
 												}
-											%>
-											
-											 <% for (Video video : new MediaService().getVideosUnderSessionId(session1.getId(), StatusTypes.CREATED)) { %>
-										 <li id="video_<%=video.getId()%>" data-jstree='{"opened":true}'><%="VIDEO > " +video.getTitle() %>
-										<span class="label label-green rounded-2x"> Assigned to - <%=video.getAsignee() %></span>
-										 </li>
-										 <%
-												}
-											%>
-											</ul>
-										 </li>
-										 
-										 <%
-										 	}
-										 %></ul>
-										 </li>
-											<%
-												}
-											%>
-										</ul>
-										</li>
-									<%
+												}	
+										
+										for (Task task : (List<Task>) dao.findByItemType("VIDEO")) {
+											Video vid = new VideoDAO().findById(task.getItemId());
+											if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
+											{
+												
+												%>
+												<li id="task_<%=task.getId()%>" data-jstree='{"opened":true}'><span class="label label-green rounded-2x"><%=task.getTaskName()%> > <%=vid.getTitle()%></span>
+												<% 
+											}
 										}
-									%>
+										
+								%>
+									
 								</ul>
 							</li>
 						</ul>

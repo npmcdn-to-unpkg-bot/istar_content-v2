@@ -32,25 +32,23 @@ public class AssignCreativeController extends IStarBaseServelet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		printParams(request);
 		for (String assign : request.getParameter("selected_items").split(",")) {
-			if(assign.startsWith("image")) {
+			if(assign.startsWith("task")) {
 				
-				assignImage(assign,request.getParameter("assign_user"));
-				System.out.println(request.getParameterValues("review_user").length);
+				assignTask(assign,request.getParameter("assign_user"));
+				
 			}
 			System.out.println(assign);
 		}
 
-		response.sendRedirect(request.getContextPath() + "/content_admin/course_structure.jsp");
+		response.sendRedirect(request.getContextPath() + "/creative_admin/assign_creative.jsp");
 	}
 
-	private void assignImage(String assign, String creator) {
-		// TODO Auto-generated method stub
-		String image_id= assign.replace("image_", "");
-		
-		System.out.println(">>>"+image_id);
+	
+	private void assignTask(String assign, String content_id) {
+		String taskid= assign.replace("task_", "");
 		TaskDAO dao = new  TaskDAO();
-		Task task  = dao.findByItemId(Integer.parseInt(image_id)).get(0);
-		task.setActorId(Integer.parseInt(creator));
+		Task task  = dao.findById(Integer.parseInt(taskid));
+		task.setActorId(Integer.parseInt(content_id));
 		task.setStatus(StatusTypes.CREATIVE_ASSIGNED);
 		Session session1 = dao.getSession();
 		Transaction tx1 = null;
@@ -66,32 +64,10 @@ public class AssignCreativeController extends IStarBaseServelet {
 		} finally {
 			session1.close();
 		}
+		
+		
 	}
 
-	private void assignVideo(String assign, String creator) {
-		// TODO Auto-generated method stub
-		String image_id= assign.replace("image_", "");
-		
-		System.out.println(">>>"+image_id);
-		TaskDAO dao = new  TaskDAO();
-		Task task  = dao.findByItemId(Integer.parseInt(image_id)).get(0);
-		task.setActorId(Integer.parseInt(creator));
-		task.setStatus(StatusTypes.CREATIVE_ASSIGNED);
-		Session session1 = dao.getSession();
-		Transaction tx1 = null;
-		try {
-			tx1 = session1.beginTransaction();
-			
-			dao.save(task);
-			tx1.commit();
-		} catch (HibernateException e) {
-			if (tx1 != null)
-				tx1.rollback();
-			e.printStackTrace();
-		} finally {
-			session1.close();
-		}
-	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
