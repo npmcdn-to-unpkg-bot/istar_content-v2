@@ -20,15 +20,19 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.MediaTypes;
+import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Folder;
 import com.istarindia.apps.dao.FolderItems;
 import com.istarindia.apps.dao.FolderItemsDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.CMSUtils;
 import com.istarindia.apps.services.FolderService;
+import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -58,13 +62,12 @@ public class MediaUploadController extends IStarBaseServelet {
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
 		}
-		Image transientInstance2 = new Image();
+		
 		ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
 		
 		String tags ="";
-		String description ="";
-		String title ="";
 		
+		int item_id=0;
 		String folders[] = null;
 		int cmsession_id=0;
 		
@@ -88,17 +91,18 @@ public class MediaUploadController extends IStarBaseServelet {
 						VideoDAO dao = new VideoDAO();
 						Session session = dao.getSession();
 						Transaction tx = null;
-						Video transientInstance = new Video();
+						System.out.println("item id="+item_id);
+						Video transientInstance = dao.findById(item_id);
 						try {
 							tx = session.beginTransaction();
-							transientInstance.setTitle(item.getName());
+							
 						
 							transientInstance.setUrl("upload?getfile=" + item.getName());
 							transientInstance.setTags(tags);
-							transientInstance.setTitle(title);
-							transientInstance.setDescription(description);
+							
+							
 							transientInstance.setSessionId(cmsession_id);
-							dao.save(transientInstance);
+							dao.attachDirty(transientInstance);
 							tx.commit();
 						} catch (HibernateException e) {
 							e.printStackTrace();
@@ -108,6 +112,31 @@ public class MediaUploadController extends IStarBaseServelet {
 						} finally {
 							session.close();
 						}
+						
+						for(String folder_id : folders)
+						{
+							System.out.println("----------------->" + folder_id);
+							
+							FolderItemsDAO itemDAO = new FolderItemsDAO();
+							FolderItems item2 = new FolderItems();
+							
+							item2.setFolderId(Integer.parseInt(folder_id));
+							item2.setItemType(MediaTypes.VIDEO);
+							item2.setItemId(transientInstance.getId());
+							Session session1 = itemDAO.getSession();
+							Transaction tx1 = null;
+							try {
+								tx1 = session1.beginTransaction();
+								itemDAO.save(item2);
+								tx1.commit();
+							} catch (HibernateException e) {
+								if (tx1 != null)
+									tx1.rollback();
+								e.printStackTrace();
+							} finally {
+								session1.close();
+							}
+						}
 						//CMSRegistry.writeAuditLog("Video with title " + transientInstance.getTitle() + " and " + transientInstance.getUrl() + " created. ", (Users) request.getSession().getAttribute("user"));
 					} 
 					else 
@@ -115,17 +144,20 @@ public class MediaUploadController extends IStarBaseServelet {
 						ImageDAO dao = new ImageDAO();
 						Session session = dao.getSession();
 						Transaction tx = null;
+						Image transientInstance2 = dao.findById(item_id);
+						
+						
 						try {
 							tx = session.beginTransaction();
-							transientInstance2.setTitle(title);
-							transientInstance2.setDescription(description);
+							
+							
 							transientInstance2.setUrl("upload?getfile=" + item.getName());
 							transientInstance2.setDeleteUrl("upload?delfile=" + item.getName());
 							transientInstance2.setThumbnailUrl("upload?getthumb=" + item.getName());
 							transientInstance2.setTags(tags);
 							transientInstance2.setSessionid(cmsession_id);
 							
-							dao.save(transientInstance2);
+							dao.attachDirty(transientInstance2);
 							tx.commit();
 						} catch (HibernateException e) {
 							if (tx != null)
@@ -169,13 +201,9 @@ public class MediaUploadController extends IStarBaseServelet {
 				} else {
 					if (item.getFieldName().equalsIgnoreCase("tags")) {
 						tags = item.getString();
-					} else if (item.getFieldName().equalsIgnoreCase("description")) {
-						description = item.getString();
-					} else if (item.getFieldName().equalsIgnoreCase("selected_items2")) {
+					}  else if (item.getFieldName().equalsIgnoreCase("selected_items2")) {
 						folders = item.getString().split(",");
 						
-					}else if (item.getFieldName().equalsIgnoreCase("title")) {
-						title = item.getString();
 					}else if (item.getFieldName().equalsIgnoreCase("selected_items")) {
 
 						for (String cmsession : item.getString().split(",")) {
@@ -184,10 +212,12 @@ public class MediaUploadController extends IStarBaseServelet {
 							}
 							System.out.println("session is "+cmsession);
 						}
+					}else if (item.getFieldName().equalsIgnoreCase("item_id")) {
+						item_id = Integer.parseInt(item.getString());
 					}
 					
 				}
-				request.setAttribute("msg", "Image with title " + transientInstance2.getTitle() + " and " + transientInstance2.getUrl() + " created. ");
+			//	request.setAttribute("msg", "Image with title " + transientInstance2.getTitle() + " and " + transientInstance2.getUrl() + " created. ");
 
 			}
 		} catch (FileUploadException e) {
@@ -197,7 +227,34 @@ public class MediaUploadController extends IStarBaseServelet {
 		} finally {
 
 		}
-		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
+		TaskDAO d = new TaskDAO();
+		Task t = null;
+		for(Task tt :d.findByItemId(item_id))
+		{
+			if(tt.getItemType().equalsIgnoreCase(MediaTypes.IMAGE) || (tt.getItemType().equalsIgnoreCase(MediaTypes.VIDEO)))
+			{
+				t= tt;
+				break;
+			}	
+		}
+		System.out.println("task here is "+t.getId());
+		t.setStatus(StatusTypes.COMPLETED);
+		Session session1 = d.getSession();
+		Transaction tx1 = null;
+		try {
+			tx1 = session1.beginTransaction();
+			d.attachDirty(t);
+			tx1.commit();
+		} catch (HibernateException e) {
+			if (tx1 != null)
+				tx1.rollback();
+			e.printStackTrace();
+		} finally {
+			session1.close();
+		}
+		
+		
+		request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
 	}
 
 	/**

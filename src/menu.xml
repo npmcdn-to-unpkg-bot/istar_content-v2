@@ -28,16 +28,16 @@
     	<child_links display_name="Created" url="/content/created_media_content_creator" valid_roles="content_creator"/>
     	<child_links display_name="Published" url="/content/published_media_content_creator" valid_roles="content_creator"/>
     	
-    	<child_links display_name="Not assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin"/>
-    	<child_links display_name="Assigned" url="/content/assigned_media_creative_admin" valid_roles="creative_admin"/>
+    	<child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin"/>
+    	
     	<child_links display_name="Not reviewed" url="/content/completed_media_creative_admin" valid_roles="creative_admin"/>
-    	<child_links display_name="Published" url="/content/published_media_creative_admin" valid_roles="creative_admin"/>
+    	<child_links display_name="Published" url="/content/published_media_creative_creator" valid_roles="creative_admin"/>
     	
 
     	<child_links display_name="Assigned" url="/content/assigned_media" valid_roles="creative_creator"/>
 		<child_links display_name="Inprogress" url="/content/draft_media" valid_roles="creative_creator"/>
  		<child_links display_name="Not reviewed" url="/content/completed_media" valid_roles="creative_creator"/>
- 		<child_links display_name="Published" url="/content/pubilshed_media" valid_roles="creative_creator"/>
+ 		<child_links display_name="Published" url="/content/published_media_creative_creator" valid_roles="creative_creator"/>
     </parent_links>
 
    
