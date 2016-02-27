@@ -99,10 +99,14 @@
 		<!--/container-->
 		<div class="container content">
 			<div class="row">
+			<% 
+			
+			int item_id = (int)request.getAttribute("item_id");
+			%>
 				<form action="<%=baseURL%>media_upload" class="sky-form"
 					method="POST" novalidate="novalidate" onsubmit="myFunction()"
 					enctype="multipart/form-data">
-					<>
+					<input type="hidden" name="item_id" value="<%=item_id %>" />
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<input type="hidden" id="selected_items2" name="selected_items2" />
 					<div class="col-md-4">
@@ -190,17 +194,7 @@
 						<header>Media details</header>
 
 						<fieldset>
-							<section>
-								<label class="label">Title</label> <label class="input">
-									<input type="text" name="title">
-								</label>
-							</section>
-
-							<section>
-								<label class="label">Description</label> <label class="input">
-									 <TEXTAREA NAME="description" ROWS="5" cols="50"></TEXTAREA>
-								</label>
-							</section>
+							
 
 							<section>
 								<label class="label">Tags</label> <label class="input">
@@ -222,7 +216,7 @@
 						</fieldset>
 
 						<footer>
-							<button type="submit" class="btn-u">Upload</button>
+							<button type="submit" class="btn-u">Upload and Mark as Complete</button>
 						</footer>
 
 						<div class="margin-bottom-60"></div>
