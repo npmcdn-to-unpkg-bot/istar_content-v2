@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,9 +46,11 @@ public class MediaUploadController extends IStarBaseServelet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    @Override
+    public void init(ServletConfig config) {
+        fileUploadPath = new File("C:\\Users\\mak\\Pictures");
+    }
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		printParams(request);
 		
@@ -81,8 +84,6 @@ public class MediaUploadController extends IStarBaseServelet {
 					System.out.println("del type "+ "GET");
 					System.out.println("location "+"upload?getfile=" + item.getName());
 
-					
-
 					if (item.getName().toString().endsWith(".mp4")) {
 						VideoDAO dao = new VideoDAO();
 						Session session = dao.getSession();
@@ -91,11 +92,12 @@ public class MediaUploadController extends IStarBaseServelet {
 						try {
 							tx = session.beginTransaction();
 							transientInstance.setTitle(item.getName());
-							transientInstance.setDescription("This is a sample descirption.");
+						
 							transientInstance.setUrl("upload?getfile=" + item.getName());
 							transientInstance.setTags(tags);
+							transientInstance.setTitle(title);
 							transientInstance.setDescription(description);
-							
+							transientInstance.setSessionId(cmsession_id);
 							dao.save(transientInstance);
 							tx.commit();
 						} catch (HibernateException e) {
