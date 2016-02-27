@@ -2,6 +2,8 @@
     <wb-module deploy-name="istar_content">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/slides"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/edit_slides"/>
         <dependent-module archiveName="istardao.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/istardao/istardao">
             <dependency-type>uses</dependency-type>
         </dependent-module>

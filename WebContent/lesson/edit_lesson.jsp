@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.LessonService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
@@ -115,9 +116,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
 							</p>
 						</div>
-						<% } else { %>
-							<a class="btn-u btn-u-xs btn-u-orange" href="<%=LessonService.getEditURL(lesson)%>">Create a Presentation</a>
-						<% }  %>
+						<% } else { 
+						LessonUtils utils = new LessonUtils();
+						out.println(utils.getEditForm(lesson));
+						
+						// Create Two block 
+						// Top one has to be add new SLide  
+						//Botton one is list of slides
+						}  %>
 					</div>
 					</div>
 					

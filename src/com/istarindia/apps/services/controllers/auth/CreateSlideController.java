@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.istarindia.apps.dao.Presentaion;
+import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.cms.lessons.SlideService;
+
 /**
  * Servlet implementation class CreateSlideController
  */
@@ -26,8 +30,27 @@ public class CreateSlideController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//template=ONLY_TITLE>&title=sssssssssssssssssssss
+		//http://127.0.0.1:8080/content/create_slide?template=ONLY_TITLE
+		//	&ppt_id=1&
+		//	title=ssssssssssssssssssssssssssssssssssssssssss&
+		//	slideTransition=Slide&backgroundTransition=Fade&
+		//	backgroundColor=%23b5533c
+		String template = request.getParameter("template");
+		SlideService service = new SlideService();
+		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+		switch (template) {
+		case "ONLY_TITLE":
+			service.addTextSlideToLesson(ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+					request.getParameter("backgroundTransition"), request.getParameter("backgroundColor"));
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		
 	}
 
 	/**

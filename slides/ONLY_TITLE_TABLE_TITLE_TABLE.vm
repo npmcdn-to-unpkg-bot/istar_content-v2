@@ -1,0 +1,24 @@
+<section class="ONLY_TITLE_TABLE_TITLE_TABLE" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+	<h2 class="first_heading">$slide.getTitle()</h2>
+	<table class="first_table">
+		<tbody> 
+			#foreach( $row in $slide.getTables().get(0).getRows() )
+			<tr>
+				#foreach( $cell in $row.getCells() )
+					<td>$cell</td>
+				#end
+			#end
+		</tbody>
+	</table>
+	<h2 class="second_heading">$slide.getTitle()</h2>
+	<table class="second_table">
+		<tbody> 
+			#foreach( $row in $slide.getTables().get(0).getRows() )
+			<tr>
+				#foreach( $cell in $row.getCells() )
+					<td>$cell</td>
+				#end
+			#end
+		</tbody>
+	</table>
+</section>

@@ -1,0 +1,13 @@
+<section class="ONLY_TITLE_TREE" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+	<h2>$slide.getTitle()</h2>
+	<ol>
+		#foreach( $item in $slide.getList().getItems() )
+			<li  class="fragment fade-up parent_tree_item" >$item.getText()</li>
+			<ul class="fragment fade-up">
+				#foreach( $itemTree in $item.getList().getItems() )
+					<li class="fragment fade-up child_tree_item" >$itemTree.getText()</li>
+				#end
+			</ul>
+	 	 #end
+	</ol>
+</section>

@@ -1,0 +1,3 @@
+<section class="ONLY_TITLE" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+	<p>$slide.getTitle()</p>
+</section>

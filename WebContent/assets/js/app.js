@@ -238,7 +238,9 @@ var App = function () {
 	}
 	
 	function handleTables() {
-		 var otable =  $('#datatable_fixed_column').DataTable({
+		try {
+		
+		var otable =  $('#datatable_fixed_column').DataTable({
 			 initComplete: function () {
 		            this.api().columns().every( function () {
 		                var column = this;
@@ -260,6 +262,9 @@ var App = function () {
 		            } );
 		        }, 
 			 responsive: true});
+	} catch (err) {
+		// TODO: handle exception
+	}
 	}
 
 	return {
