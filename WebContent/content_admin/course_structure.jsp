@@ -128,7 +128,7 @@
 										<span>&nbsp;&nbsp;&nbsp;</span>
 										<span class="label rounded label-sea"> Reviewer - <%=lesson.getREviewers() %></span>
 										<span>&nbsp;&nbsp;&nbsp;</span>
-										<span class="label rounded label-sea"> Status - <%=lesson.getStatus() %></span>
+										<span class="label rounded label-yellow"> Status - <%=lesson.getStatus() %></span>
 										 </li>
 										 <%
 												}
