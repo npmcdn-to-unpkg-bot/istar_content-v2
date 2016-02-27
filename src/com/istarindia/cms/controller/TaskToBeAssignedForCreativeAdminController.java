@@ -44,7 +44,7 @@ public class TaskToBeAssignedForCreativeAdminController extends HttpServlet {
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
 		//id, lessonName, session, module, course,  review_by, request for publish
 		//these values can be accessed in jsp page to render the data 
-		List<Lesson> lessons= new LessonService().getAllLessonAssignedTO_ContentCreator(user.getId(), StatusTypes.APPROVED);
+		List<Lesson> lessons= new LessonService().getAllLessonToBeAssignedByCreativeAdmin(user.getId(), StatusTypes.CREATED);
 		for(Lesson lesson : lessons)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
