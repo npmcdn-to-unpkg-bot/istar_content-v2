@@ -168,13 +168,9 @@ public class CMSSlide {
 
 	public StringWriter getText() throws JAXBException {
 	       StringWriter out = new StringWriter();
-
 		JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-		// output pretty printed
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
 		jaxbMarshaller.marshal(this, new StreamResult(out));
 		return out;
 	}

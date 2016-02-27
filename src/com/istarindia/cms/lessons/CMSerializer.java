@@ -1,6 +1,14 @@
 package com.istarindia.cms.lessons;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -37,7 +45,6 @@ public class CMSerializer {
 		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 		ve.init();
 		VelocityContext context = new VelocityContext();
-
 		context.put("slide", slide);
 		Template t = ve.getTemplate(slide.getTemplateName()+".vm");
 		StringWriter writer = new StringWriter();
@@ -51,15 +58,39 @@ public class CMSerializer {
 	
 	public String serializeLesson(Presentaion ppt) {
 		StringBuffer out = new StringBuffer();
-
 		for (Slide slide : ppt.getSlides()) {
 			out.append(serializeSlide(slide));
 		}
 		return out.toString();
 	}
 
-	private Object serializeSlide(Slide slide) {
+	private StringBuffer serializeSlide(Slide slide) {
 		StringBuffer out = new StringBuffer();
+		CMSSlide cMSlide = new CMSSlide();
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
+			InputStream in = IOUtils.toInputStream(slide.getSlideText(), "UTF-8");
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
+			System.out.println(slide);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		VelocityEngine ve = new VelocityEngine();
+		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		ve.init();
+		VelocityContext context = new VelocityContext();
+		context.put("slide", cMSlide);
+	
+		Template t = ve.getTemplate(cMSlide.getTemplateName() + ".vm");
+		StringWriter writer = new StringWriter();
+		t.merge(context, writer);
+		out.append(writer.toString());
 		return out;
 	}
 

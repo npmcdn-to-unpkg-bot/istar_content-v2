@@ -1,0 +1,28 @@
+<header>Tempalate with only Title</header>
+<input name-"template" value="ONLY_TITLE">
+<fieldset>
+	<section>
+		<label class="label">Title</label>
+		<label class="input">
+			#if($slide.getTitle() )
+			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			#else 
+			<input type="text" name="title" placeholder=" Please enter title" >
+			#end	
+		</label>
+	</section>
+</fieldset>
+<fieldset>
+	<section>
+		<label class="label">Textarea</label>
+		<label class="textarea">
+			#if($slide.getParagraph() )
+			<textarea rows="3" name="paragraph" placeholder=" Please enter text" > $slide.getParagraph()</textarea>
+			#else 
+			<textarea rows="3" name="paragraph" placeholder=" Please enter text" value=""> </textarea>
+			#end	
+			
+		</label>
+		<div class="note"><strong>Note:</strong> This is where we will put in the paragraph.</div>
+	</section>
+</fieldset>

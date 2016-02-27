@@ -30,26 +30,23 @@ public class CreateSlideController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//template=ONLY_TITLE>&title=sssssssssssssssssssss
-		//http://127.0.0.1:8080/content/create_slide?template=ONLY_TITLE
-		//	&ppt_id=1&
-		//	title=ssssssssssssssssssssssssssssssssssssssssss&
-		//	slideTransition=Slide&backgroundTransition=Fade&
-		//	backgroundColor=%23b5533c
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
 		case "ONLY_TITLE":
 			service.addTextSlideToLesson(ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundTransition"), request.getParameter("backgroundColor"));
+					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"));
 			break;
-
+		case "ONLY_TITLE_PARAGRAPH":
+			service.addTextAndParaGraphSlideToLesson(ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+			break;
 		default:
 			break;
 		}
 		
-		
+		response.sendRedirect("/content/edit_lesson?lesson_id="+ppt.getLesson().getId());
 		
 	}
 
