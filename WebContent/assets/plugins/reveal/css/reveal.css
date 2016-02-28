@@ -1692,3 +1692,17 @@ html:-moz-full-screen-ancestor {
 	margin-top: 50px;
 	font-size: 180%;
 }
+
+.reveal .ONLY_TITLE_IMAGE p
+	{
+	
+	margin-top: -250px;
+	font-size: 250%;
+	line-height: 1.5;
+}
+
+.reveal .ONLY_TITLE_IMAGE img
+	{
+	
+	width: 100%;
+}

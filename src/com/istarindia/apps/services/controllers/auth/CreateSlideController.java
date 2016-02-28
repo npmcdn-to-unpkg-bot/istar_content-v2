@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.istarindia.apps.dao.Image;
+import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.cms.lessons.CMSImage;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSTextItem;
 import com.istarindia.cms.lessons.SlideService;
@@ -52,12 +55,16 @@ public class CreateSlideController extends HttpServlet {
 			service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
 					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
 			break;
-		default:
 			
-		case "ONLY_TITLE_LIST":
-			CMSList list = getNewList(request);
-			service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+		case "ONLY_TITLE_IMAGE":
+			ImageDAO dao = new ImageDAO();
+			Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+			CMSImage image = new CMSImage();
+			image.setUrl(img.getUrl());
+			image.setTitle(img.getTitle());
+			image.setDescription(img.getDescription());
+			service.addTextImageSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image);
 			break;
 		default:
 			break;

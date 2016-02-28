@@ -237,4 +237,44 @@ public class SlideService {
 			}
 		}
 	}
+
+	public void addTextImageSlideToLesson(String teacherNotes, String studentNotes, Presentaion ppt, String title,
+			String slideTransition, String backgroundColor, String backgroundTransition,  CMSImage image) {
+			CMSSlide cMSlide = new CMSSlide();
+			cMSlide.setBackground(backgroundColor);
+			cMSlide.setBackgroundTransition(backgroundTransition);
+			cMSlide.setTransition(slideTransition);
+			cMSlide.setTemplateName("ONLY_TITLE_IMAGE");
+			cMSlide.setTitle(title);
+			cMSlide.setImage(image);
+			Slide slide = new Slide();
+			slide.setTitle(title);
+			try {
+				slide.setSlideText(cMSlide.getText().toString());
+			} catch (JAXBException e1) {
+				// TODO Auto-generated catch block
+				// e1.printStackTrace();
+			}
+			ppt.getSlides().add(slide);
+			slide.setPresentaion(ppt);
+
+			SlideDAO dao = new SlideDAO();
+			Session session = dao.getSession();
+			Transaction tx = null;
+			try {
+				tx = session.beginTransaction();
+				slide.setTeacherNotes(teacherNotes);
+				slide.setStudentNotes(studentNotes);
+				slide.setTemplate("ONLY_TITLE");
+				dao.save(slide);
+				tx.commit();
+			} catch (HibernateException e) {
+				if (tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+		
+	}
 }

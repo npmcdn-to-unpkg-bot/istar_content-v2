@@ -51,7 +51,6 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
-
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
@@ -61,21 +60,15 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
-
 <body>
-
 	<div class="wrapper">
 		<jsp:include page="/content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">Edit/Create Slide - fill_tempate.jsp?ppt_id=1&slide_type=ONLY_TITLE</h1>
-				<ul class="pull-right breadcrumb">
-					<li><a href="/">Home</a></li>
-					<li><a href="">Content Admin </a></li>
-					<li class="active">Edit/Create Slide</li>
-				</ul>
-			</div>
-			<%
+			<div class="container-fluid">
+				<h1 class="pull-left">Edit/Create Slide</h1>
+			</div>			
+		</div>
+		<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				LessonUtils utils = new LessonUtils();
 				CMSSlide slide = new CMSSlide();
@@ -85,14 +78,12 @@
 				} else {
 					slide.setTemplateName(request.getParameter("slide_type"));
 				}
-			%>
-		</div>
-		<div class="container-fluid" style="padding: 0px !important">
+			%><div class="container-fluid" style="padding: 0px !important">
 			<form action="/content/create_slide" name="" method="GET" class="sky-form">
 				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>"> <input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
 				<div class="row">
 					<div class="col-md-5">
-						<%=utils.getEditProfileEdit(slide) %>
+						<%=utils.getEditProfileEdit(slide, ppt) %>
 						<fieldset>
 							<section>
 								<label class="label">Select Slide Transition</label> <label class="select"> 
@@ -174,6 +165,7 @@
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://rvera.github.io/image-picker/image-picker/image-picker.js" type="text/javascript"></script>
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
@@ -187,6 +179,12 @@
 
 	<script type="text/javascript">
 $( document ).ready(function() {
+
+
+
+	$("#image-picker").imagepicker()
+	
+	
 	  tinymce.init({
 		  selector: 'textarea',
 		  height: 100,

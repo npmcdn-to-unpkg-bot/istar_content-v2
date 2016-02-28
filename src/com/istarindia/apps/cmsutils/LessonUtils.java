@@ -6,6 +6,7 @@ package com.istarindia.apps.cmsutils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -18,9 +19,12 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import com.istarindia.apps.dao.Image;
+import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Slide;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.cms.lessons.CMSSlide;
 
@@ -113,7 +117,12 @@ public class LessonUtils {
 		return out;
 	}
 
-	public StringBuffer getEditProfileEdit(CMSSlide slide) {
+	public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt) {
+		
+		// Add image library
+		ImageDAO dao = new ImageDAO();
+		ArrayList<Image> images =  (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
+		
 		StringBuffer out = new StringBuffer();
 		VelocityEngine ve = new VelocityEngine();
 		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
@@ -121,6 +130,7 @@ public class LessonUtils {
 		ve.init();
 		VelocityContext context = new VelocityContext();
 		context.put("slide", slide);
+		context.put("images", images);
 		Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
 		StringWriter writer = new StringWriter();
 		t.merge(context, writer);

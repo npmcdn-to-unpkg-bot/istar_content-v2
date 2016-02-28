@@ -12,14 +12,18 @@
 		</label>
 	</section>
 	
+	
 	<section>
 		<label class="label">Image URL </label>
-		<label class="input">
-			#if($slide.getTitle() )
-			<input type="text" name="title" placeholder=" Please enter Image URL" value="$slide.getImage().getUrl()">
-			#else 
-			<input type="text" name="title" placeholder=" Please enter Image URL" >
-			#end			
+		<label class="select" >
+			<select name="image_url" id="image-picker">
+				#foreach ($image in $images)
+					<option data-img-src="$image.getUrl()" value="$image.getId()">$image.getTitle()</option>
+				#end
+			</select>
 		</label>
 	</section>
+							
+							
+	
 </fieldset>
