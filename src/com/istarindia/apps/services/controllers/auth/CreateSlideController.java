@@ -53,6 +53,13 @@ public class CreateSlideController extends HttpServlet {
 					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
 			break;
 		default:
+			
+		case "ONLY_TITLE_LIST":
+			CMSList list = getNewList(request);
+			service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+			break;
+		default:
 			break;
 		}
 		

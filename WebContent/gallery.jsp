@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.services.MediaService"%>
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
@@ -51,6 +52,7 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+	<link rel="stylesheet" href="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
@@ -68,98 +70,29 @@
 		<jsp:include page="/content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">Edit/Create Slide - fill_tempate.jsp?ppt_id=1&slide_type=ONLY_TITLE</h1>
-				<ul class="pull-right breadcrumb">
-					<li><a href="/">Home</a></li>
-					<li><a href="">Content Admin </a></li>
-					<li class="active">Edit/Create Slide</li>
-				</ul>
+				<h1 class="pull-left">Gallery</h1>
+
 			</div>
-			<%
-				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-				LessonUtils utils = new LessonUtils();
-				CMSSlide slide = new CMSSlide();
-				if(request.getParameterMap().containsKey("slide_id")) {
-					SlideDAO dao = new SlideDAO();
-					slide = (new LessonUtils()).convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
-				} else {
-					slide.setTemplateName(request.getParameter("slide_type"));
-				}
-			%>
+
 		</div>
-		<div class="container-fluid" style="padding: 0px !important">
-			<form action="/content/create_slide" name="" method="GET" class="sky-form">
-				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>"> <input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
-				<div class="row">
-					<div class="col-md-5">
-						<%=utils.getEditProfileEdit(slide) %>
-						<fieldset>
-							<section>
-								<label class="label">Select Slide Transition</label> <label class="select"> 
-								<select name="slideTransition" value="<%=slide.getTransition() %>">
-										<option value="None">None</option>
-										<option value="Fade">Fade</option>
-										<option value="Slide">Slide</option>
-										<option value="Convex">Convex</option>
-										<option value="Concave">Concave</option>
-										<option value="Zoom">Zoom</option>
-								</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="label">Select Background Transition</label> <label class="select"> <select name="backgroundTransition">
-										<option value="None">None</option>
-										<option value="Fade">Fade</option>
-										<option value="Slide">Slide</option>
-										<option value="Convex">Convex</option>
-										<option value="Concave">Concave</option>
-										<option value="Zoom">Zoom</option>
-								</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="label">Select Slide Background color</label> <label class="select">
-								 <input type="color" name="backgroundColor" value="#b5533c">
-								</label>
-							</section>
-						</fieldset>
-						
-						
-						<fieldset>
-							<section>
-								<label class="label">Teacher Notes</label> <label class="textarea"> 
-								<textarea rows="3" name="teacher_notes" placeholder=" Please enter text" ><%=slide.getTeacherNotes() %> </textarea>
+		<div class="container-fluid content">
+			<div class="text-center margin-bottom-50">
+				<h2 class="title-v2 title-center">Gallery</h2>
+			</div>
 
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the paragraph.
-								</div>
-							</section>
-						</fieldset>
-						<fieldset>
-							<section>
-								<label class="label">Student Notes</label> <label class="textarea"> 
-								<textarea rows="3" name="student_notes" placeholder=" Please enter text" > <%=slide.getStudentNotes() %></textarea>
-
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the paragraph.
-								</div>
-							</section>
-						</fieldset>
-						
-						<footer>
-							<button type="submit" class="btn-u">Submit</button>
-						</footer>
-					</div>
-
-					<div class="col-md-6"></div>
-
+			<div class="row  margin-bottom-30">
+				<% 
+				MediaService service = new MediaService();
+				List<Image> images = service.getAllPublishedImages();
+				for(Image image : images ) {
+				%>
+				<div class="col-sm-2 sm-margin-bottom-30">
+					<a href="<%=image.getThumbnailUrl() %>" rel="gallery3" class="fancybox img-hover-v1" title="Image 1"> 
+					<span><img class="img-responsive" src="<%=image.getThumbnailUrl() %>" alt=""></span>
+					</a>
 				</div>
-
-
-			</form>
-
+				<% } %>
+			</div>
 		</div>
 	</div>
 	<!-- JS Global Compulsory -->
@@ -171,12 +104,14 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/fancy-box.js"></script>
+	
 	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
 	<!--[if lt IE 9]>
@@ -187,20 +122,8 @@
 
 	<script type="text/javascript">
 $( document ).ready(function() {
-	  tinymce.init({
-		  selector: 'textarea',
-		  height: 100,
-		  plugins: [
-		    'advlist autolink lists link image charmap print preview anchor',
-		    'searchreplace visualblocks code fullscreen',
-		    'insertdatetime media table contextmenu paste code'
-		  ],
-		  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-		  content_css: [
-		    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-		    '//www.tinymce.com/css/codepen.min.css'
-		  ]
-		}); 
+	App.init();
+	FancyBox.initFancybox();
 	})
 	</script>
 </body>

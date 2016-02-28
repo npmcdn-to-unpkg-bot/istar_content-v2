@@ -1,0 +1,4 @@
+<section class="ONLY_TITLE_IMAGE" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+	<p>$slide.getTitle()</p>
+	<img src='$slide.getImage().getUrl()'>
+</section>

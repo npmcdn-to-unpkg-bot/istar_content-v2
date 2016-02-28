@@ -68,7 +68,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<form action="/content/create_task" id="sky-form4" class="sky-form" novalidate="novalidate" method="POST">
+			<form action="/content/create_task" id="sky-form4" class="sky-form" novalidate="novalidate" method="GET" onsubmit="myFunction()">
 			<input type="hidden" id="selected_items" name="selected_items" />
 			<div class="row">
 				
@@ -184,7 +184,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- JS Implementing Plugins -->
+	<!-- JS Implementing Plugins -->	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+	
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
@@ -195,6 +196,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				function myFunction() {
 					var selectedElmsIds = $('#html1').jstree("get_selected");
 					$('#selected_items').val(selectedElmsIds);
+alert(selectedElmsIds);
 					console.log(selectedElmsIds);
 
 				}
@@ -211,9 +213,28 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						},
 						"plugins" : [ "checkbox" ]
 					});
-					$('#selected_items').val("aaaa");
 
-				});
+					try {
+
+						$('#selected_items1').val("aaaa");
+					 tinymce.init({
+						  selector: 'textarea',
+						  height: 100,
+						  plugins: [
+						    'advlist autolink lists link image charmap print preview anchor',
+						    'searchreplace visualblocks code fullscreen',
+						    'insertdatetime media table contextmenu paste code'
+						  ],
+						  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+						  content_css: [
+						    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+						    '//www.tinymce.com/css/codepen.min.css'
+						  ]
+						}); 
+				}
+				 catch (err) {
+					// TODO: handle exception
+				}});
 			</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 

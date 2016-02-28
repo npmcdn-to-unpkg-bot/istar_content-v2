@@ -85,18 +85,18 @@ public class CreateTaskController extends HttpServlet {
 				vid.setDescription(desc);
 				vid.setTitle(title);
 				vid.setSessionId(cmsession_id);
-				Session session = dao.getSession();
-				Transaction tx = null;
+				Session session1 = dao.getSession();
+				Transaction tx1 = null;
 				try {
-					tx = session.beginTransaction();
+					tx1 = session1.beginTransaction();
 					dao.save(vid);
-					tx.commit();
+					tx1.commit();
 				} catch (HibernateException e) {
-					if (tx != null)
-						tx.rollback();
+					if (tx1 != null)
+						tx1.rollback();
 					e.printStackTrace();
 				} finally {
-					session.close();
+					session1.close();
 				}
 				item_id = vid.getId();
 			}	

@@ -1,0 +1,25 @@
+<header>Tempalate with only Title</header>
+<input name-"template" value="ONLY_TITLE">
+<fieldset>
+	<section>
+		<label class="label">Title</label>
+		<label class="input">
+			#if($slide.getTitle() )
+			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			#else 
+			<input type="text" name="title" placeholder=" Please enter title" >
+			#end			
+		</label>
+	</section>
+	
+	<section>
+		<label class="label">Image URL </label>
+		<label class="input">
+			#if($slide.getTitle() )
+			<input type="text" name="title" placeholder=" Please enter Image URL" value="$slide.getImage().getUrl()">
+			#else 
+			<input type="text" name="title" placeholder=" Please enter Image URL" >
+			#end			
+		</label>
+	</section>
+</fieldset>

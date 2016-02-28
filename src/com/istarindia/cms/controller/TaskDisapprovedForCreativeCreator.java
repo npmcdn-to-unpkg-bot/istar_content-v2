@@ -14,8 +14,6 @@ import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.MediaReview;
-import com.istarindia.apps.dao.MediaReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
@@ -71,12 +69,12 @@ public class TaskDisapprovedForCreativeCreator extends HttpServlet {
 				embed_list.add(vid.getTitle());
 				embed_list.add(vid.getDescription());//3
 			}
-			MediaReview rev = (MediaReview) new MediaReviewDAO().findByProperty("task",task).get(0);
 			
-			embed_list.add(rev.getComment());//4
+			
+			
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
 			System.out.println(">>>task is >> "+task.getStatus());
-			embed_list.add(manager.getTaskStatusForm(task,user));//5
+			embed_list.add(manager.getTaskStatusForm(task,user));
 			System.out.println(manager.getTaskStatusForm(task,user));
 			
 			

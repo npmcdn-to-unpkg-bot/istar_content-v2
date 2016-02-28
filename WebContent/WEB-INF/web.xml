@@ -9,4 +9,20 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+ <servlet>
+        <description/>
+        <display-name>MediaUploadController</display-name>
+        <servlet-name>MediaUploadController</servlet-name>
+        <servlet-class>com.istarindia.cms.controller.MediaUploadController</servlet-class>
+        <init-param>
+            <description>Define storage path for file uploads</description>
+            <param-name>upload_path</param-name>
+            <param-value>C:/Users/Vaibhav/Pictures/media_library</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MediaUploadController</servlet-name>
+        <url-pattern>/media_upload</url-pattern>
+    </servlet-mapping>
 </web-app>

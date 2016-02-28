@@ -86,7 +86,8 @@
 									<%
 										TaskDAO dao = new TaskDAO();
 										for (Task task : (List<Task>) dao.findByItemType("IMAGE")) {
-												Image img = new ImageDAO().findById(task.getItemId());
+									try {
+											Image img = new ImageDAO().findById(task.getItemId());
 												if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
 												{
 											%>
@@ -96,8 +97,8 @@
 									
 									<% 		
 												}
-												}	
-										
+												}	catch(Exception e) {}
+										}
 										for (Task task : (List<Task>) dao.findByItemType("VIDEO")) {
 											Video vid = new VideoDAO().findById(task.getItemId());
 											if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))

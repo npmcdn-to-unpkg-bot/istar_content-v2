@@ -74,8 +74,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 			<div class="row  margin-bottom-30">
 				<div class="col-sm-6 sm-margin-bottom-30">
-					<a href="" rel="gallery" class="fancybox img-hover-v1" title="Image 1">
-						<span><img class="img-responsive" src="<%=baseURL %>/creative_admin/dd.jpg" alt="image"></span>
+					<a href="<%=details.get(4) %>" rel="gallery" class="fancybox img-hover-v1" title="Image 1">
+						<span><img class="img-responsive" src="<%=details.get(4) %>" alt="image"></span>
 					</a>
 				</div>
 				<div class="col-sm-6 sm-margin-bottom-30">

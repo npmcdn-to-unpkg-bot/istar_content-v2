@@ -1,11 +1,18 @@
 package com.istarindia.cms.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +25,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.imgscalr.Scalr;
 
 import com.istarindia.apps.MediaTypes;
 import com.istarindia.apps.StatusTypes;
@@ -38,7 +46,6 @@ import com.istarindia.apps.services.controllers.IStarBaseServelet;
 /**
  * Servlet implementation class MediaUploadController
  */
-@WebServlet("/media_upload")
 public class MediaUploadController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
 	public static File fileUploadPath;
@@ -52,7 +59,10 @@ public class MediaUploadController extends IStarBaseServelet {
 
     @Override
     public void init(ServletConfig config) {
-        fileUploadPath = new File("C:\\Users\\mak\\Pictures");
+    	//C:\Users\Vaibhav\Pictures
+    	String folder =config.getInitParameter("upload_path");
+    	
+    	fileUploadPath = new File(folder);
     }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -151,9 +161,9 @@ public class MediaUploadController extends IStarBaseServelet {
 							tx = session.beginTransaction();
 							
 							
-							transientInstance2.setUrl("upload?getfile=" + item.getName());
-							transientInstance2.setDeleteUrl("upload?delfile=" + item.getName());
-							transientInstance2.setThumbnailUrl("upload?getthumb=" + item.getName());
+							transientInstance2.setUrl("/content/media_upload?getfile=" + item.getName());
+							transientInstance2.setDeleteUrl("/content/media_upload?delfile=" + item.getName());
+							transientInstance2.setThumbnailUrl("/content/media_upload?getthumb=" + item.getName());
 							transientInstance2.setTags(tags);
 							
 							
@@ -254,7 +264,64 @@ public class MediaUploadController extends IStarBaseServelet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		if (request.getParameter("getfile") != null && !request.getParameter("getfile").isEmpty()) {
+			File file = new File(fileUploadPath, request.getParameter("getfile"));
+			if (file.exists()) {
+				int bytes = 0;
+				ServletOutputStream op = response.getOutputStream();
+
+				response.setContentType(getMimeType(file));
+				response.setContentLength((int) file.length());
+				response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+
+				byte[] bbuf = new byte[1024];
+				DataInputStream in = new DataInputStream(new FileInputStream(file));
+
+				while ((in != null) && ((bytes = in.read(bbuf)) != -1)) {
+					op.write(bbuf, 0, bytes);
+				}
+
+				in.close();
+				op.flush();
+				op.close();
+			}
+		} else if (request.getParameter("delfile") != null && !request.getParameter("delfile").isEmpty()) {
+			File file = new File(fileUploadPath, request.getParameter("delfile"));
+			if (file.exists()) {
+				file.delete(); // TODO:check and report success
+			}
+		} else if (request.getParameter("getthumb") != null && !request.getParameter("getthumb").isEmpty()) {
+			File file = new File(fileUploadPath, request.getParameter("getthumb"));
+			if (file.exists()) {
+				String mimetype = getMimeType(file);
+				if (mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
+					BufferedImage im = ImageIO.read(file);
+					if (im != null) {
+						BufferedImage thumb = Scalr.resize(im, 165);
+						ByteArrayOutputStream os = new ByteArrayOutputStream();
+						if (mimetype.endsWith("png")) {
+							ImageIO.write(thumb, "PNG", os);
+							response.setContentType("image/png");
+						} else if (mimetype.endsWith("jpeg")) {
+							ImageIO.write(thumb, "jpg", os);
+							response.setContentType("image/jpeg");
+						} else {
+							ImageIO.write(thumb, "GIF", os);
+							response.setContentType("image/gif");
+						}
+						ServletOutputStream srvos = response.getOutputStream();
+						response.setContentLength(os.size());
+						response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+						os.writeTo(srvos);
+						srvos.flush();
+						srvos.close();
+					}
+				}
+			} // TODO: check and report success
+		} else {
+			PrintWriter writer = response.getWriter();
+			writer.write("call POST with multipart form data");
+		}
 	}
 	
 	private String getMimeType(File file) {

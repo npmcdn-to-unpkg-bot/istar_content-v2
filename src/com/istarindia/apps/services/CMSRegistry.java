@@ -60,6 +60,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_TABLE");
 		slideTemplates.add("ONLY_TITLE_TABLE_TITLE_TABLE");
 		slideTemplates.add("ONLY_TITLE_TABLE_PARAGRAPH");
+		slideTemplates.add("ONLY_TITLE_IMAGE");
 
 		
 	}
