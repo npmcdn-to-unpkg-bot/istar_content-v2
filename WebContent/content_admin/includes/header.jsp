@@ -39,7 +39,18 @@ System.out.println("session user1 ="+request.getSession().getAttribute("user"));
 	<div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
 		<div class="container">
 			<ul class="nav navbar-nav">
-				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  { %>
+				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  {
+					boolean able_to_see=false;
+					for(ChildLink child :  parent.getChildren())  {
+						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
+						if(child.getValidRoles().contains(userRold)) {
+							able_to_see = true;
+							break;
+						}
+					}
+					if(able_to_see)
+					{
+					%>
 				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %> </a>
 					<ul class="dropdown-menu">
 					<% for(ChildLink child :  parent.getChildren())  {
@@ -51,7 +62,9 @@ System.out.println("session user1 ="+request.getSession().getAttribute("user"));
 					</ul>
 				</li>
 				
-				<% }  %>
+				<% 
+					}
+					}  %>
 			</ul>
 		</div>
 	</div>

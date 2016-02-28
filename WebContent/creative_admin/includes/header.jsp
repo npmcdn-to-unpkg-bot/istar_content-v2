@@ -20,9 +20,20 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-				<div class="container">
-<ul class="nav navbar-nav">
-				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  { %>
+					<div class="container">
+						<ul class="nav navbar-nav">
+				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  {
+					boolean able_to_see=false;
+					for(ChildLink child :  parent.getChildren())  {
+						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
+						if(child.getValidRoles().contains(userRold)) {
+							able_to_see = true;
+							break;
+						}
+					}
+					if(able_to_see)
+					{
+					%>
 				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %> </a>
 					<ul class="dropdown-menu">
 					<% for(ChildLink child :  parent.getChildren())  {
@@ -34,7 +45,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</ul>
 				</li>
 				
-				<% }  %>
+				<% 
+					}
+					}  %>
 			</ul>
 				</div><!--/end container-->
 			</div><!--/navbar-collapse-->
