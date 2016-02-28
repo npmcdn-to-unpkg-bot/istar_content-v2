@@ -41,7 +41,11 @@
  		
  		<child_links display_name="Published Media" url="/content/published_media_creative_creator" valid_roles="creative_creator"/>
     </parent_links>
-
+  <parent_links display_name="Folder">
+        <child_links display_name="Create Folder" url="/content/creative_admin/new_folder.jsp" valid_roles="creative_admin"/>
+    	
+    	
+    </parent_links>
    
    
     
