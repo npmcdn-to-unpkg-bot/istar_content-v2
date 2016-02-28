@@ -87,7 +87,7 @@
 				}
 			%>
 		</div>
-		<div class="container-fluid height-2000 content profile" style="padding: 0px !important">
+		<div class="container-fluid content profile" style="padding: 0px !important">
 			<form action="/content/create_slide" name="" method="GET" class="sky-form">
 				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>"> <input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
 				<div class="row">
@@ -123,6 +123,31 @@
 								</label>
 							</section>
 						</fieldset>
+						
+						
+						<fieldset>
+							<section>
+								<label class="label">Teacher Notes</label> <label class="textarea"> 
+								<textarea rows="3" name="teacher_notes" placeholder=" Please enter text" ><%=slide.getTeacherNotes() %> </textarea>
+
+								</label>
+								<div class="note">
+									<strong>Note:</strong> This is where we will put in the paragraph.
+								</div>
+							</section>
+						</fieldset>
+						<fieldset>
+							<section>
+								<label class="label">Student Notes</label> <label class="textarea"> 
+								<textarea rows="3" name="student_notes" placeholder=" Please enter text" > <%=slide.getStudentNotes() %></textarea>
+
+								</label>
+								<div class="note">
+									<strong>Note:</strong> This is where we will put in the paragraph.
+								</div>
+							</section>
+						</fieldset>
+						
 						<footer>
 							<button type="submit" class="btn-u">Submit</button>
 						</footer>
@@ -162,7 +187,7 @@
 
 	<script type="text/javascript">
 $( document ).ready(function() {
-	 tinymce.init({
+	  tinymce.init({
 		  selector: 'textarea',
 		  height: 100,
 		  plugins: [
@@ -175,7 +200,7 @@ $( document ).ready(function() {
 		    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
 		    '//www.tinymce.com/css/codepen.min.css'
 		  ]
-		});
+		}); 
 	})
 	</script>
 </body>

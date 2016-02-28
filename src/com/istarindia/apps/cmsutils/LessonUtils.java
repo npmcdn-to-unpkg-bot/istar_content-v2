@@ -135,6 +135,8 @@ public class LessonUtils {
 			InputStream in = IOUtils.toInputStream(slide.getSlideText(), "UTF-8");
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
+			cMSlide.setTeacherNotes(slide.getTeacherNotes());
+			cMSlide.setStudentNotes(slide.getStudentNotes());
 			System.out.println(slide);
 		} catch (JAXBException e) {
 			e.printStackTrace();

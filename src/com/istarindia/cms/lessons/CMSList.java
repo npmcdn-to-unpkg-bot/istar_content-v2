@@ -13,14 +13,9 @@ import javax.xml.bind.annotation.XmlElement;
  *
  */
 public class CMSList {
-	String type;
 	ArrayList<CMSTextItem> items;
-	String list_type;/*
-						 * This is where we can use types of list either as a
-						 * css class or as ... shapeType not sure need to ask
-						 * Sir about it
-						 */
-
+	String list_type;
+	
 	public ArrayList<CMSTextItem> getItems() {
 		return items;
 	}
@@ -28,15 +23,6 @@ public class CMSList {
 	@XmlElement(name = "li")
 	public void setItems(ArrayList<CMSTextItem> items) {
 		this.items = items;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	@XmlAttribute(name = "type")
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getList_type() {

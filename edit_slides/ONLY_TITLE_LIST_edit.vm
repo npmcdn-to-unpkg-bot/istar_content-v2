@@ -1,0 +1,28 @@
+<header>Tempalate with only Title and List Items</header>
+<input name-"template" value="ONLY_TITLE_LIST">
+<fieldset>
+	<section>
+		<label class="label">Title</label>
+		<label class="input">
+			#if($slide.getTitle() )
+			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			#else 
+			<input type="text" name="title" placeholder=" Please enter title" >
+			#end			
+		</label>
+	</section>
+	
+	<section>
+		<label class="label">List Item 1 </label>
+		<label class="input">
+			#if($slide.getTitle() )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	
+	
+	
+</fieldset>

@@ -73,50 +73,44 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
-				
-				
-				
-				
 				<div class="col-md-6">
 					<form action="/content/update_lesson" id="sky-form4" class="sky-form" novalidate="novalidate">
 						<input type="hidden" name="lesson_id" value="<%=lesson.getId() %>" /> <input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId() %>" />
 						<fieldset>
-							
+
 							<section>
-							<label>Title of Lesson</label>
-								<label class="input"> <input value="<%=lesson.getTitle() %>" type="text" name="title" placeholder="Title of Lesson"> <b class="tooltip tooltip-bottom-right">The title of the lesson</b>
+								<label>Title of Lesson</label> <label class="input"> <input value="<%=lesson.getTitle() %>" type="text" name="title" placeholder="Title of Lesson"> <b class="tooltip tooltip-bottom-right">The title of the lesson</b>
 								</label>
 							</section>
-							
+
 							<section>
-							<label>Duration of Lesson</label>
-								<label class="input"> <input value="<%=lesson.getDuration() %>" type="number" name="duration" placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
+								<label>Duration of Lesson</label> <label class="input"> <input value="<%=lesson.getDuration() %>" type="number" name="duration" placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
 								</label>
 							</section>
 							<section>
-							<label> Tags</label>
-								<label class="input"> <input data-role="tagsinput" value="<%=lesson.getTags() %>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
+								<label> Tags</label> <label class="input"> <input data-role="tagsinput" value="<%=lesson.getTags() %>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 								</label>
 							</section>
 						</fieldset>
+						
 						<footer>
 							<button type="submit" class="btn-u">Update Lesson</button>
 						</footer>
 					</form>
 
-					
+
 				</div>
-				
-				
+
+
 				<div class="col-md-6">
 					<% if(LessonService.isEmptyLesson(lesson)) { %>
-						<div class="alert alert-warning fade in text-center">
-							<h4>Please Create a Presentation/Assessment/Game</h4>
-							<p>
-								<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
-							</p>
-						</div>
-						<% } else { 
+					<div class="alert alert-warning fade in text-center">
+						<h4>Please Create a Presentation/Assessment/Game</h4>
+						<p>
+							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
+						</p>
+					</div>
+					<% } else { 
 						LessonUtils utils = new LessonUtils();
 						out.println(utils.getEditForm(lesson));
 						
@@ -124,11 +118,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						// Top one has to be add new SLide  
 						//Botton one is list of slides
 						}  %>
-					</div>
-					</div>
-					
+				</div>
 			</div>
+
 		</div>
+	</div>
 	</div>
 	</div>
 	<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
