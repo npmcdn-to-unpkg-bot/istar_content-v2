@@ -32,41 +32,42 @@
 <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="<%=baseURL%>assets/css/headers/header-default.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/footers/footer-v1.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/headers/header-default.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/animate.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+
 <!-- CSS Theme -->
-<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/theme/black.css" id="style_color">
-<link rel="stylesheet" href="//www.tinymce.com/css/codepen.min.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
+
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
 </head>
+
 <body>
+
 	<div class="wrapper">
-		<jsp:include page="/content_admin/includes/header.jsp"></jsp:include>
+		<jsp:include page="content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid">
-				<h1 class="pull-left">Edit/Create Slide</h1>
-			</div>			
+			<div class="container-fluid ">
+				<h1 class="pull-left">Add/Edit Slide</h1>
+			</div>
 		</div>
 		<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
@@ -78,16 +79,17 @@
 				} else {
 					slide.setTemplateName(request.getParameter("slide_type"));
 				}
-			%><div class="container-fluid" style="padding: 0px !important">
+			%>
+		<div class="container-fluid" style="padding: 0px !important">
 			<form action="/content/create_slide" name="" method="GET" class="sky-form">
-				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>"> <input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
+				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>" style="display: none"> 
+				<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
 				<div class="row">
 					<div class="col-md-5">
 						<%=utils.getEditProfileEdit(slide, ppt) %>
 						<fieldset>
 							<section>
-								<label class="label">Select Slide Transition</label> <label class="select"> 
-								<select name="slideTransition" value="<%=slide.getTransition() %>">
+								<label class="label">Select Slide Transition</label> <label class="select"> <select name="slideTransition" value="<%=slide.getTransition() %>">
 										<option value="None">None</option>
 										<option value="Fade">Fade</option>
 										<option value="Slide">Slide</option>
@@ -109,17 +111,15 @@
 								</label>
 							</section>
 							<section>
-								<label class="label">Select Slide Background color</label> <label class="select">
-								 <input type="color" name="backgroundColor" value="#b5533c">
+								<label class="label">Select Slide Background color</label> <label class="select"> <input type="color" name="backgroundColor" value="#b5533c">
 								</label>
 							</section>
 						</fieldset>
-						
-						
+
+
 						<fieldset>
 							<section>
-								<label class="label">Teacher Notes</label> <label class="textarea"> 
-								<textarea rows="3" name="teacher_notes" placeholder=" Please enter text" ><%=slide.getTeacherNotes() %> </textarea>
+								<label class="label">Teacher Notes</label> <label class="textarea"> <textarea rows="3" name="teacher_notes" placeholder=" Please enter text"><%=slide.getTeacherNotes() %> </textarea>
 
 								</label>
 								<div class="note">
@@ -129,8 +129,7 @@
 						</fieldset>
 						<fieldset>
 							<section>
-								<label class="label">Student Notes</label> <label class="textarea"> 
-								<textarea rows="3" name="student_notes" placeholder=" Please enter text" > <%=slide.getStudentNotes() %></textarea>
+								<label class="label">Student Notes</label> <label class="textarea"> <textarea rows="3" name="student_notes" placeholder=" Please enter text"> <%=slide.getStudentNotes() %></textarea>
 
 								</label>
 								<div class="note">
@@ -138,7 +137,7 @@
 								</div>
 							</section>
 						</fieldset>
-						
+
 						<footer>
 							<button type="submit" class="btn-u">Submit</button>
 						</footer>
@@ -153,31 +152,34 @@
 
 		</div>
 	</div>
+	<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
+	</div>
+
+
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-
-	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
   <script src="http://rvera.github.io/image-picker/image-picker/image-picker.js" type="text/javascript"></script>
 
-	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
+	<script src="<%=baseURL %>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
-
-	<script type="text/javascript">
+<script type="text/javascript">
 $( document ).ready(function() {
 
 

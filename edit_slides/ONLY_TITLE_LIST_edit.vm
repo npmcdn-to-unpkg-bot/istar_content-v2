@@ -1,5 +1,4 @@
 <header>Tempalate with only Title and List Items</header>
-<input name-"template" value="ONLY_TITLE_LIST">
 <fieldset>
 	<section>
 		<label class="label">Title</label>

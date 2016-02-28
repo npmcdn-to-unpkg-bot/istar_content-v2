@@ -33,8 +33,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
 		 * inputs in request Integer cmsession_id, Integer duration, String
 		 * lessonType, String tags, String title, String[] learningObjectives
@@ -45,16 +44,12 @@ public class UpdateLessonController extends IStarBaseServelet {
 		String tags = "";
 		String learningObjectives[];
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
-		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id")
-				&& request.getParameterMap().containsKey("duration")
-				
-				&& request.getParameterMap().containsKey("title")) 
-		
+		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id") && request.getParameterMap().containsKey("duration") && request.getParameterMap().containsKey("title"))
+
 		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
 			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
 			int duration = Integer.parseInt(request.getParameter("duration"));
-			
 
 			String title = request.getParameter("title");
 			if (request.getParameterMap().containsKey("Tags")) {
@@ -67,8 +62,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 				}
 			}
 			LessonService service = new LessonService();
-			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration,  tags, title, "dtype",
-	ite);
+			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite);
 
 			request.setAttribute("lesson", lesson);
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
@@ -82,8 +76,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

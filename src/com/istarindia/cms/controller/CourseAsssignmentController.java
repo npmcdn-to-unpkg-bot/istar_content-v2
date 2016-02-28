@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.StatusTypes;
+import com.istarindia.apps.cmsutils.ErrorMessages;
 import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Task;
@@ -49,13 +50,16 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		for (String assign : request.getParameter("selected_items").split(",")) {
 			if(assign.startsWith("lesson")) {
 				String[] reviewer = request.getParameterValues("review_user");
-				assignLesson(assign,request.getParameter("assign_user"),reviewer );
-				System.out.println(request.getParameterValues("review_user").length);
-			}
-			System.out.println(assign);
-		}
+				try {
+					assignLesson(assign,request.getParameter("assign_user"),reviewer );
+				} catch (NullPointerException e) {
+					request.setAttribute("message_failure", ErrorMessages.MISSING_REVIEWER);
 
-		response.sendRedirect(request.getContextPath() + "/content_admin/course_structure.jsp");	
+					//e.printStackTrace();
+				}
+			}
+		}
+		request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 	}
 
 	private void assignLesson(String assign, String content_id, String[] reviewer) {
@@ -82,28 +86,29 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		}
 		
 		
-		for(String reviewer_id: reviewer )
-		{
-			TaskReviewerDAO dao2 = new TaskReviewerDAO();
-			TaskReviewer review = new TaskReviewer();
-			review.setContentReviewer(new ContentReviewerDAO().findById(Integer.parseInt(reviewer_id)));
-			review.setStatus(StatusTypes.REVIEWER_ASSIGNED);
-			review.setTask(task);
-			Session session2 = dao2.getSession();
-			Transaction tx2 = null;
-			try {
-				tx2 = session2.beginTransaction();
-				
-				dao2.save(review);
-				tx2.commit();
-			} catch (HibernateException e) {
-				if (tx2 != null)
-					tx2.rollback();
-				e.printStackTrace();
-			} finally {
-				session2.close();
+			for(String reviewer_id: reviewer )
+			{
+				TaskReviewerDAO dao2 = new TaskReviewerDAO();
+				TaskReviewer review = new TaskReviewer();
+				review.setContentReviewer(new ContentReviewerDAO().findById(Integer.parseInt(reviewer_id)));
+				review.setStatus(StatusTypes.REVIEWER_ASSIGNED);
+				review.setTask(task);
+				Session session2 = dao2.getSession();
+				Transaction tx2 = null;
+				try {
+					tx2 = session2.beginTransaction();
+					
+					dao2.save(review);
+					tx2.commit();
+				} catch (HibernateException e) {
+					if (tx2 != null)
+						tx2.rollback();
+					e.printStackTrace();
+				} finally {
+					session2.close();
+				}
 			}
-		}
+		
 		
 		
 	}

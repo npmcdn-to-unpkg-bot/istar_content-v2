@@ -1,4 +1,4 @@
-<%@page import="com.istarindia.apps.role.ChildLink"%>
+<%@page import="com.istarindia.apps.role.ChildLink"%><%@page import="java.util.*"%>
 <%@page import="javafx.scene.Parent"%>
 <%@page import="com.istarindia.apps.role.ParentLink"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
@@ -51,17 +51,17 @@ System.out.println("session user1 ="+request.getSession().getAttribute("user"));
 					if(able_to_see)
 					{
 					%>
-				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %> </a>
+				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
+				</a>
 					<ul class="dropdown-menu">
-					<% for(ChildLink child :  parent.getChildren())  {
+						<% for(ChildLink child :  parent.getChildren())  {
 						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
 						if(child.getValidRoles().contains(userRold)) {
 						%>
 						<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
 						<% }  } %>
-					</ul>
-				</li>
-				
+					</ul></li>
+
 				<% 
 					}
 					}  %>
@@ -69,3 +69,30 @@ System.out.println("session user1 ="+request.getSession().getAttribute("user"));
 		</div>
 	</div>
 </div>
+<% Enumeration attrs =  request.getAttributeNames();
+while(attrs.hasMoreElements()) {
+  String attributeName = attrs.nextElement().toString();
+  System.out.println("attributeName -- >"+ attributeName);
+	if(attributeName.equalsIgnoreCase("message_success")) {
+		System.out.println(attributeName);
+	%>
+
+					
+					<div class="alert alert-success fade in margin-bottom-40">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<h4>Well done!</h4>
+	<p><%=request.getAttribute("message_success") %></p>
+</div>
+<%   
+   } else if(attributeName.equalsIgnoreCase("message_failure")) {
+			System.out.println(attributeName);
+	
+	%><div class="alert alert-danger fade in">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4>Oh snap! You got an error!</h4>
+						<p><%=request.getAttribute("message_failure") %></p>
+						
+					</div>
+<%   
+   }
+} %>
