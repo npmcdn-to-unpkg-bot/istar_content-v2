@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
-
+<%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
@@ -55,11 +55,15 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<jsp:include page="../content_creator/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">All Created Tasks</h1>
+				<h1 class="pull-left">All Tasks Created</h1>
 			</div>
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
+			<% String[] headers = {"#", "Media Title", "Session Name", "Task Name", "Assigned To", "Status"}; %>
+			<%=TableUtils.getTableHeader("All Media Created", headers, items, 5) %>
+		</div>
+		<%-- <div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
 				<div class="panel-heading"></div>
 				<div class="panel-body">
@@ -98,7 +102,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</table>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 
 
 		<jsp:include page="includes/footer.jsp"></jsp:include>
