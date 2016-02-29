@@ -69,11 +69,11 @@ public class LessonUtils {
 			out.append("<button type='submit' class='btn-u btn-u-default'>Add Slide</button>");
 			out.append("</div>");
 			out.append("<div class='checkbox'  style='margin-right: 50px'>");
-			out.append("<a href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
+			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
 					+ "' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</div>");
-			out.append(
-					"<button type='submit' class='btn-u btn-u-default'  style='margin-right: 50px'>Desktop Preview	</button>");
+			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
+			+ "' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</form>");
 			out.append("</div>");
 			out.append("</div>");
@@ -100,7 +100,7 @@ public class LessonUtils {
 				out.append("<td>"+ppt.getSlides().get(i).getTitle()+"</td>");
 				
 				out.append(
-						"<td><a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id="+ppt.getId()+"&slide_id="+ppt.getSlides().get(i).getId()+"'><i class='fa fa-check'></i>Edit</a></td>");
+						"<td><a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id="+ppt.getId()+"&slide_id="+ppt.getSlides().get(i).getId()+"&slide_type="+ppt.getSlides().get(i).getTemplate()+"'><i class='fa fa-check'></i>Edit</a></td>");
 				out.append("</tr>");
 			}
 

@@ -68,7 +68,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<form action="/content/create_task" id="sky-form4" class="sky-form" novalidate="novalidate" method="GET" onsubmit="myFunction()">
+			<form action="/content/create_task" id="sky-form1" class="sky-form" method="GET" onsubmit="myFunction()">
 			<input type="hidden" id="selected_items" name="selected_items" />
 			<div class="row">
 				
@@ -98,7 +98,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							</section>
 							
 							<section>
-								<label > Task Description</label> <label class="input">
+								<label > Task Description* </label> <label class="input">
 								 <TEXTAREA NAME="description" ROWS="5" cols="75"></TEXTAREA>
 								</label>
 							</section>
@@ -191,17 +191,23 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
-	
+	<!-- JS Implementing Plugins -->
+	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
 				function myFunction() {
 					var selectedElmsIds = $('#html1').jstree("get_selected");
 					$('#selected_items').val(selectedElmsIds);
-alert(selectedElmsIds);
-					console.log(selectedElmsIds);
-
 				}
 				jQuery(document).ready(function() {
 					App.init();
+					Validation.initValidation();
+
 					$('#html1').jstree({
 						"core" : {
 							"themes" : {

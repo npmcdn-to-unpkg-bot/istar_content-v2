@@ -61,7 +61,7 @@ public class CreateLessonController  extends IStarBaseServelet {
 				System.out.println(assign);
 			}
 			//request.setAttribute("lesson", lesson);
-			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);
+			request.getRequestDispatcher("/lesson/new_lesson.jsp").forward(request, response);
 		}
 		else
 		{

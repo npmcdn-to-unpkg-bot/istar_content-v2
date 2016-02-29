@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
-
+<%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
@@ -55,56 +55,17 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">All Lessons with Review Pending</h1>
+				<h1 class="pull-left">All Tasks with Pending Reviews</h1>
 				
 			</div>
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
-				<div class="panel-heading"></div>
-				<div class="panel-body">
-					<table class="table" id="datatable_fixed_column">
-						<thead>
-							<tr>
-								<th></th>
-								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Session" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Module" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Course" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Creator" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Reviewer" /></th>
-								<th></th>	
-							</tr>
-							<tr>
-								<th>#</th>
-								<th>Title</th>
-								<th class="hidden-sm">Session Title</th>
-								<th>Module Title</th>
-								<th>Course Title</th>
-								<th>Created By</th>
-								<th>Reviewers</th>
-								<th>Task Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for(ArrayList<String> item : items) { %>
-							<tr>
-								<td><%=item.get(0) %></td>
-								<td><%=item.get(1) %></td>
-								<td class="hidden-sm"><%=item.get(2) %></td>
-								<td><%=item.get(3) %></td>
-								<td><%=item.get(4) %></td>
-								<td><%=item.get(5) %></td>
-								<td><%=item.get(6) %></td>
-								<td><%=item.get(7) %></td>
-							</tr>
-							<% } %>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Created By", "Reviewers", "Task Action" }; %>
+			<%=TableUtils.getTableHeader("All Tasks with Pending Reviews ", headers, items, 7) %>
+			
 		</div>
+		
 
 
 		<jsp:include page="includes/footer.jsp"></jsp:include>
