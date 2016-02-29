@@ -88,7 +88,21 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+		<script type="text/javascript">
+	var responsiveHelper_dt_basic = undefined;
+	var responsiveHelper_datatable_fixed_column = undefined;
+	var responsiveHelper_datatable_col_reorder = undefined;
+	var responsiveHelper_datatable_tabletools = undefined;
 	
+	var breakpointDefinition = {
+		tablet : 1024,
+		phone : 480
+	};
+	jQuery(document).ready(function() {
+			App.init();
+
+		});
+	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
