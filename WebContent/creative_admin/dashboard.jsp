@@ -53,12 +53,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container">
-				<h1 class="pull-left">Creative Admin Dashboard</h1>
-				<ul class="pull-right breadcrumb">
-				<ul class="pull-right breadcrumb">
-					<li><a href="<%=baseURL%>creative_admin/dashboard.jsp">Dashboard</a></li>
-				</ul>
+			<div class="container-fluid">
+				<h1 class="pull-left"><a href="<%=baseURL %>creative_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
+				<!-- <ul class="pull-right breadcrumb">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="">Content Admin </a></li>
+					<li class="active">Dashboard</li>
+				</ul> -->
 			</div>
 			<!--/container-->
 		</div>
