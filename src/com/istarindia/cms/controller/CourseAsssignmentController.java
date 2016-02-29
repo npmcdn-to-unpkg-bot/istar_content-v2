@@ -1,6 +1,9 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -85,28 +88,38 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 			session1.close();
 		}
 		
+		TaskReviewerDAO dao2 = new TaskReviewerDAO();
+		List<TaskReviewer> rev = dao2.findByProperty("task", task);
+		List<Integer> already_added = new ArrayList<Integer>();
+		for(TaskReviewer r : rev)
+		{
+			already_added.add(r.getContentReviewer().getId());
+		}
 		
 			for(String reviewer_id: reviewer )
 			{
-				TaskReviewerDAO dao2 = new TaskReviewerDAO();
-				TaskReviewer review = new TaskReviewer();
-				review.setContentReviewer(new ContentReviewerDAO().findById(Integer.parseInt(reviewer_id)));
-				review.setStatus(StatusTypes.REVIEWER_ASSIGNED);
-				review.setTask(task);
-				Session session2 = dao2.getSession();
-				Transaction tx2 = null;
-				try {
-					tx2 = session2.beginTransaction();
-					
-					dao2.save(review);
-					tx2.commit();
-				} catch (HibernateException e) {
-					if (tx2 != null)
-						tx2.rollback();
-					e.printStackTrace();
-				} finally {
-					session2.close();
+				if(!already_added.contains(reviewer_id))
+				{
+					TaskReviewer review = new TaskReviewer();
+					review.setContentReviewer(new ContentReviewerDAO().findById(Integer.parseInt(reviewer_id)));
+					review.setStatus(StatusTypes.REVIEWER_ASSIGNED);
+					review.setTask(task);
+					Session session2 = dao2.getSession();
+					Transaction tx2 = null;
+					try {
+						tx2 = session2.beginTransaction();
+						
+						dao2.save(review);
+						tx2.commit();
+					} catch (HibernateException e) {
+						if (tx2 != null)
+							tx2.rollback();
+						e.printStackTrace();
+					} finally {
+						session2.close();
+					}
 				}
+				
 			}
 		
 		
