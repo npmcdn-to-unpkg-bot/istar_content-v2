@@ -56,12 +56,6 @@ public class LessonUtils {
 			for (String template : CMSRegistry.slideTemplates) {
 				out.append("<option value='" + template + "'>" + template + "</option>");
 			}
-			// out.append("<% for(String templateName:
-			// CMSRegistry.slideTemplates) { %>");
-			// out.append("<option value='<%=templateName %>'><%=templateName
-			// %></option>");
-			// out.append("<% } %>");
-
 			out.append("</select>");
 
 			out.append("</div>");
@@ -69,11 +63,9 @@ public class LessonUtils {
 			out.append("<button type='submit' class='btn-u btn-u-default'>Add Slide</button>");
 			out.append("</div>");
 			out.append("<div class='checkbox'  style='margin-right: 50px'>");
-			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
-					+ "' class='btn-u btn-u-default'>Mobile Preview</a>");
+			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</div>");
-			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
-			+ "' class='btn-u btn-u-default'>Mobile Preview</a>");
+			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</form>");
 			out.append("</div>");
 			out.append("</div>");
@@ -93,14 +85,21 @@ public class LessonUtils {
 			out.append("</tr>");
 			out.append("</thead>");
 			out.append("<tbody>");
-
-			for (int i=0; i< ppt.getSlides().size();i++) {
+			DBUtils db = new DBUtils();
+			ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
+			for (int i = 0; i < data.size(); i++) {
 				out.append("<tr>");
-				out.append("<td>"+i+"</td>");
-				out.append("<td>"+ppt.getSlides().get(i).getTitle()+"</td>");
+				out.append("<td>" + data.get(i).get(0) + "</td>");
+				out.append("<td>" + data.get(i).get(1) + "</td>");
+				out.append("<td>");
+				out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + 
+				data.get(i).get(2) + "'>" + "<i class='fa fa-check'></i>Edit</a>");
 				
-				out.append(
-						"<td><a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id="+ppt.getId()+"&slide_id="+ppt.getSlides().get(i).getId()+"&slide_type="+ppt.getSlides().get(i).getTemplate()+"'><i class='fa fa-check'></i>Edit</a></td>");
+				out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
+						+ "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
+						
+				
+				out.append("</td>");
 				out.append("</tr>");
 			}
 
@@ -118,11 +117,11 @@ public class LessonUtils {
 	}
 
 	public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt) {
-		
+
 		// Add image library
 		ImageDAO dao = new ImageDAO();
-		ArrayList<Image> images =  (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
-		
+		ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
+
 		StringBuffer out = new StringBuffer();
 		VelocityEngine ve = new VelocityEngine();
 		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
@@ -131,6 +130,7 @@ public class LessonUtils {
 		VelocityContext context = new VelocityContext();
 		context.put("slide", slide);
 		context.put("images", images);
+		context.put("list_types", CMSRegistry.listTypes);
 		Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
 		StringWriter writer = new StringWriter();
 		t.merge(context, writer);
@@ -138,6 +138,7 @@ public class LessonUtils {
 		return out;
 
 	}
+
 	public CMSSlide convertSlide(Slide slide) {
 		CMSSlide cMSlide = new CMSSlide();
 		try {
@@ -154,10 +155,9 @@ public class LessonUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return cMSlide;
-		
+
 	}
-	
-	
+
 }

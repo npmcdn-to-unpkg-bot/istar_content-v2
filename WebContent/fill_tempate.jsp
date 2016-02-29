@@ -78,17 +78,17 @@
 					SlideDAO dao = new SlideDAO();
 					slide = (new LessonUtils()).convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 					%>
-					<input name="is_edit" value="true" type="text"> 
-					<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="text"> 
+					<input name="is_edit" value="true" type="hidden"> 
+					<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden"> 
 					<% 
 				} else {
 					slide.setTemplateName(request.getParameter("slide_type"));%>
-					<input name="is_edit" value="false" type="text"> 
+					<input name="is_edit" value="false" type="hidden"> 
 					<% 
 				}
 			%>
 		<div class="container-fluid" style="padding: 0px !important">
-				<input type="text" name="template" value="<%=slide.getTemplateName() %>" > 
+				<input type="hidden" name="template" value="<%=slide.getTemplateName() %>" > 
 				<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
 				<div class="row">
 					<div class="col-md-5">

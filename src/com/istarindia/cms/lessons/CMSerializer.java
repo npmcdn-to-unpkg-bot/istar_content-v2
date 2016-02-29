@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -14,7 +16,11 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
+import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.cms.lessons.CMSLesson;
@@ -31,7 +37,7 @@ import com.istarindia.cms.lessons.CMSSlide;
 public class CMSerializer {
 	public String serializeLesson(CMSLesson lesson) {
 		StringBuffer out = new StringBuffer();
-
+		
 		for (CMSSlide slide : lesson.getSlides()) {
 			out.append(serializeSlide(slide));
 		}
@@ -58,7 +64,19 @@ public class CMSerializer {
 	
 	public String serializeLesson(Presentaion ppt) {
 		StringBuffer out = new StringBuffer();
-		for (Slide slide : ppt.getSlides()) {
+		
+		
+		IstarUserDAO dao = new IstarUserDAO();
+		Session session = dao.getSession();
+		String sql1 = "select * from slide where presentation_id="+ppt.getId()+" order by id";
+		SQLQuery query = session.createSQLQuery(sql1);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List<HashMap<String, Object>> results = query.list();
+		
+		for (HashMap<String, Object> slide1 : results) {
+			Slide slide = new Slide();
+			slide.setSlideText(slide1.get("slide_text").toString());
+			slide.setTemplate(slide1.get("template").toString());
 			out.append(serializeSlide(slide));
 		}
 		return out.toString();
