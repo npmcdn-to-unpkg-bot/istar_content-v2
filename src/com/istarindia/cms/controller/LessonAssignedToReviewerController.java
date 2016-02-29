@@ -50,7 +50,15 @@ public class LessonAssignedToReviewerController extends HttpServlet {
 			embed_list.add(lesson.getCmsession().getModule().getModuleName());
 			embed_list.add(lesson.getCmsession().getModule().getCourse().getCourseName());
 			
-			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
+			List<Task> task_list = new TaskDAO().findByItemId(lesson.getId());
+			Task task = null;
+			for(Task task1: task_list)
+			{
+				if(task1.getItemType().equalsIgnoreCase("LESSON"))
+				{
+					task= task1;
+				}
+			}
 			embed_list.add(new ContentCreatorDAO().findById(task.getActorId()).getName());
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
 			embed_list.add(manager.getTaskStatusForm(task,user));
