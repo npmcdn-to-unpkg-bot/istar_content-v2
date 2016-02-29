@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
-
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Creative Creator Dashboard | iStar CMS</title>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<% String url = request.getRequestURL().toString();
+String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+%>
+<title>Creative Admin Reports | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -38,8 +39,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
+
+
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
@@ -54,53 +55,30 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All Tasks in Draft</h1>
-				
+			<div class="container-fluid">
+				<h1 class="pull-left">
+					<a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Report - Tasks</a>
+				</h1>
+
 			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
+			<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
-				<div class="panel-heading"></div>
-				<div class="panel-body">
-					<table class="table" id="datatable_fixed_column">
-						<thead>
-							<tr>
-								<th><input type="text" class="form-control" placeholder="" /></th>
-									<th><input type="text" class="form-control" placeholder="Search By Task Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
-							
-								
-								
-								
-							</tr>
-							<tr>
-								<th>#</th>
-								<th >Task Name </th>
-								<th>Title</th>
-								<th>Description</th>
-								<th>Task Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for(ArrayList<String> item : items) { %>
-							<tr>
-								<td><%=item.get(0) %></td>
-								<td><%=item.get(1) %></td>
-								<td ><%=item.get(2) %></td>
-								<td><%=item.get(3) %></td>
-								<td><%=item.get(4) %></td>
-							</tr>
-							<% } %>
-						</tbody>
-					</table>
+			<div class="col-md-6">
+				<div class="headline">
+					<h2>Task Reports</h2>
+				</div>
+				<div class="col-md-6">
+					<%=(new ReportUtils()).getReport(0).toString() %>
+				</div>
+				<div class="col-md-6">
+					<%=(new ReportUtils()).getReport(1).toString() %>
 				</div>
 			</div>
 		</div>
 
 
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
 
@@ -115,24 +93,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
-	jQuery(document).ready(function() {
+		jQuery(document).ready(function() {
 			App.init();
-
+			
 		});
 	</script>
 	<!--[if lt IE 9]>

@@ -32,6 +32,12 @@ if (request.getSession().getAttribute("user").toString().equalsIgnoreCase("null"
 				<div class="container">
 						<ul class="nav navbar-nav">
 				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  {
+					if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
+						IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+						System.out.println("session user1 ="+((IstarUser)request.getSession().getAttribute("user")).getEmail());
+						String displayName = user.getName();
+						parent.setDisplayName("Welcome "+ displayName);
+					}
 					boolean able_to_see=false;
 					for(ChildLink child :  parent.getChildren())  {
 						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();

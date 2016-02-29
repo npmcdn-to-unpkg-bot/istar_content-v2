@@ -1,30 +1,57 @@
 package test;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 import com.istarindia.apps.cmsutils.CMSFolder;
+import com.istarindia.apps.cmsutils.reports.Report;
+import com.istarindia.apps.cmsutils.reports.ReportCollection;
+import com.istarindia.apps.cmsutils.reports.ReportUtils;
 import com.istarindia.apps.dao.Folder;
 import com.istarindia.apps.services.CMSUtils;
 import com.istarindia.apps.services.FolderService;
 import com.istarindia.apps.services.LessonService;
+import com.istarindia.cms.lessons.CMSLesson;
 
 public class testDB {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//System.out.println(CMSFolder.init());
-		StringBuffer sb = new StringBuffer();
-		sb = CMSUtils.getAllFolders();
+	
+		/*String[] keys = {"name","count"};
+		//ReportUtils r = new ReportUtils();
+		//r.getReportData("ss", keys);
 		
-	//	System.out.println("folders>>>"+sb.toString());
 		
-		FolderService d = new FolderService(); 
-		Folder root = d.getRootFolder();
-		StringBuffer sb1 = new StringBuffer();
-		System.out.println(d.getFolderRecursively(root,sb1));
+		String sql = "SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE   task.actor_id = content_creator.id group by content_creator.name";
+		Report r = new Report(sql , keys, "pie", 1);
 		
-	//	System.out.println(d.getSubFolders(root));
-	//	System.out.println(d.getRootFolder());
 		
-	//System.out.println(d.getSubFolders(root).size());
+		ReportCollection c = new ReportCollection();
+		ArrayList<Report> reports = new ArrayList<>();
+		reports.add(r);
+		c.setReports(reports);
+		
+		try {
+			//File file = new File("C:\\Users\\Vaibhav\\workspace\\reveal\\src\\file.xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			// output pretty printed
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			//jaxbMarshaller.marshal(lesson, file);
+			jaxbMarshaller.marshal(c, System.out);
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}*/
+		
+		System.out.println((new ReportUtils()).getReport(0).toString());
 	}
 
 }

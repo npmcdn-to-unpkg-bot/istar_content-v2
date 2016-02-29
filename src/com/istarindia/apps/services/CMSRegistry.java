@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.cmsutils.CMSFolder;
+import com.istarindia.apps.cmsutils.reports.ReportCollection;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.role.Menu;
@@ -33,6 +34,7 @@ import com.istarindia.apps.role.Menu;
 public class CMSRegistry {
 
 	public static Menu menu;
+	public static ReportCollection reportCollection;
 	public static ArrayList<String> slideTemplates = new ArrayList<>();
 
 	static {
@@ -44,6 +46,23 @@ public class CMSRegistry {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			menu = (Menu) jaxbUnmarshaller.unmarshal(file);
+			System.out.println(menu);
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			// req.getServletContext().getRealPath("/WEB-INF/fileName.properties")
+			URL url = (new CMSRegistry()).getClass().getClassLoader().getResource("/report_list.xml");
+			File file = new File(url.toURI());
+			JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			reportCollection = (ReportCollection) jaxbUnmarshaller.unmarshal(file);
 			System.out.println(menu);
 
 		} catch (JAXBException e) {
