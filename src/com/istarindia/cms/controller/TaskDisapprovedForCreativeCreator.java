@@ -14,6 +14,8 @@ import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.MediaReview;
+import com.istarindia.apps.dao.MediaReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
@@ -45,11 +47,13 @@ public class TaskDisapprovedForCreativeCreator extends HttpServlet {
 		//id, lessonName, session, module, course,  review_by, request for publish
 		//these values can be accessed in jsp page to render the data 
 		List<Task> tasks  = new MediaService().getAllTaskAssignedForCreativeCreator(user.getId(), StatusTypes.DIS_APPROVED); 
+		
 		for(Task task : tasks)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
+			
 		/*
-		 * id, title, task name, and action
+		 * id, title, task name, review comments and action
 		 * */
 			embed_list.add(task.getId().toString());
 			
@@ -73,8 +77,18 @@ public class TaskDisapprovedForCreativeCreator extends HttpServlet {
 			
 			
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
-			System.out.println(">>>task is >> "+task.getStatus());
+			List <MediaReview> media_review= new MediaReviewDAO().findByProperty("task",task);
+			StringBuffer sb = new StringBuffer();
+			if(media_review.size()>0)
+			{
+				for(MediaReview review: media_review)
+				{
+					sb.append(review.getComment()+",");
+				}
+			}
+			embed_list.add(sb.toString());
 			embed_list.add(manager.getTaskStatusForm(task,user));
+			
 			System.out.println(manager.getTaskStatusForm(task,user));
 			
 			
