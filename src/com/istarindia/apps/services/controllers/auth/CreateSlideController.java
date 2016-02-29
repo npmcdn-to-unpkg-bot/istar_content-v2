@@ -42,12 +42,27 @@ public class CreateSlideController extends HttpServlet {
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
 		case "ONLY_TITLE":
-			service.addTextSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"));
+			
+			if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.addTextSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"));
+			} else {
+				service.addTextSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
+			}
+			
 			break;
 		case "ONLY_TITLE_PARAGRAPH":
-			service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+			if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+					
+			} else {
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"),request.getParameter("slide_id"));
+				
+			}
+			
 			break;
 			
 		case "ONLY_TITLE_LIST":

@@ -53,6 +53,9 @@ public class CMSRegistry {
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		try {
@@ -70,8 +73,11 @@ public class CMSRegistry {
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+ 
 		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_LIST");
