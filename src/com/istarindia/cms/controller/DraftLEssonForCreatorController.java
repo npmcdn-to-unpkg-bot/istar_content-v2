@@ -70,7 +70,7 @@ public class DraftLEssonForCreatorController extends HttpServlet {
 				for(TaskReviewer review : taskreview)
 				{
 					buff.append(review.getContentReviewer().getName());
-					buff.append(",");
+					buff.append(" , ");
 				}
 				embed_list.add(buff.toString());
 			}
