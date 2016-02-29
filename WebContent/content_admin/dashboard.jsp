@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-for (Cookie cookie : request.getCookies())
-{
-	System.out.println("in dashboard>>"+cookie.getName());	
-}
+
 
 %>
 <!DOCTYPE html>

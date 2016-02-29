@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<istar_reports>
+    <reports id="0" type_of_report="pie">
+        <column>name</column>
+        <column>count</column>
+        <sql>SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE   task.actor_id = content_creator.id group by content_creator.name</sql>
+    	<title>My Name is Lakhan </title>
+    </reports>
+     <reports id="1" type_of_report="pie">
+        <column>status</column>
+        <column>count</column>
+        <sql>SELECT task.status, count(*) FROM public.task, public.content_creator WHERE   task.actor_id = content_creator.id group by task.status</sql>
+    <title>My Name is Lakhan 2222222222222222222</title>
+    </reports>
+</istar_reports>

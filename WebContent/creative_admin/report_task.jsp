@@ -1,8 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
-
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -10,7 +5,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Creative Creator Dashboard | iStar CMS</title>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<% String url = request.getRequestURL().toString();
+String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+%>
+<title>Creative Admin Reports | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -38,8 +37,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
+
+
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
@@ -54,49 +53,22 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All Tasks in Draft</h1>
+			<div class="container-fluid">
+				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Report - Tasks</a></h1>
 				
 			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
+			<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
-				<div class="panel-heading"></div>
-				<div class="panel-body">
-					<table class="table" id="datatable_fixed_column">
-						<thead>
-							<tr>
-								<th><input type="text" class="form-control" placeholder="" /></th>
-									<th><input type="text" class="form-control" placeholder="Search By Task Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
-							
-								
-								
-								
-							</tr>
-							<tr>
-								<th>#</th>
-								<th >Task Name </th>
-								<th>Title</th>
-								<th>Description</th>
-								<th>Task Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for(ArrayList<String> item : items) { %>
-							<tr>
-								<td><%=item.get(0) %></td>
-								<td><%=item.get(1) %></td>
-								<td ><%=item.get(2) %></td>
-								<td><%=item.get(3) %></td>
-								<td><%=item.get(4) %></td>
-							</tr>
-							<% } %>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<div class="tag-box tag-box-v3">
+						<div class="headline"><h2>Task Breakup per Resource</h2></div>
+						<p>Tasks Assigned per Resource</p><br><br>
+
+						<!-- Pie Charts v1 -->
+						<div class="row pie-progress-charts margin-bottom-60">
+							<div id="container"> aaaa</div>
+						</div>
+					</div>
 		</div>
 
 
@@ -108,31 +80,70 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- JS Implementing Plugins -->
+	<!-- JS Implementing Plugins -->	<script src="https://code.highcharts.com/highcharts.js"></script>
+	
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
-	<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
-	jQuery(document).ready(function() {
-			App.init();
 
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			 $('#container').highcharts({
+			        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false,
+			            type: 'pie'
+			        },
+			        title: {
+			            text: 'Browser market shares January, 2015 to May, 2015'
+			        },
+			        tooltip: {
+			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			        },
+			        plotOptions: {
+			            pie: {
+			                allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: true,
+			                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                    style: {
+			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                    }
+			                }
+			            }
+			        },
+			        series: [{
+			            name: 'Brands',
+			            colorByPoint: true,
+			            data: [{
+			                name: 'Microsoft Internet Explorer',
+			                y: 56.33
+			            }, {
+			                name: 'Chrome',
+			                y: 24.03,
+			                sliced: true,
+			                selected: true
+			            }, {
+			                name: 'Firefox',
+			                y: 10.38
+			            }, {
+			                name: 'Safari',
+			                y: 4.77
+			            }, {
+			                name: 'Opera',
+			                y: 0.91
+			            }, {
+			                name: 'Proprietary or Undetectable',
+			                y: 0.2
+			            }]
+			        }]
+			    });
 		});
 	</script>
 	<!--[if lt IE 9]>

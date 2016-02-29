@@ -266,6 +266,52 @@ var App = function () {
 		// TODO: handle exception
 	}
 	}
+	
+	function handleGraphs() {
+		try {
+			console.log("graoh foujd -->");
+			$('.datatable_report').each(function(i, obj) {
+				
+				var tableID  = $(this).attr('id');
+			    var containerID = '#'+$(this).data('graph_containter');
+			    var graph_type = $(this).data('graph_type');
+			    console.log("tableID -->" + $(this).attr('id'));
+				console.log("containerID -->" + containerID);
+				 var graph_title = $(this).data('graph_title');
+				
+				 $(containerID).highcharts({
+				        data: {
+				            table: tableID
+				        },
+				        chart: {
+				            type: graph_type
+				        },
+				        title: {
+				            text: graph_title
+				        },
+				        tooltip: {
+				            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				        },
+				        plotOptions: {
+				            pie: {
+				                allowPointSelect: true,
+				                cursor: 'pointer',
+				                dataLabels: {
+				                    enabled: true,
+				                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+				                    style: {
+				                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+				                    }
+				                }
+				            }
+				        }
+				    });
+			});
+		
+	} catch (err) {
+		console.log(err);
+	}
+	}
 
 	return {
 		init: function () {
@@ -284,6 +330,7 @@ var App = function () {
 			handleEqualHeightColumns();
 			handleEqualHeightColumns__Images();
 			handleTables();
+			handleGraphs();
 		},
 
 		// Counters
