@@ -277,4 +277,88 @@ public class SlideService {
 			}
 		
 	}
+
+	public void addTextSlideToLessonUpdate(String teacherNotes, String studentNotes, Presentaion ppt, String title,
+			String slideTransition, String backgroundColor, String backgroundTransition, String slideID) { 
+		
+		CMSSlide cMSlide = new CMSSlide();
+		cMSlide.setBackground(backgroundColor);
+		cMSlide.setBackgroundTransition(backgroundTransition);
+		cMSlide.setTransition(slideTransition);
+		cMSlide.setTemplateName("ONLY_TITLE");
+		cMSlide.setTitle(title);
+
+		Slide slide = (new SlideDAO()).findById(Integer.parseInt(slideID));
+		slide.setTitle(title);
+		try {
+			slide.setSlideText(cMSlide.getText().toString());
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			// e1.printStackTrace();
+		}
+		
+		
+		slide.setPresentaion(ppt);
+
+		SlideDAO dao = new SlideDAO();
+		Session session = dao.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			slide.setTeacherNotes(teacherNotes);
+			slide.setStudentNotes(studentNotes);
+			slide.setTemplate("ONLY_TITLE");
+			dao.attachDirty(slide);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	public void addTextAndParaGraphSlideToLessonUpdate(String teacherNotes, String studentNotes, Presentaion ppt,
+	String title, String slideTransition, String backgroundColor, String backgroundTransition,
+	String paragraph, String slideID)  {
+		CMSSlide cMSlide = new CMSSlide();
+		cMSlide.setBackground(backgroundColor);
+		cMSlide.setBackgroundTransition(backgroundTransition);
+		cMSlide.setTransition(slideTransition);
+		cMSlide.setTemplateName("ONLY_TITLE_PARAGRAPH");
+		cMSlide.setTitle(title);
+		cMSlide.setParagraph(paragraph);
+		Slide slide = (new SlideDAO()).findById(Integer.parseInt(slideID));
+		slide.setTitle(title);
+
+		try {
+			slide.setSlideText(cMSlide.getText().toString());
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			// e1.printStackTrace();
+		}
+		ppt.getSlides().add(slide);
+		slide.setPresentaion(ppt);
+		
+		SlideDAO dao = new SlideDAO();
+		Session session = dao.getSession();
+		Transaction tx = null;
+		try {
+			slide.setTeacherNotes(teacherNotes);
+			slide.setStudentNotes(studentNotes);
+			tx = session.beginTransaction();
+			slide.setTemplate("ONLY_TITLE_PARAGRAPH");
+			dao.save(slide);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
 }
