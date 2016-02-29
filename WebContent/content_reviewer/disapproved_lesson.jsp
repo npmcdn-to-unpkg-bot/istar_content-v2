@@ -10,7 +10,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Content Content Dashboard | iStar CMS</title>
+<title>Content Reviewer Dashboard | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
