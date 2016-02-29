@@ -8,7 +8,11 @@ var Validation = function () {
 	            // Rules for form validation
 	            rules:
 	            {
-	                required:
+	            	title:
+	            	{
+	            		required: true
+	            	},
+	            	description:
 	                {
 	                    required: true
 	                },
@@ -72,9 +76,13 @@ var Validation = function () {
 	            // Messages for form validation
 	            messages:
 	            {
-	                required:
+	            	title:
+	            	{
+	            		required: 'Pleaes enter a valid image title'
+	            	},
+	            	description:
 	                {
-	                    required: 'Please enter something'
+	                    required: 'Please enter the task description(Tags and target folders)'
 	                },
 	                email:
 	                {
