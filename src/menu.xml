@@ -49,7 +49,7 @@
    <parent_links display_name="Media">
         <child_links display_name="Published Media" url="/content/published_media_creative_creator" valid_roles="creative_admin,creative_creator,content_creator,content_admin"/>
     <child_links display_name="Gallery"
-			url="/content/gallery.jsp" valid_roles="creative_admin,creative_creator,content_creator" />
+			url="/content/gallery.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
     </parent_links>
    
     
