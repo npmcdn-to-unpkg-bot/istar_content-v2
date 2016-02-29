@@ -98,8 +98,10 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		
 			for(String reviewer_id: reviewer )
 			{
-				if(!already_added.contains(reviewer_id))
+				System.out.println("review is "+reviewer_id);
+				if(!already_added.contains(Integer.parseInt(reviewer_id)))
 				{
+					System.out.println("inside review is "+reviewer_id);
 					TaskReviewer review = new TaskReviewer();
 					review.setContentReviewer(new ContentReviewerDAO().findById(Integer.parseInt(reviewer_id)));
 					review.setStatus(StatusTypes.REVIEWER_ASSIGNED);
