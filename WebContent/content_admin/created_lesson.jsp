@@ -1,4 +1,4 @@
-2<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -63,10 +63,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="container-fluid height-1000" style="padding: 0px !important">
 			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Created By", "Reviewers", "Task Action" }; %>
 			<%=TableUtils.getTableHeader("All Created Tasks", headers, items, 7) %>
-			
-			
-			
-			
+		
 		</div>
 
 

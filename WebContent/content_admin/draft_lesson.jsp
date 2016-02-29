@@ -58,17 +58,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">All Tasks in Progress - Test</h1>
+				<h1 class="pull-left">All Tasks in Progress </h1>
 				
 			</div>
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Created By", "Reviewers", "Task Action" }; %>
-			<%=TableUtils.getTableHeader("All Tasks in Progress - Test", headers, items, 7) %>
-			
-			
-			
+			<%=TableUtils.getTableHeader("All Tasks in Progress ", headers, items, 7) %>
 			
 		</div>
 
