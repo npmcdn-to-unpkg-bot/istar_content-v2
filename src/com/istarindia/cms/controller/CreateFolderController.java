@@ -59,7 +59,7 @@ public class CreateFolderController extends IStarBaseServelet {
 				}
 			}	
 		}
-		request.getRequestDispatcher("/creative_admin/dashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("/creative_admin/new_folder.jsp").forward(request, response);
 	}
 
 	/**

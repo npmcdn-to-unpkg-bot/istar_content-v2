@@ -67,8 +67,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<%=TableUtils.getTableHeader("All Tasks in Progress - Test", headers, items, 6) %>
 			
 			
-			
-			
 		</div>
 
 
