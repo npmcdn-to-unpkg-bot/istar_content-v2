@@ -63,7 +63,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">All completed Tasks</h1>
+				<h1 class="pull-left">All Tasks Completed</h1>
 				
 			</div>
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
