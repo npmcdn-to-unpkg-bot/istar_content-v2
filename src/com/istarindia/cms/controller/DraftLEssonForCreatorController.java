@@ -53,11 +53,19 @@ public class DraftLEssonForCreatorController extends HttpServlet {
 			embed_list.add(lesson.getCmsession().getTitle());
 			embed_list.add(lesson.getCmsession().getModule().getModuleName());
 			embed_list.add(lesson.getCmsession().getModule().getCourse().getCourseName());
-			Task task = new TaskDAO().findByItemId(lesson.getId()).get(0);
-			
+			List<Task> task_list = new TaskDAO().findByItemId(lesson.getId());
+			Task task = null;
+			for(Task task1: task_list)
+			{
+				if(task1.getItemType().equalsIgnoreCase("LESSON"))
+				{
+					task= task1;
+				}
+			}
 			List <TaskReviewer> taskreview = new TaskReviewerDAO().findByProperty("task", task);
 			if(taskreview.size()>0)
 			{
+				
 				StringBuffer buff = new StringBuffer();
 				for(TaskReviewer review : taskreview)
 				{
@@ -71,6 +79,7 @@ public class DraftLEssonForCreatorController extends HttpServlet {
 				embed_list.add("reviewer not assigned");
 			}
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
+			System.out.println("TASK_ID HERE IS "+task.getId());
 			embed_list.add(manager.getTaskStatusForm(task,user));
 			embed_list.add(lesson.getId().toString()); //mark completed
 			
