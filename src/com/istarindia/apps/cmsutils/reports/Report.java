@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
  */
 public class Report {
 	String sql;
-	ArrayList<String> columns;
+	ArrayList<IStarColumn> columns;
 	String title;
 	String type_of_report;
 	int id;
@@ -22,7 +22,7 @@ public class Report {
 	public Report() {
 		super();
 	}
-	public Report(String sql, ArrayList<String> columns, String type_of_report, int id) {
+	public Report(String sql, ArrayList<IStarColumn> columns, String type_of_report, int id) {
 		super();
 		this.sql = sql;
 		this.columns = columns;
@@ -39,11 +39,11 @@ public class Report {
 	}
 	
 	@XmlElement (name="column")
-	public ArrayList<String> getColumns() {
+	public ArrayList<IStarColumn> getColumns() {
 		return columns;
 	}
 	
-	public void setColumns(ArrayList<String> columns) {
+	public void setColumns(ArrayList<IStarColumn> columns) {
 		this.columns = columns;
 	}
 	

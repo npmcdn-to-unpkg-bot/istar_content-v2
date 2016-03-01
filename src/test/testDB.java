@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import com.istarindia.apps.cmsutils.CMSFolder;
+import com.istarindia.apps.cmsutils.reports.IStarColumn;
 import com.istarindia.apps.cmsutils.reports.Report;
 import com.istarindia.apps.cmsutils.reports.ReportCollection;
 import com.istarindia.apps.cmsutils.reports.ReportUtils;
@@ -25,10 +26,13 @@ public class testDB {
 		/*String[] keys = {"name","count"};
 		//ReportUtils r = new ReportUtils();
 		//r.getReportData("ss", keys);
+		*/
 		
-		
+		IStarColumn col = new IStarColumn(true, "NONE", "name", "name");
 		String sql = "SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE   task.actor_id = content_creator.id group by content_creator.name";
-		Report r = new Report(sql , keys, "pie", 1);
+		ArrayList<IStarColumn> keys = new ArrayList<>();
+		keys.add(col);keys.add(col);keys.add(col);keys.add(col);
+		Report r = new Report(sql , keys , "pie", 1);
 		
 		
 		ReportCollection c = new ReportCollection();
@@ -49,7 +53,7 @@ public class testDB {
 
 		} catch (JAXBException e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		System.out.println((new ReportUtils()).getReport(0).toString());
 	}

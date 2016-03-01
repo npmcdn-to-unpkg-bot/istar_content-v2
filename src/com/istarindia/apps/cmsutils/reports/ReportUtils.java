@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import javax.crypto.interfaces.PBEKey;
 import javax.xml.bind.JAXBContext;
@@ -15,6 +16,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -27,22 +29,28 @@ import com.istarindia.apps.services.CMSRegistry;
  */
 public class ReportUtils {
 
-	public ArrayList<ArrayList<String>> getReportData(String sql1, ArrayList<String> keys) {
+	public ArrayList<ArrayList<String>> getReportData(String sql1, ArrayList<IStarColumn> keys, HashMap<String, String> conditions) {
 		ArrayList<ArrayList<String>> table = new ArrayList<>();
 		IstarUserDAO dao = new IstarUserDAO();
 		Session session = dao.getSession();
-
-		// String sql1 = "SELECT content_creator.name, count(*) FROM
-		// public.task, public.content_creator WHERE task.actor_id =
-		// content_creator.id group by content_creator.name";
 		SQLQuery query = session.createSQLQuery(sql1);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		
+		for(String key : conditions.keySet()) {
+			try {
+				query.setParameter(key, Integer.parseInt(conditions.get(key)));
+			} catch (Exception e) {
+				query.setParameter(key, conditions.get(key));
+			}
+			
+		}
+		
 		List<HashMap<String, Object>> results = query.list();
 
 		for (HashMap<String, Object> object : results) {
 			ArrayList<String> row = new ArrayList<>();
-			for (String string : keys) {
-				row.add(object.get(string) + "");
+			for (IStarColumn string : keys) {
+				row.add(object.get(string.getName()) + "");
 
 			}
 			
@@ -52,7 +60,7 @@ public class ReportUtils {
 
 	}
 
-	public StringBuffer getReport(int reportID) {
+	public StringBuffer getReport(int reportID, HashMap<String, String> conditions) {
 		File file = new File("C:\\Users\\Vaibhav\\workspace\\istar_content\\src\\report_list.xml");
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
@@ -72,23 +80,30 @@ public class ReportUtils {
 		}
 
 		StringBuffer out = new StringBuffer();
-		ArrayList<ArrayList<String>> data = getReportData(report.getSql(), report.getColumns());
+		ArrayList<ArrayList<String>> data = getReportData(report.getSql(), report.getColumns(), conditions);
 		out.append("<p>" + report.getTitle() + "</p>");
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
 		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> All Tasks in Progress </h3> </div><div class='panel-body'></div>"
 				+ "<table  class='table table-striped table-bordered display responsive nowrap dataTable datatable_report' id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "   data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID + "'>");
 		out.append("<thead><tr>");
-		for (String column : report.getColumns()) {
-			out.append("<th>" + column + "</th>");
+		for (IStarColumn column : report.getColumns()) {
+			if(column.isVisible) {
+				out.append("<th>" + column.getDisplayName() + "</th>");
+			}
 		}
 		out.append("</tr></thead>");
 
 		out.append("<tbody>");
 		for (ArrayList<String> row : data) {
 			out.append("<tr>");
-			for (String cell : row) {
-				out.append("<td>" + cell + "</td>");
+			int i=0;
+			for (IStarColumn column : report.getColumns()) {
+				if(column.isVisible) {
+					out.append("<th>" + row.get(i) + "</th>");
+					i++;
+				}
 			}
+			
 			out.append("</tr>");
 		}
 		out.append("</tbody>");
