@@ -17,7 +17,7 @@ public class TableUtils {
 		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'>"
 				+ "<i class='fa fa-tasks'></i> "+title+"</h3> </div>");
 		out.append("<div class='panel-body'></div>");
-		out.append("<table class='table table-striped table-bordered display responsive nowrap' id='datatable_fixed_column' width='100%' "
+		out.append("<table class='table table-striped table-bordered display responsivess' id='datatable_fixed_column' width='100%' "
 				+ "cellspacing='0'> <thead> <tr> ");
 		//		+ "<th>#</th> <th>First Name</th> <th class='hidden-sm'>Last Name</th> <th>Username</th> <th>Status</th> "
 		
