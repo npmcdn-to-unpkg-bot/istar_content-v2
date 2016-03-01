@@ -106,7 +106,7 @@ public class CreateTaskController extends HttpServlet {
 			CreativeAdmin cretaive_admin = (CreativeAdmin)new CreativeAdminDAO().findAll().get(0);
 			new TaskService().createTask(item_id, media_type, "ALL", StatusTypes.CREATED, "CREATE_"+media_type, cretaive_admin.getId(), user.getId());
 			
-			response.sendRedirect(request.getContextPath() + "/media/create_task.jsp");		
+			request.getRequestDispatcher("/media/create_task.jsp").forward(request, response);	
 			}
 	}
 	}
