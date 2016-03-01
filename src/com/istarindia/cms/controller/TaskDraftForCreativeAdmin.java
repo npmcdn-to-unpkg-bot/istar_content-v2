@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.StatusTypes;
+import com.istarindia.apps.dao.ContentCreatorDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
@@ -61,6 +63,7 @@ public class TaskDraftForCreativeAdmin extends HttpServlet {
 				embed_list.add("IMAGE");
 				embed_list.add(img.getTitle());
 				embed_list.add(img.getDescription());//3
+				embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());//4
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
@@ -68,6 +71,7 @@ public class TaskDraftForCreativeAdmin extends HttpServlet {
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
 				embed_list.add(vid.getDescription());//3
+				embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());//4
 			}	
 			
 			

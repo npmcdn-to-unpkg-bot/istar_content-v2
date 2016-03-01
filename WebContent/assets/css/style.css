@@ -90,7 +90,7 @@ table.dataTable td, table.dataTable th {
 }
 
 table.dataTable.nowrap th, table.dataTable.nowrap td {
-	white-space: nowrap
+	/* white-space: nowrap */
 }
 
 div.dataTables_wrapper div.dataTables_length label {

@@ -30,9 +30,10 @@ public class TableUtils {
 		out.append("<tfoot> ");
 		out.append("<tr> ");
 		for (String string : headers) {
-			if(!string.equalsIgnoreCase("Task Action")){
+			if(!string.equalsIgnoreCase("Task Action") && !string.equalsIgnoreCase("Url") && !string.equalsIgnoreCase("Description")){
 				out.append("<th>"+string+"</th>");
-			}	
+			}
+			
 		}
 		
 		

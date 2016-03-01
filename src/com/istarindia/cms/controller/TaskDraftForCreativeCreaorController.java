@@ -15,6 +15,8 @@ import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Lesson;
+import com.istarindia.apps.dao.MediaReview;
+import com.istarindia.apps.dao.MediaReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
@@ -66,6 +68,15 @@ public class TaskDraftForCreativeCreaorController extends HttpServlet {
 				embed_list.add("IMAGE");
 				embed_list.add(img.getTitle());
 				embed_list.add(img.getDescription());//3
+				List<MediaReview> rev = new MediaReviewDAO().findByProperty("task", task);
+				if(rev.size()>0)
+				{
+					embed_list.add(rev.get(0).getComment());
+				}
+				else
+				{
+					embed_list.add("-");
+				}
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
@@ -73,6 +84,15 @@ public class TaskDraftForCreativeCreaorController extends HttpServlet {
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
 				embed_list.add(vid.getDescription());//3
+				List<MediaReview> rev = new MediaReviewDAO().findByProperty("task", task);
+				if(rev.size()>0)
+				{
+					embed_list.add(rev.get(0).getComment());
+				}
+				else
+				{
+					embed_list.add("-");
+				}	
 			}	
 			
 			

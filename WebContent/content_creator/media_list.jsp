@@ -60,49 +60,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<% String[] headers = {"#", "Media Title", "Session Name", "Task Name", "Assigned To", "Status"}; %>
-			<%=TableUtils.getTableHeader("All Media Created", headers, items, 5) %>
+			<% String[] headers = {"#", "Media Title", "Session Name", "Url", "Task Name", "Assigned To", "Status"}; %>
+			<%=TableUtils.getTableHeader("All Media Created", headers, items, 6) %>
 		</div>
-		<%-- <div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-yellow margin-bottom-40" style="margin: 20px">
-				<div class="panel-heading"></div>
-				<div class="panel-body">
-					<table class="table" id="datatable_fixed_column">
-						<thead>
-							<tr>
-								<th></th>
-								<th><input type="text" class="form-control" placeholder="Search By Title" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Task Name" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Assignee" /></th>
-								<th><input type="text" class="form-control" placeholder="Search By Status" /></th>
-								<th></th>	
-							</tr>
-							<tr>
-								<th>#</th>
-								<th>Media Title</th>
-								<th>Session Name</th>
-								<th>Task Name</th>
-								<th>Assigned To</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for(ArrayList<String> item : items) { %>
-							<tr>
-								<td><%=item.get(0) %></td>
-								<td><%=item.get(1) %></td>
-								<td><%=item.get(2) %></td>
-								<td><%=item.get(3) %></td>
-								<td><%=item.get(4) %></td>
-								<td><%=item.get(5) %></td>
-								<td></td>
-							</tr>
-							<% } %>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div> --%>
+		
 
 
 		<jsp:include page="includes/footer.jsp"></jsp:include>

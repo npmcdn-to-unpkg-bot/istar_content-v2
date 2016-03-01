@@ -107,7 +107,7 @@ public class MediaUploadController extends IStarBaseServelet {
 							tx = session.beginTransaction();
 							
 						
-							transientInstance.setUrl("upload?getfile=" + item.getName());
+							transientInstance.setUrl("/content/media_upload?getfile=" + item.getName());
 							transientInstance.setTags(tags);
 							
 							

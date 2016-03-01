@@ -58,18 +58,19 @@ public class TaskCreatedByContentCreatorController extends HttpServlet {
 				{System.out.println("task id here is "+ task.getId());
 					embed_list.add(new ImageDAO().findById(task.getItemId()).getTitle());//1
 					embed_list.add(new CmsessionDAO().findById(new ImageDAO().findById(task.getItemId()).getSessionid()).getTitle());//2
+					embed_list.add("<a href="+new ImageDAO().findById(task.getItemId()).getUrl()+" target='_new'>Get Media</a>");//3
 				}	
 				else if(task.getItemType().equalsIgnoreCase("VIDEO"))
 				{
 					embed_list.add(new VideoDAO().findById(task.getItemId()).getTitle());//1
 					embed_list.add(new CmsessionDAO().findById(new VideoDAO().findById(task.getItemId()).getSessionId()).getTitle());//2
-
+					embed_list.add("<a href="+new VideoDAO().findById(task.getItemId()).getUrl()+" target='_new'>Get Media</a>");//3
 				}	
-				embed_list.add(task.getTaskName());//3
+				embed_list.add(task.getTaskName());//4
 				
-				embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());//3
+				embed_list.add(new IstarUserDAO().findById(task.getActorId()).getName());//5
 				//TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
-				embed_list.add(task.getStatus());//5
+				embed_list.add(task.getStatus());//6
 				
 				list_to_be_displayed.add(embed_list);
 			} catch (Exception e) {

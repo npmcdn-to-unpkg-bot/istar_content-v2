@@ -67,12 +67,16 @@ public class TaskPublishedForCreativeCreatorController extends HttpServlet {
 				
 				embed_list.add("IMAGE");
 				embed_list.add(img.getTitle());
+				embed_list.add(img.getDescription());
+				embed_list.add("<a href='"+img.getUrl()+"' target='_new'>MEdia Link</a>");
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
 				Video vid = new VideoDAO().findById(task.getItemId());
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
+				embed_list.add(vid.getDescription());
+				embed_list.add("<a href='"+vid.getUrl()+"'>Media Link</a>");
 			}	
 			
 			
@@ -86,7 +90,7 @@ public class TaskPublishedForCreativeCreatorController extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("tasks", list_to_be_displayed);
-		request.getRequestDispatcher("/creative_admin/published.jsp").forward(request, response);
+		request.getRequestDispatcher("/creative_creator/published.jsp").forward(request, response);
 	
 	}
 
