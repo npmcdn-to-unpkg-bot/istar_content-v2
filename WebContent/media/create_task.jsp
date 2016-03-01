@@ -117,20 +117,20 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 									<div id="html1">
 										<ul>
-											<li id="none" data-jstree='{"opened":true }'>All Courses
+											<li id="none" data-jstree='{"opened":true ,"disabled":true}'>All Courses
 												<ul>
 													<%
 														CourseDAO dao = new CourseDAO();
 														for (Course course : (List<Course>) dao.findAll()) {
 													%>
 													<li id="course_<%=course.getId()%>"
-														data-jstree='{"opened":true}'><%=course.getCourseName()%>
+														data-jstree='{"opened":true ,"disabled":true}'><%=course.getCourseName()%>
 														<ul>
 															<%
 																for (Module module : course.getModules()) {
 															%>
 															<li id="module_<%=module.getId()%>"
-																data-jstree='{"opened":true}'><%=module.getModuleName()%>
+																data-jstree='{"opened":true ,"disabled":true}'><%=module.getModuleName()%>
 																<ul>
 																	<%
 																		for (Cmsession session1 : module.getCmsessions()) {
