@@ -147,6 +147,33 @@ public class MediaUploadController extends IStarBaseServelet {
 								session1.close();
 							}
 						}
+						
+						
+						TaskDAO d = new TaskDAO();
+						Task t = null;
+						for(Task tt :d.findByItemId(item_id))
+						{
+							if(tt.getItemType().equalsIgnoreCase(MediaTypes.VIDEO))
+							{
+								t= tt;
+								break;
+							}	
+						}
+						System.out.println("task here is "+t.getId());
+						t.setStatus(StatusTypes.COMPLETED);
+						Session session111 = d.getSession();
+						Transaction tx111 = null;
+						try {
+							tx111 = session111.beginTransaction();
+							d.attachDirty(t);
+							tx111.commit();
+						} catch (HibernateException e) {
+							if (tx111 != null)
+								tx111.rollback();
+							e.printStackTrace();
+						} finally {
+							session111.close();
+						}
 						//CMSRegistry.writeAuditLog("Video with title " + transientInstance.getTitle() + " and " + transientInstance.getUrl() + " created. ", (Users) request.getSession().getAttribute("user"));
 					} 
 					else 
@@ -205,6 +232,34 @@ public class MediaUploadController extends IStarBaseServelet {
 								session1.close();
 							}
 						}
+						
+						TaskDAO d = new TaskDAO();
+						Task t = null;
+						for(Task tt :d.findByItemId(item_id))
+						{
+							if(tt.getItemType().equalsIgnoreCase(MediaTypes.IMAGE))
+							{
+								t= tt;
+								break;
+							}	
+						}
+						System.out.println("task here is "+t.getId());
+						t.setStatus(StatusTypes.COMPLETED);
+						Session session11 = d.getSession();
+						Transaction tx11 = null;
+						try {
+							tx11 = session11.beginTransaction();
+							d.attachDirty(t);
+							tx11.commit();
+						} catch (HibernateException e) {
+							if (tx11 != null)
+								tx11.rollback();
+							e.printStackTrace();
+						} finally {
+							session11.close();
+						}
+						
+						
 					
 					}
 					
@@ -230,31 +285,7 @@ public class MediaUploadController extends IStarBaseServelet {
 		} finally {
 
 		}
-		TaskDAO d = new TaskDAO();
-		Task t = null;
-		for(Task tt :d.findByItemId(item_id))
-		{
-			if(tt.getItemType().equalsIgnoreCase(MediaTypes.IMAGE) || (tt.getItemType().equalsIgnoreCase(MediaTypes.VIDEO)))
-			{
-				t= tt;
-				break;
-			}	
-		}
-		System.out.println("task here is "+t.getId());
-		t.setStatus(StatusTypes.COMPLETED);
-		Session session1 = d.getSession();
-		Transaction tx1 = null;
-		try {
-			tx1 = session1.beginTransaction();
-			d.attachDirty(t);
-			tx1.commit();
-		} catch (HibernateException e) {
-			if (tx1 != null)
-				tx1.rollback();
-			e.printStackTrace();
-		} finally {
-			session1.close();
-		}
+		
 		
 		
 		request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
