@@ -79,14 +79,15 @@ public class LoginController extends IStarBaseServelet {
 							CMSRegistry.writeAuditLog("User Logged in ->" + ((IstarUser) request.getSession().getAttribute("user")).getEmail(), user.getId());
 							request.setAttribute("msg", "Welcome to iStar, " + user.getName());
 							//request.getRequestDispatcher("/"+user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
-							response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+							response.sendRedirect("/"+ user.getUserType().toLowerCase() + "/dashboard.jsp");
 					 }
 					 else
 					 {
 						 request.getSession().setAttribute("user", user);
 						 CMSRegistry.writeAuditLog("User Logged in ->" + ((IstarUser) request.getSession().getAttribute("user")).getEmail(), user.getId());
-							request.setAttribute("msg", "Welcome to iStar, " + user.getName());
-							response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+						request.setAttribute("msg", "Welcome to iStar, " + user.getName());
+						//response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+						request.getRequestDispatcher("/"+user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
 					 }	 
 					
 					
@@ -94,15 +95,14 @@ public class LoginController extends IStarBaseServelet {
 			} catch (java.lang.IndexOutOfBoundsException e) {
 				e.printStackTrace();
 				request.setAttribute("msg", "Missing Username or password");
-				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-				request.getRequestDispatcher("/content_admin/index.jsp").forward(request, response);
-				rd.forward(request, response);
+				//RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+				request.getRequestDispatcher("/content/index.jsp").forward(request, response);
+				//rd.forward(request, response);
 			}
 
 		} else {
 			request.setAttribute("msg", "Missing Username or password");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("/content/index.jsp").forward(request, response);
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

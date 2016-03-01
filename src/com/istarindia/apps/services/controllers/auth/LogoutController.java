@@ -44,7 +44,7 @@ public class LogoutController extends IStarBaseServelet {
 		try {
 			IstarUser user = (IstarUser) request.getSession().getAttribute("user");
 			System.out.println("user to logout ->>"+ user.getEmail());
-			request.getSession().removeAttribute("user");
+			
 			IstarUserDAO dao = new IstarUserDAO();
 			Session session1 = dao.getSession();
 			Transaction tx = null;
@@ -52,7 +52,10 @@ public class LogoutController extends IStarBaseServelet {
 				user.setIstarAuthorizationToken("");
 				tx = session1.beginTransaction();
 				dao.attachDirty(user);
-				tx.commit();
+				 session1.flush();
+				 tx.commit();
+				    session1.clear();
+				
 			} catch (HibernateException e) {
 				if (tx != null)
 					tx.rollback();
@@ -60,6 +63,8 @@ public class LogoutController extends IStarBaseServelet {
 			} finally {
 				session1.close();
 			}
+			request.getSession().removeAttribute("user");
+			
 		} catch (java.lang.IndexOutOfBoundsException e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "Missing Username or password");
@@ -69,21 +74,27 @@ public class LogoutController extends IStarBaseServelet {
 			// TODO: handle exception
 		}
 
-		try {
-			Cookie cookie = new Cookie("token", "");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-			request.setAttribute("msg", "You are successfully Logged out.");
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		/*if(request.getCookies()!=null)
+		{
+			System.out.println("I am in logout");
+			for(Cookie c : request.getCookies())
+			{
+				if(c.getName().equalsIgnoreCase("token"))
+				{
+					Cookie cookie = new Cookie("token", "");
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+					request.setAttribute("msg", "You are successfully Logged out.");
+					response.sendRedirect(request.getContextPath() + "/index.jsp");
 
-		} catch (java.lang.IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			request.setAttribute("msg", "Missing Username or password");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);
-		}
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+				}
+			}
+			
+		}*/
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+		rd.forward(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
