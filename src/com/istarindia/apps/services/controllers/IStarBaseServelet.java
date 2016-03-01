@@ -18,5 +18,6 @@ public class IStarBaseServelet extends HttpServlet{
 		for(Object key: request.getParameterMap().keySet()) {
 			System.out.println("key-> "+ key.toString() + " : value ->"+ request.getParameter(key.toString()));
 		}
+		
 	}
 }

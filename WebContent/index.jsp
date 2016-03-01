@@ -14,27 +14,7 @@ if(request.getSession().getAttribute("user")!=null)
 	response.sendRedirect(url1);
 }else
 {System.out.println("i am in else in index");
-/* 	Cookie[] cookies=request.getCookies();
-	if(cookies!=null)
-	{	
-		for(Cookie c : cookies)
-		{
-			if(c.getName().equalsIgnoreCase("token"))
-			{
-				if(new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).size()>0)
-				{
-					IstarUser user = new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).get(0);
-						System.out.println("came in index");
-						request.getSession().setAttribute("user", user);
-						String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
-						response.sendRedirect(url1);
-					
-				}
-				
-			}
-		}
 
-	} */
 }	
 
 %>

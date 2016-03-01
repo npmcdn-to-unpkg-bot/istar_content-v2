@@ -30,12 +30,7 @@ if (request.getSession().getAttribute("user").toString().equalsIgnoreCase("null"
 				<div class="container">
 						<ul class="nav navbar-nav">
 				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  {
-					if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
-						IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-						System.out.println("session user1 ="+((IstarUser)request.getSession().getAttribute("user")).getEmail());
-						String displayName = user.getName();
-						parent.setDisplayName("Welcome "+ displayName);
-					}
+					
 					boolean able_to_see=false;
 					for(ChildLink child :  parent.getChildren())  {
 						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
@@ -46,20 +41,27 @@ if (request.getSession().getAttribute("user").toString().equalsIgnoreCase("null"
 					}
 					if(able_to_see)
 					{
-					%>
-				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %> </a>
-					<ul class="dropdown-menu">
-					<% for(ChildLink child :  parent.getChildren())  {
-						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
-						if(child.getValidRoles().contains(userRold)) {
 						%>
-						<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
-						<% }  } %>
-					</ul>
-				</li>
-				
-				<% 
-					}
+					<% if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
+						IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+						String displayName = "Welcome "+ user.getName();
+						%>
+					<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=displayName %>
+					<% } else { %>
+					<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
+					<% } %>
+					</a>
+						<ul class="dropdown-menu">
+							<% for(ChildLink child :  parent.getChildren())  {
+							String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
+							if(child.getValidRoles().contains(userRold)) {
+							%>
+							<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
+							<% }  } %>
+						</ul></li>
+
+					<% 
+						}
 					}  %>
 			</ul>
 				</div><!--/end container-->

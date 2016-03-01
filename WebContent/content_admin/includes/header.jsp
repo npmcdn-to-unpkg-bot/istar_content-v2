@@ -39,12 +39,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="container">
 			<ul class="nav navbar-nav">
 				<% for(ParentLink parent :  CMSRegistry.menu.getLinks())  {
-					if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
-						System.out.println("session user1 ="+((IstarUser)request.getSession().getAttribute("user")).getEmail());
-						IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-						String displayName = user.getName();
-						parent.setDisplayName("Welcome "+ displayName);
-					}
+					
 					boolean able_to_see=false;
 					for(ChildLink child :  parent.getChildren())  {
 						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
@@ -56,7 +51,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					if(able_to_see)
 					{
 					%>
+				<% if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
+					IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+					String displayName = "Welcome "+ user.getName();
+					%>
+				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=displayName %>
+				<% } else { %>
 				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
+				<% } %>
 				</a>
 					<ul class="dropdown-menu">
 						<% for(ChildLink child :  parent.getChildren())  {

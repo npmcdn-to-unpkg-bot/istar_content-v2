@@ -50,20 +50,27 @@ System.out.println("session user1 ="+request.getSession().getAttribute("user"));
 					}
 					if(able_to_see)
 					{
-					%>
-				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
-				</a>
-					<ul class="dropdown-menu">
-						<% for(ChildLink child :  parent.getChildren())  {
-						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
-						if(child.getValidRoles().contains(userRold)) {
 						%>
-						<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
-						<% }  } %>
-					</ul></li>
+					<% if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
+						IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+						String displayName = "Welcome "+ user.getName();
+						%>
+					<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=displayName %>
+					<% } else { %>
+					<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
+					<% } %>
+					</a>
+						<ul class="dropdown-menu">
+							<% for(ChildLink child :  parent.getChildren())  {
+							String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
+							if(child.getValidRoles().contains(userRold)) {
+							%>
+							<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
+							<% }  } %>
+						</ul></li>
 
-				<% 
-					}
+					<% 
+						}
 					}  %>
 			</ul>
 		</div>
