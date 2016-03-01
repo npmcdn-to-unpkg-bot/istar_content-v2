@@ -86,7 +86,7 @@ while(attrs.hasMoreElements()) {
 
 					
 					<div class="alert alert-success fade in margin-bottom-40">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	<h4>Well done!</h4>
 	<p><%=request.getAttribute("message_success") %></p>
 </div>
@@ -95,7 +95,7 @@ while(attrs.hasMoreElements()) {
 			System.out.println(attributeName);
 	
 	%><div class="alert alert-danger fade in">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 						<h4>Oh snap! You got an error!</h4>
 						<p><%=request.getAttribute("message_failure") %></p>
 						
