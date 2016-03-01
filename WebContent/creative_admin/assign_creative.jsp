@@ -46,14 +46,9 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
 
-
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
-
-
-
-
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
@@ -63,13 +58,9 @@
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			
 			<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			
-
-
 			<div class="panel panel-orange" style="margin-left: 100px; margin-right: 100px">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -77,7 +68,6 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-
 					<button class="btn-u" data-toggle="modal" data-target="#myModal">Select Creative Creator</button>
 					<div id="html1">
 						<ul>
@@ -91,10 +81,7 @@
 												if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
 												{
 											%>
-									
 									<li id="task_<%=task.getId()%>" data-jstree='{"opened":true}'><span class="label label-purple rounded-2x"><%=task.getTaskName()%> > <%=img.getTitle()%></span>
-									
-									
 									<% 		
 												}
 												}	catch(Exception e) {
@@ -105,20 +92,16 @@
 											Video vid = new VideoDAO().findById(task.getItemId());
 											if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
 											{
-												
 												%>
 												<li id="task_<%=task.getId()%>" data-jstree='{"opened":true}'><span class="label label-green rounded-2x"><%=task.getTaskName()%> > <%=vid.getTitle()%></span>
 												<% 
 											}
 										}
-										
 								%>
-									
 								</ul>
 							</li>
 						</ul>
 					</div>
-
 				</div>
 			</div>
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -145,32 +128,12 @@
 										</select>
 									</div>
 								</div>
-								
-								<!-- <div class="form-group">
-									<label for="inputEmail1" class="col-lg-2 control-label">Number of Presentations</label>
-									<div class="col-lg-10">
-										<input type="number" class="form-control" id="inputEmail1" name="no_of_ppt" placeholder="Number of Presentations">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail1" class="col-lg-2 control-label">Number of Games</label>
-									<div class="col-lg-10">
-										<input type="number" class="form-control" id="inputEmail1" placeholder="Number of Games" name="no_of_games">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail1" class="col-lg-2 control-label">Number of Assessment</label>
-									<div class="col-lg-10">
-										<input type="number" class="form-control" id="inputEmail1" placeholder="Number of Assessment" name="no_of_assessment">
-									</div>
-								</div> -->
 								<div class="form-group">
 									<div class="col-lg-offset-2 col-lg-10">
 										<button type="submit" class="btn-u btn-u-green">Assign & Create</button>
 									</div>
 								</div>
 							</form>
-
 						</div>
 						<div class="modal-footer">
 							<button data-dismiss="modal" class="btn-u btn-u-default" type="button">Close</button>
@@ -199,7 +162,6 @@
 					var selectedElmsIds = $('#html1').jstree("get_selected");
 					$('#selected_items').val(selectedElmsIds);
 					console.log(selectedElmsIds);
-
 				}
 				jQuery(document).ready(function() {
 					App.init();

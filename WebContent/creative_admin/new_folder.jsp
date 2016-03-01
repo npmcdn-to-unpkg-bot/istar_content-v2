@@ -93,73 +93,50 @@
 		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left">Create New Folder</h1>
-
 			</div>
 		</div>
 		<!--/container-->
 		<div class="container content">
 			<div class="row">
-			
 				<form action="<%=baseURL%>create_folder" class="sky-form"
 					method="POST" id="sky-form1" onsubmit="myFunction()">
-					
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<input type="hidden" id="selected_items2" name="selected_items2" />
 					<div class="col-md-4">
 						<header>Select Parent Folder</header>
-
 						<fieldset>
 							<div class="panel panel-grey margin-bottom-40">
 								<div class="panel-body">
-
-
-									<div id="html2">
-
-
+									<div id="html1">
 										<ul>
 											<%=getFolderTree()%>
-
 										</ul>
-
 									</div>
 								</div>
 							</div>
 						</fieldset>
-
 						<div class="margin-bottom-60"></div>
 					</div>
-			
 					<div class="col-md-4">
-
 						<header>Folder details</header>
-
 						<fieldset>
-							
-
 							<section>
 								<label class="label">Folder Name</label> <label class="input">
 									<input type="text" name="folder_name" >
 								</label>
 							</section>
-
-						
 						</fieldset>
-
 						<footer>
 							<button type="submit" class="btn-u">Create Folder</button>
 						</footer>
-
 						<div class="margin-bottom-60"></div>
-
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
 
 	<!-- JS Implementing Plugins -->	
 	<script type="text/javascript"
@@ -194,15 +171,13 @@
 	
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
-			var selectedElmsIds2 = $('#html2').jstree("get_selected");
 			$('#selected_items').val(selectedElmsIds);
-			$('#selected_items2').val(selectedElmsIds2);
 			console.log(selectedElmsIds);
-			console.log(selectedElmsIds2);
-
 		}
+		
 		jQuery(document).ready(function() {
 			App.init();
+			Validation.createFolderValidation();
 			StyleSwitcher.initStyleSwitcher();
 			$('#html1').jstree({
 				"core" : {
@@ -217,33 +192,7 @@
 				},
 				"plugins" : [ "checkbox" ]
 			});
-			var selectedElmsIds = $('#html1').jstree("get_selected");
-
-			
-			
-		});
-		jQuery(document).ready(function() {
-			App.init();
-			Validation.createFolderValidation();
-
-			StyleSwitcher.initStyleSwitcher();
-			$('#html2').jstree({
-				"core" : {
-					"multiple": false,
-					"themes" : {
-						"variant" : "large"
-					}
-				},
-				"checkbox" : {
-					"keep_selected_style" : false,
-					"three_state" : false,
-				},
-				"plugins" : [ "checkbox" ]
-			});
-			var selectedElmsIds2 = $('#html2').jstree("get_selected");
-
-			
-			
+			var selectedElmsIds = $('#html1').jstree("get_selected");	
 		});
 	</script>
 	<!--[if lt IE 9]>

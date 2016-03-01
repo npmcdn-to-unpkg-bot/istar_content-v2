@@ -93,14 +93,12 @@
 		<div class="breadcrumbs">
 			<div class="container">
 				<h1 class="pull-left">Upload media</h1>
-
 			</div>
 		</div>
 		<!--/container-->
 		<div class="container content">
 			<div class="row">
 			<% 
-			
 			int item_id = (int)request.getAttribute("item_id");
 			%>
 				<form action="<%=baseURL%>media_upload" class="sky-form"
@@ -111,41 +109,28 @@
 					<input type="hidden" id="selected_items2" name="selected_items2" />
 					<div class="col-md-4">
 						<header>Select Folder</header>
-
 						<fieldset>
 							<div class="panel panel-grey margin-bottom-40">
 								<div class="panel-body">
-
-
-									<div id="html2">
-
-
+									<div id="html1">
 										<ul>
 											<%=getFolderTree()%>
-
 										</ul>
-
 									</div>
 								</div>
 							</div>
 						</fieldset>
-
 						<div class="margin-bottom-60"></div>
 					</div>
 					<div class="col-md-4">
-
 						<header>Media details</header>
-
 						<fieldset>
-							
-
 							<section>
 								<label class="label">Tags</label> <label class="input">
 									<input type="text" name="tags" data-role="tagsinput"
 									class="tagcontainer">
 								</label>
 							</section>
-
 							<section>
 								<label class="label">File input</label> <label for="file"
 									class="input input-file">
@@ -154,25 +139,19 @@
 										 class="input input-file" onchange="this.parentNode.nextSibling.value = this.value"	name="file">Browse
 									</div> <input type="text" readonly="">
 								</label>
-
 							</section>
 						</fieldset>
-
 						<footer>
 							<button type="submit" class="btn-u">Upload and Mark as Complete</button>
 						</footer>
-
 						<div class="margin-bottom-60"></div>
-
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
@@ -203,12 +182,8 @@
 	
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
-			var selectedElmsIds2 = $('#html2').jstree("get_selected");
 			$('#selected_items').val(selectedElmsIds);
-			$('#selected_items2').val(selectedElmsIds2);
 			console.log(selectedElmsIds);
-			console.log(selectedElmsIds2);
-
 		}
 		jQuery(document).ready(function() {
 			App.init();
@@ -226,26 +201,6 @@
 				"plugins" : [ "checkbox" ]
 			});
 			var selectedElmsIds = $('#html1').jstree("get_selected");
-		});
-		jQuery(document).ready(function() {
-			App.init();
-			StyleSwitcher.initStyleSwitcher();
-			$('#html2').jstree({
-				"core" : {
-					"themes" : {
-						"variant" : "large"
-					}
-				},
-				"checkbox" : {
-					"keep_selected_style" : false,
-					"three_state" : false,
-				},
-				"plugins" : [ "checkbox" ]
-			});
-			var selectedElmsIds2 = $('#html2').jstree("get_selected");
-
-			
-			
 		});
 	</script>
 	<!--[if lt IE 9]>

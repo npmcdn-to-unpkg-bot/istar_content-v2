@@ -63,24 +63,17 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">Create Task</h1>
-				
 			</div>
-			
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<form action="/content/create_task" id="sky-form1" class="sky-form" method="GET" onsubmit="myFunction()">
 			<input type="hidden" id="selected_items" name="selected_items" />
 			<div class="row">
-				
 				<div class="col-md-6">
-					
-						
 						<fieldset>
-						
 						<section>
 								<label> Media Title* </label> <label class="input"> <input
 									type="text" name="title" placeholder="Title of Media">
-									
 								</label>
 							</section>
 							<section>
@@ -124,7 +117,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 									<div id="html1">
 										<ul>
-											<li id="none" data-jstree='{"opened":true}'>All Courses
+											<li id="none" data-jstree='{"opened":true }'>All Courses
 												<ul>
 													<%
 														CourseDAO dao = new CourseDAO();
@@ -219,7 +212,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							"keep_selected_style" : false,
 							"three_state" : false,
 						},
-						"plugins" : [ "checkbox" ]
+						"plugins" : [ "checkbox", "types"]
 					});
 
 					try {
