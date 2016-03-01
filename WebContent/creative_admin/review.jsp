@@ -118,8 +118,7 @@
 				<div class="col-sm-6 sm-margin-bottom-30">
 					<fieldset>
 
-						<form action="/content/media_review_by_admin"
-							novalidate="novalidate">
+						<form action="/content/media_review_by_admin" >
 							<input type="hidden" name="task_id" value="<%=details.get(6)%>">
 							<section>
 								<label style="font-size: 17px; font-family:" OpenSans", Arial, sans-serif;">Tags:</label>

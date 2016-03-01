@@ -229,12 +229,14 @@
 			StyleSwitcher.initStyleSwitcher();
 			$('#html2').jstree({
 				"core" : {
+					"multiple": false,
 					"themes" : {
 						"variant" : "large"
 					}
 				},
 				"checkbox" : {
-					"keep_selected_style" : false
+					"keep_selected_style" : false,
+					"three_state" : false,
 				},
 				"plugins" : [ "checkbox" ]
 			});
