@@ -132,63 +132,6 @@
 
 						<div class="margin-bottom-60"></div>
 					</div>
-				<%-- 	<div class="col-md-4">
-						<!-- General Unify Forms -->
-						<header>Select Session</header>
-
-						<fieldset>
-
-							<div class="panel panel-grey margin-bottom-40">
-								<div class="panel-body">
-
-
-									<div id="html1">
-										<ul>
-											<li id="none" data-jstree='{"opened":true}'>All Courses
-												<ul>
-													<%
-														CourseDAO dao = new CourseDAO();
-														for (Course course : (List<Course>) dao.findAll()) {
-													%>
-													<li id="course_<%=course.getId()%>"
-														data-jstree='{"opened":true}'><%=course.getCourseName()%>
-														<ul>
-															<%
-																for (Module module : course.getModules()) {
-															%>
-															<li id="module_<%=module.getId()%>"
-																data-jstree='{"opened":true}'><%=module.getModuleName()%>
-																<ul>
-																	<%
-																		for (Cmsession session1 : module.getCmsessions()) {
-																	%>
-																	<li id="session_<%=session1.getId()%>"
-																		data-jstree='{"opened":true}'><%=session1.getTitle()%>
-
-																	</li>
-
-																	<%
-																		}
-																	%>
-																</ul></li>
-															<%
-																}
-															%>
-														</ul></li>
-													<%
-														}
-													%>
-												</ul>
-											</li>
-										</ul>
-									</div>
-
-								</div>
-							</div>
-						</fieldset>
-						<div class="margin-bottom-60"></div>
-
-					</div> --%>
 					<div class="col-md-4">
 
 						<header>Media details</header>
@@ -277,14 +220,12 @@
 					}
 				},
 				"checkbox" : {
-					"keep_selected_style" : false
+					"keep_selected_style" : false,
+					"three_state" : false,
 				},
 				"plugins" : [ "checkbox" ]
 			});
 			var selectedElmsIds = $('#html1').jstree("get_selected");
-
-			
-			
 		});
 		jQuery(document).ready(function() {
 			App.init();
@@ -296,7 +237,8 @@
 					}
 				},
 				"checkbox" : {
-					"keep_selected_style" : false
+					"keep_selected_style" : false,
+					"three_state" : false,
 				},
 				"plugins" : [ "checkbox" ]
 			});
