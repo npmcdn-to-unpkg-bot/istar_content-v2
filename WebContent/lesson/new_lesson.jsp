@@ -92,7 +92,7 @@
 		<div class="container-fluid height-1000"
 			style="padding: 0px !important">
 			<div class="row">
-				<form action="/content/create_lesson" id="sky-form4" class="sky-form" novalidate="novalidate" onsubmit="myFunction()">
+				<form action="/content/create_lesson" id="sky-form4" class="sky-form" onsubmit="myFunction()">
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<div class="col-md-6">
 					<div class="alert alert-warning fade in text-center">
@@ -181,6 +181,7 @@
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript"
@@ -191,6 +192,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
 		type="text/javascript" charset="utf-8"></script>
+	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
@@ -198,6 +200,7 @@
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
@@ -207,6 +210,7 @@
 		}
 		jQuery(document).ready(function() {
 			App.init();
+			Validation.lessonValidation();
 			$('#html1').jstree({
 				"core" : {
 					"themes" : {

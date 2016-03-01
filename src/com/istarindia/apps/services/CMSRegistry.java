@@ -20,6 +20,7 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.istarindia.apps.ListTypes;
 import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.cmsutils.CMSFolder;
 import com.istarindia.apps.cmsutils.reports.ReportCollection;
@@ -36,6 +37,7 @@ public class CMSRegistry {
 	public static Menu menu;
 	public static ReportCollection reportCollection;
 	public static ArrayList<String> slideTemplates = new ArrayList<>();
+	public static ArrayList<String> listTypes = new ArrayList<>();
 
 	static {
 		try {
@@ -87,6 +89,9 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_TABLE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
 
+		listTypes.add(ListTypes.SIMPLE_LIST);
+		listTypes.add(ListTypes.PROCESS_LIST);
+		listTypes.add(ListTypes.CYCLE_LIST);
 		
 	}
 

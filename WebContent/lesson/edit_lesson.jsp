@@ -74,7 +74,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
 				<div class="col-md-6">
-					<form action="/content/update_lesson" id="sky-form4" class="sky-form" novalidate="novalidate">
+					<form action="/content/update_lesson" id="sky-form4" class="sky-form">
 						<input type="hidden" name="lesson_id" value="<%=lesson.getId() %>" /> <input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId() %>" />
 						<fieldset>
 
@@ -134,17 +134,28 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
+	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
 	<script src="<%=baseURL %>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/validation.js"></script>
 
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			Validation.lessonValidation();
+		});
+	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>

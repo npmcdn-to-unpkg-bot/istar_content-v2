@@ -206,7 +206,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				}
 				jQuery(document).ready(function() {
 					App.init();
-					Validation.initValidation();
+					Validation.createMediaTaskValidation();
 
 					$('#html1').jstree({
 						"core" : {

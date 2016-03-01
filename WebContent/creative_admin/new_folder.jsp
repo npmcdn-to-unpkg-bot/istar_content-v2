@@ -101,7 +101,7 @@
 			<div class="row">
 			
 				<form action="<%=baseURL%>create_folder" class="sky-form"
-					method="POST" novalidate="novalidate" onsubmit="myFunction()">
+					method="POST" id="sky-form1" onsubmit="myFunction()">
 					
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<input type="hidden" id="selected_items2" name="selected_items2" />
@@ -161,7 +161,7 @@
 	</div>
 
 
-	<!-- JS Global Compulsory -->
+	<!-- JS Implementing Plugins -->	
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -171,10 +171,13 @@
 	<script type="text/javascript"
 		src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 	<script type="text/javascript"
@@ -186,6 +189,7 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
 	
 		function myFunction() {
@@ -218,6 +222,8 @@
 		});
 		jQuery(document).ready(function() {
 			App.init();
+			Validation.createFolderValidation();
+
 			StyleSwitcher.initStyleSwitcher();
 			$('#html2').jstree({
 				"core" : {

@@ -62,8 +62,10 @@
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid">
-				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
-				
+				<h1 class="pull-left">
+					<a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a>
+				</h1>
+
 			</div>
 			<!--/container-->
 		</div>
@@ -79,7 +81,8 @@
 
 						<fieldset>
 							<section>
-								<label class="label">File input   &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color:RED">here</a>  )</label><label for="file" class="input input-file">
+								<label class="label">File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color: RED">here</a> )
+								</label><label for="file" class="input input-file">
 									<div class="button">
 										<input name="file" type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
 									</div> <input type="text" readonly="">
@@ -117,33 +120,27 @@
 												for (Module module : course.getModules()) {
 											%>
 											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getModuleName()%>
-											<ul> <%
+												<ul>
+													<%
  												for (Cmsession session1 : module.getCmsessions()) {
  											%>
-											<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%> 
-										 <ul>
-										 <% for (Lesson lesson : session1.getLessons()) { %>
-										 <li  style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %>
-										<span class="label label-purple rounded-2x" > Assigned to - <%=lesson.getAsignee() %></span>
-										<span>&nbsp;&nbsp;&nbsp;</span>
-										<span class="label rounded label-sea"> Reviewer - <%=lesson.getREviewers() %></span>
-										<span>&nbsp;&nbsp;&nbsp;</span>
-										<span class="label rounded label-yellow"> Status - <%=lesson.getStatus() %></span>
-										 </li>
-										 <%
+													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%>
+														<ul>
+															<% for (Lesson lesson : session1.getLessons()) { %>
+															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> <span class="label label-purple rounded-2x"> Assigned to - <%=lesson.getAsignee() %></span> <span>&nbsp;&nbsp;&nbsp;</span> <span class="label rounded label-sea"> Reviewer - <%=lesson.getREviewers() %></span> <span>&nbsp;&nbsp;&nbsp;</span> <span class="label rounded label-yellow"> Status - <%=lesson.getStatus() %></span></li>
+															<%
 												}
-											%></ul>
-										 </li>
-										 
-										 <%
+											%>
+														</ul></li>
+
+													<%
 										 	}
-										 %></ul>
-										 </li>
+										 %>
+												</ul></li>
 											<%
 												}
 											%>
-										</ul>
-										</li>
+										</ul></li>
 									<%
 										}
 									%>

@@ -68,12 +68,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<div class="headline">
 					<h2>Task Reports</h2>
 				</div>
-				<div class="col-md-6">
-					<%=(new ReportUtils()).getReport(0).toString() %>
-				</div>
-				<div class="col-md-6">
-					<%=(new ReportUtils()).getReport(1).toString() %>
-				</div>
+<!-- 				<div class="col-md-6"> -->
+<%-- 					<%=(new ReportUtils()).getReport(0).toString() %> --%>
+<!-- 				</div> -->
+<!-- 				<div class="col-md-6"> -->
+<%-- 					<%=(new ReportUtils()).getReport(1).toString() %> --%>
+<!-- 				</div> -->
+<%=(new ReportUtils()).getReport(2).toString() %>
+
 			</div>
 		</div>
 
@@ -94,7 +96,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script><script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
