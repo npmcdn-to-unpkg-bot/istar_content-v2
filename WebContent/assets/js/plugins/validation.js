@@ -10,11 +10,13 @@ var Validation = function () {
 	            {
 	            	title:
 	            	{
-	            		required: true
+	            		required: true,
+	            		rangelength: [5, 50]
 	            	},
 	            	description:
 	                {
-	                    required: true
+	                    required: true,
+	            		rangelength: [5, 150]
 	                }
 	            },
 	                                
@@ -23,7 +25,8 @@ var Validation = function () {
 	            {
 	            	title:
 	            	{
-	            		required: 'Pleaes enter a valid image title'
+	            		required: 'Please enter a valid image title',
+	            		rangelength: [5, 50]
 	            	},
 	            	description:
 	                {
@@ -47,7 +50,7 @@ var Validation = function () {
 	            	folder_name:
 	            	{
 	            		required: true,
-	            		rangelength: [5, 50]
+	            		rangelength: [3, 50]
 	            	}
 	            },
 	                                
@@ -56,7 +59,7 @@ var Validation = function () {
 	            {
 	            	folder_name:
 	            	{
-	            		required: 'Pleaes enter a valid folder name'
+	            		required: 'Please enter a valid folder name'
 	            	}
 	            },                  
 	            
@@ -74,11 +77,13 @@ var Validation = function () {
             {
             	title:
             	{
-            		required: true
+            		required: true,
+            		rangelength: [5, 50]
             	},
             	duration:
                 {
-                    required: true
+                    required: true,
+                    min: 0
                 },
             	tags:
             	{
@@ -91,17 +96,15 @@ var Validation = function () {
             {
             	title:
             	{
-            		required: 'Pleaes enter valid lesson title'
+            		required: 'Please enter valid lesson title'
             	},
             	duration:
                 {
                     required: 'Please enter valid duration',
-                    min: 1
                 },
             	tags:
             	{
             		required: 'Please enter at least one tag',
-            		min: 1
             	}
             },                  
             

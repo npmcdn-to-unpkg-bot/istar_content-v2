@@ -210,12 +210,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 					$('#html1').jstree({
 						"core" : {
+							"multiple": false,
 							"themes" : {
 								"variant" : "large"
 							}
 						},
 						"checkbox" : {
-							"keep_selected_style" : false
+							"keep_selected_style" : false,
+							"three_state" : false,
 						},
 						"plugins" : [ "checkbox" ]
 					});
