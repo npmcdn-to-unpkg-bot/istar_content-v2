@@ -284,7 +284,11 @@ var App = function () {
 				            table: tableID
 				        },
 				        chart: {
-				            type: graph_type
+				            type: graph_type, 
+				            options3d: {
+				                enabled: true,
+				                alpha: 45
+				            }
 				        },
 				        title: {
 				            text: graph_title

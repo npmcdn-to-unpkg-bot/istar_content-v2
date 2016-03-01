@@ -69,6 +69,7 @@
 				<h1 class="pull-left">Add/Edit Slide</h1>
 			</div>
 		</div>
+				<form action="/content/create_slide" name="" method="GET" class="sky-form">
 		<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				LessonUtils utils = new LessonUtils();
@@ -76,13 +77,18 @@
 				if(request.getParameterMap().containsKey("slide_id")) {
 					SlideDAO dao = new SlideDAO();
 					slide = (new LessonUtils()).convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
+					%>
+					<input name="is_edit" value="true" type="hidden"> 
+					<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden"> 
+					<% 
 				} else {
-					slide.setTemplateName(request.getParameter("slide_type"));
+					slide.setTemplateName(request.getParameter("slide_type"));%>
+					<input name="is_edit" value="false" type="hidden"> 
+					<% 
 				}
 			%>
 		<div class="container-fluid" style="padding: 0px !important">
-			<form action="/content/create_slide" name="" method="GET" class="sky-form">
-				<input type="hidden" name="template" value="<%=request.getParameter("slide_type") %>" style="display: none"> 
+				<input type="hidden" name="template" value="<%=slide.getTemplateName() %>" > 
 				<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id") %>">
 				<div class="row">
 					<div class="col-md-5">

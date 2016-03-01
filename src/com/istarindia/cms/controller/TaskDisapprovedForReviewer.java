@@ -79,7 +79,7 @@ public class TaskDisapprovedForReviewer extends HttpServlet {
 			list_to_be_displayed.add(embed_list);
 		}	
 		request.setAttribute("lessons", list_to_be_displayed);
-		request.getRequestDispatcher("/content_creator/disapproved_lesson.jsp").forward(request, response);
+		request.getRequestDispatcher("/content_reviewer/disapproved_lesson.jsp").forward(request, response);
 
 	}
 

@@ -24,17 +24,18 @@ import com.istarindia.cms.lessons.SlideService;
 @WebServlet("/create_slide")
 public class CreateSlideController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateSlideController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CreateSlideController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String template = request.getParameter("template");
@@ -42,54 +43,92 @@ public class CreateSlideController extends HttpServlet {
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
 		case "ONLY_TITLE":
-			service.addTextSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"));
+
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.addTextSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"));
+			} else {
+				service.addTextSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						request.getParameter("slide_id"));
+			}
+
 			break;
 		case "ONLY_TITLE_PARAGRAPH":
-			service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						request.getParameter("paragraph"));
+
+			} else {
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("slide_id"));
+
+			}
+
 			break;
-			
+
 		case "ONLY_TITLE_LIST":
-			CMSList list = getNewList(request);
-			service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewList(request);
+				service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewList(request);
+				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						list, request.getParameter("slide_id"));
+			}
+
 			break;
 			
 		case "ONLY_TITLE_IMAGE":
-			ImageDAO dao = new ImageDAO();
-			Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
-			CMSImage image = new CMSImage();
-			image.setUrl(img.getUrl());
-			image.setTitle(img.getTitle());
-			image.setDescription(img.getDescription());
-			service.addTextImageSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"),  ppt, request.getParameter("title"), request.getParameter("slideTransition"), 
-					request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image);
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				ImageDAO dao = new ImageDAO();
+
+				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				CMSImage image = new CMSImage();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addTextImageSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image);
+			} else {
+				ImageDAO dao = new ImageDAO();
+
+				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				CMSImage image = new CMSImage();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addTextImageSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						image, request.getParameter("slide_id"));
+
+			}
 			break;
 		default:
 			break;
 		}
-		
-		response.sendRedirect("/content/edit_lesson?lesson_id="+ppt.getLesson().getId());
-		
+
+		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId());
+
 	}
 
 	private CMSList getNewList(HttpServletRequest request) {
 		CMSList list = new CMSList();
 		list.setItems(new ArrayList<CMSTextItem>());
 		for (Object key : request.getParameterMap().keySet()) {
-			if(key.toString().startsWith("list_item")) {
-				System.out.println(key.toString());
-				CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
-				list.getItems().add(item);
+			if (key.toString().startsWith("list_item")) {
+				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
+					System.out.println(key.toString());
+					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
+					list.getItems().add(item);
+					System.out.println("---->" + request.getParameter(key.toString()));
+				}
 			}
 		}
-		
+
 		return list;
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

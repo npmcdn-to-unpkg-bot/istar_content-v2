@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <istar_reports>
-    <reports id="0" type_of_report="pie">
-        <column>name</column>
-        <column>count</column>
-        <sql>SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE   task.actor_id = content_creator.id group by content_creator.name</sql>
-    	<title>My Name is Lakhan </title>
-    </reports>
-     <reports id="1" type_of_report="pie">
-        <column>status</column>
-        <column>count</column>
-        <sql>SELECT task.status, count(*) FROM public.task, public.content_creator WHERE   task.actor_id = content_creator.id group by task.status</sql>
-    <title>My Name is Lakhan 2222222222222222222</title>
-    </reports>
+	<reports id="0" type_of_report="pie">
+		<column>name</column>
+		<column>count</column>
+		<sql>SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE task.actor_id = content_creator.id group by content_creator.name</sql>
+		<title>My Name is Lakhan </title>
+	</reports>
+	<reports id="1" type_of_report="pie">
+		<column>status</column>
+		<column>count</column>
+		<sql>SELECT task.status, count(*) FROM public.task, public.content_creator WHERE task.actor_id = content_creator.id group by task.status</sql>
+		<title>My Name is Lakhan 2222222222222222222</title>
+	</reports>
+
+	<reports id="2" type_of_report="table">
+		<column>course_name</column>
+		<column>module_name</column>
+		<column>session_title</column>
+		<sql>SELECT course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, lesson.session_id as l_lession_id, lesson.title as lesson_title, 
+lesson.id as lession_id, task.status as status, string_agg(content_reviewer.email, ',')  FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='DRAFT' group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status
+		
+		</sql>
+		<title> All Tasks in Progress</title>
+	</reports>
 </istar_reports>

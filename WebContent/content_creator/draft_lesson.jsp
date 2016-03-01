@@ -64,7 +64,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Reviewers", "Task Action" }; %>
-			<%=TableUtils.getTableHeader("All Tasks in Progress - Test", headers, items, 6) %>
+			<%=TableUtils.getTableHeader("All Tasks in Progress", headers, items, 6) %>
 			
 			
 		</div>

@@ -49,12 +49,9 @@ public class ReportUtils {
 	public StringBuffer getReport(int reportID) {
 		File file = new File("C:\\Users\\Vaibhav\\workspace\\istar_content\\src\\report_list.xml");
 		ReportCollection reportCollection = new ReportCollection();
-		try {
-			// req.getServletContext().getRealPath("/WEB-INF/fileName.properties")
-			//URL url = (new CMSRegistry()).getClass().getClassLoader().getResource("/report_list.xml");
-			//File file = new File(url.toURI());
+		Report report =  new Report();
+try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
-
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			reportCollection = (ReportCollection) jaxbUnmarshaller.unmarshal(file);
 
@@ -62,13 +59,18 @@ public class ReportUtils {
 			e.printStackTrace();
 		}
 		
+		for (Report r : reportCollection.getReports()) {
+			if(r.getId()==reportID)
+			{
+				report = r;
+			}
+			}
 		
 		StringBuffer out = new StringBuffer();
-		Report report = reportCollection.getReports().get(reportID);
 		ArrayList<ArrayList<String>> data = getReportData(report.getSql(), report.getColumns());
 		out.append("<p>"+report.getTitle()+"</p>");
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
-		out.append("<table style='display:none' class='datatable_report' id='datatable_report_"+reportID+"' data-graph_type='"+report.getType_of_report()+"' "
+		out.append("<table  class='datatable_report' id='datatable_report_"+reportID+"' data-graph_type='"+report.getType_of_report()+"' "
 				+ ""
 				+ "   data-graph_title='"+report.getTitle()+"' "
 				+ "data-graph_containter='report_container_"+reportID+"'>");
