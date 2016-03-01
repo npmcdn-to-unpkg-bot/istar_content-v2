@@ -265,6 +265,12 @@ var App = function () {
 	} catch (err) {
 		// TODO: handle exception
 	}
+	
+	$('.datatable_report').each(function(i, obj) {
+		var tableID  = $(this).attr('id');
+		$('#'+tableID).DataTable();
+	});
+	
 	}
 	
 	function handleGraphs() {
