@@ -348,7 +348,7 @@ public class MediaUploadController extends IStarBaseServelet {
 						srvos.close();
 					}
 				}
-			} // TODO: check and report success
+			} 
 		} else {
 			PrintWriter writer = response.getWriter();
 			writer.write("call POST with multipart form data");
@@ -360,6 +360,8 @@ public class MediaUploadController extends IStarBaseServelet {
 		if (file.exists()) {
 			if (getSuffix(file.getName()).equalsIgnoreCase("png")) {
 				mimetype = "image/png";
+			} else if(getSuffix(file.getName()).equalsIgnoreCase("mp4")){
+				mimetype = "application/octet-stream";
 			} else {
 				javax.activation.MimetypesFileTypeMap mtMap = new javax.activation.MimetypesFileTypeMap();
 				mimetype = mtMap.getContentType(file);

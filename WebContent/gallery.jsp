@@ -8,8 +8,7 @@
 
 <%
 	String url = request.getRequestURL().toString();
-	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
-			+ request.getContextPath() + "/";
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -52,7 +51,9 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
-	<link rel="stylesheet" href="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
@@ -81,19 +82,25 @@
 			</div>
 
 			<div class="row  margin-bottom-30">
+
+				<div class="container content">
+			
+
+			<div class="row  margin-bottom-30">
 				<% 
 				MediaService service = new MediaService();
 				List<Image> images = service.getAllPublishedImages();
 				for(Image image : images ) {
 				%>
 				<div class="col-sm-2 sm-margin-bottom-30">
-					<a href="<%=image.getThumbnailUrl() %>" rel="gallery3" class="fancybox img-hover-v1" title="Image 1"> 
-					<span><img class="img-responsive" src="<%=image.getThumbnailUrl() %>" alt=""></span>
+					<a href="<%=image.getUrl() %>" rel="gallery3" class="fancybox img-hover-v1" title="Image 1">
+						<span><img class="img-responsive" src="<%=image.getThumbnailUrl() %>" alt=""></span>
 					</a>
 				</div>
 				<% } %>
+		</div>
+
 			</div>
-		
 		</div>
 	</div>
 	<!-- JS Global Compulsory -->
@@ -106,13 +113,16 @@
 	<!-- JS Customization -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+		<script type="text/javascript" src="<%=baseURL%>assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/cube-portfolio/cube-portfolio-6-fw-ns.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/fancy-box.js"></script>
-	
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/fancy-box.js"></script>
+
 	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
 	<!--[if lt IE 9]>
