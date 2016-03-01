@@ -40,6 +40,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
 
 
 <!-- CSS Theme -->
@@ -64,7 +65,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="headline">
 					<h2>Task Reports</h2>
 				</div>
@@ -97,6 +98,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/data.js"></script><script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/dataTables.colVis.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/dataTables.tableTools.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
 	
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script type="text/javascript">

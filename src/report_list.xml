@@ -17,10 +17,14 @@
 		<column>course_name</column>
 		<column>module_name</column>
 		<column>session_title</column>
-		<sql>SELECT course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, lesson.session_id as l_lession_id, lesson.title as lesson_title, 
-lesson.id as lession_id, task.status as status, string_agg(content_reviewer.email, ',')  FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='DRAFT' group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status
+		<column>l_lession_id</column>
+		<column>lession_id</column>
+		<column>status</column>
+		<column>revv</column>
 		
-		</sql>
+		<sql>SELECT course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, lesson.session_id as l_lession_id, lesson.title as lesson_title, 
+lesson.id as lession_id, task.status as status, string_agg(content_reviewer.email, ',') as revv  FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='DRAFT' group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status
+</sql>
 		<title> All Tasks in Progress</title>
 	</reports>
 </istar_reports>
