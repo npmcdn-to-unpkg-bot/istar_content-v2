@@ -76,14 +76,14 @@
 			</div>
 
 		</div>
-		<div class="container-fluid content">
+		<div class="container height-1000 content">
 			<div class="text-center margin-bottom-50">
 				<h2 class="title-v2 title-center">Gallery</h2>
 			</div>
 
 			<div class="row  margin-bottom-30">
 
-				<div class="container content">
+				<div class="container-fluid height-1000 content">
 			
 
 			<div class="row  margin-bottom-30">
@@ -101,6 +101,7 @@
 		</div>
 
 			</div>
+		</div>
 		</div>
 	</div>
 	<!-- JS Global Compulsory -->

@@ -2,6 +2,8 @@
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <html lang="en">
@@ -69,13 +71,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<div class="headline">
 					<h2>Task Reports</h2>
 				</div>
-<!-- 				<div class="col-md-6"> -->
-<%-- 					<%=(new ReportUtils()).getReport(0).toString() %> --%>
-<!-- 				</div> -->
-<!-- 				<div class="col-md-6"> -->
-<%-- 					<%=(new ReportUtils()).getReport(1).toString() %> --%>
-<!-- 				</div> -->
-<%=(new ReportUtils()).getReport(2).toString() %>
+				<% HashMap<String, String> conditions = new  HashMap();
+				conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());%>
+<%=(new ReportUtils()).getReport(2, conditions).toString() %>
 
 			</div>
 		</div>
