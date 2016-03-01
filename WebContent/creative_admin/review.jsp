@@ -98,12 +98,19 @@
 				 %> <span><img class="img-responsive"
 											src="<%=details.get(4)%>" alt="image"></span> <%
 				 	} else {System.out.println("item name"+details.get(4));
-				 %> <span><EMBED type="application/x-mplayer2"
-												pluginspage="http://www.microsoft.com/Windows/MediaPlayer/"
-								name="mediaplayer1" ShowStatusBar="true"
-								EnableContextMenu="false" width="700" height="500"
-								autostart="true" loop="false" SRC="<%=details.get(4)%>"
-								loop="1" autostart="true"></EMBED></span> <%
+				 %> <span>
+				 
+				 
+				 <figure>
+				<video id="my-video" class="video-js" controls preload="auto"
+					style="margin-left: -80px;" width="1020"
+					poster="http://www.baquickbites.com/_assets/images/my_video_poster.jpg" data-setup="{}">
+					<source src="<%=details.get(4)%>" type='video/mp4'>
+
+				</video>
+
+			</figure>
+			</span> <%
  	}
  %>
 					</a>
@@ -176,6 +183,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
 		type="text/javascript" charset="utf-8"></script>
+	<script src="http://vjs.zencdn.net/ie8/1.1.1/videojs-ie8.min.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"

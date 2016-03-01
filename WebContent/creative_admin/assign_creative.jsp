@@ -97,7 +97,9 @@
 									
 									<% 		
 												}
-												}	catch(Exception e) {}
+												}	catch(Exception e) {
+													e.printStackTrace();
+												}
 										}
 										for (Task task : (List<Task>) dao.findByItemType("VIDEO")) {
 											Video vid = new VideoDAO().findById(task.getItemId());

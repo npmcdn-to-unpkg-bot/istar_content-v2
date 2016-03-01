@@ -68,15 +68,7 @@ public class TaskDraftForCreativeCreaorController extends HttpServlet {
 				embed_list.add("IMAGE");
 				embed_list.add(img.getTitle());
 				embed_list.add(img.getDescription());//3
-				List<MediaReview> rev = new MediaReviewDAO().findByProperty("task", task);
-				if(rev.size()>0)
-				{
-					embed_list.add(rev.get(0).getComment());
-				}
-				else
-				{
-					embed_list.add("-");
-				}
+				
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
@@ -84,15 +76,7 @@ public class TaskDraftForCreativeCreaorController extends HttpServlet {
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
 				embed_list.add(vid.getDescription());//3
-				List<MediaReview> rev = new MediaReviewDAO().findByProperty("task", task);
-				if(rev.size()>0)
-				{
-					embed_list.add(rev.get(0).getComment());
-				}
-				else
-				{
-					embed_list.add("-");
-				}	
+				
 			}	
 			
 			

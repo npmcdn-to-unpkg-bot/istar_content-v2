@@ -151,7 +151,7 @@
 									class="input input-file">
 									<div class="button">
 										<input type="file" id="file"
-											name="file">Browse
+										 class="input input-file" onchange="this.parentNode.nextSibling.value = this.value"	name="file">Browse
 									</div> <input type="text" readonly="">
 								</label>
 

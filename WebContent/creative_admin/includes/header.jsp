@@ -50,20 +50,27 @@ System.out.println("session user1 ="+request.getSession().getAttribute("user"));
 					}
 					if(able_to_see)
 					{
-					%>
-				<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
-				</a>
-					<ul class="dropdown-menu">
-						<% for(ChildLink child :  parent.getChildren())  {
-						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
-						if(child.getValidRoles().contains(userRold)) {
 						%>
-						<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
-						<% }  } %>
-					</ul></li>
+					<% if(parent.getDisplayName().equalsIgnoreCase("user_email")) {
+						IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+						String displayName = "Welcome "+ user.getName();
+						%>
+					<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=displayName %>
+					<% } else { %>
+					<li class="dropdown"><a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> <%=parent.getDisplayName() %>
+					<% } %>
+					</a>
+						<ul class="dropdown-menu">
+							<% for(ChildLink child :  parent.getChildren())  {
+							String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
+							if(child.getValidRoles().contains(userRold)) {
+							%>
+							<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
+							<% }  } %>
+						</ul></li>
 
-				<% 
-					}
+					<% 
+						}
 					}  %>
 			</ul>
 		</div>
@@ -79,7 +86,7 @@ while(attrs.hasMoreElements()) {
 
 					
 					<div class="alert alert-success fade in margin-bottom-40">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	<h4>Well done!</h4>
 	<p><%=request.getAttribute("message_success") %></p>
 </div>
@@ -88,7 +95,7 @@ while(attrs.hasMoreElements()) {
 			System.out.println(attributeName);
 	
 	%><div class="alert alert-danger fade in">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 						<h4>Oh snap! You got an error!</h4>
 						<p><%=request.getAttribute("message_failure") %></p>
 						

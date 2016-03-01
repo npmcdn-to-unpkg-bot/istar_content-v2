@@ -41,49 +41,10 @@ public class LogoutController extends IStarBaseServelet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		printParams(request);
-		try {
-			IstarUser user = (IstarUser) request.getSession().getAttribute("user");
-			System.out.println("user to logout ->>"+ user.getEmail());
-			request.getSession().removeAttribute("user");
-			IstarUserDAO dao = new IstarUserDAO();
-			Session session1 = dao.getSession();
-			Transaction tx = null;
-			try {
-				user.setIstarAuthorizationToken("");
-				tx = session1.beginTransaction();
-				dao.attachDirty(user);
-				tx.commit();
-			} catch (HibernateException e) {
-				if (tx != null)
-					tx.rollback();
-				e.printStackTrace();
-			} finally {
-				session1.close();
-			}
-		} catch (java.lang.IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			request.setAttribute("msg", "Missing Username or password");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);
-		} catch (org.hibernate.HibernateException e) {
-			// TODO: handle exception
-		}
-
-		try {
-			Cookie cookie = new Cookie("token", "");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-			request.setAttribute("msg", "You are successfully Logged out.");
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-
-		} catch (java.lang.IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			request.setAttribute("msg", "Missing Username or password");
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);
-		}
-
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getSession().removeAttribute("user");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+		rd.forward(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

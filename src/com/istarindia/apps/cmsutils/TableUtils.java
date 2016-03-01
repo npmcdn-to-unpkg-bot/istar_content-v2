@@ -17,12 +17,12 @@ public class TableUtils {
 		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'>"
 				+ "<i class='fa fa-tasks'></i> "+title+"</h3> </div>");
 		out.append("<div class='panel-body'></div>");
-		out.append("<table class='table table-striped table-bordered display responsive nowrap' id='datatable_fixed_column' width='100%' "
+		out.append("<table class='table table-striped table-bordered display responsivess' id='datatable_fixed_column' width='100%' "
 				+ "cellspacing='0'> <thead> <tr> ");
 		//		+ "<th>#</th> <th>First Name</th> <th class='hidden-sm'>Last Name</th> <th>Username</th> <th>Status</th> "
 		
 		for (String string : headers) {
-			out.append("<th>"+string+"</th>");
+			out.append("<th style='max-width:100px !important; word-wrap: break-word;'>"+string+"</th>");
 		}
 		
 		out.append("</tr> </thead> ");
@@ -31,7 +31,7 @@ public class TableUtils {
 		out.append("<tr> ");
 		for (String string : headers) {
 			if(!string.equalsIgnoreCase("Task Action") && !string.equalsIgnoreCase("Url") && !string.equalsIgnoreCase("Description")){
-				out.append("<th>"+string+"</th>");
+				out.append("<th style='max-width:100px !important; word-wrap: break-word;'>"+string+"</th>");
 			}
 			
 		}
@@ -42,7 +42,7 @@ public class TableUtils {
 		for (ArrayList<String> arrayList : items) {
 			out.append("<tr> ");
 			for (int i=0; i<= count ;i++) {
-				out.append("<td>"+arrayList.get(i)+"</td>");
+				out.append("<td style='max-width:100px !important; word-wrap: break-word;'>"+arrayList.get(i)+"</td>");
 			}out.append("</tr>");
 		}
 		out.append("</table> </div>");

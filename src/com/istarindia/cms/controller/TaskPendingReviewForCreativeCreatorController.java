@@ -65,12 +65,14 @@ public class TaskPendingReviewForCreativeCreatorController extends HttpServlet {
 				
 				embed_list.add("IMAGE");
 				embed_list.add(img.getTitle());
+				embed_list.add(img.getDescription());
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
 				Video vid = new VideoDAO().findById(task.getItemId());
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
+				embed_list.add(vid.getDescription());
 			}	
 			
 			

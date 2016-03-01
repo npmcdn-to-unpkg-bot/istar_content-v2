@@ -61,7 +61,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<% String[] headers = {"#", "Task Name", "Title", "Status" }; %>
+			<% String[] headers = {"#", "Task Name", "Title", "Description" }; %>
 			<%=TableUtils.getTableHeader("All Tasks Not Reviewed", headers, items, 3) %>
 		</div>
 	

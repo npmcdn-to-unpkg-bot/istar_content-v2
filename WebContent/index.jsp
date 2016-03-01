@@ -6,33 +6,15 @@
 <!--<![endif]-->
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+
 if(request.getSession().getAttribute("user")!=null)
 {
+	System.out.println("i am in idnex");
 	String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
 	response.sendRedirect(url1);
 }else
-{
-	Cookie[] cookies=request.getCookies();
-	if(cookies!=null)
-	{	
-		for(Cookie c : cookies)
-		{
-			if(c.getName().equalsIgnoreCase("token"))
-			{
-				if(new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).size()>0)
-				{
-					IstarUser user = new IstarUserDAO().findByIstarAuthorizationToken(c.getValue().toString()).get(0);
-						System.out.println("came in index");
-						request.getSession().setAttribute("user", user);
-						String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
-						response.sendRedirect(url1);
-					
-				}
-				
-			}
-		}
+{System.out.println("i am in else in index");
 
-	}
 }	
 
 %>
@@ -51,28 +33,28 @@ if(request.getSession().getAttribute("user")!=null)
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="assets/css/headers/header-v6.css">
-<link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/headers/header-v6.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="assets/plugins/animate.css">
-<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/plugins/brand-buttons/brand-buttons-inversed.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/brand-buttons/brand-buttons-inversed.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="assets/css/theme-colors/red.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/red.css">
 
 <!-- CSS Page Style -->
-	<link rel="stylesheet" href="assets/css/pages/page_log_reg_v2.css">
+	<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/page_log_reg_v2.css">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
 <body >
 	<!--=== Content Part ===-->
@@ -94,12 +76,12 @@ if(request.getSession().getAttribute("user")!=null)
 			</div>
 			<hr>
 
-			<div class="checkbox">
+			<!-- <div class="checkbox">
 				<label>
 					<input type="checkbox" name="remember">
 					<p>Always stay signed in</p>
 				</label>
-			</div>
+			</div> -->
 
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
@@ -118,20 +100,20 @@ if(request.getSession().getAttribute("user")!=null)
 	<!--=== End Footer v1 ===-->
 
 	<!-- JS Global Compulsory -->
-	<script src="assets/plugins/jquery/jquery.min.js"></script>
-	<script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script src="assets/plugins/back-to-top.js"></script>
-	<script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
+	<script src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+	<script src="<%=baseURL%>assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+	<script type="<%=baseURL%>text/javascript" src="assets/js/plugins/style-switcher.js"></script>
 
 	<!-- JS Customization -->
-	<script src="assets/js/custom.js"></script>
+	<script src="<%=baseURL%>assets/js/custom.js"></script>
 
 	<!-- JS Page Level -->
-	<script src="assets/js/app.js"></script>
+	<script src="<%=baseURL%>assets/js/app.js"></script>
 	<script>
 		jQuery(document).ready(function() {
 			App.init();
