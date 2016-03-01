@@ -81,12 +81,12 @@
 
 						<fieldset>
 							<section>
-								<label class="label">File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color: RED">here</a> )
-								</label><label for="file" class="input input-file">
-									<div class="button">
-										<input name="file" type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
-									</div> <input type="text" readonly="">
+								<p>File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color: RED">here</a> )
+								</p>
+								<label for="file" class="input input-file">
+									<div class="button"><input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly>
 								</label>
+								
 							</section>
 						</fieldset>
 						<footer>

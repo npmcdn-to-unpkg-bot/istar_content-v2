@@ -105,6 +105,7 @@ public class CourseUploadController extends HttpServlet {
 				request.setAttribute("message_success", "Upload has been done successfully!");
 				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 			}catch (org.apache.poi.poifs.filesystem.NotOLE2FileException e) {
+				e.printStackTrace();
 				System.out.println("java.io.FileNotFoundException");
 				request.setAttribute("message_failure", "There was an error: " + e.getMessage());
 				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);

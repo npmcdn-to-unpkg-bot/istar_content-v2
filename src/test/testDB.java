@@ -55,7 +55,6 @@ public class testDB {
 			e.printStackTrace();
 		}
 		
-		System.out.println((new ReportUtils()).getReport(0).toString());
 	}
 
 }

@@ -61,7 +61,7 @@ public class ReportUtils {
 	}
 
 	public StringBuffer getReport(int reportID, HashMap<String, String> conditions) {
-		File file = new File("C:\\Users\\Vaibhav\\workspace\\istar_content\\src\\report_list.xml");
+		File file = new File("C:\\Users\\vaibhav\\git\\istar_content\\src\\report_list.xml");
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
 		try {

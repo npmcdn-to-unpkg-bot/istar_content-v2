@@ -28,11 +28,16 @@ public class DBUtils {
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List<HashMap<String, Object>> results = query.list();
 		for (HashMap<String, Object> object : results) {
-			ArrayList<String> row = new ArrayList<>();
-			row.add(object.get("id").toString());
-			row.add(object.get("title").toString());
-			row.add(object.get("template").toString());
-			table.add(row);
+			try {
+				ArrayList<String> row = new ArrayList<>();
+				row.add(object.get("id").toString());
+				row.add(object.get("title").toString());
+				row.add(object.get("template").toString());
+				table.add(row);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return table;
 	}
