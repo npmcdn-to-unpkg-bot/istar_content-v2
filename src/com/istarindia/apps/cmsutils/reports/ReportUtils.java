@@ -47,16 +47,15 @@ public class ReportUtils {
 			}
 			
 		}
-		
-		List<HashMap<String, Object>> results = query.list();
 
+		List<HashMap<String, Object>> results = query.list();
 		for (HashMap<String, Object> object : results) {
 			ArrayList<String> row = new ArrayList<>();
 			for (IStarColumn string : keys) {
 				row.add(object.get(string.getName()) + "");
-
+				System.out.println(object.get(string.getName()));
 			}
-			
+
 			table.add(row);
 		}
 		return table;
@@ -84,9 +83,9 @@ public class ReportUtils {
 
 		StringBuffer out = new StringBuffer();
 		ArrayList<ArrayList<String>> data = getReportData(report.getSql(), report.getColumns(), conditions);
-		out.append("<p>" + report.getTitle() + "</p>");
+		
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
-		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> All Tasks in Progress </h3> </div><div class='panel-body'></div>"
+		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
 				+ "<table  class='table table-striped table-bordered display responsive nowrap dataTable datatable_report' id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "   data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID + "'>");
 		out.append("<thead><tr>");
 		for (IStarColumn column : report.getColumns()) {
@@ -102,7 +101,7 @@ public class ReportUtils {
 			out.append("<tr>");
 			int i=0;
 			for (IStarColumn column : report.getColumns()) {
-				if(column.getName().equalsIgnoreCase("taskid")) {
+				if(column.getName().equalsIgnoreCase("task_id")) {
 					ROWID = row.get(i);
 				}
 				if(column.isVisible) {
@@ -118,8 +117,7 @@ public class ReportUtils {
 		}
 		out.append("</tbody>");
 		out.append("</table></div></div></div>");
-		out.append("<div id='report_container_" + reportID + "'>aaaa</div>");
-
+		
 		return out;
 
 	}
