@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
-<%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
+<%@page import="com.istarindia.apps.cmsutils.TableUtils"%><%@page import="com.istarindia.apps.dao.*"%><%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -60,11 +63,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<h1 class="pull-left">All Tasks in Progress</h1>
 				
 			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Reviewers", "Task Action" }; %>
-			<%=TableUtils.getTableHeader("All Tasks in Progress", headers, items, 6) %>
+		<% HashMap<String, String> conditions = new  HashMap();
+				conditions.put("content_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				
+				%>
+				<%=(new ReportUtils()).getReport(3, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+
 			
 			
 		</div>
