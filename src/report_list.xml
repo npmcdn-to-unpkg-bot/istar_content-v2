@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <istar_reports>
+
+	<!-- Content Creator -->
 	<reports id="0" type_of_report="pie">
 		<column>name</column>
 		<column>count</column>
@@ -13,7 +15,68 @@
 		<title>My Name is Lakhan 2222222222222222222</title>
 	</reports>
 
+	<!-- Created lesson list for content creator -->
 	<reports id="2" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="revv" isVisible="true" name="reviewers" />
+		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT
+a.id AS taskid,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
+d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers,  A.status
+FROM public.task A
+LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
+LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
+LEFT JOIN public.lesson L ON (A.item_id=L.id)
+INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
+INNER JOIN public.module M ON (M.id=CM.module_id)
+INNER JOIN public.course CC ON (CC.id=M.course_id) 
+WHERE
+ A.item_type ='LESSON' 
+GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+ORDER BY a.id
+		</sql>
+		<title> All Tasks Created</title>
+	</reports>
+	
+	<!-- Draft lesson list for content creator -->
+	<reports id="3" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+
+
+		<sql>SELECT
+a.id AS taskid,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
+array_to_string(array_agg(C.name), ',') as reviewers
+FROM public.task A
+LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
+LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
+LEFT JOIN public.lesson L ON (A.item_id=L.id)
+INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
+INNER JOIN public.module M ON (M.id=CM.module_id)
+INNER JOIN public.course CC ON (CC.id=M.course_id) 
+WHERE
+A.status LIKE 'DRAFT' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
+GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+ORDER BY a.id
+		</sql>
+		<title> All Tasks in Progress</title>
+	</reports>
+	
+	<!-- Review pending lesson list for content creator -->
+	<reports id="4" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
@@ -23,12 +86,236 @@
 		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
 
 
-		<sql>SELECT task.id as taskid, lesson.title lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
-			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='CREATED' and task.item_type='LESSON' AND task.actor_id = :actor_id
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='COMPLETED' and task.item_type='LESSON' AND task.actor_id = actor_id
 			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
 		</sql>
-		<title> All Tasks in Progress</title>
+		<title> All Tasks in Review</title>
 	</reports>
+	
+	<!-- Approved lesson list for content creator -->
+	<reports id="5" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="revv" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='APPROVED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Approved</title>
+	</reports>
+	
+	<!-- Disapproved lesson list for content creator -->
+	<reports id="6" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="revv" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='DISAPPROVED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Disapproved</title>
+	</reports>
+	
+	<!-- Published lesson list for content creator -->
+	<reports id="7" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="revv" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='PUBLISHED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Published</title>
+	</reports>
+	
+	<!-- Content Admin -->
+	<reports id="20" type_of_report="pie">
+		<column>name</column>
+		<column>count</column>
+		<sql>SELECT content_admin.name, count(*) FROM public.task, public.content_admin WHERE task.actor_id = content_admin.id group by content_admin.name</sql>
+		<title>My Name is CONTENT admin </title>
+	</reports>
+	<reports id="21" type_of_report="pie">
+		<column>status</column>
+		<column>count</column>
+		<sql>SELECT task.status, count(*) FROM public.task, public.content_admin WHERE task.actor_id = content_admin.id group by task.status</sql>
+		<title>My Name is content ADMIN</title>
+	</reports>
+	
+	<!-- Created lesson list for content admin -->
+	<reports id="22" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='CREATED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Created</title>
+	</reports>
+	
+	<!-- Inprogress lesson list for content admin -->
+	<reports id="23" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='DRAFT' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks In progress</title>
+	</reports>
+	
+	<!-- Review pending lesson list for content admin -->
+	<reports id="24" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='REVIEW_PENDING' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Pending review</title>
+	</reports>
+	
+	<!-- Requested to publish lesson list for content admin -->
+	<reports id="25" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='REQUEST_FOR_PUBLISH' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks requested to be published</title>
+	</reports>
+	
+	<!-- Content Reviewer -->
+	<reports id="40" type_of_report="pie">
+		<column>name</column>
+		<column>count</column>
+		<sql>SELECT content_reviewer.name, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by content_reviewer.name</sql>
+		<title>My Name is CONTENT reviewer </title>
+	</reports>
+	<reports id="41" type_of_report="pie">
+		<column>status</column>
+		<column>count</column>
+		<sql>SELECT task.status, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by task.status</sql>
+		<title>My Name is content REVIEWER</title>
+	</reports>
+	
+	<!-- Assigned lesson list for Content Reviewer -->
+	<reports id="42" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Created by" isVisible="true" name="creator" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, task.actor_id as creator, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='COMPLETED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Assigned</title>
+	</reports>
+	
+	<!-- Disaaproved lesson list for Content Reviewer -->
+	<reports id="43" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='DISAPPROVED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Disaaproved</title>
+	</reports>
+	
+	<!-- Creative creator -->
+	<reports id="60" type_of_report="pie">
+		<column>name</column>
+		<column>count</column>
+		<sql>SELECT creative_creator.name, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by creative_creator.name</sql>
+		<title>My Name is Creative Creator </title>
+	</reports>
+	<reports id="61" type_of_report="pie">
+		<column>status</column>
+		<column>count</column>
+		<sql>SELECT task.status, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by task.status</sql>
+		<title>My Name is Creative Creatorrrrrrr</title>
+	</reports>
+	
+	<!-- Assigned lesson list for Creative creator -->
+	<reports id="62" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Created by" isVisible="true" name="creator" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, task.actor_id as creator, task.status as status 
+			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer
+			WHERE task.item_id = lesson.id AND lesson.session_id = cmsession.id AND course.id = module.course_id AND cmsession.module_id = module.id and task.status='COMPLETED' and task.item_type='LESSON' AND task.actor_id = actor_id
+			group by course.course_name, module.module_name,cmsession.title, lesson.session_id, lesson.title, task.item_id, lesson.id, task.status, task.id, lesson.title
+		</sql>
+		<title> All Tasks Assigned</title>
+	</reports>
+	
 	
 	
 </istar_reports>
