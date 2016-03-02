@@ -106,7 +106,6 @@
 					enctype="multipart/form-data">
 					<input type="hidden" name="item_id" value="<%=item_id %>" />
 					<input type="hidden" id="selected_items" name="selected_items" />
-					<input type="hidden" id="selected_items2" name="selected_items2" />
 					<div class="col-md-4">
 						<header>Select Folder</header>
 						<fieldset>

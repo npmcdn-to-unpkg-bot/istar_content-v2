@@ -36,10 +36,10 @@ public class CreateFolderController extends IStarBaseServelet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("atelast coming in controler");
 		printParams(request);
-		if(request.getParameterMap().containsKey("selected_items2") && request.getParameterMap().containsKey("folder_name"))
+		if(request.getParameterMap().containsKey("selected_items") && request.getParameterMap().containsKey("folder_name"))
 		{
 			System.out.println("i am here");
-			for (String folder_id : request.getParameter("selected_items2").split(",")) {
+			for (String folder_id : request.getParameter("selected_items").split(",")) {
 				FolderDAO dao = new FolderDAO();
 				Folder folder = new Folder();
 				folder.setName(request.getParameter("folder_name"));

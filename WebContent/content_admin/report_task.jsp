@@ -72,8 +72,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<h2>Task Reports</h2>
 				</div>
 				<% HashMap<String, String> conditions = new  HashMap();
-				conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());%>
-<%=(new ReportUtils()).getReport(2, conditions).toString() %>
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				
+				%>
+				<%=(new ReportUtils()).getReport(2, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 
 			</div>
 		</div>

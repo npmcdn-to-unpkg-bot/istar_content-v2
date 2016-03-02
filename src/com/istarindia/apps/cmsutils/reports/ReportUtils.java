@@ -19,7 +19,10 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.id.IntegralDataTypeHolder;
 
+import com.istarindia.apps.cmsutils.reports.column.ReportColumnHandlerFactory;
+import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.services.CMSRegistry;
 
@@ -60,7 +63,7 @@ public class ReportUtils {
 
 	}
 
-	public StringBuffer getReport(int reportID, HashMap<String, String> conditions) {
+	public StringBuffer getReport(int reportID, HashMap<String, String> conditions, IstarUser user, String taskType) {
 		File file = new File("C:\\Users\\vaibhav\\git\\istar_content\\src\\report_list.xml");
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
@@ -94,16 +97,23 @@ public class ReportUtils {
 		out.append("</tr></thead>");
 
 		out.append("<tbody>");
+		String ROWID = "";
 		for (ArrayList<String> row : data) {
 			out.append("<tr>");
 			int i=0;
 			for (IStarColumn column : report.getColumns()) {
+				if(column.getName().equalsIgnoreCase("taskid")) {
+					ROWID = row.get(i);
+				}
 				if(column.isVisible) {
-					out.append("<th>" + row.get(i) + "</th>");
-					i++;
+					if(column.getColumnHandler().equalsIgnoreCase("NONE")) {
+						out.append("<th>" + row.get(i) + "</th>");
+					} else {
+						out.append("<th>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID)) + "</th>");
+					}i++;
 				}
 			}
-			
+			ROWID = "";
 			out.append("</tr>");
 		}
 		out.append("</tbody>");

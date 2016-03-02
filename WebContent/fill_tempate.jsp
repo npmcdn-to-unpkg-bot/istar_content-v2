@@ -1,7 +1,7 @@
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.LessonService"%>
+<%@page import="com.istarindia.apps.services.LessonService"%><%@page import="com.istarindia.apps.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
@@ -95,29 +95,41 @@
 						<%=utils.getEditProfileEdit(slide, ppt) %>
 						<fieldset>
 							<section>
-								<label class="label">Select Slide Transition</label> <label class="select"> <select name="slideTransition" value="<%=slide.getTransition() %>">
-										<option value="None">None</option>
-										<option value="Fade">Fade</option>
-										<option value="Slide">Slide</option>
-										<option value="Convex">Convex</option>
-										<option value="Concave">Concave</option>
-										<option value="Zoom">Zoom</option>
+								<label class="label">Select Slide Transition</label> 
+								<label class="select"> <select name="slideTransition" value="<%=slide.getTransition() %>">
+										<% for (String type : SlideTransition.SlideTransitionTypes) {
+											
+											if(type.equalsIgnoreCase(slide.getTransition())) {%>
+											<option selected="selected" value="<%=type %>"><%=type %></option>
+										<% } else {
+											%>
+											<option value="<%=type %>"><%=type %></option>
+										<%
+											}
+										}
+										%>
 								</select> <i></i>
 								</label>
 							</section>
 							<section>
-								<label class="label">Select Background Transition</label> <label class="select"> <select name="backgroundTransition">
-										<option value="None">None</option>
-										<option value="Fade">Fade</option>
-										<option value="Slide">Slide</option>
-										<option value="Convex">Convex</option>
-										<option value="Concave">Concave</option>
-										<option value="Zoom">Zoom</option>
+								<label class="label">Select Background Transition</label> <label class="select"> 
+								<select name="backgroundTransition" value="<%=slide.getBackgroundTransition()%>" %>>
+										<% for (String type : SlideTransition.BackgroundTransition) {
+											if(type.equalsIgnoreCase(slide.getBackgroundTransition())) {
+											%>
+											<option selected="selected" value="<%=type %>"><%=type %></option>
+										<%} else { %>
+										<option value="<%=type %>"><%=type %></option>
+										<%
+											}
+										}
+										%>
 								</select> <i></i>
 								</label>
 							</section>
 							<section>
-								<label class="label">Select Slide Background color</label> <label class="select"> <input type="color" name="backgroundColor" value="#b5533c">
+								<label class="label">Select Slide Background color</label> <label class="select"> 
+								<input type="color" name="backgroundColor" value="<%=slide.getBackground()%>">
 								</label>
 							</section>
 						</fieldset>

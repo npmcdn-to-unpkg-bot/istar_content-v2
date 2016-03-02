@@ -212,7 +212,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							"keep_selected_style" : false,
 							"three_state" : false,
 						},
-						"plugins" : [ "checkbox", "types"]
+						"plugins" : [ "checkbox"]
 					});
 
 					try {
