@@ -13,6 +13,7 @@ import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.cms.lessons.CMSHTMLTableRow;
 import com.istarindia.cms.lessons.CMSImage;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSTextItem;
@@ -68,11 +69,11 @@ public class CreateSlideController extends HttpServlet {
 		case "ONLY_TITLE_LIST":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
-				service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+				service.addTextTreeSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewList(request);
-				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
 						list, request.getParameter("slide_id"));
 			}
 
@@ -101,12 +102,54 @@ public class CreateSlideController extends HttpServlet {
 
 			}
 			break;
+		case "ONLY_TITLE_TREE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewTree(request);
+				service.addTextTreeSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewList(request);
+				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						list, request.getParameter("slide_id"));
+			}
+
+			break;	
 		default:
 			break;
 		}
 
 		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId());
 
+	}
+
+	private CMSList getNewTree(HttpServletRequest request) {
+		CMSList list = new CMSList();
+		list.setItems(new ArrayList<CMSTextItem>());
+		for (Object key : request.getParameterMap().keySet()) {
+			if (key.toString().startsWith("parent_")) {
+				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
+					System.out.println("key>>>"+key.toString());
+					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
+					item.setList(getList(request,key ));
+					list.getItems().add(item);
+					
+					System.out.println("---->" + request.getParameter(key.toString()));
+				}
+			}
+		}
+
+		return list;
+	}
+
+	private CMSList getList(HttpServletRequest request, Object key) {
+		
+		for (Object iterable_element : request.getParameterMap().keySet()) {
+			if(iterable_element.toString().startsWith(key.toString())) {
+				System.out.println(iterable_element);
+			}
+		}
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private CMSList getNewList(HttpServletRequest request) {

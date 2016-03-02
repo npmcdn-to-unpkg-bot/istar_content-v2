@@ -228,6 +228,52 @@ public class SlideService {
 		}
 	}
 
+	
+	public void addTextTreeSlideToLesson(String teacherNotes, String student_notes, Presentaion ppt, String title,
+			String slideTransition, String backgroundColor, String backgroundTransition, CMSList list) {
+		CMSSlide cMSlide = new CMSSlide();
+		cMSlide.setBackground(backgroundColor);
+		cMSlide.setBackgroundTransition(backgroundTransition);
+		cMSlide.setTransition(slideTransition);
+		cMSlide.setTemplateName("ONLY_TITLE_TREE");
+		cMSlide.setTitle(title);
+		Slide slide = new Slide();
+		slide.setTitle(title);
+		cMSlide.setList(list);
+		try {
+			slide.setSlideText(cMSlide.getText().toString());
+			System.out.println(cMSlide.getText().toString());
+		} catch (JAXBException e1) {
+			System.out.println(">>>>JAXBException");
+		}
+		ppt.getSlides().add(slide);
+		slide.setPresentaion(ppt);
+
+		SlideDAO dao = new SlideDAO();
+		Session session = dao.getSession();
+		Transaction tx = null;
+		try {
+			slide.setTeacherNotes(teacherNotes);
+			slide.setStudentNotes(student_notes);
+			tx = session.beginTransaction();
+			slide.setTemplate("ONLY_TITLE_TREE");
+
+			dao.save(slide);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+		
+	
+
+	
+	
+	
 	public void addTextImageSlideToLesson(String teacherNotes, String studentNotes, Presentaion ppt, String title, String slideTransition, String backgroundColor, String backgroundTransition, CMSImage image) {
 		CMSSlide cMSlide = new CMSSlide();
 		cMSlide.setBackground(backgroundColor);
@@ -424,5 +470,58 @@ public class SlideService {
 		}
 
 	}
+
+	public void addTextTreeSlideToLessonUpdate(String teacherNotes, String student_notes, Presentaion ppt, String title,
+			String slideTransition, String backgroundColor, String backgroundTransition, CMSList list, String slideID) {
+		
+		CMSSlide cMSlide = new CMSSlide();
+		cMSlide.setBackground(backgroundColor);
+		cMSlide.setBackgroundTransition(backgroundTransition);
+		cMSlide.setTransition(slideTransition);
+		cMSlide.setTemplateName("ONLY_TITLE_TREE");
+		cMSlide.setTitle(title);
+		Slide slide = (new SlideDAO()).findById(Integer.parseInt(slideID));
+		slide.setTitle(title);
+		cMSlide.setList(list);
+		try {
+			slide.setSlideText(cMSlide.getText().toString());
+			System.out.println(cMSlide.getText().toString());
+		} catch (JAXBException e1) {
+			System.out.println(">>>>JAXBException");
+		}
+		ppt.getSlides().add(slide);
+		slide.setPresentaion(ppt);
+
+		SlideDAO dao = new SlideDAO();
+		Session session = dao.getSession();
+		Transaction tx = null;
+		try {
+			slide.setTeacherNotes(teacherNotes);
+			slide.setStudentNotes(student_notes);
+			tx = session.beginTransaction();
+			slide.setTemplate("ONLY_TITLE_TREE");
+
+			dao.save(slide);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		
+		
+		
+		
+		
+	
+
+	
+	}
+
+
+	
 
 }
