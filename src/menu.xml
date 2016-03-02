@@ -16,15 +16,15 @@
 		<child_links display_name="Not Reviewed" url="/content/content_admin/review_pending.jsp" valid_roles="content_admin" />
 		<child_links display_name="Requested to Publish" url="/content/content_admin/not_published.jsp" valid_roles="content_admin" />
 
-		<child_links display_name="Assigned" url="/content/lesson_assigned" valid_roles="content_creator" />
-		<child_links display_name="Inprogress" url="/content/draft_lesson_creator" valid_roles="content_creator" />
-		<child_links display_name="Disapproved" url="/content/lesson_disapproved" valid_roles="content_creator" />
-		<child_links display_name="Approved" url="/content/approved_lesson_creator" valid_roles="content_creator" />
+		<child_links display_name="Assigned" url="/content/content_creator/assigned_lesson.jsp" valid_roles="content_creator" />
+		<child_links display_name="Inprogress" url="/content/content_creator/draft_lesson.jsp" valid_roles="content_creator" />
+		<child_links display_name="Disapproved" url="/content/content_creator/disapproved_lesson.jsp" valid_roles="content_creator" />
+		<child_links display_name="Approved" url="/content/content_creator/approved_lesson.jsp" valid_roles="content_creator" />
 
 		<child_links display_name="Assigned" url="/content/lesson_assigned_reviewer" valid_roles="content_reviewer" />
 		<child_links display_name="Disapproved" url="/content/task_disapproved_for_reviewer" valid_roles="content_reviewer" />
 
-		<child_links display_name="Created" url="/content/created_media_content_creator" valid_roles="content_creator" />
+		<child_links display_name="Created" url="/content/content_creator/created_media.jsp" valid_roles="content_creator" />
 
 		<child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin" />
 		<child_links display_name="Inprogress" url="/content/creative_admin/inprogress.jsp" valid_roles="creative_admin" />

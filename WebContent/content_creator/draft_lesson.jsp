@@ -59,26 +59,16 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All Tasks in Progress</h1>
-				
+		<div class="container-fluid height-1000" style="padding: 0px !important">
+			<div class="col-md-12">
+				<% HashMap<String, String> conditions = new HashMap();
+				conditions.put("content_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(83, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 			</div>
 		</div>
-		<div class="container-fluid height-1000" style="padding: 0px !important">
-		<% HashMap<String, String> conditions = new  HashMap();
-				conditions.put("content_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
-				
-				%>
-				<%=(new ReportUtils()).getReport(3, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
-
-			
-			
-		</div>
-
-
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
