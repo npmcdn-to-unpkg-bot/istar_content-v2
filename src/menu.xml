@@ -27,8 +27,8 @@
 		<child_links display_name="Created" url="/content/created_media_content_creator" valid_roles="content_creator" />
 
 		<child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Inprogress" url="/content/task_draft_creative_admin" valid_roles="creative_admin" />
-		<child_links display_name="Not reviewed" url="/content/completed_media_creative_admin" valid_roles="creative_admin" />
+		<child_links display_name="Inprogress" url="/content/creative_admin/inprogress.jsp" valid_roles="creative_admin" />
+		<child_links display_name="Not reviewed" url="/content/creative_admin/not_reviewed.jsp" valid_roles="creative_admin" />
 
 		<child_links display_name="Assigned" url="/content/assigned_media" valid_roles="creative_creator" />
 		<child_links display_name="Inprogress" url="/content/draft_media" valid_roles="creative_creator" />
@@ -41,7 +41,7 @@
 	</parent_links>
 	
 	<parent_links display_name="Media">
-		<child_links display_name="Published Media" url="/content/published_media_creative_creator" valid_roles="creative_admin,creative_creator" />
+		<child_links display_name="Published Media" url="/content/creative_admin/published.jsp" valid_roles="creative_admin,creative_creator" />
 		<child_links display_name="Gallery" url="/content/gallery.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 	</parent_links>
 
