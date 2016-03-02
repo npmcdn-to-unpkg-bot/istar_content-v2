@@ -266,7 +266,7 @@ public class MediaUploadController extends IStarBaseServelet {
 				} else {
 					if (item.getFieldName().equalsIgnoreCase("tags")) {
 						tags = item.getString();
-					}  else if (item.getFieldName().equalsIgnoreCase("selected_items2")) {
+					}  else if (item.getFieldName().equalsIgnoreCase("selected_items")) {
 						folders = item.getString().split(",");
 						
 					}
