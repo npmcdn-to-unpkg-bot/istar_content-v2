@@ -23,7 +23,7 @@
 		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="revv" isVisible="true" name="revv" />
-		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT task.id as taskid, lesson.title as lesson_title, course.course_name as course_name, module.module_name as module_name, cmsession.title as session_title, string_agg(content_reviewer.email, ',') as revv, task.status as status 
 			FROM public.task, public.lesson, public.course, public.cmsession, public.module, public.content_reviewer

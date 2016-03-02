@@ -20,6 +20,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import com.istarindia.apps.cmsutils.reports.column.ReportColumnHandlerFactory;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.services.CMSRegistry;
 
@@ -99,8 +100,11 @@ public class ReportUtils {
 			int i=0;
 			for (IStarColumn column : report.getColumns()) {
 				if(column.isVisible) {
-					out.append("<th>" + row.get(i) + "</th>");
-					i++;
+					if(column.getColumnHandler().equalsIgnoreCase("NONE")) {
+						out.append("<th>" + row.get(i) + "</th>");
+					} else {
+						out.append("<th>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i)) + "</th>");
+					}i++;
 				}
 			}
 			
