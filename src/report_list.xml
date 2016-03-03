@@ -395,7 +395,7 @@
 			INNER JOIN public.module M ON (M.id=CM.module_id)
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.status LIKE 'ASSIGNED' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
+			A.status LIKE 'CONTENT_ASSIGNED' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
 			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
@@ -523,15 +523,6 @@
 		</sql>
 		<title> All Media Tasks created</title>
 	</reports>
-
-	<!-- DONE -->
-	
-	
-	
-	
-	
-	
-	
 	
 	
 
@@ -674,6 +665,17 @@
 		</sql>
 		<title> All Media Tasks Disapproved</title>
 	</reports>
+
+	<!-- DONE -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 
