@@ -30,10 +30,10 @@
 		<child_links display_name="Inprogress" url="/content/creative_admin/inprogress.jsp" valid_roles="creative_admin" />
 		<child_links display_name="Not reviewed" url="/content/creative_admin/not_reviewed.jsp" valid_roles="creative_admin" />
 
-		<child_links display_name="Assigned" url="/content/assigned_media" valid_roles="creative_creator" />
-		<child_links display_name="Inprogress" url="/content/draft_media" valid_roles="creative_creator" />
-		<child_links display_name="Not reviewed" url="/content/completed_media" valid_roles="creative_creator" />
-		<child_links display_name="Disapproved" url="/content/disapproved" valid_roles="creative_creator" />
+		<child_links display_name="Assigned" url="/content/creative_creator/assigned.jsp" valid_roles="creative_creator" />
+		<child_links display_name="Inprogress" url="/content/creative_creator/inprogress.jsp" valid_roles="creative_creator" />
+		<child_links display_name="Not reviewed" url="/content/creative_creator/not_reviewed.jsp" valid_roles="creative_creator" />
+		<child_links display_name="Disapproved" url="/content/creative_creator/disapproved.jsp" valid_roles="creative_creator" />
 
 	</parent_links>
 	<parent_links display_name="Folder">
