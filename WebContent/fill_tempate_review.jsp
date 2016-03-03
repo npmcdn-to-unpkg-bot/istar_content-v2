@@ -85,7 +85,7 @@
 				<h1 class="pull-left">Review Slide</h1>
 			</div>
 		</div>
-		<form action="/content/create_slide" name="" method="GET"
+		<form action="/content/review_lesson" name="" method="GET"
 			class="sky-form">
 			<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
