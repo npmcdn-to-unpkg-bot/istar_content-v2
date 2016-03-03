@@ -1,10 +1,9 @@
-<section class="ONLY_TITLE_LIST" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
-	<h2>$slide.getTitle()</h2>
-	<svg width="1080" height="1500">
-
-
+<section class="IDEAS_LIST___ONLY_TITLE_LIST" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+<h2 class="updated" id="data_slide_title">$slide.getTitle()</h2>
+<div>
+<svg width="1080" height="1500">
     <!--Cone-->
-    <polygon points="50,550 525,1200 950,550"
+    <polygon points="200,550 525,1200 850,550"
              fill="rgb(222,184,135)" stroke-width="5" >
         <animate attributeName="fill" attributeType="XML" id="fifth_circle_x"
                  from="rgb(222,184,135)"  to="rgb(0,125,125)"
@@ -95,7 +94,7 @@
     </defs>
 
     <!--Text 1-->
-    <text x="470" y="305" fill="white" font-size="45px" >Idea 1
+    <text x="470" y="305" fill="white" font-size="45px" >$slide.getList().getItems().get(0).getText()
 
         <animate attributeName="y" attributeType="XML" id="first_circle"
                  from="305"  to="1007"
@@ -158,7 +157,7 @@
     </defs>
 
     <!--Text 2-->
-    <text x="690" y="375" fill="white" font-size="45px" >Idea 2
+    <text x="690" y="375" fill="white" font-size="45px" >$slide.getList().getItems().get(1).getText()
 
         <animate attributeName="x" attributeType="XML" id="second_circle_x"
                  from="690"  to="390"
@@ -220,7 +219,7 @@
 
 
     <!--Text 3-->
-    <text x="550" y="125" fill="white" font-size="45px" >Idea 3
+    <text x="550" y="125" fill="white" font-size="45px" >$slide.getList().getItems().get(2).getText()
 
         <animate attributeName="y" attributeType="XML" id="first_circle"
                  from="125"  to="847"
@@ -284,7 +283,7 @@
 
 
     <!--Text 4-->
-    <text x="115" y="270" fill="white" font-size="45px" >Idea 4
+    <text x="115" y="270" fill="white" font-size="45px" >$slide.getList().getItems().get(3).getText()
 
         <animate attributeName="x" attributeType="XML" id="second_circle_x"
                  from="115"  to="320"
@@ -351,7 +350,7 @@
     </defs>
 
     <!--Text 5-->
-    <text x="850" y="216" fill="white" font-size="45px" >Idea 5
+    <text x="850" y="216" fill="white" font-size="45px" >$slide.getList().getItems().get(4).getText()
 
         <animate attributeName="x" attributeType="XML" id="second_circle_x"
                  from="850"  to="480"
@@ -368,4 +367,5 @@
     <!--circle cx="100" cy="300" r="80" fill="white" stroke-width="5" stroke="black" > </circle-->
 
 </svg>
+</div>
 </section>

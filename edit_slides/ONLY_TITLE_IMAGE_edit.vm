@@ -17,7 +17,7 @@
 		<label class="select" >
 			<select class="updateble" name="image_url" id="image-picker">
 				#foreach ($image in $images)
-					<option data-img-src="$image.getUrl()" value="$image.getId()">$image.getTitle()</option>
+					<option id="$image.getId()" class="updateble" data-img-src="$image.getUrl()" value="$image.getId()">$image.getTitle()</option>
 				#end
 			</select>
 		</label>

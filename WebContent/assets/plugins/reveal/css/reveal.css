@@ -1706,3 +1706,8 @@ html:-moz-full-screen-ancestor {
 	
 	width: 100%;
 }
+
+.reveal .IDEAS_LIST___ONLY_TITLE_LIST h2 {
+	 margin-top: -444px;
+}
+}

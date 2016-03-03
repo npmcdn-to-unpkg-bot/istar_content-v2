@@ -295,6 +295,12 @@
 				
 			});
 		});
+		
+		$('#image-picker').on('change', function() {
+			var id = $(this).find(":checked").attr('id');
+			$('#prv').contents().find('#data_image_url').attr("src",$('#'+id).data('img-src'));
+
+			});
 	}
 	$( document ).ready(function() {
 		initTextArea();
