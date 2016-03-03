@@ -15,7 +15,8 @@
 		<title>CREATIVE ADMIN</title>
 	</reports>
 	
-	<!-- Task report for creative admin -->
+<!-- TBD	
+	<!- - Task report for creative admin - ->
 	<reports id="2" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
@@ -25,11 +26,11 @@
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
-		<sql>
+		<sql> 
 		</sql>
 		<title>Task report</title>
 	</reports>
-	
+-->
 	<!-- Published media for creative admin -->
 	<reports id="3" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -159,6 +160,7 @@
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="actor" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
@@ -188,6 +190,7 @@
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="actor" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
@@ -413,7 +416,7 @@
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="actor" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
@@ -628,10 +631,10 @@
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
-		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="reviewers" isVisible="true" name="reviewers" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="NONE" display_name="Module Name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
@@ -657,10 +660,10 @@
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
-		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="revv" isVisible="true" name="reviewers" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="NONE" display_name="Module Name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers
@@ -682,13 +685,13 @@
 	
 	<!-- Approved lesson list for content creator -->
 	<reports id="85" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="module_name" isVisible="true" name="module_name" />
-		<column columnHandler="NONE" display_name="course_name" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Module Name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Name" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers
@@ -716,7 +719,7 @@
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
 		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
 		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="Actor" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
