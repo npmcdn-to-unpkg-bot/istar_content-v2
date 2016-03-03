@@ -19,7 +19,7 @@ public class ReportColumnHandlerFactory {
 	      }
 	      return instance;
 	   }
-	public StatusColumnHandler getHandler(String columnHandler) {
+	public ColumnHandler getHandler(String columnHandler) {
 		switch (columnHandler) {
 		case "STATUS_HANDLER":
 			return (new StatusColumnHandler());

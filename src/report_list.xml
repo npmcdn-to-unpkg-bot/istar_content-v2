@@ -714,9 +714,9 @@
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="Actor" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="actor" />
+		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
