@@ -36,8 +36,8 @@
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
+		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="assigned_to" />
 		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
@@ -53,7 +53,7 @@
 			ELSE 'None' END) as url,
 			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
 			ELSE 'Not Assigned'
-			END) as Assigned_to,
+			END) as assigned_to,
 			D.name as created_by
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
@@ -71,8 +71,8 @@
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
+		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="assigned_to" />
 		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
@@ -88,7 +88,7 @@
 			ELSE 'None' END) as url,
 			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
 			ELSE 'Not Assigned'
-			END) as Assigned_to,
+			END) as assigned_to,
 			D.name as created_by
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
@@ -106,8 +106,8 @@
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
+		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="assigned_to" />
 		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
@@ -123,7 +123,7 @@
 			ELSE 'None' END) as url,
 			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
 			ELSE 'Not Assigned'
-			END) as Assigned_to,
+			END) as assigned_to,
 			D.name as created_by
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
@@ -558,6 +558,7 @@
 		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="NONE" display_name="Review Comments" isVisible="true" name="review_comments" />
 		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
@@ -575,7 +576,7 @@
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='DISAPPROVED' AND A.actor_id = :creative_creator_id
+			A.item_type !='LESSON' AND A.status='DIS_APPROVED' AND A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,M.task_id,M.comment,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
 		<title> All Media Tasks Disapproved</title>
@@ -717,9 +718,10 @@
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="Actor" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="actor" />
+		<column columnHandler="NONE" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
@@ -748,5 +750,33 @@
 		<title> All Media Tasks created</title>
 	</reports>
 
+<!-- Published lesson list for content creator -->
+	<reports id="87" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="actor" />
+		<column columnHandler="LESSON_LINK_HANDLER" display_name="Status" isVisible="true" name="status" />
 
+		<sql>SELECT
+			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
+			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
+			LEFT JOIN public.lesson L ON (A.item_id=L.id)
+			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
+			INNER JOIN public.module M ON (M.id=CM.module_id)
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
+			WHERE
+			A.status LIKE 'PUBLISHED' AND A.item_type ='LESSON'
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			ORDER BY a.id
+		</sql>
+		<title> All Tasks Published</title>
+	</reports>
 </istar_reports>

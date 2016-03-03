@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.istarindia.apps.StatusTypes;
+import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
@@ -26,16 +27,24 @@ public class StatusColumnHandler extends ColumnHandler {
 			{ 
 				if(user.getUserType().equals(roles))
 				{
-					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW))
+					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN))
 					{
 						items.put("<li><a href='/content/review_task?task_id="+taskID+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/review_task?task_id="+taskID+"'>"+stage.getName()+"</a></li> ");
 
 					}
-					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT))
+					else if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN))
+					{
+						items.put("<li><a href='/content/media_review?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/media_review?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ");
+
+					}	
+					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && task.getItemType().equalsIgnoreCase("LESSON"))
 					{
 						items.put("<li><a href='/content/edit_lesson?lesson_id="+task.getItemId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_lesson?lesson_id="+task.getItemId()+"'>"+stage.getName()+"</a></li> ");
 
-					}
+					}else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && !task.getItemType().equalsIgnoreCase("LESSON"))
+					{
+						items.put("<li><a href='/content/edit_media?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_media?task_id="+task.getId()+"'>"+stage.getName()+"</a></li>");
+					}		
 					else if(stage.getName().equalsIgnoreCase(StatusTypes.UNPUBLISHED))
 					{	
 						items.put("<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ");						

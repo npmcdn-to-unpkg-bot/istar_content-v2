@@ -44,7 +44,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
-
+<%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
 </head>
@@ -53,16 +57,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
-		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All published lessons</h1>
-				
-			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
-		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Created By", "Reviewers", "Task Action" }; %>
-			<%=TableUtils.getTableHeader("All Tasks Published", headers, items, 7) %>
+			<div class="col-md-12">
+				<% HashMap<String, String> conditions = new HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(87, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+			</div>
 		</div>
 		
 
@@ -87,22 +88,20 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
-	<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
-	jQuery(document).ready(function() {
-			App.init();
 
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			Validation.lessonValidation();
 		});
-	</script>
-	<!--[if lt IE 9]>
+		
+		function openWin(url) {
+		    myWindow = window.open(url, "", "width=412, height=659");  // Opens a new window
+		    
+		    return false;
+		}
+	
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
