@@ -206,7 +206,7 @@
 								<div id="htc_one_emulator"
 									style="transform: scale(1); transform-origin: 0px 0px 0px;">
 									<div id="frame_htc_one_emulator" class="frame_scroller">
-										<iframe src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>" 
+										<iframe src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>" 
 										frameborder="0" id='prv'
 											style="background-color: #fff;margin-top: 217px;width: 360px;     height: 593px;"> </iframe>
 									</div>

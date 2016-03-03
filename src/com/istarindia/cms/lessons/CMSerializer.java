@@ -23,6 +23,7 @@ import org.hibernate.Session;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Slide;
+import com.istarindia.apps.dao.SlideDAO;
 import com.istarindia.cms.lessons.CMSLesson;
 import com.istarindia.cms.lessons.CMSSlide;
 
@@ -118,16 +119,30 @@ public class CMSerializer {
 	}
 
 	
-	public static StringBuffer serializeBlankSlide(String templateName) {
-		StringBuffer out = new StringBuffer();
-
+	public static StringBuffer serializeBlankSlide(String templateName, String slideID) {
 		
+		SlideDAO dao = new SlideDAO();
+		Slide cm = dao.findById(Integer.parseInt(slideID));
+		CMSSlide slide =  new CMSSlide();
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
+			InputStream in = IOUtils.toInputStream(cm.getSlideText(), "UTF-8");
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			slide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
+			System.out.println(slide);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuffer out = new StringBuffer();
 		VelocityEngine ve = new VelocityEngine();
 		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
 		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 		ve.init();
 		VelocityContext context = new VelocityContext();
-		context.put("slide", new CMSSlide());
+		context.put("slide", slide);
 	
 		Template t = ve.getTemplate(templateName + ".vm");
 		StringWriter writer = new StringWriter();
