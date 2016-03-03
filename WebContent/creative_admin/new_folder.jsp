@@ -31,7 +31,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Upload media | iStar CMS</title>
+<title> Create New Folder | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
