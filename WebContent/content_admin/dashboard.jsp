@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-
-
-%>
+String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -40,8 +37,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 
-
-
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
@@ -57,33 +52,27 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="breadcrumbs">
 			<div class="container-fluid">
 				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
-				<!-- <ul class="pull-right breadcrumb">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="">Content Admin </a></li>
-					<li class="active">Dashboard</li>
-				</ul> -->
 			</div>
 			<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<section id="processes" class="g-bg-dark-blue1">
 				<div class="container content-md g-text-height-md">
-
 					<div class="row g-mb-60 text-center g-heading-v7">
 						<div class="col-sm-8 col-sm-offset-2">
 							<h2 class="h2 color-light">
-								<span class="block-name">Work Process</span> <span class="g-text-height-lg">Step By Step</span>
+								<span class="block-name">Work Process</span> 
+								<span class="g-text-height-lg">Step By Step</span>
 							</h2>
 						</div>
 					</div>
 
 					<div class="row g-mb-20">
-						
 						<div class="col-md-6 g-mb-20 steps-v1--lspace">
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>created_lesson">View All Created Lessons</a>
+										<a href="<%=baseURL %>content_admin/created_lesson.jsp">View All Created Lessons</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons created by Content Admin and not assigned to Content Creator.</p></li>
@@ -94,24 +83,21 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>draft_lesson">View All Lessons in Progress</a>
+										<a href="<%=baseURL %>content_admin/draft_lesson.jsp">View All Lessons in Progress</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons which are in progress by Content Developer.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
-						</div>
-						
-						
-						
+						</div>	
 					</div>
 
-						<div class="row g-mb-50">
+					<div class="row g-mb-50">
 						<div class="col-md-6 g-mb-20 steps-v1--lspace">
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>completed_lesson">View All Completed Lessons</a>
+										<a href="<%=baseURL %>content_admin/completed_lesson.jsp">View All Completed Lessons</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are completed by Content Developers.</p></li>
@@ -123,7 +109,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>review_pending">View All Lessons with Pending Review</a>
+										<a href="<%=baseURL %>content_admin/review_pending.jsp">View All Lessons with Pending Review</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are completed by Content Developers and review by Content Reviewer is pending.</p></li>
@@ -137,7 +123,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>not_published">View All Lessons to be Published</a>
+										<a href="<%=baseURL %>content_admin/not_published.jsp">View All Lessons to be Published</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons which are ready to be published by Content Admin.</p></li>
@@ -145,12 +131,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							</ul>
 						</div>
 						
-						
 						<div class="col-md-6 steps-v1--rspace">
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>published_lesson">View All Published Lesson</a>
+										<a href="<%=baseURL %>content_admin/published_lesson.jsp">View All Published Lesson</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons which are published by Content Admin.</p></li>
@@ -158,17 +143,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							</ul>
 						</div>
 					</div>
-
+					
 					<div class="row g-mb-50">
-						
 					</div>
-
-
 				</div>
 			</section>
 		</div>
-
-
 		<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
