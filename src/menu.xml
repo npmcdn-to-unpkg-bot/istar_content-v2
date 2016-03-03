@@ -21,8 +21,8 @@
 		<child_links display_name="Disapproved" url="/content/content_creator/disapproved_lesson.jsp" valid_roles="content_creator" />
 		<child_links display_name="Approved" url="/content/content_creator/approved_lesson.jsp" valid_roles="content_creator" />
 
-		<child_links display_name="Assigned" url="/content/lesson_assigned_reviewer" valid_roles="content_reviewer" />
-		<child_links display_name="Disapproved" url="/content/task_disapproved_for_reviewer" valid_roles="content_reviewer" />
+		<child_links display_name="Assigned" url="/content/content_reviewer/assigned_lesson.jsp" valid_roles="content_reviewer" />
+		<child_links display_name="Disapproved" url="/content/content_reviewer/disapproved_lesson.jsp" valid_roles="content_reviewer" />
 
 		<child_links display_name="Created" url="/content/content_creator/created_media.jsp" valid_roles="content_creator" />
 
