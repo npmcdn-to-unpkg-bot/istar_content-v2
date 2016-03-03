@@ -1,7 +1,7 @@
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.LessonService"%><%@page import="com.istarindia.apps.*"%>
+<%@page import="com.istarindia.apps.services.LessonService"%><%@page import="com.istarindia.apps.*"%><%@page import="com.istarindia.apps.SlideTransition"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
@@ -54,22 +58,16 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All Created Tasks</h1>
-				
+		<div class="container-fluid height-1000" style="padding: 0px !important">
+			<div class="col-md-12">
+				<% HashMap<String, String> conditions = new HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(23, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("lessons");  %>
 		</div>
-	<div class="container-fluid height-1000" style="padding: 0px !important">
-			<% String[] headers = {"#", "Title", "Session Title", "Module Title", "Course Title", "Created By", "Reviewers", "Task Action" }; %>
-			<%=TableUtils.getTableHeader("All Created Tasks", headers, items, 7) %>
-		
-		</div>
-
-
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
