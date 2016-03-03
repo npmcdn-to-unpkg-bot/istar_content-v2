@@ -84,14 +84,15 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_LIST");
 		slideTemplates.add("ONLY_TITLE_TREE");
-		slideTemplates.add("ONLY_TITLE_TABLE");
-		slideTemplates.add("ONLY_TITLE_TABLE_TITLE_TABLE");
-		slideTemplates.add("ONLY_TITLE_TABLE_PARAGRAPH");
+		//slideTemplates.add("ONLY_TITLE_TABLE");
+		//slideTemplates.add("ONLY_TITLE_TABLE_TITLE_TABLE");
+	//	slideTemplates.add("ONLY_TITLE_TABLE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
 
 		listTypes.add(ListTypes.SIMPLE_LIST);
 		listTypes.add(ListTypes.PROCESS_LIST);
 		listTypes.add(ListTypes.CYCLE_LIST);
+		listTypes.add(ListTypes.IDEAS_LIST);
 		
 	}
 

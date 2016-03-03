@@ -13,6 +13,7 @@ import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.cms.lessons.CMSHTMLTableRow;
 import com.istarindia.cms.lessons.CMSImage;
 import com.istarindia.cms.lessons.CMSList;
@@ -23,7 +24,7 @@ import com.istarindia.cms.lessons.SlideService;
  * Servlet implementation class CreateSlideController
  */
 @WebServlet("/create_slide")
-public class CreateSlideController extends HttpServlet {
+public class CreateSlideController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -39,6 +40,7 @@ public class CreateSlideController extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		printParams(request);
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
@@ -69,11 +71,13 @@ public class CreateSlideController extends HttpServlet {
 		case "ONLY_TITLE_LIST":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
-				service.addTextTreeSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
+				list.setList_type(request.getParameter("list_type"));
+				service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewList(request);
-				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+				list.setList_type(request.getParameter("list_type"));
+				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
 						list, request.getParameter("slide_id"));
 			}
 
