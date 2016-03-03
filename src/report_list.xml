@@ -387,7 +387,7 @@
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="Created by" isVisible="true" name="creator" />
+		<column columnHandler="NONE" display_name="Created by" isVisible="true" name="actor" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT

@@ -101,13 +101,13 @@
 				<form action="<%=baseURL%>create_folder" class="sky-form"
 					method="POST" id="sky-form1" onsubmit="myFunction()">
 					<input type="hidden" id="selected_items" name="selected_items" />
-					<input type="hidden" id="selected_items2" name="selected_items2" />
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<header>Select Parent Folder</header>
 						<fieldset>
 							<div class="panel panel-grey margin-bottom-40">
 								<div class="panel-body">
 									<div id="html1">
+									
 										<ul>
 											<%=getFolderTree()%>
 										</ul>
@@ -127,7 +127,8 @@
 							</section>
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn-u">Create Folder</button>
+							<button type="submit" name="button" class="btn-u">Create Folder</button>
+						<label id="err" style="display: block;color:#ee9393"></label>
 						</footer>
 						<div class="margin-bottom-60"></div>
 					</div>
@@ -171,6 +172,11 @@
 	
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
+			if (selectedElmsIds == ""){
+			event.preventDefault();
+			document.getElementById("err").innerHTML = "Please select parent folder!";
+			return false; 
+			}
 			$('#selected_items').val(selectedElmsIds);
 			console.log(selectedElmsIds);
 		}
@@ -191,8 +197,9 @@
 					"three_state" : false,
 				},
 				"plugins" : [ "checkbox" ]
-			});
-			var selectedElmsIds = $('#html1').jstree("get_selected");	
+				
+			})
+
 		});
 	</script>
 	<!--[if lt IE 9]>
