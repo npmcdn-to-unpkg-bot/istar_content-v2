@@ -23,6 +23,8 @@ public class ReportColumnHandlerFactory {
 		switch (columnHandler) {
 		case "STATUS_HANDLER":
 			return (new StatusColumnHandler());
+		case "MEDIA_LINK_HANDLER":
+			return (new MediaLinkHandler());
 		default:
 			break;
 		}

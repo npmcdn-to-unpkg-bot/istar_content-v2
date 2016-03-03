@@ -38,8 +38,7 @@ public class StatusColumnHandler extends ColumnHandler {
 					}
 					else if(stage.getName().equalsIgnoreCase(StatusTypes.UNPUBLISHED))
 					{	
-						items.put("<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ");
-						
+						items.put("<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ");						
 					}
 					else
 					{
