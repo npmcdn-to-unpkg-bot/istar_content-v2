@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
+<%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.IstarUser"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,7 +15,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Creative Admin Dashboard | iStar CMS</title>
+<title>Content Creator Dashboard | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -61,14 +62,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="col-md-12">
 				<% HashMap<String, String> conditions = new HashMap();
-				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				conditions.put("content_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
 				%>
-				<%=(new ReportUtils()).getReport(4, conditions, ((IstarUser)request.getSession().getAttribute("user")), null).toString() %>
+				<%=(new ReportUtils()).getReport(86, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 			</div>
 		</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
@@ -85,7 +85,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 	var responsiveHelper_dt_basic = undefined;
 	var responsiveHelper_datatable_fixed_column = undefined;
 	var responsiveHelper_datatable_col_reorder = undefined;

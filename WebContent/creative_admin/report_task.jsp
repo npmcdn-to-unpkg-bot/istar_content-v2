@@ -3,6 +3,10 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en">
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <!--<![endif]-->
 <head>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
@@ -53,28 +57,17 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid">
-				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Report - Tasks</a></h1>
-				
-			</div>
-			<!--/container-->
+		<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="tag-box tag-box-v3">
-						<div class="headline"><h2>Task Breakup per Resource</h2></div>
-						<p>Tasks Assigned per Resource</p><br><br>
-
-						<!-- Pie Charts v1 -->
-						<div class="row pie-progress-charts margin-bottom-60">
-							<div id="container"> aaaa</div>
-						</div>
-					</div>
+			<div class="col-md-12">
+				
+					<!-- TODO -->
+			
+			</div>
 		</div>
-
-
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
@@ -92,58 +85,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
-			 $('#container').highcharts({
-			        chart: {
-			            plotBackgroundColor: null,
-			            plotBorderWidth: null,
-			            plotShadow: false,
-			            type: 'pie'
-			        },
-			        title: {
-			            text: 'Browser market shares January, 2015 to May, 2015'
-			        },
-			        tooltip: {
-			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-			        },
-			        plotOptions: {
-			            pie: {
-			                allowPointSelect: true,
-			                cursor: 'pointer',
-			                dataLabels: {
-			                    enabled: true,
-			                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-			                    style: {
-			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-			                    }
-			                }
-			            }
-			        },
-			        series: [{
-			            name: 'Brands',
-			            colorByPoint: true,
-			            data: [{
-			                name: 'Microsoft Internet Explorer',
-			                y: 56.33
-			            }, {
-			                name: 'Chrome',
-			                y: 24.03,
-			                sliced: true,
-			                selected: true
-			            }, {
-			                name: 'Firefox',
-			                y: 10.38
-			            }, {
-			                name: 'Safari',
-			                y: 4.77
-			            }, {
-			                name: 'Opera',
-			                y: 0.91
-			            }, {
-			                name: 'Proprietary or Undetectable',
-			                y: 0.2
-			            }]
-			        }]
-			    });
 		});
 	</script>
 	<!--[if lt IE 9]>

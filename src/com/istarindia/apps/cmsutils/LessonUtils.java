@@ -120,6 +120,7 @@ public class LessonUtils {
 
 		// Add image library
 		ImageDAO dao = new ImageDAO();
+		//ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
 		ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
 
 		StringBuffer out = new StringBuffer();
