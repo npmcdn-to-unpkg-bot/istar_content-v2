@@ -25,13 +25,13 @@ import com.istarindia.apps.services.TaskService;
  * Servlet implementation class TaslReviewController
  */
 @WebServlet("/review_task")
-public class TaslReviewController extends HttpServlet {
+public class TaskReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TaslReviewController() {
+    public TaskReviewController() {
         super();
         // TODO Auto-generated constructor stub
     }
