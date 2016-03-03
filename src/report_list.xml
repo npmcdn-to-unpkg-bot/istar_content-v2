@@ -379,7 +379,7 @@
 	
 	<!-- Assigned lesson list for Content Reviewer -->
 	<reports id="42" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
@@ -408,7 +408,7 @@
 	
 	<!-- Disapproved lesson list for Content Reviewer -->
 	<reports id="43" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />

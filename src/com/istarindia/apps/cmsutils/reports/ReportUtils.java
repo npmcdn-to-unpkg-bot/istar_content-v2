@@ -65,7 +65,7 @@ public class ReportUtils {
 	}
 
 	public StringBuffer getReport(int reportID, HashMap<String, String> conditions, IstarUser user, String taskType) {
-		
+		System.err.println("=====================================>>>"+reportID);
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
 		try {
