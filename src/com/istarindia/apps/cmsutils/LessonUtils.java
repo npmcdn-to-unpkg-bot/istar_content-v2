@@ -116,6 +116,55 @@ public class LessonUtils {
 		return out;
 	}
 
+	
+	public StringBuffer getReviewForm(Lesson lesson) {
+		StringBuffer out = new StringBuffer();
+		if (lesson.getPresentaion() != null) {
+			Presentaion ppt = lesson.getPresentaion();
+
+			
+			out.append("<div class=' col-md-12 '>");
+			out.append("<div class='panel panel-sea margin-bottom-40'>");
+			out.append("<div class='panel-heading'>");
+			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Slides to Review</h3>");
+			out.append("</div>");
+			out.append("<table class='table table-striped'>");
+			out.append("<thead>");
+			out.append("<tr>");
+			out.append("<th>#</th>");
+			out.append("<th>Slide Title</th>");
+			out.append("<th>Action</th>");
+			out.append("</tr>");
+			out.append("</thead>");
+			out.append("<tbody>");
+			DBUtils db = new DBUtils();
+			ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
+			for (int i = 0; i < data.size(); i++) {
+				out.append("<tr>");
+				out.append("<td>" + data.get(i).get(0) + "</td>");
+				out.append("<td>" + data.get(i).get(1) + "</td>");
+				out.append("<td>");
+				out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate_review.jsp?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + 
+				data.get(i).get(2) + "'>" + "<i class='fa fa-check'></i>View Slide</a>");
+				
+							
+				
+				out.append("</td>");
+				out.append("</tr>");
+			}
+
+			out.append("</tbody>");
+			out.append("</table>");
+			out.append("</div>");
+			out.append("</div>");
+		} else if (lesson.getGame() != null) {
+
+		} else if (lesson.getAssessment() != null) {
+
+		}
+
+		return out;
+	}
 	public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt) {
 
 		// Add image library

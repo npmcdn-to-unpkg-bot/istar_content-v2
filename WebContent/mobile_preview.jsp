@@ -6,6 +6,8 @@
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 String templateName = request.getParameter("template_name");
+String slide_id = request.getParameter("slide_id");
+
 %><!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +48,7 @@ String templateName = request.getParameter("template_name");
 	<div class="reveal">
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeBlankSlide(templateName)) %>
+			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id)) %>
 
 		</div>
 
