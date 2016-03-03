@@ -1,0 +1,184 @@
+<header>Tempalate with only ONLY_TITLE_TREE</header>
+<fieldset>
+	<section>
+		<label class="label">Title</label>
+		<label class="input">
+			#if($slide.getTitle() )
+			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			#else 
+			<input type="text" name="title" placeholder=" Please enter title" >
+			#end			
+		</label>
+	</section>
+	
+	<section>
+		<label class="label">Parent Item 1 </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="parent_item_1" placeholder=" Please Parent Item 1" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="parent_item_1" placeholder=" Please enter Parent Item 1" >
+			#end			
+		</label>
+	</section>
+	
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter Child Item 1 Parent 1 " value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter Child Item 1  Parent 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 2  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter Child Item 2 Parent 1" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter Child Item 2 Parent 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter Child Item 3 Parent 1" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter Child Item 3 Parent 1 " >
+			#end			
+		</label>
+	</section>
+
+<section>
+		<label class="label">Parent Item 2 </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="parent_item_2" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="parent_item_2" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	
+	<section>
+		<label class="label">Parent Item 2 </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="parent_item_3" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="parent_item_3" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	
+	<section>
+		<label class="label">Parent Item 4 </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="parent_item_4" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="parent_item_4" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+	<section style='margin-left: 100px'>
+		<label class="label">Child Item 1  </label>
+		<label class="input">
+			#if($slide.getList().getItems().size() >= 1 )
+			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			#else 
+			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			#end			
+		</label>
+	</section>
+
+
+	
+</fieldset>
