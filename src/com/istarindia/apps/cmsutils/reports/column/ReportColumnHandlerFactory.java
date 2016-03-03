@@ -25,6 +25,8 @@ public class ReportColumnHandlerFactory {
 			return (new StatusColumnHandler());
 		case "MEDIA_LINK_HANDLER":
 			return (new MediaLinkHandler());
+		case "LESSON_LINK_HANDLER":
+			return (new LessonLinkHandler());	
 		default:
 			break;
 		}
