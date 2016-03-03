@@ -15,7 +15,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Content Admin Dashboard | iStar CMS</title>
+<title> Assigned Creative | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">

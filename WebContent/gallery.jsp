@@ -18,7 +18,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Content Admin Dashboard | iStar CMS</title>
+<title> Media Gallery | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">

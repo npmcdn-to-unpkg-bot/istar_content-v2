@@ -1,6 +1,143 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <istar_reports>
 	
+	<!-- Creative Admin -->
+	<reports id="0" type_of_report="pie">
+		<column>name</column>
+		<column>count</column>
+		<sql>SELECT creative_admin.name, count(*) FROM public.task, public.creative_admin WHERE task.actor_id = creative_admin.id group by creative_admin.name</sql>
+		<title>Creative Admin </title>
+	</reports>
+	<reports id="1" type_of_report="pie">
+		<column>status</column>
+		<column>count</column>
+		<sql>SELECT task.status, count(*) FROM public.task, public.creative_admin WHERE task.actor_id = creative_admin.id group by task.status</sql>
+		<title>CREATIVE ADMIN</title>
+	</reports>
+	
+	<!-- Task report for creative admin -->
+	<reports id="2" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>
+		</sql>
+		<title>Task report</title>
+	</reports>
+	
+	<!-- Published media for creative admin -->
+	<reports id="3" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
+		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT
+			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
+			WHEN 'VIDEO' THEN V.title
+			ELSE 'None' END) as title,
+			CM.title as session_title,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description WHEN 'VIDEO' THEN V.description
+			ELSE 'None'
+			END) as description,
+			(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
+			ELSE 'None' END) as url,
+			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
+			ELSE 'Not Assigned'
+			END) as Assigned_to,
+			D.name as created_by
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.video V ON (A.item_id=V.id)
+			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
+			WHERE
+			A.item_type !='LESSON' AND A.status='PUBLISHED'
+			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
+		</sql>
+		<title> All Tasks Published</title>
+	</reports>
+	
+	<!-- Inprogress lesson list for creative admin -->
+	<reports id="4" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
+		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT
+			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
+			WHEN 'VIDEO' THEN V.title
+			ELSE 'None' END) as title,
+			CM.title as session_title,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description WHEN 'VIDEO' THEN V.description
+			ELSE 'None'
+			END) as description,
+			(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
+			ELSE 'None' END) as url,
+			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
+			ELSE 'Not Assigned'
+			END) as Assigned_to,
+			D.name as created_by
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.video V ON (A.item_id=V.id)
+			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
+			WHERE
+			A.item_type !='LESSON' AND A.status='DRAFT'
+			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
+		</sql>
+		<title> All Media Tasks in progress</title>
+	</reports>
+	
+	<!-- Pending for review media list for content admin -->
+	<reports id="5" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
+		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT
+			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
+			WHEN 'VIDEO' THEN V.title
+			ELSE 'None' END) as title,
+			CM.title as session_title,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description WHEN 'VIDEO' THEN V.description
+			ELSE 'None'
+			END) as description,
+			(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
+			ELSE 'None' END) as url,
+			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
+			ELSE 'Not Assigned'
+			END) as Assigned_to,
+			D.name as created_by
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.video V ON (A.item_id=V.id)
+			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
+			WHERE
+			A.item_type !='LESSON' AND A.status='COMPLETED'
+			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
+		</sql>
+		<title> All Tasks Pending Review</title>
+	</reports>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	
 	<!-- Content Admin -->
 	<reports id="20" type_of_report="pie">
 		<column>name</column>
@@ -40,7 +177,7 @@
 			 A.item_type ='LESSON' 
 			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
-</sql>
+		</sql>
 		<title>Task report</title>
 	</reports>
 	
@@ -69,7 +206,7 @@
 			 A.item_type ='LESSON' 
 			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
-</sql>
+		</sql>
 		<title> All Tasks Created</title>
 	</reports>
 	
@@ -192,7 +329,7 @@
 		<title> All Tasks not Published</title>
 	</reports>
 	
-	<!-- Requested to publish lesson list for content admin -->
+	<!-- Published lesson list for content admin -->
 	<reports id="28" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
@@ -222,156 +359,240 @@
 		<title> All Tasks Published</title>
 	</reports>
 	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 	
 	
-	<!-- Creative Admin -->
-	<reports id="0" type_of_report="pie">
+	
+	<!-- Content Reviewer -->
+	<reports id="40" type_of_report="pie">
 		<column>name</column>
 		<column>count</column>
-		<sql>SELECT creative_admin.name, count(*) FROM public.task, public.creative_admin WHERE task.actor_id = creative_admin.id group by creative_admin.name</sql>
-		<title>My Name is CREATIVE admin </title>
+		<sql>SELECT content_reviewer.name, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by content_reviewer.name</sql>
+		<title>My Name is CONTENT reviewer </title>
 	</reports>
-	<reports id="1" type_of_report="pie">
+	<reports id="41" type_of_report="pie">
 		<column>status</column>
 		<column>count</column>
-		<sql>SELECT task.status, count(*) FROM public.task, public.creative_admin WHERE task.actor_id = creative_admin.id group by task.status</sql>
-		<title>My Name is creative ADMIN</title>
+		<sql>SELECT task.status, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by task.status</sql>
+		<title>My Name is content REVIEWER</title>
 	</reports>
 	
-	<!-- Task report for creative admin -->
-	<reports id="2" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+	<!-- Assigned lesson list for Content Reviewer -->
+	<reports id="42" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="NONE" display_name="Created by" isVisible="true" name="creator" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
-		<sql>
+		<sql>SELECT
+			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
+			d.email as actor
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
+			LEFT JOIN public.lesson L ON (A.item_id=L.id)
+			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
+			INNER JOIN public.module M ON (M.id=CM.module_id)
+			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			WHERE
+			A.status LIKE 'COMPLETED' AND  B.status LIKE 'REVIEWER_ASSIGNED' AND  A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			ORDER BY a.id
 		</sql>
-		<title>Task report</title>
+		<title> All Tasks Assigned</title>
 	</reports>
 	
-	<!-- Published media for creative admin -->
-	<reports id="3" type_of_report="table">
+	<!-- Disapproved lesson list for Content Reviewer -->
+	<reports id="43" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT
+			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
+			d.email as actor
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
+			LEFT JOIN public.lesson L ON (A.item_id=L.id)
+			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
+			INNER JOIN public.module M ON (M.id=CM.module_id)
+			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			WHERE
+			A.status = 'DIS_APPROVED' AND B.status LIKE 'DIS_APPROVED' AND  A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			ORDER BY a.id
+		</sql>
+		<title> All Tasks Disapproved</title>
+	</reports>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+
+	<!-- Creative creator -->
+	<reports id="60" type_of_report="pie">
+		<column>name</column>
+		<column>count</column>
+		<sql>SELECT creative_creator.name, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by creative_creator.name</sql>
+		<title>My Name is Creative Creator </title>
+	</reports>
+	<reports id="61" type_of_report="pie">
+		<column>status</column>
+		<column>count</column>
+		<sql>SELECT task.status, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by task.status</sql>
+		<title>My Name is Creative Creatorrrrrrr</title>
+	</reports>
+	
+	<!-- Assigned media task list for creative creator -->
+	<reports id="62" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
-		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
 			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description WHEN 'VIDEO' THEN V.description
-			ELSE 'None'
-			END) as description,
-			(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
-			ELSE 'None' END) as url,
-			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
-			ELSE 'Not Assigned'
-			END) as Assigned_to,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description
+			WHEN 'VIDEO' THEN V.description
+			ELSE 'None' END) as description,
 			D.name as created_by
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
+			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
+			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
+			LEFT JOIN public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='PUBLISHED'
+			A.item_type !='LESSON' AND A.status='CREATIVE_ASSIGNED' AND A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
-		<title> All Tasks Pending Review</title>
+		<title> All Media Tasks Assigned</title>
 	</reports>
 	
-	<!-- Inprogress lesson list for creative admin -->
-	<reports id="4" type_of_report="table">
+	<!-- Inprogess media task list for creative creator -->
+	<reports id="63" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
-		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
 			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description WHEN 'VIDEO' THEN V.description
-			ELSE 'None'
-			END) as description,
-			(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
-			ELSE 'None' END) as url,
-			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
-			ELSE 'Not Assigned'
-			END) as Assigned_to,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description
+			WHEN 'VIDEO' THEN V.description
+			ELSE 'None' END) as description,
 			D.name as created_by
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
+			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
+			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
+			LEFT JOIN public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='DRAFT'
+			A.item_type !='LESSON' AND A.status='DRAFT' AND A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
-		<title> All Media Tasks in progress</title>
+		<title> All Media Tasks in Progress</title>
 	</reports>
 	
-	<!-- Pending for review media list for content admin -->
-	<reports id="5" type_of_report="table">
+	<!-- Not reviewed media task list for creative creator -->
+	<reports id="64" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="URL" isVisible="true" name="url" />
-		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="Assigned_to" />
-		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
 			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description WHEN 'VIDEO' THEN V.description
-			ELSE 'None'
-			END) as description,
-			(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
-			ELSE 'None' END) as url,
-			A.status as status, (CASE A.actor_id WHEN AD.id THEN AD.name WHEN CR.id THEN CR.name
-			ELSE 'Not Assigned'
-			END) as Assigned_to,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description
+			WHEN 'VIDEO' THEN V.description
+			ELSE 'None' END) as description,
 			D.name as created_by
 			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
+			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
+			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
+			LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.video V ON (A.item_id=V.id)
+			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
+			WHERE
+			A.item_type !='LESSON' AND A.status='COMPLETED' AND A.actor_id = :creative_creator_id
+			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
+		</sql>
+		<title> All Media Tasks Pending Review</title>
+	</reports>
+	
+	<!-- Disapproved media task list for creative creator -->
+	<reports id="65" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT
+			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
+			WHEN 'VIDEO' THEN V.title
+			ELSE 'None' END) as title,
+			CM.title as session_title,
+			( CASE A.item_type WHEN 'IMAGE' THEN I.description
+			WHEN 'VIDEO' THEN V.description
+			ELSE 'None' END) as description,
+			(CASE M.task_id WHEN A.id THEN M.comment ELSE 'No comments' END) as review_comments, D.name as created_by
+			FROM public.task A
+			LEFT JOIN public.media_review M ON (M.task_id=A.id)
 			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='COMPLETED'
-			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
+			A.item_type !='LESSON' AND A.status='DISAPPROVED' AND A.actor_id = :creative_creator_id
+			GROUP BY A.id, A.item_id ,M.task_id,M.comment,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
-		<title> All Tasks completed</title>
-	</reports>
+		<title> All Media Tasks Disapproved</title>
+	</reports>	
 	
-	
-	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
 	<!-- Content Creator -->
 	<reports id="80" type_of_report="pie">
 		<column>name</column>
 		<column>count</column>
 		<sql>SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE task.actor_id = content_creator.id group by content_creator.name</sql>
-		<title>My Name is Lakhan </title>
+		<title>Title</title>
 	</reports>
 	<reports id="81" type_of_report="pie">
 		<column>status</column>
 		<column>count</column>
 		<sql>SELECT task.status, count(*) FROM public.task, public.content_creator WHERE task.actor_id = content_creator.id group by task.status</sql>
-		<title>My Name is Lakhan 2222222222222222222</title>
+		<title>TITLE</title>
 	</reports>
 
 	<!-- Assigned lesson list for content creator -->
@@ -402,7 +623,7 @@
 		<title> All Tasks Assigned </title>
 	</reports>
 	
-	<!-- Draft lesson list for content creator -->
+	<!-- Inprogress lesson list for content creator -->
 	<reports id="83" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
@@ -523,206 +744,6 @@
 		</sql>
 		<title> All Media Tasks created</title>
 	</reports>
-	
-	
-
-	<!-- Creative creator -->
-	<reports id="60" type_of_report="pie">
-		<column>name</column>
-		<column>count</column>
-		<sql>SELECT creative_creator.name, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by creative_creator.name</sql>
-		<title>My Name is Creative Creator </title>
-	</reports>
-	<reports id="61" type_of_report="pie">
-		<column>status</column>
-		<column>count</column>
-		<sql>SELECT task.status, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by task.status</sql>
-		<title>My Name is Creative Creatorrrrrrr</title>
-	</reports>
-	
-	<!-- Assigned media task list for creative creator -->
-	<reports id="62" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
-		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
-		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
-
-		<sql>SELECT
-			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
-			WHEN 'VIDEO' THEN V.title
-			ELSE 'None' END) as title,
-			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description
-			WHEN 'VIDEO' THEN V.description
-			ELSE 'None' END) as description,
-			D.name as created_by
-			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
-			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
-			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
-			LEFT JOIN public.image I ON (A.item_id=I.id)
-			LEFT JOIN public.video V ON (A.item_id=V.id)
-			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
-			WHERE
-			A.item_type !='LESSON' AND A.status='CREATIVE_ASSIGNED' AND A.actor_id = :creative_creator_id
-			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
-		</sql>
-		<title> All Media Tasks Assigned</title>
-	</reports>
-	
-	<!-- Inorogess media task list for creative creator -->
-	<reports id="63" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
-		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
-		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
-
-		<sql>SELECT
-			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
-			WHEN 'VIDEO' THEN V.title
-			ELSE 'None' END) as title,
-			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description
-			WHEN 'VIDEO' THEN V.description
-			ELSE 'None' END) as description,
-			D.name as created_by
-			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
-			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
-			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
-			LEFT JOIN public.image I ON (A.item_id=I.id)
-			LEFT JOIN public.video V ON (A.item_id=V.id)
-			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
-			WHERE
-			A.item_type !='LESSON' AND A.status='DRAFT' AND A.actor_id = :creative_creator_id
-			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
-		</sql>
-		<title> All Media Tasks Assigned</title>
-	</reports>
-	
-	<!-- Not reviewed media task list for creative creator -->
-	<reports id="64" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
-		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
-		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
-
-		<sql>SELECT
-			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
-			WHEN 'VIDEO' THEN V.title
-			ELSE 'None' END) as title,
-			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description
-			WHEN 'VIDEO' THEN V.description
-			ELSE 'None' END) as description,
-			D.name as created_by
-			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
-			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
-			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
-			LEFT JOIN public.image I ON (A.item_id=I.id)
-			LEFT JOIN public.video V ON (A.item_id=V.id)
-			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
-			WHERE
-			A.item_type !='LESSON' AND A.status='COMPLETED' AND A.actor_id = :creative_creator_id
-			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
-		</sql>
-		<title> All Media Tasks Pending Review</title>
-	</reports>
-	
-	<!-- Not reviewed media task list for creative creator -->
-	<reports id="65" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
-		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
-		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
-
-		<sql>SELECT
-			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
-			WHEN 'VIDEO' THEN V.title
-			ELSE 'None' END) as title,
-			CM.title as session_title,
-			( CASE A.item_type WHEN 'IMAGE' THEN I.description
-			WHEN 'VIDEO' THEN V.description
-			ELSE 'None' END) as description,
-			(CASE M.task_id WHEN A.id THEN M.comment ELSE 'No comments' END) as review_comments, D.name as created_by
-			FROM public.task A
-			LEFT JOIN public.media_review M ON (M.task_id=A.id)
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
-			LEFT JOIN public.video V ON (A.item_id=V.id)
-			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
-			WHERE
-			A.item_type !='LESSON' AND A.status='DISAPPROVED' AND A.actor_id = :creative_creator_id
-			GROUP BY A.id, A.item_id ,M.task_id,M.comment,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
-		</sql>
-		<title> All Media Tasks Disapproved</title>
-	</reports>
-
-	<!-- DONE -->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
-
-
-	<!-- Content Reviewer -->
-	<reports id="40" type_of_report="pie">
-		<column>name</column>
-		<column>count</column>
-		<sql>SELECT content_reviewer.name, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by content_reviewer.name</sql>
-		<title>My Name is CONTENT reviewer </title>
-	</reports>
-	<reports id="41" type_of_report="pie">
-		<column>status</column>
-		<column>count</column>
-		<sql>SELECT task.status, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by task.status</sql>
-		<title>My Name is content REVIEWER</title>
-	</reports>
-	
-	<!-- Assigned lesson list for Content Reviewer -->
-	<reports id="42" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
-		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
-		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="Created by" isVisible="true" name="creator" />
-		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
-
-		<sql>
-		</sql>
-		<title> All Tasks Assigned</title>
-	</reports>
-	
-	<!-- Disaaproved lesson list for Content Reviewer -->
-	<reports id="43" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="taskid" />
-		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
-		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="revv" />
-		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
-
-		<sql>
-		</sql>
-		<title> All Tasks Disaaproved</title>
-	</reports>
-	
 </istar_reports>
