@@ -26,9 +26,9 @@
 		<label class="label">List Item 1 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
+			<input type="text" id="list_item_1" class="updateble" name="list_item_1" placeholder=" Please enter title" value="$slide.getList().getItems().get(0).getText()">
 			#else 
-			<input type="text" name="list_item_1" placeholder=" Please enter List Item 1 " >
+			<input type="text" id="list_item_1" class="updateble" name="list_item_1" placeholder=" Please enter List Item 1 " >
 			#end			
 		</label>
 	</section>
@@ -37,9 +37,9 @@
 		<label class="label">List Item 2 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 2 )
-			<input type="text" name="list_item_2" placeholder=" lease enter List Item 2" value="$slide.getList().getItems().get(1).getText()">
+			<input type="text" id="list_item_2" class="updateble" name="list_item_2" placeholder=" lease enter List Item 2" value="$slide.getList().getItems().get(1).getText()">
 			#else 
-			<input type="text" name="list_item_2" placeholder=" Please enter List Item 2 " >
+			<input type="text" id="list_item_2" class="updateble" name="list_item_2" placeholder=" Please enter List Item 2 " >
 			#end			
 		</label>
 	</section>
@@ -48,9 +48,9 @@
 		<label class="label">List Item 3 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 3 )
-			<input type="text" name="list_item_3" placeholder=" lease enter List Item 3" value="$slide.getList().getItems().get(2).getText()">
+			<input type="text" id="list_item_3" class="updateble" name="list_item_3" placeholder=" lease enter List Item 3" value="$slide.getList().getItems().get(2).getText()">
 			#else 
-			<input type="text" name="list_item_3" placeholder=" Please enter List Item 3 " >
+			<input type="text" id="list_item_3" class="updateble" name="list_item_3" placeholder=" Please enter List Item 3 " >
 			#end			
 		</label>
 	</section>
@@ -59,9 +59,9 @@
 		<label class="label">List Item 4 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 4 )
-			<input type="text" name="list_item_4" placeholder=" lease enter List Item 4" value="$slide.getList().getItems().get(3).getText()">
+			<input type="text" id="list_item_4" class="updateble" name="list_item_4" placeholder=" lease enter List Item 4" value="$slide.getList().getItems().get(3).getText()">
 			#else 
-			<input type="text" name="list_item_4" placeholder=" Please enter List Item 4 " >
+			<input type="text" id="list_item_4" class="updateble" name="list_item_4" placeholder=" Please enter List Item 4 " >
 			#end			
 		</label>
 	</section>
@@ -69,9 +69,9 @@
 		<label class="label">List Item 5 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 5 )
-			<input type="text" name="list_item_5" placeholder=" lease enter List Item 5" value="$slide.getList().getItems().get(4).getText()">
+			<input type="text" id="list_item_5" class="updateble" name="list_item_5" placeholder=" lease enter List Item 5" value="$slide.getList().getItems().get(4).getText()">
 			#else 
-			<input type="text" name="list_item_5" placeholder=" Please enter List Item 5 " >
+			<input type="text" id="list_item_5" class="updateble" name="list_item_5" placeholder=" Please enter List Item 5 " >
 			#end			
 		</label>
 	</section>
@@ -79,9 +79,9 @@
 		<label class="label">List Item 6 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 6 )
-			<input type="text" name="list_item_6" placeholder=" lease enter List Item 6" value="$slide.getList().getItems().get(5).getText()">
+			<input type="text"id="list_item_6" class="updateble"  name="list_item_6" placeholder=" lease enter List Item 6" value="$slide.getList().getItems().get(5).getText()">
 			#else 
-			<input type="text" name="list_item_6" placeholder=" Please enter List Item 6 " >
+			<input type="text" id="list_item_6" class="updateble" name="list_item_6" placeholder=" Please enter List Item 6 " >
 			#end			
 		</label>
 	</section>

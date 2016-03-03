@@ -124,6 +124,10 @@ public class CreateSlideController extends HttpServlet {
 
 	private CMSList getNewTree(HttpServletRequest request) {
 		CMSList list = new CMSList();
+		/*ArrayList<CMSTextItem>	items =new ArrayList<CMSTextItem>();
+		items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));*/
 		list.setItems(new ArrayList<CMSTextItem>());
 		for (Object key : request.getParameterMap().keySet()) {
 			if (key.toString().startsWith("parent_")) {
@@ -143,6 +147,9 @@ public class CreateSlideController extends HttpServlet {
 
 	private CMSList getList(HttpServletRequest request, Object key) {
 		CMSList list = new CMSList();
+		/*ArrayList<CMSTextItem>	items =new ArrayList<CMSTextItem>();
+		items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));*/
 		list.setItems(new ArrayList<CMSTextItem>());
 		for (Object iterable_element : request.getParameterMap().keySet()) {
 			if(iterable_element.toString().endsWith("_"+key.toString())) {
@@ -157,7 +164,12 @@ public class CreateSlideController extends HttpServlet {
 
 	private CMSList getNewList(HttpServletRequest request) {
 		CMSList list = new CMSList();
-		list.setItems(new ArrayList<CMSTextItem>());
+		ArrayList<CMSTextItem>	items =new ArrayList<CMSTextItem>();
+		items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));
+		list.setItems(items);
 		for (Object key : request.getParameterMap().keySet()) {
 			if (key.toString().startsWith("list_item")) {
 				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {

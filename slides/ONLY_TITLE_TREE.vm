@@ -4,7 +4,7 @@
 		#foreach( $item in $slide.getList().getItems() )
 				#set( $v = $foreach.count )
 			<li id="data_parent_$foreach.count" class="updated fragment fade-up parent_tree_item" >$item.getText()</li>
-			<ul class="fragment fade-up">
+			<ul class="updated fragment fade-up">
 				#foreach( $itemTree in $item.getList().getItems() )
 					<li id="data_child_$foreach.count_parent_$v" class="updated fragment fade-up child_tree_item" >$itemTree.getText()</li>
 				#end

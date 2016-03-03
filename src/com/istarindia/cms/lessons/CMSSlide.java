@@ -30,6 +30,15 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 @XmlRootElement(name = "slide")
 
 public class CMSSlide {
+	public CMSSlide() {
+	ArrayList<CMSTextItem>	items =new ArrayList<CMSTextItem>();
+		items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));
+		items.add(new CMSTextItem(""));items.add(new CMSTextItem(""));
+		list = new CMSList();
+		list.setItems(items);
+	}
+
 	String transition="zoom";
 	String title;
 	String paragraph;
