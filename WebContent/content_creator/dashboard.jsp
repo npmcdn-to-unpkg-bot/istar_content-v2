@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-%>
+String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -38,8 +37,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 
-
-
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
@@ -56,7 +53,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="breadcrumbs">
 			<div class="container-fluid">
 				<h1 class="pull-left">Content Creator Dashboard</h1>
-				
 			</div>
 			<!--/container-->
 		</div>
@@ -64,7 +60,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<section id="processes" class="g-bg-dark-blue1">
 				<div class="container content-md g-text-height-md">
-
 					<div class="row g-mb-60 text-center g-heading-v7">
 						<div class="col-sm-8 col-sm-offset-2">
 							<h2 class="h2 color-light">
@@ -74,40 +69,37 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</div>
 
 					<div class="row g-mb-20">
-						
 						<div class="col-md-6 g-mb-20 steps-v1--lspace">
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>lesson_assigned">View All Assigned Lessons</a>
+										<a href="<%=baseURL %>content_creator/assigned_lesson.jsp">View All Assigned Lessons</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons assigned by Content Admin.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
+						
 						<div class="col-md-6 g-mb-20 steps-v1--lspace">
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>draft_lesson_creator">View All Lessons in Progress</a>
+										<a href="<%=baseURL %>content_creator/draft_lesson.jsp">View All Lessons in Progress</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons which are in progress by Content Developer.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
-						
-						
-						
 					</div>
-
-						<div class="row g-mb-50">
+					
+					<div class="row g-mb-50">
 						<div class="col-md-6 g-mb-20 steps-v1--lspace">
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>lesson_disapproved">View All Disapproved Lessons</a>
+										<a href="<%=baseURL %>content_creator/disapproved_lesson.jsp">View All Disapproved Lessons</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all lessons which are disapproved by Content Reviewer.</p></li>
@@ -119,7 +111,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>approved_lesson_creator">View All Approved Lessons</a>
+										<a href="<%=baseURL %>content_creator/approved_lesson.jsp">View All Approved Lessons</a>
 									</h3>
 								</li>
 								<li><p>This will let you view all tasks which are completed by Content Developers and approved by Content Reviewer and ready to be published.</p></li>
@@ -136,10 +128,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>published_lesson">View All Published Lesson</a>
+										<a href="<%=baseURL %>content_admin/published_lesson.jsp">View All Published Lesson</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all lessons which are published by Content Admin.</p></li>
+								<li><p>This will let you view all the published lessons.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
@@ -148,10 +140,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>created_media_content_creator">View All Created Media tasks</a>
+										<a href="<%=baseURL %>content_creator/created_media.jsp">View All Created Media tasks</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all tasks which are created by Content Developers.</p></li>
+								<li><p>This will let you view all media tasks which are created by Content Developers.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
@@ -165,10 +157,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
 								<li>
 									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>published_media_creative_creator">View All Published Media tasks </a>
+										<a href="<%=baseURL %>creative_admin/published.jsp">View All Published Media tasks </a>
 									</h3>
 								</li>
-								<li><p>This will let you view all tasks which are created by Content Developers and are ready to use.</p></li>
+								<li><p>This will let you view all the published media tasks.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
