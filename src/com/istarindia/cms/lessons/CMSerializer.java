@@ -105,7 +105,12 @@ public class CMSerializer {
 		VelocityContext context = new VelocityContext();
 		context.put("slide", cMSlide);
 	
-		Template t = ve.getTemplate(cMSlide.getTemplateName() + ".vm");
+		String templateVMFileName= cMSlide.getTemplateName() + ".vm";
+		if(cMSlide.getTemplateName().equalsIgnoreCase("ONLY_TITLE_LIST")) {
+			templateVMFileName = cMSlide.getList().getList_type()+"___"+  cMSlide.getTemplateName() + ".vm";
+		}
+		
+		Template t = ve.getTemplate(templateVMFileName);
 		StringWriter writer = new StringWriter();
 		t.merge(context, writer);
 		out.append(writer.toString());

@@ -88,7 +88,12 @@ public class ReportUtils {
 		}
 
 		StringBuffer out = new StringBuffer();
-		ArrayList<ArrayList<String>> data = getReportData(report.getSql(), report.getColumns(), conditions);
+		ArrayList<ArrayList<String>> data = new ArrayList<>();
+		try {
+			data = getReportData(report.getSql(), report.getColumns(), conditions);
+		} catch (Exception e) {
+			System.out.println("reportID===============>>>"+ reportID);
+		}
 		
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
 		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
