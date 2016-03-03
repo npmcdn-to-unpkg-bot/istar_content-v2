@@ -112,7 +112,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addTextTreeSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), list);
 
 			} else {
-				CMSList list = getNewList(request);
+				CMSList list = getNewTree(request);
 				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
 						list, request.getParameter("slide_id"));
 			}
@@ -146,14 +146,17 @@ public class CreateSlideController extends IStarBaseServelet {
 	}
 
 	private CMSList getList(HttpServletRequest request, Object key) {
-		
+		CMSList list = new CMSList();
+		list.setItems(new ArrayList<CMSTextItem>());
 		for (Object iterable_element : request.getParameterMap().keySet()) {
-			if(iterable_element.toString().startsWith(key.toString())) {
-				System.out.println(iterable_element);
+			if(iterable_element.toString().endsWith("_"+key.toString())) {
+				CMSTextItem item = new CMSTextItem(request.getParameter(iterable_element.toString()));
+				list.getItems().add(item);
+				System.out.println("element here is -----"+iterable_element);
 			}
 		}
 		// TODO Auto-generated method stub
-		return null;
+		return list;
 	}
 
 	private CMSList getNewList(HttpServletRequest request) {

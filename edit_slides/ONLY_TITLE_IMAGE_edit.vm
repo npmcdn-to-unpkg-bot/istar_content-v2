@@ -4,9 +4,9 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input type="text" name="title" id="slide_title" class="updateble" placeholder=" Please enter title" value="$slide.getTitle()">
 			#else 
-			<input type="text" name="title" placeholder=" Please enter title" >
+			<input type="text" name="title"  id="slide_title" class="updateble" placeholder=" Please enter title" >
 			#end			
 		</label>
 	</section>
@@ -15,7 +15,7 @@
 	<section>
 		<label class="label">Image URL </label>
 		<label class="select" >
-			<select name="image_url" id="image-picker">
+			<select class="updateble" name="image_url" id="image-picker">
 				#foreach ($image in $images)
 					<option data-img-src="$image.getUrl()" value="$image.getId()">$image.getTitle()</option>
 				#end

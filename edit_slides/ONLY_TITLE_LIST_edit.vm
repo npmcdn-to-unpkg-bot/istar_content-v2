@@ -4,9 +4,9 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input type="text" name="title" id="slide_title" class="updateble"  placeholder=" Please enter title" value="$slide.getTitle()">
 			#else 
-			<input type="text" name="title" placeholder=" Please enter title" >
+			<input type="text" name="title" id="slide_title" class="updateble"  placeholder=" Please enter title" >
 			#end			
 		</label>
 	</section>
@@ -14,7 +14,7 @@
 	<section>
 		<label class="label">Select List Type</label>
 		<label class="select" >
-			<select name="list_type">
+			<select name="list_type" >
 				#foreach ($item in $list_types)
 					<option  value="$item">$item</option>
 				#end

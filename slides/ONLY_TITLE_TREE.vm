@@ -1,11 +1,12 @@
 <section class="ONLY_TITLE_TREE" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
-	<h2>$slide.getTitle()</h2>
+	<h2 class="updated" id="data_slide_title">$slide.getTitle()</h2>
 	<ol>
 		#foreach( $item in $slide.getList().getItems() )
-			<li  class="fragment fade-up parent_tree_item" >$item.getText()</li>
+				#set( $v = $foreach.count )
+			<li id="data_parent_$foreach.count" class="updated fragment fade-up parent_tree_item" >$item.getText()</li>
 			<ul class="fragment fade-up">
 				#foreach( $itemTree in $item.getList().getItems() )
-					<li class="fragment fade-up child_tree_item" >$itemTree.getText()</li>
+					<li id="data_child_$foreach.count_parent_$v" class="updated fragment fade-up child_tree_item" >$itemTree.getText()</li>
 				#end
 			</ul>
 	 	 #end

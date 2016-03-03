@@ -17,7 +17,7 @@
     <init-param>
       <description>Define storage path for file uploads</description>
       <param-name>upload_path</param-name>
-      <param-value>C:/Users/Vaibhav/Pictures/media_library</param-value>
+      <param-value>C:/Users/mak/Pictures/</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
