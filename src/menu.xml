@@ -51,9 +51,9 @@
 		<child_links display_name="Dashboard" url="/content/content_reviewer/dashboard.jsp" valid_roles="content_reviewer" />
 		<child_links display_name="Dashboard" url="/content/creative_creator/dashboard.jsp" valid_roles="creative_creator" />
 		<child_links display_name="Dashboard" url="/content/creative_admin/dashboard.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Reports" url="/content/content_admin/report_task.jsp" valid_roles="content_admin" />
+<!-- 		<child_links display_name="Reports" url="/content/content_admin/report_task.jsp" valid_roles="content_admin" />
 		<child_links display_name="Reports" url="/content/creative_admin/report_task.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Logout" url="/content/auth/logout" valid_roles="content_admin,content_creator,content_reviewer,creative_admin,creative_creator" />
+ -->		<child_links display_name="Logout" url="/content/auth/logout" valid_roles="content_admin,content_creator,content_reviewer,creative_admin,creative_creator" />
 	</parent_links>
 
 </menu>
