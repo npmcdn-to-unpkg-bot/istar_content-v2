@@ -155,6 +155,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			App.init();
 			Validation.lessonValidation();
 		});
+		
+		function openWin(url) {
+		    myWindow = window.open(url, "", "width=412, height=659");  // Opens a new window
+		    
+		    return false;
+		}
 	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>

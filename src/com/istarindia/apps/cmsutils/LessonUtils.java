@@ -63,9 +63,9 @@ public class LessonUtils {
 			out.append("<button type='submit' class='btn-u btn-u-default'>Add Slide</button>");
 			out.append("</div>");
 			out.append("<div class='checkbox'  style='margin-right: 50px'>");
-			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "' class='btn-u btn-u-default'>Mobile Preview</a>");
+			out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "\")'  href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</div>");
-			out.append("<a target='_new'  href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "' class='btn-u btn-u-default'>Mobile Preview</a>");
+			out.append("<a onclick='openWin('/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "')'   href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</form>");
 			out.append("</div>");
 			out.append("</div>");
