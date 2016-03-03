@@ -4,10 +4,11 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input id="slide_title" class="updateble"  type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
 			#else 
-			<input type="text" name="title" placeholder=" Please enter title" >
+			<input id="slide_title" class="updateble"  type="text" name="title" placeholder=" Please enter title" >
 			#end			
 		</label>
 	</section>
 </fieldset>
+{{istar.slide_title}}

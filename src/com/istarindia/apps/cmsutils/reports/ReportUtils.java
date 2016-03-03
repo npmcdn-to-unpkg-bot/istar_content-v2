@@ -41,7 +41,9 @@ public class ReportUtils {
 		
 		for(String key : conditions.keySet()) {
 			try {
-				query.setParameter(key, Integer.parseInt(conditions.get(key)));
+				if(sql1.contains(key)) {
+					query.setParameter(key, Integer.parseInt(conditions.get(key)));
+				} 
 			} catch (Exception e) {
 				query.setParameter(key, conditions.get(key));
 			}
@@ -63,14 +65,18 @@ public class ReportUtils {
 	}
 
 	public StringBuffer getReport(int reportID, HashMap<String, String> conditions, IstarUser user, String taskType) {
-		File file = new File("/Users/mvsuryateja/git/content/istar_content/src/report_list.xml");
+		
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
+			URL url = (new CMSRegistry()).getClass().getClassLoader().getResource("/report_list.xml");
+			File file = new File(url.toURI());	JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			reportCollection = (ReportCollection) jaxbUnmarshaller.unmarshal(file);
 
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -86,11 +92,14 @@ public class ReportUtils {
 		
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
 		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
-				+ "<table  class='table table-striped table-bordered display responsive nowrap dataTable datatable_report' id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "   data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID + "'>");
+				+ "<table style='width: 98%;margin-left: 1%;margin-right: 1%;' class='table table-striped table-bordered display responsive  dataTable datatable_report' "
+				+ "id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "  "
+						+ " data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID +
+						"'>");
 		out.append("<thead><tr>");
 		for (IStarColumn column : report.getColumns()) {
 			if(column.isVisible) {
-				out.append("<th>" + column.getDisplayName() + "</th>");
+				out.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + column.getDisplayName() + "</th>");
 			}
 		}
 		out.append("</tr></thead>");
@@ -106,9 +115,9 @@ public class ReportUtils {
 				}
 				if(column.isVisible) {
 					if(column.getColumnHandler().equalsIgnoreCase("NONE")) {
-						out.append("<th>" + row.get(i) + "</th>");
+						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + row.get(i) + "</th>");
 					} else {
-						out.append("<th>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID)) + "</th>");
+						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID)) + "</th>");
 					}i++;
 				}
 			}

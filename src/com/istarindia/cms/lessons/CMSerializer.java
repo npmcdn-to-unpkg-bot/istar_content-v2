@@ -112,4 +112,22 @@ public class CMSerializer {
 		return out;
 	}
 
+	
+	public static StringBuffer serializeBlankSlide(String templateName) {
+		StringBuffer out = new StringBuffer();
+
+		
+		VelocityEngine ve = new VelocityEngine();
+		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		ve.init();
+		VelocityContext context = new VelocityContext();
+		context.put("slide", new CMSSlide());
+	
+		Template t = ve.getTemplate(templateName + ".vm");
+		StringWriter writer = new StringWriter();
+		t.merge(context, writer);
+		out.append(writer.toString());
+		return out;
+	}
 }

@@ -36,8 +36,6 @@ public class LessonAssignedToCreatorController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
-		//id, lessonName, session, module, course,  review_by, start working		
-		//these values can be accessed in jsp page to render the data 
 		List<Lesson> lessons= new LessonService().getAllLessonAssignedTO_ContentCreator(user.getId(), StatusTypes.CONTENT_ASSIGNED);
 		for(Lesson lesson : lessons)
 		{
