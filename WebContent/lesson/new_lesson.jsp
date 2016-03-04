@@ -98,7 +98,7 @@
 					<div class="alert alert-warning fade in text-center">
 						<fieldset>
 							<section>
-								<label>Title of Lesson</label> <label class="input"> <input
+								<label>Title of Lesson</label> <label class="input" > <input
 									value="" type="text" name="title" placeholder="Title of Lesson">
 									<b class="tooltip tooltip-bottom-right">The title of the
 										lesson*</b>
@@ -122,7 +122,10 @@
 
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn-u">Create Lesson</button>
+							<button type="submit" class="btn-u"  >Create Lesson</button>
+							<label id="err" style="display: block;color:#ee9393"></label>
+							
+							
 						</footer>
 					
 
@@ -204,6 +207,11 @@
 	<script type="text/javascript">
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
+			if (selectedElmsIds == ""){
+				event.preventDefault();
+				document.getElementById("err").innerHTML = "Please select the session";
+				return false; 
+				}
 			$('#selected_items').val(selectedElmsIds);
 			console.log(selectedElmsIds);
 
