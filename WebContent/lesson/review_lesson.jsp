@@ -134,7 +134,8 @@
 						</fieldset>
 
 						<footer>
-							<button type="submit" class="btn-u">Add Review Comments</button>
+							<button type="submit" class="btn-u" name ="review" value="APPROVED">Approved</button>
+							<button type="submit" class="btn-u" name = "review" value="DIS_APPROVED">Dis Approve</button>
 						</footer>
 					</form>
 
@@ -178,7 +179,11 @@
 								
 								<% 
 								TaskLogDAO dao = new TaskLogDAO();
-								List<TaskLog> items = dao.findByProperty("taskId", Integer.parseInt(request.getParameter("task_id")));
+								TaskLog sample  = new TaskLog();
+								sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
+								sample.setItemType("LESSON");
+								
+								List<TaskLog> items = dao.findByExample(sample);
 								for(TaskLog log : items) {
 								
 									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
