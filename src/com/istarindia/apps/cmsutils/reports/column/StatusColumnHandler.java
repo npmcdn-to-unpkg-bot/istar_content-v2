@@ -27,12 +27,12 @@ public class StatusColumnHandler extends ColumnHandler {
 			{ 
 				if(user.getUserType().equals(roles))
 				{
-					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN))
+					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN) && task.getItemType().equalsIgnoreCase("LESSON"))
 					{
 						items.put("<li><a href='/content/review_task?task_id="+taskID+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/review_task?task_id="+taskID+"'>"+stage.getName()+"</a></li> ");
 
 					}
-					else if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN))
+					else if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN) && !task.getItemType().equalsIgnoreCase("LESSON"))
 					{
 						items.put("<li><a href='/content/media_review?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/media_review?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ");
 

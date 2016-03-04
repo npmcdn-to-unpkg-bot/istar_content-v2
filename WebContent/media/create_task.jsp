@@ -99,6 +99,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						</fieldset>
 						<footer>
 							<button type="submit" class="btn-u">Create Task</button>
+								<label id="err" style="display: block;color:#ee9393"></label>
 						</footer>
 					
 
@@ -195,6 +196,11 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript">
 				function myFunction() {
 					var selectedElmsIds = $('#html1').jstree("get_selected");
+					if (selectedElmsIds == ""){
+						event.preventDefault();
+						document.getElementById("err").innerHTML = "Please select the session";
+						return false; 
+						}
 					$('#selected_items').val(selectedElmsIds);
 				}
 				jQuery(document).ready(function() {
