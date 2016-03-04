@@ -112,10 +112,11 @@
 					value="<%=slide.getTemplateName()%>"> <input type="hidden"
 					name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
-					<div class="col-md-1" style="    margin-left: 39px;vertical-align:middle;">
+					<div class="col-md-1"
+						style="margin-left: 39px; vertical-align: middle;">
 						<a class="left carousel-control" href="#myCarousel"> <span
-							class="glyphicon glyphicon-chevron-left" ></span>
-							<span class="sr-only">Previous</span>
+							class="glyphicon glyphicon-chevron-left"></span> <span
+							class="sr-only">Previous</span>
 						</a>
 					</div>
 					<div class="col-md-3">
@@ -127,8 +128,8 @@
 
 								</label>
 								<div class="note">
-									<strong>Note:</strong> This is where we will put in the
-									paragraph.
+									<strong>Note:</strong> This is where we will put in the Review
+									Notes.
 								</div>
 							</section>
 						</fieldset>
@@ -136,36 +137,79 @@
 						<footer>
 							<button type="submit" class="btn-u">Submit</button>
 						</footer>
-					</div>
+						<div class="panel panel-profile profile">
+							<div class="panel-heading overflow-h">
+								<h2 class="panel-title heading-sm pull-left">
+									<i class="fa fa-comments-o"></i> Review Comments
+								</h2>
 
-					<div class="col-md-6" style="margin-top: -254px;">
+							</div>
+							<div id="scrollbar4"
+								class="panel-body no-padding mCustomScrollbar"
+								data-mcs-theme="minimal-dark">
 
-						<div id="phone_area" style="display: block;">
-							<div id="phone_placeholder"
-								style="display: block; height: 1024px;">
-								<div id="htc_one_emulator"
-									style="transform: scale(1); transform-origin: 0px 0px 0px;">
-									<div id="frame_htc_one_emulator" class="frame_scroller">
-										<iframe
-											src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>"
-											frameborder="0" id='prv'
-											style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
-										</iframe>
+								<% 
+								TaskDAO TDAO = new  TaskDAO();
+								Task task = new Task();
+								task.setItemType("LESSON");
+								task.setItemId(ppt.getLesson().getId());
+								task = TDAO.findByExample(task).get(0);
+								TaskLogDAO dao = new TaskLogDAO();
+								TaskLog sample  = new TaskLog();
+								sample.setTaskId(task.getId());
+								sample.setItemType("SLIDE");
+								sample.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
+								
+								List<TaskLog> items = dao.findByExample(sample);
+								for(TaskLog log : items) {
+								
+									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+									
+									%>
+								<div class="comment">
+									<img
+										src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
+										alt="">
+									<div class="overflow-h">
+										<strong><%=user.getName() %></strong>
+										<p><%=log.getComments() %></p>
+
 									</div>
+								</div>
+								<% } %>
+
+							</div>
+						</div>
+					</div>
+				
+				<div class="col-md-6" style="margin-top: -254px;">
+
+					<div id="phone_area" style="display: block;">
+						<div id="phone_placeholder"
+							style="display: block; height: 1024px;">
+							<div id="htc_one_emulator"
+								style="transform: scale(1); transform-origin: 0px 0px 0px;">
+								<div id="frame_htc_one_emulator" class="frame_scroller">
+									<iframe
+										src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>"
+										frameborder="0" id='prv'
+										style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
+									</iframe>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-1">
-						<a class="right carousel-control" href="#myCarousel" role="button"
-							data-slide="next"> <span
-							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
-					</div>
-
 				</div>
+
+				<div class="col-md-1">
+					<a class="right carousel-control" href="#myCarousel" role="button"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+
+			</div>
 		</form>
 
 	</div>
