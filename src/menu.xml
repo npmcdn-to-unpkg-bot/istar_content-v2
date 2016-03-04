@@ -5,9 +5,7 @@
 	</parent_links>
 	<parent_links display_name="Lesson">
 		<child_links display_name="Create Lesson" url="/content/lesson/new_lesson.jsp" valid_roles="content_admin,content_creator" />
-
-		<child_links display_name="Published Lesson" url="/content/content_creator/published_lesson.jsp" valid_roles="content_creator,content_reviewer" />
-		<child_links display_name="Published Lesson" url="/content/content_admin/published_lesson.jsp" valid_roles="content_admin" />
+		<child_links display_name="Published Lesson" url="/content/content_admin/published_lesson.jsp" valid_roles="content_admin,content_creator,content_reviewer" />
 	</parent_links>
 	<parent_links display_name="Task">
 		<child_links display_name="Create Task" url="/content/media/create_task.jsp" valid_roles="content_creator" />

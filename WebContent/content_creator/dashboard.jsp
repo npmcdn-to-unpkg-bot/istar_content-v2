@@ -88,7 +88,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 										<a href="<%=baseURL %>content_creator/draft_lesson.jsp">View All Lessons in Progress</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all lessons which are in progress by Content Developer.</p></li>
+								<li><p>This will let you view all lessons which are in progress by Content Creators.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
@@ -114,7 +114,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 										<a href="<%=baseURL %>content_creator/approved_lesson.jsp">View All Approved Lessons</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all tasks which are completed by Content Developers and approved by Content Reviewer and ready to be published.</p></li>
+								<li><p>This will let you view all tasks which are completed by Content Creators and approved by Content Reviewer and ready to be published.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
@@ -143,7 +143,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 										<a href="<%=baseURL %>content_creator/created_media.jsp">View All Created Media tasks</a>
 									</h3>
 								</li>
-								<li><p>This will let you view all media tasks which are created by Content Developers.</p></li>
+								<li><p>This will let you view all media tasks which are created by Content Creators.</p></li>
 								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
 							</ul>
 						</div>
