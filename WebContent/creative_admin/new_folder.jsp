@@ -96,12 +96,12 @@
 			</div>
 		</div>
 		<!--/container-->
-		<div class="container content">
+		<div class="container-fluid content">
 			<div class="row">
 				<form action="<%=baseURL%>create_folder" class="sky-form"
 					method="POST" id="sky-form1" onsubmit="myFunction()">
 					<input type="hidden" id="selected_items" name="selected_items" />
-					<div class="col-md-6">
+					<div class="col-md-8">
 						<header>Select Parent Folder</header>
 						<fieldset>
 							<div class="panel panel-grey margin-bottom-40">

@@ -96,7 +96,7 @@
 			</div>
 		</div>
 		<!--/container-->
-		<div class="container content">
+		<div class="container-fluid content">
 			<div class="row">
 			<% 
 			int item_id = (int)request.getAttribute("item_id");
@@ -106,7 +106,7 @@
 					enctype="multipart/form-data">
 					<input type="hidden" name="item_id" value="<%=item_id %>" />
 					<input type="hidden" id="selected_items" name="selected_items" />
-					<div class="col-md-4">
+					<div class="col-md-8">
 						<header>Select Folder</header>
 						<fieldset>
 							<div class="panel panel-grey margin-bottom-40">

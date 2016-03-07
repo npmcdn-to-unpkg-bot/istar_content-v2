@@ -161,6 +161,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		    
 		    return false;
 		}
+		
+		function openWinSpeaker(url) {
+		    myWindow = window.open(url, "", "width=1024, height=768");  // Opens a new window
+		    
+		    return false;
+		}
 	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>

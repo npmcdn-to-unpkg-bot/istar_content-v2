@@ -65,7 +65,7 @@ public class LessonUtils {
 			out.append("<div class='checkbox'  style='margin-right: 50px'>");
 			out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "\")'  href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
 			out.append("</div>");
-			out.append("<a onclick='openWin('/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "')'   href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
+			out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId() + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
 			out.append("</form>");
 			out.append("</div>");
 			out.append("</div>");

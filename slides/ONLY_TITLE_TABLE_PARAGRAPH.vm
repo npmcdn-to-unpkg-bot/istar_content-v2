@@ -11,4 +11,8 @@
 		</tbody>
 	</table>
 	<p>$slide.getParagraph()</p>
+	
+	<aside class="notes">
+       Teacher Notes - $slide.getTeacherNotes()
+     </aside>
 </section>

@@ -289,8 +289,8 @@
 					].join( '&' );
 
 					var hash = '#/' + data.state.indexh + '/' + data.state.indexv;
-					var currentURL = data.url + '?' + params + '&postMessageEvents=true' + hash;
-					var upcomingURL = data.url + '?' + params + '&controls=false' + hash;
+					var currentURL = data.url + '&' + params + '&postMessageEvents=true' + hash;
+					var upcomingURL = data.url + '&' + params + '&controls=false' + hash;
 
 					currentSlide = document.createElement( 'iframe' );
 					currentSlide.setAttribute( 'width', 1280 );
