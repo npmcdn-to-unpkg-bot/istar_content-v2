@@ -68,7 +68,10 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<button class="btn-u" data-toggle="modal" data-target="#myModal">Select Creative Creator</button>
+					<label id="err" style="display: block;color:#ee9393"></label>
+					<button id="demo" onclick="myFunction()" class="btn-u"  data-target="#myModal">Select Creative Creator</button>
+							
+					
 					<div id="html1">
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>Tasks Not Assigned
@@ -112,7 +115,7 @@
 							<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 						</div>
 						<div class="modal-body">
-							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/assign_creator">
+							<form class="form-horizontal" role="form"" action="/content/assign_creator">
 								<input type="hidden" id="selected_items" name="selected_items" />
 								<div class="form-group">
 									<label for="inputEmail1" class="col-lg-4 control-label">Choose Creative Creator</label>
@@ -158,10 +161,18 @@
 			<!-- JS Page Level -->
 			<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 			<script type="text/javascript">
-				function myFunction() {
+			function myFunction() {
 					var selectedElmsIds = $('#html1').jstree("get_selected");
+					if (selectedElmsIds == ""){
+						//event.preventDefault();
+						document.getElementById("err").innerHTML = "Please select the media task";
+						return false; 
+						}
+					else {
+						document.getElementById("err").innerHTML = "";
+						$('#myModal').modal('show');
+					}
 					$('#selected_items').val(selectedElmsIds);
-					console.log(selectedElmsIds);
 				}
 				jQuery(document).ready(function() {
 					App.init();

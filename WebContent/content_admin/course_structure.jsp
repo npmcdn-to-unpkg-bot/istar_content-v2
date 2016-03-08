@@ -91,6 +91,8 @@
 						</fieldset>
 						<footer>
 							<button type="submit" class="btn-u">Submit</button>
+							
+							
 						</footer>
 					</form>
 				</div>
@@ -104,8 +106,8 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-
-					<button class="btn-u" data-toggle="modal" data-target="#myModal">Select Creator and Reviewer</button>
+	                 <label id="err" style="display: block;color:#ee9393"></label>
+					<button class="btn-u" onclick="myFunction()" data-target="#myModal">Select Creator and Reviewer</button>
 					<div id="html1">
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses
@@ -240,9 +242,15 @@
 			<script type="text/javascript">
 				function myFunction() {
 					var selectedElmsIds = $('#html1').jstree("get_selected");
+					if (selectedElmsIds == ""){
+						document.getElementById("err").innerHTML = "Please select the lesson";
+						return false; 
+						}
+					else {
+						$('#myModal').modal('show');
+						document.getElementById("err").innerHTML = "";
+					}
 					$('#selected_items').val(selectedElmsIds);
-					console.log(selectedElmsIds);
-
 				}
 				jQuery(document).ready(function() {
 					App.init();
