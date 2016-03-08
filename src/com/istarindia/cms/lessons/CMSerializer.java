@@ -102,8 +102,9 @@ public class CMSerializer {
 		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 		ve.init();
 		VelocityContext context = new VelocityContext();
+		cMSlide.setTeacherNotes(slide.getTeacherNotes());
+		
 		context.put("slide", cMSlide);
-
 		String templateVMFileName = cMSlide.getTemplateName() + ".vm";
 		if (cMSlide.getTemplateName().equalsIgnoreCase("ONLY_TITLE_LIST")) {
 			templateVMFileName = cMSlide.getList().getList_type() + "___" + cMSlide.getTemplateName() + ".vm";

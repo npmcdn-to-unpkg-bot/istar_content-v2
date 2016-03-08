@@ -11,4 +11,8 @@
 			</ul>
 	 	 #end
 	</ol>
+	
+	<aside class="notes">
+       Teacher Notes - $slide.getTeacherNotes()
+     </aside>
 </section>

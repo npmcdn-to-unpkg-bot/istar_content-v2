@@ -1,4 +1,8 @@
 <section  class="ONLY_TITLE_TABLE_PARAGRAPH" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
 	<h2 class="updated" id="data_slide_title">$slide.getTitle()</h2>
 	<p class="updated" id="data_slide_paragraph">$slide.getParagraph()</p>
+	
+	 <aside class="notes">
+       Teacher Notes - $slide.getTeacherNotes()
+     </aside>
 </section>

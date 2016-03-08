@@ -5,4 +5,8 @@
 			<li class="fragment fade-up" >$item.getText()</li>
 	 	 #end
 	</ol>
+	
+	<aside class="notes">
+       Teacher Notes - $slide.getTeacherNotes()
+     </aside>
 </section>
