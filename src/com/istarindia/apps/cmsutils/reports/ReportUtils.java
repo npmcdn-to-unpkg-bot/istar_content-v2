@@ -108,6 +108,14 @@ public class ReportUtils {
 			}
 		}
 		out.append("</tr></thead>");
+		
+		out.append("<tfoot><tr>");
+		for (IStarColumn column : report.getColumns()) {
+			if(column.isVisible) {
+				out.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + column.getDisplayName() + "</th>");
+			}
+		}
+		out.append("</tr></tfoot>");
 
 		out.append("<tbody>");
 		String ROWID = "";

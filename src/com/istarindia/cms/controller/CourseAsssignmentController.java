@@ -17,12 +17,15 @@ import org.hibernate.Transaction;
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.cmsutils.ErrorMessages;
 import com.istarindia.apps.dao.ContentReviewerDAO;
+import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
+import com.istarindia.apps.services.task.CreateLessonTaskManager;
 
 /**
  * Servlet implementation class CourseAsssignmentController
@@ -54,7 +57,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 			if(assign.startsWith("lesson")) {
 				String[] reviewer = request.getParameterValues("review_user");
 				try {
-					assignLesson(assign,request.getParameter("assign_user"),reviewer );
+					assignLesson(assign,request.getParameter("assign_user"),reviewer, request );
 				} catch (NullPointerException e) {
 					request.setAttribute("message_failure", ErrorMessages.MISSING_REVIEWER);
 
@@ -65,7 +68,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 	}
 
-	private void assignLesson(String assign, String content_id, String[] reviewer) {
+	private void assignLesson(String assign, String content_id, String[] reviewer, HttpServletRequest request) {
 		String lessonid= assign.replace("lesson_", "");
 		
 		System.out.println(">>>"+lessonid);
@@ -87,7 +90,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		} finally {
 			session1.close();
 		}
-		
+		CreateLessonTaskManager.pushTaskNotification(new LessonDAO().findById(Integer.parseInt(lessonid)), (IstarUser)request.getSession().getAttribute("user"), "The Lesson was assigned to "+(new IstarUserDAO().findById(Integer.parseInt(content_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail());
 		TaskReviewerDAO dao2 = new TaskReviewerDAO();
 		List<TaskReviewer> rev = dao2.findByProperty("task", task);
 		List<Integer> already_added = new ArrayList<Integer>();
@@ -120,6 +123,12 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 					} finally {
 						session2.close();
 					}
+					
+					CreateLessonTaskManager.pushTaskNotification(new LessonDAO().findById(Integer.parseInt(lessonid)), (IstarUser)request.getSession().getAttribute("user"), "The Lesson was assigned reviewer as  "+(new IstarUserDAO().findById(Integer.parseInt(reviewer_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail());
+
+				} else {
+					CreateLessonTaskManager.pushTaskNotification(new LessonDAO().findById(Integer.parseInt(lessonid)), (IstarUser)request.getSession().getAttribute("user"), "The Lesson was assigned reviewer as  "+(new IstarUserDAO().findById(Integer.parseInt(reviewer_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail());
+
 				}
 				
 			}

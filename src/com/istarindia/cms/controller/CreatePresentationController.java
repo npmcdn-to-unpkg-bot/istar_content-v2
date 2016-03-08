@@ -11,9 +11,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.apps.services.task.CreateLessonTaskManager;
 
 /**
  * Servlet implementation class CreatePresentationController
@@ -51,7 +54,10 @@ public class CreatePresentationController extends HttpServlet {
 		} finally {
 			session.close();
 		}
-		request.setAttribute("lesson", (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id"))));
+		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
+		CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A presentation for the lesson was created.");
+		
+		request.setAttribute("lesson", lesson);
 		request.getRequestDispatcher("/edit_lesson").forward(request, response);;
 	}
 
