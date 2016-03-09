@@ -131,12 +131,9 @@
 								</label>
 							</section>
 							<section>
-								<label class="label">File input</label> <label for="file"
-									class="input input-file">
-									<div class="button">
-										<input type="file" id="file"
-										 class="input input-file" onchange="this.parentNode.nextSibling.value = this.value"	name="file">Browse
-									</div> <input type="text" readonly="">
+								<label class="label">File input</label>
+								<label for="file" class="input input-file">
+									<div class="button"><input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly>
 								</label>
 							</section>
 						</fieldset>

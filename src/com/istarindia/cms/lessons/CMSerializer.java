@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -96,7 +97,17 @@ public class CMSerializer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		CMSList newList = new CMSList();
+		newList.setList_type(cMSlide.getList().getList_type());
+		newList.setItems(new ArrayList<>());
+		for (CMSTextItem item : cMSlide.getList().getItems()) {
+			if(item.getText().trim().equalsIgnoreCase("")) {
+			//	cMSlide.getList().getItems().remove(item);
+			} else {
+				newList.getItems().add(item);
+			}
+		}
+		cMSlide.setList(newList);
 		VelocityEngine ve = new VelocityEngine();
 		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
 		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());

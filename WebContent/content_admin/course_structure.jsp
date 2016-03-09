@@ -107,7 +107,7 @@
 				</div>
 				<div class="panel-body">
 	                 <label id="err" style="display: block;color:#ee9393"></label>
-					<button class="btn-u" onclick="myFunction()" data-target="#myModal">Select Creator and Reviewer</button>
+					<button class="btn-u" onclick="myFunction()" data-target="#myModal" style="    position: fixed;right: 108px;">Select Creator and Reviewer</button>
 					<div id="html1">
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses
@@ -119,17 +119,36 @@
 									<li id="course_<%=course.getId()%>" data-jstree='{"opened":true}'><%=course.getCourseName()%>
 										<ul>
 											<%
-												for (Module module : course.getModules()) {
+												for (Module module : course.getAllModules(course.getId())) {
 											%>
 											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getModuleName()%>
 												<ul>
 													<%
- 												for (Cmsession session1 : module.getCmsessions()) {
+ 												for (Cmsession session1 : module.getAllSession(module.getId())) {
  											%>
 													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%>
 														<ul>
-															<% for (Lesson lesson : session1.getLessons()) { %>
-															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> <span class="label label-purple rounded-2x"> Assigned to - <%=lesson.getAsignee() %></span> <span>&nbsp;&nbsp;&nbsp;</span> <span class="label rounded label-sea"> Reviewer - <%=lesson.getREviewers() %></span> <span>&nbsp;&nbsp;&nbsp;</span> <span class="label rounded label-yellow"> Status - <%=lesson.getStatus() %></span></li>
+															<% for (Lesson lesson : session1.getAllLessons(session1.getId())) { 
+																String reviewers = "label rounded label-sea";
+																String assigned = "label label-purple rounded-2x";
+																String statusLabel = "label rounded label-yellow";
+																if(lesson.getREviewers().equalsIgnoreCase("reviewer not assigned")) {
+																	reviewers = "label label-default ";
+																}
+																
+																
+																if(lesson.getStatus().equalsIgnoreCase("CREATED")) {
+																	statusLabel = "label label-default ";
+																}
+															//	String email = ((IstarUser)request.getAttribute("user")).getEmail();
+																//if(lesson.getAsignee().equalsIgnoreCase(email)) {
+																//	assigned = "label label-default ";
+																//}
+															%>
+															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
+															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
+															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=reviewers %>"> Reviewer - <%=lesson.getREviewers() %></span> 
+															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=statusLabel%>"> Status - <%=lesson.getStatus() %></span></li>
 															<%
 												}
 											%>
@@ -161,7 +180,7 @@
 							<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 						</div>
 						<div class="modal-body">
-							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/course/assignment">
+							<form class="form-horizontal" role="form" onsubmit="myFunction()" action="/content/course/assignment" method="POST">
 								<input type="hidden" id="selected_items" name="selected_items" />
 								<div class="form-group">
 									<label for="inputEmail1" class="col-lg-4 control-label">Choose User to Assign</label>

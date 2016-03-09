@@ -197,6 +197,9 @@ public class SlideService {
 			cMSlide.setTitle(title);
 			Slide slide = new Slide();
 			slide.setTitle(title);
+			
+			
+			
 			cMSlide.setList(list);
 			try {
 				slide.setSlideText(cMSlide.getText().toString());

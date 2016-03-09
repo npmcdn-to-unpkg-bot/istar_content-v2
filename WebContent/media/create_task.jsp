@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.services.task.MediaUploadHelper"%>
 <%@page import="com.istarindia.apps.services.LessonService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
@@ -117,44 +118,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 									<div id="html1">
-										<ul>
-											<li id="none" data-jstree='{"opened":true ,"disabled":true}'>All Courses
-												<ul>
-													<%
-														CourseDAO dao = new CourseDAO();
-														for (Course course : (List<Course>) dao.findAll()) {
-													%>
-													<li id="course_<%=course.getId()%>"
-														data-jstree='{"opened":true ,"disabled":true}'><%=course.getCourseName()%>
-														<ul>
-															<%
-																for (Module module : course.getModules()) {
-															%>
-															<li id="module_<%=module.getId()%>"
-																data-jstree='{"opened":true ,"disabled":true}'><%=module.getModuleName()%>
-																<ul>
-																	<%
-																		for (Cmsession session1 : module.getCmsessions()) {
-																	%>
-																	<li id="session_<%=session1.getId()%>"
-																		data-jstree='{"opened":true}'><%=session1.getTitle()%>
-
-																	</li>
-
-																	<%
-																		}
-																	%>
-																</ul></li>
-															<%
-																}
-															%>
-														</ul></li>
-													<%
-														}
-													%>
-												</ul>
-											</li>
-										</ul>
+										<%=(new MediaUploadHelper().getMediaTree((IstarUser)request.getSession().getAttribute("user"))) %>
 									</div>
 
 								</div>

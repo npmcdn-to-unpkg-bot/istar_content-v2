@@ -148,7 +148,7 @@ public class MediaUploadController extends IStarBaseServelet {
 							}
 						}
 						
-						
+						System.err.println();
 						TaskDAO d = new TaskDAO();
 						Task t = null;
 						for(Task tt :d.findByItemId(item_id))
@@ -159,7 +159,7 @@ public class MediaUploadController extends IStarBaseServelet {
 								break;
 							}	
 						}
-						System.out.println("task here is "+t.getId());
+						System.err.println("task here is "+t.getId());
 						t.setStatus(StatusTypes.COMPLETED);
 						Session session111 = d.getSession();
 						Transaction tx111 = null;

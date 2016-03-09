@@ -95,9 +95,17 @@ public class ReportUtils {
 			System.out.println("reportID===============>>>"+ reportID);
 		}
 		
+		String style="style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'";
+		String tableStyle ="style='width: 98%;margin-left: 1%;margin-right: 1%;'";
+		if(report.getType_of_report().equalsIgnoreCase("table")) {
+			style="style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'";
+		} else {
+			style="style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'";
+			tableStyle = "style='display:none'";
+		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
-		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
-				+ "<table style='width: 98%;margin-left: 1%;margin-right: 1%;' class='table table-striped table-bordered display responsive  dataTable datatable_report' "
+		out.append("<div class='panel panel-yellow margin-bottom-40' "+style+"> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
+				+ "<table "+tableStyle+" class='table table-striped table-bordered display responsive  dataTable datatable_report' "
 				+ "id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "  "
 						+ " data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID +
 						"'>");
@@ -108,7 +116,7 @@ public class ReportUtils {
 			}
 		}
 		out.append("</tr></thead>");
-		
+		if(report.getType_of_report().equalsIgnoreCase("table")) {
 		out.append("<tfoot><tr>");
 		for (IStarColumn column : report.getColumns()) {
 			if(column.isVisible) {
@@ -116,7 +124,7 @@ public class ReportUtils {
 			}
 		}
 		out.append("</tr></tfoot>");
-
+		}
 		out.append("<tbody>");
 		String ROWID = "";
 		for (ArrayList<String> row : data) {
@@ -138,8 +146,9 @@ public class ReportUtils {
 			out.append("</tr>");
 		}
 		out.append("</tbody>");
-		out.append("</table></div></div></div>");
-		
+		out.append("</table>");
+		out.append("<div id='report_container_" + reportID+"'></div>");
+		out.append("</div></div>");
 		return out;
 
 	}

@@ -1,36 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <istar_reports>
-	
+
 	<!-- Creative Admin -->
 	<reports id="0" type_of_report="pie">
-		<column>name</column>
-		<column>count</column>
-		<sql>SELECT creative_admin.name, count(*) FROM public.task, public.creative_admin WHERE task.actor_id = creative_admin.id group by creative_admin.name</sql>
-		<title>Creative Admin </title>
+
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="count" />
+		<sql>SELECT
+			course.course_name, COUNT (*)
+
+			FROM
+			task,
+			content_creator,
+			lesson, cmsession, "module", course
+			WHERE
+			task.actor_id = content_creator."id" and
+			task.item_id=lesson."id"
+			and lesson.session_id=cmsession."id"
+			and cmsession.module_id="module"."id"
+			and "module".course_id=course.id
+
+			GROUP BY
+			course.course_name
+		</sql>
+		<title>Tasks by Course</title>
 	</reports>
 	<reports id="1" type_of_report="pie">
-		<column>status</column>
-		<column>count</column>
-		<sql>SELECT task.status, count(*) FROM public.task, public.creative_admin WHERE task.actor_id = creative_admin.id group by task.status</sql>
-		<title>CREATIVE ADMIN</title>
+
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="name" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="count" />
+		<sql>SELECT
+			content_creator.name, COUNT (*)
+
+			FROM
+			task,
+			content_creator,
+			lesson, cmsession, "module", course
+			WHERE
+			task.actor_id = content_creator."id" and
+			task.item_id=lesson."id"
+			and lesson.session_id=cmsession."id"
+			and cmsession.module_id="module"."id"
+			and "module".course_id=course.id
+
+			GROUP BY
+			content_creator.name
+		</sql>
+		<title>Tasks by Assignee </title>
 	</reports>
 	
-<!-- TBD	
-	<!- - Task report for creative admin - ->
-	<reports id="2" type_of_report="table">
-		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
-		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
-		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
-		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
-		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
-		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+	<reports id="2" type_of_report="pie">
 
-		<sql> 
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="status" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="count" />
+		<sql>SELECT
+	task.status, COUNT (*)
+	
+FROM
+	task,
+	content_creator, 
+	lesson, cmsession, "module", course
+WHERE
+	task.actor_id = content_creator."id" and 
+	task.item_id=lesson."id"
+and lesson.session_id=cmsession."id"
+and cmsession.module_id="module"."id"
+and "module".course_id=course.id
+
+GROUP BY
+	task.status
 		</sql>
-		<title>Task report</title>
+		<title>Tasks by Status </title>
 	</reports>
--->
+	
+	<reports id="100" type_of_report="column">
+<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="status" />
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="count" />
+		<sql>SELECT
+	course_name, task.status, COUNT (*)
+FROM
+	task,
+	content_creator, 
+	lesson, cmsession, "module", course, task_log
+WHERE
+	task.actor_id = content_creator."id" and 
+	task.item_id=lesson."id"
+and lesson.session_id=cmsession."id"
+and cmsession.module_id="module"."id"
+and "module".course_id=course.id
+and task_log.task_id=task.id
+GROUP BY
+	task.status,course_name
+
+		</sql>
+		<title>Tasks by Status &amp; Course </title>
+	</reports>
+
+	<!-- TBD <!- - Task report for creative admin - -> <reports id="2" type_of_report="table"> <column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" /> <column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" /> <column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" /> <column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" /> <column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" /> <column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" /> <column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" 
+		name="status" /> <sql> </sql> <title>Task report</title> </reports> -->
 	<!-- Published media for creative admin -->
 	<reports id="3" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -56,7 +124,8 @@
 			END) as assigned_to,
 			D.name as created_by
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON
+			(CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
@@ -65,7 +134,7 @@
 		</sql>
 		<title> All Tasks Published</title>
 	</reports>
-	
+
 	<!-- Inprogress lesson list for creative admin -->
 	<reports id="4" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -91,7 +160,8 @@
 			END) as assigned_to,
 			D.name as created_by
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON
+			(CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
@@ -100,7 +170,7 @@
 		</sql>
 		<title> All Media Tasks in progress</title>
 	</reports>
-	
+
 	<!-- Pending for review media list for content admin -->
 	<reports id="5" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -126,7 +196,8 @@
 			END) as assigned_to,
 			D.name as created_by
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON
+			(CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
@@ -135,24 +206,24 @@
 		</sql>
 		<title> All Tasks Pending Review</title>
 	</reports>
-	
+
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-	
-	
+
+
 	<!-- Content Admin -->
-	<reports id="20" type_of_report="pie">
+	<reports id="20" type_of_report="table">
 		<column>name</column>
 		<column>count</column>
 		<sql>SELECT content_admin.name, count(*) FROM public.task, public.content_admin WHERE task.actor_id = content_admin.id group by content_admin.name</sql>
 		<title>My Name is CONTENT admin </title>
 	</reports>
-	<reports id="21" type_of_report="pie">
+	<reports id="21" type_of_report="table">
 		<column>status</column>
 		<column>count</column>
 		<sql>SELECT task.status, count(*) FROM public.task, public.content_admin WHERE task.actor_id = content_admin.id group by task.status</sql>
 		<title>My Name is content ADMIN</title>
 	</reports>
-	
+
 	<!-- Task report for content admin -->
 	<reports id="22" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -168,21 +239,22 @@
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
 			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, A.status
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
-			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
 			LEFT JOIN public.lesson L ON (A.item_id=L.id)
 			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
 			INNER JOIN public.module M ON (M.id=CM.module_id)
-			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			 A.item_type ='LESSON' 
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			A.item_type ='LESSON'
+			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name,
+			CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title>Task report</title>
 	</reports>
-	
+
 	<!-- Created lesson list for content admin -->
 	<reports id="23" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -199,21 +271,22 @@
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
 			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, a.id AS taskid, A.status
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
-			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
 			LEFT JOIN public.lesson L ON (A.item_id=L.id)
 			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
 			INNER JOIN public.module M ON (M.id=CM.module_id)
-			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			 A.item_type ='LESSON' 
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			A.item_type ='LESSON'
+			GROUP BY A.ID, L.id, d.email, L.title, CM.title,
+			M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Created</title>
 	</reports>
-	
+
 	<!-- Inprogress lesson list for content admin -->
 	<reports id="24" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -228,21 +301,22 @@
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
 			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
-			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
 			LEFT JOIN public.lesson L ON (A.item_id=L.id)
 			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
 			INNER JOIN public.module M ON (M.id=CM.module_id)
-			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.status LIKE 'DRAFT' AND A.item_type ='LESSON' 
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			A.status LIKE 'DRAFT' AND A.item_type ='LESSON'
+			GROUP BY A.ID, L.id, d.email, L.title, CM.title,
+			M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks in progress</title>
 	</reports>
-	
+
 	<!-- Completed lesson list for content admin -->
 	<reports id="25" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -258,21 +332,22 @@
 			a.id AS task_id, L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
 			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
-			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
 			LEFT JOIN public.lesson L ON (A.item_id=L.id)
 			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
 			INNER JOIN public.module M ON (M.id=CM.module_id)
-			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.status LIKE 'COMPLETED' AND A.item_type ='LESSON' 
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			A.status LIKE 'COMPLETED' AND A.item_type ='LESSON'
+			GROUP BY A.ID, L.id, d.email, L.title, CM.title,
+			M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks completed</title>
 	</reports>
-	
+
 	<!-- Review pending lesson list for content admin -->
 	<reports id="26" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -297,12 +372,13 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'COMPLETED' AND A.item_type ='LESSON' and B.status='REVIEWER_ASSIGNED'
-			GROUP BY A.ID,L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID,L.id, d.email,
+			L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Pending Review</title>
 	</reports>
-	
+
 	<!-- Requested to publish lesson list for content admin -->
 	<reports id="27" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -327,12 +403,13 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'REQUEST_FOR_PUBLISH' AND A.item_type ='LESSON'
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id, d.email, L.title,
+			CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks not Published</title>
 	</reports>
-	
+
 	<!-- Published lesson list for content admin -->
 	<reports id="28" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -357,30 +434,31 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'PUBLISHED' AND A.item_type ='LESSON'
-			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title,
+			M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Published</title>
 	</reports>
-	
+
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-	
-	
-	
+
+
+
 	<!-- Content Reviewer -->
-	<reports id="40" type_of_report="pie">
+	<reports id="40" type_of_report="table">
 		<column>name</column>
 		<column>count</column>
 		<sql>SELECT content_reviewer.name, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by content_reviewer.name</sql>
 		<title>My Name is CONTENT reviewer </title>
 	</reports>
-	<reports id="41" type_of_report="pie">
+	<reports id="41" type_of_report="table">
 		<column>status</column>
 		<column>count</column>
 		<sql>SELECT task.status, count(*) FROM public.task, public.content_reviewer WHERE task.actor_id = content_reviewer.id group by task.status</sql>
 		<title>My Name is content REVIEWER</title>
 	</reports>
-	
+
 	<!-- Assigned lesson list for Content Reviewer -->
 	<reports id="42" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -395,21 +473,22 @@
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
 			d.email as actor
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
-			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
 			LEFT JOIN public.lesson L ON (A.item_id=L.id)
 			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
 			INNER JOIN public.module M ON (M.id=CM.module_id)
-			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.status LIKE 'COMPLETED' AND  B.status LIKE 'REVIEWER_ASSIGNED' AND  A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
-			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			A.status LIKE 'COMPLETED' AND B.status LIKE 'REVIEWER_ASSIGNED' AND A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
+			GROUP BY A.ID, L.id,d.email,
+			L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Assigned</title>
 	</reports>
-	
+
 	<!-- Disapproved lesson list for Content Reviewer -->
 	<reports id="43" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -424,38 +503,39 @@
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
 			d.email as actor
 			FROM public.task A
-			LEFT JOIN public.content_creator D ON (D.id=A.actor_id) 
-			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id) 
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
 			LEFT JOIN public.lesson L ON (A.item_id=L.id)
 			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
 			INNER JOIN public.module M ON (M.id=CM.module_id)
-			INNER JOIN public.course CC ON (CC.id=M.course_id) 
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			B.status LIKE 'DIS_APPROVED' AND  A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
-			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			B.status LIKE 'DIS_APPROVED' AND A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name,
+			CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Disapproved</title>
 	</reports>
-	
+
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-	
+
 
 	<!-- Creative creator -->
-	<reports id="60" type_of_report="pie">
+	<reports id="60" type_of_report="table">
 		<column>name</column>
 		<column>count</column>
 		<sql>SELECT creative_creator.name, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by creative_creator.name</sql>
 		<title>My Name is Creative Creator </title>
 	</reports>
-	<reports id="61" type_of_report="pie">
+	<reports id="61" type_of_report="table">
 		<column>status</column>
 		<column>count</column>
 		<sql>SELECT task.status, count(*) FROM public.task, public.creative_creator WHERE task.actor_id = creative_creator.id group by task.status</sql>
 		<title>My Name is Creative Creatorrrrrrr</title>
 	</reports>
-	
+
 	<!-- Assigned media task list for creative creator -->
 	<reports id="62" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -482,12 +562,13 @@
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='CREATIVE_ASSIGNED' AND A.actor_id = :creative_creator_id
+			A.item_type !='LESSON' AND
+			A.status='CREATIVE_ASSIGNED' AND A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
 		<title> All Media Tasks Assigned</title>
 	</reports>
-	
+
 	<!-- Inprogess media task list for creative creator -->
 	<reports id="63" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -514,12 +595,13 @@
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='DRAFT' AND A.actor_id = :creative_creator_id
+			A.item_type !='LESSON' AND A.status='DRAFT' AND
+			A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
 		<title> All Media Tasks in Progress</title>
 	</reports>
-	
+
 	<!-- Not reviewed media task list for creative creator -->
 	<reports id="64" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -546,12 +628,13 @@
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
-			A.item_type !='LESSON' AND A.status='COMPLETED' AND A.actor_id = :creative_creator_id
+			A.item_type !='LESSON' AND A.status='COMPLETED' AND
+			A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
 		<title> All Media Tasks Pending Review</title>
 	</reports>
-	
+
 	<!-- Disapproved media task list for creative creator -->
 	<reports id="65" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -574,26 +657,27 @@
 			FROM public.task A
 			LEFT JOIN public.media_review M ON (M.task_id=A.id)
 			LEFT JOIN public.content_creator D ON (D.id=A.owner_id) LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id) LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id) LEFT JOIN public.image I ON (A.item_id=I.id)
-			LEFT JOIN public.video V ON (A.item_id=V.id)
+			LEFT JOIN
+			public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
 			A.item_type !='LESSON' AND A.status='DIS_APPROVED' AND A.actor_id = :creative_creator_id
 			GROUP BY A.id, A.item_id ,M.task_id,M.comment,CM.title,I.title,V.title,D.name ,I.description,V.description, I.url,V.url, A.status, AD.id, CR.id ORDER BY a.id
 		</sql>
 		<title> All Media Tasks Disapproved</title>
-	</reports>	
-	
+	</reports>
+
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 
 	<!-- Content Creator -->
-	<reports id="80" type_of_report="pie">
+	<reports id="80" type_of_report="table">
 		<column>name</column>
 		<column>count</column>
 		<sql>SELECT content_creator.name, count(*) FROM public.task, public.content_creator WHERE task.actor_id = content_creator.id group by content_creator.name</sql>
 		<title>Title</title>
 	</reports>
-	<reports id="81" type_of_report="pie">
+	<reports id="81" type_of_report="table">
 		<column>status</column>
 		<column>count</column>
 		<sql>SELECT task.status, count(*) FROM public.task, public.content_creator WHERE task.actor_id = content_creator.id group by task.status</sql>
@@ -622,12 +706,13 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'CONTENT_ASSIGNED' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id,
+			d.email, L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Assigned </title>
 	</reports>
-	
+
 	<!-- Inprogress lesson list for content creator -->
 	<reports id="83" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -651,12 +736,13 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'DRAFT' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id, d.email, L.title,
+			CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks in Progress</title>
 	</reports>
-	
+
 	<!-- Disapproved lesson list for content creator -->
 	<reports id="84" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -679,12 +765,13 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'DIS_APPROVED' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id, d.email,
+			L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Disapproved</title>
 	</reports>
-	
+
 	<!-- Approved lesson list for content creator -->
 	<reports id="85" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -707,12 +794,13 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'APPROVED' AND A.item_type ='LESSON' AND A.actor_id=:content_creator_id
-			GROUP BY A.ID, L.id, d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id, d.email,
+			L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Approved</title>
 	</reports>
-	
+
 	<!-- Created media list for content creator -->
 	<reports id="86" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
@@ -741,7 +829,8 @@
 			LEFT JOIN public.content_creator D ON (D.id=A.owner_id)
 			LEFT JOIN public.creative_admin AD ON (A.actor_id=AD.id)
 			LEFT JOIN public.creative_creator CR ON (CR.id=A.actor_id)
-			LEFT JOIN public.image I ON (A.item_id=I.id)
+			LEFT JOIN
+			public.image I ON (A.item_id=I.id)
 			LEFT JOIN public.video V ON (A.item_id=V.id)
 			INNER JOIN public.cmsession CM ON (I.session_id= CM.id)
 			WHERE
@@ -751,7 +840,7 @@
 		<title> All Media Tasks created</title>
 	</reports>
 
-<!-- Published lesson list for content creator -->
+	<!-- Published lesson list for content creator -->
 	<reports id="87" type_of_report="table">
 		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
@@ -775,7 +864,8 @@
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
 			A.status LIKE 'PUBLISHED' AND A.item_type ='LESSON'
-			GROUP BY A.ID, L.id,d.email, L.title, CM.title, M.module_name, CC.course_name
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title,
+			M.module_name, CC.course_name
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks Published</title>

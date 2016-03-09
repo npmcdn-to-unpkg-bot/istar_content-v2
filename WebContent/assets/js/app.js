@@ -302,7 +302,6 @@ var App = function () {
 		try {
 			console.log("graoh foujd -->");
 			$('.datatable_report').each(function(i, obj) {
-				
 				var tableID  = $(this).attr('id');
 			    var containerID = '#'+$(this).data('graph_containter');
 			    var graph_type = $(this).data('graph_type');
@@ -342,6 +341,9 @@ var App = function () {
 				        }
 				    });
 			});
+			
+			//Hide Table
+			$('.dataTables_wrapper').hide();
 		
 	} catch (err) {
 		console.log(err);

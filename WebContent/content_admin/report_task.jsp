@@ -61,11 +61,28 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<!--/container-->
 		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="col-md-12">
+			<div class="col-md-4">
 				<% HashMap<String, String> conditions = new  HashMap();
 				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
 				%>
-				<%=(new ReportUtils()).getReport(22, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				<%=(new ReportUtils()).getReport(0, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+			</div>
+			
+			<div class="col-md-4">
+				<% HashMap<String, String> conditions1 = new  HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(1, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+			</div>
+			<div class="col-md-4">
+				<% HashMap<String, String> conditions2 = new  HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(2, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+			</div>
+			<div class="col-md-12">
+								<%=(new ReportUtils()).getReport(100, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+
 			</div>
 		</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
