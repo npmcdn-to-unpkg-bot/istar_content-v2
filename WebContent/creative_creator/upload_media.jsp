@@ -133,15 +133,13 @@
 							<section>
 								<label class="label">File input</label>
 								<label for="file" class="input input-file">
-									<div class="button">
-									<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value" name="file">Browse</div>
+									<div class="button"><input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
 									<input type="text" readonly>
 								</label>
-								
-								
 							</section>
 						</fieldset>
 						<footer>
+	               			<label id="err" style="display: block;color:#ee9393"></label>
 							<button type="submit" class="btn-u">Upload and Mark as Complete</button>
 						</footer>
 						<div class="margin-bottom-60"></div>
@@ -182,6 +180,14 @@
 	
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
+			if (selectedElmsIds == ""){
+				event.preventDefault();
+				document.getElementById("err").innerHTML = "Please select the target folder(s)";
+				return false; 
+				}
+			else {
+				document.getElementById("err").innerHTML = "";
+			}
 			$('#selected_items').val(selectedElmsIds);
 			console.log(selectedElmsIds);
 		}

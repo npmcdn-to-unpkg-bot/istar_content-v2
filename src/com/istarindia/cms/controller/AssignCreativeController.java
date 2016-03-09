@@ -39,10 +39,11 @@ public class AssignCreativeController extends IStarBaseServelet {
 			}
 			System.out.println(assign);
 		}
+		request.setAttribute("message_success", "Task has been assigned successfully!");
+		request.getRequestDispatcher("/creative_admin/assign_creative.jsp").forward(request, response);
 
-		response.sendRedirect(request.getContextPath() + "/creative_admin/assign_creative.jsp");
+	//	response.sendRedirect(request.getContextPath() + "/creative_admin/assign_creative.jsp");
 	}
-
 	
 	private void assignTask(String assign, String content_id) {
 		String taskid= assign.replace("task_", "");
@@ -54,7 +55,6 @@ public class AssignCreativeController extends IStarBaseServelet {
 		Transaction tx1 = null;
 		try {
 			tx1 = session1.beginTransaction();
-			
 			dao.save(task);
 			tx1.commit();
 		} catch (HibernateException e) {
@@ -64,8 +64,6 @@ public class AssignCreativeController extends IStarBaseServelet {
 		} finally {
 			session1.close();
 		}
-		
-		
 	}
 
 	/**

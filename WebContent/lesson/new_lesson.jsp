@@ -209,9 +209,12 @@
 			var selectedElmsIds = $('#html1').jstree("get_selected");
 			if (selectedElmsIds == ""){
 				event.preventDefault();
-				document.getElementById("err").innerHTML = "Please select the session";
+				document.getElementById("err").innerHTML = "Please select the session and try again";
 				return false; 
 				}
+			else {
+				document.getElementById("err").innerHTML = "";
+			}
 			$('#selected_items').val(selectedElmsIds);
 			console.log(selectedElmsIds);
 

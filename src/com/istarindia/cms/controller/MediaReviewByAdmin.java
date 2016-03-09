@@ -84,10 +84,12 @@ public class MediaReviewByAdmin extends IStarBaseServelet {
 			if(request.getParameter("button").equalsIgnoreCase(StatusTypes.APPROVED))
 			{
 				new TaskService().updateStatus(task.getId(), StatusTypes.PUBLISHED);
+				request.setAttribute("message_success", "The media has been approved and published successfully!");
 			}
 			else
 			{
 				new TaskService().updateStatus(task.getId(), StatusTypes.DIS_APPROVED);
+				request.setAttribute("message_success", "The media has been sent back to the creator with your comments!");
 			}	
 			
 		}

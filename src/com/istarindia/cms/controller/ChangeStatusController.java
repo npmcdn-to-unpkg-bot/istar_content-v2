@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.LessonDAO;
@@ -41,10 +42,30 @@ public class ChangeStatusController extends HttpServlet {
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is chamged from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
 			new TaskService().updateStatus(task_id, new_status);
-			
-			
-			
-			response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
+			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
+				request.setAttribute("message_success", "New task has been sent for review successfully!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.DRAFT)) {
+				request.setAttribute("message_success", "The task has been updated as In Progress successfully!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.DIS_APPROVED)) {
+				request.setAttribute("message_success", "The task has been successfully sent back to the content creator!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.APPROVED)) {
+				request.setAttribute("message_success", "The task has been successfully approved!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.PUBLISHED)) {
+				request.setAttribute("message_success", "The task has been successfully published!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH)) {
+				request.setAttribute("message_success", "The request has been sent for publishing the task!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.DELETED)) {
+				request.setAttribute("message_success", "The task has been successfully deleted!");
+			}
+			String redirectUrl=user.getUserType().toLowerCase() + "/dashboard.jsp";
+			request.getRequestDispatcher(redirectUrl).forward(request, response);
+			//response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
 		}
 	}
 

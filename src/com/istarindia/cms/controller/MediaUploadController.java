@@ -287,9 +287,8 @@ public class MediaUploadController extends IStarBaseServelet {
 		} finally {
 
 		}
-		
-		
-		
+
+		request.setAttribute("message_success", "Media file has been uploaded successfully and sent for review!");
 		request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
 	}
 

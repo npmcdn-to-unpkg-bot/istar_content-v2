@@ -59,6 +59,7 @@ public class CreateFolderController extends IStarBaseServelet {
 				}
 			}	
 		}
+		request.setAttribute("message_success", "New folder has been created successfully!");
 		request.getRequestDispatcher("/creative_admin/new_folder.jsp").forward(request, response);
 	}
 

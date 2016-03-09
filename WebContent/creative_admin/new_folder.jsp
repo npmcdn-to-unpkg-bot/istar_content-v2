@@ -107,7 +107,6 @@
 							<div class="panel panel-grey margin-bottom-40">
 								<div class="panel-body">
 									<div id="html1">
-									
 										<ul>
 											<%=getFolderTree()%>
 										</ul>
@@ -176,6 +175,9 @@
 			event.preventDefault();
 			document.getElementById("err").innerHTML = "Please select parent folder!";
 			return false; 
+			}
+			else {
+				document.getElementById("err").innerHTML = "";
 			}
 			$('#selected_items').val(selectedElmsIds);
 			console.log(selectedElmsIds);
