@@ -193,7 +193,7 @@ public class MediaUploadController extends IStarBaseServelet {
 							transientInstance2.setThumbnailUrl("/content/media_upload?getthumb=" + item.getName());
 							transientInstance2.setTags(tags);
 							
-							
+							request.setAttribute("msg", "Image with title " + transientInstance2.getTitle() + " and " + transientInstance2.getUrl() + " created. ");
 							dao.attachDirty(transientInstance2);
 							tx.commit();
 						} catch (HibernateException e) {
@@ -275,12 +275,14 @@ public class MediaUploadController extends IStarBaseServelet {
 					}
 					
 				}
-			//	request.setAttribute("msg", "Image with title " + transientInstance2.getTitle() + " and " + transientInstance2.getUrl() + " created. ");
+				
 
 			}
 		} catch (FileUploadException e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
 
