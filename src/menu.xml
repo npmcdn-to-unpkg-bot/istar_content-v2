@@ -24,7 +24,7 @@
 		<child_links display_name="Assigned" url="/content/content_reviewer/assigned_lesson.jsp" valid_roles="content_reviewer" />
 		<child_links display_name="Disapproved" url="/content/content_reviewer/disapproved_lesson.jsp" valid_roles="content_reviewer" />
 
-		<child_links display_name="Created" url="/content/content_creator/created_media.jsp" valid_roles="content_creator" />
+		<child_links display_name="Created Media" url="/content/content_creator/created_media.jsp" valid_roles="content_creator" />
 
 		<child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin" />
 		<child_links display_name="Assigned" url="/content/creative_admin/assigned.jsp" valid_roles="creative_admin" />
