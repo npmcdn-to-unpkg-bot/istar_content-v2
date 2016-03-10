@@ -75,6 +75,16 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+			
+			 document.onreadystatechange = function () {
+			     if (document.readyState == "complete") {
+			    	 console.log("Ready");
+			    	 initSlide();
+			   }
+			 }
+			
+			
+			
 
 		</script>
 

@@ -105,6 +105,26 @@ public class CMSerializer {
 			//	cMSlide.getList().getItems().remove(item);
 			} else {
 				newList.getItems().add(item);
+				
+				
+				try {
+					if(item.getList().items.size() !=0) {
+						System.err.println("111");
+					
+						CMSList childList = new CMSList();
+						ArrayList<CMSTextItem> items3 = new ArrayList<>();
+						childList.setItems(items3);
+						for (CMSTextItem childItem : item.getList().items) {
+							if(!childItem.getText().trim().startsWith("$slide")) {
+								childList.getItems().add(childItem);
+							}
+						}
+						item.setList(childList);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
 			}
 		}
 		cMSlide.setList(newList);

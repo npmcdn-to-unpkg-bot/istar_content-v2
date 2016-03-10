@@ -108,9 +108,9 @@ public class LessonUtils {
 			out.append("</div>");
 			out.append("</div>");
 		} else if (lesson.getGame() != null) {
-
+			out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 		} else if (lesson.getAssessment() != null) {
-
+			out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 		}
 
 		return out;

@@ -93,9 +93,6 @@ public class ReviewLessonController extends IStarBaseServelet {
 			response.sendRedirect("/content/content_reviewer/dashboard.jsp");
 			response.getWriter().append("Served at: ").append(request.getContextPath());
 		} else {
-			/// review_lesson?is_edit=true&slide_id=4&template=ONLY_TITLE&
-			// ppt_id=9&review_notes=%3Cp%3Essssssssssssssssssss%3C%2Fp%3E
-			
 			SlideDAO dao1 = new SlideDAO();
 			Slide slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
 			
