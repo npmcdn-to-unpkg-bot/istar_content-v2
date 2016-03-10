@@ -58,6 +58,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 				String[] reviewer = request.getParameterValues("review_user");
 				try {
 					assignLesson(assign,request.getParameter("assign_user"),reviewer, request );
+					request.setAttribute("message_success", ErrorMessages.ALL_OK);
 				} catch (NullPointerException e) {
 					request.setAttribute("message_failure", ErrorMessages.MISSING_REVIEWER);
 
@@ -65,7 +66,6 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 				}
 			}
 		}
-		request.setAttribute("message_success", ErrorMessages.ALL_OK);
 		request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 	}
 

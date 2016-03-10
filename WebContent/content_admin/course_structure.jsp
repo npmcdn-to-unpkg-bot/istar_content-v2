@@ -103,7 +103,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-	                 <label id="err" style="display: block;color:#ee9393"></label>
+	                 <label id="err" style="font-size: 150%; display: block;color:#ee9393"></label>
 					<button class="btn-u" onclick="myFunction()" data-target="#myModal" style="    position: fixed;right: 108px;">Select Creator and Reviewer</button>
 					<div id="html1">
 						<ul>
@@ -260,6 +260,7 @@
 					var selectedElmsIds = $('#html1').jstree("get_selected");
 					if (selectedElmsIds == ""){
 						document.getElementById("err").innerHTML = "Please select the lesson";
+						$(window).scrollTop(0);
 						return false; 
 						}
 					else {
