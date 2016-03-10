@@ -10,6 +10,7 @@
 	<parent_links display_name="Task">
 		<child_links display_name="Create Task" url="/content/media/create_task.jsp" valid_roles="content_creator" />
 		<child_links display_name="Created" url="/content/content_admin/created_lesson.jsp" valid_roles="content_admin" />
+		<child_links display_name="Assigned" url="/content/content_admin/assigned.jsp" valid_roles="content_admin" />
 		<child_links display_name="Inprogress" url="/content/content_admin/draft_lesson.jsp" valid_roles="content_admin" />
 		<child_links display_name="Completed" url="/content/content_admin/completed_lesson.jsp" valid_roles="content_admin" />
 		<child_links display_name="Not Reviewed" url="/content/content_admin/review_pending.jsp" valid_roles="content_admin" />
