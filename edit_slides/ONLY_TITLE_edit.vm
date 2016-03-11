@@ -4,9 +4,9 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input id="slide_title" class="updateble"  type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input id="slide_title" class="updateble"  type="text" name="title" placeholder="Please enter title" data-parsley-required="true" data-parsley-required-message="Please enter the title" value="$slide.getTitle()">
 			#else 
-			<input id="slide_title" class="updateble"  type="text" name="title" placeholder=" Please enter title" >
+			<input id="slide_title" class="updateble"  type="text" name="title" placeholder="Please enter title" data-parsley-required="true" data-parsley-required-message="Please enter the title">
 			#end			
 		</label>
 	</section>

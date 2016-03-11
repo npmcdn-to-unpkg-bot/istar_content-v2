@@ -57,6 +57,9 @@ public class CMSSlide {
 
 	@XmlElement(name = "student_notes")
 	public String getStudentNotes() {
+		if(studentNotes==null) {
+			return "";
+		}
 		return studentNotes;
 	}
 
@@ -66,6 +69,9 @@ public class CMSSlide {
 
 	@XmlElement(name = "teacher_notes")
 	public String getTeacherNotes() {
+		if(teacherNotes==null) {
+			return "";
+		}
 		return teacherNotes;
 	}
 

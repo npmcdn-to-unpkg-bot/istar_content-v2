@@ -86,7 +86,7 @@
 			</div>
 		</div>
 		<form action="/content/create_slide" name="" method="GET"
-			class="sky-form">
+			data-parsley-validate="" novalidate="" class="sky-form">
 			<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				LessonUtils utils = new LessonUtils();
@@ -168,9 +168,12 @@
 
 						<fieldset>
 							<section>
-								<label class="label">Teacher Notes</label> <label
-									class="textarea"> <textarea rows="3"
-										name="teacher_notes" placeholder=" Please enter text"><%=slide.getTeacherNotes()%> </textarea>
+								<label class="label">Teacher Notes</label> 
+								<label class="textarea"> <textarea rows="3" name="teacher_notes" 
+								data-parsley-required="true" data-parsley-length="[5,250]" 
+								data-parsley-required-message="Please provide teacher notes" 
+								data-parsley-length-message="It should be 5-250 characters long">
+								<%=slide.getTeacherNotes()%> </textarea>
 
 								</label>
 								<div class="note">
@@ -181,10 +184,12 @@
 						</fieldset>
 						<fieldset>
 							<section>
-								<label class="label">Student Notes</label> <label
-									class="textarea"> <textarea rows="3"
-										name="student_notes" placeholder=" Please enter text"> <%=slide.getStudentNotes()%></textarea>
-
+								<label class="label">Student Notes</label> 
+								<label class="textarea"> <textarea rows="3"name="student_notes" 
+								data-parsley-required="true" data-parsley-length="[5,250]" 
+								data-parsley-required-message="Please provide student notes" 
+								data-parsley-length-message="It should be 5-250 characters long"> 
+								<%=slide.getStudentNotes()%></textarea>
 								</label>
 								<div class="note">
 									<strong>Note:</strong> This is where we will put in the
@@ -251,6 +256,7 @@
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	 <script type="text/javascript" src="<%=baseURL %>assets/js/plugins/parsley.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
