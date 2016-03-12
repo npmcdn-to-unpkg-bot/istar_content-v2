@@ -126,7 +126,10 @@ public class LessonUtils {
 					+ "<fieldset><section><label>Assessment Type</label> "
 					+ "<label class='input'><select class='form-control valid' name='slide_type' style='margin-right: 50px'>");
 			
-			out.append("<option value='STATIC'>STATIC</option><option value='ADAPTIVE'>ADAPTIVE</option><option value='TREE'>TREE</option><option value='RANDOM'>RANDOM</option></select></label> </section> "
+			out.append("<option value='STATIC'>STATIC</option>"
+					+ "<option value='ADAPTIVE'>ADAPTIVE</option>"
+					+ "<option value='TREE'>TREE</option>"
+					+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
 					+ "<section> <label>Number of Questions</label> <label class='input'> "
 					+ "<input value='20' type='number' name='duration' placeholder='Duration of Lesson'>  </label> </section> </fieldset> "
 					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");

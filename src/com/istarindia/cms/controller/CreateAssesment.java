@@ -1,4 +1,4 @@
-package com.istarindia.apps.services.controllers.auth;
+package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
