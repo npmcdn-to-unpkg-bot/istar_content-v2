@@ -1,6 +1,9 @@
-package com.istarindia.apps.services.controllers.auth;
+package com.istarindia.cms.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,14 +42,21 @@ public class CreateAssesment extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AssessmentDAO dao= new AssessmentDAO();
-		Assessment ppt = new Assessment();
-		ppt.setLesson((new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id"))));
-		Session session = dao.getSession();
+		AssessmentDAO assessmentDAO= new AssessmentDAO();
+		Assessment assessment = new Assessment();
+		
+		Integer lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
+		assessment.setLesson((new LessonDAO()).findById(lesson_id));
+		
+		Calendar calendar = Calendar.getInstance();
+		Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+		assessment.setCreatedAt(currentTimestamp);
+		
+		Session session = assessmentDAO.getSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			dao.save(ppt);
+			assessmentDAO.save(assessment);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -55,11 +65,14 @@ public class CreateAssesment extends HttpServlet {
 		} finally {
 			session.close();
 		}
+		
 		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
 		CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "An Assessment for the lesson was created.");
 		
 		request.setAttribute("lesson", lesson);
 		request.getRequestDispatcher("/edit_lesson").forward(request, response);;
+		
+		
 	}
 
 	/**

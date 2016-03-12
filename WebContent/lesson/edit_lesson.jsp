@@ -71,6 +71,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			</div>
 			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
 		</div>
+		<BR/>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
 				<div class="col-md-4">
