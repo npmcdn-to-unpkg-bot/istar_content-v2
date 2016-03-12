@@ -122,16 +122,16 @@ public class LessonUtils {
 					+ "</i>Assessment Details</h3></div>"
 					+ "<div class='panel-body'> "
 					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form'> "
-					+ "<input type='hidden' name='assessment_id' value=''> "
+					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
 					+ "<fieldset><section><label>Assessment Type</label> "
-					+ "<label class='input'><select class='form-control valid' name='slide_type' style='margin-right: 50px'>");
+					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>");
 			
 			out.append("<option value='STATIC'>STATIC</option>"
 					+ "<option value='ADAPTIVE'>ADAPTIVE</option>"
 					+ "<option value='TREE'>TREE</option>"
 					+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
 					+ "<section> <label>Number of Questions</label> <label class='input'> "
-					+ "<input value='20' type='number' name='duration' placeholder='Duration of Lesson'>  </label> </section> </fieldset> "
+					+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> </fieldset> "
 					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 		}
 

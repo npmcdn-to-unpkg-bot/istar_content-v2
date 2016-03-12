@@ -27,13 +27,13 @@ import com.istarindia.apps.services.task.CreateLessonTaskManager;
  * Servlet implementation class CreateAssesment
  */
 @WebServlet("/create_assesment")
-public class CreateAssesment extends HttpServlet {
+public class CreateAssesmentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateAssesment() {
+    public CreateAssesmentController() {
         super();
         // TODO Auto-generated constructor stub
     }
