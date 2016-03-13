@@ -4,9 +4,9 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input id="slide_title" class="updateble"   type="text" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input id="slide_title" class="updateble"   type="text" name="title" placeholder=" Please enter title"data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" value="$slide.getTitle()">
 			#else 
-			<input id="slide_title" class="updateble"   type="text" name="title" placeholder=" Please enter title" >
+			<input id="slide_title" class="updateble"   type="text" name="title" placeholder=" Please enter title" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*">
 			#end	
 		</label>
 	</section>
@@ -16,9 +16,9 @@
 		<label class="label">Textarea</label>
 		<label class="textarea">
 			#if($slide.getParagraph() )
-			<textarea id="slide_paragraph" rows="3" class="updateble"    name="paragraph" placeholder=" Please enter text" > $slide.getParagraph()</textarea>
+			<textarea id="slide_paragraph" rows="3" class="updateble"    name="paragraph" placeholder=" Please enter text" data-parsley-minlength="5" data-parsley-maxlength="50" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 50 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" > $slide.getParagraph()</textarea>
 			#else 
-			<textarea id="slide_paragraph" rows="3" class="updateble"    name="paragraph" placeholder=" Please enter text" value=""> </textarea>
+			<textarea id="slide_paragraph" rows="3" class="updateble"    name="paragraph" placeholder=" Please enter text" value="" data-parsley-minlength="5" data-parsley-maxlength="50" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 50 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" > </textarea>
 			#end	
 			
 		</label>

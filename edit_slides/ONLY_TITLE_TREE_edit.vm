@@ -4,9 +4,9 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input type="text" id="slide_title" class="updateble" name="title" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input type="text" id="slide_title" class="updateble" name="title" placeholder=" Please enter title" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*"value="$slide.getTitle()">
 			#else 
-			<input type="text" id="slide_title" class="updateble" name="title" placeholder=" Please enter title" >
+			<input type="text" id="slide_title" class="updateble" name="title" placeholder=" Please enter title" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*">
 			#end			
 		</label>
 	</section>
@@ -15,9 +15,9 @@
 		<label class="label">Parent Item 1 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="parent_1" name="parent_1" placeholder=" Please Parent Item 1" value="$slide.getList().getItems().get(0).getText()">
+			<input type="text" class="updateble" id="parent_1" name="parent_1" placeholder=" Please Parent Item 1" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" value="$slide.getList().getItems().get(0).getText()">
 			#else 
-			<input type="text" class="updateble" id="parent_1" name="parent_1" placeholder=" Please enter Parent Item 1" >
+			<input type="text" class="updateble" id="parent_1" name="parent_1" placeholder=" Please enter Parent Item 1" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*">
 			#end			
 		</label>
 	</section>
@@ -26,9 +26,9 @@
 		<label class="label">Child Item 1  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble"  id="child_1_parent_1" name="child_1_parent_1" placeholder=" Please enter Child Item 1 Parent 1 " value="$slide.getList().getItems().get(0).getList().getItems().get(0).getText()">
+			<input type="text" class="updateble"  id="child_1_parent_1" name="child_1_parent_1" placeholder=" Please enter Child Item 1 Parent 1 " data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" value="$slide.getList().getItems().get(0).getList().getItems().get(0).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_1_parent_1" name="child_1_parent_1" placeholder=" Please enter Child Item 1  Parent 1 " >
+			<input type="text" class="updateble" id="child_1_parent_1" name="child_1_parent_1" placeholder=" Please enter Child Item 1  Parent 1 " data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" >
 			#end			
 		</label>
 	</section>
@@ -36,9 +36,9 @@
 		<label class="label">Child Item 2  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_2_parent_1"  name="child_2_parent_1" placeholder=" Please enter Child Item 2 Parent 1" value="$slide.getList().getItems().get(0).getList().getItems().get(1).getText()">
+			<input type="text" class="updateble" id="child_2_parent_1"  name="child_2_parent_1" placeholder=" Please enter Child Item 2 Parent 1" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" value="$slide.getList().getItems().get(0).getList().getItems().get(1).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_2_parent_1" name="child_2_parent_1" placeholder=" Please enter Child Item 2 Parent 1 " >
+			<input type="text" class="updateble" id="child_2_parent_1" name="child_2_parent_1" placeholder=" Please enter Child Item 2 Parent 1 " data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" >
 			#end			
 		</label>
 	</section>
@@ -48,7 +48,7 @@
 			#if($slide.getList().getItems().size() >= 1 )
 			<input type="text" class="updateble" id="child_3_parent_1" name="child_3_parent_1" placeholder=" Please enter Child Item 3 Parent 1" value="$slide.getList().getItems().get(0).getList().getItems().get(2).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_3_parent_1" name="child_3_parent_1" placeholder=" Please enter Child Item 3 Parent 1 " >
+			<input type="text" class="updateble" id="child_3_parent_1" name="child_3_parent_1" placeholder=" Please enter Child Item 3 Parent 1 ">
 			#end			
 		</label>
 	</section>
@@ -57,9 +57,9 @@
 		<label class="label">Parent Item 2 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="parent_2" name="parent_2" placeholder=" Please Parent Item 2" value="$slide.getList().getItems().get(1).getText()">
+			<input type="text" class="updateble" id="parent_2" name="parent_2" placeholder=" Please Parent Item 2" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" value="$slide.getList().getItems().get(1).getText()">
 			#else 
-			<input type="text" class="updateble" id="parent_2" name="parent_2" placeholder=" Please enter Parent Item 2" >
+			<input type="text" class="updateble" id="parent_2" name="parent_2" placeholder=" Please enter Parent Item 2" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*">
 			#end			
 		</label>
 	</section>
@@ -68,9 +68,9 @@
 		<label class="label">Child Item 1  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_1_parent_2" name="child_1_parent_2" placeholder=" Please enter Child Item 1 Parent 2 " value="$slide.getList().getItems().get(1).getList().getItems().get(0).getText()">
+			<input type="text" class="updateble" id="child_1_parent_2" name="child_1_parent_2" placeholder=" Please enter Child Item 1 Parent 2 " data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*"value="$slide.getList().getItems().get(1).getList().getItems().get(0).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_1_parent_2" name="child_1_parent_2" placeholder=" Please enter Child Item 1  Parent 2 " >
+			<input type="text" class="updateble" id="child_1_parent_2" name="child_1_parent_2" placeholder=" Please enter Child Item 1  Parent 2 " data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" >
 			#end			
 		</label>
 	</section>
@@ -78,9 +78,9 @@
 		<label class="label">Child Item 2  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_2_parent_2" name="child_2_parent_2" placeholder=" Please enter Child Item 2 Parent 2" value="$slide.getList().getItems().get(1).getList().getItems().get(1).getText()">
+			<input type="text" class="updateble" id="child_2_parent_2" name="child_2_parent_2" placeholder=" Please enter Child Item 2 Parent 2" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*" value="$slide.getList().getItems().get(1).getList().getItems().get(1).getText()">
 			#else 
-			<input type="text"  class="updateble" id="child_2_parent_2" name="child_2_parent_2" placeholder=" Please enter Child Item 2 Parent 2 " >
+			<input type="text"  class="updateble" id="child_2_parent_2" name="child_2_parent_2" placeholder=" Please enter Child Item 2 Parent 2 " data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Input should be at least 5 characters long " data-parsley-maxlength-message="Input should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="It is mandatory*">
 			#end			
 		</label>
 	</section>
@@ -98,7 +98,7 @@
 		<label class="label">Parent Item 3 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="parent_3" name="parent_3" placeholder=" Please Parent Item 3" value="$slide.getList().getItems().get(2).getText()">
+			<input type="text" class="updateble" id="parent_3" name="parent_3" placeholder=" Please Parent Item 3"  value="$slide.getList().getItems().get(2).getText()">
 			#else 
 			<input type="text"  class="updateble" id="parent_3" name="parent_3" placeholder=" Please enter Parent Item 3" >
 			#end			
@@ -121,7 +121,7 @@
 			#if($slide.getList().getItems().size() >= 1 )
 			<input type="text" class="updateble" id="child_2_parent_3" name="child_2_parent_3" placeholder=" Please enter Child Item 2 Parent 3" value="$slide.getList().getItems().get(2).getList().getItems().get(1).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_2_parent_3" name="child_2_parent_3" placeholder=" Please enter Child Item 2 Parent 3 " >
+			<input type="text" class="updateble" id="child_2_parent_3" name="child_2_parent_3" placeholder=" Please enter Child Item 2 Parent 3 "  >
 			#end			
 		</label>
 	</section>
@@ -129,9 +129,9 @@
 		<label class="label">Child Item 3  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_3_parent_3" name="child_3_parent_3" placeholder=" Please enter Child Item 3 Parent 3" value="$slide.getList().getItems().get(2).getList().getItems().get(2).getText()">
+			<input type="text" class="updateble" id="child_3_parent_3" name="child_3_parent_3" placeholder=" Please enter Child Item 3 Parent 3"  value="$slide.getList().getItems().get(2).getList().getItems().get(2).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_3_parent_3" name="child_3_parent_3" placeholder=" Please enter Child Item 3 Parent 3 " >
+			<input type="text" class="updateble" id="child_3_parent_3" name="child_3_parent_3" placeholder=" Please enter Child Item 3 Parent 3 "  >
 			#end			
 		</label>
 	</section>
@@ -139,7 +139,7 @@
 		<label class="label">Parent Item 4 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" id="parent_4" class="updateble"  name="parent_4" placeholder=" Please Parent Item 4" value="$slide.getList().getItems().get(3).getText()">
+			<input type="text" id="parent_4" class="updateble"  name="parent_4" placeholder=" Please Parent Item 4"  value="$slide.getList().getItems().get(3).getText()">
 			#else 
 			<input type="text" id="parent_4" class="updateble"  name="parent_4" placeholder=" Please enter Parent Item 4" >
 			#end			
@@ -150,7 +150,7 @@
 		<label class="label">Child Item 1  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text"  class="updateble" id="child_1_parent_4" name="child_1_parent_4" placeholder=" Please enter Child Item 1 Parent 4 " value="$slide.getList().getItems().get(3).getList().getItems().get(0).getText()">
+			<input type="text"  class="updateble" id="child_1_parent_4" name="child_1_parent_4" placeholder=" Please enter Child Item 1 Parent 4 "  value="$slide.getList().getItems().get(3).getList().getItems().get(0).getText()">
 			#else 
 			<input type="text" class="updateble" id="child_1_parent_4" name="child_1_parent_4" placeholder=" Please enter Child Item 1  Parent 4 " >
 			#end			
@@ -160,7 +160,7 @@
 		<label class="label">Child Item 2  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_2_parent_4" name="child_2_parent_4" placeholder=" Please enter Child Item 2 Parent 4" value="$slide.getList().getItems().get(3).getList().getItems().get(1).getText()">
+			<input type="text" class="updateble" id="child_2_parent_4" name="child_2_parent_4" placeholder=" Please enter Child Item 2 Parent 4"  value="$slide.getList().getItems().get(3).getList().getItems().get(1).getText()">
 			#else 
 			<input type="text" class="updateble" id="child_2_parent_4" name="child_2_parent_4" placeholder=" Please enter Child Item 2 Parent 4 " >
 			#end			
@@ -170,9 +170,9 @@
 		<label class="label">Child Item 3  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_3_parent_4" name="child_3_parent_4" placeholder=" Please enter Child Item 3 Parent 4" value="$slide.getList().getItems().get(3).getList().getItems().get(2).getText()">
+			<input type="text" class="updateble" id="child_3_parent_4" name="child_3_parent_4" placeholder=" Please enter Child Item 3 Parent 4"  value="$slide.getList().getItems().get(3).getList().getItems().get(2).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_3_parent_4" name="child_3_parent_4" placeholder=" Please enter Child Item 3 Parent 4 " >
+			<input type="text" class="updateble" id="child_3_parent_4" name="child_3_parent_4" placeholder=" Please enter Child Item 3 Parent 4 "  >
 			#end			
 		</label>
 	</section>
@@ -181,9 +181,9 @@
 		<label class="label">Parent Item 5 </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" id="parent_5" class="updateble"  name="parent_5" placeholder=" Please Parent Item 5" value="$slide.getList().getItems().get(4).getText()">
+			<input type="text" id="parent_5" class="updateble"  name="parent_5" placeholder=" Please Parent Item 5"  value="$slide.getList().getItems().get(4).getText()">
 			#else 
-			<input type="text" id="parent_5" class="updateble"  name="parent_5" placeholder=" Please enter Parent Item 5" >
+			<input type="text" id="parent_5" class="updateble"  name="parent_5" placeholder=" Please enter Parent Item 5"  >
 			#end			
 		</label>
 	</section>
@@ -192,9 +192,9 @@
 		<label class="label">Child Item 1  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_1_parent_5" name="child_1_parent_5" placeholder=" Please enter Child Item 1 Parent 5 " value="$slide.getList().getItems().get(4).getList().getItems().get(0).getText()">
+			<input type="text" class="updateble" id="child_1_parent_5" name="child_1_parent_5" placeholder=" Please enter Child Item 1 Parent 5 "  value="$slide.getList().getItems().get(4).getList().getItems().get(0).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_1_parent_5" name="child_1_parent_5" placeholder=" Please enter Child Item 1  Parent 5 " >
+			<input type="text" class="updateble" id="child_1_parent_5" name="child_1_parent_5" placeholder=" Please enter Child Item 1  Parent 5 "  >
 			#end			
 		</label>
 	</section>
@@ -202,9 +202,9 @@
 		<label class="label">Child Item 2  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_2_parent_5" name="child_2_parent_5" placeholder=" Please enter Child Item 2 Parent 5" value="$slide.getList().getItems().get(4).getList().getItems().get(1).getText()">
+			<input type="text" class="updateble" id="child_2_parent_5" name="child_2_parent_5" placeholder=" Please enter Child Item 2 Parent 5"  value="$slide.getList().getItems().get(4).getList().getItems().get(1).getText()">
 			#else 
-			<input type="text" class="updateble" id="child_2_parent_5" name="child_2_parent_5" placeholder=" Please enter Child Item 2 Parent 5 " >
+			<input type="text" class="updateble" id="child_2_parent_5" name="child_2_parent_5" placeholder=" Please enter Child Item 2 Parent 5 "  >
 			#end			
 		</label>
 	</section>
@@ -212,7 +212,7 @@
 		<label class="label">Child Item 3  </label>
 		<label class="input">
 			#if($slide.getList().getItems().size() >= 1 )
-			<input type="text" class="updateble" id="child_3_parent_5" name="child_3_parent_5" placeholder=" Please enter Child Item 3 Parent 5" value="$slide.getList().getItems().get(4).getList().getItems().get(2).getText()">
+			<input type="text" class="updateble" id="child_3_parent_5" name="child_3_parent_5" placeholder=" Please enter Child Item 3 Parent 5"  value="$slide.getList().getItems().get(4).getList().getItems().get(2).getText()">
 			#else 
 			<input type="text" class="updateble" id="child_3_parent_5" name="child_3_parent_5" placeholder=" Please enter Child Item 3 Parent 5 " >
 			#end			

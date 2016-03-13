@@ -4,9 +4,9 @@
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input type="text" name="title" id="slide_title" class="updateble" placeholder=" Please enter title" value="$slide.getTitle()">
+			<input type="text" name="title" id="slide_title" class="updateble" placeholder=" Please enter title" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Title should be at least 5 characters long " data-parsley-maxlength-message="Title should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="Title is mandatory*"value="$slide.getTitle()">
 			#else 
-			<input type="text" name="title"  id="slide_title" class="updateble" placeholder=" Please enter title" >
+			<input type="text" name="title"  id="slide_title" class="updateble" placeholder=" Please enter title" data-parsley-minlength="5" data-parsley-maxlength="15" data-parsley-minlength-message="Title should be at least 5 characters long " data-parsley-maxlength-message="Title should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="Title is mandatory*" >
 			#end			
 		</label>
 	</section>

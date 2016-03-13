@@ -60,8 +60,11 @@ public class UpdateAssesmentController extends HttpServlet {
 			Assessment assessment = (Assessment) service.updateAssessment(assessment_id, assessment_type, number_of_questions);
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("assessment", assessment);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
-		} else {
+			  Lesson lesson = assessment.getLesson();
+			                         //Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
+			                         request.setAttribute("lesson", lesson);
+			                         request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);		
+			                         } else {
 			System.out.println("Something missing .... ");
 		}
 	}
