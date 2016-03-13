@@ -19,6 +19,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.Lesson;
@@ -110,7 +111,28 @@ public class LessonUtils {
 		} else if (lesson.getGame() != null) {
 			out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 		} else if (lesson.getAssessment() != null) {
-			out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+			//out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+
+			Assessment assessment = lesson.getAssessment();
+
+			out.append("<div class=' col-md-12 '>"
+					+ "<div class='panel panel-sea'>"
+					+ "<div class='panel-heading'>"
+					+ "<h3 class='panel-title'><i class='fa fa-tasks'>"
+					+ "</i>Assessment Details</h3></div>"
+					+ "<div class='panel-body'> "
+					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form'> "
+					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
+					+ "<fieldset><section><label>Assessment Type</label> "
+					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>");
+			
+			out.append("<option value='STATIC'>STATIC</option>"
+					+ "<option value='ADAPTIVE'>ADAPTIVE</option>"
+					+ "<option value='TREE'>TREE</option>"
+					+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
+					+ "<section> <label>Number of Questions</label> <label class='input'> "
+					+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> </fieldset> "
+					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 		}
 
 		return out;

@@ -71,33 +71,59 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			</div>
 			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
 		</div>
+		<BR/>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
 				<div class="col-md-4">
-					<form action="/content/update_lesson" id="sky-form4" class="sky-form">
-						<input type="hidden" name="lesson_id" value="<%=lesson.getId() %>" /> <input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId() %>" />
-						<fieldset>
 
-							<section>
-								<label>Title of Lesson</label> <label class="input"> <input value="<%=lesson.getTitle() %>" type="text" name="title" placeholder="Title of Lesson"> <b class="tooltip tooltip-bottom-right">The title of the lesson</b>
-								</label>
-							</section>
+					<div class="col-md-12">
+						<div class=" col-md-12 ">
+							<div class="panel panel-sea">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<i class="fa fa-tasks"></i>Lesson Details
+									</h3>
+								</div>
+								<div class="panel-body">
 
-							<section>
-								<label>Duration of Lesson</label> <label class="input"> <input value="<%=lesson.getDuration() %>" type="number" name="duration" placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
-								</label>
-							</section>
-							<section>
-								<label> Tags</label> <label class="input"> <input data-role="tagsinput" value="<%=lesson.getTags() %>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
-								</label>
-							</section>
-						</fieldset>
-						
-						<footer>
-							<button type="submit" class="btn-u">Update Lesson</button>
-						</footer>
-					</form>
 
+									<form action="/content/update_lesson" id="sky-form4" class="sky-form">
+										<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> <input type="hidden"
+											name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+										<fieldset>
+
+											<section>
+												<label>Title of Lesson</label> <label class="input">
+													<input value="<%=lesson.getTitle()%>" type="text" name="title" placeholder="Title of Lesson"> 
+													<b class="tooltip tooltip-bottom-right">The title of the lesson</b>
+												</label>
+											</section>
+
+											<section>
+												<label>Duration of Lesson</label> <label class="input">
+													<input value="<%=lesson.getDuration()%>" type="number" 	name="duration" 
+													placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
+												</label>
+											</section>
+											<section>
+												<label> Tags</label> <label class="input"> 
+												<input data-role="tagsinput" value="<%=lesson.getTags()%>" 	type="text" name="Tags" 
+												class="tagcontainer" 	placeholder="Tags of Lesson"> 
+												<b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
+												</label>
+											</section>
+										</fieldset>
+
+										<footer>
+											<button type="submit" class="btn-u">Update Lesson</button>
+										</footer>
+									</form>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
 
 				</div>
 
@@ -124,9 +150,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			</div>
 
 		</div>
-	</div>
-	</div>
-	</div>
 	<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
 	</div>
 
