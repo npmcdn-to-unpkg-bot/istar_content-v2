@@ -14,7 +14,7 @@ public class TableUtils {
 	String tableNotes;
 	public static StringBuffer getTableHeader(String title, String[] headers, ArrayList<ArrayList<String>> items, int count) {
 		StringBuffer out = new StringBuffer();
-		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'> <div class='panel-heading'> <h3 class='panel-title'>"
+		out.append("<div class='panel panel-yellow margin-bottom-40' style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'> <div class='panel-heading'> <h3 class='panel-title'>"
 				+ "<i class='fa fa-tasks'></i> "+title+"</h3> </div>");
 		out.append("<div class='panel-body'></div>");
 		out.append("<table class='table table-striped table-bordered display responsivess' id='datatable_fixed_column' width='100%' "

@@ -729,7 +729,7 @@ a.btn-u-xs {
 }
 
 .btn-u.btn-u-yellow {
-	background: #f1c40f;
+	background: #FFC107;
 }
 .btn-u.btn-u-yellow:hover,
 .btn-u.btn-u-yellow:focus,
@@ -942,7 +942,7 @@ a.btn-u-xs {
 }
 
 .btn-u.btn-brd.btn-u-yellow {
-	border-color: #f1c40f;
+	border-color: #FFC107;
 }
 .btn-u.btn-brd.btn-u-yellow:hover {
 	color: #f39c12;
@@ -1121,7 +1121,7 @@ span.badge-orange,
 span.label-yellow,
 span.badge-yellow,
 .list-group-item.active>.badge.badge-yellow {
-	background: #f1c40f;
+	background: #FFC107;
 }
 
 span.label-purple,
@@ -1432,8 +1432,8 @@ i.icon-color-green {
 	border: solid 1px #2ecc71;
 }
 i.icon-color-yellow {
-	color: #f1c40f;
-	border: solid 1px #f1c40f;
+	color: #FFC107;
+	border: solid 1px #FFC107;
 }
 i.icon-color-orange {
 	color: #e67e22;
@@ -1509,7 +1509,7 @@ i.icon-bg-green {
 	background: #2ecc71;
 }
 i.icon-bg-yellow {
-	background: #f1c40f;
+	background: #FFC107;
 }
 i.icon-bg-orange {
 	background: #e67e22;
@@ -1618,7 +1618,7 @@ i.icon-bg-light-grey {
 	background: #e67e22;
 }
 .text-highlights-yellow {
-	background: #f1c40f;
+	background: #FFC107;
 }
 .text-highlights-purple {
 	background: #9b6bcc;
@@ -1654,7 +1654,7 @@ i.icon-bg-light-grey {
 	border-color: #e74c3c;
 }
 .text-border-yellow {
-	border-color: #f1c40f;
+	border-color: #FFC107;
 }
 .text-border-purple {
 	border-color: #9b6bcc;
@@ -1900,16 +1900,25 @@ blockquote.hero.hero-default small {
 
 /*Panel Yellow*/
 .panel-yellow {
-	border-color: #f1c40f;
+	border-color: #FFC107;
 }
 
 .panel-yellow > .panel-heading {
-	background: #f1c40f;
+	background: #FFC107;
+}
+.panel-yellow > .panel-heading .panel-title {
+	color: #444444;
 }
 
+.dataTables_length , .dataTables_info {
+	padding-left: 30px !important;
+}
 /*Panel Grey*/
 .panel-grey {
 	border-color: #95a5a6;
+}
+.dataTables_filter  , .dataTables_paginate{
+	padding-right: 30px !important;
 }
 
 .panel-grey > .panel-heading {
@@ -2357,7 +2366,7 @@ img.image-md {
 .color-brown { color: #9c8061;}
 .color-light { color: #ffffff;}
 .color-orange { color: #e67e22;}
-.color-yellow { color: #f1c40f;}
+.color-yellow { color: #FFC107;}
 .color-green1 { color: #2ecc71;}
 .color-purple { color: #9b6bcc;}
 .color-inherit { color: inherit;}

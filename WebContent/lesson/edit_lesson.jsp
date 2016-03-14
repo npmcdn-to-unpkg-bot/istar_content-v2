@@ -113,6 +113,21 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 												<b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 												</label>
 											</section>
+											
+											
+							<section>
+								<label class="label">List of Learning Objectives</label>
+								<div class="row">
+									<% for(LearningObjective obj :  lesson.getLearningObjectives()) { %>
+									<div class="col col-12">
+										<label class="checkbox"><input type="checkbox" name="learningObjectives" checked="checked" value="<%=obj.getId() %>">
+										<i></i><%=obj.getTitle() %></label>
+									</div>
+									<% } %>
+								</div>
+							</section>
+
+							
 										</fieldset>
 
 										<footer>
