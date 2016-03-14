@@ -54,18 +54,21 @@ public class LoginController extends IStarBaseServelet {
 					request.setAttribute("msg", "Welcome to iStar, " + user.getName());
 					request.getRequestDispatcher("/" + user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
 
+				} else {
+					request.setAttribute("msg", "Wrong Username or password");
+					request.getRequestDispatcher("/index.jsp").forward(request, response);
 				}
 			} catch (java.lang.IndexOutOfBoundsException e) {
 				e.printStackTrace();
 				request.setAttribute("msg", "Missing Username or password");
-				request.getRequestDispatcher("/content/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 
 		} else {
 			request.setAttribute("msg", "Missing Username or password");
 			request.getRequestDispatcher("/content/index.jsp").forward(request, response);
 		}
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

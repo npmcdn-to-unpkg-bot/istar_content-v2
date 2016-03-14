@@ -66,6 +66,11 @@ if(request.getSession().getAttribute("user")!=null)
 				<p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a> to registration.</p>
 			</div>
 <form action="<%=baseURL %>auth/login" name="login_form">
+			<% if(null != request.getAttribute("msg")) { %>
+			<div class="alert alert-danger fade in">
+									<strong>Oh snap!</strong> <%=request.getAttribute("msg") %>
+								</div>
+								<% } %>
 			<div class="input-group margin-bottom-20">
 				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 				<input type="text" class="form-control" placeholder="Email" name="email">

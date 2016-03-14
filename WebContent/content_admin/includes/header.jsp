@@ -10,7 +10,6 @@ if (request.getSession().getAttribute("user")==null) {
 	System.out.println("redirecting to index");
 	String url1 = "/content/"+ "index.jsp";
 	request.getRequestDispatcher(url1).forward(request, response);
-	
 	System.out.println("came back to header");
 }
 }catch(NullPointerException ex)

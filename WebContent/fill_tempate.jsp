@@ -91,7 +91,10 @@
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				LessonUtils utils = new LessonUtils();
 				CMSSlide slide = new CMSSlide();
+				Boolean newSlide = true;
 				if (request.getParameterMap().containsKey("slide_id")) {
+					System.err.println("Its an old SLide ");
+					newSlide = false;
 					SlideDAO dao = new SlideDAO();
 					slide = (new LessonUtils())
 							.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
@@ -101,6 +104,8 @@
 				type="hidden">
 			<%
 				} else {
+					System.err.println("Its an new  SLide ");
+					newSlide = true;
 					slide.setTemplateName(request.getParameter("slide_type"));
 			%>
 			<input name="is_edit" value="false" type="hidden">
@@ -114,7 +119,7 @@
 					value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
 					<div class="col-md-5">
-						<%=utils.getEditProfileEdit(slide, ppt)%>
+						<%=utils.getEditProfileEdit(slide, ppt, newSlide)%>
 						<fieldset>
 							<section>
 								<label class="label">Select Slide Transition</label> <label
@@ -170,10 +175,9 @@
 							<section>
 								<label class="label">Teacher Notes</label> 
 								<label class="textarea"> <textarea rows="3" name="teacher_notes" 
-								data-parsley-required="true" data-parsley-minlength="5" data-parsley-maxlength="250"
-								data-parsley-required-message="Please provide teacher notes"  
-								data-parsley-minlength-message="Teacher Notes should be at leat 5 characters long"
-								data-parsley-maxlength-message="Teacher Notes should be less than 250 characters long">
+								data-parsley-required="true" data-parsley-length="[5,250]" 
+								data-parsley-required-message="Please provide teacher notes" 
+								data-parsley-length-message="It should be 5-250 characters long">
 								<%=slide.getTeacherNotes()%> </textarea>
 
 								</label>
@@ -187,10 +191,9 @@
 							<section>
 								<label class="label">Student Notes</label> 
 								<label class="textarea"> <textarea rows="3"name="student_notes" 
-								data-parsley-required="true" data-parsley-minlength="5" data-parsley-maxlength="250"
+								data-parsley-required="true" data-parsley-length="[5,250]" 
 								data-parsley-required-message="Please provide student notes" 
-								data-parsley-minlength-message="Student Notes should be at leat 5 characters long"
-								data-parsley-maxlength-message="Student Notes should be less than 250 characters long"> 
+								data-parsley-length-message="It should be 5-250 characters long"> 
 								<%=slide.getStudentNotes()%></textarea>
 								</label>
 								<div class="note">
