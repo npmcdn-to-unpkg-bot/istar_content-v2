@@ -59,12 +59,11 @@ public class DBUtils {
 		Question question = new Question();
 		for (HashMap<String, Object> object : results) {
 			try {
-				//question = questionDao.findById(object.get("questionid"));
-				
+				question = questionDao.findById((Integer) object.get("questionid"));
 				ArrayList<String> row = new ArrayList<>();
-				row.add(object.get("id").toString());
-				row.add(object.get("title").toString());
-				row.add(object.get("template").toString());
+				row.add(question.getId().toString());
+				row.add(question.getQuestionText());
+				row.add(question.getCreatedAt().toString());
 				table.add(row);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
