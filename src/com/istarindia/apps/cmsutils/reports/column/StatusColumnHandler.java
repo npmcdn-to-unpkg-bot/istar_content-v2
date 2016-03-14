@@ -37,7 +37,7 @@ public class StatusColumnHandler extends ColumnHandler {
 						items.put("<li><a href='/content/media_review?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/media_review?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ");
 
 					}	
-					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && task.getItemType().equalsIgnoreCase("LESSON"))
+					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) &&!user.getUserType().equalsIgnoreCase(UserTypes.CONTENT_REVIEWER) && task.getItemType().equalsIgnoreCase("LESSON"))
 					{
 						items.put("<li><a href='/content/edit_lesson?lesson_id="+task.getItemId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_lesson?lesson_id="+task.getItemId()+"'>"+stage.getName()+"</a></li> ");
 
