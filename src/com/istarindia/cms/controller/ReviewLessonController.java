@@ -140,7 +140,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 	}
 
 	private void markLessonAsReviewed(HttpServletRequest request) {
-		System.err.println("i m hgere");;
+		System.err.println("i m in review lesson controller");;
 		if(request.getParameter("review").equalsIgnoreCase("DIS_APPROVED"))
 		{
 			TaskDAO dao = new TaskDAO();
@@ -151,29 +151,33 @@ public class ReviewLessonController extends IStarBaseServelet {
 			
 			
 			TaskReviewerDAO trdao = new   TaskReviewerDAO();
-			TaskReviewer tr = new TaskReviewer();
+			List<TaskReviewer> reviewers  = trdao.findByProperty("task", task);
 			IstarUser u = ((IstarUser) request.getSession().getAttribute("user"));
 			ContentReviewer cr = new ContentReviewerDAO().findById(u.getId());
-			tr.setContentReviewer(cr);
-			tr.setTask(task);
-			System.err.println("-----"+task.getId());
-			tr = trdao.findByExample(tr).get(0);
-			tr.setStatus("DIS_APPROVED");
-			Session session1 = trdao.getSession();
-			Transaction tx1 = null;
-			try {
-				tx1 = session1.beginTransaction();
+			for(TaskReviewer r : reviewers)
+			{
+				if(r.getContentReviewer().getId().equals(u.getId()))
+				{
+					System.err.println("-----"+task.getId());
+					System.err.println("taskreviewerid is ===="+r.getId());
+					r.setStatus("DIS_APPROVED");
+					Session session1 = trdao.getSession();
+					Transaction tx1 = null;
+					try {
+						tx1 = session1.beginTransaction();
 
-				trdao.attachDirty(tr);
-				tx1.commit();
-			} catch (HibernateException e) {
-				if (tx1 != null)
-					tx1.rollback();
-				e.printStackTrace();
-			} finally {
-				session1.close();
+						trdao.attachDirty(r);
+						tx1.commit();
+					} catch (HibernateException e) {
+						if (tx1 != null)
+							tx1.rollback();
+						System.err.println(e.getMessage());
+						e.printStackTrace();
+					} finally {
+						session1.close();
+					}
+				}
 			}
-			
 			
 			task.setStatus("DIS_APPROVED");
 			Session session = dao.getSession();
@@ -200,25 +204,34 @@ public class ReviewLessonController extends IStarBaseServelet {
 			task.setItemType("LESSON");
 			task = dao.findByExample(task).get(0);
 			TaskReviewerDAO trdao = new   TaskReviewerDAO();
-			TaskReviewer tr = new TaskReviewer();
-			tr.setContentReviewer((ContentReviewer) request.getSession().getAttribute("user"));
-			tr.setTask(task);
-			tr = trdao.findByExample(tr).get(0);
-			tr.setStatus("APPROVED");
-			Session session = trdao.getSession();
-			Transaction tx = null;
-			try {
-				tx = session.beginTransaction();
+			//TaskReviewer tr = new TaskReviewer();
+			List<TaskReviewer> reviewers  = trdao.findByProperty("task", task);
+			IstarUser u = ((IstarUser) request.getSession().getAttribute("user"));
+		//	tr.setContentReviewer((ContentReviewer) request.getSession().getAttribute("user"));
+			//tr.setTask(task);
+			//tr = trdao.findByExample(tr).get(0);
+			for(TaskReviewer r : reviewers)
+			{
+				if(r.getContentReviewer().getId().equals(u.getId()))
+				{
+					r.setStatus("APPROVED");
+					Session session = trdao.getSession();
+					Transaction tx = null;
+					try {
+						tx = session.beginTransaction();
 
-				trdao.attachDirty(tr);
-				tx.commit();
-			} catch (HibernateException e) {
-				if (tx != null)
-					tx.rollback();
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
+						trdao.attachDirty(r);
+						tx.commit();
+					} catch (HibernateException e) {
+						if (tx != null)
+							tx.rollback();
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+				}
+			}	
+			
 			
 			boolean finally_approved=true;
 			for(TaskReviewer r :( List<TaskReviewer>)trdao.findByProperty("task", task))

@@ -20,12 +20,13 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.LessonService;
 import com.istarindia.apps.services.TaskService;
+import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
  * Servlet implementation class TaslReviewController
  */
 @WebServlet("/review_task")
-public class TaskReviewController extends HttpServlet {
+public class TaskReviewController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -41,8 +42,9 @@ public class TaskReviewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		printParams(request);
 		TaskDAO dao = new TaskDAO();
-		Task task = dao.findByItemId(Integer.parseInt(request.getParameter("task_id"))).get(0);
+		Task task = dao.findById(Integer.parseInt(request.getParameter("task_id")));
 		
 		//new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
 		
@@ -52,7 +54,7 @@ public class TaskReviewController extends HttpServlet {
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
 		if (request.getParameterMap().containsKey("task_id"))
 		{
-			int lesson_id = Integer.parseInt(request.getParameter("task_id"));
+			int lesson_id = task.getItemId();
 			String title = request.getParameter("title");
 			if(request.getParameterMap().containsKey("tags"))
 			{
