@@ -40,7 +40,7 @@ public class ChangeStatusController extends HttpServlet {
 			int task_id = Integer.parseInt(request.getParameter("task_id"));
 			String new_status = request.getParameter("new_status");
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is chamged from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
+			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
 			new TaskService().updateStatus(task_id, new_status);
 			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
 				request.setAttribute("message_success", "New task has been sent for review successfully!");
