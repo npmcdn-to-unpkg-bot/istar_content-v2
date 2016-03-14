@@ -563,7 +563,7 @@
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="actor" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
