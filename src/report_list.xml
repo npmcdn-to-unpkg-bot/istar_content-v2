@@ -761,7 +761,7 @@
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
-			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers
+			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
