@@ -63,7 +63,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<div class="row g-mb-60 text-center g-heading-v7">
 						<div class="col-sm-8 col-sm-offset-2">
 							<h2 class="h2 color-light">
-								<span class="block-name">Work Process</span> <span class="g-text-height-lg">Step By Step</span>
+								<span class="block-name">Work Process</span>
 							</h2>
 						</div>
 					</div>

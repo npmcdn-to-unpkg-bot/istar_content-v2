@@ -95,12 +95,12 @@ public class ReportUtils {
 			System.out.println("reportID===============>>>"+ reportID);
 		}
 		
-		String style="style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'";
+		String style="style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
 		String tableStyle ="style='width: 98%;margin-left: 1%;margin-right: 1%;'";
 		if(report.getType_of_report().equalsIgnoreCase("table")) {
-			style="style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'";
+			style="style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
 		} else {
-			style="style='margin: 10px;    margin: 10px;border: 3px solid #f1c40f;'";
+			style="style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
 			tableStyle = "style='display:none'";
 		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");

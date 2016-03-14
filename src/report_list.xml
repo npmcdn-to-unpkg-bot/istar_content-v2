@@ -936,4 +936,34 @@
 		</sql>
 		<title> All Tasks Published</title>
 	</reports>
+	
+	<reports id="88" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="actor" />
+		<column columnHandler="LESSON_LINK_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>SELECT
+			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			FROM public.task A
+			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
+			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
+			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
+			LEFT JOIN public.lesson L ON (A.item_id=L.id)
+			INNER JOIN public.cmsession CM ON (L.session_id= CM.id)
+			INNER JOIN public.module M ON (M.id=CM.module_id)
+			INNER JOIN public.course CC ON (CC.id=M.course_id)
+			WHERE
+			A.status LIKE 'PUBLISHED' AND A.item_type ='LESSON'
+			GROUP BY A.ID, L.id,d.email, L.title, CM.title,
+			M.module_name, CC.course_name
+			ORDER BY a.id
+		</sql>
+		<title> All Tasks Published</title>
+	</reports>
 </istar_reports>

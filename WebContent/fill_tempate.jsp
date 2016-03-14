@@ -206,6 +206,49 @@
 						<footer>
 							<button type="submit" class="btn-u">Submit</button>
 						</footer>
+						<div class="panel panel-profile profile">
+							<div class="panel-heading overflow-h">
+								<h2 class="panel-title heading-sm pull-left">
+									<i class="fa fa-comments-o"></i> Review Comments
+								</h2>
+
+							</div>
+							<div id="scrollbar4"
+								class="panel-body no-padding mCustomScrollbar"
+								data-mcs-theme="minimal-dark">
+
+								<% 
+								TaskDAO TDAO = new  TaskDAO();
+								Task task = new Task();
+								task.setItemType("LESSON");
+								task.setItemId(ppt.getLesson().getId());
+								task = TDAO.findByExample(task).get(0);
+								TaskLogDAO dao = new TaskLogDAO();
+								TaskLog sample  = new TaskLog();
+								sample.setTaskId(task.getId());
+								sample.setItemType("SLIDE");
+								sample.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
+								
+								List<TaskLog> items = dao.findByExample(sample);
+								for(TaskLog log : items) {
+								
+									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+									
+									%>
+								<div class="comment">
+									<img
+										src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
+										alt="">
+									<div class="overflow-h">
+										<strong><%=user.getName() %></strong>
+										<p><%=log.getComments() %></p>
+
+									</div>
+								</div>
+								<% } %>
+
+							</div>
+						</div>
 					</div>
 
 					<div class="col-md-6" style="margin-top: -254px;">

@@ -112,7 +112,6 @@ if(request.getSession().getAttribute("user")!=null)
 	<!-- JS Implementing Plugins -->
 	<script src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 	<script src="<%=baseURL%>assets/plugins/backstretch/jquery.backstretch.min.js"></script>
-	<script type="<%=baseURL%>text/javascript" src="assets/js/plugins/style-switcher.js"></script>
 
 	<!-- JS Customization -->
 	<script src="<%=baseURL%>assets/js/custom.js"></script>
@@ -122,21 +121,20 @@ if(request.getSession().getAttribute("user")!=null)
 	<script>
 		jQuery(document).ready(function() {
 			App.init();
-			StyleSwitcher.initStyleSwitcher();
 		});
 	</script>
 	<script>
 	$.backstretch([
-	   			"assets/img/bg/19.jpg",
-	   			"assets/img/bg/18.jpg",
+	   			"<%=baseURL%>assets/img/bg/19.jpg",
+	   			"<%=baseURL%>assets/img/bg/18.jpg",
 	   			], {
 	   				fade: 1000,
 	   				duration: 7000
 	   			});
 		$(".forms-wrapper").backstretch([
-			"assets/img/bg/6.jpg",
-			"assets/img/bg/5.jpg",
-			"assets/img/bg/7.jpg",
+			"<%=baseURL%>assets/img/bg/6.jpg",
+			"<%=baseURL%>assets/img/bg/5.jpg",
+			"<%=baseURL%>assets/img/bg/7.jpg",
 			], {
 				fade: 1000,
 				duration: 7000

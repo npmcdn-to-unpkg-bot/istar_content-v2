@@ -515,3 +515,7 @@ ul.thumbnails.image_picker_selector li .thumbnail img {
 ul.thumbnails.image_picker_selector li .thumbnail.selected {
 	background: #0088cc;
 }
+
+.datatable_report select {    width: 125px;}
+
+.parsley-required {color: red}
