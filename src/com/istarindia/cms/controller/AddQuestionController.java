@@ -2,6 +2,12 @@ package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
+import com.istarindia.apps.dao.LearningObjective;
+import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.services.OptionService;
 import com.istarindia.apps.services.QuestionService;
@@ -43,12 +51,20 @@ public class AddQuestionController extends IStarBaseServelet {
 		QuestionService questionService = new QuestionService();
 		OptionService optionService = new OptionService();
 		AssessmentDAO dao = new AssessmentDAO();
+		LearningObjectiveDAO learningObjectiveDAO = new LearningObjectiveDAO();
 		Assessment assessment = dao.findById(Integer.parseInt(request.getParameter("assessment_id")));
-				
+		
+		String[] learningObjectiveIds = request.getParameterValues("learningObjectives");
+		Set<LearningObjective> learningObjectiveSet=new HashSet<LearningObjective>();
+		if(learningObjectiveIds!=null){
+		for (int i = 0; i < learningObjectiveIds.length; i++) {
+			learningObjectiveSet.add(learningObjectiveDAO.findById(Integer.parseInt(learningObjectiveIds[i])));
+		}} 
+		
 		Question question = questionService.createNewQuestionForAssessment(request.getParameter("question_text"),
 				request.getParameter("question_type"), Integer.parseInt(request.getParameter("difficulty_level")),
-				Integer.parseInt(request.getParameter("assessment_id")));
-
+				Integer.parseInt(request.getParameter("assessment_id")),learningObjectiveSet);
+		
 		optionService.createNewOption(request.getParameter("option1"), question, "demo"/*request.getParameter("marking_scheme1")*/);
 		optionService.createNewOption(request.getParameter("option2"), question, "demo"/*request.getParameter("marking_scheme1")*/);
 		optionService.createNewOption(request.getParameter("option3"), question, "demo"/*request.getParameter("marking_scheme1")*/);
