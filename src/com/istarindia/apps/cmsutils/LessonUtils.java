@@ -134,15 +134,14 @@ public class LessonUtils {
 					+ "<div class='panel-body'> "
 					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
 					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
-					+ "<fieldset><section><label>Assessment Type</label> "
+					+ "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
 					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
 					+ "<option value='STATIC'>STATIC</option>"
 					+ "<option value='ADAPTIVE'>ADAPTIVE</option>"
 					+ "<option value='TREE'>TREE</option>"
 					+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
-					+ "<section> <label>Number of Questions</label> <label class='input'> "
+					+ "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
 					+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
-					
 /*
 					out.append("<div class='row tab-v3'> <div class='col-sm-3'> ");
 					out.append("<ul class='nav nav-pills nav-stacked'> ");
@@ -164,16 +163,17 @@ public class LessonUtils {
 									+ q.getQuestionText() + "</label> </div> ");
 						}
 						
-							out.append("<a class='btn-u btn-u-orange' href='/content/content_creator/new_question.jsp?learning_objective="+item.getId()+"' style='margin-top: 20px'>Create a New Question</a>");
+						out.append("<a class='btn-u btn-u-orange' href='/content/content_creator/new_question.jsp?learning_objective="+item.getId()+"' style='margin-top: 20px'>Create a New Question</a>");
 						out.append("</div> </section> </fieldset>");
 						out.append("</div>");
 					}
 					out.append(" </div>");
 					out.append(" </div>");
-					out.append(" </div>");*/
-					
+					out.append(" </div>");
+					*/
+					out.append(" </div>");
 					out.append( "</fieldset> "
-					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+					+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 			}
 		else {
 			out.append("<div class=' col-md-12 '>"
