@@ -149,6 +149,8 @@
 								data-mcs-theme="minimal-dark">
 
 								<% 
+							
+								try {
 								TaskDAO TDAO = new  TaskDAO();
 								Task task = new Task();
 								task.setItemType("LESSON");
@@ -176,7 +178,13 @@
 
 									</div>
 								</div>
-								<% } %>
+								<% } 
+								}
+								catch(Exception e) {
+									
+								}
+								
+								%>
 
 							</div>
 						</div>
