@@ -35,6 +35,8 @@ import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Slide;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
@@ -129,7 +131,12 @@ public class LessonUtils {
 
 			Assessment assessment = lesson.getAssessment();
 			ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
-			
+			TaskDAO dao = new TaskDAO();
+			List<Task> taskItems = dao.findByItemId(lesson.getId());
+			Integer task_id = new Integer(0);
+			for (Task item : taskItems) {
+				task_id = item.getId();
+			}
 			if(assessment.getAssessmentType()==null){
 
 			out.append("<div class=' col-md-12 '>"
@@ -140,6 +147,7 @@ public class LessonUtils {
 					+ "<div class='panel-body'> "
 					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
 					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
+					+ "<input type='hidden' name='task_id' value="+task_id+"> "
 					+ "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
 					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
 					+ "<option value='STATIC'>STATIC</option>"

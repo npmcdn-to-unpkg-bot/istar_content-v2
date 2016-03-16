@@ -51,20 +51,24 @@ public class UpdateAssesmentController extends HttpServlet {
 
 		String assessment_type = "";
 		if (request.getParameterMap().containsKey("assessment_id") && request.getParameterMap().containsKey("assessment_type") && request.getParameterMap().containsKey("number_of_questions"))
-		{
+ {
 			int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
+			int task_id = Integer.parseInt(request.getParameter("task_id"));
 			int number_of_questions = Integer.parseInt(request.getParameter("number_of_questions"));
 			assessment_type = request.getParameter("assessment_type");
-			
+
 			AssessmentService service = new AssessmentService();
-			Assessment assessment = (Assessment) service.updateAssessment(assessment_id, assessment_type, number_of_questions);
+			Assessment assessment = (Assessment) service.updateAssessment(assessment_id, assessment_type,
+					number_of_questions);
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("assessment", assessment);
-			  Lesson lesson = assessment.getLesson();
-			                         //Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
-			                         request.setAttribute("lesson", lesson);
-			                         request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);		
-			                         } else {
+			Lesson lesson = assessment.getLesson();
+			// Lesson lesson = (new
+			// LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
+			request.setAttribute("lesson", lesson);
+			request.setAttribute("task_id", task_id);
+			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+		} else {
 			System.out.println("Something missing .... ");
 		}
 	}
