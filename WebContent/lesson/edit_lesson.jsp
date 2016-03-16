@@ -151,7 +151,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						<h4>Please Create a Presentation/Assessment/Game</h4>
 						<p>
 							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId()%>&task_id=<%=task_id%>">Create a Presentation</a> 
-							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>">Create a Assessment</a> 
+							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>&task_id=<%=task_id%>">Create a Assessment</a> 
 							<a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
 						</p>
 					</div>
