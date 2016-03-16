@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";%>
 <!DOCTYPE html>
@@ -58,7 +61,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<section id="processes" class="g-bg-dark-blue1">
+			<%-- <div class="col-md-4">
+				<% HashMap<String, String> conditions = new  HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(100, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+			</div> --%><section id="processes" class="g-bg-dark-blue1">
 				<div class="container content-md g-text-height-md">
 					<div class="row g-mb-60 text-center g-heading-v7">
 						<div class="col-sm-8 col-sm-offset-2">
@@ -151,21 +159,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					</div>
 
 
-					<div class="row g-mb-50">
-						
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>creative_admin/published.jsp">View All Published Media tasks </a>
-									</h3>
-								</li>
-								<li><p>This will let you view all the published media tasks.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-
-					</div>
+				
 					
 					<div class="row g-mb-50">
 						
@@ -190,9 +184,18 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
-	<!-- JS Page Level -->
+	<!-- JS Page Level --><script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script><script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/dataTables.colVis.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/dataTables.tableTools.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="http://127.0.0.1:8080/content/assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+	
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/style-switcher.js"></script>	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();

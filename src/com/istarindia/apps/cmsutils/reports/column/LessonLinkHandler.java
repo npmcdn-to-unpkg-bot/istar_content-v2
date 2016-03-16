@@ -15,9 +15,18 @@ public class LessonLinkHandler extends ColumnHandler {
 		Task t = new TaskDAO().findById(taskID);
 		Lesson l = new LessonDAO().findById(t.getItemId());
 		System.out.println("======="+l.getId());
-		Presentaion ppt = (Presentaion)new PresentaionDAO().findByProperty("lesson", l).get(0);
+		if(new PresentaionDAO().findByProperty("lesson", l).size()>0)
+		{
+			Presentaion ppt = (Presentaion)new PresentaionDAO().findByProperty("lesson", l).get(0);
+			return new StringBuffer("<a href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "'> Preview</a>  ");	
+		}
+		else
+		{
+			return new StringBuffer("Preview Not Available");	
+		}	
+		
 		//Presentaion ppt =(Presentaion) new PresentaionDAO().findByProperty("lesson", new LessonDAO().findById(new TaskDAO().findById(taskID).getItemId())).get(0);
-		return new StringBuffer("<a href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "'> Preview</a>  ");
+		
 		
 	}
 

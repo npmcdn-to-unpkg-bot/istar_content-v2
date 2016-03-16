@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
+
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
@@ -51,25 +56,20 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 <body>
 
-	<div class="wrapper">
+<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">All Tasks Published</h1>
-				
-			</div>
-			<% ArrayList<ArrayList<String>> items = (ArrayList<ArrayList<String>>)request.getAttribute("tasks");  %>
-		</div>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<% String[] headers = {"#", "Task Name", "Title","Description","Url" }; %>
-			<%=TableUtils.getTableHeader("All Tasks Published", headers, items, 4) %>
-		
+			<div class="col-md-12">
+				<% HashMap<String, String> conditions = new HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				%>
+				<%=(new ReportUtils()).getReport(3, conditions, ((IstarUser)request.getSession().getAttribute("user")), null).toString() %>
+			</div>
 		</div>
-		
-
-
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
+</div>
 
 
 	<!-- JS Global Compulsory -->

@@ -91,9 +91,18 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 	
 	<script type="text/javascript">
-		jQuery(document).ready(function() {
+	var responsiveHelper_dt_basic = undefined;
+	var responsiveHelper_datatable_fixed_column = undefined;
+	var responsiveHelper_datatable_col_reorder = undefined;
+	var responsiveHelper_datatable_tabletools = undefined;
+	
+	var breakpointDefinition = {
+		tablet : 1024,
+		phone : 480
+	};
+	jQuery(document).ready(function() {
 			App.init();
-			Validation.lessonValidation();
+
 		});
 		
 		function openWin(url) {
@@ -101,7 +110,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		    
 		    return false;
 		}
-	
+	</script>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
