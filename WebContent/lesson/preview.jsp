@@ -1,4 +1,4 @@
-<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
+	<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.istarindia.cms.lessons.*"%>
@@ -26,13 +26,18 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<link href="mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" />
-<!-- Printing and PDF exports -->
+<% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+	System.err.println("This is Mobile");
+%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" />
+
+<%  } else {
+	System.err.println("This is Desktop");
+  } %><!-- Printing and PDF exports -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL %>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL %>assets/plugins/reveal/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
@@ -67,19 +72,21 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 				// Optional reveal.js plugins
 				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: '<%=baseURL %>assets/plugins/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
+					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/notes/notes.js', async: true }
 				]
 			});
 			
 			 document.onreadystatechange = function () {
 			     if (document.readyState == "complete") {
 			    	 console.log("Ready");
-			    	 initSlide();
+			    	 try { initSlide(); } catch (err) {
+						// TODO: handle exception
+					}
 			   }
 			 }
 			
