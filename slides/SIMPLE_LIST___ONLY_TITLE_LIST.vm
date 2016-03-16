@@ -1,4 +1,5 @@
-<section class="ONLY_TITLE_LIST" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" data-background-transition="$slide.getTransition()">
+<section class="ONLY_TITLE_LIST" data-transition="$slide.getTransition()" data-background="#ffffff" 
+data-background-transition="$slide.getTransition()" >
 	<h2>$slide.getTitle()</h2>
 	<ol>
 		#foreach( $item in $slide.getList().getItems() )

@@ -2,7 +2,9 @@ package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,13 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.dao.ContentReviewer;
 import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.SlideDAO;
 import com.istarindia.apps.dao.Task;
@@ -128,10 +133,40 @@ public class ReviewLessonController extends IStarBaseServelet {
 			} finally {
 				session.close();
 			}
-			// content/content_reviewer/dashboard.jsp
-		
-			response.sendRedirect("/content/content_reviewer/dashboard.jsp");
-			response.getWriter().append("Served at: ").append(request.getContextPath());
+			Slide nextSlide;
+			try {
+				nextSlide = new Slide();
+				session = dao.getSession();
+				
+				ArrayList<Slide> items = new ArrayList<>();
+				
+				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " order by id";
+				SQLQuery query = session.createSQLQuery(sql1);
+				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+				List<HashMap<String, Object>> results = query.list();
+				for (HashMap<String, Object> slide1 : results) {
+					Slide slide2 = new Slide();
+					slide2.setSlideText(slide1.get("slide_text").toString());
+					slide2.setTemplate(slide1.get("template").toString());
+					slide2.setId(Integer.parseInt(slide1.get("id").toString()));
+					items.add(slide2);
+				}
+				
+				for (int i=0;i< items.size();i++) {
+					System.err.println("slide.getId() --> "+slide.getId());
+					System.err.println("slide.getPresentaion().getSlides().get(i).getId() --> "+items.get(i).getId());
+					if(slide.getId() == items.get(i).getId()) {
+						nextSlide = items.get(i+1);
+					}
+				}
+				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+nextSlide.getId()+"&slide_type="+nextSlide.getTemplate());
+				response.getWriter().append("Served at: ").append(request.getContextPath());
+			} catch (Exception e) {
+				response.sendRedirect("/content/review_task?task_id="+task.getId());
+				response.getWriter().append("Served at: ").append(request.getContextPath());
+			}
+			
+			
 		}
 		
 		
