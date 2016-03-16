@@ -21,6 +21,8 @@ import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.QuestionService;
 
 import org.hibernate.Criteria;
@@ -56,8 +58,15 @@ public class DeleteQuestionController extends HttpServlet {
 		*/
 		Integer question_id = Integer.parseInt(request.getParameter("question_id"));
 		Integer assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
-		
-			// TODO Auto-generated method stub
+		Assessment assessment1 = new AssessmentDAO().findById(assessment_id);
+		Lesson lesson = new LessonDAO().findById(assessment1.getLesson().getId());
+		TaskDAO taskdao = new TaskDAO();
+		List<Task> taskItems = taskdao.findByItemId(lesson.getId());
+		Integer task_id = new Integer(0);
+		for (Task item : taskItems) {
+			task_id = item.getId();
+		}
+ 			// TODO Auto-generated method stub
 			ArrayList<ArrayList<String>> table = new ArrayList<>();
 			AssessmentQuestionDAO dao = new AssessmentQuestionDAO();
 			Session session = dao.getSession();
@@ -75,7 +84,8 @@ public class DeleteQuestionController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		response.sendRedirect("/content/index.jsp");
+		request.setAttribute("task_id", task_id);
+		response.sendRedirect("/content/edit_lesson?lesson_id=" + lesson.getId()+"&task_id="+task_id);
 	}
 
 	/**
