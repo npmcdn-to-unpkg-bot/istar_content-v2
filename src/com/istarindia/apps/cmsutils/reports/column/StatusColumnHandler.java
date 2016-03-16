@@ -21,7 +21,7 @@ public class StatusColumnHandler extends ColumnHandler {
 		
 		TaskDAO dao = new TaskDAO();
 		Task task = dao.findById(taskID);
-		for(TaskStage stage : getAllVaildStages(task.getStatus())) {
+		for(TaskStage stage : getAllVaildStages(status)) {
 			String[] role_array = stage.getValidRole().split(",");
 			for(String roles : role_array)
 			{ 
@@ -39,7 +39,7 @@ public class StatusColumnHandler extends ColumnHandler {
 					}	
 					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) &&!user.getUserType().equalsIgnoreCase(UserTypes.CONTENT_REVIEWER) && task.getItemType().equalsIgnoreCase("LESSON"))
 					{
-						items.put("<li><a href='/content/edit_lesson?lesson_id="+task.getItemId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_lesson?lesson_id="+task.getItemId()+"'>"+stage.getName()+"</a></li> ");
+						items.put("<li><a href='/content/edit_lesson?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_lesson?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ");
 
 					}else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && !task.getItemType().equalsIgnoreCase("LESSON"))
 					{

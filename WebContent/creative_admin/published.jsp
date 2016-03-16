@@ -68,7 +68,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
-
+</div>
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
