@@ -70,7 +70,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<li class="active">Edit Lesson</li>
 				</ul> -->
 			</div>
-			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
+			<% Lesson lesson = (Lesson)request.getAttribute("lesson"); 
+			Integer task_id = Integer.parseInt(request.getParameter("task_id"));%>
 		</div>
 		<BR/>
 		<div class="container-fluid height-1000" style="padding: 0px !important">
@@ -89,7 +90,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 									<form action="/content/update_lesson" id="sky-form4" class="sky-form">
-										<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> <input type="hidden"
+										<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> <input type="hidden" name="task_id" value="<%=task_id%>" /> <input type="hidden"
 											name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
 										<fieldset>
 
@@ -145,8 +146,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 				<div class="col-md-8">
-					<% if(LessonService.isEmptyLesson(lesson)) { 
-					Integer task_id = Integer.parseInt(request.getParameter("task_id"));%>
+					<% if(LessonService.isEmptyLesson(lesson)) { %>
 					<div class="alert alert-warning fade in text-center">
 						<h4>Please Create a Presentation/Assessment/Game</h4>
 						<p>

@@ -88,6 +88,7 @@
 		<form action="/content/create_slide" name="" method="GET"
 			data-parsley-validate="" novalidate="" class="sky-form">
 			<%
+				Integer task_id = Integer.parseInt(request.getParameter("task_id"));
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				LessonUtils utils = new LessonUtils();
 				CMSSlide slide = new CMSSlide();
@@ -99,7 +100,8 @@
 					slide = (new LessonUtils())
 							.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 			%>
-			<input name="is_edit" value="true" type="hidden"> <input
+			<input name="is_edit" value="true" type="hidden"> 
+			<input name="task_id" value="<%=task_id%>" type="hidden"> <input
 				name="slide_id" value="<%=request.getParameter("slide_id")%>"
 				type="hidden">
 			<%
@@ -109,6 +111,7 @@
 					slide.setTemplateName(request.getParameter("slide_type"));
 			%>
 			<input name="is_edit" value="false" type="hidden">
+			<input name="task_id" value="<%=task_id%>"type="hidden">
 			<%
 				}
 			%>

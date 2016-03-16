@@ -46,6 +46,7 @@ public class CreateSlideController extends IStarBaseServelet {
 		printParams(request);
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
+		Integer task_id = Integer.parseInt(request.getParameter("task_id"));
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
 		case "ONLY_TITLE":
@@ -151,7 +152,7 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 		CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"),
 				"A new Slide added with the template => "+ template +" created in the presentation wih ID ->"+ ppt.getId() );
-		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId());
+		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId()+"&task_id="+task_id);
 
 	}
 

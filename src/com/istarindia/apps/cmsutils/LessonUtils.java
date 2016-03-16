@@ -69,6 +69,7 @@ public class LessonUtils {
 			out.append("<div class='panel-body'>");
 			out.append("<form class='form-inline' role='form' action='/content/fill_tempate.jsp'>");
 			out.append("<input name='ppt_id' value='" + ppt.getId() + "' type='hidden'/>");
+			out.append("<input name='task_id' value='" + task_id + "' type='hidden'/>");
 
 			out.append("<div class='form-group'>");
 			out.append("<select class='form-control' name='slide_type' style='margin-right: 50px'>");
@@ -115,11 +116,11 @@ public class LessonUtils {
 				out.append("<td>" + data.get(i).get(1) + "</td>");
 				out.append("<td>");
 				out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
-						+ "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
+						+ "&slide_id=" + data.get(i).get(0) + "&task_id=" +task_id+ "&slide_type=" + data.get(i).get(2) + "'>"
 						+ "<i class='fa fa-check'></i>Edit</a>");
 
 				out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-						+ "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
+						+ "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&task_id=" +task_id+ "&slide_id=" + data.get(i).get(0) + "'>"
 						+ "<i class='fa fa-remove'></i>Delete</a>");
 
 				out.append("</td>");
@@ -252,7 +253,6 @@ public class LessonUtils {
 			out.append("</div>");
 		}
 	}
-
 		return out;
 	}
 

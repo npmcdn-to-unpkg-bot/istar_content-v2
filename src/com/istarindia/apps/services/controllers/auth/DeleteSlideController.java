@@ -41,7 +41,8 @@ public class DeleteSlideController extends HttpServlet {
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		SlideDAO dao = new SlideDAO();
 		Slide slide= dao.findById(Integer.parseInt(request.getParameter("slide_id")));
-		
+		Integer task_id = Integer.parseInt(request.getParameter("task_id"));
+
 		
 		Session session = dao.getSession();
 		Transaction tx = null;
@@ -59,7 +60,7 @@ public class DeleteSlideController extends HttpServlet {
 		}
 		
 		
-		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId());
+		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId()+"&task_id="+task_id);
 	}
 
 	/**
