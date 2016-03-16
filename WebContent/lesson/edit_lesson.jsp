@@ -145,11 +145,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 				<div class="col-md-8">
-					<% if(LessonService.isEmptyLesson(lesson)) { %>
+					<% if(LessonService.isEmptyLesson(lesson)) { 
+					Integer task_id = Integer.parseInt(request.getParameter("task_id"));%>
 					<div class="alert alert-warning fade in text-center">
 						<h4>Please Create a Presentation/Assessment/Game</h4>
 						<p>
-							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> 
+							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId()%>&task_id=<%=task_id%>">Create a Presentation</a> 
 							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>">Create a Assessment</a> 
 							<a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
 						</p>

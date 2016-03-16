@@ -68,6 +68,7 @@ public class EditLessonController extends HttpServlet {
 			Lesson lesson= (new LessonDAO()).findById(lesson_id);
 			
 			request.setAttribute("lesson", lesson);
+			request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 		}
 		
