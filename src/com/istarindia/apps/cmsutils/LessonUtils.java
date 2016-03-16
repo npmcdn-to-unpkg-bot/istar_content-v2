@@ -4,18 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -23,7 +19,6 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -31,7 +26,6 @@ import org.hibernate.Session;
 
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.Cmsession;
-import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUserDAO;
@@ -40,10 +34,7 @@ import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
-import com.istarindia.apps.dao.Question;
-import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
@@ -238,7 +229,7 @@ public class LessonUtils {
 				out.append("<a class='btn btn-success btn-xs' href='#' >" + "<i class='fa fa-check'></i>Edit</a>");
 				
 				out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-						+ "href='#'>" + "<i class='fa fa-remove'></i>Delete</a>");
+						+ "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
 				
 				out.append("</td>");
 				out.append("</tr>");
