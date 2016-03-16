@@ -330,6 +330,7 @@
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_name" />
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
+			<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="actor" />
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
@@ -714,7 +715,7 @@
 		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
 		<sql>SELECT
-			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
+			A.id as task_id, A.item_id as item_id,A.status as status, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
 			CM.title as session_title,
