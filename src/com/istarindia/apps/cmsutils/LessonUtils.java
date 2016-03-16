@@ -50,6 +50,12 @@ public class LessonUtils {
 
 	public StringBuffer getEditForm(Lesson lesson) {
 		StringBuffer out = new StringBuffer();
+		TaskDAO dao = new TaskDAO();
+		List<Task> taskItems = dao.findByItemId(lesson.getId());
+		Integer task_id = new Integer(0);
+		for (Task item : taskItems) {
+			task_id = item.getId();
+		}
 		if (lesson.getPresentaion() != null) {
 			Presentaion ppt = lesson.getPresentaion();
 
@@ -131,12 +137,7 @@ public class LessonUtils {
 
 			Assessment assessment = lesson.getAssessment();
 			ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
-			TaskDAO dao = new TaskDAO();
-			List<Task> taskItems = dao.findByItemId(lesson.getId());
-			Integer task_id = new Integer(0);
-			for (Task item : taskItems) {
-				task_id = item.getId();
-			}
+			
 			if(assessment.getAssessmentType()==null){
 
 			out.append("<div class=' col-md-12 '>"
@@ -162,6 +163,7 @@ public class LessonUtils {
 					+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 			}
 		else {
+
 			out.append("<div class=' col-md-12 '>"
 					+ "<div class='panel panel-sea'>"
 					+ "<div class='panel-heading'>"
@@ -170,6 +172,7 @@ public class LessonUtils {
 					+ "<div class='panel-body'> "
 					+ "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
 					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
+					+ "<input type='hidden' name='task_id' value="+task_id+"> "
 					+ "<fieldset>");
 
 			out.append("<section><label class='label'>List of Learning Objectives in this Session</label> <div class='row'>");
