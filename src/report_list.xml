@@ -107,7 +107,7 @@
 		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
 		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="assigned_to" />
 		<column columnHandler="NONE" display_name="Created By" isVisible="true" name="created_by" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<!-- <column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" /> -->
 
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
@@ -298,13 +298,13 @@
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="Assigned to" isVisible="true" name="actor" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
-		<column columnHandler="NONE" display_name="Status" isVisible="true" name="state" />
-		<column columnHandler="TASK_HISTORY" display_name="Task History" isVisible="true" name="taskid" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="TASK_HISTORY" display_name="Task History" isVisible="true" name="task_id" />
 		<column columnHandler="STATUS_HANDLER" display_name="Action" isVisible="true" name="status" />
 		
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, a.id AS taskid, A.status as state
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -314,7 +314,7 @@
 			INNER JOIN public.module M ON (M.id=CM.module_id)
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.item_type ='LESSON'
+			A.item_type ='LESSON' AND A.status!='DELETED'
 			GROUP BY A.ID, L.id, d.email, L.title, CM.title,
 			M.module_name, CC.course_name, A.status
 			ORDER BY a.id
@@ -334,7 +334,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers,A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -365,7 +365,7 @@
 
 		<sql>SELECT
 			a.id AS task_id, L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers,A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -396,7 +396,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -427,7 +427,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -454,11 +454,11 @@
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
 		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="actor" />
-		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="LESSON_LINK_HANDLER" display_name="Preview" isVisible="true" name="status" />
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -489,7 +489,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers
+			d.email as actor,array_to_string(array_agg(C.name), ',') as reviewers,A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -537,7 +537,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			d.email as actor
+			d.email as actor, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -547,7 +547,7 @@
 			INNER JOIN public.module M ON (M.id=CM.module_id)
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.status LIKE 'COMPLETED' AND B.status LIKE 'REVIEWER_ASSIGNED' AND A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
+			A.status LIKE 'COMPLETED' AND (B.status LIKE 'REVIEWER_ASSIGNED' OR B.status LIKE 'DIS_APPROVED') AND A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
 			GROUP BY A.ID, L.id,d.email,
 			L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id
@@ -616,6 +616,7 @@
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
 			CM.title as session_title,
+			A.status as status,
 			( CASE A.item_type WHEN 'IMAGE' THEN I.description
 			WHEN 'VIDEO' THEN V.description
 			ELSE 'None' END) as description,
@@ -648,7 +649,7 @@
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
-			CM.title as session_title,
+			CM.title as session_title,A.status as status,
 			( CASE A.item_type WHEN 'IMAGE' THEN I.description
 			WHEN 'VIDEO' THEN V.description
 			ELSE 'None' END) as description,
@@ -682,6 +683,7 @@
 			WHEN 'VIDEO' THEN V.title
 			ELSE 'None' END) as title,
 			CM.title as session_title,
+			A.status as status,
 			( CASE A.item_type WHEN 'IMAGE' THEN I.description
 			WHEN 'VIDEO' THEN V.description
 			ELSE 'None' END) as description,
@@ -791,7 +793,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,
-			array_to_string(array_agg(C.name), ',') as reviewers
+			array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -820,7 +822,7 @@
 		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
 
 		<sql>SELECT
-			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers
+			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers,A.status as status
 			FROM public.task A
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
@@ -850,7 +852,7 @@
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name, array_to_string(array_agg(C.name), ',') as reviewers, A.status as status
-			FROM public.task A
+			FROM public.task A, A.status as status
 			LEFT JOIN public.content_creator D ON (D.id=A.actor_id)
 			LEFT JOIN public.task_reviewer B ON(A.id=B.task_id)
 			LEFT JOIN public.content_reviewer C ON (C.id=B.reviewer_id)
@@ -915,7 +917,7 @@
 		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
 		<column columnHandler="NONE" display_name="Reviewers" isVisible="true" name="reviewers" />
 		<column columnHandler="NONE" display_name="Assigned To" isVisible="true" name="actor" />
-		<column columnHandler="LESSON_LINK_HANDLER" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="LESSON_LINK_HANDLER" display_name="Preview" isVisible="true" name="status" />
 
 		<sql>SELECT
 			a.id AS task_id,L.id as lesson_id, L.title as lesson_title, CM.title as session_title, M.module_name as module_name, CC.course_name as course_name,

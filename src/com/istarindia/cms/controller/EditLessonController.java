@@ -40,7 +40,7 @@ public class EditLessonController extends HttpServlet {
 		 * Integer cmsession_id, Integer duration, String lessonType, String tags, String title, 
 		String[] learningObjectives*/
 		TaskDAO dao = new TaskDAO();
-		Task task = dao.findByItemId(Integer.parseInt(request.getParameter("lesson_id"))).get(0);
+		Task task = dao.findById(Integer.parseInt(request.getParameter("task_id")));
 		
 		new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
 		
@@ -48,9 +48,9 @@ public class EditLessonController extends HttpServlet {
 		String  tags="";
 		String learningObjectives[];
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
-		if (request.getParameterMap().containsKey("lesson_id"))
+		if (request.getParameterMap().containsKey("task_id"))
 		{
-			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
+			int lesson_id = task.getItemId();
 			String title = request.getParameter("title");
 			if(request.getParameterMap().containsKey("tags"))
 			{
@@ -64,7 +64,7 @@ public class EditLessonController extends HttpServlet {
 					ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
 				}
 			}
-			LessonService service = new LessonService();
+		
 			Lesson lesson= (new LessonDAO()).findById(lesson_id);
 			
 			request.setAttribute("lesson", lesson);
