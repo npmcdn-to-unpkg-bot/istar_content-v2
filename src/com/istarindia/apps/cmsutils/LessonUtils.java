@@ -37,6 +37,7 @@ import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.services.AssessmentService;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
@@ -164,7 +165,10 @@ public class LessonUtils {
 					+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 			}
 		else {
-
+			Integer number_of_questions = new Integer(0);
+			AssessmentService assessmentService = new AssessmentService();
+			number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
+			if(number_of_questions <= assessment.getNumber_of_questions()) {
 			out.append("<div class=' col-md-12 '>"
 					+ "<div class='panel panel-sea'>"
 					+ "<div class='panel-heading'>"
@@ -216,7 +220,7 @@ public class LessonUtils {
 					+ "<section> <label>Option 5</label> <label class='input'> "
 					+ "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
 					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-
+			}
 			out.append("<div class=' col-md-12 '>");
 			out.append("<div class='panel panel-sea margin-bottom-40'>");
 			out.append("<div class='panel-heading'>");
