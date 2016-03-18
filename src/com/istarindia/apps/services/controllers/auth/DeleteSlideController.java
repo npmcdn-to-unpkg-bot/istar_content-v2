@@ -59,7 +59,7 @@ public class DeleteSlideController extends HttpServlet {
 		}
 		
 		
-		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId());
+		response.sendRedirect("/content/edit_lesson?task_id=" + ppt.getLesson().getId());
 	}
 
 	/**

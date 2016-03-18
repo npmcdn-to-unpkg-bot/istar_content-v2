@@ -153,8 +153,8 @@ public class ReviewLessonController extends IStarBaseServelet {
 				}
 				
 				for (int i=0;i< items.size();i++) {
-					System.err.println("slide.getId() --> "+slide.getId());
-					System.err.println("slide.getPresentaion().getSlides().get(i).getId() --> "+items.get(i).getId());
+					//System.err.println("slide.getId() --> "+slide.getId());
+					//System.err.println("slide.getPresentaion().getSlides().get(i).getId() --> "+items.get(i).getId());
 					if(slide.getId() == items.get(i).getId()) {
 						nextSlide = items.get(i+1);
 					}
@@ -175,7 +175,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 	}
 
 	private void markLessonAsReviewed(HttpServletRequest request) {
-		System.err.println("i m in review lesson controller");;
+		//System.err.println("i m in review lesson controller");;
 		if(request.getParameter("review").equalsIgnoreCase("DIS_APPROVED"))
 		{
 			TaskDAO dao = new TaskDAO();
@@ -193,8 +193,8 @@ public class ReviewLessonController extends IStarBaseServelet {
 			{
 				if(r.getContentReviewer().getId().equals(u.getId()))
 				{
-					System.err.println("-----"+task.getId());
-					System.err.println("taskreviewerid is ===="+r.getId());
+					//System.err.println("-----"+task.getId());
+					//System.err.println("taskreviewerid is ===="+r.getId());
 					r.setStatus("DIS_APPROVED");
 					Session session1 = trdao.getSession();
 					Transaction tx1 = null;
@@ -206,7 +206,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 					} catch (HibernateException e) {
 						if (tx1 != null)
 							tx1.rollback();
-						System.err.println(e.getMessage());
+						//System.err.println(e.getMessage());
 						e.printStackTrace();
 					} finally {
 						session1.close();

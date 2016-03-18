@@ -109,7 +109,7 @@ public class CMSerializer {
 				
 				try {
 					if(item.getList().items.size() !=0) {
-						System.err.println("111");
+						//System.err.println("111");
 					
 						CMSList childList = new CMSList();
 						ArrayList<CMSTextItem> items3 = new ArrayList<>();
@@ -180,7 +180,7 @@ public class CMSerializer {
 				
 				try {
 					if(item.getList().items.size() !=0) {
-						System.err.println("111");
+						//System.err.println("111");
 					
 						CMSList childList = new CMSList();
 						ArrayList<CMSTextItem> items3 = new ArrayList<>();

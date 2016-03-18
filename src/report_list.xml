@@ -716,7 +716,7 @@
 		<sql>SELECT
 			A.id as task_id, A.item_id as item_id, A.item_type as item_type, (CASE A.item_type WHEN 'IMAGE' THEN I.title
 			WHEN 'VIDEO' THEN V.title
-			ELSE 'None' END) as title,
+			ELSE 'None' END) as title, A.status as status,
 			CM.title as session_title,
 			( CASE A.item_type WHEN 'IMAGE' THEN I.description
 			WHEN 'VIDEO' THEN V.description

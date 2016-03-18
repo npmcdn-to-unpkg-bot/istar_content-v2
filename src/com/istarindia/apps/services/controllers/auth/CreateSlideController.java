@@ -151,7 +151,7 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 		CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"),
 				"A new Slide added with the template => "+ template +" created in the presentation wih ID ->"+ ppt.getId() );
-		response.sendRedirect("/content/edit_lesson?lesson_id=" + ppt.getLesson().getId());
+		response.sendRedirect("/content/edit_lesson?task_id=" + ppt.getLesson().getId());
 
 	}
 

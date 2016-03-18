@@ -58,7 +58,7 @@ public class CreatePresentationController extends HttpServlet {
 		CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A presentation for the lesson was created.");
 		
 		request.setAttribute("lesson", lesson);
-		request.getRequestDispatcher("/edit_lesson").forward(request, response);;
+		request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);;
 	}
 
 	/**

@@ -58,7 +58,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 			if (request.getParameterMap().containsKey("learningObjectives")) {
 				learningObjectives = (String[]) request.getParameterMap().get("learningObjectives");
 				for (String element : learningObjectives) {
-					System.err.println("Seected LO -->"+ element);
+					//System.err.println("Seected LO -->"+ element);
 					ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
 				}
 			}

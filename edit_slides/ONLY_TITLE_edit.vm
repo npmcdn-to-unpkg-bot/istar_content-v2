@@ -1,14 +1,13 @@
-<header>Tempalate with only Title</header>
+<header>Template with only Title</header>
 <fieldset>
 	<section>
 		<label class="label">Title</label>
 		<label class="input">
 			#if($slide.getTitle() )
-			<input id="slide_title" class="updateble"  type="text" name="title" placeholder="Please enter title" data-parsley-minlength="5" data-parsley-maxlength="60" data-parsley-minlength-message="Title should be at least 5 characters long " data-parsley-maxlength-message="Title should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="Title is mandatory*"  value="$slide.getTitle()">
+			<input id="${tag_string}slide_title" class="updateble"  type="text" name="${tag_string}title" placeholder="Please enter title" data-parsley-minlength="5" data-parsley-maxlength="60" data-parsley-minlength-message="Title should be at least 5 characters long " data-parsley-maxlength-message="Title should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="Title is mandatory*"  value="$slide.getTitle()">
 			#else 
-			<input id="slide_title" class="updateble"  type="text" name="title" placeholder="Please enter title" data-parsley-minlength="5" data-parsley-maxlength="60" data-parsley-minlength-message="Title should be at least 5 characters long " data-parsley-maxlength-message="Title should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="Title is mandatory*">
+			<input id="${tag_string}slide_title" class="updateble"  type="text" name="${tag_string}title" placeholder="Please enter title" data-parsley-minlength="5" data-parsley-maxlength="60" data-parsley-minlength-message="Title should be at least 5 characters long " data-parsley-maxlength-message="Title should be less than 15 characters long" data-parsley-required="true" data-parsley-required-message="Title is mandatory*">
 			#end			
 		</label>
 	</section>
 </fieldset>
-{{istar.slide_title}}

@@ -458,6 +458,14 @@ div.dtr-modal div.dtr-modal-background {
 	border: 1px solid red;*/
 }
 
+#frame_htc_one_emulator1 {
+	    margin: 345px 0px 0px 280px;
+	
+	   /*  margin: 189px 0 0 233px; */
+	/* left: -4px; 
+	border: 1px solid red;*/
+}
+
 }
 .frame_scroller {
 	display: inline-block;
@@ -470,6 +478,14 @@ div.dtr-modal div.dtr-modal-background {
 		url("http://mobiletest.me/themes/sky/phones/HTC_One_portrait.png");
 	width: 599px;
 	height: 1024px;
+}
+
+#htc_one_emulator1 {
+	background-image:
+		url("/content/img/iPad_mini_portrait.png");
+		height:913px;
+	    background-size:cover;
+
 }
 
 ul.thumbnails.image_picker_selector {

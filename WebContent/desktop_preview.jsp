@@ -1,11 +1,13 @@
-	<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
+<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.istarindia.cms.lessons.*"%>
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+String templateName = request.getParameter("template_name");
+String slide_id = request.getParameter("slide_id");
+
 %><!doctype html>
 <html lang="en">
 <head>
@@ -26,13 +28,6 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-	//System.err.println("This is Mobile");
-%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" />
-
-<%  } else {
-	//System.err.println("This is Desktop");
-  } %><!-- Printing and PDF exports -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
@@ -51,7 +46,7 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 	<div class="reveal">
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeLesson(ppt)) %>
+			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id)) %>
 
 		</div>
 
@@ -79,19 +74,9 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
 					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/notes/notes.js', async: true }
 				]
+			
+			
 			});
-			
-			 document.onreadystatechange = function () {
-			     if (document.readyState == "complete") {
-			    	 console.log("Ready");
-			    	 try { initSlide(); } catch (err) {
-						// TODO: handle exception
-					}
-			   }
-			 }
-			
-			
-			
 
 		</script>
 

@@ -40,8 +40,11 @@ public class EditLessonController extends HttpServlet {
 		 * Integer cmsession_id, Integer duration, String lessonType, String tags, String title, 
 		String[] learningObjectives*/
 		TaskDAO dao = new TaskDAO();
-		Task task = dao.findById(Integer.parseInt(request.getParameter("task_id")));
-		
+		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("task_id")));
+		Task task = new Task();
+		task.setItemId(lesson.getId());
+		task.setTaskName("CREATE_LESSON");
+		task = new TaskDAO().findByExample(task).get(0);
 		new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
 		
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
@@ -65,7 +68,7 @@ public class EditLessonController extends HttpServlet {
 				}
 			}
 		
-			Lesson lesson= (new LessonDAO()).findById(lesson_id);
+			//Lesson lesson= (new LessonDAO()).findById(lesson_id);
 			
 			request.setAttribute("lesson", lesson);
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);

@@ -149,8 +149,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<div class="alert alert-warning fade in text-center">
 						<h4>Please Create a Presentation/Assessment/Game</h4>
 						<p>
-							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> 
-							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>">Create a Assessment</a> 
+							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId()%>">Create a Presentation</a> 
+							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?task_id=<%=lesson.getId()%>">Create a Assessment</a> 
 							<a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
 						</p>
 					</div>
@@ -163,43 +163,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						//Botton one is list of slides
 						}  %>
 				</div>
-					<div class="col-sm-5">
-						<div class="panel panel-profile profile">
-							<div class="panel-heading overflow-h">
-								<h2 class="panel-title heading-sm pull-left">
-									<i class="fa fa-comments-o"></i> Review Comments
-								</h2>
-								
-							</div>
-							<div id="scrollbar4"
-								class="panel-body no-padding mCustomScrollbar"
-								data-mcs-theme="minimal-dark">
-								
-								<% 
-								TaskLogDAO dao = new TaskLogDAO();
-								TaskLog sample  = new TaskLog();
-								sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
-								sample.setItemType("LESSON");
-								
-								List<TaskLog> items = dao.findByExample(sample);
-								for(TaskLog log : items) {
-								
-									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-									
-									%>
-								<div class="comment">
-									<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
-									<div class="overflow-h">
-										<strong><%=user.getName() %></strong>
-										<p><%=log.getComments() %></p>
-										
-									</div>
-								</div>
-								<% } %>
-
-							</div>
-						</div>
-					</div>
+					
 			</div>
 
 		</div>

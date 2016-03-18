@@ -9,7 +9,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 String pptID = request.getParameter("ppt_id");
 pptID = pptID.split("\\?")[0]; 
 if(pptID.contains("\\?")) {
-	System.err.println("Kamini");
+	//System.err.println("Kamini");
 }
 
 Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
