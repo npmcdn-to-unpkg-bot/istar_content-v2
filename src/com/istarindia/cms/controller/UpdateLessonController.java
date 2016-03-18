@@ -48,6 +48,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 
 		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
+			int task_id = Integer.parseInt(request.getParameter("task_id"));
 			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
 			int duration = Integer.parseInt(request.getParameter("duration"));
 
@@ -66,6 +67,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite);
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("lesson", lesson);
+			request.setAttribute("task_id", task_id);
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 		} else {
 			System.out.println("Something missing .... ");

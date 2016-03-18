@@ -44,8 +44,9 @@ public class CreateAssesmentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AssessmentDAO assessmentDAO= new AssessmentDAO();
 		Assessment assessment = new Assessment();
-		
+
 		Integer lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
+		Integer task_id = Integer.parseInt(request.getParameter("task_id"));
 		assessment.setLesson((new LessonDAO()).findById(lesson_id));
 		
 		Calendar calendar = Calendar.getInstance();

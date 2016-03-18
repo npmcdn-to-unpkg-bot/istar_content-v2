@@ -382,7 +382,7 @@ public class LessonUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		out.append(writer.toString());
+		out.append(writer.toString().replaceAll("id=\"", "id=\"" + tagString));
 		return out;
 
 	}
