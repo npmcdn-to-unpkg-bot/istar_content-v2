@@ -46,7 +46,7 @@ public class CreateAssesmentController extends HttpServlet {
 		Assessment assessment = new Assessment();
 
 		Integer lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
-		Integer task_id = Integer.parseInt(request.getParameter("task_id"));
+
 		assessment.setLesson((new LessonDAO()).findById(lesson_id));
 		
 		Calendar calendar = Calendar.getInstance();

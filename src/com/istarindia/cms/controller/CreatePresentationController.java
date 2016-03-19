@@ -57,7 +57,6 @@ public class CreatePresentationController extends HttpServlet {
 		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
 		CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A presentation for the lesson was created.");
 		
-		Integer task_id = Integer.parseInt(request.getParameter("task_id"));
 		request.setAttribute("lesson", lesson);
 
 		request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);;

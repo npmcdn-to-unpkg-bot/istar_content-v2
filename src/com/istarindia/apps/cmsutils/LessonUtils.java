@@ -323,7 +323,7 @@ public class LessonUtils {
 		return out;
 	}
 
-	public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide, String tagString) {
+	public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide) {
 		ImageDAO dao = new ImageDAO();
 		ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid",
 				ppt.getLesson().getCmsession().getId());
@@ -366,7 +366,7 @@ public class LessonUtils {
 		VelocityContext context = new VelocityContext();
 		context.put("slide", slide);
 		context.put("images", images);
-		context.put("tag_string", tagString);
+		//context.put("tag_string", tagString);
 		context.put("list_types", CMSRegistry.listTypes);
 		Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
 		StringWriter writer = new StringWriter();
@@ -382,7 +382,7 @@ public class LessonUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		out.append(writer.toString().replaceAll("id=\"", "id=\"" + tagString));
+		out.append(writer.toString());
 		return out;
 
 	}

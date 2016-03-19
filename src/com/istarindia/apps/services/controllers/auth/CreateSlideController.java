@@ -46,7 +46,6 @@ public class CreateSlideController extends IStarBaseServelet {
 		printParams(request);
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
-		Integer task_id = Integer.parseInt(request.getParameter("task_id"));
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
 		case "ONLY_TITLE":
