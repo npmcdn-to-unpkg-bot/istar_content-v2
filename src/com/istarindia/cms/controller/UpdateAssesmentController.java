@@ -25,6 +25,8 @@ import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.AssessmentService;
 import com.istarindia.apps.services.LessonService;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
@@ -53,7 +55,7 @@ public class UpdateAssesmentController extends HttpServlet {
 		if (request.getParameterMap().containsKey("assessment_id") && request.getParameterMap().containsKey("assessment_type") && request.getParameterMap().containsKey("number_of_questions"))
  {
 			int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
-			int task_id = Integer.parseInt(request.getParameter("task_id"));
+		
 			int number_of_questions = Integer.parseInt(request.getParameter("number_of_questions"));
 			assessment_type = request.getParameter("assessment_type");
 
@@ -66,7 +68,12 @@ public class UpdateAssesmentController extends HttpServlet {
 			// Lesson lesson = (new
 			// LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
 			request.setAttribute("lesson", lesson);
-			request.setAttribute("task_id", task_id);
+			TaskDAO dao = new TaskDAO();
+			Task t = new Task();
+			t.setItemType("LESSON");
+			t.setItemId(lesson.getId());
+			
+			request.setAttribute("task_id", dao.findByExample(t).get(0).getId());
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 		} else {
 			System.out.println("Something missing .... ");
