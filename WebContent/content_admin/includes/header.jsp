@@ -5,13 +5,16 @@
 <%@page import="com.istarindia.apps.dao.IstarUser"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
+String userRold = "";
+
 try{
 if (request.getSession().getAttribute("user")==null) {
 	System.out.println("redirecting to index");
 	String url1 = "/content/"+ "index.jsp";
 	request.getRequestDispatcher(url1).forward(request, response);
 	System.out.println("came back to header");
-}
+	userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
+} 
 }catch(NullPointerException ex)
 {
 	System.out.println("npe");
@@ -41,7 +44,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					
 					boolean able_to_see=false;
 					for(ChildLink child :  parent.getChildren())  {
-						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
 						if(child.getValidRoles().contains(userRold)) {
 							able_to_see = true;
 							break;
@@ -61,7 +63,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				</a>
 					<ul class="dropdown-menu">
 						<% for(ChildLink child :  parent.getChildren())  {
-						String userRold = ((IstarUser)request.getSession().getAttribute("user")).getUserType().toLowerCase();
 						if(child.getValidRoles().contains(userRold)) {
 						%>
 						<li><a href="<%=child.getUrl() %>"><%=child.getDisplayName() %></a></li>
