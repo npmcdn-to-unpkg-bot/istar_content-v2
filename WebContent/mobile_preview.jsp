@@ -24,11 +24,11 @@ String slide_id = request.getParameter("slide_id");
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/<%=request.getParameter("lesson_theme").toLowerCase()%>.css" id="theme">
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" /><!-- Printing and PDF exports -->
+<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" /><!-- Printing and PDF exports -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';

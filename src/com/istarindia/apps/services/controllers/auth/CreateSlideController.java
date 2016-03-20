@@ -146,6 +146,24 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
+		case "ONLY_PARAGRAPH":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				/*service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"));*/
+				service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"), 
+						
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+				
+
+			} else {
+				service.addParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"), 
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("slide_id"));
+
+			}
+
+			break;
 		default:
 			break;
 		}

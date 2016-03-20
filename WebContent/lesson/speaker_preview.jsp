@@ -29,7 +29,7 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/<%=ppt.getLesson().getLesson_theme().toLowerCase() %>.css" id="theme">
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">

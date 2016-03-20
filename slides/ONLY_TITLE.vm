@@ -1,8 +1,0 @@
-<section class="ONLY_TITLE" data-transition="$slide.getTransition()" data-background="$slide.getBackground()" 
-data-background-transition="$slide.getBackgroundTransition()">
-	<p class="updated" id="data_slide_title">$slide.getTitle()</p>
-	
-<aside class="notes">
-       Teacher Notes - $slide.getTeacherNotes()
-     </aside>
-</section>

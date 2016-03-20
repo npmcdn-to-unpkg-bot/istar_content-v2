@@ -12,6 +12,11 @@
 	font-size: 170%;
 }
 
+.reveal .ONLY_PARAGRAPH p {
+	margin-top: 50px;
+	font-size: 200%;
+}
+
 .reveal .ONLY_TITLE_LIST h2 {
 	font-size:150%;
 	    margin-top: 86px;

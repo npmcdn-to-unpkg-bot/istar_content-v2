@@ -10,11 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.LearningObjective;
-import com.istarindia.apps.dao.LearningObjectiveDAO;
-import com.istarindia.apps.dao.Lesson;
-import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.LessonTypes;
 import com.istarindia.apps.dao.*;
 import com.istarindia.apps.services.LessonService;
@@ -48,10 +43,13 @@ public class UpdateLessonController extends IStarBaseServelet {
 
 		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
-			int task_id = Integer.parseInt(request.getParameter("task_id"));
+			Task task = new Task();
+			task.setItemId(lesson_id);
+			task.setItemType("LESSON");
+			task = (new TaskDAO()).findByExample(task).get(0);
 			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
 			int duration = Integer.parseInt(request.getParameter("duration"));
-
+			String lesson_theme = request.getParameter("lesson_theme");
 			String title = request.getParameter("title");
 			if (request.getParameterMap().containsKey("Tags")) {
 				tags = request.getParameter("Tags");
@@ -64,10 +62,10 @@ public class UpdateLessonController extends IStarBaseServelet {
 				}
 			}
 			LessonService service = new LessonService();
-			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite);
+			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite, lesson_theme);
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("lesson", lesson);
-			request.setAttribute("task_id", task_id);
+			request.setAttribute("task_id", task.getId());
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 		} else {
 			System.out.println("Something missing .... ");

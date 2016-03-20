@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="slides"/>
-	<classpathentry kind="src" path="edit_slides"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
@@ -52,5 +50,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/velocity-1.7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/werken-xpath-0.9.4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/istardao"/>
+	<classpathentry kind="lib" path="/istardao/edit_slides"/>
+	<classpathentry kind="lib" path="/istardao/slides"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

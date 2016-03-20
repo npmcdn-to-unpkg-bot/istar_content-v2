@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.Themes"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 
 <%@page import="com.istarindia.apps.services.LessonService"%>
@@ -72,7 +73,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			</div>
 			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
 		</div>
-		<BR/>
+		<BR />
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
 				<div class="col-md-4">
@@ -89,45 +90,51 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 
 									<form action="/content/update_lesson" id="sky-form4" class="sky-form">
-										<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> <input type="hidden"
-											name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+										<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> <input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
 										<fieldset>
 
 											<section>
-												<label>Title of Lesson</label> <label class="input">
-													<input value="<%=lesson.getTitle()%>" type="text" name="title" placeholder="Title of Lesson"> 
-													<b class="tooltip tooltip-bottom-right">The title of the lesson</b>
+												<label>Title of Lesson</label> <label class="input"> <input value="<%=lesson.getTitle()%>" type="text" name="title" placeholder="Title of Lesson"> <b class="tooltip tooltip-bottom-right">The title of the lesson</b>
 												</label>
 											</section>
 
 											<section>
-												<label>Duration of Lesson</label> <label class="input">
-													<input value="<%=lesson.getDuration()%>" type="number" 	name="duration" 
-													placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
+												<label>Duration of Lesson</label> <label class="input"> <input value="<%=lesson.getDuration()%>" type="number" name="duration" placeholder="Duration of Lesson"> <b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
 												</label>
 											</section>
 											<section>
-												<label> Tags</label> <label class="input"> 
-												<input data-role="tagsinput" value="<%=lesson.getTags()%>" 	type="text" name="Tags" 
-												class="tagcontainer" 	placeholder="Tags of Lesson"> 
-												<b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
+												<label> Tags</label> <label class="input"> <input data-role="tagsinput" value="<%=lesson.getTags()%>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> <b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 												</label>
 											</section>
-											
-											
-							<section>
-								<label class="label">List of Learning Objectives</label>
-								<div class="row">
-									<% for(LearningObjective obj :  lesson.getLearningObjectives()) { %>
-									<div class="col col-12">
-										<label class="checkbox"><input type="checkbox" name="learningObjectives" checked="checked" value="<%=obj.getId() %>">
-										<i></i><%=obj.getTitle() %></label>
-									</div>
-									<% } %>
-								</div>
-							</section>
 
-							
+											<section>
+												<label class="label">Lesson Themes</label>
+												<div class="row">
+													<% for(String themeName :  Themes.lessonThemes) { %>
+													<div class="col col-4">
+														<% if(lesson.getLesson_theme().equalsIgnoreCase(themeName)) { %>
+														<label class="radio"><input type="radio" name="lesson_theme" checked="checked" value="<%=themeName%>">
+														<i class="rounded-x" ></i><%=themeName%></label>
+														<% } else { %>
+														<label class="radio"><input type="radio" name="lesson_theme"   value="<%=themeName%>">
+														<i class="rounded-x" ></i><%=themeName%></label>
+														<% } %>
+													</div>
+													<% } %>
+												</div>
+											</section>
+											<section>
+												<label class="label">List of Learning Objectives</label>
+												<div class="row">
+													<% for(LearningObjective obj :  lesson.getLearningObjectives()) { %>
+													<div class="col col-12">
+														<label class="checkbox"><input type="checkbox" name="learningObjectives" checked="checked" value="<%=obj.getId() %>"> <i></i><%=obj.getTitle() %></label>
+													</div>
+													<% } %>
+												</div>
+											</section>
+
+
 										</fieldset>
 
 										<footer>
@@ -149,9 +156,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<div class="alert alert-warning fade in text-center">
 						<h4>Please Create a Presentation/Assessment/Game</h4>
 						<p>
-							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> 
-							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>">Create a Assessment</a> 
-							<a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
+							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
 						</p>
 					</div>
 					<% } else { 
@@ -163,22 +168,24 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						//Botton one is list of slides
 						}  %>
 				</div>
-					<div class="col-sm-5">
-						<div class="panel panel-profile profile">
-							<div class="panel-heading overflow-h">
-								<h2 class="panel-title heading-sm pull-left">
-									<i class="fa fa-comments-o"></i> Review Comments
-								</h2>
-								
-							</div>
-							<div id="scrollbar4"
-								class="panel-body no-padding mCustomScrollbar"
-								data-mcs-theme="minimal-dark">
-								
-								<% 
+				<div class="col-sm-5">
+					<div class="panel panel-profile profile">
+						<div class="panel-heading overflow-h">
+							<h2 class="panel-title heading-sm pull-left">
+								<i class="fa fa-comments-o"></i> Review Comments
+							</h2>
+
+						</div>
+						<div id="scrollbar4" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
+
+							<% 
 								TaskLogDAO dao = new TaskLogDAO();
 								TaskLog sample  = new TaskLog();
-								sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
+								if(request.getParameterMap().containsKey("task_id")) {
+									sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
+								} else {
+									sample.setTaskId(Integer.parseInt(request.getAttribute("task_id").toString()));
+								}
 								sample.setItemType("LESSON");
 								
 								List<TaskLog> items = dao.findByExample(sample);
@@ -187,23 +194,23 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
 									
 									%>
-								<div class="comment">
-									<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
-									<div class="overflow-h">
-										<strong><%=user.getName() %></strong>
-										<p><%=log.getComments() %></p>
-										
-									</div>
-								</div>
-								<% } %>
+							<div class="comment">
+								<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
+								<div class="overflow-h">
+									<strong><%=user.getName() %></strong>
+									<p><%=log.getComments() %></p>
 
+								</div>
 							</div>
+							<% } %>
+
 						</div>
 					</div>
+				</div>
 			</div>
 
 		</div>
-	<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
+		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
 	</div>
 
 
@@ -216,8 +223,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
