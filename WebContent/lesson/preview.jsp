@@ -28,11 +28,11 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
 <% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
 	//System.err.println("This is Mobile");
-%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" />
+%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
 
-<%  } else {
-	//System.err.println("This is Desktop");
-  } %><!-- Printing and PDF exports -->
+<%  } else { %>
+	<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
+<%  } %><!-- Printing and PDF exports -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';

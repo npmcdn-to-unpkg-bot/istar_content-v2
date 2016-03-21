@@ -18,9 +18,12 @@
 }
 
 .reveal .ONLY_TITLE_LIST h2 {
-	font-size:150%;
-	    margin-top: 86px;
-	    color: green;
+	font-size: 180%;
+    margin-top: 86px;
+    color: green;
+    width: 1136px;
+    text-align: right;
+    margin-left: -92px;
 }
 
 .reveal .ONLY_TITLE_LIST ol {
@@ -29,7 +32,7 @@
 }
 
 .reveal .ONLY_TITLE_LIST ol li {
-	font-size: 180%;
+	font-size: 150%;
     line-height: 2;
     list-style: none;
     background: #fcd006;
