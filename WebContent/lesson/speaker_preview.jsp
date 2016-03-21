@@ -67,10 +67,10 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
 			Reveal.initialize({
 				controls: true,
 				progress: true,
-				history: true,
-				center: true,
+				history: false,
+				center: false,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'none', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
