@@ -39,12 +39,13 @@ public class EditLessonController extends HttpServlet {
 		/*	inputs in request
 		 * Integer cmsession_id, Integer duration, String lessonType, String tags, String title, 
 		String[] learningObjectives*/
-		TaskDAO dao = new TaskDAO();
-		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("task_id")));
 		Task task = new Task();
-		task.setItemId(lesson.getId());
-		task.setTaskName("CREATE_LESSON");
-		task = new TaskDAO().findByExample(task).get(0);
+		task = new TaskDAO().findById(Integer.parseInt(request.getParameter("task_id")));
+		Lesson lesson = (new LessonDAO()).findById(task.getItemId());
+		
+	//	task.setItemId(lesson.getId());
+		//task.setTaskName("CREATE_LESSON");
+		//task = new TaskDAO().findByExample(task).get(0);
 		new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
 		
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
