@@ -85,6 +85,7 @@ public class DeleteQuestionController extends HttpServlet {
 				e.printStackTrace();
 			}
 		request.setAttribute("task_id", task_id);
+	//	request.setAttribute("lesson", lesson);
 		response.sendRedirect("/content/edit_lesson?lesson_id=" + lesson.getId()+"&task_id="+task_id);
 	}
 

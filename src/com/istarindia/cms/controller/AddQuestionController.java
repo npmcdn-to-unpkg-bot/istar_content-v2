@@ -20,6 +20,8 @@ import com.istarindia.apps.dao.AssessmentDAO;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Question;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.OptionService;
 import com.istarindia.apps.services.QuestionService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
@@ -53,7 +55,7 @@ public class AddQuestionController extends IStarBaseServelet {
 		AssessmentDAO dao = new AssessmentDAO();
 		LearningObjectiveDAO learningObjectiveDAO = new LearningObjectiveDAO();
 		Assessment assessment = dao.findById(Integer.parseInt(request.getParameter("assessment_id")));
-		Integer task_id= Integer.parseInt(request.getParameter("task_id"));
+		//Integer task_id= Integer.parseInt(request.getParameter("task_id"));
 		String[] learningObjectiveIds = request.getParameterValues("learningObjectives");
 		Set<LearningObjective> learningObjectiveSet=new HashSet<LearningObjective>();
 		if(learningObjectiveIds!=null){
@@ -74,7 +76,12 @@ public class AddQuestionController extends IStarBaseServelet {
 		//TODO: UPDATE:::: CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"),
 		//		"A new Slide added with the template => "+ template +" created in the presentation wih ID ->"+ ppt.getId() );
 	//	request.setAttribute("task_id", task_id);
-		response.sendRedirect("/content/edit_lesson?lesson_id=" + assessment.getLesson().getId()+"&task_id="+task_id);
+		TaskDAO dao1 = new TaskDAO();
+		Task t = new Task();
+		t.setItemType("LESSON");
+		t.setItemId(assessment.getLesson().getId());
+		
+		response.sendRedirect("/content/edit_lesson?lesson_id=" + assessment.getLesson().getId()+"&task_id="+dao1.findByExample(t).get(0).getId());
 
 	}
 

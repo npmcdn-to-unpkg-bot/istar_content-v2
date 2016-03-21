@@ -31,6 +31,8 @@ import org.hibernate.Session;
 
 import com.istarindia.apps.SlideTransition;
 import com.istarindia.apps.dao.Assessment;
+import com.istarindia.apps.dao.AssessmentQuestion;
+import com.istarindia.apps.dao.AssessmentQuestionDAO;
 import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.Image;
@@ -222,6 +224,11 @@ public class LessonUtils {
 				DBUtils db = new DBUtils();
 				ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
 				for (int i = 0; i < data.size(); i++) {
+					
+					AssessmentQuestionDAO aqdao = new AssessmentQuestionDAO();
+					AssessmentQuestion aq = new AssessmentQuestion();
+					aq.setQuestion(new QuestionDAO().findById(Integer.parseInt(data.get(i).get(0))));
+					
 					out.append("<tr>");
 					out.append("<td>" + data.get(i).get(0) + "</td>");
 					out.append("<td>" + data.get(i).get(1) + "</td>");
@@ -229,7 +236,7 @@ public class LessonUtils {
 					out.append("<a class='btn btn-success btn-xs' href='#' >" + "<i class='fa fa-check'></i>Edit</a>");
 
 					out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-							+ "href='#'>" + "<i class='fa fa-remove'></i>Delete</a>");
+							+ "href='/content/delete_question?question_id="+data.get(i).get(0)+"&assessment_id="+aqdao.findByExample(aq).get(0)+"'>" + "<i class='fa fa-remove'></i>Delete</a>");
 
 					out.append("</td>");
 					out.append("</tr>");
