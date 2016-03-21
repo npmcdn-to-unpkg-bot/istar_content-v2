@@ -68,7 +68,7 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
 				controls: true,
 				progress: true,
 				history: false,
-				center: false,
+				center: true,
 
 				transition: 'none', // none/fade/slide/convex/concave/zoom
 

@@ -45,7 +45,8 @@
 
 .reveal .ONLY_TITLE_TREE h2 {
 	font-size: 250%;
-	margin-top: -500px;
+    margin-top: -16%;
+
 }
 
 .reveal .ONLY_TITLE_TREE ol {
@@ -69,7 +70,6 @@
 
 .reveal .ONLY_TITLE_TABLE h2, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE h2 , .ONLY_TITLE_TABLE_PARAGRAPH h2 {
 	font-size: 250%;
-	margin-top: -870px;
 }
 
 .reveal .ONLY_TITLE_TABLE table, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE table , .reveal .ONLY_TITLE_TABLE_PARAGRAPH table
@@ -96,7 +96,6 @@
 
 .reveal .ONLY_TITLE_TABLE_PARAGRAPH h2 {
 	font-size: 250%;
-	margin-top: -630px;
 }
 
 .reveal .ONLY_TITLE_TABLE_PARAGRAPH table td
@@ -139,7 +138,6 @@ top: -1633px;
     margin-left: 8px;
     min-width: 1400px;
     z-index: 110 !important;
-    position: relative !important;}
 .reveal .ONLY_TITLE_LIST {
 	top: 103px;
     display: block;
@@ -149,4 +147,8 @@ top: -1633px;
     min-width: 1400px;
     z-index: 110 !important;
     position: relative !important;
+}
+
+.reveal .ONLY_TITLE h2 {
+	font-size: 300%;
 }
