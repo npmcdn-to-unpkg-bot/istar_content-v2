@@ -33,9 +33,11 @@
     line-height: 2;
     list-style: none;
     background: #fcd006;
-    min-width: 1000px;
+    min-width: 1153px;
     margin-bottom: 87px;
     z-index: 10 !important;
+    margin-left: -420px;
+    padding-left: 986px;
 }
 
 .reveal .ONLY_TITLE_TREE h2 {
@@ -125,17 +127,16 @@
 }
 
 .reveal .ONLY_TITLE_LIST #bg {
-top: -1401px;
+top: -1633px;
     display: block;
     background-image: url("/content/assets/img/mobile_referece1.png");
     background-size: cover;
     /* margin-top: -598px; */
-    height: 1851px;
-    margin-left: -61px;
+    height: 1820px;
+    margin-left: 8px;
     min-width: 1400px;
     z-index: 110 !important;
-    position: relative !important;
-}
+    position: relative !important;}
 .reveal .ONLY_TITLE_LIST {
 	top: 103px;
     display: block;

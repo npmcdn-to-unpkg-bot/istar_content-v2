@@ -199,7 +199,7 @@
 								style="transform: scale(1); transform-origin: 0px 0px 0px;">
 								<div id="frame_htc_one_emulator" class="frame_scroller">
 									<iframe
-										src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>"
+										src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
 										frameborder="0" id='prv'
 										style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
 									</iframe>

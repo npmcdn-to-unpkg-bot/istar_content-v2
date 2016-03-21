@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.LessonTypes;
 import com.istarindia.apps.dao.*;
+import com.istarindia.apps.services.CourseService;
 import com.istarindia.apps.services.LessonService;
 import com.istarindia.apps.services.PresentationService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
@@ -57,12 +58,14 @@ public class UpdateLessonController extends IStarBaseServelet {
 			if (request.getParameterMap().containsKey("learningObjectives")) {
 				learningObjectives = (String[]) request.getParameterMap().get("learningObjectives");
 				for (String element : learningObjectives) {
-					//System.err.println("Seected LO -->"+ element);
+					System.err.println("Seected LO -->"+ element);
 					ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
 				}
 			}
 			LessonService service = new LessonService();
 			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite, lesson_theme);
+			(new CourseService()).clearLearningObjectiveWithLesson(lesson, ite);
+			(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", task.getId());

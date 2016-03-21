@@ -42,6 +42,7 @@ public class ReportUtils {
 		for(String key : conditions.keySet()) {
 			try {
 				if(sql1.contains(key)) {
+					System.out.println("key->"+ key + "   value-> "+conditions.get(key) );
 					query.setParameter(key, Integer.parseInt(conditions.get(key)));
 				} 
 			} catch (Exception e) {
@@ -60,6 +61,7 @@ public class ReportUtils {
 
 			table.add(row);
 		}
+		System.err.println("Result Count"+ results.size() );
 		return table;
 
 	}
@@ -92,7 +94,8 @@ public class ReportUtils {
 		try {
 			data = getReportData(report.getSql(), report.getColumns(), conditions);
 		} catch (Exception e) {
-			System.out.println("reportID===============>>>"+ reportID);
+			e.printStackTrace();
+			System.err.println("reportID===============>>>"+ reportID);
 		}
 		
 		String style="style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
