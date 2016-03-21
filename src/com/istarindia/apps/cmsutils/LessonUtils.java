@@ -155,12 +155,13 @@ public class LessonUtils {
 						+ "<option value='TREE'>TREE</option>"
 						+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
 						+ "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
-						+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
+						+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'> <input value='' type='hidden' name='number_of_questions' placeholder='Number of questions'> </label> </section> ");
 
 				out.append(" </div>");
 				out.append("</fieldset> "
 						+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-			} else {
+			} 
+			else {
 				out.append("<div class=' col-md-12 '>" + "<div class='panel panel-sea'>" + "<div class='panel-heading'>"
 						+ "<h3 class='panel-title'><i class='fa fa-tasks'>" + "</i>Question Details</h3></div>"
 						+ "<div class='panel-body'> "

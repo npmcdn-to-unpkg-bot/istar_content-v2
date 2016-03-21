@@ -71,7 +71,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<li class="active">Edit Lesson</li>
 				</ul> -->
 			</div>
-			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  %>
+			<% Lesson lesson = (Lesson)request.getAttribute("lesson");  
+			int task_id = Integer.parseInt(request.getAttribute("task_id").toString());
+			%>
 		</div>
 		<BR />
 		<div class="container-fluid height-1000" style="padding: 0px !important">
@@ -156,7 +158,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<div class="alert alert-warning fade in text-center">
 						<h4>Please Create a Presentation/Assessment/Game</h4>
 						<p>
-							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
+							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId()%>&task_id=<%=task_id %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?lesson_id=<%=lesson.getId() %>&task_id=<%=task_id %>">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
 						</p>
 					</div>
 					<% } else { 
