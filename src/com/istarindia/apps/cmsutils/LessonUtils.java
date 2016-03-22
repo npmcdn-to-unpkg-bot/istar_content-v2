@@ -153,7 +153,6 @@ public class LessonUtils {
 					+ "<div class='panel-body'> "
 					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
 					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
-				//	+ "<input type='hidden' name='task_id' value="+task_id+"> "
 					+ "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
 					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
 					+ "<option value='STATIC'>STATIC</option>"
@@ -180,7 +179,6 @@ public class LessonUtils {
 					+ "<div class='panel-body'> "
 					+ "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
 					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
-				//	+ "<input type='hidden' name='task_id' value="+task_id+"> "
 					+ "<fieldset>");
 
 			out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
@@ -334,6 +332,41 @@ public class LessonUtils {
 		} else if (lesson.getGame() != null) {
 
 		} else if (lesson.getAssessment() != null) {
+
+			Assessment assessment = lesson.getAssessment();
+			out.append("<div class=' col-md-12 '>");
+			out.append("<div class='panel panel-sea margin-bottom-40'>");
+			out.append("<div class='panel-heading'>");
+			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
+			out.append("</div>");
+			out.append("<table class='table table-striped'>");
+			out.append("<thead>");
+			out.append("<tr>");
+			out.append("<th>#</th>");
+			out.append("<th>Question Title</th>");
+			out.append("<th>Action</th>");
+			out.append("</tr>");
+			out.append("</thead>");
+			out.append("<tbody>");
+			DBUtils db = new DBUtils();
+			ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+			for (int i = 0; i < data.size(); i++) {
+				out.append("<tr>");
+				out.append("<td>" + data.get(i).get(0) + "</td>");
+				out.append("<td>" + data.get(i).get(1) + "</td>");
+				out.append("<td>");
+				out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id="+data.get(i).get(0)+"&lesson_id="+lesson.getId()+"'>" 
+				+ "<i class='fa fa-check'></i>View question</a>");
+				out.append("</td>");
+				out.append("</tr>");
+			}
+
+			out.append("</tbody>");
+			out.append("</table>");
+			out.append("</div>");
+			out.append("</div>");
+
+		
 
 		}
 
