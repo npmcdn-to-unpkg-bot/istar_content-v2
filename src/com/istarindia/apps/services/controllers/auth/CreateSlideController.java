@@ -14,6 +14,8 @@ import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
 import com.istarindia.cms.lessons.CMSHTMLTableRow;
@@ -169,8 +171,11 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 		CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"),
 				"A new Slide added with the template => "+ template +" created in the presentation wih ID ->"+ ppt.getId() );
-
-		response.sendRedirect("/content/edit_lesson?task_id=" + ppt.getLesson().getId());
+		Task t = new Task();
+		t.setItemId(ppt.getLesson().getId());
+		t.setItemType("LESSON");
+		t = new TaskDAO().findByExample(t).get(0);
+		response.sendRedirect("/content/edit_lesson?task_id=" +t.getId() );
 
 
 	}

@@ -18,9 +18,12 @@
 }
 
 .reveal .ONLY_TITLE_LIST h2 {
-	font-size:150%;
-	    margin-top: 86px;
-	    color: green;
+	font-size: 180%;
+    margin-top: 86px;
+    color: green;
+    width: 1136px;
+    text-align: right;
+    margin-left: -92px;
 }
 
 .reveal .ONLY_TITLE_LIST ol {
@@ -29,18 +32,21 @@
 }
 
 .reveal .ONLY_TITLE_LIST ol li {
-	font-size: 180%;
+	font-size: 150%;
     line-height: 2;
     list-style: none;
     background: #fcd006;
-    min-width: 1000px;
+    min-width: 1153px;
     margin-bottom: 87px;
     z-index: 10 !important;
+    margin-left: -420px;
+    padding-left: 986px;
 }
 
 .reveal .ONLY_TITLE_TREE h2 {
 	font-size: 250%;
-	margin-top: -500px;
+    margin-top: -16%;
+
 }
 
 .reveal .ONLY_TITLE_TREE ol {
@@ -64,7 +70,6 @@
 
 .reveal .ONLY_TITLE_TABLE h2, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE h2 , .ONLY_TITLE_TABLE_PARAGRAPH h2 {
 	font-size: 250%;
-	margin-top: -870px;
 }
 
 .reveal .ONLY_TITLE_TABLE table, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE table , .reveal .ONLY_TITLE_TABLE_PARAGRAPH table
@@ -91,7 +96,6 @@
 
 .reveal .ONLY_TITLE_TABLE_PARAGRAPH h2 {
 	font-size: 250%;
-	margin-top: -630px;
 }
 
 .reveal .ONLY_TITLE_TABLE_PARAGRAPH table td
@@ -124,25 +128,20 @@
 	 margin-top: -444px;
 }
 
-.reveal .ONLY_TITLE_LIST #bg {
-top: -1401px;
-    display: block;
+.reveal .ONLY_TITLE_LIST ol{
+       display: block;
     background-image: url("/content/assets/img/mobile_referece1.png");
     background-size: cover;
-    /* margin-top: -598px; */
-    height: 1851px;
-    margin-left: -61px;
-    min-width: 1400px;
-    z-index: 110 !important;
-    position: relative !important;
+  
 }
 .reveal .ONLY_TITLE_LIST {
-	top: 103px;
-    display: block;
-    margin-top: -598px;
-    height: 1851px;
-    margin-left: -61px;
-    min-width: 1400px;
-    z-index: 110 !important;
-    position: relative !important;
+	
+}
+
+.reveal .ONLY_TITLE h2 {
+	font-size: 300%;
+}
+
+.reveal .ONLY_TITLE_IMAGE h2 {
+	margin-top: -26%;
 }
