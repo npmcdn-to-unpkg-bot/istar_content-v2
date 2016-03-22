@@ -169,11 +169,7 @@
 					if (LessonService.isEmptyLesson(lesson)) {
 				%>
 				<div class="alert alert-warning fade in text-center">
-					<h4>Please Create a Presentation/Assessment/Game</h4>
-					<p>
-						<%-- 							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
- --%>
-					</p>
+					<h4>Lesson is empty!!</h4>
 				</div>
 				<%
 					} else {
