@@ -20,10 +20,7 @@
 .reveal .ONLY_TITLE_LIST h2 {
 	font-size: 180%;
     margin-top: 86px;
-    color: green;
-    width: 1136px;
-    text-align: right;
-    margin-left: -92px;
+  
 }
 
 .reveal .ONLY_TITLE_LIST ol {
@@ -35,12 +32,6 @@
 	font-size: 150%;
     line-height: 2;
     list-style: none;
-    background: #fcd006;
-    min-width: 1153px;
-    margin-bottom: 87px;
-    z-index: 10 !important;
-    margin-left: -420px;
-    padding-left: 986px;
 }
 
 .reveal .ONLY_TITLE_TREE h2 {
@@ -125,13 +116,13 @@
 }
 
 .reveal .IDEAS_LIST___ONLY_TITLE_LIST h2 {
-	 margin-top: -444px;
+	 margin-top: -36%;
+	 text-align: left;
 }
 
 .reveal .ONLY_TITLE_LIST ol{
        display: block;
-    background-image: url("/content/assets/img/mobile_referece1.png");
-    background-size: cover;
+
   
 }
 .reveal .ONLY_TITLE_LIST {
@@ -144,4 +135,66 @@
 
 .reveal .ONLY_TITLE_IMAGE h2 {
 	margin-top: -26%;
+}
+
+
+.reveal  .SIMPLE_LIST___ONLY_TITLE_LIST h2 {
+	font-size: 250%;
+	 margin-top: -20%;
+}
+
+.reveal  .SIMPLE_LIST___ONLY_TITLE_LIST ol li {
+	font-size: 180%;
+	list-style: none;
+} 
+
+
+.reveal  .ONLY_TITLE_LIST h2 {
+	font-size: 250%;
+	 margin-top: -20%;
+}
+
+.reveal  .ONLY_TITLE_LIST ol li {
+	font-size: 180%;
+	list-style: none;
+} 
+.reveal .IDEAS_LIST___ONLY_TITLE_LIST {
+	background: white
+}
+.reveal .IDEAS_LIST___ONLY_TITLE_LIST #bg_image{
+       display: block;
+    background-image: url("/content/assets/img/mobile_referece1.png");
+    background-size: cover;
+    margin-left: -52px;
+    height: 1964px;
+    margin-top: -484px;
+    position: absolute;
+    /* top: -1135px; */
+    left: -1px;
+    width: 1000px;
+        
+}
+
+.reveal .IDEAS_LIST___ONLY_TITLE_LIST ol  {
+       border: 1px solid red;
+    margin-top: -498px;
+    z-index: 10;
+}
+.reveal .IDEAS_LIST___ONLY_TITLE_LIST ol  li:first-child div{
+	color : red;
+	 margin-top: 480px;
+}
+.reveal .IDEAS_LIST___ONLY_TITLE_LIST ol li div{
+       display: block;
+       	font-size: 150%;
+    line-height: 2;
+    list-style: none;
+    background: #fcd006;
+    min-width: 1153px;
+    margin-bottom: 87px;
+    z-index: 10 !important;
+    margin-left: -420px;
+    padding-left: 986px;
+        margin-top: 120px;
+        z-index: 10;
 }

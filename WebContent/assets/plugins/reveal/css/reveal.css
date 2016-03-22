@@ -1600,25 +1600,3 @@ html:-moz-full-screen-ancestor {
 .ONLY_TITLE  p {font-size: 200%;}
 
 
-.reveal .ONLY_TITLE_LIST h2 {
-	font-size:150%;
-	    margin-top: 86px;
-	    color: green;
-}
-
-.reveal .ONLY_TITLE_LIST ol {
-	margin-top: 100px;
-
-}
-
-.reveal .ONLY_TITLE_LIST ol li {
-	font-size: 180%;
-    line-height: 2;
-    list-style: none;
-    background: #fcd006;
-    min-width: 1153px;
-    margin-bottom: 87px;
-    z-index: 10 !important;
-    margin-left: -420px;
-    padding-left: 986px;
-}
