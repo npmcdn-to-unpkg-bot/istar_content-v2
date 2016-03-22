@@ -1,333 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <game id="1" name="sample_game">
-    <assets data_type="Integer" id="1" name="score"/>
-    <assets data_type="Integer" id="2" name="coins"/>
-    <assets data_type="String" id="3" name="karate_belt"/>
-    <stages id="1" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE">
-        <options id="1" jump_to="8" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="689" ypos="35">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="23" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="333" ypos="51">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="629" ypos="104">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="18" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="291" ypos="229">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="24" marking_scheme="score+10;coins+20;karate_belt=black" xpos="153" ypos="294">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="2" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE">
-        <options id="1" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="220" ypos="193">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="16" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="746" ypos="230">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="541" ypos="159">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="174" ypos="242">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="183" ypos="124">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="3" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="4" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE">
-        <options id="1" jump_to="14" marking_scheme="score+10;coins+20;karate_belt=black" xpos="123" ypos="234">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="63" ypos="227">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="487" ypos="198">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="697" ypos="393">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="5" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="80" ypos="308">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="5" stage_type="MULTIPLE_OPTION_DRAG_DROP">
-        <options id="1" jump_to="23" marking_scheme="score+10;coins+20;karate_belt=black" xpos="280" ypos="186">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="23" marking_scheme="score+10;coins+20;karate_belt=black" xpos="192" ypos="361">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="472" ypos="381">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="106" ypos="269">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="24" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="84" ypos="331">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="6" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="7" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="8" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="9" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="7" marking_scheme="score+10;coins+20;karate_belt=black" xpos="530" ypos="48">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="678" ypos="304">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="15" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="444" ypos="158">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="375" ypos="116">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="393" ypos="114">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="10" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="4" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="583" ypos="387">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="20" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="320" ypos="167">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="5" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="231" ypos="304">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="55" ypos="122">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="724" ypos="216">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="11" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE">
-        <options id="1" jump_to="15" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="315" ypos="133">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="12" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="74" ypos="109">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="313" ypos="141">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="11" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="173" ypos="203">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="6" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="399" ypos="71">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="12" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="9" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="269" ypos="305">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="7" marking_scheme="score+10;coins+20;karate_belt=black" xpos="53" ypos="313">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="197" ypos="40">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="7" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="507" ypos="383">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="15" marking_scheme="score+10;coins+20;karate_belt=black" xpos="507" ypos="106">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="13" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="7" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="746" ypos="364">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="19" marking_scheme="score+10;coins+20;karate_belt=black" xpos="440" ypos="279">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="567" ypos="394">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="19" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="428" ypos="301">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="10" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="489" ypos="270">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="14" stage_type="MULTIPLE_OPTION_DRAG_DROP">
-        <options id="1" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="248" ypos="371">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="15" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="502" ypos="382">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="378" ypos="85">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="743" ypos="203">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="22" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="717" ypos="200">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="15" stage_type="MULTIPLE_OPTION_DRAG_DROP">
-        <options id="1" jump_to="10" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="257" ypos="365">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="112" ypos="387">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="4" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="374" ypos="291">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="82" ypos="150">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="456" ypos="114">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="16" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="17" stage_type="MULTIPLE_OPTION_DRAG_DROP">
-        <options id="1" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="515" ypos="307">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="628" ypos="300">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="23" ypos="307">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="18" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="224" ypos="369">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="659" ypos="157">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="18" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="18" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="61" ypos="333">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="13" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="407" ypos="319">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="473" ypos="302">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="20" marking_scheme="score+10;coins+20;karate_belt=black" xpos="203" ypos="187">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="9" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="166" ypos="34">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="19" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE">
-        <options id="1" jump_to="2" marking_scheme="score+10;coins+20;karate_belt=black" xpos="173" ypos="27">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="440" ypos="285">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="707" ypos="70">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="17" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="176" ypos="375">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="203" ypos="102">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="20" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="21" stage_type="MULTIPLE_OPTION_DRAG_DROP">
-        <options id="1" jump_to="8" marking_scheme="score+10;coins+20;karate_belt=black" xpos="404" ypos="345">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="7" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="596" ypos="322">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="316" ypos="159">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="22" marking_scheme="score+10;coins+20;karate_belt=black" xpos="321" ypos="280">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="124" ypos="29">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="22" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="15" marking_scheme="score+10;coins+20;karate_belt=black" xpos="507" ypos="78">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="12" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="281" ypos="318">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="331" ypos="222">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="191" ypos="41">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="21" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="34" ypos="145">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="23" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
-        <options id="1" jump_to="21" marking_scheme="score+10;coins+20;karate_belt=black" xpos="315" ypos="127">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="2" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="163" ypos="27">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="3" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="376" ypos="51">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="4" jump_to="16" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="362" ypos="19">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <options id="5" jump_to="20" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="686" ypos="35">
-            <option_text>sheets containing Lorem Ipsum passage</option_text>
-        </options>
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
-    <stages id="24" stage_type="INFORMATION_ONLY">
-        <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text>
-    </stages>
+	<assets data_type="Integer" id="1" name="score" />
+	<assets data_type="Integer" id="2" name="coins" />
+	<assets data_type="String" id="3" name="karate_belt" />
+
+	<stages id="0" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h1>Story So Far</h1><ul>
+<li>
+<div>Party with the Bakshi', at their holiday home on their private island in the Bay of Bengal. 3 day Holiday. (House and zoom in)</div>
+</li>
+<li>
+<div>Only the Rich and the influential of the town are invited.</div>
+</li>
+<li>
+<div>As guests arrive they are shown to their rooms by the man servant of the house.</div>
+</li>
+<li>
+<div>After an hour, All gather for Dinner.</div>
+</li>
+</ul>]]>
+		</question_text>
+	</stages>
+	<stages id="1" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h1>Story So Far</h1>
+<ul>
+<li>Maid Runs in with a look of terror.</li>
+<li>She takes everyone to the body.</li>
+<li>Murder was committed in Mr Tarun&rsquo;s Room.</li>
+</ul>]]>
+		</question_text>
+	</stages>
+	
+	<stages id="2" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h1>Story So Far</h1>
+<ul>
+<li>Mr Irfan is Telephoned and arrives on the island. 2 hours later.</li>
+<li>After that the Storm gets stronger and the island is shut off.</li>
+<li>Mrs Reka Bakshi Shows Inspector Irfan to the crime Scene.</li>
+</ul>]]>
+		</question_text>
+	</stages>
+
+
+
+
+
+
+
+
+	<!-- <stages id="1" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="8" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="689" ypos="35"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="23" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="333" ypos="51"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="629" ypos="104"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="18" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="291" ypos="229"> <option_text>sheets 
+		containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="24" marking_scheme="score+10;coins+20;karate_belt=black" xpos="153" ypos="294"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="2" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="220" ypos="193"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="16" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="746" ypos="230"> <option_text>sheets containing 
+		Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="541" ypos="159"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="174" ypos="242"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="183" ypos="124"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="3" stage_type="INFORMATION_ONLY"> 
+		<question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="4" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="14" marking_scheme="score+10;coins+20;karate_belt=black" xpos="123" ypos="234"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="63" ypos="227"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="487" ypos="198"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options 
+		id="4" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="697" ypos="393"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="5" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="80" ypos="308"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="5" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="23" marking_scheme="score+10;coins+20;karate_belt=black" xpos="280" ypos="186"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="23" 
+		marking_scheme="score+10;coins+20;karate_belt=black" xpos="192" ypos="361"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="472" ypos="381"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="106" ypos="269"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="24" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="84" ypos="331"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy 
+		text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="6" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="7" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="8" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="9" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="7" marking_scheme="score+10;coins+20;karate_belt=black" xpos="530" 
+		ypos="48"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="678" ypos="304"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="15" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="444" ypos="158"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="375" ypos="116"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="393" ypos="114"> 
+		<option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="10" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="4" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="583" ypos="387"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="20" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="320" ypos="167"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="5" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="231" ypos="304"> <option_text>sheets 
+		containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="55" ypos="122"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="724" ypos="216"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="11" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="15" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="315" ypos="133"> <option_text>sheets containing 
+		Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="12" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="74" ypos="109"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="313" ypos="141"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="11" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="173" ypos="203"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="6" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="399" ypos="71"> <option_text>sheets containing Lorem 
+		Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="12" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="9" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="269" ypos="305"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="7" marking_scheme="score+10;coins+20;karate_belt=black" xpos="53" ypos="313"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="197" ypos="40"> <option_text>sheets containing Lorem Ipsum passage</option_text> 
+		</options> <options id="4" jump_to="7" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="507" ypos="383"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="15" marking_scheme="score+10;coins+20;karate_belt=black" xpos="507" ypos="106"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="13" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="7" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="746" ypos="364"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> 
+		<options id="2" jump_to="19" marking_scheme="score+10;coins+20;karate_belt=black" xpos="440" ypos="279"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="567" ypos="394"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="19" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="428" ypos="301"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="10" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="489" ypos="270"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is 
+		simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="14" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="248" ypos="371"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="15" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="502" ypos="382"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="378" ypos="85"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="23" 
+		marking_scheme="score+5;coins+10;karate_belt=blue" xpos="743" ypos="203"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="22" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="717" ypos="200"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="15" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="10" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="257" ypos="365"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" 
+		xpos="112" ypos="387"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="374" ypos="291"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="82" ypos="150"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="456" ypos="114"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem 
+		Ipsum </question_text> </stages> <stages id="16" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="17" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="515" ypos="307"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="628" ypos="300"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="23" ypos="307"> <option_text>sheets 
+		containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="18" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="224" ypos="369"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="659" ypos="157"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="18" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="18" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="61" ypos="333"> <option_text>sheets containing 
+		Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="13" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="407" ypos="319"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="473" ypos="302"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="20" marking_scheme="score+10;coins+20;karate_belt=black" xpos="203" ypos="187"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="9" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="166" ypos="34"> <option_text>sheets containing 
+		Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="19" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="2" marking_scheme="score+10;coins+20;karate_belt=black" xpos="173" ypos="27"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="440" ypos="285"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="707" ypos="70"> <option_text>sheets containing Lorem 
+		Ipsum passage</option_text> </options> <options id="4" jump_to="17" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="176" ypos="375"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="203" ypos="102"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="20" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="21" stage_type="MULTIPLE_OPTION_DRAG_DROP"> 
+		<options id="1" jump_to="8" marking_scheme="score+10;coins+20;karate_belt=black" xpos="404" ypos="345"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="7" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="596" ypos="322"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="316" ypos="159"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="22" marking_scheme="score+10;coins+20;karate_belt=black" xpos="321" ypos="280"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> 
+		<options id="5" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="124" ypos="29"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="22" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="15" marking_scheme="score+10;coins+20;karate_belt=black" xpos="507" ypos="78"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="12" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="281" ypos="318"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options 
+		id="3" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="331" ypos="222"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="191" ypos="41"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="21" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="34" ypos="145"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="23" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" 
+		jump_to="21" marking_scheme="score+10;coins+20;karate_belt=black" xpos="315" ypos="127"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="163" ypos="27"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="376" ypos="51"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="16" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="362" ypos="19"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="20" 
+		marking_scheme="score+5;coins+10;karate_belt=blue" xpos="686" ypos="35"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="24" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> -->
 </game>
