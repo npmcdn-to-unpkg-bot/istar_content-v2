@@ -57,6 +57,10 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 		<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
 		<script src="<%=baseURL %>assets/plugins/reveal/js/reveal.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL %>assets/js/typed.min.js"></script>
 
 		<script>
 
@@ -84,9 +88,7 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 			 document.onreadystatechange = function () {
 			     if (document.readyState == "complete") {
 			    	 console.log("Ready");
-			    	 try { initSlide(); } catch (err) {
-						// TODO: handle exception
-					}
+			    	
 			   }
 			 }
 			
