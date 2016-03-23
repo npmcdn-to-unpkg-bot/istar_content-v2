@@ -28,8 +28,16 @@ public class PlayGameController extends IStarBaseServelet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		printParams(request);
-		request.setAttribute("stage_id", request.getParameter("stage_id"));
+		//printParams(request);
+	
+		
+		request.setAttribute("prev_stage_id", request.getParameter("prev_stage_id"));
+		if(request.getParameterMap().containsKey("option_id"))
+		{
+			request.setAttribute("option_id", request.getParameter("option_id"));
+		}
+		
+		
 		request.getRequestDispatcher("/game/gameplay.jsp").forward(request, response);
 	}
 

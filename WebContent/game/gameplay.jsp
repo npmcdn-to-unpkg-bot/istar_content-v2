@@ -96,27 +96,125 @@
 						<div class="panel-body">
 							
 		<%
-		Game game = new GameService().getGame();
-		if(request.getAttribute("stage_id")==null)
-		{
-			System.err.println("in null");
-			out.println(new GameService().startGame(game));
-		}
-		else
-		{
-			int stage_id = Integer.parseInt(request.getAttribute("stage_id").toString());
-			if(stage_id==-100)
-			{
-				out.println("Game Over");
-			}
-			else
-			{
-				out.println(new GameService().getNextStageForm(game,stage_id));
-			}	
-		}
-		
-		
-		%>
+										Game game = new GameService().getGame();
+											ArrayList<Stage> stages = game.getStages();
+											
+											if(request.getAttribute("prev_stage_id")==null)
+											{
+												for(Asset a : game.getAssets())
+												{	
+													request.getSession().setAttribute(a.getName(),0);
+													System.err.println("just started the game with "+ a.getName() +" = "+request.getSession().getAttribute(a.getName()));
+												}
+												out.println(new GameService().startGame(game));
+											}
+											else
+											{
+										int prev_stage_id = Integer.parseInt(request.getAttribute("prev_stage_id").toString());
+										if(request.getAttribute("option_id")!=null)
+										{
+											int option_id = Integer.parseInt(request.getAttribute("option_id").toString());
+											Stage stage = stages.get(prev_stage_id-1);
+											ArrayList<Option> options = stage.getOptions();
+											String marking_scheme = options.get(option_id-1).getMakringScheme();
+											//marking_scheme = marking_scheme.replace("\\+", "+");
+											String [] schemes=null;
+											String [] score=null;
+											//	if (marking_scheme.contains("-")) {
+											schemes = marking_scheme.split(";");
+											
+											StringBuffer sb= new StringBuffer();
+											
+											for(String schema : schemes)
+											{
+												
+											
+												for(Asset a : game.getAssets())
+												{
+													if(schema.contains(a.getName()))
+													{
+														sb.append(a.getName()+"=");
+														if(a.getDataType().equalsIgnoreCase("Integer"))
+														{
+															
+															Double new_val = (Double)new GameService().getScriptEvaluation(a.getName(), request.getSession().getAttribute(a.getName()).toString(), schema);
+															request.getSession().setAttribute(a.getName(), new_val.intValue());
+															sb.append(new_val.intValue()+";");
+															System.err.println("current value of "+a.getName()+"= "+request.getSession().getAttribute(a.getName()));
+														}
+														else
+														{
+															
+															request.getSession().setAttribute(a.getName(), schema.split("=")[1]);
+															sb.append(schema.split("=")[1]+";");
+															System.err.println("current value of "+a.getName()+"= "+request.getSession().getAttribute(a.getName()));	
+														}
+														
+													}
+												}
+												
+											}
+											
+											int student_id =16;
+											new GameService().updateStudentGame(student_id, sb.toString(),game.getId());
+											
+										/* 	for(String scheme : schemes)
+											{
+												String asset_array[]=null;
+												if(scheme.contains("-"))
+												{
+													asset_array = scheme.split("\\-");
+													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) - Integer.parseInt(asset_array[1]);
+													request.getSession().setAttribute(asset_array[0], new_score);
+													
+													System.err.println(" minus from score " + asset_array[1]);
+													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
+													
+												}else if(scheme.contains("+"))
+												{
+													asset_array = scheme.split("\\+");
+													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) + Integer.parseInt(asset_array[1]);
+													request.getSession().setAttribute(asset_array[0], new_score);
+													
+													System.err.println(" add to score " + asset_array[1]);
+													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
+													
+												}
+												else if(scheme.contains("*"))
+												{
+													asset_array = scheme.split("\\*");
+													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) * Integer.parseInt(asset_array[1]);
+													request.getSession().setAttribute(asset_array[0], new_score);
+													
+													System.err.println(" multiply to score " + asset_array[1]);
+													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
+													
+												}else if(scheme.contains("/"))
+												{
+													asset_array = scheme.split("\\/");
+													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) / Integer.parseInt(asset_array[1]);
+													request.getSession().setAttribute(asset_array[0], new_score);
+													
+													System.err.println(" divide from score " + asset_array[1]);
+													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
+													
+												}
+											}	 */
+													
+											int stage_id = options.get(option_id - 1).getJump_to();
+												out.println(new GameService().getNextStageForm(game, stage_id));
+											} else {
+												int stage_id = prev_stage_id + 1;
+												if (stage_id == -100 || stage_id > stages.size()) {
+													out.println("Game Over");
+													out.println("Your score is: "+request.getSession().getAttribute("score"));
+												} else {
+													out.println(new GameService().getNextStageForm(game, stage_id));
+												}
+											}
+
+										}
+									%>
 
 						</div>
 
