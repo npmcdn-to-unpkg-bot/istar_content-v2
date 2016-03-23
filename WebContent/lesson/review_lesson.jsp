@@ -62,8 +62,7 @@
 
 <!-- CSS Theme -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/default.css"
-	id="style_color">
+	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet"
 	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 
@@ -88,116 +87,142 @@
 				Lesson lesson = (Lesson) request.getAttribute("lesson");
 			%>
 		</div>
+		<br />
 		<div class="container-fluid height-1000"
 			style="padding: 0px !important">
-			<div class="row">
-				<div class="col-md-6">
-					<form action="/content/review_lesson" id="sky-form4"
-						class="sky-form">
-						<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" />
-						<input type="hidden" name="cmsession_id"
-							value="<%=lesson.getCmsession().getId()%>" />
-						<fieldset>
 
-							<section>
-								<label>Title of Lesson</label> <label class="input"> <input
-									readonly="readonly" value="<%=lesson.getTitle()%>" type="text"
-									name="title" placeholder="Title of Lesson"> <b
-									class="tooltip tooltip-bottom-right">The title of the
-										lesson</b>
-								</label>
-							</section>
+			<div class="col-md-4">
 
-							<section>
-								<label>Duration of Lesson</label> <label class="input">
-									<input readonly="readonly" value="<%=lesson.getDuration()%>"
-									type="number" name="duration" placeholder="Duration of Lesson">
-									<b class="tooltip tooltip-bottom-right">The duration of the
-										lesson</b>
-								</label>
-							</section>
-							<section>
-								<label> Tags</label> <label class="input"> <input
-									readonly="readonly" data-role="tagsinput"
-									value="<%=lesson.getTags()%>" type="text" name="Tags"
-									class="tagcontainer" placeholder="Tags of Lesson"> <b
-									class="tooltip tooltip-bottom-right">The tags of the lesson</b>
-								</label>
-							</section>
+				<div class="col-md-12">
+					<div class=" col-md-12 ">
+						<div class="panel panel-sea">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-tasks"></i>Lesson Details
+								</h3>
+							</div>
+							<div class="panel-body">
 
-							<section>
-								<label> Review Comments</label> <label class="input"> <textarea
-										rows="3" name="review_notes" placeholder=" Please enter text"
-										id="teacher_notes"></textarea>
-								</label>
-							</section>
-						</fieldset>
+								<form action="/content/review_lesson" id="sky-form4"
+									class="sky-form">
+									<input type="hidden" name="lesson_id"
+										value="<%=lesson.getId()%>" /> <input type="hidden"
+										name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+									<fieldset>
 
-						<footer>
-							<button type="submit" class="btn-u" name ="review" value="APPROVED">Approved</button>
-							<button type="submit" class="btn-u" name = "review" value="DIS_APPROVED">Dis Approve</button>
-						</footer>
-					</form>
+										<section>
+											<label>Title of Lesson</label> <label class="input">
+												<input readonly="readonly" value="<%=lesson.getTitle()%>"
+												type="text" name="title" placeholder="Title of Lesson">
+												<b class="tooltip tooltip-bottom-right">The title of the
+													lesson</b>
+											</label>
+										</section>
 
+										<section>
+											<label>Duration of Lesson</label> <label class="input">
+												<input readonly="readonly" value="<%=lesson.getDuration()%>"
+												type="number" name="duration"
+												placeholder="Duration of Lesson"> <b
+												class="tooltip tooltip-bottom-right">The duration of the
+													lesson</b>
+											</label>
+										</section>
+										<section>
+											<label> Tags</label> <label class="input"> <input
+												readonly="readonly" data-role="tagsinput"
+												value="<%=lesson.getTags()%>" type="text" name="Tags"
+												class="tagcontainer" placeholder="Tags of Lesson"> <b
+												class="tooltip tooltip-bottom-right">The tags of the
+													lesson</b>
+											</label>
+										</section>
 
+										<section>
+											<label> Review Comments</label> <label class="input">
+												<textarea rows="3" name="review_notes"
+													placeholder=" Please enter text" id="teacher_notes"></textarea>
+											</label>
+										</section>
+									</fieldset>
+
+									<footer>
+										<button type="submit" class="btn-u" name="review"
+											value="APPROVED">Approved</button>
+										<button type="submit" class="btn-u" name="review"
+											value="DIS_APPROVED">Dis Approve</button>
+									</footer>
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
 				</div>
 
+			</div>
 
-				<div class="col-md-6">
-					<%
-						if (LessonService.isEmptyLesson(lesson)) {
-					%>
-					<div class="alert alert-warning fade in text-center">
-						<h4>Please Create a Presentation/Assessment/Game</h4>
-						<p>
-							<%-- 							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
+
+			<div class="col-md-8">
+				<%
+					if (LessonService.isEmptyLesson(lesson)) {
+				%>
+				<div class="alert alert-warning fade in text-center">
+					<h4>Please Create a Presentation/Assessment/Game</h4>
+					<p>
+						<%-- 							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?lesson_id=<%=lesson.getId() %>">Create a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea" href="#">Create a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
  --%>
-						</p>
-					</div>
-					<%
-						} else {
-							LessonUtils utils = new LessonUtils();
-							out.println(utils.getReviewForm(lesson));
+					</p>
+				</div>
+				<%
+					} else {
+						LessonUtils utils = new LessonUtils();
+						out.println(utils.getReviewForm(lesson));
 
-							// Create Two block 
-							// Top one has to be add new SLide  
-							//Botton one is list of slides
-						}
-					%>
+						// Create Two block 
+						// Top one has to be add new SLide  
+						//Botton one is list of slides
+					}
+				%>
 
-					<div class="col-sm-5">
-						<div class="panel panel-profile profile">
-							<div class="panel-heading overflow-h">
-								<h2 class="panel-title heading-sm pull-left">
-									<i class="fa fa-comments-o"></i> Review Comments
-								</h2>
-								
-							</div>
-							<div id="scrollbar4"
-								class="panel-body no-padding mCustomScrollbar"
-								data-mcs-theme="minimal-dark">
-								
-								<% 
-								TaskLogDAO dao = new TaskLogDAO();
-								TaskLog sample  = new TaskLog();
-								sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
-								sample.setItemType("LESSON");
-								
-								List<TaskLog> items = dao.findByExample(sample);
-								for(TaskLog log : items) {
-								
-									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-									
-									%>
+				<div class=" col-md-12 ">
+					<div class="panel panel-sea">
+
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-comments-o"></i> Review Comments
+							</h3>
+						</div>
+
+						<div class="panel-body">
+
+							<div class="panel panel-profile profile">
+
+								<%
+									TaskLogDAO dao = new TaskLogDAO();
+									TaskLog sample = new TaskLog();
+									sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
+									sample.setItemType("LESSON");
+
+									List<TaskLog> items = dao.findByExample(sample);
+									for (TaskLog log : items) {
+
+										IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+								%>
 								<div class="comment">
-									<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
+									<img
+										src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
+										alt="">
 									<div class="overflow-h">
-										<strong><%=user.getName() %></strong>
-										<p><%=log.getComments() %></p>
-										
+										<strong><%=user.getName()%></strong>
+										<p><%=log.getComments()%></p>
+
 									</div>
 								</div>
-								<% } %>
+								<%
+									}
+								%>
 
 							</div>
 						</div>
@@ -206,8 +231,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
+		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
 	</div>
 
 

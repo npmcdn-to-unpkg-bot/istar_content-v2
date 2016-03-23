@@ -55,7 +55,8 @@ public class AddQuestionController extends IStarBaseServelet {
 		AssessmentDAO dao = new AssessmentDAO();
 		LearningObjectiveDAO learningObjectiveDAO = new LearningObjectiveDAO();
 		Assessment assessment = dao.findById(Integer.parseInt(request.getParameter("assessment_id")));
-		//Integer task_id= Integer.parseInt(request.getParameter("task_id"));
+
+		Integer specifier = Integer.parseInt(request.getParameter("specifier"));
 		String[] learningObjectiveIds = request.getParameterValues("learningObjectives");
 		Set<LearningObjective> learningObjectiveSet=new HashSet<LearningObjective>();
 		if(learningObjectiveIds!=null){
@@ -65,17 +66,22 @@ public class AddQuestionController extends IStarBaseServelet {
 		
 		Question question = questionService.createNewQuestionForAssessment(request.getParameter("question_text"),
 				request.getParameter("question_type"), Integer.parseInt(request.getParameter("difficulty_level")),
-				Integer.parseInt(request.getParameter("assessment_id")),learningObjectiveSet);
+				Integer.parseInt(request.getParameter("assessment_id")), learningObjectiveSet, specifier);
 		
-		optionService.createNewOption(request.getParameter("option1"), question, "demo"/*request.getParameter("marking_scheme1")*/);
-		optionService.createNewOption(request.getParameter("option2"), question, "demo"/*request.getParameter("marking_scheme1")*/);
-		optionService.createNewOption(request.getParameter("option3"), question, "demo"/*request.getParameter("marking_scheme1")*/);
-		optionService.createNewOption(request.getParameter("option4"), question, "demo"/*request.getParameter("marking_scheme1")*/);
-		optionService.createNewOption(request.getParameter("option5"), question, "demo"/*request.getParameter("marking_scheme1")*/);
+		String[] answers = request.getParameterValues("answers");
+		Integer[] optionValue = new Integer[5];
+		if(answers!=null){
+			for (int j = 0; j < answers.length; j++){
+				optionValue[Integer.parseInt(answers[j])-1] = 1;
+			}
+		}
+
+		optionService.createNewOption(request.getParameter("option1"), question, optionValue[0]);
+		optionService.createNewOption(request.getParameter("option2"), question, optionValue[1]);
+		optionService.createNewOption(request.getParameter("option3"), question, optionValue[2]);
+		optionService.createNewOption(request.getParameter("option4"), question, optionValue[3]);
+		optionService.createNewOption(request.getParameter("option5"), question, optionValue[4]);
 		
-		//TODO: UPDATE:::: CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"),
-		//		"A new Slide added with the template => "+ template +" created in the presentation wih ID ->"+ ppt.getId() );
-	//	request.setAttribute("task_id", task_id);
 		TaskDAO dao1 = new TaskDAO();
 		Task t = new Task();
 		t.setItemType("LESSON");

@@ -24,6 +24,8 @@ import com.istarindia.apps.dao.ContentReviewer;
 import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.Question;
+import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.SlideDAO;
 import com.istarindia.apps.dao.Task;
@@ -57,47 +59,90 @@ public class ReviewLessonController extends IStarBaseServelet {
 			throws ServletException, IOException {
 		printParams(request);
 
-		// Add comments on lesson
-		if (!request.getParameterMap().containsKey("is_edit")) {
+		// Add comments on question
+				 if(request.getParameterMap().containsKey("question_id")){
+						//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-			TaskDAO dao = new TaskDAO();
-			Task task = new Task();
-			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
-			task.setItemType("LESSON");
-			task = dao.findByExample(task).get(0);
+						QuestionDAO questiondao = new QuestionDAO();
+						Question question = questiondao.findById(Integer.parseInt(request.getParameter("question_id")));
+						
+						TaskDAO dao = new TaskDAO();
+						Task task = new Task();
+						task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
+						task.setItemType("LESSON");
+						task = dao.findByExample(task).get(0);
 
-			TaskLogDAO lDAO = new TaskLogDAO();
-			TaskLog log = new TaskLog();
-			IstarUser user = (IstarUser) request.getSession().getAttribute("user");
-			log.setActorId(user.getId());
-			log.setChangedStatus("COMPLETED");
-			log.setTaskId(task.getId());
-			Calendar calendar = Calendar.getInstance();
-			Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
-			log.setCreatedAt(currentTimestamp);
-			log.setComments(request.getParameter("review_notes"));
-			log.setItemType("LESSON");
-			log.setItem_id(Integer.parseInt(request.getParameter("lesson_id")));
-			Session session = lDAO.getSession();
-			Transaction tx = null;
-			try {
-				tx = session.beginTransaction();
+						TaskLogDAO lDAO = new TaskLogDAO();
+						TaskLog log = new TaskLog();
+						IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+						log.setActorId(user.getId());
+						log.setChangedStatus("COMPLETED");
+						log.setTaskId(task.getId());
+						Calendar calendar = Calendar.getInstance();
+						Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+						log.setCreatedAt(currentTimestamp);
+						log.setComments(request.getParameter("review_notes"));
+						log.setItemType("QUESTION");
+						log.setItem_id(Integer.parseInt(request.getParameter("question_id")));
+						Session session = lDAO.getSession();
+						Transaction tx = null;
+						try {
+							tx = session.beginTransaction();
 
-				lDAO.attachDirty(log);
-				tx.commit();
-			} catch (HibernateException e) {
-				if (tx != null)
-					tx.rollback();
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
-			// content/content_reviewer/dashboard.jsp
-			 markLessonAsReviewed(request);
-			
-			response.sendRedirect("/content/content_reviewer/dashboard.jsp");
-			response.getWriter().append("Served at: ").append(request.getContextPath());
-		} else {
+							lDAO.attachDirty(log);
+							tx.commit();
+						} catch (HibernateException e) {
+							if (tx != null)
+								tx.rollback();
+							e.printStackTrace();
+						} finally {
+							session.close();
+						}
+						response.sendRedirect("/content/lesson/review_question.jsp?question_id="+question.getId()+"&lesson_id="+Integer.parseInt(request.getParameter("lesson_id")));
+					}
+				
+				else if (!request.getParameterMap().containsKey("is_edit")) {
+
+					TaskDAO dao = new TaskDAO();
+					Task task = new Task();
+					task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
+					task.setItemType("LESSON");
+					task = dao.findByExample(task).get(0);
+
+					TaskLogDAO lDAO = new TaskLogDAO();
+					TaskLog log = new TaskLog();
+					IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+					log.setActorId(user.getId());
+					log.setChangedStatus("COMPLETED");
+					log.setTaskId(task.getId());
+					Calendar calendar = Calendar.getInstance();
+					Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+					log.setCreatedAt(currentTimestamp);
+					log.setComments(request.getParameter("review_notes"));
+					log.setItemType("LESSON");
+					log.setItem_id(Integer.parseInt(request.getParameter("lesson_id")));
+					Session session = lDAO.getSession();
+					Transaction tx = null;
+					try {
+						tx = session.beginTransaction();
+
+						lDAO.attachDirty(log);
+						tx.commit();
+					} catch (HibernateException e) {
+						if (tx != null)
+							tx.rollback();
+						e.printStackTrace();
+					} finally {
+						session.close();
+					}
+					// content/content_reviewer/dashboard.jsp
+					 markLessonAsReviewed(request);
+					
+					response.sendRedirect("/content/content_reviewer/dashboard.jsp");
+					response.getWriter().append("Served at: ").append(request.getContextPath());
+				}
+				
+				else {
 			SlideDAO dao1 = new SlideDAO();
 			Slide slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
 			

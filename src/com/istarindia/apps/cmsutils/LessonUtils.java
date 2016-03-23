@@ -47,6 +47,7 @@ import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.services.AssessmentService;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
@@ -137,116 +138,122 @@ public class LessonUtils {
 		} else if (lesson.getGame() != null) {
 			out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 		} else if (lesson.getAssessment() != null) {
-			// out.append("This is where we wil have a form to generate a
-			// Asssesment Screen Input....");
+			//out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 
 			Assessment assessment = lesson.getAssessment();
-			ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(
-					getLearningObjectivesOfAllSiblings(lesson.getId()));
+			ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
+			
+			if(assessment.getAssessmentType()==null){
 
-			if (assessment.getAssessmentType() == null) {
+			out.append("<div class=' col-md-12 '>"
+					+ "<div class='panel panel-sea'>"
+					+ "<div class='panel-heading'>"
+					+ "<h3 class='panel-title'><i class='fa fa-tasks'>"
+					+ "</i>Assessment Details</h3></div>"
+					+ "<div class='panel-body'> "
+					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
+					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
+					+ "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
+					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
+					+ "<option value='STATIC'>STATIC</option>"
+					+ "<option value='ADAPTIVE'>ADAPTIVE</option>"
+					+ "<option value='TREE'>TREE</option>"
+					+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
+					+ "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
+					+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
 
-				out.append("<div class=' col-md-12 '>" + "<div class='panel panel-sea'>" + "<div class='panel-heading'>"
-						+ "<h3 class='panel-title'><i class='fa fa-tasks'>" + "</i>Assessment Details</h3></div>"
-						+ "<div class='panel-body'> "
-						+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
-						+ "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
-						+ "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
-						+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
-						+ "<option value='STATIC'>STATIC</option>" + "<option value='ADAPTIVE'>ADAPTIVE</option>"
-						+ "<option value='TREE'>TREE</option>"
-						+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
-						+ "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
-						+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'> <input value='' type='hidden' name='number_of_questions' placeholder='Number of questions'> </label> </section> ");
-
-				out.append(" </div>");
-				out.append("</fieldset> "
-						+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-			} 
-			else {
-				out.append("<div class=' col-md-12 '>" + "<div class='panel panel-sea'>" + "<div class='panel-heading'>"
-						+ "<h3 class='panel-title'><i class='fa fa-tasks'>" + "</i>Question Details</h3></div>"
-						+ "<div class='panel-body'> "
-						+ "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
-						+ "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
-						+ "<fieldset>");
-
-				out.append(
-						"<section><label class='label'>List of Learning Objectives in this Session</label> <div class='row'>");
-
-				for (LearningObjective obj : items) {
-
-					out.append("<div class='col col-12'><label class='checkbox'>"
-							+ "<input type='checkbox' name='learningObjectives' checked='checked' value=" + obj.getId()
-							+ "><i></i>" + obj.getTitle() + "</label></div>");
-				}
-				out.append("</div></section><section><label>Question Type</label> " + "<label class='input'>"
-						+ "<select class='form-control valid' name='question_type' style='margin-right: 50px'>"
-						+ "<option value='1'>Type1</option>" + "<option value='2'>Type2</option>"
-						+ "<option value='3'>Type3</option>"
-						+ "<option value='4'>Type4</option></select></label> </section>"
-						+ "<section><label>Difficulty Level</label> " + "<label class='input'>"
-						+ "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>"
-						+ "<option value='1'>1(Hardest)</option>" + "<option value='2'>2</option>"
-						+ "<option value='3'>3</option>" + "<option value='4'>4</option>"
-						+ "<option value='5'>5</option>" + "<option value='6'>6</option>"
-						+ "<option value='7'>7</option>" + "<option value='8'>8</option>"
-						+ "<option value='9'>9</option>"
-						+ "<option value='10'>10(Easiest)</option></select></label> </section>"
-						+ "<section><label>Question Text</label> "
-						+ "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
-						+ "<section> <label>Option 1</label> <label class='input'> "
-						+ "<TEXTAREA NAME='option1' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-						+ "<section> <label>Option 2</label> <label class='input'> "
-						+ "<TEXTAREA NAME='option2' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-						+ "<section> <label>Option 3</label> <label class='input'> "
-						+ "<TEXTAREA NAME='option3' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-						+ "<section> <label>Option 4</label> <label class='input'> "
-						+ "<TEXTAREA NAME='option4' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-						+ "<section> <label>Option 5</label> <label class='input'> "
-						+ "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
-						+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-
-				out.append("<div class=' col-md-12 '>");
-				out.append("<div class='panel panel-sea margin-bottom-40'>");
-				out.append("<div class='panel-heading'>");
-				out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
-				out.append("</div>");
-				out.append("<table class='table table-striped'>");
-				out.append("<thead>");
-				out.append("<tr>");
-				out.append("<th>#</th>");
-				out.append("<th>Question Title</th>");
-				out.append("<th>Action</th>");
-				out.append("</tr>");
-				out.append("</thead>");
-				out.append("<tbody>");
-				DBUtils db = new DBUtils();
-				ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
-				for (int i = 0; i < data.size(); i++) {
-					
-					AssessmentQuestionDAO aqdao = new AssessmentQuestionDAO();
-					AssessmentQuestion aq = new AssessmentQuestion();
-					aq.setQuestion(new QuestionDAO().findById(Integer.parseInt(data.get(i).get(0))));
-					
-					out.append("<tr>");
-					out.append("<td>" + data.get(i).get(0) + "</td>");
-					out.append("<td>" + data.get(i).get(1) + "</td>");
-					out.append("<td>");
-					out.append("<a class='btn btn-success btn-xs' href='#' >" + "<i class='fa fa-check'></i>Edit</a>");
-
-					out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-							+ "href='/content/delete_question?question_id="+data.get(i).get(0)+"&assessment_id="+aqdao.findByExample(aq).get(0)+"'>" + "<i class='fa fa-remove'></i>Delete</a>");
-
-					out.append("</td>");
-					out.append("</tr>");
-				}
-
-				out.append("</tbody>");
-				out.append("</table>");
-				out.append("</div>");
-				out.append("</div>");
+					out.append(" </div>");
+					out.append( "</fieldset> "
+					+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 			}
+		else {
+			Integer number_of_questions = new Integer(0);
+			AssessmentService assessmentService = new AssessmentService();
+			number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
+			if(number_of_questions < assessment.getNumber_of_questions()) {
+			out.append("<div class=' col-md-12 '>"
+					+ "<div class='panel panel-sea'>"
+					+ "<div class='panel-heading'>"
+					+ "<h3 class='panel-title'><i class='fa fa-tasks'>"
+					+ "</i>Question Details</h3></div>"
+					+ "<div class='panel-body'> "
+					+ "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
+					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
+					+ "<fieldset>");
+
+			out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
+			
+			for(LearningObjective obj :  items) { 
+			
+			out.append("<div class='col col-12'><label class='checkbox'>"
+					+ "<input type='checkbox' name='learningObjectives' checked='checked' value="
+					+ obj.getId() +"><i></i>" +obj.getTitle()+"</label></div>"); } 
+			out.append("</div></section></br>"
+					+ "<div class='row'><section class='col col-md-4'><label>Question Type</label> "
+					+ "<label class='input'>"
+					+ "<select class='form-control valid' name='question_type' style='margin-right: 50px'>"
+					+ "<option value='1'>Single correct option</option>"
+					+ "<option value='2'>Multiple correct options</option></select></label> </section>"
+					+ "<section class='col col-md-4'><label>Difficulty Level</label> "
+					+ "<label class='input'>"
+					+ "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>"
+					+ "<option value='1'>1(EASIEST)</option> <option value='2'>2</option> <option value='3'>3</option>"
+					+ "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
+					+ "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
+					+ "<option value='10'>10(HARDEST)</option></select></label> </section>"
+					+ "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
+					+ "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
+					+ "<option value='1'>1</option><option value='2'>2</option></select></label></section></div>"
+					+ "<section><label>Question Text</label> "
+					+ "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
+					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='1'><i></i>Option 1</label><label class='input'> "
+					+ "<TEXTAREA NAME='option1' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='2'><i></i>Option 2</label><label class='input'> "
+					+ "<TEXTAREA NAME='option2' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='3'><i></i>Option 3</label> <label class='input'> "
+					+ "<TEXTAREA NAME='option3' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='4'><i></i>Option 4</label> <label class='input'> "
+					+ "<TEXTAREA NAME='option4' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='5'><i></i>Option 5</label> <label class='input'> "
+					+ "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
+					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+			}
+			out.append("<div class=' col-md-12 '>");
+			out.append("<div class='panel panel-sea margin-bottom-40'>");
+			out.append("<div class='panel-heading'>");
+			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
+			out.append("</div>");
+			out.append("<table class='table table-striped'>");
+			out.append("<thead>");
+			out.append("<tr>");
+			out.append("<th>#</th>");
+			out.append("<th>Question Title</th>");
+			out.append("<th>Action</th>");
+			out.append("</tr>");
+			out.append("</thead>");
+			out.append("<tbody>");
+			DBUtils db = new DBUtils();
+			ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+			for (int i = 0; i < data.size(); i++) {
+				out.append("<tr>");
+				out.append("<td>" + data.get(i).get(0) + "</td>");
+				out.append("<td>" + data.get(i).get(1) + "</td>");
+				out.append("<td>");
+				out.append("<a class='btn btn-success btn-xs' href='#' >" + "<i class='fa fa-check'></i>Edit</a>");
+				
+				out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
+						+ "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
+				
+				out.append("</td>");
+				out.append("</tr>");
+			}
+
+			out.append("</tbody>");
+			out.append("</table>");
+			out.append("</div>");
+			out.append("</div>");
+		}
+			
 		}
 
 		return out;
@@ -325,6 +332,41 @@ public class LessonUtils {
 		} else if (lesson.getGame() != null) {
 
 		} else if (lesson.getAssessment() != null) {
+
+			Assessment assessment = lesson.getAssessment();
+			out.append("<div class=' col-md-12 '>");
+			out.append("<div class='panel panel-sea margin-bottom-40'>");
+			out.append("<div class='panel-heading'>");
+			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
+			out.append("</div>");
+			out.append("<table class='table table-striped'>");
+			out.append("<thead>");
+			out.append("<tr>");
+			out.append("<th>#</th>");
+			out.append("<th>Question Title</th>");
+			out.append("<th>Action</th>");
+			out.append("</tr>");
+			out.append("</thead>");
+			out.append("<tbody>");
+			DBUtils db = new DBUtils();
+			ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+			for (int i = 0; i < data.size(); i++) {
+				out.append("<tr>");
+				out.append("<td>" + data.get(i).get(0) + "</td>");
+				out.append("<td>" + data.get(i).get(1) + "</td>");
+				out.append("<td>");
+				out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id="+data.get(i).get(0)+"&lesson_id="+lesson.getId()+"'>" 
+				+ "<i class='fa fa-check'></i>View question</a>");
+				out.append("</td>");
+				out.append("</tr>");
+			}
+
+			out.append("</tbody>");
+			out.append("</table>");
+			out.append("</div>");
+			out.append("</div>");
+
+		
 
 		}
 
