@@ -26,6 +26,7 @@ import org.hibernate.Session;
 
 import com.istarindia.apps.SlideTransition;
 import com.istarindia.apps.dao.Assessment;
+import com.istarindia.apps.dao.AssessmentOption;
 import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
@@ -35,492 +36,703 @@ import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
+import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.services.AssessmentService;
 import com.istarindia.apps.services.CMSRegistry;
+import com.istarindia.apps.services.QuestionService;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
 import com.istarindia.cms.lessons.CMSTextItem;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @author Vaibhav
  *
  */
 public class LessonUtils {
- 
+
+    public StringBuffer getEditForm(Lesson lesson) {
+        StringBuffer out = new StringBuffer();
+        if (lesson.getPresentaion() != null) {
+            Presentaion ppt = lesson.getPresentaion();
+
+            out.append("<div class=' col-md-12 '>");
+            out.append("<div class='panel panel-sea'>");
+            out.append("<div class='panel-heading'>");
+            out.append("<h3 class='panel-title'>");
+            out.append("<i class='fa fa-tasks'></i>New Slide");
+            out.append("</h3>");
+            out.append("</div>");
+            out.append("<div class='panel-body'>");
+            out.append("<form class='form-inline' role='form' action='/content/fill_tempate.jsp'>");
+            out.append("<input name='ppt_id' value='" + ppt.getId() + "' type='hidden'/>");
+
+            out.append("<div class='form-group'>");
+            out.append("<select class='form-control' name='slide_type' style='margin-right: 50px'>");
+
+            for (String template : CMSRegistry.slideTemplates) {
+                out.append("<option value='" + template + "'>" + template + "</option>");
+            }
+            out.append("</select>");
+
+            out.append("</div>");
+            out.append("<div class='form-group'  style='margin-right: 50px'>");
+            out.append("<button type='submit' class='btn-u btn-u-default'>Add Slide</button>");
+            out.append("</div>");
+            out.append("<div class='checkbox'  style='margin-right: 50px'>");
+            out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
+                    + "\")'  href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
+            out.append("</div>");
+            out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId()
+                    + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
+            out.append("</form>");
+            out.append("</div>");
+            out.append("</div>");
+            out.append("</div>");
+
+            out.append("<div class=' col-md-12 '>");
+            out.append("<div class='panel panel-sea margin-bottom-40'>");
+            out.append("<div class='panel-heading'>");
+            out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Slides</h3>");
+            out.append("</div>");
+            out.append("<table class='table table-striped'>");
+            out.append("<thead>");
+            out.append("<tr>");
+            out.append("<th>#</th>");
+            out.append("<th>Slide Title</th>");
+            out.append("<th>Action</th>");
+            out.append("</tr>");
+            out.append("</thead>");
+            out.append("<tbody>");
+            DBUtils db = new DBUtils();
+            ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
+            for (int i = 0; i < data.size(); i++) {
+                out.append("<tr>");
+                out.append("<td>" + data.get(i).get(0) + "</td>");
+                out.append("<td>" + data.get(i).get(1) + "</td>");
+                out.append("<td>");
+                out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
+                        + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
+                        + "<i class='fa fa-check'></i>Edit</a>");
+
+                out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
+                        + "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
+                        + "<i class='fa fa-remove'></i>Delete</a>");
+
+                out.append("</td>");
+                out.append("</tr>");
+            }
+
+            out.append("</tbody>");
+            out.append("</table>");
+            out.append("</div>");
+            out.append("</div>");
+        } else if (lesson.getGame() != null) {
+            out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+        } else if (lesson.getAssessment() != null) {
+            //out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+
+            Assessment assessment = lesson.getAssessment();
+            ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
+
+            if (assessment.getAssessmentType() == null) {
+
+                out.append("<div class=' col-md-12 '>"
+                        + "<div class='panel panel-sea'>"
+                        + "<div class='panel-heading'>"
+                        + "<h3 class='panel-title'><i class='fa fa-tasks'>"
+                        + "</i>Assessment Details</h3></div>"
+                        + "<div class='panel-body'> "
+                        + "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
+                        + "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
+                        + "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
+                        + "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
+                        + "<option value='STATIC'>STATIC</option>"
+                        + "<option value='ADAPTIVE'>ADAPTIVE</option>"
+                        + "<option value='TREE'>TREE</option>"
+                        + "<option value='RANDOM'>RANDOM</option></select></label> </section> "
+                        + "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
+                        + "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
+
+                out.append(" </div>");
+                out.append("</fieldset> "
+                        + "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+            } else {
+                Integer number_of_questions = new Integer(0);
+                AssessmentService assessmentService = new AssessmentService();
+                number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
+                if (number_of_questions < assessment.getNumber_of_questions()) {
+                    out.append("<div class=' col-md-12 '>"
+                            + "<div class='panel panel-sea'>"
+                            + "<div class='panel-heading'>"
+                            + "<h3 class='panel-title'><i class='fa fa-tasks'>"
+                            + "</i>Question Details</h3></div>"
+                            + "<div class='panel-body'> "
+                            + "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
+                            + "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
+                            + "<fieldset>");
+
+                    out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
+
+                    for (LearningObjective obj : items) {
+
+                        out.append("<div class='col col-12'><label class='checkbox'>"
+                                + "<input type='checkbox' name='learningObjectives' checked='checked' value="
+                                + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
+                    }
+                    out.append("</div></section></br>"
+                            + "<div class='row'><section class='col col-md-4'><label>Question Type</label> "
+                            + "<label class='input'>"
+                            + "<select class='form-control valid' name='question_type' style='margin-right: 50px'>"
+                            + "<option value='1'>Single correct option</option>"
+                            + "<option value='2'>Multiple correct options</option></select></label> </section>"
+                            + "<section class='col col-md-4'><label>Difficulty Level</label> "
+                            + "<label class='input'>"
+                            + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>"
+                            + "<option value='1'>1(EASIEST)</option> <option value='2'>2</option> <option value='3'>3</option>"
+                            + "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
+                            + "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
+                            + "<option value='10'>10(HARDEST)</option></select></label> </section>"
+                            + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
+                            + "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
+                            + "<option value='1'>1</option><option value='2'>2</option></select></label></section></div>"
+                            + "<section><label>Question Text</label> "
+                            + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
+                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='1'><i></i>Option 1</label><label class='input'> "
+                            + "<TEXTAREA NAME='option1' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='2'><i></i>Option 2</label><label class='input'> "
+                            + "<TEXTAREA NAME='option2' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='3'><i></i>Option 3</label> <label class='input'> "
+                            + "<TEXTAREA NAME='option3' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='4'><i></i>Option 4</label> <label class='input'> "
+                            + "<TEXTAREA NAME='option4' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
+                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='5'><i></i>Option 5</label> <label class='input'> "
+                            + "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
+                            + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+                }
+                out.append("<div class=' col-md-12 '>");
+                out.append("<div class='panel panel-sea margin-bottom-40'>");
+                out.append("<div class='panel-heading'>");
+                out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
+                out.append("</div>");
+                out.append("<table class='table table-striped'>");
+                out.append("<thead>");
+                out.append("<tr>");
+                out.append("<th>#</th>");
+                out.append("<th>Question Title</th>");
+                out.append("<th>Action</th>");
+                out.append("</tr>");
+                out.append("</thead>");
+                out.append("<tbody>");
+                DBUtils db = new DBUtils();
+                ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+                for (int i = 0; i < data.size(); i++) {
+                    out.append("<tr>");
+                    out.append("<td>" + data.get(i).get(0) + "</td>");
+                    out.append("<td>" + data.get(i).get(1) + "</td>");
+                    out.append("<td>");
+                    out.append("<a class='btn btn-success btn-xs' href='/content/edit_assessment_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "&_action=edit" + "'>" + "<i class='fa fa-check'></i>Edit</a>");
+
+                    out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
+                            + "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
+
+                    out.append("</td>");
+                    out.append("</tr>");
+                }
+
+                out.append("</tbody>");
+                out.append("</table>");
+                out.append("</div>");
+                out.append("</div>");
+            }
+
+        }
+
+        return out;
+    }
+
+    //Added by Kunal on 24/03/2016 for editing assessment question
+    public String getFormForQuestionEdit(Lesson lesson, String questionId) {
+        StringBuilder out = new StringBuilder();
+        if (lesson.getPresentaion() != null) {
+
+        } else if (lesson.getGame() != null) {
+
+        } else if (lesson.getAssessment() != null) {
+            Assessment assessment = lesson.getAssessment();
+            ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
+
+            if (assessment.getAssessmentType() == null) {
+
+                out.append("<div class=' col-md-12 '>"
+                        + "<div class='panel panel-sea'>"
+                        + "<div class='panel-heading'>"
+                        + "<h3 class='panel-title'><i class='fa fa-tasks'>"
+                        + "</i>Assessment Details</h3></div>"
+                        + "<div class='panel-body'> "
+                        + "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
+                        + "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
+                        + "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
+                        + "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
+                        + "<option value='STATIC'>STATIC</option>"
+                        + "<option value='ADAPTIVE'>ADAPTIVE</option>"
+                        + "<option value='TREE'>TREE</option>"
+                        + "<option value='RANDOM'>RANDOM</option></select></label> </section> "
+                        + "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
+                        + "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
+
+                out.append(" </div>");
+                out.append("</fieldset> "
+                        + "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+            } else {
+                Integer number_of_questions = new Integer(0);
+                AssessmentService assessmentService = new AssessmentService();
+                number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
+                QuestionService questionService = new QuestionService();
+                Question question = new Question();
+                question = questionService.findById(Integer.parseInt(questionId));
+                if (number_of_questions < assessment.getNumber_of_questions()) {
+                    
+                    out.append("<div class=' col-md-12 '>"
+                            + "<div class='panel panel-sea'>"
+                            + "<div class='panel-heading'>"
+                            + "<h3 class='panel-title'><i class='fa fa-tasks'>"
+                            + "</i>Question Details</h3></div>"
+                            + "<div class='panel-body'> "
+                            + "<form action='/content/edit_assessment_question?_action=update' id='sky-form4' class='sky-form' method='POST'> "
+                            + "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
+                            + "<fieldset>");
+
+                    out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
+                    out.append("<input type='hidden' name='questionId' value='"+question.getId() + "' </input>");
+
+                    for (LearningObjective obj : items) {
+
+                        out.append("<div class='col col-12'><label class='checkbox'>"
+                                + "<input type='checkbox' name='learningObjectives' checked='checked' value="
+                                + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
+                    }
+                    Set optionSet = new HashSet();
+                    optionSet = question.getAssessmentOptions();
+                    Iterator it = optionSet.iterator();
+                    String[][] optionSetStringArray = new String[optionSet.size()][2];
+                    int counter = 0;
+                    while (it.hasNext()) {
+                        AssessmentOption assessmentOption = (AssessmentOption) it.next();
+                        try {
+                            optionSetStringArray[counter][0] = assessmentOption.getId() + "";
+                            optionSetStringArray[counter][1] = assessmentOption.getText();
+                            counter++;
+                        } catch (Exception e) {
+                        }
+
+                    }
+
+                    java.util.Arrays.sort(optionSetStringArray, new java.util.Comparator() {
+                        @Override
+                        public int compare(Object a, Object b) {
+                            String[] row1 = (String[]) a;
+                            String[] row2 = (String[]) b;
+
+                            return row1[0].compareTo(row2[0]);
+                        }
+                    });
+
+                    out.append("</div></section></br>"
+                            + "<div class='row'><section class='col col-md-4'><label>Question Type</label> "
+                            + "<label class='input'>"
+                            + "<select class='form-control valid' name='question_type' style='margin-right: 50px'>");
+                    if (question.getQuestionType().equalsIgnoreCase("1")) {
+                        out.append("<option value='1' selected=selected>Single correct option</option><option value='2'>Multiple correct options</option>");
+                    } else {
+                        out.append("<option value='2' selected=selected>Multiple correct options</option><option value='2'>Single correct option</option>");
+                    }
+                    out.append("</select></label> </section>"
+                            + "<section class='col col-md-4'><label>Difficulty Level</label>"
+                            + "<label class='input'>"
+                            + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>");
+                    out.append(getDifficultyLevelDropDown(question.getDifficultyLevel()));
+
+                    out.append("</select></label> </section>"
+                            + "<section class='col col-md-4'><label>Depth</label> <label class='input'> ");
+
+                    out.append(getSpecifierDropDown(question.getSpecifier()));
+                    out.append("<section><label>Question Text</label> "
+                            + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'>" + question.getQuestionText() + "</TEXTAREA> </label> </section> ");
+
+                    int increment = 1;
+                    for (int a = 0; a < optionSetStringArray.length; a++) {
+                        out.append("<section> <label class='checkbox'><input type='checkbox' name='answers' value='" + increment + "'/><i></i>Option " + increment + "</label><label class='input'> <TEXTAREA NAME='option_" + optionSetStringArray[a][0] + "'  ROWS='2' cols='25'>" + optionSetStringArray[a][1] + "</TEXTAREA> </label> </section>");
+                        increment++;
+                    }
+
+                    out.append("</fieldset>"
+                            + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+                }
+                out.append("<div class=' col-md-12 '>");
+                out.append("<div class='panel panel-sea margin-bottom-40'>");
+                out.append("<div class='panel-heading'>");
+                out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
+                out.append("</div>");
+                out.append("<table class='table table-striped'>");
+                out.append("<thead>");
+                out.append("<tr>");
+                out.append("<th>#</th>");
+                out.append("<th>Question Title</th>");
+                out.append("<th>Action</th>");
+                out.append("</tr>");
+                out.append("</thead>");
+                out.append("<tbody>");
+                DBUtils db = new DBUtils();
+                ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+                for (int i = 0; i < data.size(); i++) {
+                    out.append("<tr>");
+                    out.append("<td>" + data.get(i).get(0) + "</td>");
+                    out.append("<td>" + data.get(i).get(1) + "</td>");
+                    out.append("<td>");
+                    out.append("<a class='btn btn-success btn-xs' href='/content/edit_assessment_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "&_action=edit" + "'>" + "<i class='fa fa-check'></i>Edit</a>");
+
+                    out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
+                            + "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
+
+                    out.append("</td>");
+                    out.append("</tr>");
+                }
+
+                out.append("</tbody>");
+                out.append("</table>");
+                out.append("</div>");
+                out.append("</div>");
+            }
+        }
+        return out.toString();
+    }
+
+    // getting Specifier Drop down
+    private String getSpecifierDropDown(int specifier) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<select class='form-control valid' name='specifier' style='margin-right: 50px'>" + "\n");
+        if (specifier == 1) {
+            sb.append("<option value='1' selected=selected>1</option>" + "\n");
+            sb.append("<option value='2'>2</option>" + "\n");
+
+        } else {
+            sb.append("<option value='2' selected=selected>2</option>" + "\n");
+            sb.append("<option value='1'>1</option>" + "\n");
+        }
+        sb.append("</select></label></section></div>");
+
+        return sb.toString();
+
+    }
     
-	public StringBuffer getEditForm(Lesson lesson) {
-		StringBuffer out = new StringBuffer();
-		if (lesson.getPresentaion() != null) {
-			Presentaion ppt = lesson.getPresentaion();
+// getting Difficulty Level Drop down
 
-			out.append("<div class=' col-md-12 '>");
-			out.append("<div class='panel panel-sea'>");
-			out.append("<div class='panel-heading'>");
-			out.append("<h3 class='panel-title'>");
-			out.append("<i class='fa fa-tasks'></i>New Slide");
-			out.append("</h3>");
-			out.append("</div>");
-			out.append("<div class='panel-body'>");
-			out.append("<form class='form-inline' role='form' action='/content/fill_tempate.jsp'>");
-			out.append("<input name='ppt_id' value='" + ppt.getId() + "' type='hidden'/>");
+    private String getDifficultyLevelDropDown(int level) {
+        StringBuilder sb = new StringBuilder();
+        if (level == 1) {
+            sb.append("<option value='1' selected=selected>1(EASIEST)</option>");
+            for (int x = 2; x < 10; x++) {
+                sb.append("<option value='" + x + "'>" + x + "</option>");
 
-			out.append("<div class='form-group'>");
-			out.append("<select class='form-control' name='slide_type' style='margin-right: 50px'>");
+            }
+            sb.append("<option value='10'>10(HARDEST)</option>");
+        } else if (level == 10) {
+            sb.append("<option value='10' selected=selected>10(HARDEST)</option>");
+            sb.append("<option value='1'>1(EASIEST)</option>");
+            for (int x = 2; x < 10; x++) {
+                sb.append("<option value='" + x + "'>" + x + "</option>");
 
-			for (String template : CMSRegistry.slideTemplates) {
-				out.append("<option value='" + template + "'>" + template + "</option>");
-			}
-			out.append("</select>");
+            }
 
-			out.append("</div>");
-			out.append("<div class='form-group'  style='margin-right: 50px'>");
-			out.append("<button type='submit' class='btn-u btn-u-default'>Add Slide</button>");
-			out.append("</div>");
-			out.append("<div class='checkbox'  style='margin-right: 50px'>");
-			out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
-					+ "\")'  href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
-			out.append("</div>");
-			out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId()
-					+ "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
-			out.append("</form>");
-			out.append("</div>");
-			out.append("</div>");
-			out.append("</div>");
+        } else {
+            sb.append("<option value='1'>1(EASIEST)</option>");
+            for (int x = 2; x < 10; x++) {
+                if (x == level) {
+                    sb.append("<option value='" + x + "' selected>" + x + "</option>");
+                } else {
+                    sb.append("<option value='" + x + "'>" + x + "</option>");
+                }
 
-			out.append("<div class=' col-md-12 '>");
-			out.append("<div class='panel panel-sea margin-bottom-40'>");
-			out.append("<div class='panel-heading'>");
-			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Slides</h3>");
-			out.append("</div>");
-			out.append("<table class='table table-striped'>");
-			out.append("<thead>");
-			out.append("<tr>");
-			out.append("<th>#</th>");
-			out.append("<th>Slide Title</th>");
-			out.append("<th>Action</th>");
-			out.append("</tr>");
-			out.append("</thead>");
-			out.append("<tbody>");
-			DBUtils db = new DBUtils();
-			ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
-			for (int i = 0; i < data.size(); i++) {
-				out.append("<tr>");
-				out.append("<td>" + data.get(i).get(0) + "</td>");
-				out.append("<td>" + data.get(i).get(1) + "</td>");
-				out.append("<td>");
-				out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
-						+ "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
-						+ "<i class='fa fa-check'></i>Edit</a>");
+            }
+            sb.append("<option value='10'>10(HARDEST)</option>");
+        }
+        return sb.toString();
 
-				out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-						+ "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
-						+ "<i class='fa fa-remove'></i>Delete</a>");
+    }
 
-				out.append("</td>");
-				out.append("</tr>");
-			}
+    private ArrayList<LearningObjective> getLearningObjectivesOfAllSiblings(Integer id) {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> list = new ArrayList<>();
+        IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+        Lesson lesson = new LessonDAO().findById(id);
+        Cmsession cmsession = lesson.getCmsession();
+        List<Lesson> siblings = cmsession.getAllLessons(cmsession.getId());
 
-			out.append("</tbody>");
-			out.append("</table>");
-			out.append("</div>");
-			out.append("</div>");
-		} else if (lesson.getGame() != null) {
-			out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
-		} else if (lesson.getAssessment() != null) {
-			//out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+        for (Lesson lessonItem : siblings) {
+            String sql = "select * from learning_objective_lesson where lessonid=" + lessonItem.getId()
+                    + " order by learning_objectiveid";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            List<HashMap<String, Object>> results = query.list();
+            LearningObjectiveDAO learningObjectiveDao = new LearningObjectiveDAO();
+            LearningObjective learningObjective = new LearningObjective();
+            for (HashMap<String, Object> object : results) {
+                try {
+                    learningObjective = learningObjectiveDao.findById((Integer) object.get("learning_objectiveid"));
+                    if (!list.contains(learningObjective)) {
+                        list.add(learningObjective);
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
 
-			Assessment assessment = lesson.getAssessment();
-			ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
-			
-			if(assessment.getAssessmentType()==null){
+    public StringBuffer getReviewForm(Lesson lesson) {
+        StringBuffer out = new StringBuffer();
+        if (lesson.getPresentaion() != null) {
+            Presentaion ppt = lesson.getPresentaion();
 
-			out.append("<div class=' col-md-12 '>"
-					+ "<div class='panel panel-sea'>"
-					+ "<div class='panel-heading'>"
-					+ "<h3 class='panel-title'><i class='fa fa-tasks'>"
-					+ "</i>Assessment Details</h3></div>"
-					+ "<div class='panel-body'> "
-					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
-					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
-					+ "<fieldset><div class='row'><section class='col col-6'><label>Assessment Type</label> "
-					+ "<label class='input'><select class='form-control valid' name='assessment_type' style='margin-right: 50px'>"
-					+ "<option value='STATIC'>STATIC</option>"
-					+ "<option value='ADAPTIVE'>ADAPTIVE</option>"
-					+ "<option value='TREE'>TREE</option>"
-					+ "<option value='RANDOM'>RANDOM</option></select></label> </section> "
-					+ "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
-					+ "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
+            out.append("<div class=' col-md-12 '>");
+            out.append("<div class='panel panel-sea margin-bottom-40'>");
+            out.append("<div class='panel-heading'>");
+            out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Slides to Review</h3>");
+            out.append("</div>");
+            out.append("<table class='table table-striped'>");
+            out.append("<thead>");
+            out.append("<tr>");
+            out.append("<th>#</th>");
+            out.append("<th>Slide Title</th>");
+            out.append("<th>Action</th>");
+            out.append("</tr>");
+            out.append("</thead>");
+            out.append("<tbody>");
+            DBUtils db = new DBUtils();
+            ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
+            for (int i = 0; i < data.size(); i++) {
+                out.append("<tr>");
+                out.append("<td>" + data.get(i).get(0) + "</td>");
+                out.append("<td>" + data.get(i).get(1) + "</td>");
+                out.append("<td>");
+                out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate_review.jsp?ppt_id="
+                        + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
+                        + "<i class='fa fa-check'></i>View Slide</a>");
 
-					out.append(" </div>");
-					out.append( "</fieldset> "
-					+ "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-			}
-		else {
-			Integer number_of_questions = new Integer(0);
-			AssessmentService assessmentService = new AssessmentService();
-			number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-			if(number_of_questions < assessment.getNumber_of_questions()) {
-			out.append("<div class=' col-md-12 '>"
-					+ "<div class='panel panel-sea'>"
-					+ "<div class='panel-heading'>"
-					+ "<h3 class='panel-title'><i class='fa fa-tasks'>"
-					+ "</i>Question Details</h3></div>"
-					+ "<div class='panel-body'> "
-					+ "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
-					+ "<input type='hidden' name='assessment_id' value="+assessment.getId()+"> "
-					+ "<fieldset>");
+                out.append("</td>");
+                out.append("</tr>");
+            }
 
-			out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
-			
-			for(LearningObjective obj :  items) { 
-			
-			out.append("<div class='col col-12'><label class='checkbox'>"
-					+ "<input type='checkbox' name='learningObjectives' checked='checked' value="
-					+ obj.getId() +"><i></i>" +obj.getTitle()+"</label></div>"); } 
-			out.append("</div></section></br>"
-					+ "<div class='row'><section class='col col-md-4'><label>Question Type</label> "
-					+ "<label class='input'>"
-					+ "<select class='form-control valid' name='question_type' style='margin-right: 50px'>"
-					+ "<option value='1'>Single correct option</option>"
-					+ "<option value='2'>Multiple correct options</option></select></label> </section>"
-					+ "<section class='col col-md-4'><label>Difficulty Level</label> "
-					+ "<label class='input'>"
-					+ "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>"
-					+ "<option value='1'>1(EASIEST)</option> <option value='2'>2</option> <option value='3'>3</option>"
-					+ "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
-					+ "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
-					+ "<option value='10'>10(HARDEST)</option></select></label> </section>"
-					+ "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
-					+ "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
-					+ "<option value='1'>1</option><option value='2'>2</option></select></label></section></div>"
-					+ "<section><label>Question Text</label> "
-					+ "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
-					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='1'><i></i>Option 1</label><label class='input'> "
-					+ "<TEXTAREA NAME='option1' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='2'><i></i>Option 2</label><label class='input'> "
-					+ "<TEXTAREA NAME='option2' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='3'><i></i>Option 3</label> <label class='input'> "
-					+ "<TEXTAREA NAME='option3' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='4'><i></i>Option 4</label> <label class='input'> "
-					+ "<TEXTAREA NAME='option4' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-					+ "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='5'><i></i>Option 5</label> <label class='input'> "
-					+ "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
-					+ "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-			}
-			out.append("<div class=' col-md-12 '>");
-			out.append("<div class='panel panel-sea margin-bottom-40'>");
-			out.append("<div class='panel-heading'>");
-			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
-			out.append("</div>");
-			out.append("<table class='table table-striped'>");
-			out.append("<thead>");
-			out.append("<tr>");
-			out.append("<th>#</th>");
-			out.append("<th>Question Title</th>");
-			out.append("<th>Action</th>");
-			out.append("</tr>");
-			out.append("</thead>");
-			out.append("<tbody>");
-			DBUtils db = new DBUtils();
-			ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
-			for (int i = 0; i < data.size(); i++) {
-				out.append("<tr>");
-				out.append("<td>" + data.get(i).get(0) + "</td>");
-				out.append("<td>" + data.get(i).get(1) + "</td>");
-				out.append("<td>");
-				out.append("<a class='btn btn-success btn-xs' href='#' >" + "<i class='fa fa-check'></i>Edit</a>");
-				
-				out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-						+ "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
-				
-				out.append("</td>");
-				out.append("</tr>");
-			}
+            out.append("</tbody>");
+            out.append("</table>");
+            out.append("</div>");
+            out.append("</div>");
+        } else if (lesson.getGame() != null) {
 
-			out.append("</tbody>");
-			out.append("</table>");
-			out.append("</div>");
-			out.append("</div>");
-		}
-			
-		}
+        } else if (lesson.getAssessment() != null) {
 
-		return out;
-	}
+            Assessment assessment = lesson.getAssessment();
+            out.append("<div class=' col-md-12 '>");
+            out.append("<div class='panel panel-sea margin-bottom-40'>");
+            out.append("<div class='panel-heading'>");
+            out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
+            out.append("</div>");
+            out.append("<table class='table table-striped'>");
+            out.append("<thead>");
+            out.append("<tr>");
+            out.append("<th>#</th>");
+            out.append("<th>Question Title</th>");
+            out.append("<th>Action</th>");
+            out.append("</tr>");
+            out.append("</thead>");
+            out.append("<tbody>");
+            DBUtils db = new DBUtils();
+            ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+            for (int i = 0; i < data.size(); i++) {
+                out.append("<tr>");
+                out.append("<td>" + data.get(i).get(0) + "</td>");
+                out.append("<td>" + data.get(i).get(1) + "</td>");
+                out.append("<td>");
+                out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id=" + data.get(i).get(0) + "&lesson_id=" + lesson.getId() + "'>"
+                        + "<i class='fa fa-check'></i>View question</a>");
+                out.append("</td>");
+                out.append("</tr>");
+            }
 
-	private ArrayList<LearningObjective> getLearningObjectivesOfAllSiblings(Integer id) {
-		// TODO Auto-generated method stub
-		ArrayList<LearningObjective> list = new ArrayList<>();
-		IstarUserDAO dao = new IstarUserDAO();
-		Session session = dao.getSession();
-		Lesson lesson = new LessonDAO().findById(id);
-		Cmsession cmsession = lesson.getCmsession();
-		List<Lesson> siblings = cmsession.getAllLessons(cmsession.getId());
+            out.append("</tbody>");
+            out.append("</table>");
+            out.append("</div>");
+            out.append("</div>");
 
-		for (Lesson lessonItem : siblings) {
-			String sql = "select * from learning_objective_lesson where lessonid=" + lessonItem.getId()
-					+ " order by learning_objectiveid";
-			SQLQuery query = session.createSQLQuery(sql);
-			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			List<HashMap<String, Object>> results = query.list();
-			LearningObjectiveDAO learningObjectiveDao = new LearningObjectiveDAO();
-			LearningObjective learningObjective = new LearningObjective();
-			for (HashMap<String, Object> object : results) {
-				try {
-					learningObjective = learningObjectiveDao.findById((Integer) object.get("learning_objectiveid"));
-					if (!list.contains(learningObjective)) {
-						list.add(learningObjective);
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return list;
-	}
+        }
 
-	public StringBuffer getReviewForm(Lesson lesson) {
-		StringBuffer out = new StringBuffer();
-		if (lesson.getPresentaion() != null) {
-			Presentaion ppt = lesson.getPresentaion();
+        return out;
+    }
 
-			out.append("<div class=' col-md-12 '>");
-			out.append("<div class='panel panel-sea margin-bottom-40'>");
-			out.append("<div class='panel-heading'>");
-			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Slides to Review</h3>");
-			out.append("</div>");
-			out.append("<table class='table table-striped'>");
-			out.append("<thead>");
-			out.append("<tr>");
-			out.append("<th>#</th>");
-			out.append("<th>Slide Title</th>");
-			out.append("<th>Action</th>");
-			out.append("</tr>");
-			out.append("</thead>");
-			out.append("<tbody>");
-			DBUtils db = new DBUtils();
-			ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
-			for (int i = 0; i < data.size(); i++) {
-				out.append("<tr>");
-				out.append("<td>" + data.get(i).get(0) + "</td>");
-				out.append("<td>" + data.get(i).get(1) + "</td>");
-				out.append("<td>");
-				out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate_review.jsp?ppt_id="
-						+ ppt.getId() + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
-						+ "<i class='fa fa-check'></i>View Slide</a>");
+    public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide) {
+        ImageDAO dao = new ImageDAO();
+        ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid",
+                ppt.getLesson().getCmsession().getId());
 
-				out.append("</td>");
-				out.append("</tr>");
-			}
+        CMSList newList = new CMSList();
+        newList.setList_type(slide.getList().getList_type());
+        newList.setItems(new ArrayList<>());
+        for (CMSTextItem item : slide.getList().getItems()) {
+            if (item.getText().trim().equalsIgnoreCase("")) {
+            } else {
+                newList.getItems().add(item);
+                try {
+                    if (item.getList().getItems().size() != 0) {
+                        // System.err.println("111");
+                        CMSList childList = new CMSList();
+                        ArrayList<CMSTextItem> items3 = new ArrayList<>();
+                        childList.setItems(items3);
+                        for (CMSTextItem childItem : item.getList().getItems()) {
+                            if (!childItem.getText().trim().startsWith("$slide")) {
+                                childList.getItems().add(childItem);
+                            }
+                        }
+                        item.setList(childList);
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    // e.printStackTrace();
+                }
+            }
+        }
+        if (!newSlide) {
+            slide.setList(newList);
+        }
 
-			out.append("</tbody>");
-			out.append("</table>");
-			out.append("</div>");
-			out.append("</div>");
-		} else if (lesson.getGame() != null) {
+        StringBuffer out = new StringBuffer();
+        VelocityEngine ve = new VelocityEngine();
+        ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+        ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        ve.init();
+        VelocityContext context = new VelocityContext();
+        context.put("slide", slide);
+        context.put("images", images);
+        //context.put("tag_string", tagString);
+        context.put("list_types", CMSRegistry.listTypes);
+        Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
+        StringWriter writer = new StringWriter();
+        try {
+            t.merge(context, writer);
+        } catch (ResourceNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ParseErrorException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (MethodInvocationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        out.append(writer.toString());
+        return out;
 
-		} else if (lesson.getAssessment() != null) {
+    }
 
-			Assessment assessment = lesson.getAssessment();
-			out.append("<div class=' col-md-12 '>");
-			out.append("<div class='panel panel-sea margin-bottom-40'>");
-			out.append("<div class='panel-heading'>");
-			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
-			out.append("</div>");
-			out.append("<table class='table table-striped'>");
-			out.append("<thead>");
-			out.append("<tr>");
-			out.append("<th>#</th>");
-			out.append("<th>Question Title</th>");
-			out.append("<th>Action</th>");
-			out.append("</tr>");
-			out.append("</thead>");
-			out.append("<tbody>");
-			DBUtils db = new DBUtils();
-			ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
-			for (int i = 0; i < data.size(); i++) {
-				out.append("<tr>");
-				out.append("<td>" + data.get(i).get(0) + "</td>");
-				out.append("<td>" + data.get(i).get(1) + "</td>");
-				out.append("<td>");
-				out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id="+data.get(i).get(0)+"&lesson_id="+lesson.getId()+"'>" 
-				+ "<i class='fa fa-check'></i>View question</a>");
-				out.append("</td>");
-				out.append("</tr>");
-			}
+    public CMSSlide convertSlide(Slide slide) {
+        CMSSlide cMSlide = new CMSSlide();
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
+            InputStream in = IOUtils.toInputStream(slide.getSlideText(), "UTF-8");
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
+            cMSlide.setTeacherNotes(slide.getTeacherNotes());
+            cMSlide.setStudentNotes(slide.getStudentNotes());
+            System.out.println(slide);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-			out.append("</tbody>");
-			out.append("</table>");
-			out.append("</div>");
-			out.append("</div>");
+        return cMSlide;
 
-		
+    }
 
-		}
+    public static StringBuffer getCreatePane() {
+        return new StringBuffer("AAAA");
+    }
 
-		return out;
-	}
+    public static StringBuffer getGeneralCreatePane(CMSSlide slide, String pptID) {
+        StringBuffer out = new StringBuffer();
+        out.append("<input type='hidden' name='template' value='" + slide.getTemplateName() + "'> ");
+        out.append("<input type='hidden' name='ppt_id' value=" + pptID + ">");
 
-	public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide) {
-		ImageDAO dao = new ImageDAO();
-		ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid",
-				ppt.getLesson().getCmsession().getId());
+        out.append("<fieldset><section><label class='label'>Select Slide Transition</label> <label class='select'>");
+        out.append("<select name='slideTransition' value='" + slide.getTransition() + "'>");
 
-		CMSList newList = new CMSList();
-		newList.setList_type(slide.getList().getList_type());
-		newList.setItems(new ArrayList<>());
-		for (CMSTextItem item : slide.getList().getItems()) {
-			if (item.getText().trim().equalsIgnoreCase("")) {
-			} else {
-				newList.getItems().add(item);
-				try {
-					if (item.getList().getItems().size() != 0) {
-						// System.err.println("111");
-						CMSList childList = new CMSList();
-						ArrayList<CMSTextItem> items3 = new ArrayList<>();
-						childList.setItems(items3);
-						for (CMSTextItem childItem : item.getList().getItems()) {
-							if (!childItem.getText().trim().startsWith("$slide")) {
-								childList.getItems().add(childItem);
-							}
-						}
-						item.setList(childList);
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					// e.printStackTrace();
-				}
-			}
-		}
-		if (!newSlide) {
-			slide.setList(newList);
-		}
+        for (String type : SlideTransition.SlideTransitionTypes) {
+            if (type.equalsIgnoreCase(slide.getTransition())) {
+                out.append("<option selected='selected' value='" + type + "'>" + type + "</option>");
+            } else {
+                out.append("<option selected='selected' value='" + type + "'>" + type + "</option>");
+            }
+        }
+        out.append("</select>");
+        out.append("</section></fieldset>");
 
-		StringBuffer out = new StringBuffer();
-		VelocityEngine ve = new VelocityEngine();
-		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-		ve.init();
-		VelocityContext context = new VelocityContext();
-		context.put("slide", slide);
-		context.put("images", images);
-		//context.put("tag_string", tagString);
-		context.put("list_types", CMSRegistry.listTypes);
-		Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
-		StringWriter writer = new StringWriter();
-		try {
-			t.merge(context, writer);
-		} catch (ResourceNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseErrorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MethodInvocationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		out.append(writer.toString());
-		return out;
+        out.append(
+                "<fieldset><section><label class='label'>Select Background Transition</label> <label class='select'>");
+        out.append("<select name='backgroundTransition' value='" + slide.getBackgroundTransition() + "'>");
 
-	}
+        for (String type : SlideTransition.BackgroundTransition) {
+            if (type.equalsIgnoreCase(slide.getBackgroundTransition())) {
+                out.append("<option selected='selected' value='" + type + "'>" + type + "</option>");
+            } else {
+                out.append("<option selected='selected' value='" + type + "'>" + type + "</option>");
+            }
+        }
+        out.append("</select>");
+        out.append("</section></fieldset>");
 
-	public CMSSlide convertSlide(Slide slide) {
-		CMSSlide cMSlide = new CMSSlide();
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
-			InputStream in = IOUtils.toInputStream(slide.getSlideText(), "UTF-8");
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
-			cMSlide.setTeacherNotes(slide.getTeacherNotes());
-			cMSlide.setStudentNotes(slide.getStudentNotes());
-			System.out.println(slide);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        out.append(
+                "<fieldset><section><label class='label'>Select Slide Background color</label> <label class='select'>");
+        out.append("<input type='color' id='slide_color' name='backgroundColor' value='" + slide.getBackground() + "'>");
 
-		return cMSlide;
+        out.append("</section>");
+        out.append("</fieldset>");
 
-	}
+        out.append("<fieldset>");
+        out.append("<section>");
+        out.append("<label class='label'>Teacher Notes</label> ");
+        out.append("<label class='textarea'> <textarea rows='3' name='teacher_notes' ");
+        out.append("data-parsley-required='true' data-parsley-length='[5,250]' ");
+        out.append("data-parsley-required-message='Please provide teacher notes' ");
+        out.append("data-parsley-length-message='It should be 5-250 characters long'>");
+        out.append(slide.getTeacherNotes() + "</textarea>");
+        out.append("</label>");
+        out.append("<div class='note'> <strong>Note:</strong> This is where we will put in the teacher notes.</div>");
+        out.append("</section>");
+        out.append("</fieldset>");
 
-	public static StringBuffer getCreatePane() {
-		return new StringBuffer("AAAA");
-	}
+        out.append("<fieldset>");
+        out.append("<section>");
+        out.append("<label class='label'>Student Notes</label> ");
+        out.append("<label class='textarea'> <textarea rows='3' name='student_notes' ");
+        out.append("data-parsley-required='true' data-parsley-length='[5,250]' ");
+        out.append("data-parsley-required-message='Please provide student notes' ");
+        out.append("data-parsley-length-message='It should be 5-250 characters long'>");
+        out.append(slide.getStudentNotes() + "</textarea>");
+        out.append("</label>");
+        out.append("<div class='note'> <strong>Note:</strong> This is where we will put in the student notes.</div>");
+        out.append("</section>");
+        out.append("</fieldset>");
 
-	public static StringBuffer getGeneralCreatePane(CMSSlide slide, String pptID) {
-		StringBuffer out = new StringBuffer();
-		out.append("<input type='hidden' name='template' value='" + slide.getTemplateName() + "'> ");
-		out.append("<input type='hidden' name='ppt_id' value=" + pptID + ">");
+        out.append("<footer><button type='submit' class='btn-u'>Save Changes</button></footer>");
 
-		out.append("<fieldset><section><label class='label'>Select Slide Transition</label> <label class='select'>");
-		out.append("<select name='slideTransition' value='" + slide.getTransition() + "'>");
-		
-		for (String type : SlideTransition.SlideTransitionTypes) {
-	 		if (type.equalsIgnoreCase(slide.getTransition())) {
-	 			out.append("<option selected='selected' value='"+type+"'>"+type+"</option>");
-	 		}else {
-	 			out.append("<option selected='selected' value='"+type+"'>"+type+"</option>");
-	 		}
-		}
-		out.append("</select>");
-		out.append("</section></fieldset>");
-
-		out.append(
-				"<fieldset><section><label class='label'>Select Background Transition</label> <label class='select'>");
-		out.append("<select name='backgroundTransition' value='" + slide.getBackgroundTransition() + "'>");
-		
-		for (String type : SlideTransition.BackgroundTransition) {
-	 		if (type.equalsIgnoreCase(slide.getBackgroundTransition())) {
-	 			out.append("<option selected='selected' value='"+type+"'>"+type+"</option>");
-	 		}else {
-	 			out.append("<option selected='selected' value='"+type+"'>"+type+"</option>");
-	 		}
-		}
-		out.append("</select>");
-		out.append("</section></fieldset>");
-
-		out.append(
-				"<fieldset><section><label class='label'>Select Slide Background color</label> <label class='select'>");
-		out.append("<input type='color' id='slide_color' name='backgroundColor' value='"+slide.getBackground()+"'>");
-
-		
-		out.append("</section>");
-		out.append("</fieldset>");
-		
-		out.append("<fieldset>");
-		out.append("<section>");
-		out.append("<label class='label'>Teacher Notes</label> ");
-		out.append("<label class='textarea'> <textarea rows='3' name='teacher_notes' ");
-		out.append("data-parsley-required='true' data-parsley-length='[5,250]' ");
-		out.append("data-parsley-required-message='Please provide teacher notes' ");
-		out.append("data-parsley-length-message='It should be 5-250 characters long'>");
-		out.append(slide.getTeacherNotes() + "</textarea>");
-		out.append("</label>");
-		out.append("<div class='note'> <strong>Note:</strong> This is where we will put in the teacher notes.</div>");
-		out.append("</section>");
-		out.append("</fieldset>");
-		
-		
-		out.append("<fieldset>");
-		out.append("<section>");
-		out.append("<label class='label'>Student Notes</label> ");
-		out.append("<label class='textarea'> <textarea rows='3' name='student_notes' ");
-		out.append("data-parsley-required='true' data-parsley-length='[5,250]' ");
-		out.append("data-parsley-required-message='Please provide student notes' ");
-		out.append("data-parsley-length-message='It should be 5-250 characters long'>");
-		out.append(slide.getStudentNotes() + "</textarea>");
-		out.append("</label>");
-		out.append("<div class='note'> <strong>Note:</strong> This is where we will put in the student notes.</div>");
-		out.append("</section>");
-		out.append("</fieldset>");
-		
-		out.append("<footer><button type='submit' class='btn-u'>Save Changes</button></footer>");
-
-		return out;
-	}
+        return out;
+    }
 }
