@@ -355,6 +355,7 @@ public class LessonUtils {
                             + "<label class='input'>"
                             + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>");
                     out.append(getDifficultyLevelDropDown(question.getDifficultyLevel()));
+                    
 
                     out.append("</select></label> </section>"
                             + "<section class='col col-md-4'><label>Depth</label> <label class='input'> ");
