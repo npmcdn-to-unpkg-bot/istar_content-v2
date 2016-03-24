@@ -84,8 +84,8 @@
 								<p>File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample course syllabus from <a href="../assets/excel/cms course structure.xls" style="color: RED">here</a> )
 								</p>
 								<label for="file" class="input input-file">
-									<div class="button"><input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div>
-									<input type="text" readonly>
+                                    <div class="button"><input type="file" id="file" name="file" onchange="DisplayFilePath()">Browse</div>
+									<input type="text" id="formfield" readonly>
 								</label>
 							</section>
 						</fieldset>
@@ -284,8 +284,14 @@
 						"plugins" : [ "checkbox" ]
 					});
 					$('#selected_items').val("aaaa");
+	                document.getElementById("formfield").value = "";
 
 				});
+				function DisplayFilePath(){
+                    var filepath=$(":file").val();
+                    var filename=filepath.substr(filepath.lastIndexOf('\\')+1,filepath.length);
+                document.getElementById("formfield").value = filename;
+                }
 			</script>
 			<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
