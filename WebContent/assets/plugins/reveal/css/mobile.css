@@ -222,3 +222,21 @@
 .reveal .three:hover {
 	border-bottom: 100px solid #51D988;			
 } */
+
+
+
+
+
+
+
+
+
+
+
+.reveal .game h1 {
+	font-size: 32px;
+}
+
+.reveal .game ul li, .reveal .game p {
+	font-size: 23px;
+}

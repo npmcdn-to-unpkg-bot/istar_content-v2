@@ -1,45 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <game id="1" name="sample_game">
 	<assets data_type="Integer" id="1" name="star_points" />
-	
-
-<stages id="0" next_stage="1" stage_type="INFORMATION_ONLY">
+<stages id="0" next_stage="3" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h1>Story So Far</h1>
-<ul >
-<li>
-Party with the Bakshi's, at their private island villa in the Bay of
-Bengal.
-</li>
-<li>
-<div>Only the Rich and the influential of the town are invited.</div>
-</li>
-<li>
-<div>As guests arrive they are shown to their rooms by the man servant of the house.</div>
-</li>
-</ul>]]>
-		</question_text>
-</stages>
-<stages id="1" next_stage="2" stage_type="INFORMATION_ONLY">
-		<question_text>
-        <![CDATA[<h1>Story So Far</h1>
-<ul>
-<li>After an hour, All gather for Dinner.</li>
-<li>Suddenly, maid Runs in with a look of terror.</li>
-<li>She takes everyone to the body.</li>
-</ul>]]>
-		</question_text>
-</stages>
-	
-<stages id="2" next_stage="3" stage_type="INFORMATION_ONLY">
-		<question_text>
-        <![CDATA[<h1>Story So Far</h1>
-<ul>
-<li>Inspector Irfan is Telephoned and arrives on the island 2 hours later.</li>
-
-<li>Mrs Reka Bakshi Shows Inspector Irfan to the crime Scene.</li>
-<li>The Storm gets stronger and the island is shut off.</li>
-</ul>]]>
+        <![CDATA[<video width="1980" controls style='margin-top: -52px;'>
+  <source src="/content/assets/video/VerticalVideo.m4v" type="video/mp4">
+</video>]]>
 		</question_text>
 </stages>
 
