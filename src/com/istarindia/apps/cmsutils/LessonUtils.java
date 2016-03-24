@@ -48,6 +48,7 @@ import com.istarindia.cms.lessons.CMSTextItem;
  */
 public class LessonUtils {
  
+    
 	public StringBuffer getEditForm(Lesson lesson) {
 		StringBuffer out = new StringBuffer();
 		if (lesson.getPresentaion() != null) {
