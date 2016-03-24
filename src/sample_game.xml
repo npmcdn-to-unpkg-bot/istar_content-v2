@@ -17,7 +17,7 @@
 		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Bloody Hand Print at the Window  ]]></option_text>
         </options>
-        <options id="1" jump_to="4" correct="true" marking_scheme="star_points+205" xpos="457" ypos="67">
+        <options id="1" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Open Empty Office case With a few tax papers around.
               ]]></option_text>
         </options>
@@ -30,7 +30,7 @@
         <options id="4" jump_to="3" correct="false" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[   Smashed digital watch.  ]]></option_text>
         </options>
-        <options id="5" jump_to="3" correct="false" marking_scheme="star_points+20" xpos="457" ypos="67">
+        <options id="5" jump_to="3" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[   Crumpled paper.  ]]></option_text>
         </options>
        
@@ -41,14 +41,14 @@
         <![CDATA[<h2>Who do I talk to?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="5" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="5" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Mrs Reka Bakshi  ]]></option_text>
         </options>
-        <options id="1" jump_to="6" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="6" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ The Maid 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="8" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="8" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[ The Man Servant  ]]></option_text>
         </options>
 </stages>
@@ -135,14 +135,14 @@
         <![CDATA[<h1>What Next?</h1>
 
 		]]></question_text>
-		<options id="0" jump_to="11" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="11" correct="true" marking_scheme="star_points+50" xpos="457" ypos="67">
             <option_text><![CDATA[ Go To Rajesh's Room  ]]></option_text>
         </options>
-        <options id="1" jump_to="58" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="58" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Go to Tarun's Room. 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="58" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="58" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Go to Mrs Reka Bakshi's Room.  ]]></option_text>
         </options>
 </stages>
@@ -151,20 +151,20 @@
         <![CDATA[<h2>What clues can you collect</h2>
 ]]>
 		</question_text>
-		<options id="0" jump_to="16" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="16" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Phone and Messages.  ]]></option_text>
         </options>
-        <options id="1" jump_to="16" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="16" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Wet puddle at the  window.
               ]]></option_text>
         </options>
-        <options id="2" jump_to="16" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="16" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[   Muddy Boots.  ]]></option_text>
         </options>
-        <options id="3" jump_to="16" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="3" jump_to="16" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[   Random Clues.  ]]></option_text>
         </options>
-        <options id="4" jump_to="16" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="4" jump_to="16" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[   Random Clues.  ]]></option_text>
         </options>
          
@@ -211,14 +211,14 @@
         <![CDATA[<h2>Who do you want to Talk to?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="16" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="16" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Mr Bakshi  ]]></option_text>
         </options>
-        <options id="1" jump_to="24" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="24" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Mrs Reka Bakshi 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="20" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="20" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[  Lohit 
   ]]></option_text>
         </options>
@@ -342,14 +342,14 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <![CDATA[<h2>Who do you want to Talk to  now?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="28" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="28" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Lohit  ]]></option_text>
         </options>
-        <options id="1" jump_to="30" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="30" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Raj 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="32" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="32" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[  Mr Bakshi 
   ]]></option_text>
         </options>
@@ -424,14 +424,14 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <![CDATA[<h2>What Do I Do Next?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="59" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="59" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Go to Raj's Room  ]]></option_text>
         </options>
-        <options id="1" jump_to="59" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="59" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Lohit's Room 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="34" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="34" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[  The Bakshi Office 
   ]]></option_text>
         </options>
@@ -444,17 +444,17 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <p>backgroup image will come here</p>
 ]]>
 		</question_text>
-		<options id="0" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[ Wet ladies' coat  ]]></option_text>
         </options>
-        <options id="1" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[ IT department letter in the dustbin
               ]]></option_text>
         </options>
-        <options id="2" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="35" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[   Locked Draw with red smudge on it.  ]]></option_text>
         </options>
-        <options id="3" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="3" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[   wet ladies' rain cap  ]]></option_text>
         </options>
          
@@ -537,26 +537,26 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <![CDATA[<h2>Which Document to choose?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="42" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="42" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[ Valuation certificate  ]]></option_text>
         </options>
-        <options id="1" jump_to="43" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="43" correct="true" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Amit Bank Statement Extract
               ]]></option_text>
         </options>
-        <options id="2" jump_to="44" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="44" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[  Amit Bros LLP P/L
   ]]></option_text>
         </options>
-        <options id="3" jump_to="45" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="3" jump_to="45" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Bakshi Bank Statement extract
               ]]></option_text>
         </options>
-        <options id="4" jump_to="46" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="4" jump_to="46" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[  Amit Marriage certificate.
   ]]></option_text>
         </options>
-         <options id="5" jump_to="47" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+         <options id="5" jump_to="47" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[  Bakshi PAN.
   ]]></option_text>
         </options>
@@ -615,14 +615,14 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <![CDATA[<h2>Who do you talk to?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="49" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="49" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Lohit  ]]></option_text>
         </options>
-        <options id="1" jump_to="53" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="53" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Rekha 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="51" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="51" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[  Bakshi
   ]]></option_text>
         </options>
@@ -695,15 +695,15 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <![CDATA[<h2>What Next?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="60" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="60" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Look at Raj's room again  ]]></option_text>
         </options>
-        <options id="1" jump_to="60" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="60" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Look Lohit's room
 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="55" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="55" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[  Look at The Bakshi Office Again
   ]]></option_text>
         </options>
@@ -714,17 +714,17 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <p>backgroud image will come here</p>
 ]]>
 		</question_text>
-		<options id="0" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="56" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Bloody ladies glove in draw  ]]></option_text>
         </options>
-        <options id="1" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="56" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Documents with Tarun's name and IT symbol on it
               ]]></option_text>
         </options>
-        <options id="2" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="56" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[   Bloody handkerchief that was used to wipe the knife.  ]]></option_text>
         </options>
-        <options id="3" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="3" jump_to="56" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[   The murder weapon.  ]]></option_text>
         </options>
          
@@ -734,42 +734,42 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         <![CDATA[<h2>What Next? Who is the Killer?</h2>
 
 		]]></question_text>
-		<options id="0" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+		<options id="0" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Mr Rajesh  ]]></option_text>
         </options>
-        <options id="1" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[ Mr Lohit
 
               ]]></option_text>
         </options>
-        <options id="2" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="2" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[  Mr Amit
   ]]></option_text>
         </options>
-        <options id="3" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="3" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[Mr Bakshi  ]]></option_text>
         </options>
-        <options id="4" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="4" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[Mr Tarun 
 
               ]]></option_text>
         </options>
-        <options id="5" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="5" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[  Man Servent 
   ]]></option_text>
         </options>
-         <options id="6" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+         <options id="6" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
             <option_text><![CDATA[Maid 
 
               ]]></option_text>
         </options>
-        <options id="1" jump_to="57" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+        <options id="1" jump_to="57" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
             <option_text><![CDATA[  Mrs Reka Bakshi 
   ]]></option_text>
         </options>
 </stages>
 
-<stages id="57" next_stage="62" stage_type="INFORMATION_ONLY">
+<stages id="57" next_stage="-100" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Kiler is  </h2>
         <h3> Mrs Bakshi</h3>
@@ -810,10 +810,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 ]]>
 		</question_text>
 </stages>
-<stages id="62" next_stage="0" stage_type="INFORMATION_ONLY">
+<stages id="-100" next_stage="0" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2> Game Over </h2>
-        <h3> </h3>
+        <![CDATA[
+        
 			<p>Your Star Points are 156. </p>
 ]]>
 		</question_text>
