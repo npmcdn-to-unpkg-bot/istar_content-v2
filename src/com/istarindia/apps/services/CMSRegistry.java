@@ -95,6 +95,8 @@ public class CMSRegistry {
 		listTypes.add(ListTypes.CYCLE_LIST);
 		listTypes.add(ListTypes.IDEAS_LIST);
 		listTypes.add(ListTypes.SQUARE_LIST);
+		listTypes.add(ListTypes.PYRAMID_LIST);
+		listTypes.add(ListTypes.FUNNEL_LIST);
 		
 	}
 
