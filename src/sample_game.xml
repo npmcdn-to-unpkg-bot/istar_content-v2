@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <game id="1" name="sample_game">
-	<assets data_type="Integer" id="1" name="score" />
-	<assets data_type="Integer" id="2" name="coins" />
-	<assets data_type="String" id="3" name="karate_belt" />
+	<assets data_type="Integer" id="1" name="star_points" />
+	
 
-	<stages id="0" stage_type="INFORMATION_ONLY">
+<stages id="0" next_stage="1" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h1>Story So Far</h1><ul>
+        <![CDATA[<h1>Story So Far</h1>
+<ul >
 <li>
-<div>Party with the Bakshi', at their holiday home on their private island in the Bay of Bengal. 3 day Holiday. (House and zoom in)</div>
+Party with the Bakshi's, at their private island villa in the Bay of
+Bengal.
 </li>
 <li>
 <div>Only the Rich and the influential of the town are invited.</div>
@@ -16,66 +17,839 @@
 <li>
 <div>As guests arrive they are shown to their rooms by the man servant of the house.</div>
 </li>
-<li>
-<div>After an hour, All gather for Dinner.</div>
-</li>
 </ul>]]>
 		</question_text>
-	</stages>
-	<stages id="1" stage_type="INFORMATION_ONLY">
+</stages>
+<stages id="1" next_stage="2" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h1>Story So Far</h1>
 <ul>
-<li>Maid Runs in with a look of terror.</li>
+<li>After an hour, All gather for Dinner.</li>
+<li>Suddenly, maid Runs in with a look of terror.</li>
 <li>She takes everyone to the body.</li>
-<li>Murder was committed in Mr Tarun&rsquo;s Room.</li>
+</ul>]]>
+		</question_text>
+</stages>
+	
+<stages id="2" next_stage="3" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h1>Story So Far</h1>
+<ul>
+<li>Inspector Irfan is Telephoned and arrives on the island 2 hours later.</li>
+
+<li>Mrs Reka Bakshi Shows Inspector Irfan to the crime Scene.</li>
+<li>The Storm gets stronger and the island is shut off.</li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="3" next_stage="4" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+		<question_text>
+        <![CDATA[<h2>Collect the Clues</h2>
+]]>
+		</question_text>
+		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
+            <option_text><![CDATA[ Bloody Hand Print at the Window  ]]></option_text>
+        </options>
+        <options id="1" jump_to="4" correct="true" marking_scheme="star_points+205" xpos="457" ypos="67">
+            <option_text><![CDATA[ Open Empty Office case With a few tax papers around.
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
+            <option_text><![CDATA[   Muddy Print of the Man Servant.  ]]></option_text>
+        </options>
+         <options id="3" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
+            <option_text><![CDATA[   Maid's handkerchief.  ]]></option_text>
+        </options>
+        <options id="4" jump_to="3" correct="false" marking_scheme="star_points+20" xpos="457" ypos="67">
+            <option_text><![CDATA[   Smashed digital watch.  ]]></option_text>
+        </options>
+        <options id="5" jump_to="3" correct="false" marking_scheme="star_points+20" xpos="457" ypos="67">
+            <option_text><![CDATA[   Crumpled paper.  ]]></option_text>
+        </options>
+       
+</stages>
+	
+<stages id="4" next_stage="4" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>Who do I talk to?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="5" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Mrs Reka Bakshi  ]]></option_text>
+        </options>
+        <options id="1" jump_to="6" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ The Maid 
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="8" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ The Man Servant  ]]></option_text>
+        </options>
+</stages>
+
+<stages id="5" next_stage="4" stage_type="INFORMATION_ONLY" >
+		<question_text>
+        <![CDATA[
+        <h2>Interrogation Outcomes </h2>
+        <h3>Mrs Reka Bakshi</h3>
+<ul>
+<li>Things are Sad Inspector. Very Sad indeed..</li>
+<li>It is very sad. I do not know who would want to hurt poor Tarun!!!</li>
+<li>I am sorry Inspector I cannot talk anymore!!!
+</li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="6" next_stage="7" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[
+        <h2>Interrogation Outcomes </h2>
+        <h3>Maid</h3>
+<ul>
+<li>(Sob) I …. I did not mean to (Sniff)… </li>
+<li>I was just doing my duty sir.. </li>
+<li>I had no (Sob) business entering Mr Tarun’s room (Sniff)</li>
+
+
 </ul>]]>
 		</question_text>
 	</stages>
 	
-	<stages id="2" stage_type="INFORMATION_ONLY">
+<stages id="7" next_stage="4" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h1>Story So Far</h1>
+        <![CDATA[
+        <h2>Interrogation Outcomes </h2>
+        <h3>Maid</h3>
 <ul>
-<li>Mr Irfan is Telephoned and arrives on the island. 2 hours later.</li>
-<li>After that the Storm gets stronger and the island is shut off.</li>
-<li>Mrs Reka Bakshi Shows Inspector Irfan to the crime Scene.</li>
+
+<li> But you see sir, the room was open and I went in to see and .. </li>
+<li>And … that is when I saw him on the floor….</li>
+<li>I was not scared Sir I tried to help but it was too late (Sob)</li>
+<li> it was too late (Sobs Un-controllably)</li>
+
+</ul>]]>
+		</question_text>
+	</stages>	
+	
+	
+<stages id="8" next_stage="9" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[
+        <h2>Interrogation Outcomes </h2>
+        <h3>Man Servant</h3>
+<ul>
+<li>Yes Sir, It was my muddy foot prints. </li>
+<li>I am sorry sir but the rain sir, It turns everything into a big mess. </li>
+<li>No Sir I did not see Mr Tarun After I dropped him off his Luggage to in his room.</li>
+<li> Positive Sir.
+ </li>
+
 </ul>]]>
 		</question_text>
 	</stages>
+	
+<stages id="9" next_stage="10" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[
+        <h2>Interrogation Outcomes </h2>
+        <h3>Man Servant</h3>
+<ul>
+<li>I do however do recall Mr Raj having quite a heated argument with Mr Tarun. </li>
+<li>And now Mr Raj is recovering in the Balcony  .</li>
+<li> Mr Raj’s temper and habits will surely kill him.</li>
+<li>If I were you I would check him out.</li>
+<li>Yes Sir his room is the one next to Mr Tarun’s.</li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="10" next_stage="10" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h1>What Next?</h1>
+
+		]]></question_text>
+		<options id="0" jump_to="11" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Go To Rajesh's Room  ]]></option_text>
+        </options>
+        <options id="1" jump_to="58" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Go to Tarun's Room. 
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="58" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Go to Mrs Reka Bakshi's Room.  ]]></option_text>
+        </options>
+</stages>
+<stages id="11" next_stage="12" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+		<question_text>
+        <![CDATA[<h2>What clues can you collect</h2>
+]]>
+		</question_text>
+		<options id="0" jump_to="16" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Phone and Messages.  ]]></option_text>
+        </options>
+        <options id="1" jump_to="16" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Wet puddle at the  window.
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="16" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   Muddy Boots.  ]]></option_text>
+        </options>
+        <options id="3" jump_to="16" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   Random Clues.  ]]></option_text>
+        </options>
+        <options id="4" jump_to="16" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   Random Clues.  ]]></option_text>
+        </options>
+         
+</stages>
+
+<stages id="12" next_stage="13" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Messages on Rajesh's Phone</h2>
+        <h3>From Mr Lohit</h3>
+<ul>
+<li>I hope you did not tell Tarun about our little plan.</li>
+<li>You rat me out I rat you out.</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="13" next_stage="14" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Messages on Rajesh's Phone</h2>
+         <h3>From Mr Bakshi</h3>
+<ul>
+<li>You do not need to worry about him.</li>
+<li>I will take care of it.</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="14" next_stage="15" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Messages on Rajesh's Phone</h2>
+        <h3>From Mrs Reka Bakshi</h3>
+<ul>
+<li>Thank you for accepting my invitation.</li>
+<li>Do ensure Tarun comes along.</li>
+<li>Looking forward to meeting you all.</li>
+</ul>]]>
+		</question_text>
+</stages>
 
 
+<stages id="15" next_stage="15" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>Who do you want to Talk to?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="16" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Mr Bakshi  ]]></option_text>
+        </options>
+        <options id="1" jump_to="24" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Mrs Reka Bakshi 
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="20" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Lohit 
+  ]]></option_text>
+        </options>
+</stages>
+
+<stages id="16" next_stage="17" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<ul>
+<li>Yes sir this is truly is an unfortunate turn of events.</li>
+<li>The message!!! You're using un conventional methods, I see.</li>
+<li>Looking forward to meeting you all.</li>
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="17" next_stage="18" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<p>Raj hates sharing a room with Lohit and wanted an individual room because of his health condition.
+ So I had to re organise things and give everyone individual rooms. 
+ </p>]]>
+		</question_text>
+</stages>
+<stages id="18" next_stage="19" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<p> You are free to look around and talk to anyone. 
+ They will confirm this. That is all inspector. 
+Now if you will be so kind I must get back to my guests they all seem a little rattled. </p>]]>
+		</question_text>
+</stages>
+<stages id="19" next_stage="15" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<p> I just want this wretched storm to blow over so that the real police can come here and do their job. (Bakshi snapping)</p>]]>
+		</question_text>
+</stages>
+
+<stages id="20" next_stage="21" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Lohit</h3>
+<ul>
+<li>What? This is just wrong. </li><li>You cannot accuse me of this.</li><li> The murderer is out there and you wasting time talking to me?</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="21" next_stage="22" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Lohit</h3>
+<ul>
+<li>Message what message?......... </li>
+<li>Oh wait wait… </li>
+<li> Ok I see what you are trying to do…</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="22" next_stage="23" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Lohit</h3>
+<ul>
+<li>I am not a killer… </li>
+<li>I will show you all my accounts… </li>
+<li>This is all I have to declare</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="23" next_stage="25" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Lohit</h3>
+<ul>
+<li>You may also want to look at Mr Raj’s financials.</li>
+<li>But you are wasting time on me while the real killer is out there.</li>
 
 
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="24" next_stage="15" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mrs Reka Bakshi</h3>
+<ul>
+<li>Dear Mr Irfan with the killer out there why are you talking to me.</li>
+<li>Will you be able to catch the killer or must another murder be committed?</li>
 
 
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="25" next_stage="26" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Documents </h2>
+        <h3>Accounts of Mr Lohit</h3>
+<p>This is the place where a document will come.</p>]]>
+		</question_text>
+</stages>
+
+<stages id="26" next_stage="27" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Documents </h2>
+        <h3>Financials of Mr Raj</h3>
+<p>This is the place where a document will come.</p>]]>
+		</question_text>
+</stages>
+
+<stages id="27" next_stage="27" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>Who do you want to Talk to  now?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="28" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Lohit  ]]></option_text>
+        </options>
+        <options id="1" jump_to="30" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Raj 
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="32" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Mr Bakshi 
+  ]]></option_text>
+        </options>
+</stages>
+
+<stages id="28" next_stage="29" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Lohit</h3>
+<ul>
+<li>Well yes there may be a few things not mentioned in my accounts.</li>
+<li>But killing for that? </li>
+<li> Why look at Raj’s books I am sure he is up to no good.</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="29" next_stage="27" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Lohit</h3>
+<ul>
+<li>Big Exp? Yes</li>
+<li>Listen Mr Irfan I am a Land Lord, its what I do.</li>
+<li>I buy and rent property.</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="30" next_stage="31" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Raj</h3>
+<ul>
+<li>Just look at me.</li>
+<li>I am in a chair and constantly need to be helped around the house.</li>
+<li>I could not kill Tarun even if I wanted to. Bhaa..</li>
+
+</ul>]]>
+		</question_text>
+</stages>
 
 
-	<!-- <stages id="1" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="8" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="689" ypos="35"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="23" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="333" ypos="51"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="629" ypos="104"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="18" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="291" ypos="229"> <option_text>sheets 
-		containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="24" marking_scheme="score+10;coins+20;karate_belt=black" xpos="153" ypos="294"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="2" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="220" ypos="193"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="16" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="746" ypos="230"> <option_text>sheets containing 
-		Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="541" ypos="159"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="174" ypos="242"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="183" ypos="124"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="3" stage_type="INFORMATION_ONLY"> 
-		<question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="4" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="14" marking_scheme="score+10;coins+20;karate_belt=black" xpos="123" ypos="234"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="63" ypos="227"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="487" ypos="198"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options 
-		id="4" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="697" ypos="393"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="5" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="80" ypos="308"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="5" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="23" marking_scheme="score+10;coins+20;karate_belt=black" xpos="280" ypos="186"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="23" 
-		marking_scheme="score+10;coins+20;karate_belt=black" xpos="192" ypos="361"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="472" ypos="381"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="106" ypos="269"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="24" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="84" ypos="331"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy 
-		text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="6" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="7" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="8" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="9" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="7" marking_scheme="score+10;coins+20;karate_belt=black" xpos="530" 
-		ypos="48"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="678" ypos="304"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="15" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="444" ypos="158"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="375" ypos="116"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="393" ypos="114"> 
-		<option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="10" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="4" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="583" ypos="387"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="20" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="320" ypos="167"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="5" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="231" ypos="304"> <option_text>sheets 
-		containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="55" ypos="122"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="23" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="724" ypos="216"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="11" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="15" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="315" ypos="133"> <option_text>sheets containing 
-		Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="12" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="74" ypos="109"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="313" ypos="141"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="11" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="173" ypos="203"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="6" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="399" ypos="71"> <option_text>sheets containing Lorem 
-		Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="12" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="9" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="269" ypos="305"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="7" marking_scheme="score+10;coins+20;karate_belt=black" xpos="53" ypos="313"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="197" ypos="40"> <option_text>sheets containing Lorem Ipsum passage</option_text> 
-		</options> <options id="4" jump_to="7" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="507" ypos="383"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="15" marking_scheme="score+10;coins+20;karate_belt=black" xpos="507" ypos="106"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="13" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="7" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="746" ypos="364"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> 
-		<options id="2" jump_to="19" marking_scheme="score+10;coins+20;karate_belt=black" xpos="440" ypos="279"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="567" ypos="394"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="19" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="428" ypos="301"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="10" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="489" ypos="270"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is 
-		simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="14" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="248" ypos="371"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="15" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="502" ypos="382"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="18" marking_scheme="score+10;coins+20;karate_belt=black" xpos="378" ypos="85"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="23" 
-		marking_scheme="score+5;coins+10;karate_belt=blue" xpos="743" ypos="203"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="22" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="717" ypos="200"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="15" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="10" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="257" ypos="365"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" 
-		xpos="112" ypos="387"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="4" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="374" ypos="291"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="82" ypos="150"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="6" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="456" ypos="114"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem 
-		Ipsum </question_text> </stages> <stages id="16" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="17" stage_type="MULTIPLE_OPTION_DRAG_DROP"> <options id="1" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="515" ypos="307"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="1" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="628" ypos="300"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="23" ypos="307"> <option_text>sheets 
-		containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="18" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="224" ypos="369"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="659" ypos="157"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="18" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="18" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="61" ypos="333"> <option_text>sheets containing 
-		Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="13" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="407" ypos="319"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="1" marking_scheme="score+10;coins+20;karate_belt=black" xpos="473" ypos="302"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="20" marking_scheme="score+10;coins+20;karate_belt=black" xpos="203" ypos="187"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="9" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="166" ypos="34"> <option_text>sheets containing 
-		Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="19" stage_type="MULTIPLE_OPTION_MULTIPLE_CHOICE"> <options id="1" jump_to="2" marking_scheme="score+10;coins+20;karate_belt=black" xpos="173" ypos="27"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="16" marking_scheme="score+10;coins+20;karate_belt=black" xpos="440" ypos="285"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="707" ypos="70"> <option_text>sheets containing Lorem 
-		Ipsum passage</option_text> </options> <options id="4" jump_to="17" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="176" ypos="375"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="1" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="203" ypos="102"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="20" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="21" stage_type="MULTIPLE_OPTION_DRAG_DROP"> 
-		<options id="1" jump_to="8" marking_scheme="score+10;coins+20;karate_belt=black" xpos="404" ypos="345"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="7" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="596" ypos="322"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="316" ypos="159"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="22" marking_scheme="score+10;coins+20;karate_belt=black" xpos="321" ypos="280"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> 
-		<options id="5" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="124" ypos="29"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="22" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" jump_to="15" marking_scheme="score+10;coins+20;karate_belt=black" xpos="507" ypos="78"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="12" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="281" ypos="318"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options 
-		id="3" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="331" ypos="222"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="10" marking_scheme="score+10;coins+20;karate_belt=black" xpos="191" ypos="41"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="21" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="34" ypos="145"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="23" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE"> <options id="1" 
-		jump_to="21" marking_scheme="score+10;coins+20;karate_belt=black" xpos="315" ypos="127"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="2" jump_to="11" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="163" ypos="27"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="3" jump_to="9" marking_scheme="score+5;coins+10;karate_belt=blue" xpos="376" ypos="51"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="4" jump_to="16" marking_scheme="score-10;coins-5;karate_belt=yellow" xpos="362" ypos="19"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <options id="5" jump_to="20" 
-		marking_scheme="score+5;coins+10;karate_belt=blue" xpos="686" ypos="35"> <option_text>sheets containing Lorem Ipsum passage</option_text> </options> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> <stages id="24" stage_type="INFORMATION_ONLY"> <question_text>is simply dummy text of the printing and typesetting industry. Lorem Ipsum </question_text> </stages> -->
-</game>
+<stages id="31" next_stage="27" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Raj</h3>
+<ul>
+<li>And you think I will kill for a few thousands?</li>
+<li>I DEAL IN MILLIONS!!!!</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="32" next_stage="33" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<ul>
+<li>Just go and have a look at my office.</li>
+<li>I really don’t have time for you Irfan.</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="33" next_stage="33" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>What Do I Do Next?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="59" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Go to Raj's Room  ]]></option_text>
+        </options>
+        <options id="1" jump_to="59" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Lohit's Room 
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="34" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  The Bakshi Office 
+  ]]></option_text>
+        </options>
+</stages>
+
+
+<stages id="34" next_stage="35" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+		<question_text>
+        <![CDATA[<h1>What clues can you collect</h1>
+        <p>backgroup image will come here</p>
+]]>
+		</question_text>
+		<options id="0" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Wet ladies' coat  ]]></option_text>
+        </options>
+        <options id="1" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ IT department letter in the dustbin
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   Locked Draw with red smudge on it.  ]]></option_text>
+        </options>
+        <options id="3" jump_to="35" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   wet ladies' rain cap  ]]></option_text>
+        </options>
+         
+</stages>
+<stages id="35" next_stage="36" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>IT department Notice </h2>
+        <h3 style="text-align: left;">Dear Mr Amit,</h3>
+<p style="text-align: left;">Our office has tried to reach you to discuss the discrepancies discovered on your property evaluation and registration document. We have not received a response form you till date. This is the 3rd and final notice, following which one of our representatives will visit your premises.</p>
+<p style="text-align: left;">Thanking you</p>
+<p style="text-align: left;">The Income Tax Department</p>
+        ]]>
+		</question_text>
+</stages>
+
+<stages id="36" next_stage="37" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Amit</h3>
+<ul>
+<li>Hello Sir.. </li>
+<li>Yes I will be happy to answer any of your questions…</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="37" next_stage="38" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Amit</h3>
+<ul>
+<li>Wait what is that?</li>
+<li>The letter from the IT department???</li>
+<li>I am sorry I do not know what you are talking about?</li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="38" next_stage="39" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Amit</h3>
+<ul>
+<li>OH wait that is my name on …….</li>
+<li> I need my lawyer.</li>
+<li>Ouch hey no Ouch </li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="39" next_stage="40" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Amit</h3>
+<ul>
+<li>OK Ok Mister listen,</li>
+<li>you and I are well aware that we need to do certain things to survive.</li>
+<li>We are after all small fish in a shark tank.</li>
+<li>Ouch @$^&  Hey back off Ouch.</li>
+<li>OK ok I will make a deal with you.</li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="40" next_stage="41" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Amit</h3>
+<ul>
+<li>I will give you any document you want.</li>
+<li>But you can look at only one at a time.</li>
+<li>No one needs to know. Deal?</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="41" next_stage="41" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>Which Document to choose?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="42" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Valuation certificate  ]]></option_text>
+        </options>
+        <options id="1" jump_to="43" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Amit Bank Statement Extract
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="44" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Amit Bros LLP P/L
+  ]]></option_text>
+        </options>
+        <options id="3" jump_to="45" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Bakshi Bank Statement extract
+              ]]></option_text>
+        </options>
+        <options id="4" jump_to="46" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Amit Marriage certificate.
+  ]]></option_text>
+        </options>
+         <options id="5" jump_to="47" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Bakshi PAN.
+  ]]></option_text>
+        </options>
+</stages>
+<stages id="42" next_stage="48" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Document </h2>
+        <p>Valuation certificate</p>
+        
+        ]]>
+		</question_text>
+</stages>
+<stages id="43" next_stage="48" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Document </h2>
+        <p>Amit Bank Statement Extract</p>
+        
+        ]]>
+		</question_text>
+</stages>
+<stages id="44" next_stage="41" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Document </h2>
+        <p> Amit Bros LLP P/L</p>
+        
+        ]]>
+		</question_text>
+</stages>
+<stages id="45" next_stage="41" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Document </h2>
+        <p> Bakshi Bank Statement extract/L</p>
+        
+        ]]>
+		</question_text>
+</stages>
+<stages id="46" next_stage="41" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Document </h2>
+        <p> Amit Marriage certificate.</p>
+        
+        ]]>
+		</question_text>
+</stages>
+<stages id="47" next_stage="41" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Document </h2>
+        <p>  Bakshi PAN.</p>
+        
+        ]]>
+		</question_text>
+</stages>
+
+<stages id="48" next_stage="48" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>Who do you talk to?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="49" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Lohit  ]]></option_text>
+        </options>
+        <options id="1" jump_to="53" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Rekha 
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="51" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Bakshi
+  ]]></option_text>
+        </options>
+</stages>
+<stages id="49" next_stage="50" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Lohit</h3>
+<ul>
+<li>I have given you what ever I have.</li>
+<li>See the bank statement 10Cr was taken from me on 1 Jan 2016 towards Windsor Manor.</li>
+<li>What is this now? ….. Hmm Hmm……. WHAT?</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="50" next_stage="48" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Lohit</h3>
+<ul>
+<li>Wait Winsor Manor Valued at 5 Cr..</li>
+<li>But why did I pay 10 Cr?</li>
+<li>That Brut Bakshi …</li>
+<li>He has cheated me…</li>
+<li>I am going to kill him. (Storms out of the room)</li>
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="51" next_stage="52" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<ul>
+<li>Irfan you are really starting to annoy me.</li>
+<li>I have no idea of accounting.</li>
+<li>My Wife take care of it all.</li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="52" next_stage="54" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mr Bakshi</h3>
+<ul>
+<li>Feel free to have a look around my office again.</li>
+<li>Here are the keys to all the cupboards…</li>
+<li>I hope I will not see you again… </li>
+
+</ul>]]>
+		</question_text>
+</stages>
+
+<stages id="53" next_stage="48" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Interrogation Outcomes </h2>
+        <h3>From Mrs Bakshi</h3>
+<ul>
+<li>Mr Irfan. Please I do not have time for this.</li>
+<li>Yes I owned Windsor Manor and now sold it. </li>
+<li>Is that a crime now.  </li>
+
+</ul>]]>
+		</question_text>
+</stages>
+<stages id="54" next_stage="54" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>What Next?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="60" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Look at Raj's room again  ]]></option_text>
+        </options>
+        <options id="1" jump_to="60" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Look Lohit's room
+
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="55" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Look at The Bakshi Office Again
+  ]]></option_text>
+        </options>
+</stages>
+<stages id="55" next_stage="56" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+		<question_text>
+        <![CDATA[<h2>What clues can you collect</h2>
+        <p>backgroud image will come here</p>
+]]>
+		</question_text>
+		<options id="0" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Bloody ladies glove in draw  ]]></option_text>
+        </options>
+        <options id="1" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Documents with Tarun's name and IT symbol on it
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   Bloody handkerchief that was used to wipe the knife.  ]]></option_text>
+        </options>
+        <options id="3" jump_to="56" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[   The murder weapon.  ]]></option_text>
+        </options>
+         
+</stages>
+<stages id="56" next_stage="1" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+		<question_text>
+        <![CDATA[<h2>What Next? Who is the Killer?</h2>
+
+		]]></question_text>
+		<options id="0" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Mr Rajesh  ]]></option_text>
+        </options>
+        <options id="1" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[ Mr Lohit
+
+              ]]></option_text>
+        </options>
+        <options id="2" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Mr Amit
+  ]]></option_text>
+        </options>
+        <options id="3" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[Mr Bakshi  ]]></option_text>
+        </options>
+        <options id="4" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[Mr Tarun 
+
+              ]]></option_text>
+        </options>
+        <options id="5" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Man Servent 
+  ]]></option_text>
+        </options>
+         <options id="6" jump_to="61" correct="false" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[Maid 
+
+              ]]></option_text>
+        </options>
+        <options id="1" jump_to="57" correct="true" marking_scheme="score-10;coins-5" xpos="457" ypos="67">
+            <option_text><![CDATA[  Mrs Reka Bakshi 
+  ]]></option_text>
+        </options>
+</stages>
+
+<stages id="57" next_stage="62" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Kiler is  </h2>
+        <h3> Mrs Bakshi</h3>
+			<p>Backgroud image with cuffs will come here.</p>
+]]>
+		</question_text>
+</stages>
+
+<stages id="58" next_stage="10" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Closed Door </h2>
+        <h3> </h3>
+			<p>Backgroud image with closed door come here.</p>
+]]>
+		</question_text>
+</stages>
+<stages id="59" next_stage="33" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Closed Door </h2>
+        <h3> </h3>
+			<p>Backgroud image with closed door come here.</p>
+]]>
+		</question_text>
+</stages>
+<stages id="60" next_stage="54" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2>Closed Door </h2>
+        <h3> </h3>
+			<p>Backgroud image with closed door come here.</p>
+]]>
+		</question_text>
+</stages>
+<stages id="61" next_stage="56" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2> Wrong Option </h2>
+        <h3> </h3>
+			<p>Backgroud image with come here.</p>
+]]>
+		</question_text>
+</stages>
+<stages id="62" next_stage="0" stage_type="INFORMATION_ONLY">
+		<question_text>
+        <![CDATA[<h2> Game Over </h2>
+        <h3> </h3>
+			<p>Your Star Points are 156. </p>
+]]>
+		</question_text>
+</stages>
+	</game>

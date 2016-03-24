@@ -1,3 +1,4 @@
+<%@page import="javax.sound.midi.SysexMessage"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.istarindia.cms.game.Game"%>
 <%@page import="com.istarindia.apps.games.services.GameSerializer"%>
@@ -7,10 +8,12 @@
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 Game game = new GameService().getGame();
 String htmlSnippet = "";
-if(request.getParameterMap().containsKey("stage_id")) {
+if(request.getAttribute("stage_id")!=null) {
+	System.err.println("stage_id is "+Integer.parseInt(request.getAttribute("stage_id").toString()));
 	GameSerializer ser = new GameSerializer();
-	 htmlSnippet = ser.getNextStage(game, Integer.parseInt(request.getParameter("stage_id")));
+	 htmlSnippet = ser.getNextStage(game, Integer.parseInt(request.getAttribute("stage_id").toString()));
 } else {
+	System.err.println("stage_id is null");
 	GameSerializer ser = new GameSerializer();
 	 htmlSnippet = ser.getIntro(game);
 }
@@ -20,7 +23,7 @@ if(request.getParameterMap().containsKey("stage_id")) {
 <head>
 <meta charset="utf-8">
 
-<title>reveal.js The HTML Presentation Framework</title>
+<title>Murder Mystery</title>
 
 <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 <meta name="author" content="Hakim El Hattab">
@@ -47,16 +50,19 @@ if(request.getParameterMap().containsKey("stage_id")) {
 		<![endif]-->
 </head>
 <body>
+
+<body>
 	<div class="reveal">
+		<form action="/content/play_game" style="display: block;">
 		<div class="slides">
 			<%=htmlSnippet %>
 		</div>
 		<aside class="controls" style="display: block;">
 			<button type="submit" class="navigate-right enabled" aria-label="next slide"></button>
 		</aside>
+		</form>	
 	</div>
 	<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
-	<script>
-		</script>
+
 </body>
 </html>

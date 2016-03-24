@@ -12,6 +12,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import com.istarindia.cms.game.Asset;
 import com.istarindia.cms.game.Game;
 import com.istarindia.cms.game.Option;
 import com.istarindia.cms.game.Stage;
@@ -22,7 +23,7 @@ import com.istarindia.cms.game.Stage;
  */
 public class GameSerializer {
 	public String getIntro(Game game) {
-		return "<section> <h1>" + game.getName() + "</h1> <h3>The HTML Presentation Framework</h3> </section>";
+		return getNextStage(game, 0);
 
 	}
 
@@ -60,30 +61,34 @@ public class GameSerializer {
 			out.append(writer1.toString());
 			return out.toString();
 		case "MULTIPLE_OPTION_SINGLE_CHOICE":
-			out.append("<section> " + stage.getQuestionText() + "</section>");
-			ArrayList<Option> options = stage.getOptions();
-			for (Option option : options) {
-
-				out.append("<input type=\"radio\" name=\"option_id\" value=\"" + option.getId() + "\" checked=\"\">"
-						+ option.getId() + option.getOptionText() + "");
-			}
-			break;
+			ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+			ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+			ve.init();
+			context.put("stage", stage);
+			Template t2 = ve.getTemplate("MULTIPLE_OPTION_SINGLE_CHOICE.vm");
+			StringWriter writer2 = new StringWriter();
+			t2.merge(context, writer2);
+			out.append(writer2.toString());
+			return out.toString();
 		case "MULTIPLE_OPTION_DRAG_DROP":
-			out.append("<section> " + stage.getQuestionText() + "</section>");
-			// out.append("<input type=\"hidden\" name=\"prev_stage_id\"
-			// value=\""+s.getId()+"\" >");
-			ArrayList<Option> options1 = stage.getOptions();
-			for (Option option : options1) {
-
-				out.append("<input type=\"radio\" name=\"option_id\" value=\"" + option.getId() + "\" checked=\"\">"
-						+ option.getId() + option.getOptionText() + "");
-			}
-			break;
-
+			ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+			ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+			ve.init();
+			context.put("stage", stage);
+			Template t3 = ve.getTemplate("MULTIPLE_OPTION_DRAG_DROP.vm");
+			StringWriter writer3 = new StringWriter();
+			t3.merge(context, writer3);
+			out.append(writer3.toString());
+			return out.toString();
 		default:
 			break;
 		}
 		return null;
 
+	}
+
+	public void updateAssets(Asset a, String scheme) {
+		
+		
 	}
 }

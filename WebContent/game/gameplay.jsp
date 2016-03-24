@@ -157,49 +157,6 @@
 											
 											int student_id =16;
 											new GameService().updateStudentGame(student_id, sb.toString(),game.getId());
-											
-										/* 	for(String scheme : schemes)
-											{
-												String asset_array[]=null;
-												if(scheme.contains("-"))
-												{
-													asset_array = scheme.split("\\-");
-													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) - Integer.parseInt(asset_array[1]);
-													request.getSession().setAttribute(asset_array[0], new_score);
-													
-													System.err.println(" minus from score " + asset_array[1]);
-													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
-													
-												}else if(scheme.contains("+"))
-												{
-													asset_array = scheme.split("\\+");
-													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) + Integer.parseInt(asset_array[1]);
-													request.getSession().setAttribute(asset_array[0], new_score);
-													
-													System.err.println(" add to score " + asset_array[1]);
-													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
-													
-												}
-												else if(scheme.contains("*"))
-												{
-													asset_array = scheme.split("\\*");
-													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) * Integer.parseInt(asset_array[1]);
-													request.getSession().setAttribute(asset_array[0], new_score);
-													
-													System.err.println(" multiply to score " + asset_array[1]);
-													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
-													
-												}else if(scheme.contains("/"))
-												{
-													asset_array = scheme.split("\\/");
-													int new_score = Integer.parseInt(request.getSession().getAttribute(asset_array[0]).toString()) / Integer.parseInt(asset_array[1]);
-													request.getSession().setAttribute(asset_array[0], new_score);
-													
-													System.err.println(" divide from score " + asset_array[1]);
-													System.err.println(" current "+asset_array[0]+" is  " + request.getSession().getAttribute(asset_array[0]));
-													
-												}
-											}	 */
 													
 											int stage_id = options.get(option_id - 1).getJump_to();
 												out.println(new GameService().getNextStageForm(game, stage_id));
