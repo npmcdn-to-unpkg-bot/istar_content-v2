@@ -358,7 +358,7 @@ public class LessonUtils {
 
                     out.append("</select></label> </section>"
                             + "<section class='col col-md-4'><label>Depth</label> <label class='input'> ");
-
+ 
                     out.append(getSpecifierDropDown(question.getSpecifier()));
                     out.append("<section><label>Question Text</label> "
                             + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'>" + question.getQuestionText() + "</TEXTAREA> </label> </section> ");
@@ -368,7 +368,7 @@ public class LessonUtils {
                         out.append("<section> <label class='checkbox'><input type='checkbox' name='answers' value='" + increment + "'/><i></i>Option " + increment + "</label><label class='input'> <TEXTAREA NAME='option_" + optionSetStringArray[a][0] + "'  ROWS='2' cols='25'>" + optionSetStringArray[a][1] + "</TEXTAREA> </label> </section>");
                         increment++;
                     }
-
+ 
                     out.append("</fieldset>"
                             + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
                 }
