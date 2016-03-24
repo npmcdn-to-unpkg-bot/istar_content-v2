@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.cms.game.Asset"%>
 <%@page import="javax.sound.midi.SysexMessage"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.istarindia.cms.game.Game"%>
@@ -6,17 +7,35 @@
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-Game game = new GameService().getGame();
+
+GameSerializer ser = new GameSerializer();
+Game game = ser.getGame();
 String htmlSnippet = "";
 if(request.getAttribute("stage_id")!=null) {
 	System.err.println("stage_id is "+Integer.parseInt(request.getAttribute("stage_id").toString()));
-	GameSerializer ser = new GameSerializer();
+	
 	 htmlSnippet = ser.getNextStage(game, Integer.parseInt(request.getAttribute("stage_id").toString()));
-} else {
-	System.err.println("stage_id is null");
-	GameSerializer ser = new GameSerializer();
-	 htmlSnippet = ser.getIntro(game);
+} 
+else
+{
+	for (Asset iterable_element : game.getAssets()) {
+		if(iterable_element.getDataType().equalsIgnoreCase("Integer")) {
+			request.getSession().setAttribute(iterable_element.getName(), 0);
+		}
+		else if(iterable_element.getDataType().equalsIgnoreCase("String"))
+		{
+			request.getSession().setAttribute(iterable_element.getName(), "");
+		}
+	}
+	htmlSnippet = ser.getIntro(game);
 }
+
+//just for testing
+for(Asset a : game.getAssets())
+{
+	System.out.println("value of "+a.getName()+" in session is "+ request.getSession().getAttribute(a.getName()));					
+}
+
 %><!doctype html>
 <html lang="en">
 
