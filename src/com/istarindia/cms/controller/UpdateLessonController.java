@@ -52,6 +52,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 			int duration = Integer.parseInt(request.getParameter("duration"));
 			String lesson_theme = request.getParameter("lesson_theme");
 			String title = request.getParameter("title");
+			String lesson_subject = request.getParameter("lesson_subject");
 			if (request.getParameterMap().containsKey("Tags")) {
 				tags = request.getParameter("Tags");
 			}
@@ -63,7 +64,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 				}
 			}
 			LessonService service = new LessonService();
-			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite, lesson_theme);
+			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite, lesson_theme, lesson_subject);
 			(new CourseService()).clearLearningObjectiveWithLesson(lesson, ite);
 			(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
 			request.setAttribute("message_success", "Lesson updated successfully!");

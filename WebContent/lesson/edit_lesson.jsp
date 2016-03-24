@@ -106,8 +106,6 @@
 									</h3>
 								</div>
 								<div class="panel-body">
-
-
 									<form action="/content/update_lesson" id="sky-form4"
 										class="sky-form">
 										<input type="hidden" name="lesson_id"
@@ -162,6 +160,35 @@
 														<label class="radio"><input type="radio"
 															name="lesson_theme" value="<%=themeName%>"> <i
 															class="rounded-x"></i><%=themeName%></label>
+														<%
+															}
+														%>
+													</div>
+													<%
+														}
+													%>
+												</div>
+											</section>
+											
+											<section>
+												<label class="label">Subject </label>
+												<div class="row">
+													<%
+														for (String subject : Themes.subjects) {
+													%>
+													<div class="col col-4">
+														<%
+															if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
+														%>
+														<label class="radio"><input type="radio"
+															name="lesson_subject" checked="checked"
+															value="<%=subject%>"> <i class="rounded-x"></i><%=subject%></label>
+														<%
+															} else {
+														%>
+														<label class="radio"><input type="radio"
+															name="lesson_subject" value="<%=subject%>"> <i
+															class="rounded-x"></i><%=subject%></label>
 														<%
 															}
 														%>

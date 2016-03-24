@@ -48,10 +48,10 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <body>
 
-	<div class="reveal">
+	<div class="reveal <%=ppt.getLesson().getLesson_subject() %>">
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeLesson(ppt)) %>
+			<%=((new CMSerializer()).serializeLesson(ppt, ppt.getLesson().getLesson_subject())) %>
 
 		</div>
 

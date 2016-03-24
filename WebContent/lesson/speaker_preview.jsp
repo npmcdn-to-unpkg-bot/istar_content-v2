@@ -47,13 +47,12 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 </head>
-
 <body>
 
-	<div class="reveal">
+	<div class="reveal <%=ppt.getLesson().getLesson_subject() %>___<%=ppt.getLesson().getLesson_theme().toLowerCase() %>" style="background-image: url('<%=baseURL %>assets/plugins/reveal/css/images/<%=ppt.getLesson().getLesson_subject() %>.png');" >
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeLesson(ppt)) %>
+			<%=((new CMSerializer()).serializeLesson(ppt,  ppt.getLesson().getLesson_subject())) %>
 
 		</div>
 

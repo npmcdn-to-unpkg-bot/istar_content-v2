@@ -1602,7 +1602,7 @@ html:-moz-full-screen-ancestor {
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST  ol {
     font-style: italic;
-        margin-left: -7%;
+        margin-left: -1%;
             list-style-image: url(http://www.cssnewbie.com/example_files/style-unordered-lists/uncheck.gif);
 }
 
@@ -1610,8 +1610,23 @@ html:-moz-full-screen-ancestor {
         padding: 8px;
     font-style: normal;
     font-family: Arial;
-    font-size: 49px;
-    color: #eee;
+    font-size: 38px;
     border-left: 1px solid #999;
-    padding-bottom: 70px;
+    padding-bottom: 45px;
+}
+
+.reveal .SQUARE_LIST___ONLY_TITLE_LIST .roll-in {
+color: white;
+}
+
+.reveal .SQUARE_LIST___ONLY_TITLE_LIST .item_1 {
+	color: white;
+	font-size: 28px;
+	
+}
+
+.reveal .SQUARE_LIST___ONLY_TITLE_LIST .roll-in span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;      
 }
