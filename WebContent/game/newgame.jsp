@@ -54,7 +54,7 @@ for(Asset a : game.getAssets())
 
 <link rel="stylesheet" href="<%=baseURL %>assets/css/game.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/sky.css" id="theme">
-
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
 <% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
@@ -77,11 +77,66 @@ for(Asset a : game.getAssets())
 			<%=htmlSnippet %>
 		</div>
 		<aside class="controls" style="display: block;">
-			<button type="submit" class="navigate-right enabled" aria-label="next slide"></button>
+			<button type="submit" class="navigate-right enabled" aria-label="next slide" ></button>
 		</aside>
 		</form>	
 	</div>
 	<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
 
 </body>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+ <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+console.log("in js");
+$( init );
+var option_ids = [];
+
+function init() {
+	console.log("in drag");
+	
+  $('.dragable').draggable();
+  
+  $("#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+           .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" ); 
+        var draggableId = ui.draggable.attr("id");
+        draggableId =  draggableId.replace("option_","");
+        //var droppableId = $(this).attr("id");
+        option_ids.push(draggableId);
+      
+        alert(option_ids.join());
+        
+       
+      }
+    });
+ 
+}
+
+$(".navigate-right").on('click', function(){
+	
+	var stage_id = $('#themes').find('input[name="stage_id"]').val();
+	var stage_type = $('#themes').find('input[name="stage_type"]').val();
+	var prev_stage_id = $('#themes').find('input[name="prev_stage_id"]').val();
+	if(stage_type==='MULTIPLE_OPTION_DRAG_DROP')
+	{
+	//	alert('abc '+abc);
+		  $.ajax({
+	      type: "POST",
+	      url: '/content/play_game?options=' + option_ids ,
+	      
+	});
+	}
+		
+	
+});
+
+ 
+</script>
 </html>

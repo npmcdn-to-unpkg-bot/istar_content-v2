@@ -14,43 +14,45 @@
         <![CDATA[<h2 style="font-size: 100%;">Collect the Clues</h2>
 ]]>
 		</question_text>
-		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[<div style="position: absolute;top: 45X; left: 67">    
-<div style="background-image: url('/content/assets/games_images/hand_print.png');
-    background-size: cover; height: 100px;
-    width: 100px;
-    border: 1px solid red;"></div>
+		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="140" ypos="200">
+            <option_text><![CDATA[<div style="position: absolute;top: 19%; left: 46%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/hand_print.png'); background-size: cover; height: 25px; width: 31px; "></div>
     </div>]]></option_text>
         </options>
-        <options id="1" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[<div style="position: absolute;top: 45X; left: 67">    
-<div style="background-image: url('/content/assets/games_images/hand_print.png');
-    background-size: cover;"></div>
+         <options id="1" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="360" ypos="20">
+            <option_text><![CDATA[<div style="position: absolute;top: 80%; left: 60%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/foot_prints.png'); background-size: cover; height: 99px; width: 143px; "></div>
     </div>
               ]]></option_text>
         </options>
-        <options id="2" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[<div style="position: absolute;top: 45X; left: 67">    
-<div style="background-image: url('/content/assets/games_images/hand_print.png');
-    background-size: cover;"></div>
+        <options id="2" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="20" ypos="360">
+            <option_text><![CDATA[<div style="position: absolute;top: 50%; left: 5%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/handkerchief.png'); background-size: cover; height: 25px; width: 38px; "></div>
     </div>]]></option_text>
         </options>
          <options id="3" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[  <div style="position: absolute;top: 45X; left: 67">    
-<div style="background-image: url('/content/assets/games_images/hand_print.png');
-    background-size: cover;"></div>
+            <option_text><![CDATA[ <div style="position: absolute;top: 75%; left: 2%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/suit_case.png'); background-size: cover; height: 83px; width: 97px; "></div>
     </div>]]></option_text>
         </options>
-        <options id="4" jump_to="3" correct="false" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[ <div style="position: absolute;top: 45X; left: 67">    
-<div style="background-image: url('/content/assets/games_images/hand_print.png');
-    background-size: cover;"></div>
+        <options id="4" jump_to="3" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
+            <option_text><![CDATA[ <div style="position: absolute;top: 66%; left: 65%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/keys.png'); background-size: cover; height: 24px; width: 28px; "></div>
     </div> ]]></option_text>
         </options>
         <options id="5" jump_to="3" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
-            <option_text><![CDATA[  <div style="position: absolute;top: 45X; left: 67">    
-<div style="background-image: url('/content/assets/games_images/hand_print.png');
-    background-size: cover;"></div>
+            <option_text><![CDATA[  <div style="position: absolute;top: 10%; left: 3%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/wall_watch.png'); background-size: cover; height: 52px; width: 57px; "></div>
+    </div> ]]></option_text>
+        </options>
+        <options id="6" jump_to="3" correct="false" marking_scheme="star_points+0" xpos="150" ypos="600">
+            <option_text><![CDATA[  <div style="position: absolute;top: 84%; left: 47%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/wrist_watch.png'); background-size: cover; height: 25px; width: 38px; "></div>
+    </div> ]]></option_text>
+        </options>
+        <options id="6" jump_to="3" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
+            <option_text><![CDATA[  <div style="position: absolute;top: 28%; left: 8%">    
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/lamp.png'); background-size: cover; height: 48px; width: 24px; "></div>
     </div> ]]></option_text>
         </options>
        
