@@ -255,6 +255,12 @@ public class LessonUtils {
     }
 
     //Added by Kunal on 24/03/2016 for editing assessment question
+    /**
+     *
+     * @param lesson
+     * @param questionId
+     * @return
+     */
     public String getFormForQuestionEdit(Lesson lesson, String questionId) {
         StringBuilder out = new StringBuilder();
         if (lesson.getPresentaion() != null) {
@@ -295,7 +301,7 @@ public class LessonUtils {
                 Question question = new Question();
                 question = questionService.findById(Integer.parseInt(questionId));
                 if (number_of_questions < assessment.getNumber_of_questions()) {
-                    
+
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
@@ -307,7 +313,7 @@ public class LessonUtils {
                             + "<fieldset>");
 
                     out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
-                    out.append("<input type='hidden' name='questionId' value='"+question.getId() + "' </input>");
+                    out.append("<input type='hidden' name='questionId' value='" + question.getId() + "' </input>");
 
                     for (LearningObjective obj : items) {
 
@@ -355,11 +361,10 @@ public class LessonUtils {
                             + "<label class='input'>"
                             + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>");
                     out.append(getDifficultyLevelDropDown(question.getDifficultyLevel()));
-                    
 
                     out.append("</select></label> </section>"
                             + "<section class='col col-md-4'><label>Depth</label> <label class='input'> ");
- 
+
                     out.append(getSpecifierDropDown(question.getSpecifier()));
                     out.append("<section><label>Question Text</label> "
                             + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'>" + question.getQuestionText() + "</TEXTAREA> </label> </section> ");
@@ -369,7 +374,7 @@ public class LessonUtils {
                         out.append("<section> <label class='checkbox'><input type='checkbox' name='answers' value='" + increment + "'/><i></i>Option " + increment + "</label><label class='input'> <TEXTAREA NAME='option_" + optionSetStringArray[a][0] + "'  ROWS='2' cols='25'>" + optionSetStringArray[a][1] + "</TEXTAREA> </label> </section>");
                         increment++;
                     }
- 
+
                     out.append("</fieldset>"
                             + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
                 }
@@ -411,8 +416,13 @@ public class LessonUtils {
         }
         return out.toString();
     }
+//Added by Kunal on 24/03/2016 for getting Specifier Drop down
 
-    // getting Specifier Drop down
+    /**
+     *
+     * @param specifier
+     * @return
+     */
     private String getSpecifierDropDown(int specifier) {
         StringBuilder sb = new StringBuilder();
 
@@ -430,9 +440,13 @@ public class LessonUtils {
         return sb.toString();
 
     }
-    
-// getting Difficulty Level Drop down
 
+// Added by Kunal on 24/03/2016 for getting Difficulty Level Drop down
+    /**
+     *
+     * @param level
+     * @return
+     */
     private String getDifficultyLevelDropDown(int level) {
         StringBuilder sb = new StringBuilder();
         if (level == 1) {
