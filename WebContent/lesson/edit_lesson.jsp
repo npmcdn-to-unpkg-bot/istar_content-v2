@@ -299,7 +299,6 @@
                             } else {
                                 //Edited By Kunal on 24/03/2016 for editing question
                                 LessonUtils utils = new LessonUtils();
-                                System.out.println("ssssssssssssssssssssss   " + request.getAttribute("__EDIT_QUESTION"));
                                 if (request.getAttribute("__EDIT_QUESTION") != null) {
                                     String questionId = request.getAttribute("__QUESTION_ID").toString();
                                     out.println(utils.getFormForQuestionEdit(lesson, questionId));
@@ -307,7 +306,7 @@
                                     out.println(utils.getEditForm(lesson));
                                 }
 
-                                        // Create Two block 
+                                // Create Two block 
                                 // Top one has to be add new SLide  
                                 //Botton one is list of slides
                             }
