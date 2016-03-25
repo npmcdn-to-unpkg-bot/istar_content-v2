@@ -192,7 +192,7 @@ public class EventController extends HttpServlet {
     }// </editor-fold>
 
     private Date getDate(String stringDate) {
-        Date date = null;
+        Date date = null; 
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             date = formatter.parse(stringDate);
@@ -202,3 +202,4 @@ public class EventController extends HttpServlet {
         return date;
     }
 }
+ 
