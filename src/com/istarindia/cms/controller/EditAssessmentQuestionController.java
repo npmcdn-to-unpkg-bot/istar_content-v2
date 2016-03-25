@@ -93,11 +93,11 @@ public class EditAssessmentQuestionController extends HttpServlet {
                         if (fieldname.startsWith("option_")) {
                             String id = fieldname.substring(fieldname.indexOf("_") + 1, fieldname.length());
                             String[] answers = request.getParameterValues("answers");
-                           optionService.updateNewOption(Integer.parseInt(id), request.getParameter(fieldname), questionService.findById(Integer.parseInt(questionId1)), 1);
+                            optionService.updateNewOption(Integer.parseInt(id), request.getParameter(fieldname), questionService.findById(Integer.parseInt(questionId1)), 1);
 
                         }
                     }
-                    
+
                     request.setAttribute("__EDIT_QUESTION", "true");
                     request.setAttribute("__QUESTION_ID", questionId1);
 
