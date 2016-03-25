@@ -61,7 +61,9 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 		src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL %>assets/js/typed.min.js"></script>
-
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/funnel.js"></script>
 		<script>
 
 			// Full list of configuration options available at:
@@ -93,7 +95,57 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 			 }
 			
 			
-			
+			 try {
+					$('#pyramid').highcharts({
+						data : {
+							table : 'datatable'
+						},
+						chart : {
+							type : 'pyramid',
+							backgroundColor : null,
+							height: 900
+
+						},
+						title : {
+							text : ''
+						},
+						yAxis : {
+							allowDecimals : false,
+							title : {
+								text : 'Units'
+							}
+						}, xAxis: {
+				            labels: {
+				                style: {
+				                    color: 'red',
+				                    fontSize:'35px'
+				                }
+				            }
+				        }, credits: false
+					});
+					$('#funnel').highcharts({
+						data : {
+							table : 'datatable'
+						},
+						chart : {
+							type : 'funnel',
+							backgroundColor : null,
+							height: 900
+
+						},
+						title : {
+							text : ''
+						},
+						yAxis : {
+							allowDecimals : false,
+							title : {
+								text : 'Units'
+							}
+						}, credits: false
+					});
+				} catch (e) {
+
+				}
 
 		</script>
 
