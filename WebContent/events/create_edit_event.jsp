@@ -24,11 +24,9 @@
         <script>
             $(function () {
                 $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
-            });
-
-        </script>
+            });</script>
         <script type="text/javascript">
-            function checkDate() {
+            function checkDate(val) {
                 var flag = false;
                 var todayDate = new Date();
                 //need to add one to get current month as it is start with 0
@@ -38,43 +36,48 @@
                 var todayDateText = todayDay + "/" + todayMonth + "/" + todayYear;
                 var inputDateText = document.getElementById('datepicker').value;
                 var inputToDate = Date.parse(inputDateText);
+                
                 var todayToDate = Date.parse(todayDateText);
                 if (inputToDate > todayToDate) {
                     flag = true;
-                    alert("the input is later than today");
+                   
                 } else {
-
+                    alert("the input is earlier than today");
                 }
 //                else if (inputToDate < todayToDate) {
-//                    alert("the input is earlier than today");
+//                    
 //                }
 //                else {
 //                    alert("the input is same as today");
 //                }
                 if (flag) {
-
-                } else {
-
+                    if (val == '1') {
+                        document.getElementById("myform").action = "event_controller?_action=save";
+                    } else {
+                        document.getElementById("myform").action = "event_controller?_action=update";
+                    }
+                    document.getElementById("myform").method = "post";
+                    document.getElementById("myform").submit();
                 }
-
             }
         </script>
+
     </head>
     <body>
         <c:if test="${action == 'create'}">
-            <form action="event_controller?_action=save" method="post">
+            <form id="myform">
                 <h1>Create Event</h1>
                 <p>Event Type : <input type="text"  name="event_type" /> </p>
                 <p>Date: <input type="text" id="datepicker" name="event_date" />(dd/MM/yyyy) &nbsp;&nbsp;&nbsp; Hour : ${hourdrop} &nbsp;&nbsp;&nbsp; Minute : &nbsp;&nbsp;&nbsp; ${mindrop} </p>
-                <p><input type="submit" value="Save" /></p>
-            </form>
+                <p><input type="button" value="Save" onclick="checkDate('1');"/></p>
+            </form>                  
         </c:if>
         <c:if test="${action == 'edit'}">
-            <form action="event_controller?_action=update" method="post">
+            <form id ="myform">
                 <h1>Edit Event</h1>
                 <p>Event Type : <input type="text" value="${eventobject.type}" name="event_type" /> </p>
                 <p>Date: <input type="text" id="datepicker" name="event_date" value="<fmt:formatDate pattern='dd/MM/yyyy' value='${eventobject.eventdate}'  />" /> (dd/MM/yyyy) &nbsp;&nbsp;&nbsp; Hour : ${hourdrop} &nbsp;&nbsp;&nbsp; Minute : &nbsp;&nbsp;&nbsp; ${mindrop} </p>
-                <p><input type="button" value="Save" onclick="checkDate();"/></p>
+                <p><input type="button" value="Save" onclick="checkDate('2');"/></p>
                 <input type="hidden" name="event_id" value="${eventId}"/>
             </form>
         </c:if>
