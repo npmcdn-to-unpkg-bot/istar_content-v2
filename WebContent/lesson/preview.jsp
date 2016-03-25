@@ -96,53 +96,76 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 			
 			
 			 try {
-					$('#pyramid').highcharts({
-						data : {
-							table : 'datatable'
-						},
-						chart : {
-							type : 'pyramid',
-							backgroundColor : null,
-							height: 900
+				 $('#pyramid').highcharts({
+					data : {
+						table : 'datatable'
+					},
+					chart : {
+						type : 'pyramid',
+						backgroundColor : null,
+						height: 900
 
-						},
+					},
+					title : {
+						text : ''
+					},
+					yAxis : {
+						allowDecimals : false,
 						title : {
-							text : ''
-						},
-						yAxis : {
-							allowDecimals : false,
-							title : {
-								text : 'Units'
-							}
-						}, xAxis: {
-				            labels: {
-				                style: {
-				                    color: 'red',
-				                    fontSize:'35px'
+							text : 'Units'
+						}
+					}, xAxis: {
+			            labels: {
+			                style: {
+			                    color: 'red',
+			                    fontSize:'35px'
+			                }
+			            }
+			        }, 
+			        credits: false,
+			        plotOptions: {
+			            series: {
+			                dataLabels: {
+			                    enabled: false,
+			                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+			                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+			                    softConnector: true
+			                }
+			            }
+			        }
+
+				});
+				$('#funnel').highcharts({
+					data : {
+						table : 'datatable'
+					},
+					chart : {
+						type : 'funnel',
+						backgroundColor : null,
+						height: 900
+
+					},
+					title : {
+						text : ''
+					},
+					yAxis : {
+						allowDecimals : false,
+						title : {
+							text : 'Units'
+						}
+					}, 
+					credits: false,
+					 plotOptions: {
+				            series: {
+				                dataLabels: {
+				                    enabled: false,
+				                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+				                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+				                    softConnector: true
 				                }
 				            }
-				        }, credits: false
-					});
-					$('#funnel').highcharts({
-						data : {
-							table : 'datatable'
-						},
-						chart : {
-							type : 'funnel',
-							backgroundColor : null,
-							height: 900
-
-						},
-						title : {
-							text : ''
-						},
-						yAxis : {
-							allowDecimals : false,
-							title : {
-								text : 'Units'
-							}
-						}, credits: false
-					});
+				        }
+				});
 				} catch (e) {
 
 				}
