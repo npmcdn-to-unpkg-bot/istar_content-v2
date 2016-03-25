@@ -126,6 +126,7 @@ public class EventController extends HttpServlet {
                     request.setAttribute("eventId", eventId);
                     request.getRequestDispatcher("events/create_edit_event.jsp").forward(request, response);
                     break;
+                    
                 case "update":
                     String eventIdForUpdate = request.getParameter("event_id") != null ? request.getParameter("event_id") : "0";
                     String eventTypeForUpdate = request.getParameter("event_type") != null ? request.getParameter("event_type") : "";
@@ -137,6 +138,7 @@ public class EventController extends HttpServlet {
                     request.setAttribute("eventList", eventList);
                     request.getRequestDispatcher("events/event_listing.jsp").forward(request, response);
                     break;
+                    
                 case "delete":
                     String eventIdForDelete = request.getParameter("event_id") != null ? request.getParameter("event_id") : "0";
                     boolean flagForDelete = eventService.deleteEvent(Integer.parseInt(eventIdForDelete));
@@ -144,6 +146,7 @@ public class EventController extends HttpServlet {
                     request.setAttribute("eventList", eventList);
                     request.getRequestDispatcher("events/event_listing.jsp").forward(request, response);
                     break;
+                    
                 default:
                     throw new AssertionError();
             }
