@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <game id="1" name="sample_game">
 	<assets data_type="Integer" id="1" name="star_points" />
-<stages id="0" next_stage="3" stage_type="INFORMATION_ONLY">
+<stages id="0" next_stage="3" background="default.png" stage_type="INFORMATION_ONLY" >
 		<question_text>
         <![CDATA[<video width="1980" controls style='margin-top: -52px;'>
   <source src="/content/assets/video/VerticalVideo.m4v" type="video/mp4">
@@ -9,13 +9,13 @@
 		</question_text>
 </stages>
 
-<stages id="3" next_stage="4" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="3" next_stage="4" background="/content/assets/withoutclues-01.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
-        <![CDATA[<h2>Collect the Clues</h2>
+        <![CDATA[<h2 style="font-size: 100%;">Collect the Clues</h2>
 ]]>
 		</question_text>
 		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[ Bloody Hand Print at the Window  ]]></option_text>
+            <option_text><![CDATA[ /content/assets/hand_print.png  ]]></option_text>
         </options>
         <options id="1" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
             <option_text><![CDATA[ Open Empty Office case With a few tax papers around.
@@ -36,7 +36,7 @@
        
 </stages>
 	
-<stages id="4" next_stage="4" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="4" next_stage="4" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>Who do I talk to?</h2>
 
@@ -53,7 +53,7 @@
         </options>
 </stages>
 
-<stages id="5" next_stage="4" stage_type="INFORMATION_ONLY" >
+<stages id="5" next_stage="4" background="default.png" stage_type="INFORMATION_ONLY" >
 		<question_text>
         <![CDATA[
         <h2>Interrogation Outcomes </h2>
@@ -70,8 +70,8 @@
 <stages id="6" next_stage="7" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
-        <h2>Interrogation Outcomes </h2>
-        <h3>Maid</h3>
+        <h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">Maid</h3>
 <ul>
 <li>(Sob) I …. I did not mean to (Sniff)… </li>
 <li>I was just doing my duty sir.. </li>
@@ -82,7 +82,7 @@
 		</question_text>
 	</stages>
 	
-<stages id="7" next_stage="4" stage_type="INFORMATION_ONLY">
+<stages id="7" next_stage="4" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
         <h2>Interrogation Outcomes </h2>
@@ -99,7 +99,7 @@
 	</stages>	
 	
 	
-<stages id="8" next_stage="9" stage_type="INFORMATION_ONLY">
+<stages id="8" next_stage="9" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
         <h2>Interrogation Outcomes </h2>
@@ -115,7 +115,7 @@
 		</question_text>
 	</stages>
 	
-<stages id="9" next_stage="10" stage_type="INFORMATION_ONLY">
+<stages id="9" next_stage="10" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
         <h2>Interrogation Outcomes </h2>
@@ -130,7 +130,7 @@
 		</question_text>
 </stages>
 
-<stages id="10" next_stage="10" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="10" next_stage="10" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h1>What Next?</h1>
 
@@ -146,7 +146,7 @@
             <option_text><![CDATA[ Go to Mrs Reka Bakshi's Room.  ]]></option_text>
         </options>
 </stages>
-<stages id="11" next_stage="12" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="11" next_stage="12" background="default.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
         <![CDATA[<h2>What clues can you collect</h2>
 ]]>
@@ -170,7 +170,7 @@
          
 </stages>
 
-<stages id="12" next_stage="13" stage_type="INFORMATION_ONLY">
+<stages id="12" next_stage="13" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Messages on Rajesh's Phone</h2>
         <h3>From Mr Lohit</h3>
@@ -182,7 +182,7 @@
 		</question_text>
 </stages>
 
-<stages id="13" next_stage="14" stage_type="INFORMATION_ONLY">
+<stages id="13" next_stage="14" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Messages on Rajesh's Phone</h2>
          <h3>From Mr Bakshi</h3>
@@ -193,7 +193,7 @@
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="14" next_stage="15" stage_type="INFORMATION_ONLY">
+<stages id="14" next_stage="15" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Messages on Rajesh's Phone</h2>
         <h3>From Mrs Reka Bakshi</h3>
@@ -206,7 +206,7 @@
 </stages>
 
 
-<stages id="15" next_stage="15" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="15" next_stage="15" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>Who do you want to Talk to?</h2>
 
@@ -224,7 +224,7 @@
         </options>
 </stages>
 
-<stages id="16" next_stage="17" stage_type="INFORMATION_ONLY">
+<stages id="16" next_stage="17" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -235,7 +235,7 @@
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="17" next_stage="18" stage_type="INFORMATION_ONLY">
+<stages id="17" next_stage="18" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -244,7 +244,7 @@
  </p>]]>
 		</question_text>
 </stages>
-<stages id="18" next_stage="19" stage_type="INFORMATION_ONLY">
+<stages id="18" next_stage="19" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -253,7 +253,7 @@
 Now if you will be so kind I must get back to my guests they all seem a little rattled. </p>]]>
 		</question_text>
 </stages>
-<stages id="19" next_stage="15" stage_type="INFORMATION_ONLY">
+<stages id="19" next_stage="15" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -261,7 +261,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="20" next_stage="21" stage_type="INFORMATION_ONLY">
+<stages id="20" next_stage="21" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Lohit</h3>
@@ -271,7 +271,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="21" next_stage="22" stage_type="INFORMATION_ONLY">
+<stages id="21" next_stage="22" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Lohit</h3>
@@ -283,7 +283,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="22" next_stage="23" stage_type="INFORMATION_ONLY">
+<stages id="22" next_stage="23" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Lohit</h3>
@@ -295,7 +295,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="23" next_stage="25" stage_type="INFORMATION_ONLY">
+<stages id="23" next_stage="25" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Lohit</h3>
@@ -308,7 +308,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="24" next_stage="15" stage_type="INFORMATION_ONLY">
+<stages id="24" next_stage="15" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mrs Reka Bakshi</h3>
@@ -321,7 +321,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="25" next_stage="26" stage_type="INFORMATION_ONLY">
+<stages id="25" next_stage="26" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Documents </h2>
         <h3>Accounts of Mr Lohit</h3>
@@ -329,7 +329,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="26" next_stage="27" stage_type="INFORMATION_ONLY">
+<stages id="26" next_stage="27" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Documents </h2>
         <h3>Financials of Mr Raj</h3>
@@ -337,7 +337,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="27" next_stage="27" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="27" next_stage="27" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>Who do you want to Talk to  now?</h2>
 
@@ -355,7 +355,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
 </stages>
 
-<stages id="28" next_stage="29" stage_type="INFORMATION_ONLY">
+<stages id="28" next_stage="29" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Lohit</h3>
@@ -368,7 +368,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="29" next_stage="27" stage_type="INFORMATION_ONLY">
+<stages id="29" next_stage="27" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Lohit</h3>
@@ -381,7 +381,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="30" next_stage="31" stage_type="INFORMATION_ONLY">
+<stages id="30" next_stage="31" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Raj</h3>
@@ -395,7 +395,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </stages>
 
 
-<stages id="31" next_stage="27" stage_type="INFORMATION_ONLY">
+<stages id="31" next_stage="27" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Raj</h3>
@@ -407,7 +407,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="32" next_stage="33" stage_type="INFORMATION_ONLY">
+<stages id="32" next_stage="33" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -419,7 +419,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="33" next_stage="33" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="33" next_stage="33" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>What Do I Do Next?</h2>
 
@@ -438,16 +438,16 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </stages>
 
 
-<stages id="34" next_stage="35" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="34" next_stage="35" background="default.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
         <![CDATA[<h1>What clues can you collect</h1>
         <p>backgroup image will come here</p>
 ]]>
 		</question_text>
-		<options id="0" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
-            <option_text><![CDATA[ Wet ladies' coat  ]]></option_text>
+		<options id="0" jump_to="35" correct="true" marking_scheme="star_points+0" xpos="457" ypos="67">
+            <option_text><![CDATA[ Rekha's Wet Rain Coat and Cap  ]]></option_text>
         </options>
-        <options id="1" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
+        <options id="1" jump_to="35" correct="true" marking_scheme="star_points+0" xpos="457" ypos="67">
             <option_text><![CDATA[ IT department letter in the dustbin
               ]]></option_text>
         </options>
@@ -455,11 +455,20 @@ Now if you will be so kind I must get back to my guests they all seem a little r
             <option_text><![CDATA[   Locked Draw with red smudge on it.  ]]></option_text>
         </options>
         <options id="3" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
-            <option_text><![CDATA[   wet ladies' rain cap  ]]></option_text>
+            <option_text><![CDATA[   Golf Clubs ]]></option_text>
+        </options>
+        <options id="4" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
+            <option_text><![CDATA[   Car Keys ]]></option_text>
+        </options>
+        <options id="4" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
+            <option_text><![CDATA[   Crushed blue print paper ]]></option_text>
+        </options>
+        <options id="4" jump_to="35" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
+            <option_text><![CDATA[   Bottle of Ladies perfume. ]]></option_text>
         </options>
          
 </stages>
-<stages id="35" next_stage="36" stage_type="INFORMATION_ONLY">
+<stages id="35" next_stage="36" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>IT department Notice </h2>
         <h3 style="text-align: left;">Dear Mr Amit,</h3>
@@ -470,7 +479,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="36" next_stage="37" stage_type="INFORMATION_ONLY">
+<stages id="36" next_stage="37" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Amit</h3>
@@ -482,7 +491,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="37" next_stage="38" stage_type="INFORMATION_ONLY">
+<stages id="37" next_stage="38" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Amit</h3>
@@ -494,7 +503,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="38" next_stage="39" stage_type="INFORMATION_ONLY">
+<stages id="38" next_stage="39" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Amit</h3>
@@ -506,7 +515,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="39" next_stage="40" stage_type="INFORMATION_ONLY">
+<stages id="39" next_stage="40" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Amit</h3>
@@ -520,7 +529,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="40" next_stage="41" stage_type="INFORMATION_ONLY">
+<stages id="40" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Amit</h3>
@@ -532,7 +541,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="41" next_stage="41" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="41" next_stage="41" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>Which Document to choose?</h2>
 
@@ -561,7 +570,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
   ]]></option_text>
         </options>
 </stages>
-<stages id="42" next_stage="48" stage_type="INFORMATION_ONLY">
+<stages id="42" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Document </h2>
         <p>Valuation certificate</p>
@@ -569,7 +578,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         ]]>
 		</question_text>
 </stages>
-<stages id="43" next_stage="48" stage_type="INFORMATION_ONLY">
+<stages id="43" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Document </h2>
         <p>Amit Bank Statement Extract</p>
@@ -577,7 +586,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         ]]>
 		</question_text>
 </stages>
-<stages id="44" next_stage="41" stage_type="INFORMATION_ONLY">
+<stages id="44" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Document </h2>
         <p> Amit Bros LLP P/L</p>
@@ -585,7 +594,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         ]]>
 		</question_text>
 </stages>
-<stages id="45" next_stage="41" stage_type="INFORMATION_ONLY">
+<stages id="45" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Document </h2>
         <p> Bakshi Bank Statement extract/L</p>
@@ -593,7 +602,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         ]]>
 		</question_text>
 </stages>
-<stages id="46" next_stage="41" stage_type="INFORMATION_ONLY">
+<stages id="46" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Document </h2>
         <p> Amit Marriage certificate.</p>
@@ -601,7 +610,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         ]]>
 		</question_text>
 </stages>
-<stages id="47" next_stage="41" stage_type="INFORMATION_ONLY">
+<stages id="47" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Document </h2>
         <p>  Bakshi PAN.</p>
@@ -610,7 +619,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="48" next_stage="48" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="48" next_stage="48" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>Who do you talk to?</h2>
 
@@ -627,7 +636,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
   ]]></option_text>
         </options>
 </stages>
-<stages id="49" next_stage="50" stage_type="INFORMATION_ONLY">
+<stages id="49" next_stage="50" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Lohit</h3>
@@ -639,7 +648,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="50" next_stage="48" stage_type="INFORMATION_ONLY">
+<stages id="50" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Lohit</h3>
@@ -653,7 +662,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="51" next_stage="52" stage_type="INFORMATION_ONLY">
+<stages id="51" next_stage="52" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -665,7 +674,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="52" next_stage="54" stage_type="INFORMATION_ONLY">
+<stages id="52" next_stage="54" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mr Bakshi</h3>
@@ -678,7 +687,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="53" next_stage="48" stage_type="INFORMATION_ONLY">
+<stages id="53" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Interrogation Outcomes </h2>
         <h3>From Mrs Bakshi</h3>
@@ -690,7 +699,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="54" next_stage="54" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="54" next_stage="54" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>What Next?</h2>
 
@@ -708,10 +717,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
   ]]></option_text>
         </options>
 </stages>
-<stages id="55" next_stage="56" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="55" next_stage="56" background="default.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
         <![CDATA[<h2>What clues can you collect</h2>
-        <p>backgroud image will come here</p>
+        <p>background image will come here</p>
 ]]>
 		</question_text>
 		<options id="0" jump_to="56" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
@@ -729,7 +738,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
          
 </stages>
-<stages id="56" next_stage="1" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="56" next_stage="1" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>What Next? Who is the Killer?</h2>
 
@@ -769,48 +778,48 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
 </stages>
 
-<stages id="57" next_stage="-100" stage_type="INFORMATION_ONLY">
+<stages id="57" next_stage="-100" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Kiler is  </h2>
         <h3> Mrs Bakshi</h3>
-			<p>Backgroud image with cuffs will come here.</p>
+			<p>background image with cuffs will come here.</p>
 ]]>
 		</question_text>
 </stages>
 
-<stages id="58" next_stage="10" stage_type="INFORMATION_ONLY">
+<stages id="58" next_stage="10" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Closed Door </h2>
         <h3> </h3>
-			<p>Backgroud image with closed door come here.</p>
+			<p>background image with closed door come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="59" next_stage="33" stage_type="INFORMATION_ONLY">
+<stages id="59" next_stage="33" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Closed Door </h2>
         <h3> </h3>
-			<p>Backgroud image with closed door come here.</p>
+			<p>background image with closed door come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="60" next_stage="54" stage_type="INFORMATION_ONLY">
+<stages id="60" next_stage="54" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2>Closed Door </h2>
         <h3> </h3>
-			<p>Backgroud image with closed door come here.</p>
+			<p>background image with closed door come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="61" next_stage="56" stage_type="INFORMATION_ONLY">
+<stages id="61" next_stage="56" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[<h2> Wrong Option </h2>
         <h3> </h3>
-			<p>Backgroud image with come here.</p>
+			<p>background image with come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="-100" next_stage="0" stage_type="INFORMATION_ONLY">
+<stages id="-100" next_stage="0" background="default.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
         

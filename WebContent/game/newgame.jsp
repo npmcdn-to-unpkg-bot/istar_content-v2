@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.istarindia.cms.game.Game"%>
 <%@page import="com.istarindia.apps.games.services.GameSerializer"%>
-<%@ page import="com.istarindia.apps.games.services.GameService"%>
+
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
