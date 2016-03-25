@@ -15,23 +15,43 @@
 ]]>
 		</question_text>
 		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[ /content/assets/hand_print.png  ]]></option_text>
+            <option_text><![CDATA[<div style="position: absolute;top: 45X; left: 67">    
+<div style="background-image: url('/content/assets/games_images/hand_print.png');
+    background-size: cover; height: 100px;
+    width: 100px;
+    border: 1px solid red;"></div>
+    </div>]]></option_text>
         </options>
         <options id="1" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[ Open Empty Office case With a few tax papers around.
+            <option_text><![CDATA[<div style="position: absolute;top: 45X; left: 67">    
+<div style="background-image: url('/content/assets/games_images/hand_print.png');
+    background-size: cover;"></div>
+    </div>
               ]]></option_text>
         </options>
         <options id="2" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[   Muddy Print of the Man Servant.  ]]></option_text>
+            <option_text><![CDATA[<div style="position: absolute;top: 45X; left: 67">    
+<div style="background-image: url('/content/assets/games_images/hand_print.png');
+    background-size: cover;"></div>
+    </div>]]></option_text>
         </options>
          <options id="3" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[   Maid's handkerchief.  ]]></option_text>
+            <option_text><![CDATA[  <div style="position: absolute;top: 45X; left: 67">    
+<div style="background-image: url('/content/assets/games_images/hand_print.png');
+    background-size: cover;"></div>
+    </div>]]></option_text>
         </options>
         <options id="4" jump_to="3" correct="false" marking_scheme="star_points+20" xpos="457" ypos="67">
-            <option_text><![CDATA[   Smashed digital watch.  ]]></option_text>
+            <option_text><![CDATA[ <div style="position: absolute;top: 45X; left: 67">    
+<div style="background-image: url('/content/assets/games_images/hand_print.png');
+    background-size: cover;"></div>
+    </div> ]]></option_text>
         </options>
         <options id="5" jump_to="3" correct="false" marking_scheme="star_points+0" xpos="457" ypos="67">
-            <option_text><![CDATA[   Crumpled paper.  ]]></option_text>
+            <option_text><![CDATA[  <div style="position: absolute;top: 45X; left: 67">    
+<div style="background-image: url('/content/assets/games_images/hand_print.png');
+    background-size: cover;"></div>
+    </div> ]]></option_text>
         </options>
        
 </stages>
