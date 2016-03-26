@@ -841,7 +841,7 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 ]]>
 		</question_text>
 </stages>
-<stages id="-100" next_stage="0" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
+<stages id="-100" next_stage="0" background="/content/assets/game_images/villa.png" stage_type="GAME_OVER">
 		<question_text>
         <![CDATA[
         

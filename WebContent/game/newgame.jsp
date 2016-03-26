@@ -90,11 +90,13 @@ for(Asset a : game.getAssets())
 
 </body>
 
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
  <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script><!-- 
+  <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script> -->
 
@@ -119,7 +121,7 @@ function init() {
         //var droppableId = $(this).attr("id");
         option_ids.push(draggableId);
       
-        alert(option_ids.join());
+       // alert(option_ids.join());
         
        
       }
@@ -137,7 +139,7 @@ $(".navigate-right").on('click', function(){
 	//	alert('abc '+abc);
 		  $.ajax({
 	      type: "POST",
-	      url: '/content/play_game?options=' + option_ids ,
+	      url: '/content/play_game?options=' + option_ids+'&stage_id='+stage_id+'&stage_type='+stage_type+'&prev_stage_id='+prev_stage_id 
 	      
 	});
 	}

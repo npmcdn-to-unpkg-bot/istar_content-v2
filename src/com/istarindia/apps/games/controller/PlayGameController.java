@@ -52,7 +52,7 @@ public class PlayGameController extends IStarBaseServelet{
 			int prev_stage_id = Integer.parseInt(request.getParameter("prev_stage_id"));
 			if(request.getParameterMap().containsKey("options"))
 			{
-				for(String op: request.getParameterValues("options") )
+				for(String op: request.getParameter("options").toString().split(",") )
 				{
 					int option_id = Integer.parseInt(op);
 					Stage stage = null;
