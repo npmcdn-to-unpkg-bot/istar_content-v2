@@ -22,7 +22,6 @@
             <th>Event Date</th>
             <th>Event Hour</th>
             <th>Event Minute</th>
-             <th>Is Active</th>
              <th>&nbsp;</th>
              <th>&nbsp;</th>
         </thead>
@@ -37,7 +36,6 @@
                     <td><fmt:formatDate pattern="dd/MM/yyyy" value="${event.eventdate}"/>   </td>
                     <td>${event.eventhour}</td>
                     <td>${event.eventminute}</td>
-                    <td>${event.isactive}</td>
                     <td><a href="event_controller?_action=foredit&event_id=${event.id}">Edit</a></td>
                     <td><a href="event_controller?_action=delete&event_id=${event.id}">Delete</a></td>
                 </tr>
