@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <game id="1" name="sample_game">
 	<assets data_type="Integer" id="1" name="star_points" />
-<stages id="0" next_stage="3" background="default.png" stage_type="INFORMATION_ONLY" >
+<stages id="0" next_stage="3" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY" >
 		<question_text>
         <![CDATA[<video width="1980" controls style='margin-top: -52px;'>
   <source src="/content/assets/video/VerticalVideo.m4v" type="video/mp4">
@@ -16,7 +16,7 @@
 		</question_text>
 		<options id="0" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="140" ypos="200">
             <option_text><![CDATA[<div style="position: absolute;top: 19%; left: 46%">    
-<div style="background-image: url('/content/assets/game_images/scene_1/clues/hand_print.png'); background-size: cover; height: 25px; width: 31px; "></div>
+<div style="background-image: url('/content/assets/game_images/scene_1/clues/hand_print.png'); background-size: cover; height: 25px; width: 31px; !important;"></div>
     </div>]]></option_text>
         </options>
          <options id="1" jump_to="4" correct="true" marking_scheme="star_points+20" xpos="360" ypos="20">
@@ -58,7 +58,7 @@
        
 </stages>
 	
-<stages id="4" next_stage="4" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="4" next_stage="4" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
         <![CDATA[<h2>Who do I talk to?</h2>
 
@@ -75,11 +75,11 @@
         </options>
 </stages>
 
-<stages id="5" next_stage="4" background="default.png" stage_type="INFORMATION_ONLY" >
+<stages id="5" next_stage="4" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY" >
 		<question_text>
         <![CDATA[
-        <h2>Interrogation Outcomes </h2>
-        <h3>Mrs Reka Bakshi</h3>
+        <h2 style="font-size: 150%">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">Mrs Reka Bakshi</h3>
 <ul>
 <li>Things are Sad Inspector. Very Sad indeed..</li>
 <li>It is very sad. I do not know who would want to hurt poor Tarun!!!</li>
@@ -92,8 +92,8 @@
 <stages id="6" next_stage="7" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
-        <h2 style="font-size: 150%;">Interrogation Outcomes </h2>
-        <h3 style="font-size:115%;">Maid</h3>
+        <h2 style="font-size: 150%;"">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;" style="font-size:115%;">Maid</h3>
 <ul>
 <li>(Sob) I …. I did not mean to (Sniff)… </li>
 <li>I was just doing my duty sir.. </li>
@@ -104,11 +104,11 @@
 		</question_text>
 	</stages>
 	
-<stages id="7" next_stage="4" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="7" next_stage="4" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
-        <h2>Interrogation Outcomes </h2>
-        <h3>Maid</h3>
+        <h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;" style="font-size:115%;">Maid</h3>
 <ul>
 
 <li> But you see sir, the room was open and I went in to see and .. </li>
@@ -121,11 +121,11 @@
 	</stages>	
 	
 	
-<stages id="8" next_stage="9" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="8" next_stage="9" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
-        <h2>Interrogation Outcomes </h2>
-        <h3>Man Servant</h3>
+        <h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;" >Man Servant</h3>
 <ul>
 <li>Yes Sir, It was my muddy foot prints. </li>
 <li>I am sorry sir but the rain sir, It turns everything into a big mess. </li>
@@ -137,11 +137,11 @@
 		</question_text>
 	</stages>
 	
-<stages id="9" next_stage="10" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="9" next_stage="10" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
-        <h2>Interrogation Outcomes </h2>
-        <h3>Man Servant</h3>
+        <h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">Man Servant</h3>
 <ul>
 <li>I do however do recall Mr Raj having quite a heated argument with Mr Tarun. </li>
 <li>And now Mr Raj is recovering in the Balcony  .</li>
@@ -152,9 +152,9 @@
 		</question_text>
 </stages>
 
-<stages id="10" next_stage="10" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="10" next_stage="10" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h1>What Next?</h1>
+        <![CDATA[<h2 style="font-size: 150%;">What Next?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="11" correct="true" marking_scheme="star_points+50" xpos="457" ypos="67">
@@ -168,7 +168,7 @@
             <option_text><![CDATA[ Go to Mrs Reka Bakshi's Room.  ]]></option_text>
         </options>
 </stages>
-<stages id="11" next_stage="12" background="default.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="11" next_stage="12" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
         <![CDATA[<h2>What clues can you collect</h2>
 ]]>
@@ -192,10 +192,10 @@
          
 </stages>
 
-<stages id="12" next_stage="13" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="12" next_stage="13" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Messages on Rajesh's Phone</h2>
-        <h3>From Mr Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Messages on Rajesh's Phone</h2>
+        <h3 style="font-size:115%;">From Mr Lohit</h3>
 <ul>
 <li>I hope you did not tell Tarun about our little plan.</li>
 <li>You rat me out I rat you out.</li>
@@ -204,10 +204,10 @@
 		</question_text>
 </stages>
 
-<stages id="13" next_stage="14" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="13" next_stage="14" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Messages on Rajesh's Phone</h2>
-         <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Messages on Rajesh's Phone</h2>
+         <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <ul>
 <li>You do not need to worry about him.</li>
 <li>I will take care of it.</li>
@@ -215,10 +215,10 @@
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="14" next_stage="15" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="14" next_stage="15" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Messages on Rajesh's Phone</h2>
-        <h3>From Mrs Reka Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Messages on Rajesh's Phone</h2>
+        <h3 style="font-size:115%;">From Mrs Reka Bakshi</h3>
 <ul>
 <li>Thank you for accepting my invitation.</li>
 <li>Do ensure Tarun comes along.</li>
@@ -228,9 +228,9 @@
 </stages>
 
 
-<stages id="15" next_stage="15" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="15" next_stage="15" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>Who do you want to Talk to?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">Who do you want to Talk to?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="16" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
@@ -246,10 +246,10 @@
         </options>
 </stages>
 
-<stages id="16" next_stage="17" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="16" next_stage="17" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <ul>
 <li>Yes sir this is truly is an unfortunate turn of events.</li>
 <li>The message!!! You're using un conventional methods, I see.</li>
@@ -257,46 +257,46 @@
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="17" next_stage="18" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="17" next_stage="18" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <p>Raj hates sharing a room with Lohit and wanted an individual room because of his health condition.
  So I had to re organise things and give everyone individual rooms. 
  </p>]]>
 		</question_text>
 </stages>
-<stages id="18" next_stage="19" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="18" next_stage="19" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <p> You are free to look around and talk to anyone. 
  They will confirm this. That is all inspector. 
 Now if you will be so kind I must get back to my guests they all seem a little rattled. </p>]]>
 		</question_text>
 </stages>
-<stages id="19" next_stage="15" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="19" next_stage="15" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <p> I just want this wretched storm to blow over so that the real police can come here and do their job. (Bakshi snapping)</p>]]>
 		</question_text>
 </stages>
 
-<stages id="20" next_stage="21" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="20" next_stage="21" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Lohit</h3>
 <ul>
 <li>What? This is just wrong. </li><li>You cannot accuse me of this.</li><li> The murderer is out there and you wasting time talking to me?</li>
 
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="21" next_stage="22" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="21" next_stage="22" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Lohit</h3>
 <ul>
 <li>Message what message?......... </li>
 <li>Oh wait wait… </li>
@@ -305,10 +305,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="22" next_stage="23" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="22" next_stage="23" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Lohit</h3>
 <ul>
 <li>I am not a killer… </li>
 <li>I will show you all my accounts… </li>
@@ -317,10 +317,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="23" next_stage="25" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="23" next_stage="25" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Lohit</h3>
 <ul>
 <li>You may also want to look at Mr Raj’s financials.</li>
 <li>But you are wasting time on me while the real killer is out there.</li>
@@ -330,10 +330,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="24" next_stage="15" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="24" next_stage="15" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mrs Reka Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mrs Reka Bakshi</h3>
 <ul>
 <li>Dear Mr Irfan with the killer out there why are you talking to me.</li>
 <li>Will you be able to catch the killer or must another murder be committed?</li>
@@ -343,25 +343,25 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="25" next_stage="26" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="25" next_stage="26" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Documents </h2>
-        <h3>Accounts of Mr Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Documents </h2>
+        <h3 style="font-size:115%;">Accounts of Mr Lohit</h3>
 <p>This is the place where a document will come.</p>]]>
 		</question_text>
 </stages>
 
-<stages id="26" next_stage="27" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="26" next_stage="27" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Documents </h2>
-        <h3>Financials of Mr Raj</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Documents </h2>
+        <h3 style="font-size:115%;">Financials of Mr Raj</h3>
 <p>This is the place where a document will come.</p>]]>
 		</question_text>
 </stages>
 
-<stages id="27" next_stage="27" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="27" next_stage="27" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>Who do you want to Talk to  now?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">Who do you want to Talk to  now?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="28" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
@@ -377,10 +377,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
 </stages>
 
-<stages id="28" next_stage="29" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="28" next_stage="29" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Lohit</h3>
 <ul>
 <li>Well yes there may be a few things not mentioned in my accounts.</li>
 <li>But killing for that? </li>
@@ -390,10 +390,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="29" next_stage="27" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="29" next_stage="27" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Lohit</h3>
 <ul>
 <li>Big Exp? Yes</li>
 <li>Listen Mr Irfan I am a Land Lord, its what I do.</li>
@@ -403,10 +403,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="30" next_stage="31" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="30" next_stage="31" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Raj</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Raj</h3>
 <ul>
 <li>Just look at me.</li>
 <li>I am in a chair and constantly need to be helped around the house.</li>
@@ -417,10 +417,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </stages>
 
 
-<stages id="31" next_stage="27" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="31" next_stage="27" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Raj</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Raj</h3>
 <ul>
 <li>And you think I will kill for a few thousands?</li>
 <li>I DEAL IN MILLIONS!!!!</li>
@@ -429,10 +429,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="32" next_stage="33" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="32" next_stage="33" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <ul>
 <li>Just go and have a look at my office.</li>
 <li>I really don’t have time for you Irfan.</li>
@@ -441,9 +441,9 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="33" next_stage="33" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="33" next_stage="33" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>What Do I Do Next?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">What Do I Do Next?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="59" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
@@ -460,9 +460,9 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </stages>
 
 
-<stages id="34" next_stage="35" background="default.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="34" next_stage="35" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
-        <![CDATA[<h1>What clues can you collect</h1>
+        <![CDATA[<h2 style="font-size:100%">What clues can you collect</h2>
         <p>backgroup image will come here</p>
 ]]>
 		</question_text>
@@ -490,10 +490,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
          
 </stages>
-<stages id="35" next_stage="36" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="35" next_stage="36" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>IT department Notice </h2>
-        <h3 style="text-align: left;">Dear Mr Amit,</h3>
+        <![CDATA[<h2 style="font-size: 150%;">IT department Notice </h2>
+        <h3 style="font-size:115%;" style="text-align: left;">Dear Mr Amit,</h3>
 <p style="text-align: left;">Our office has tried to reach you to discuss the discrepancies discovered on your property evaluation and registration document. We have not received a response form you till date. This is the 3rd and final notice, following which one of our representatives will visit your premises.</p>
 <p style="text-align: left;">Thanking you</p>
 <p style="text-align: left;">The Income Tax Department</p>
@@ -501,10 +501,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="36" next_stage="37" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="36" next_stage="37" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Amit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Amit</h3>
 <ul>
 <li>Hello Sir.. </li>
 <li>Yes I will be happy to answer any of your questions…</li>
@@ -513,10 +513,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="37" next_stage="38" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="37" next_stage="38" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Amit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Amit</h3>
 <ul>
 <li>Wait what is that?</li>
 <li>The letter from the IT department???</li>
@@ -525,10 +525,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="38" next_stage="39" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="38" next_stage="39" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Amit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Amit</h3>
 <ul>
 <li>OH wait that is my name on …….</li>
 <li> I need my lawyer.</li>
@@ -537,10 +537,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="39" next_stage="40" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="39" next_stage="40" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Amit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Amit</h3>
 <ul>
 <li>OK Ok Mister listen,</li>
 <li>you and I are well aware that we need to do certain things to survive.</li>
@@ -551,10 +551,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="40" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="40" next_stage="41" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Amit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Amit</h3>
 <ul>
 <li>I will give you any document you want.</li>
 <li>But you can look at only one at a time.</li>
@@ -563,9 +563,9 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="41" next_stage="41" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="41" next_stage="41" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>Which Document to choose?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">Which Document to choose?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="42" correct="true" marking_scheme="star_points+30" xpos="457" ypos="67">
@@ -592,58 +592,58 @@ Now if you will be so kind I must get back to my guests they all seem a little r
   ]]></option_text>
         </options>
 </stages>
-<stages id="42" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="42" next_stage="48" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Document </h2>
+        <![CDATA[<h2 style="font-size: 150%;">Document </h2>
         <p>Valuation certificate</p>
         
         ]]>
 		</question_text>
 </stages>
-<stages id="43" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="43" next_stage="48" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Document </h2>
+        <![CDATA[<h2 style="font-size: 150%;">Document </h2>
         <p>Amit Bank Statement Extract</p>
         
         ]]>
 		</question_text>
 </stages>
-<stages id="44" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="44" next_stage="41" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Document </h2>
+        <![CDATA[<h2 style="font-size: 150%;">Document </h2>
         <p> Amit Bros LLP P/L</p>
         
         ]]>
 		</question_text>
 </stages>
-<stages id="45" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="45" next_stage="41" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Document </h2>
+        <![CDATA[<h2 style="font-size: 150%;">Document </h2>
         <p> Bakshi Bank Statement extract/L</p>
         
         ]]>
 		</question_text>
 </stages>
-<stages id="46" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="46" next_stage="41" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Document </h2>
+        <![CDATA[<h2 style="font-size: 150%;">Document </h2>
         <p> Amit Marriage certificate.</p>
         
         ]]>
 		</question_text>
 </stages>
-<stages id="47" next_stage="41" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="47" next_stage="41" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Document </h2>
+        <![CDATA[<h2 style="font-size: 150%;">Document </h2>
         <p>  Bakshi PAN.</p>
         
         ]]>
 		</question_text>
 </stages>
 
-<stages id="48" next_stage="48" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="48" next_stage="48" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>Who do you talk to?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">Who do you talk to?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="49" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
@@ -658,10 +658,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
   ]]></option_text>
         </options>
 </stages>
-<stages id="49" next_stage="50" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="49" next_stage="50" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Lohit</h3>
 <ul>
 <li>I have given you what ever I have.</li>
 <li>See the bank statement 10Cr was taken from me on 1 Jan 2016 towards Windsor Manor.</li>
@@ -670,10 +670,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="50" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="50" next_stage="48" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Lohit</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Lohit</h3>
 <ul>
 <li>Wait Winsor Manor Valued at 5 Cr..</li>
 <li>But why did I pay 10 Cr?</li>
@@ -684,10 +684,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="51" next_stage="52" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="51" next_stage="52" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <ul>
 <li>Irfan you are really starting to annoy me.</li>
 <li>I have no idea of accounting.</li>
@@ -696,10 +696,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="52" next_stage="54" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="52" next_stage="54" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mr Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mr Bakshi</h3>
 <ul>
 <li>Feel free to have a look around my office again.</li>
 <li>Here are the keys to all the cupboards…</li>
@@ -709,10 +709,10 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 		</question_text>
 </stages>
 
-<stages id="53" next_stage="48" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="53" next_stage="48" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Interrogation Outcomes </h2>
-        <h3>From Mrs Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Interrogation Outcomes </h2>
+        <h3 style="font-size:115%;">From Mrs Bakshi</h3>
 <ul>
 <li>Mr Irfan. Please I do not have time for this.</li>
 <li>Yes I owned Windsor Manor and now sold it. </li>
@@ -721,9 +721,9 @@ Now if you will be so kind I must get back to my guests they all seem a little r
 </ul>]]>
 		</question_text>
 </stages>
-<stages id="54" next_stage="54" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="54" next_stage="54" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>What Next?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">What Next?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="60" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
@@ -739,9 +739,9 @@ Now if you will be so kind I must get back to my guests they all seem a little r
   ]]></option_text>
         </options>
 </stages>
-<stages id="55" next_stage="56" background="default.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
+<stages id="55" next_stage="56" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_DRAG_DROP">
 		<question_text>
-        <![CDATA[<h2>What clues can you collect</h2>
+        <![CDATA[<h2 style="font-size: 150%;">What clues can you collect</h2>
         <p>background image will come here</p>
 ]]>
 		</question_text>
@@ -760,9 +760,9 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
          
 </stages>
-<stages id="56" next_stage="1" background="default.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
+<stages id="56" next_stage="1" background="/content/assets/game_images/villa.png" stage_type="MULTIPLE_OPTION_SINGLE_CHOICE">
 		<question_text>
-        <![CDATA[<h2>What Next? Who is the Killer?</h2>
+        <![CDATA[<h2 style="font-size: 150%;">What Next? Who is the Killer?</h2>
 
 		]]></question_text>
 		<options id="0" jump_to="61" correct="false" marking_scheme="star_points-25" xpos="457" ypos="67">
@@ -800,52 +800,52 @@ Now if you will be so kind I must get back to my guests they all seem a little r
         </options>
 </stages>
 
-<stages id="57" next_stage="-100" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="57" next_stage="-100" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Kiler is  </h2>
-        <h3> Mrs Bakshi</h3>
+        <![CDATA[<h2 style="font-size: 150%;">Kiler is  </h2>
+        <h3 style="font-size:115%;"> Mrs Bakshi</h3>
 			<p>background image with cuffs will come here.</p>
 ]]>
 		</question_text>
 </stages>
 
-<stages id="58" next_stage="10" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="58" next_stage="10" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Closed Door </h2>
-        <h3> </h3>
+        <![CDATA[<h2 style="font-size: 150%;">Closed Door </h2>
+        <h3 style="font-size:115%;"> </h3>
 			<p>background image with closed door come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="59" next_stage="33" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="59" next_stage="33" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Closed Door </h2>
-        <h3> </h3>
+        <![CDATA[<h2 style="font-size: 150%;">Closed Door </h2>
+        <h3 style="font-size:115%;"> </h3>
 			<p>background image with closed door come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="60" next_stage="54" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="60" next_stage="54" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2>Closed Door </h2>
-        <h3> </h3>
+        <![CDATA[<h2 style="font-size: 150%;">Closed Door </h2>
+        <h3 style="font-size:115%;"> </h3>
 			<p>background image with closed door come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="61" next_stage="56" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="61" next_stage="56" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
-        <![CDATA[<h2> Wrong Option </h2>
-        <h3> </h3>
+        <![CDATA[<h2 style="font-size: 150%;"> Wrong Option </h2>
+        <h3 style="font-size:115%;"> </h3>
 			<p>background image with come here.</p>
 ]]>
 		</question_text>
 </stages>
-<stages id="-100" next_stage="0" background="default.png" stage_type="INFORMATION_ONLY">
+<stages id="-100" next_stage="0" background="/content/assets/game_images/villa.png" stage_type="INFORMATION_ONLY">
 		<question_text>
         <![CDATA[
         
-			<p>Your Star Points are 156. </p>
+			<p>GAME OVER</p>
 ]]>
 		</question_text>
 </stages>

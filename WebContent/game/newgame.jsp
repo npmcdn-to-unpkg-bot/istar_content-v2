@@ -11,11 +11,16 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 GameSerializer ser = new GameSerializer();
 Game game = ser.getGame();
 String htmlSnippet = "";
-if(request.getAttribute("stage_id")!=null) {
+if(request.getAttribute("stage_id")!=null && !request.getAttribute("stage_id").toString().equals("-100")) {
 	System.err.println("stage_id is "+Integer.parseInt(request.getAttribute("stage_id").toString()));
 	
 	 htmlSnippet = ser.getNextStage(game, Integer.parseInt(request.getAttribute("stage_id").toString()));
 } 
+else if ( request.getAttribute("stage_id")!=null && request.getAttribute("stage_id").toString().equals("-100"))
+{
+	System.err.println("game over");
+	 htmlSnippet =ser.getGameOverScreen(request.getSession().getAttribute("star_points").toString());
+}
 else
 {
 	for (Asset iterable_element : game.getAssets()) {
@@ -88,8 +93,11 @@ for(Asset a : game.getAssets())
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script><!-- 
+  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script> -->
+
 <script type="text/javascript">
 console.log("in js");
 $( init );

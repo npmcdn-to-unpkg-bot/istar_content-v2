@@ -48,6 +48,23 @@ public class GameSerializer {
 
 	}
 
+	public String getGameOverScreen(String istar_points)
+	{
+		StringBuffer out = new StringBuffer();
+		VelocityEngine ve = new VelocityEngine();
+		VelocityContext context = new VelocityContext();
+		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		ve.init();
+		context.put("istar_points", istar_points);
+		Template t = ve.getTemplate("GAME_OVER.vm");
+		StringWriter writer = new StringWriter();
+		t.merge(context, writer);
+		out.append(writer.toString());
+		return out.toString();
+	
+	}
+	
 	public String getNextStage(Game game, int stageID) {
 		Stage stage = game.getStages().get(stageID);
 		for (Stage iterable_element : game.getStages()) {
