@@ -123,7 +123,8 @@
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
-	margin-top: -26%;
+	margin-top: -36%;
+	font-size: 180%;
 }
 
 .reveal  .SIMPLE_LIST___ONLY_TITLE_LIST h2 {
@@ -189,6 +190,7 @@
 	z-index: 10;
 }
 
+
 /* .reveal .shape {
 	margin: auto;
 }
@@ -240,3 +242,6 @@
 .reveal .game ul li, .reveal .game p {
 	font-size: 23px;
 }
+
+
+
