@@ -29,6 +29,8 @@ public class ReportColumnHandlerFactory {
 			return (new LessonLinkHandler());	
 		case "TASK_HISTORY":
 			return (new TaskHistoryHandler());	
+		case "ASSESSMENT":
+			return (new AssessmentHandler());
 		default:
 			break;
 		}
