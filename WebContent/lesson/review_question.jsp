@@ -2,7 +2,7 @@
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.LessonService"%><%@page
+<%@page import="com.istarindia.apps.services.*"%><%@page
 	import="com.istarindia.apps.*"%><%@page
 	import="com.istarindia.apps.SlideTransition"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -200,70 +200,67 @@
 											<%
 												for (LearningObjective obj : items) {
 											%>
-
-											<div class="col col-12">
-												<li><%=obj.getTitle()%></li>
-											</div>
+											<li>
+												<div class="col col-md-12">
+													<%=obj.getTitle()%></div>
+											</li>
 											<%
 												}
 											%>
 										</ul>
 									</div>
 								</section>
-								<br />
-								<%
-									Set<AssessmentOption> options = question.getAssessmentOptions();
-								ArrayList<AssessmentOption> option_list = new ArrayList<AssessmentOption>(options);
-								%>
+								
 								<div class="row">
-									<section class="col col-md-4">
-										<label>Question Type</label> <label class="input"> <%=question.getQuestionType()%>
+									<section class="col col-md-6">
+										<label>Question Type</label> <label class="input"> 
+										<input readonly="readonly" value="<%=question.getQuestionType()%>" >
+												<b class="tooltip tooltip-bottom-right">Type of the question</b>
 										</label>
 									</section>
-									<section class="col col-md-4">
+									<section class="col col-md-6">
 										<label>Difficulty Level</label> <label class="input">
-											<%=question.getDifficultyLevel()%>
+											<input readonly="readonly" value="<%=question.getDifficultyLevel()%>" >
+												<b class="tooltip tooltip-bottom-right">Difficulty level of the question</b>
 										</label>
 									</section>
-									<section class="col col-md-4">
-										<label>Depth</label> <label class="input"><%=question.getSpecifier() %></label>
-									</section>
+									<%-- <section class="col col-md-4">
+										<label>Depth</label> <label class="input"> <input
+											readonly="readonly" value="<%=question.getSpecifier()%>">
+											<b class="tooltip tooltip-bottom-right">Difficulty level
+												of the question</b>
+										</label>
+									</section> --%>
 								</div>
 								<section>
-									<label>Question Text</label>
-									<%=question.getQuestionText()%>
+									<label>Question Text</label><label class="input">
+										<input readonly="readonly" value="<%=question.getQuestionText()%>" >
+												<b class="tooltip tooltip-bottom-right">The question text</b>
+									</label>
 								</section>
+								<br/>
 								<section>
-								<% String[] check = new String[]{"unchecked","unchecked","unchecked","unchecked","unchecked"};
-								for(int i =0; (i<5)&&(option_list.get(i).getMarkingScheme()!=null);i++){
-								if (option_list.get(i).getMarkingScheme()==1){
+									<label>Option list:</label>
+								</section>
+								<%
+								AssessmentOptionService service = new AssessmentOptionService();
+								ArrayList<Integer> options_list = new ArrayList<Integer>();
+								options_list = service.getOptionIdsForQuestion(question_id);
+								AssessmentOptionDAO dao = new AssessmentOptionDAO();
+								String[] check = new String[]{"unchecked","unchecked","unchecked","unchecked","unchecked"};
+								for(int i=0; i < options_list.size(); i++){
+								if (dao.findById(options_list.get(i)).getMarkingScheme()!=null){
 									check[i]="checked";
-								}}%>
+								}%>
+								<section>
+									<label class="checkbox"><input type="checkbox" disabled="disabled" name="answers" <%=check[i]%>><i></i>
+										<%=dao.findById(options_list.get(i)).getText()%>
+									</label>
+								</section>
+								<%
+								}
+								%>
 								
-									<label class="checkbox"><input type="checkbox"
-										disabled="disabled" name="answers" <%=check[0]%>><i></i>Option
-										1</label><%=option_list.get(0).getText()%>
-								</section>
-								<section>
-									<label class="checkbox"><input type="checkbox"
-										disabled="disabled" name="answers" <%=check[1]%>><i></i>Option
-										2</label><%=option_list.get(1).getText()%>
-								</section>
-								<section>
-									<label class="checkbox"><input type="checkbox"
-										disabled="disabled" name="answers" <%=check[2]%>><i></i>Option
-										3</label><%=option_list.get(2).getText()%>
-								</section>
-								<section>
-									<label class="checkbox"><input type="checkbox"
-										disabled="disabled" name="answers" <%=check[3]%>><i></i>Option
-										4</label><%=option_list.get(3).getText()%>
-								</section>
-								<section>
-									<label class="checkbox"><input type="checkbox"
-										disabled="disabled" name="answers" <%=check[4]%>><i></i>Option
-										5</label><%=option_list.get(4).getText()%>
-								</section>
 							</fieldset>
 						</form>
 					</div>

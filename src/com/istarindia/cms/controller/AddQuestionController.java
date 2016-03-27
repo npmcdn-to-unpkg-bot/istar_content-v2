@@ -56,7 +56,7 @@ public class AddQuestionController extends IStarBaseServelet {
 		LearningObjectiveDAO learningObjectiveDAO = new LearningObjectiveDAO();
 		Assessment assessment = dao.findById(Integer.parseInt(request.getParameter("assessment_id")));
 
-		Integer specifier = Integer.parseInt(request.getParameter("specifier"));
+		Integer specifier = 0;      //update later for tree                      //Integer.parseInt(request.getParameter("specifier"));
 		String[] learningObjectiveIds = request.getParameterValues("learningObjectives");
 		Set<LearningObjective> learningObjectiveSet=new HashSet<LearningObjective>();
 		if(learningObjectiveIds!=null){
@@ -89,74 +89,6 @@ public class AddQuestionController extends IStarBaseServelet {
 		
 		response.sendRedirect("/content/edit_lesson?lesson_id=" + assessment.getLesson().getId()+"&task_id="+dao1.findByExample(t).get(0).getId());
 
-	}
-
-	private CMSList getNewTree(HttpServletRequest request) {
-		CMSList list = new CMSList();
-		/*
-		 * ArrayList<CMSTextItem> items =new ArrayList<CMSTextItem>();
-		 * items.add(new CMSTextItem("")); items.add(new
-		 * CMSTextItem(""));items.add(new CMSTextItem("")); items.add(new
-		 * CMSTextItem(""));items.add(new CMSTextItem(""));
-		 */
-		list.setItems(new ArrayList<CMSTextItem>());
-		for (Object key : request.getParameterMap().keySet()) {
-			if (key.toString().startsWith("parent_")) {
-				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
-					System.out.println("key>>>" + key.toString());
-					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
-					item.setList(getList(request, key));
-					list.getItems().add(item);
-
-					System.out.println("---->" + request.getParameter(key.toString()));
-				}
-			}
-		}
-
-		return list;
-	}
-
-	private CMSList getList(HttpServletRequest request, Object key) {
-		CMSList list = new CMSList();
-		/*
-		 * ArrayList<CMSTextItem> items =new ArrayList<CMSTextItem>();
-		 * items.add(new CMSTextItem("")); items.add(new
-		 * CMSTextItem(""));items.add(new CMSTextItem(""));
-		 */
-		list.setItems(new ArrayList<CMSTextItem>());
-		for (Object iterable_element : request.getParameterMap().keySet()) {
-			if (iterable_element.toString().endsWith("_" + key.toString())) {
-				CMSTextItem item = new CMSTextItem(request.getParameter(iterable_element.toString()));
-				list.getItems().add(item);
-				System.out.println("element here is -----" + iterable_element);
-			}
-		}
-		// TODO Auto-generated method stub
-		return list;
-	}
-
-	private CMSList getNewList(HttpServletRequest request) {
-		CMSList list = new CMSList();
-		ArrayList<CMSTextItem> items = new ArrayList<CMSTextItem>();
-		items.add(new CMSTextItem(""));
-		items.add(new CMSTextItem(""));
-		items.add(new CMSTextItem(""));
-		items.add(new CMSTextItem(""));
-		items.add(new CMSTextItem(""));
-		items.add(new CMSTextItem(""));
-		list.setItems(items);
-		for (Object key : request.getParameterMap().keySet()) {
-			if (key.toString().startsWith("list_item")) {
-				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
-					System.out.println(key.toString());
-					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
-					list.getItems().add(item);
-					System.out.println("---->" + request.getParameter(key.toString()));
-				}
-			}
-		}
-
-		return list;
 	}
 
 	/**

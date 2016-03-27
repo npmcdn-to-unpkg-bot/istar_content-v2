@@ -19,6 +19,10 @@ public class LessonLinkHandler extends ColumnHandler {
 		{
 			Presentaion ppt = (Presentaion)new PresentaionDAO().findByProperty("lesson", l).get(0);
 			return new StringBuffer("<a href='/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "'> Preview</a>  ");	
+		} else if(new AssessmentDAO().findByProperty("lesson", l).size()>0)
+		{
+			Assessment assessment = (Assessment)new AssessmentDAO().findByProperty("lesson", l).get(0);
+			return new StringBuffer("<a href='/content/lesson/preview_assessment.jsp?assessment_id=" + assessment.getId() + "'> Preview</a>  ");	
 		}
 		else
 		{

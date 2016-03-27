@@ -196,9 +196,10 @@ public class LessonUtils {
                             + "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
                             + "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
                             + "<option value='10'>10(HARDEST)</option></select></label> </section>"
-                            + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
+                          /*  + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
                             + "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
-                            + "<option value='1'>1</option><option value='2'>2</option></select></label></section></div>"
+                            + "<option value='1'>1</option><option value='2'>2</option></select></label></section>"*/              //Add this later for tree
+                            + "</div>"
                             + "<section><label>Question Text</label> "
                             + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
                             + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='1'><i></i>Option 1</label><label class='input'> "
@@ -554,33 +555,52 @@ public class LessonUtils {
 
         } else if (lesson.getAssessment() != null) {
 
-            Assessment assessment = lesson.getAssessment();
-            out.append("<div class=' col-md-12 '>");
-            out.append("<div class='panel panel-sea margin-bottom-40'>");
-            out.append("<div class='panel-heading'>");
-            out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Questions</h3>");
-            out.append("</div>");
-            out.append("<table class='table table-striped'>");
-            out.append("<thead>");
-            out.append("<tr>");
-            out.append("<th>#</th>");
-            out.append("<th>Question Title</th>");
-            out.append("<th>Action</th>");
-            out.append("</tr>");
-            out.append("</thead>");
-            out.append("<tbody>");
-            DBUtils db = new DBUtils();
-            ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
-            for (int i = 0; i < data.size(); i++) {
-                out.append("<tr>");
-                out.append("<td>" + data.get(i).get(0) + "</td>");
-                out.append("<td>" + data.get(i).get(1) + "</td>");
-                out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id=" + data.get(i).get(0) + "&lesson_id=" + lesson.getId() + "'>"
-                        + "<i class='fa fa-check'></i>View question</a>");
-                out.append("</td>");
-                out.append("</tr>");
-            }
+			Assessment assessment = lesson.getAssessment();
+			
+			out.append("<div class=' col-md-12 '>"
+					+ "<div class='panel panel-sea'>"
+					+ "<div class='panel-heading'>"
+					+ "<h3 class='panel-title'><i class='fa fa-tasks'>"
+					+ "</i>Assessment Details</h3></div>"
+					+ "<div class='panel-body'> "
+					+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
+					+ "<fieldset><div class='row'><section class='col col-5'><label>Assessment Type</label> "
+					+ "<label class='input'><input readonly='readonly' value="+assessment.getAssessmentType()+">"
+					+ "</label> </section> "
+					+ "<section class='col col-5'> <label>Number of Questions</label> "
+					+ "<label class='input'><input readonly='readonly' value="+assessment.getNumber_of_questions()+"> </label> </section> "
+					+ "<section class='col col-2' style='margin-top: 2.6%'> <a href=# onclick='openWin(\"/content/lesson/preview_assessment.jsp?assessment_id="+assessment.getId()+"\")' rel='float-shadow' class='btn-u btn-u-default float-shadow'>Preview</a> </section>");
+
+					out.append(" </div>");
+					out.append( "</fieldset> "
+					+ "</form></div></div></div>");
+			
+			out.append("<div class=' col-md-12 '>");
+			out.append("<div class='panel panel-sea margin-bottom-40'>");
+			out.append("<div class='panel-heading'>");
+			out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Added Questions</h3>");
+			out.append("</div>");
+			out.append("<table class='table table-striped'>");
+			out.append("<thead>");
+			out.append("<tr>");
+			out.append("<th>#</th>");
+			out.append("<th>Question Title</th>");
+			out.append("<th>Action</th>");
+			out.append("</tr>");
+			out.append("</thead>");
+			out.append("<tbody>");
+			DBUtils db = new DBUtils();
+			ArrayList<ArrayList<String>> data = db.getQuestions(assessment.getId());
+			for (int i = 0; i < data.size(); i++) {
+				out.append("<tr>");
+				out.append("<td>" + data.get(i).get(0) + "</td>");
+				out.append("<td>" + data.get(i).get(1) + "</td>");
+				out.append("<td>");
+				out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id="+data.get(i).get(0)+"&lesson_id="+lesson.getId()+"'>" 
+				+ "<i class='fa fa-check'></i>View question</a>");
+				out.append("</td>");
+				out.append("</tr>");
+			}
 
             out.append("</tbody>");
             out.append("</table>");

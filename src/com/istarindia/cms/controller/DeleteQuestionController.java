@@ -23,6 +23,7 @@ import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.services.AssessmentQuestionService;
 import com.istarindia.apps.services.QuestionService;
 
 import org.hibernate.Criteria;
@@ -50,12 +51,8 @@ public class DeleteQuestionController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//http://127.0.0.1:8080/content/delete_slide?ppt_id=6&slide_id=25
-		/*Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-		SlideDAO dao = new SlideDAO();
-		Slide slide= dao.findById(Integer.parseInt(request.getParameter("slide_id")));
-		*/
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Integer question_id = Integer.parseInt(request.getParameter("question_id"));
 		Integer assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
 		Assessment assessment1 = new AssessmentDAO().findById(assessment_id);
@@ -66,24 +63,10 @@ public class DeleteQuestionController extends HttpServlet {
 		for (Task item : taskItems) {
 			task_id = item.getId();
 		}
- 			// TODO Auto-generated method stub
-			ArrayList<ArrayList<String>> table = new ArrayList<>();
-			AssessmentQuestionDAO dao = new AssessmentQuestionDAO();
-			Session session = dao.getSession();
+ 		
+			AssessmentQuestionService service = new AssessmentQuestionService();
+			service.deleteQuestionFromAssessment(assessment_id,question_id);
 			
-			
-			Assessment assessment = new AssessmentDAO().findById(assessment_id);
-			Question question = new QuestionDAO().findById(question_id);
-			AssessmentQuestion assessmentQuestion = dao.findByMapping(assessment, question);
-			System.out.println("assessmentQuestion "  + assessmentQuestion.getId());
-			try {
-				Transaction tx = null;
-				tx = session.beginTransaction();
-				dao.delete(assessmentQuestion);
-				tx.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		request.setAttribute("task_id", task_id);
 	//	request.setAttribute("lesson", lesson);
 		response.sendRedirect("/content/edit_lesson?lesson_id=" + lesson.getId()+"&task_id="+task_id);
