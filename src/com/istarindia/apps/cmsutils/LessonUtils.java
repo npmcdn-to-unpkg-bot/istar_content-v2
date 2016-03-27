@@ -28,6 +28,7 @@ import com.istarindia.apps.SlideTransition;
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentOption;
 import com.istarindia.apps.dao.Cmsession;
+import com.istarindia.apps.dao.Game;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUserDAO;
@@ -54,7 +55,7 @@ import java.util.Set;
  */
 public class LessonUtils {
 
-    public StringBuffer getEditForm(Lesson lesson) {
+    public StringBuffer getEditForm(Lesson lesson, int taskID) {
         StringBuffer out = new StringBuffer();
         if (lesson.getPresentaion() != null) {
             Presentaion ppt = lesson.getPresentaion();
@@ -131,7 +132,30 @@ public class LessonUtils {
             out.append("</div>");
             out.append("</div>");
         } else if (lesson.getGame() != null) {
+        	Game game = lesson.getGame();
             out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+            
+            out.append("<div class=' col-md-12 '>"
+                    + "<div class='panel panel-sea'>"
+                    + "<div class='panel-heading'>"
+                    + "<h3 class='panel-title'><i class='fa fa-tasks'>"
+                    + "</i>Assessment Details</h3></div>"
+                    + "<div class='panel-body'> "
+                    + "<form action='/content/create_game' id='sky-form4' class='sky-form' method='POST'> "
+                    + "<input type='hidden' name='game_id' value=" + game.getId() + "> "
+                    		+ "<input type='hidden' name='lesson_id' value=" + lesson.getId() + "> "
+                    				+ "<input type='hidden' name='task_id' value=" + taskID + "> "
+                    + "<fieldset><div class='row'>"
+                    + "<section class='col col-6'> <label>Game XML</label> <label class='input'> ");
+            if(game.getGameObject() != null) {
+            	out.append("<textarea name='game_xml' style='width:1100px;height:500px'>"+game.getGameObject()+"</textarea>  </label> </section> ");
+            } else {
+            	out.append("<textarea name='game_xml' style='width:1100px;height:500px'></textarea>  </label> </section> ");
+            }
+            out.append(" </div>");
+            out.append("</fieldset> "
+                    + "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+      
         } else if (lesson.getAssessment() != null) {
             //out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 

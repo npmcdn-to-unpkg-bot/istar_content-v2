@@ -4,6 +4,7 @@
 package com.istarindia.apps.games.services;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -29,12 +31,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.istarindia.apps.dao.Game;
+import com.istarindia.apps.dao.GameDAO;
 import com.istarindia.apps.dao.StudentDAO;
 import com.istarindia.apps.dao.StudentGame;
 import com.istarindia.apps.dao.StudentGameDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.cms.game.Asset;
-import com.istarindia.cms.game.Game;
+import com.istarindia.cms.game.GameXML;
 import com.istarindia.cms.game.Option;
 import com.istarindia.cms.game.Stage;
 
@@ -43,7 +47,7 @@ import com.istarindia.cms.game.Stage;
  *
  */
 public class GameSerializer {
-	public String getIntro(Game game) {
+	public String getIntro(GameXML game) {
 		return getNextStage(game, 0);
 
 	}
@@ -65,7 +69,7 @@ public class GameSerializer {
 	
 	}
 	
-	public String getNextStage(Game game, int stageID) {
+	public String getNextStage(GameXML game, int stageID) {
 		Stage stage = game.getStages().get(stageID);
 		for (Stage iterable_element : game.getStages()) {
 			if(iterable_element.getId()==stageID) {
@@ -126,22 +130,23 @@ public class GameSerializer {
 
 	}
 
-	public static  Game getGame()
+	public static  GameXML getGame(int parent_item_id)
 	{
-		Game game = new Game(); 
+		GameXML game = new GameXML(); 
+		
 		try{
 		
-		URL url1 = (new CMSRegistry()).getClass().getClassLoader().getResource("/sample_game.xml");
+		Game game1 = 	(new GameDAO()).findById(parent_item_id);
+			
+		//URL url1 = (new CMSRegistry()).getClass().getClassLoader().getResource("/sample_game.xml");
 		//System.out.println("url1 --> " + url1.toURI());
-		File file = new File(url1.toURI());
-		JAXBContext jaxbContext = JAXBContext.newInstance(Game.class);
+		//File file = new File(url1.toURI());
+		JAXBContext jaxbContext = JAXBContext.newInstance(GameXML.class);
+		InputStream in = IOUtils.toInputStream(game1.getGameObject(), "UTF-8");
 
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		game = (Game) jaxbUnmarshaller.unmarshal(file);
+		game = (GameXML) jaxbUnmarshaller.unmarshal(in);
 		} catch (JAXBException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -156,7 +161,7 @@ public class GameSerializer {
 	public String eval(int game_id, String marking_scheme, Integer user_id) {
 		StudentGame stgame = new StudentGame();
 		StudentGameDAO dao = new StudentGameDAO();
-		List<Asset> as = new GameSerializer().getGame().getAssets();
+		List<Asset> as = new GameSerializer().getGame(game_id).getAssets();
 		stgame.setStudent(new StudentDAO().findById(user_id));
 		stgame.setGameId(game_id);
 		
