@@ -37,18 +37,19 @@ public class PlayGameController extends IStarBaseServelet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		printParams(request);
-		//IstarUser user = request.getSession().getAttribute("user");
-		IstarUser user = new IstarUserDAO().findById(16);
-		Game game = new GameSerializer().getGame();
+		IstarUser user =(IstarUser) request.getSession().getAttribute("user");
+		
+		
+		GameXML game = new GameSerializer().getGame(Integer.parseInt(request.getParameter("parent_item_id")));
 		ArrayList<Asset> assets = game.getAssets();
-		int stage_id=0;
+		int item_id=0;
 		if(request.getParameter("stage_type").equalsIgnoreCase("INFORMATION_ONLY"))
 		{
-			stage_id= Integer.parseInt(request.getParameter("stage_id"));
+			item_id= Integer.parseInt(request.getParameter("item_id"));
 		}
 		else if(request.getParameter("stage_type").equalsIgnoreCase("MULTIPLE_OPTION_DRAG_DROP"))
 		{
-			stage_id = Integer.parseInt(request.getParameter("stage_id"));
+			item_id = Integer.parseInt(request.getParameter("item_id"));
 			int prev_stage_id = Integer.parseInt(request.getParameter("prev_stage_id"));
 			if(request.getParameterMap().containsKey("options"))
 			{
@@ -99,7 +100,7 @@ public class PlayGameController extends IStarBaseServelet{
 					}
 				}
 				System.err.println("jumpto in multiple option single choice----"+option.getJump_to());
-				stage_id = option.getJump_to();
+				item_id = option.getJump_to();
 				String results =new GameSerializer().eval(game.getId(), option.getMakringScheme(), user.getId());
 				String xx[]= results.split(";");
 				for(Asset a : game.getAssets())
@@ -119,9 +120,9 @@ public class PlayGameController extends IStarBaseServelet{
 			
 		}
 		
-		request.setAttribute("stage_id",stage_id );
+		request.setAttribute("item_id",item_id );
 		
-		request.getRequestDispatcher("/game/newgame.jsp").forward(request, response);
+		request.getRequestDispatcher("/play_game.jsp").forward(request, response);
 	}
 
 	/**

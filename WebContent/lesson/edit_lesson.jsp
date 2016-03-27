@@ -291,7 +291,7 @@
                                    href="/content/create_ppt?lesson_id=<%=lesson.getId()%>&task_id=<%=task_id%>">Create
                                     a Presentation</a> <a class="btn-u btn-u-xs btn-u-sea"
                                                       href="/content/create_assesment?lesson_id=<%=lesson.getId()%>&task_id=<%=task_id%>">Create
-                                    a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="#"
+                                    a Assessment</a> <a class="btn-u btn-u-xs btn-u-orange" href="/content/create_game?lesson_id=<%=lesson.getId()%>&task_id=<%=task_id%>"
                                                     style="margin-top: 20px">Create a Game</a>
                             </p>
                         </div>
@@ -303,7 +303,7 @@
                                     String questionId = request.getAttribute("__QUESTION_ID").toString();
                                     out.println(utils.getFormForQuestionEdit(lesson, questionId));
                                 } else {
-                                    out.println(utils.getEditForm(lesson));
+                                    out.println(utils.getEditForm(lesson, task_id));
                                 }
 
                                 // Create Two block 

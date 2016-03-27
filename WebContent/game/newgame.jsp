@@ -7,9 +7,9 @@
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-
+int parent_item_id = Integer.parseInt(request.getParameter("parent_item_id"));
 GameSerializer ser = new GameSerializer();
-Game game = ser.getGame();
+Game game = ser.getGame(parent_item_id);
 String htmlSnippet = "";
 if(request.getAttribute("stage_id")!=null && !request.getAttribute("stage_id").toString().equals("-100")) {
 	System.err.println("stage_id is "+Integer.parseInt(request.getAttribute("stage_id").toString()));
