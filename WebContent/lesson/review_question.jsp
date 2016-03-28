@@ -201,8 +201,7 @@
 												for (LearningObjective obj : items) {
 											%>
 											<li>
-												<div class="col col-md-12">
-													<%=obj.getTitle()%></div>
+													<%=obj.getTitle()%>
 											</li>
 											<%
 												}

@@ -149,6 +149,7 @@ public class AssessmentPlayController extends IStarBaseServelet {
 							}
 						}
 					} 
+					
 					if ( report.getProgress() == prev){
 						
 						//Evaluate all the selections in this level
