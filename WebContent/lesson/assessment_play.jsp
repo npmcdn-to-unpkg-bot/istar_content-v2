@@ -141,22 +141,16 @@
 										</section>
 									</fieldset>
 								</form>
-
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 
-
 			<div class="col-md-8">
-
 				<%
 					IstarUser user = (IstarUser) request.getSession().getAttribute("user");
 					ReportService service = new ReportService();
-
 					if (service.getAssessmentReportOfUser(user.getId(), assessment) == null) {
 				%>
 				<div class="alert alert-warning fade in text-center">
@@ -188,12 +182,10 @@
 								</h3>
 							</div>
 							<div class="panel-body">
-
 								<%
 									//int question_id = Integer.parseInt(request.getParameter("question_id"));
 											Question question = new QuestionDAO().findById(question_id);
 								%>
-
 								<form action="/content/assessment_play" id="sky-form4"
 									class="sky-form">
 									<input type="hidden" name="assessment_id"

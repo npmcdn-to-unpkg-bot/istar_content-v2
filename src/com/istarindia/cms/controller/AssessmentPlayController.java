@@ -70,7 +70,7 @@ public class AssessmentPlayController extends IStarBaseServelet {
 			int question_id = Integer.parseInt(request.getParameter("question_id"));
 			Report report = service.getAssessmentReportOfUser(user.getId(), assessment);
 			int progress = question_id;
-	
+			
 			Question question = new QuestionDAO().findById(question_id);
 			
 			int score = -1;
@@ -131,7 +131,9 @@ public class AssessmentPlayController extends IStarBaseServelet {
 					Session bsession = buserdao.getSession();
 					AssessmentQuestionDAO aqdao = new AssessmentQuestionDAO();
 					AssessmentQuestion aq = aqdao.findByMapping(assessment, question);
-					String bsql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+aq.getOrderId()+"";
+					int z = (int)aq.getOrderId()+1;
+					System.out.println(z);
+					String bsql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+z+"";
 					SQLQuery bquery = bsession.createSQLQuery(bsql);
 					bquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 					List<HashMap<String, Object>> bresult = bquery.list();
@@ -141,75 +143,111 @@ public class AssessmentPlayController extends IStarBaseServelet {
 					int prev = report.getProgress();
 					if (bresult != null ){
 						for (HashMap<String, Object> bobject : bresult) {
-							tempq = (int) bobject.get("question_id");
+							tempq = (int) bobject.get("questionid");
 							tq = tqd.findById(tempq);
 							if(tq.getDifficultyLevel()==question.getDifficultyLevel()){
 								report.setProgress(tq.getId());
 								break;
 							}
 						}
-					} 
-					
+					}
+
 					if ( report.getProgress() == prev){
-						
 						//Evaluate all the selections in this level
 						StudentAssessmentService sAservice = new StudentAssessmentService();
 						Boolean ev = sAservice.performanceAtThisLevel(user.getId(), assessment_id, question.getDifficultyLevel());
-						
-						//If more than half are correct and score<difficulty(report) then move up and update score
+						//If more than half are correct 
 						if(ev==true) {
-							prev = report.getScore();
-							if(report.getScore()<question.getDifficultyLevel()){
-								for (int i=question.getDifficultyLevel()+1;i<=10;i++){
+							
+							if (report.getScore() > question.getDifficultyLevel()){
+								report.setProgress(0);
+							} 
+							
+							else if(report.getScore() < question.getDifficultyLevel()){
+								report.setScore(question.getDifficultyLevel());
+								for (int i=question.getDifficultyLevel()+1;i<=10;i++) {
 									IstarUserDAO cuserdao = new IstarUserDAO();
 									Session csession = cuserdao.getSession();
-									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+"";
+									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 									List<HashMap<String, Object>> cresult = bquery.list();
 									for (HashMap<String, Object> hashMap : cresult) {
 										tq = tqd.findById((int)hashMap.get("questionid"));
-										if(tq.getDifficultyLevel()==i){
-											report.setScore(question.getDifficultyLevel());
+										if(tq.getDifficultyLevel()==i){ 
 											report.setProgress((int)hashMap.get("questionid"));
 										}
 									}
 								}
-								if (prev == report.getScore()) {
-									report.setProgress(0);
+							} 
+							
+							else if(report.getScore() == question.getDifficultyLevel()){
+								for (int i=question.getDifficultyLevel()+1;i<=10;i++) {
+									IstarUserDAO cuserdao = new IstarUserDAO();
+									Session csession = cuserdao.getSession();
+									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
+									SQLQuery cquery = csession.createSQLQuery(csql);
+									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+									List<HashMap<String, Object>> cresult = bquery.list();
+									for (HashMap<String, Object> hashMap : cresult) {
+										tq = tqd.findById((int)hashMap.get("questionid"));
+										if(tq.getDifficultyLevel()==i){ 
+											report.setProgress((int)hashMap.get("questionid"));
+										}
+									}
 								}
 							}
-						//If more then half are correct and score>difficulty(report) then end game and show difficulty(report)
-							else {
-								report.setProgress(0);
-							}
+							
+							
+							
 						}
 						//If more than half are wrong and score<difficulty(report) then end game and show score
 						else {
-							prev = report.getScore();
-							if(report.getScore()<question.getDifficultyLevel()){
+							prev = report.getProgress();
+							if (report.getScore() < question.getDifficultyLevel()){
 								report.setProgress(0);
 							}
-						//If more than half are wrong and score>difficulty(report) then move down and update score
+							
 							else {
-								for (int i=question.getDifficultyLevel()-1;i>0;i--){
-									IstarUserDAO euserdao = new IstarUserDAO();
-									Session esession = euserdao.getSession();
-									String esql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+"";
-									SQLQuery equery = esession.createSQLQuery(esql);
-									equery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> eresult = equery.list();
-									for (HashMap<String, Object> hashMap : eresult) {
-										tq = tqd.findById((int)hashMap.get("questionid"));
-										if(tq.getDifficultyLevel()==i){
-											report.setScore(question.getDifficultyLevel());
-											report.setProgress((int)hashMap.get("questionid"));
+								if(report.getScore() > question.getDifficultyLevel()){
+									report.setScore(question.getDifficultyLevel());
+
+									for (int i=question.getDifficultyLevel()-1;i>0;i--) {
+										IstarUserDAO cuserdao = new IstarUserDAO();
+										Session csession = cuserdao.getSession();
+										String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
+										SQLQuery cquery = csession.createSQLQuery(csql);
+										cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+										List<HashMap<String, Object>> cresult = bquery.list();
+										for (HashMap<String, Object> hashMap : cresult) {
+											tq = tqd.findById((int)hashMap.get("questionid"));
+											if(tq.getDifficultyLevel()==i){
+												report.setProgress((int)hashMap.get("questionid"));
+											}
+										}
+									}
+									if (report.getProgress() == prev){
+										report.setProgress(0);
+									}
+								} else if (report.getScore() == question.getDifficultyLevel()){
+									//DO NOTHING
+
+									for (int i=question.getDifficultyLevel()-1;i>0;i--) {
+										IstarUserDAO cuserdao = new IstarUserDAO();
+										Session csession = cuserdao.getSession();
+										String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
+										SQLQuery cquery = csession.createSQLQuery(csql);
+										cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+										List<HashMap<String, Object>> cresult = bquery.list();
+										for (HashMap<String, Object> hashMap : cresult) {
+											tq = tqd.findById((int)hashMap.get("questionid"));
+											if(tq.getDifficultyLevel()==i){
+												report.setProgress((int)hashMap.get("questionid"));
+											}
 										}
 									}
 								}
-								if (prev == report.getScore()) {
-									report.setProgress(0);
-								}
+								
 							}
 						}
 					}
@@ -280,12 +318,11 @@ public class AssessmentPlayController extends IStarBaseServelet {
 		else {
 			
 			if (service.getAssessmentReportOfUser(user.getId(), assessment) == null){
-
+				
 				Report report = new Report();
 				System.out.println();
 				report.setAssessment(assessment);
 				report.setUserId(user.getId());
-				report.setScore(0);
 				
 				switch(assessment.getAssessmentType()) {
 
@@ -311,14 +348,14 @@ public class AssessmentPlayController extends IStarBaseServelet {
 						int qid= 0 ;
 						Question q = new Question();
 						QuestionDAO qdao = new QuestionDAO();
+						//array of difficulty evels existing for the assessment-id
 						for (HashMap<String, Object> aobject : aresult) {
 							qid=(int) aobject.get("questionid");
-							System.out.println(qid);
 							q = qdao.findById(qid);
 							temp[i]=q.getDifficultyLevel();
-							System.out.println(i+"--------------"+temp[i]);
 							i++;
 						}
+						//remove zeroes in the array
 						int j = 0;
 					    for( int ii=0;  ii<temp.length;  ii++ )
 					    {
@@ -327,24 +364,23 @@ public class AssessmentPlayController extends IStarBaseServelet {
 					    }
 					    int [] newArray = new int[j];
 					    System.arraycopy( temp, 0, newArray, 0, j );
-						Arrays.sort(newArray);
-						int progress = 0;
+						//sort the new consolidated array
+					    Arrays.sort(newArray);
+						//find the median of the set of existing difficulty levels in the integer array
+					    int progress = 0;
 						if (newArray.length==0) {
 							progress=0;
 						} else if (newArray.length==1) {
 							progress=newArray[0];
-							System.out.println(progress);
 						} else {
 							progress=newArray[newArray.length/2];
 						}
-						System.out.println(newArray.length+"   ppppppppppppppppppppppppppppppppppppppppppppppppp   "+progress);
+						//set the score as the current difficulty level
+						report.setScore(progress);
+						//set the progress same as question id of the question  with order_id=1 and the corresponding difficulty-level
 						for (HashMap<String, Object> zobject : aresult) {
 							qid=(int) zobject.get("questionid");
 							q = qdao.findById(qid);
-							System.out.println(qid);
-							System.out.println(newArray[0]);
-							System.out.println(q.getDifficultyLevel());
-							System.out.println(progress);
 							if (progress == q.getDifficultyLevel()){
 								report.setProgress(qid);
 								break;
@@ -364,6 +400,7 @@ public class AssessmentPlayController extends IStarBaseServelet {
 						List<HashMap<String, Object>> result = query.list();
 						int init_question_id = (int) result.get(0).get("questionid");
 						report.setProgress(init_question_id);
+						report.setScore(0);
 					
 						break;
 				}
@@ -385,7 +422,7 @@ public class AssessmentPlayController extends IStarBaseServelet {
 				report.setId(report.getId());
 			}
 			else {
-				System.out.print("This is a strange place to end up in!!");
+				System.out.print("You shouldn't be here! This is really a mysterious place to end up in!!");
 			}
 		}
 
