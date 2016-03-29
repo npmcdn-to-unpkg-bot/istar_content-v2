@@ -124,13 +124,12 @@ public class AssessmentPlayController extends IStarBaseServelet {
 				case "ADAPTIVE":
 					System.out.println("ADAPTIVE");
 					
-					//TODO Score
-					
 					//TODO Progress
 					IstarUserDAO buserdao = new IstarUserDAO();
 					Session bsession = buserdao.getSession();
 					AssessmentQuestionDAO aqdao = new AssessmentQuestionDAO();
 					AssessmentQuestion aq = aqdao.findByMapping(assessment, question);
+					//get next orderId
 					int z = (int)aq.getOrderId()+1;
 					System.out.println(z);
 					String bsql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+z+"";
@@ -160,41 +159,59 @@ public class AssessmentPlayController extends IStarBaseServelet {
 						if(ev==true) {
 							
 							if (report.getScore() > question.getDifficultyLevel()){
+								System.err.println((new Throwable()).getStackTrace()[0].getLineNumber());
 								report.setProgress(0);
+								report.setScore(question.getDifficultyLevel());
 							} 
 							
 							else if(report.getScore() < question.getDifficultyLevel()){
+								System.err.println((new Throwable()).getStackTrace()[0].getLineNumber());
 								report.setScore(question.getDifficultyLevel());
-								for (int i=question.getDifficultyLevel()+1;i<=10;i++) {
+								int i=question.getDifficultyLevel()+1;
+								prev = report.getProgress();
+								for (;i<=10;i++) {
+									System.err.println((new Throwable()).getStackTrace()[0].getLineNumber());
 									IstarUserDAO cuserdao = new IstarUserDAO();
 									Session csession = cuserdao.getSession();
-									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
+									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> cresult = bquery.list();
+									List<HashMap<String, Object>> cresult = cquery.list();
 									for (HashMap<String, Object> hashMap : cresult) {
+										System.err.println((new Throwable()).getStackTrace()[0].getLineNumber());
 										tq = tqd.findById((int)hashMap.get("questionid"));
 										if(tq.getDifficultyLevel()==i){ 
+											System.err.println((new Throwable()).getStackTrace()[0].getLineNumber());
 											report.setProgress((int)hashMap.get("questionid"));
+											i=11;
 										}
 									}
 								}
-							} 
+								if (prev == report.getProgress()){
+									report.setProgress(0);
+								}
+							}
 							
 							else if(report.getScore() == question.getDifficultyLevel()){
-								for (int i=question.getDifficultyLevel()+1;i<=10;i++) {
+								int i=question.getDifficultyLevel()+1;
+								prev = report.getProgress();
+								for (;i<=10;i++) {
 									IstarUserDAO cuserdao = new IstarUserDAO();
 									Session csession = cuserdao.getSession();
-									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
+									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> cresult = bquery.list();
+									List<HashMap<String, Object>> cresult = cquery.list();
 									for (HashMap<String, Object> hashMap : cresult) {
 										tq = tqd.findById((int)hashMap.get("questionid"));
 										if(tq.getDifficultyLevel()==i){ 
 											report.setProgress((int)hashMap.get("questionid"));
+											i=11;
 										}
 									}
+								}
+								if (prev == report.getProgress()){
+									report.setProgress(0);
 								}
 							}
 							
@@ -203,51 +220,54 @@ public class AssessmentPlayController extends IStarBaseServelet {
 						}
 						//If more than half are wrong and score<difficulty(report) then end game and show score
 						else {
-							prev = report.getProgress();
 							if (report.getScore() < question.getDifficultyLevel()){
 								report.setProgress(0);
 							}
 							
-							else {
-								if(report.getScore() > question.getDifficultyLevel()){
-									report.setScore(question.getDifficultyLevel());
-
-									for (int i=question.getDifficultyLevel()-1;i>0;i--) {
-										IstarUserDAO cuserdao = new IstarUserDAO();
-										Session csession = cuserdao.getSession();
-										String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
-										SQLQuery cquery = csession.createSQLQuery(csql);
-										cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-										List<HashMap<String, Object>> cresult = bquery.list();
-										for (HashMap<String, Object> hashMap : cresult) {
-											tq = tqd.findById((int)hashMap.get("questionid"));
-											if(tq.getDifficultyLevel()==i){
-												report.setProgress((int)hashMap.get("questionid"));
-											}
-										}
-									}
-									if (report.getProgress() == prev){
-										report.setProgress(0);
-									}
-								} else if (report.getScore() == question.getDifficultyLevel()){
-									//DO NOTHING
-
-									for (int i=question.getDifficultyLevel()-1;i>0;i--) {
-										IstarUserDAO cuserdao = new IstarUserDAO();
-										Session csession = cuserdao.getSession();
-										String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1;
-										SQLQuery cquery = csession.createSQLQuery(csql);
-										cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-										List<HashMap<String, Object>> cresult = bquery.list();
-										for (HashMap<String, Object> hashMap : cresult) {
-											tq = tqd.findById((int)hashMap.get("questionid"));
-											if(tq.getDifficultyLevel()==i){
-												report.setProgress((int)hashMap.get("questionid"));
-											}
+							else if(report.getScore() > question.getDifficultyLevel()){
+								report.setScore(question.getDifficultyLevel());
+								prev = report.getProgress();
+								for (int i=question.getDifficultyLevel()-1;i>0;i--) {
+									IstarUserDAO cuserdao = new IstarUserDAO();
+									Session csession = cuserdao.getSession();
+									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
+									SQLQuery cquery = csession.createSQLQuery(csql);
+									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+									List<HashMap<String, Object>> cresult = cquery.list();
+									for (HashMap<String, Object> hashMap : cresult) {
+										tq = tqd.findById((int)hashMap.get("questionid"));
+										if(tq.getDifficultyLevel()==i){
+											report.setProgress((int)hashMap.get("questionid"));
+											i=-1;
 										}
 									}
 								}
+								if (report.getProgress() == prev){
+									report.setProgress(0);
+								}
+							} 
 								
+							else if (report.getScore() == question.getDifficultyLevel()){
+								prev = report.getProgress();
+								report.setScore(question.getDifficultyLevel());
+								for (int i=question.getDifficultyLevel()-1;i>0;i--) {
+									IstarUserDAO cuserdao = new IstarUserDAO();
+									Session csession = cuserdao.getSession();
+									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
+									SQLQuery cquery = csession.createSQLQuery(csql);
+									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+									List<HashMap<String, Object>> cresult = cquery.list();
+									for (HashMap<String, Object> hashMap : cresult) {
+										tq = tqd.findById((int)hashMap.get("questionid"));
+										if(tq.getDifficultyLevel()==i){
+											report.setProgress((int)hashMap.get("questionid"));
+											i=-1;
+										}
+									}
+								}
+								if (report.getProgress() == prev){
+									report.setProgress(0);
+								}
 							}
 						}
 					}
