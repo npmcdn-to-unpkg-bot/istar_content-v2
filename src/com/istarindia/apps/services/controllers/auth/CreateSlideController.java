@@ -16,12 +16,15 @@ import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.dao.Video;
+import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
 import com.istarindia.cms.lessons.CMSHTMLTableRow;
 import com.istarindia.cms.lessons.CMSImage;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSTextItem;
+import com.istarindia.cms.lessons.CMSVideo;
 import com.istarindia.cms.lessons.SlideService;
 
 /**
@@ -125,6 +128,34 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				service.addTextImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"));
+
+			}
+			break;
+			
+		case "ONLY_TITLE_VIDEO":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				VideoDAO dao = new VideoDAO();
+
+				Video img = dao.findById(Integer.parseInt(request.getParameter("video_url")));
+				CMSVideo image = new CMSVideo();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addTextVideoSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), image);
+			} else {
+				VideoDAO dao = new VideoDAO();
+				Video img = dao.findById(Integer.parseInt(request.getParameter("video_url")));
+				CMSVideo image = new CMSVideo();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addTextVideoSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"));

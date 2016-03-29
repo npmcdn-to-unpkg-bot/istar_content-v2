@@ -26,11 +26,16 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-	//System.err.println("This is Mobile");
-%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
+<% 
+String mobile="";
 
-<%  } else { %>
+if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+	//System.err.println("This is Mobile");
+	mobile="mobile_";
+%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
+<%  } else { mobile="mobile_";
+%>
+	
 	<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
 <%  } %><!-- Printing and PDF exports -->
 <script>
@@ -48,7 +53,7 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <body>
 
-	<div class="reveal <%=ppt.getLesson().getLesson_subject() %>">
+	<div class="reveal <%=ppt.getLesson().getLesson_subject() %>___<%=ppt.getLesson().getLesson_theme().toLowerCase() %>" style="    background-size: cover;background-image: url('<%=baseURL %>assets/plugins/reveal/css/images/<%=mobile %><%=ppt.getLesson().getLesson_subject() %>.png');" >
 
 		<div class="slides">
 			<%=((new CMSerializer()).serializeLesson(ppt, ppt.getLesson().getLesson_subject())) %>
@@ -90,6 +95,10 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 			 document.onreadystatechange = function () {
 			     if (document.readyState == "complete") {
 			    	 console.log("Ready");
+			    	 
+			    	 Reveal.addEventListener( 'slidechanged', function( event ) {
+			    		console.log("Thsi is a slide transitin");
+			    	} );
 			    	
 			   }
 			 }

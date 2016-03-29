@@ -39,6 +39,8 @@ import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.Slide;
+import com.istarindia.apps.dao.Video;
+import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.AssessmentService;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.QuestionService;
@@ -640,6 +642,8 @@ public class LessonUtils {
         ImageDAO dao = new ImageDAO();
         ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid",
                 ppt.getLesson().getCmsession().getId());
+        ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId",
+                ppt.getLesson().getCmsession().getId());
 
         CMSList newList = new CMSList();
         newList.setList_type(slide.getList().getList_type());
@@ -679,7 +683,8 @@ public class LessonUtils {
         VelocityContext context = new VelocityContext();
         context.put("slide", slide);
         context.put("images", images);
-        //context.put("tag_string", tagString);
+
+        context.put("videos", videos);//context.put("tag_string", tagString);
         context.put("list_types", CMSRegistry.listTypes);
         Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
         StringWriter writer = new StringWriter();

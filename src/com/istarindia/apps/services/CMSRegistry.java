@@ -85,6 +85,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_LIST");
 		slideTemplates.add("ONLY_TITLE_TREE");
 		slideTemplates.add("ONLY_PARAGRAPH");
+		slideTemplates.add("ONLY_TITLE_VIDEO");
 		//slideTemplates.add("ONLY_TITLE_TABLE");
 		//slideTemplates.add("ONLY_TITLE_TABLE_TITLE_TABLE");
 	//	slideTemplates.add("ONLY_TITLE_TABLE_PARAGRAPH");
@@ -97,7 +98,8 @@ public class CMSRegistry {
 		listTypes.add(ListTypes.SQUARE_LIST);
 		listTypes.add(ListTypes.PYRAMID_LIST);
 		listTypes.add(ListTypes.FUNNEL_LIST);
-		
+		listTypes.add(ListTypes.OCTOPUS_LIST);
+		listTypes.add(ListTypes.BURGER_LIST);
 	}
 
 	public static CMSFolder root = CMSFolder.init();

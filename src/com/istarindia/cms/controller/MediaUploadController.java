@@ -59,9 +59,7 @@ public class MediaUploadController extends IStarBaseServelet {
 
     @Override
     public void init(ServletConfig config) {
-    	//C:\Users\Vaibhav\Pictures
     	String folder =config.getInitParameter("upload_path");
-    	
     	fileUploadPath = new File(folder);
     }
 	
@@ -105,13 +103,8 @@ public class MediaUploadController extends IStarBaseServelet {
 						Video transientInstance = dao.findById(item_id);
 						try {
 							tx = session.beginTransaction();
-							
-						
 							transientInstance.setUrl("/content/media_upload?getfile=" + item.getName());
 							transientInstance.setTags(tags);
-							
-							
-						
 							dao.attachDirty(transientInstance);
 							tx.commit();
 						} catch (HibernateException e) {
@@ -301,14 +294,11 @@ public class MediaUploadController extends IStarBaseServelet {
 			if (file.exists()) {
 				int bytes = 0;
 				ServletOutputStream op = response.getOutputStream();
-
 				response.setContentType(getMimeType(file));
 				response.setContentLength((int) file.length());
 				response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
-
 				byte[] bbuf = new byte[1024];
 				DataInputStream in = new DataInputStream(new FileInputStream(file));
-
 				while ((in != null) && ((bytes = in.read(bbuf)) != -1)) {
 					op.write(bbuf, 0, bytes);
 				}
@@ -362,6 +352,8 @@ public class MediaUploadController extends IStarBaseServelet {
 			if (getSuffix(file.getName()).equalsIgnoreCase("png")) {
 				mimetype = "image/png";
 			} else if(getSuffix(file.getName()).equalsIgnoreCase("mp4")){
+				mimetype = "application/octet-stream";
+			} else if(getSuffix(file.getName()).equalsIgnoreCase("m4v")){
 				mimetype = "application/octet-stream";
 			} else {
 				javax.activation.MimetypesFileTypeMap mtMap = new javax.activation.MimetypesFileTypeMap();
