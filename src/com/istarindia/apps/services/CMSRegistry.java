@@ -100,6 +100,7 @@ public class CMSRegistry {
 		listTypes.add(ListTypes.FUNNEL_LIST);
 		listTypes.add(ListTypes.OCTOPUS_LIST);
 		listTypes.add(ListTypes.BURGER_LIST);
+		listTypes.add(ListTypes.POLE_LIST);
 	}
 
 	public static CMSFolder root = CMSFolder.init();
