@@ -4,7 +4,7 @@
     Author     : Kunal Chakravertti
 --%>
 
-
+ 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -18,7 +18,7 @@
         <h1>Choose Questions</h1>
         <form action="tests_controller?_action=save" method="POST">
             <c:set var="count" value="1" scope="page"/>
-            <table border="1">
+            <table border="1"> 
                 <thead>
                 <th>&nbsp;</th><th>Text</th><th>&nbsp;</th>
                 </thead>

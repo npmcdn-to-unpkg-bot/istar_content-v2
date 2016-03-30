@@ -22,23 +22,23 @@
 
         <script type="text/javascript">
             function checkDate(val) {
-                var flag = false;
-                var todayDate = new Date();
-                //need to add one to get current month as it is start with 0
-                var todayMonth = todayDate.getMonth() + 1;
-                var todayDay = todayDate.getDate();
-                var todayYear = todayDate.getFullYear();
-                var todayDateText = todayDay + "/" + todayMonth + "/" + todayYear;
-                var inputDateText = document.getElementById('datepicker').value;
-                var inputToDate = Date.parse(inputDateText);
-
-                var todayToDate = Date.parse(todayDateText);
-                if (inputToDate > todayToDate) {
-                    flag = true;
-
-                } else {
-                    alert("the input is earlier than today");
-                }
+                var flag = true;
+//                var todayDate = new Date();
+//                //need to add one to get current month as it is start with 0
+//                var todayMonth = todayDate.getMonth() + 1;
+//                var todayDay = todayDate.getDate();
+//                var todayYear = todayDate.getFullYear();
+//                var todayDateText = todayDay + "/" + todayMonth + "/" + todayYear;
+//                var inputDateText = document.getElementById('datepicker').value;
+//                var inputToDate = Date.parse(inputDateText);
+//
+//                var todayToDate = Date.parse(todayDateText);
+//                if (inputToDate > todayToDate) {
+//                    flag = true;
+//
+//                } else {
+//                    alert("the input is earlier than today");
+//                }
 //                else if (inputToDate < todayToDate) {
 //                    
 //                }
