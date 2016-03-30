@@ -34,7 +34,7 @@
 
 .reveal .ONLY_TITLE_TREE h2 {
 	font-size: 220%;
-	margin-top: -16%;
+	margin-top: -46%;
 }
 
 .reveal .ONLY_TITLE_TREE ol {
@@ -244,4 +244,11 @@
 }
 
 
+.OCTOPUS_LIST___ONLY_TITLE_LIST h2 {
+	margin-top: -46%;
+}
 
+
+.BURGER_LIST___ONLY_TITLE_LIST h2 {
+	margin-top: -46%;
+}

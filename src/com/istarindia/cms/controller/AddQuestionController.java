@@ -56,7 +56,7 @@ public class AddQuestionController extends IStarBaseServelet {
 		LearningObjectiveDAO learningObjectiveDAO = new LearningObjectiveDAO();
 		Assessment assessment = dao.findById(Integer.parseInt(request.getParameter("assessment_id")));
 
-		Integer specifier = 0;      //update later for tree                      //Integer.parseInt(request.getParameter("specifier"));
+		Integer specifier = 1;      //update later for tree                      //Integer.parseInt(request.getParameter("specifier"));
 		String[] learningObjectiveIds = request.getParameterValues("learningObjectives");
 		Set<LearningObjective> learningObjectiveSet=new HashSet<LearningObjective>();
 		if(learningObjectiveIds!=null){
