@@ -65,7 +65,7 @@ public class AssessmentPlayController extends IStarBaseServelet {
 		Assessment assessment = new AssessmentDAO().findById(assessment_id);
 		ReportService service = new ReportService();
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-		
+		System.err.println("pppppppppppppppppppppppppppppppppppppp");
 		if(request.getParameterMap().containsKey("question_id")) {
 			int question_id = Integer.parseInt(request.getParameter("question_id"));
 			Report report = service.getAssessmentReportOfUser(user.getId(), assessment);
@@ -337,7 +337,9 @@ public class AssessmentPlayController extends IStarBaseServelet {
 		}
 		else {
 			
-			if (service.getAssessmentReportOfUser(user.getId(), assessment) == null){
+			//if (service.getAssessmentReportOfUser(user.getId(), assessment) == null){
+				
+				
 				
 				Report report = new Report();
 				System.out.println();
@@ -440,10 +442,10 @@ public class AssessmentPlayController extends IStarBaseServelet {
 					rsession.close();
 				}
 				report.setId(report.getId());
-			}
+			/*}
 			else {
 				System.out.print("You shouldn't be here! This is really a mysterious place to end up in!!");
-			}
+			}*/
 		}
 
 		request.setAttribute("assessment_id", assessment_id);

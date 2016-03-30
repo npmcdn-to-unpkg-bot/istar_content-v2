@@ -37,41 +37,41 @@
 
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
+	href="assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
 
 <!-- CSS Header and Footer -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/headers/header-default.css">
+	href="assets/css/headers/header-default.css">
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/footers/footer-v1.css">
+	href="assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
+<link rel="stylesheet" href="assets/plugins/animate.css">
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
+	href="assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
+	href="assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/business.style.css">
+<link rel="stylesheet" href="assets/css/global.css">
+<link rel="stylesheet" href="assets/css/pages/profile.css">
 
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+	href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
+	href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+	href="assets/plugins/tagz/bootstrap-tagsinput.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+	href="assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+	href="assets/css/theme-colors/orange.css" id="style_color">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom.css">
 </head>
 
 <body>
@@ -186,12 +186,10 @@
 									//int question_id = Integer.parseInt(request.getParameter("question_id"));
 											Question question = new QuestionDAO().findById(question_id);
 								%>
-								<form action="/content/assessment_play" id="sky-form4"
-									class="sky-form">
-									<input type="hidden" name="assessment_id"
-										value="<%=assessment_id%>" /> <input type="hidden"
-										name="question_id" value="<%=question_id%>" /> <input
-										type="hidden" name="report_id" value="<%=report.getId()%>" />
+								<form action="/content/assessment_play" id="sky-form4" class="sky-form">
+									<input type="hidden" name="assessment_id" value="<%=assessment_id%>" /> 
+									<input type="hidden" name="question_id" value="<%=question_id%>" /> 
+									<input type="hidden" name="report_id" value="<%=report.getId()%>" />
 
 									<fieldset>
 										<section>
@@ -270,34 +268,34 @@
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+		src="assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+		src="assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+		src="assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+		src="assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
+		src="assets/plugins/jstree/jstree.js"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
 		type="text/javascript" charset="utf-8"></script>
 
 	<script
-		src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
+		src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<script src="assets/plugins/tagz/bootstrap-tagsinput.js"
 		type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript"
-		src="<%=baseURL%>assets/js/plugins/validation.js"></script>
+		src="assets/js/plugins/validation.js"></script>
 
 	<script type="text/javascript">
 		
