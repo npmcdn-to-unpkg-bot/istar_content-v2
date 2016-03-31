@@ -1,66 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <menu>
-	<parent_links display_name="Course">
-		<child_links display_name="View Course Structure" url="/content/content_admin/course_structure.jsp" valid_roles="content_admin" />
-		<child_links display_name="View Learning Objectives" url="/content/content_admin/course_learning_objectives.jsp" valid_roles="content_admin" />
-	</parent_links>
+    <!-- Added By Kunal -->
+    <parent_links display_name="Event Listing">
+        <child_links display_name="All Event Listing" url="/content/event_controller?_action=findall" valid_roles="content_admin" />
+        <child_links display_name="Event Listing for Today" url="/content/event_controller?_action=findbydate" valid_roles="content_admin" />
+        <child_links display_name="Event Listing for Week" url="/content/event_controller?_action=findbyweek" valid_roles="content_admin" />
+        <child_links display_name="Event Listing for Month" url="/content/event_controller?_action=findbymonth" valid_roles="content_admin" />
+    </parent_links>
+    <parent_links display_name="Session Listing">
+        <child_links display_name="All Session Listing" url="/content/session_controller?_action=findall" valid_roles="content_admin" />
+    </parent_links>
+    <parent_links display_name="Tests Listing">
+        <child_links display_name="All Tests Listing" url="/content/tests_controller?_action=findall" valid_roles="content_admin" />
+    </parent_links>
+    
+    <!-- Added by Kunal ends -->
+    <parent_links display_name="Course">
+        <child_links display_name="View Course Structure" url="/content/content_admin/course_structure.jsp" valid_roles="content_admin" />
+        <child_links display_name="View Learning Objectives" url="/content/content_admin/course_learning_objectives.jsp" valid_roles="content_admin" />
+    </parent_links>
 	
-	<parent_links display_name="Lesson">
-		<child_links display_name="Create Lesson" url="/content/lesson/new_lesson.jsp" valid_roles="content_admin,content_creator" />
-		<child_links display_name="Assessment" url="/content/content_creator/assessments.jsp" valid_roles="content_admin,content_creator" />
-		<child_links display_name="Published Lesson" url="/content/content_admin/published_lesson.jsp" valid_roles="content_admin" />
-		<child_links display_name="Published Lesson" url="/content/content_creator/published_lesson.jsp" valid_roles="content_creator" />
-		<child_links display_name="Published Lesson" url="/content/content_reviewer/published_lesson.jsp" valid_roles="content_reviewer" />
-	</parent_links>
-	<parent_links display_name="Task">
-		<child_links display_name="Create Task" url="/content/media/create_task.jsp" valid_roles="content_creator" />
-		<child_links display_name="Created" url="/content/content_admin/created_lesson.jsp" valid_roles="content_admin" />
-		<child_links display_name="Assigned" url="/content/content_admin/assigned.jsp" valid_roles="content_admin" />
-		<child_links display_name="Inprogress" url="/content/content_admin/draft_lesson.jsp" valid_roles="content_admin" />
-		<child_links display_name="Completed" url="/content/content_admin/completed_lesson.jsp" valid_roles="content_admin" />
-		<child_links display_name="Not Reviewed" url="/content/content_admin/review_pending.jsp" valid_roles="content_admin" />
-		<child_links display_name="Requested to Publish" url="/content/content_admin/not_published.jsp" valid_roles="content_admin" />
+    <parent_links display_name="Lesson">
+        <child_links display_name="Create Lesson" url="/content/lesson/new_lesson.jsp" valid_roles="content_admin,content_creator" />
+        <child_links display_name="Assessment" url="/content/content_creator/assessments.jsp" valid_roles="content_admin,content_creator" />
+        <child_links display_name="Published Lesson" url="/content/content_admin/published_lesson.jsp" valid_roles="content_admin" />
+        <child_links display_name="Published Lesson" url="/content/content_creator/published_lesson.jsp" valid_roles="content_creator" />
+        <child_links display_name="Published Lesson" url="/content/content_reviewer/published_lesson.jsp" valid_roles="content_reviewer" />
+    </parent_links>
+    <parent_links display_name="Task">
+        <child_links display_name="Create Task" url="/content/media/create_task.jsp" valid_roles="content_creator" />
+        <child_links display_name="Created" url="/content/content_admin/created_lesson.jsp" valid_roles="content_admin" />
+        <child_links display_name="Assigned" url="/content/content_admin/assigned.jsp" valid_roles="content_admin" />
+        <child_links display_name="Inprogress" url="/content/content_admin/draft_lesson.jsp" valid_roles="content_admin" />
+        <child_links display_name="Completed" url="/content/content_admin/completed_lesson.jsp" valid_roles="content_admin" />
+        <child_links display_name="Not Reviewed" url="/content/content_admin/review_pending.jsp" valid_roles="content_admin" />
+        <child_links display_name="Requested to Publish" url="/content/content_admin/not_published.jsp" valid_roles="content_admin" />
 
-		<child_links display_name="Assigned" url="/content/content_creator/assigned_lesson.jsp" valid_roles="content_creator" />
-		<child_links display_name="Inprogress" url="/content/content_creator/draft_lesson.jsp" valid_roles="content_creator" />
-		<child_links display_name="Disapproved" url="/content/content_creator/disapproved_lesson.jsp" valid_roles="content_creator" />
-		<child_links display_name="Approved" url="/content/content_creator/approved_lesson.jsp" valid_roles="content_creator" />
+        <child_links display_name="Assigned" url="/content/content_creator/assigned_lesson.jsp" valid_roles="content_creator" />
+        <child_links display_name="Inprogress" url="/content/content_creator/draft_lesson.jsp" valid_roles="content_creator" />
+        <child_links display_name="Disapproved" url="/content/content_creator/disapproved_lesson.jsp" valid_roles="content_creator" />
+        <child_links display_name="Approved" url="/content/content_creator/approved_lesson.jsp" valid_roles="content_creator" />
 
-		<child_links display_name="Assigned" url="/content/content_reviewer/assigned_lesson.jsp" valid_roles="content_reviewer" />
-		<child_links display_name="Disapproved" url="/content/content_reviewer/disapproved_lesson.jsp" valid_roles="content_reviewer" />
+        <child_links display_name="Assigned" url="/content/content_reviewer/assigned_lesson.jsp" valid_roles="content_reviewer" />
+        <child_links display_name="Disapproved" url="/content/content_reviewer/disapproved_lesson.jsp" valid_roles="content_reviewer" />
 
-		<child_links display_name="Created Media" url="/content/content_creator/created_media.jsp" valid_roles="content_creator" />
+        <child_links display_name="Created Media" url="/content/content_creator/created_media.jsp" valid_roles="content_creator" />
 
-		<child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Assigned" url="/content/creative_admin/assigned.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Inprogress" url="/content/creative_admin/inprogress.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Not reviewed" url="/content/creative_admin/not_reviewed.jsp" valid_roles="creative_admin" />
+        <child_links display_name="Creative Not Assigned" url="/content/creative_admin/assign_creative.jsp" valid_roles="creative_admin" />
+        <child_links display_name="Assigned" url="/content/creative_admin/assigned.jsp" valid_roles="creative_admin" />
+        <child_links display_name="Inprogress" url="/content/creative_admin/inprogress.jsp" valid_roles="creative_admin" />
+        <child_links display_name="Not reviewed" url="/content/creative_admin/not_reviewed.jsp" valid_roles="creative_admin" />
 
-		<child_links display_name="Assigned" url="/content/creative_creator/assigned.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Inprogress" url="/content/creative_creator/inprogress.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Not reviewed" url="/content/creative_creator/not_reviewed.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Disapproved" url="/content/creative_creator/disapproved.jsp" valid_roles="creative_creator" />
+        <child_links display_name="Assigned" url="/content/creative_creator/assigned.jsp" valid_roles="creative_creator" />
+        <child_links display_name="Inprogress" url="/content/creative_creator/inprogress.jsp" valid_roles="creative_creator" />
+        <child_links display_name="Not reviewed" url="/content/creative_creator/not_reviewed.jsp" valid_roles="creative_creator" />
+        <child_links display_name="Disapproved" url="/content/creative_creator/disapproved.jsp" valid_roles="creative_creator" />
 
-	</parent_links>
-	<parent_links display_name="Folder">
-		<child_links display_name="Create Folder" url="/content/creative_admin/new_folder.jsp" valid_roles="creative_admin" />
-	</parent_links>
+    </parent_links>
+    <parent_links display_name="Folder">
+        <child_links display_name="Create Folder" url="/content/creative_admin/new_folder.jsp" valid_roles="creative_admin" />
+    </parent_links>
 	
-	<parent_links display_name="Media">
-		<child_links display_name="Published Media" url="/content/creative_admin/published.jsp" valid_roles="creative_admin" />
-		<child_links display_name="Published Media" url="/content/creative_creator/published.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Gallery" url="/content/gallery.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
-	</parent_links>
+    <parent_links display_name="Media">
+        <child_links display_name="Published Media" url="/content/creative_admin/published.jsp" valid_roles="creative_admin" />
+        <child_links display_name="Published Media" url="/content/creative_creator/published.jsp" valid_roles="creative_creator" />
+        <child_links display_name="Gallery" url="/content/gallery.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
+    </parent_links>
 
-	<parent_links display_name="user_email">
-		<child_links display_name="Dashboard" url="/content/content_admin/dashboard.jsp" valid_roles="content_admin" />
-		<child_links display_name="Dashboard" url="/content/content_creator/dashboard.jsp" valid_roles="content_creator" />
-		<child_links display_name="Dashboard" url="/content/content_reviewer/dashboard.jsp" valid_roles="content_reviewer" />
-		<child_links display_name="Dashboard" url="/content/creative_creator/dashboard.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Dashboard" url="/content/creative_admin/dashboard.jsp" valid_roles="creative_admin" />
-<!-- 		<child_links display_name="Reports" url="/content/content_admin/report_task.jsp" valid_roles="content_admin" />
-		<child_links display_name="Reports" url="/content/creative_admin/report_task.jsp" valid_roles="creative_admin" />
- -->		<child_links display_name="Logout" url="/content/auth/logout" valid_roles="content_admin,content_creator,content_reviewer,creative_admin,creative_creator" />
-	</parent_links>
+    <parent_links display_name="user_email">
+        <child_links display_name="Dashboard" url="/content/content_admin/dashboard.jsp" valid_roles="content_admin" />
+        <child_links display_name="Dashboard" url="/content/content_creator/dashboard.jsp" valid_roles="content_creator" />
+        <child_links display_name="Dashboard" url="/content/content_reviewer/dashboard.jsp" valid_roles="content_reviewer" />
+        <child_links display_name="Dashboard" url="/content/creative_creator/dashboard.jsp" valid_roles="creative_creator" />
+        <child_links display_name="Dashboard" url="/content/creative_admin/dashboard.jsp" valid_roles="creative_admin" />
+        <!-- 		<child_links display_name="Reports" url="/content/content_admin/report_task.jsp" valid_roles="content_admin" />
+                       <child_links display_name="Reports" url="/content/creative_admin/report_task.jsp" valid_roles="creative_admin" />
+        -->		
+        <child_links display_name="Logout" url="/content/auth/logout" valid_roles="content_admin,content_creator,content_reviewer,creative_admin,creative_creator" />
+    </parent_links>
 
 </menu>
