@@ -65,7 +65,7 @@
                 <p>Test Type : <select name="test_type">
                         <option value="STATIC">Static</option>
                         <option value="ADAPTIVE">Adaptive</option>
-                        <option value="TREEE">Tree</option>
+                        <option value="TREE">Tree</option>
                         <option value="RANDOM">Random</option>
                     </select> 
                 </p>
@@ -87,14 +87,14 @@
                                 <option value="STATIC">Static</option>
                                 <option value="RANDOM">Random</option>
                                 <option value="ADAPTIVE">Adaptive</option>
-                                <option value="TREEE">Tree</option>
+                                <option value="TREE">Tree</option>
                             </select> 
                         </c:when>
                         <c:when test="${testObject.assessmentType == 'STATIC'}">
                             <select name="test_type">
                                 <option value="STATIC" selected="selected">Static</option>
                                 <option value="ADAPTIVE">Adaptive</option>
-                                <option value="TREEE">Tree</option>
+                                <option value="TREE">Tree</option>
                                 <option value="RANDOM">Random</option>
                             </select> 
                         </c:when>
@@ -102,11 +102,11 @@
                             <select name="test_type">
                                 <option value="ADAPTIVE" selected="selected">Adaptive</option>
                                 <option value="STATIC">Static</option>
-                                <option value="TREEE">Tree</option>
+                                <option value="TREE">Tree</option>
                                 <option value="RANDOM">Random</option>
                             </select> 
                         </c:when>
-                        <c:when test="${testObject.assessmentType == 'TREEE'}">
+                        <c:when test="${testObject.assessmentType == 'TREE'}">
                             <select name="test_type">
                                 <option value="TREE" selected="selected">Tree</option>
                                 <option value="STATIC">Static</option>
@@ -119,7 +119,7 @@
                                 <option value="RANDOM" selected="selected">Random</option>
                                 <option value="STATIC">Static</option>
                                 <option value="ADAPTIVE">Adaptive</option>
-                                <option value="TREEE">Tree</option>
+                                <option value="TREE">Tree</option>
                             </select> 
                         </c:when>
                     </c:choose>
