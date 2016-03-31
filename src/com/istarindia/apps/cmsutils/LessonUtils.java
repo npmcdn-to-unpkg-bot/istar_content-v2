@@ -107,6 +107,7 @@ public class LessonUtils {
             out.append("<th>#</th>");
             out.append("<th>Slide Title</th>");
             out.append("<th>Action</th>");
+            out.append("<th>Slide Template</th>");
             out.append("</tr>");
             out.append("</thead>");
             out.append("<tbody>");
@@ -124,8 +125,10 @@ public class LessonUtils {
                 out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
                         + "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
                         + "<i class='fa fa-remove'></i>Delete</a>");
+                
 
                 out.append("</td>");
+                out.append("<td>" + data.get(i).get(2) + "</td>");
                 out.append("</tr>");
             }
 
@@ -716,7 +719,8 @@ public class LessonUtils {
             cMSlide.setStudentNotes(slide.getStudentNotes());
             System.out.println(slide);
         } catch (JAXBException e) {
-            e.printStackTrace();
+            System.err.println(slide.getId());
+        	e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

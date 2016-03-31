@@ -96,8 +96,10 @@
 					System.err.println("Its an old SLide ");
 					newSlide = false;
 					SlideDAO dao = new SlideDAO();
+					
 					slide = (new LessonUtils())
 							.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
+					slide.setTemplateName(request.getParameter("slide_type"));
 			%>
 			<input name="is_edit" value="true" type="hidden"> <input
 				name="slide_id" value="<%=request.getParameter("slide_id")%>"
