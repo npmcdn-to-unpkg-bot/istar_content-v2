@@ -225,9 +225,11 @@ public class LessonUtils {
                             + "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
                             + "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
                             + "<option value='10'>10(HARDEST)</option></select></label> </section>"
-                          /*  + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
+                        
+                            /*  + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
                             + "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
                             + "<option value='1'>1</option><option value='2'>2</option></select></label></section>"*/              //Add this later for tree
+                            
                             + "</div>"
                             + "<section><label>Question Text</label> "
                             + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
@@ -241,8 +243,8 @@ public class LessonUtils {
                             + "<TEXTAREA NAME='option4' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
                             + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='5'><i></i>Option 5</label> <label class='input'> "
                             + "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
-                            + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-                }
+                            + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label class='err' style='color:red'></label></footer></form></div></div></div>");
+                    }
                 out.append("<div class=' col-md-12 '>");
                 out.append("<div class='panel panel-sea margin-bottom-40'>");
                 out.append("<div class='panel-heading'>");

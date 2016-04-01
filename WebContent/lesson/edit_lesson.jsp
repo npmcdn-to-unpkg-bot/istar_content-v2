@@ -352,11 +352,47 @@
         src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 
         <script type="text/javascript">
+        	//Lesson details validation
             jQuery(document).ready(function () {
                 App.init();
                 Validation.lessonValidation();
             });
 
+            //Checkbox validation for correct options
+            $(':checkbox').on(
+            	    'change',
+            	    function() {
+            	        var th = $(this),
+            	            name = th.prop('name');
+            	        if ((th.is(':checked')) && $("#question_type").val() == 1) {
+            	            $(':checkbox[name="' + name + '"]').not($(this)).prop(
+            	                'checked', false);
+            	        }
+            	    });
+
+            	$(document).ready(function() {
+            	    var limit = 1;
+            	    $("#sky-form4").validate({
+            	            rules: {
+            	                "answers": {
+            	                    required: function(element) {
+            	                        return $('input[type="checkbox"]:checked').length > 0;
+            	                    }
+            	                }
+            	            },
+            	            
+            	            messages: {
+            	                "answers": {
+            	                    required: "Please select checkboxes for correct answer(s)",
+            	                }
+            	            },
+
+            	            errorPlacement: function(error, element) {
+            	                error.appendTo('.err');
+            	            },
+            	        });
+            	});
+            
             function openWin(url) {
                 myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
 
