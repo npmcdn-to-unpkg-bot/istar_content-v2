@@ -189,11 +189,11 @@ public class LessonUtils {
                 out.append(" </div>");
                 out.append("</fieldset> "
                         + "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-            } else {
+            } else { 
                 Integer number_of_questions = new Integer(0);
                 AssessmentService assessmentService = new AssessmentService();
                 number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-                if (number_of_questions < assessment.getNumber_of_questions()) {
+                if (number_of_questions < assessment.getNumberOfQuestions()) {
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
@@ -332,7 +332,7 @@ public class LessonUtils {
                 QuestionService questionService = new QuestionService();
                 Question question = new Question();
                 question = questionService.findById(Integer.parseInt(questionId));
-                if (number_of_questions < assessment.getNumber_of_questions()) {
+                if (number_of_questions < assessment.getNumberOfQuestions()) {
 
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
@@ -599,7 +599,7 @@ public class LessonUtils {
 					+ "<label class='input'><input readonly='readonly' value="+assessment.getAssessmentType()+">"
 					+ "</label> </section> "
 					+ "<section class='col col-5'> <label>Number of Questions</label> "
-					+ "<label class='input'><input readonly='readonly' value="+assessment.getNumber_of_questions()+"> </label> </section> "
+					+ "<label class='input'><input readonly='readonly' value="+assessment.getNumberOfQuestions()+"> </label> </section> "
 					+ "<section class='col col-2' style='margin-top: 2.6%'> <a href=# onclick='openWin(\"/content/lesson/preview_assessment.jsp?assessment_id="+assessment.getId()+"\")' rel='float-shadow' class='btn-u btn-u-default float-shadow'>Preview</a> </section>");
 
 					out.append(" </div>");
