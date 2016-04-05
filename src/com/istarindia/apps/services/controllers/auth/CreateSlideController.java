@@ -53,6 +53,38 @@ public class CreateSlideController extends IStarBaseServelet {
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
+		case "ONLY_TITLE_PARAGRPH_IMAGE":
+
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				ImageDAO dao = new ImageDAO();
+
+				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				CMSImage image = new CMSImage();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				
+				
+				service.addTextParagraphSlideToLesson(request.getParameter("paragraph"), image,request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, "NO_TITLE",
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"));
+			} else {
+				ImageDAO dao = new ImageDAO();
+
+				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				CMSImage image = new CMSImage();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addTextParagraphSlideToLessonUpdate(request.getParameter("paragraph"),image,request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, "NO_TITLE",
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
+			}
+
+			break;
+		
 		case "ONLY_TITLE":
 
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
