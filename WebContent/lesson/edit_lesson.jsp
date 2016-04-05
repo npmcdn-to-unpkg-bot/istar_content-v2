@@ -358,40 +358,28 @@
                 Validation.lessonValidation();
             });
 
-            //Checkbox validation for correct options
-            $(':checkbox').on(
-            	    'change',
-            	    function() {
-            	        var th = $(this),
-            	            name = th.prop('name');
-            	        if ((th.is(':checked')) && $("#question_type").val() == 1) {
-            	            $(':checkbox[name="' + name + '"]').not($(this)).prop(
-            	                'checked', false);
-            	        }
-            	    });
+            $('input.correctOption').on('change', function() {
+            	if($('#qType').val()=='1'){
+                $('input.correctOption').not(this).prop('checked', false);  
+            	}
+            });
 
-            	$(document).ready(function() {
-            	    var limit = 1;
-            	    $("#sky-form4").validate({
-            	            rules: {
-            	                "answers": {
-            	                    required: function(element) {
-            	                        return $('input[type="checkbox"]:checked').length > 0;
-            	                    }
-            	                }
-            	            },
-            	            
-            	            messages: {
-            	                "answers": {
-            	                    required: "Please select checkboxes for correct answer(s)",
-            	                }
-            	            },
-
-            	            errorPlacement: function(error, element) {
-            	                error.appendTo('.err');
-            	            },
-            	        });
-            	});
+            $('#qType').on('change', function() {
+            	if($('#qType').val()=='1'){
+            		$('input.correctOption').removeAttr('checked');
+            	}
+            });
+            
+            $(document).ready(function() {
+                $('#checkBtn').on('click', function(e) {
+                    var cnt = $("input[name='answers']:checked").length;
+                    if (cnt < 1) 
+                    {
+                    	$("#err").text("(Note: At least one correct option should be selected before proceeding)");
+                        e.preventDefault();
+                    }
+                });
+            });
             
             function openWin(url) {
                 myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
