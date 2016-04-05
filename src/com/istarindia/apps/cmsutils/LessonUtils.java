@@ -332,8 +332,7 @@ public class LessonUtils {
                 QuestionService questionService = new QuestionService();
                 Question question = new Question();
                 question = questionService.findById(Integer.parseInt(questionId));
-                if (number_of_questions < assessment.getNumber_of_questions()) {
-
+                
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
@@ -409,7 +408,7 @@ public class LessonUtils {
 
                     out.append("</fieldset>"
                             + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-                }
+                
                 out.append("<div class=' col-md-12 '>");
                 out.append("<div class='panel panel-sea margin-bottom-40'>");
                 out.append("<div class='panel-heading'>");

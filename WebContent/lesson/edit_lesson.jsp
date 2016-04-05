@@ -94,9 +94,7 @@
             <BR />
             <div class="container-fluid height-1000"
                  style="padding: 0px !important">
-                <div class="row">
                     <div class="col-md-4">
-
                         <div class="col-md-12">
                             <div class=" col-md-12 ">
                                 <div class="panel panel-sea">
@@ -312,13 +310,9 @@
                             }
                         %>
                     </div>
-
-                </div>
-
             </div>
             <jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
             </div>
-
 
             <!-- JS Global Compulsory -->
             <script type="text/javascript"
