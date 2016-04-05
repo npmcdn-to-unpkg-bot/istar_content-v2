@@ -5,14 +5,8 @@
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-
-String pptID = request.getParameter("ppt_id");
-pptID = pptID.split("\\?")[0]; 
-if(pptID.contains("\\?")) {
-	//System.err.println("Kamini");
-}
-
-Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
+Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+int cm_session_id = ppt.getLesson().getCmsession().getId();
 %><!doctype html>
 <html lang="en">
 <head>
@@ -20,70 +14,51 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(pptID));
 
 <title>reveal.js The HTML Presentation Framework</title>
 
-<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-<meta name="author" content="Hakim El Hattab">
+ <link href="<%=baseURL %>impress/css/video-js.css" rel="stylesheet">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/css/impress.css" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/css/bootstrap.css" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/css/substep.css" rel="stylesheet" />
+    <% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+%><link href="<%=baseURL %>impress/css/style.css" rel="stylesheet" type="text/css"  />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<%  } else { %>
+<link href="<%=baseURL %>impress/css/style.css" rel="stylesheet" type="text/css"  />
+<%  } %>
 
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/<%=ppt.getLesson().getLesson_theme().toLowerCase() %>.css" id="theme">
-
-<!-- Code syntax highlighting -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 480px)" />
-<!-- Printing and PDF exports -->
-<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL %>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL %>assets/plugins/reveal/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-
-<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
 </head>
-<body>
 
-	<div class="reveal <%=ppt.getLesson().getLesson_subject() %>___<%=ppt.getLesson().getLesson_theme().toLowerCase() %>" style="background-image: url('<%=baseURL %>assets/plugins/reveal/css/images/<%=ppt.getLesson().getLesson_subject() %>.png');" >
+<body class="impress-not-supported" id="ppt" data-next_item="<%=request.getAttribute("next_item")%>" data-ppt_ID="<%=ppt.getId() %>">
+<!-- <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div> -->
 
-		<div class="slides">
-			<%=((new CMSerializer()).serializeLesson(ppt,  ppt.getLesson().getLesson_subject())) %>
+<div id="impress">
+
+			<%=((new CMSerializerImpress()).serializeLesson(ppt)) %>
 
 		</div>
 
-		<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
-		<script src="<%=baseURL %>assets/plugins/reveal/js/reveal.js"></script>
+	<!--[if lt IE 9]>
+		<script src="assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="assets/crossbrowserjs/respond.min.js"></script>
+		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+<script src="<%=baseURL %>impress/js/substeps2.js"></script> 
+<script src="<%=baseURL %>impress/js/impress.js"></script>  <script src="<%=baseURL %>impress/js/video.js"></script>
 
-		<script>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: false,
-				center: true,
-
-				transition: 'none', // none/fade/slide/convex/concave/zoom
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: '<%=baseURL %>assets/plugins/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/notes/notes.js', async: true }
-				]
-			});
-
-		</script>
+<script>
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+    	 impress().init();
+  }
+}
+</script>
 
 		<!-- Everything below this point is only used for the reveal.js demo page -->
 </body>
 </html>
+`

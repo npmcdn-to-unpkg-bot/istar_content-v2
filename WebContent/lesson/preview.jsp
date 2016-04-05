@@ -1,4 +1,4 @@
-	<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
+<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.istarindia.cms.lessons.*"%>
@@ -6,6 +6,7 @@
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+int cm_session_id = ppt.getLesson().getCmsession().getId();
 %><!doctype html>
 <html lang="en">
 <head>
@@ -13,174 +14,56 @@ Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getPa
 
 <title>reveal.js The HTML Presentation Framework</title>
 
-<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-<meta name="author" content="Hakim El Hattab">
+ <link href="<%=baseURL %>impress/css/video-js.css" rel="stylesheet">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/css/impress.css" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/css/bootstrap.css" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/css/substep.css" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/cube/touch.css" rel="stylesheet" />
+    <% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+%><link href="<%=baseURL %>impress/css/mobile.css" rel="stylesheet" type="text/css"  />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<%  } else { %>
+<link href="<%=baseURL %>impress/css/mobile.css" rel="stylesheet" type="text/css"  />
+<%  } %>
 
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/<%=ppt.getLesson().getLesson_theme().toLowerCase() %>.css" id="theme">
-
-<!-- Code syntax highlighting -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<% 
-String mobile="";
-
-if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-	//System.err.println("This is Mobile");
-	mobile="mobile_";
-%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
-<%  } else { mobile="mobile_";
-%>
-	
-	<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
-<%  } %><!-- Printing and PDF exports -->
-<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL %>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL %>assets/plugins/reveal/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-
-<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
 </head>
 
-<body>
+<body class="impress-not-supported" id="ppt" data-next_item="<%=request.getAttribute("next_item")%>" data-ppt_ID="<%=ppt.getId() %>">
+<!-- <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div> -->
 
-	<div class="reveal <%=ppt.getLesson().getLesson_subject() %>___<%=ppt.getLesson().getLesson_theme().toLowerCase() %>" style="    background-size: cover;background-image: url('<%=baseURL %>assets/plugins/reveal/css/images/<%=mobile %><%=ppt.getLesson().getLesson_subject() %>.png');" >
+<div id="impress">
 
-		<div class="slides">
-			<%=((new CMSerializer()).serializeLesson(ppt, ppt.getLesson().getLesson_subject())) %>
+			<%=((new CMSerializerImpress()).serializeLesson(ppt)) %>
 
 		</div>
 
-		<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
-		<script src="<%=baseURL %>assets/plugins/reveal/js/reveal.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL %>assets/js/typed.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/funnel.js"></script>
-		<script>
+	<!--[if lt IE 9]>
+		<script src="assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="assets/crossbrowserjs/respond.min.js"></script>
+		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+<script src="<%=baseURL %>impress/js/jquery-1.9.1.min.js"></script> 
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: false,
-				center: false,
+<script src="<%=baseURL %>impress/js/substeps2.js"></script> 
+<script src="<%=baseURL %>impress/js/impress.js"></script>  
+<script src="<%=baseURL %>impress/js/video.js"></script>
+<script src="<%=baseURL %>impress/cube/touch.js"></script>
+<script src="<%=baseURL %>impress/cube/mousetrap.min.js"></script>
 
-				transition: 'none', // none/fade/slide/convex/concave/zoom
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: '<%=baseURL %>assets/plugins/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/notes/notes.js', async: true }
-				]
-			});
-			
-			 document.onreadystatechange = function () {
-			     if (document.readyState == "complete") {
-			    	 console.log("Ready");
-			    	 
-			    	 Reveal.addEventListener( 'slidechanged', function( event ) {
-			    		console.log("Thsi is a slide transitin");
-			    	} );
-			    	
-			   }
-			 }
-			
-			
-			 try {
-				 $('#pyramid').highcharts({
-					data : {
-						table : 'datatable'
-					},
-					chart : {
-						type : 'pyramid',
-						backgroundColor : null,
-						height: 900
-
-					},
-					title : {
-						text : ''
-					},
-					yAxis : {
-						allowDecimals : false,
-						title : {
-							text : 'Units'
-						}
-					}, xAxis: {
-			            labels: {
-			                style: {
-			                    color: 'red',
-			                    fontSize:'35px'
-			                }
-			            }
-			        }, 
-			        credits: false,
-			        plotOptions: {
-			            series: {
-			                dataLabels: {
-			                    enabled: false,
-			                    format: '<b>{point.name}</b> ({point.y:,.0f})',
-			                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
-			                    softConnector: true
-			                }
-			            }
-			        }
-
-				});
-				$('#funnel').highcharts({
-					data : {
-						table : 'datatable'
-					},
-					chart : {
-						type : 'funnel',
-						backgroundColor : null,
-						height: 900
-
-					},
-					title : {
-						text : ''
-					},
-					yAxis : {
-						allowDecimals : false,
-						title : {
-							text : 'Units'
-						}
-					}, 
-					credits: false,
-					 plotOptions: {
-				            series: {
-				                dataLabels: {
-				                    enabled: false,
-				                    format: '<b>{point.name}</b> ({point.y:,.0f})',
-				                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
-				                    softConnector: true
-				                }
-				            }
-				        }
-				});
-				} catch (e) {
-
-				}
-
-		</script>
+<script>
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+    	 impress().init();
+  }
+}
+</script>
 
 		<!-- Everything below this point is only used for the reveal.js demo page -->
 </body>
 </html>
+`
