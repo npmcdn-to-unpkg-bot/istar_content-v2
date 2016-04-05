@@ -193,7 +193,7 @@ public class LessonUtils {
                 Integer number_of_questions = new Integer(0);
                 AssessmentService assessmentService = new AssessmentService();
                 number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-                if (number_of_questions < assessment.getNumberOfQuestions()) {
+                if (number_of_questions < assessment.getNumber_of_questions()) {
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
@@ -215,7 +215,7 @@ public class LessonUtils {
                     out.append("</div></section></br>"
                             + "<div class='row'><section class='col col-md-4'><label>Question Type</label> "
                             + "<label class='input'>"
-                            + "<select class='form-control valid' name='question_type' style='margin-right: 50px'>"
+                            + "<select class='form-control valid' id='qType' name='question_type' style='margin-right: 50px'>"
                             + "<option value='1'>Single correct option</option>"
                             + "<option value='2'>Multiple correct options</option></select></label> </section>"
                             + "<section class='col col-md-4'><label>Difficulty Level</label> "
@@ -233,17 +233,17 @@ public class LessonUtils {
                             + "</div>"
                             + "<section><label>Question Text</label> "
                             + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'></TEXTAREA> </label> </section> "
-                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='1'><i></i>Option 1</label><label class='input'> "
+                            + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='1'><i></i>Option 1</label><label class='input'> "
                             + "<TEXTAREA NAME='option1' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='2'><i></i>Option 2</label><label class='input'> "
+                            + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='2'><i></i>Option 2</label><label class='input'> "
                             + "<TEXTAREA NAME='option2' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='3'><i></i>Option 3</label> <label class='input'> "
+                            + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='3'><i></i>Option 3</label> <label class='input'> "
                             + "<TEXTAREA NAME='option3' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='4'><i></i>Option 4</label> <label class='input'> "
+                            + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='4'><i></i>Option 4</label> <label class='input'> "
                             + "<TEXTAREA NAME='option4' ROWS='2' cols='25'></TEXTAREA> </label> </section> "
-                            + "<section> <label class='checkbox'><input type='checkbox' name='answers'  value='5'><i></i>Option 5</label> <label class='input'> "
+                            + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='5'><i></i>Option 5</label> <label class='input'> "
                             + "<TEXTAREA NAME='option5' ROWS='2' cols='25'></TEXTAREA> </label> </section> </fieldset> "
-                            + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label class='err' style='color:red'></label></footer></form></div></div></div>");
+                            + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label id='err' style='color:red'></label></footer></form></div></div></div>");
                     }
                 out.append("<div class=' col-md-12 '>");
                 out.append("<div class='panel panel-sea margin-bottom-40'>");
@@ -332,8 +332,7 @@ public class LessonUtils {
                 QuestionService questionService = new QuestionService();
                 Question question = new Question();
                 question = questionService.findById(Integer.parseInt(questionId));
-                if (number_of_questions < assessment.getNumberOfQuestions()) {
-
+                
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
@@ -409,7 +408,7 @@ public class LessonUtils {
 
                     out.append("</fieldset>"
                             + "<footer> <button type='submit' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
-                }
+                
                 out.append("<div class=' col-md-12 '>");
                 out.append("<div class='panel panel-sea margin-bottom-40'>");
                 out.append("<div class='panel-heading'>");
@@ -599,7 +598,7 @@ public class LessonUtils {
 					+ "<label class='input'><input readonly='readonly' value="+assessment.getAssessmentType()+">"
 					+ "</label> </section> "
 					+ "<section class='col col-5'> <label>Number of Questions</label> "
-					+ "<label class='input'><input readonly='readonly' value="+assessment.getNumberOfQuestions()+"> </label> </section> "
+					+ "<label class='input'><input readonly='readonly' value="+assessment.getNumber_of_questions()+"> </label> </section> "
 					+ "<section class='col col-2' style='margin-top: 2.6%'> <a href=# onclick='openWin(\"/content/lesson/preview_assessment.jsp?assessment_id="+assessment.getId()+"\")' rel='float-shadow' class='btn-u btn-u-default float-shadow'>Preview</a> </section>");
 
 					out.append(" </div>");
