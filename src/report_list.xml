@@ -1000,4 +1000,46 @@
 		</sql>
 		<title> All assessments</title>
 	</reports>
+	
+	<reports id="90" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" isVisible="true" name="cid" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="mid" />
+		<column columnHandler="NONE" display_name="Session ID" isVisible="true" name="cmid" />
+		<column columnHandler="NONE" display_name="Lesson ID" isVisible="true" name="lid" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Module Name" isVisible="true" name="module_name" />
+		<column columnHandler="NONE" display_name="title" isVisible="true" name="title" />
+		
+		
+		<sql>SELECT C.id AS cid,
+       M.id AS mid,
+       CM.id AS cmid,
+       L.id AS lid,
+       C.course_name,
+       M.module_name,
+       L.title
+FROM course C,
+     cmsession CM,
+     module M,
+     lesson L,
+     task T,
+     student S,
+     batch_group BG,
+     batch_students BS,
+     batch_course BC
+WHERE C.id = M.course_id
+  AND M.id = CM.module_id
+  AND CM.id = L.session_id
+  AND L.id=T.item_id
+  AND T.item_type='LESSON'
+  AND T.status='PUBLISHED'
+  AND S.istar_authorization_token = :istar_authorization_token
+  AND BC.course_id=C.id
+  AND BC.batch_group_id=BG.id
+  AND BS.student_id= S.id
+  AND BS.batch_group_id=BG.id
+
+		</sql>
+		<title> Course List</title>
+	</reports>
 </istar_reports>
