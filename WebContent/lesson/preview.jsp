@@ -21,6 +21,7 @@ int cm_session_id = ppt.getLesson().getCmsession().getId();
     <link href="<%=baseURL %>impress/css/bootstrap.css" rel="stylesheet" />
     <link href="<%=baseURL %>impress/css/substep.css" rel="stylesheet" />
     <link href="<%=baseURL %>impress/cube/touch.css" rel="stylesheet" />
+    <link href="<%=baseURL %>impress/themes/<%=ppt.getLesson().getLesson_theme().toLowerCase() %>.css" rel="stylesheet" />
     <% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
 %><link href="<%=baseURL %>impress/css/mobile.css" rel="stylesheet" type="text/css"  />
 

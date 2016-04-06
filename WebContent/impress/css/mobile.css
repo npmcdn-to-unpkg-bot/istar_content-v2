@@ -76,6 +76,7 @@ body     { pointer-events: auto;      pointer-events: auto;
 
 a {
   text-decoration: none;
+  color: none !important;
 }
 
 
@@ -193,16 +194,16 @@ img.updated {
 	
 }
 
-.SIMPLE_LIST___ONLY_TITLE_LIST  h2 {
+.SIMPLE_LIST___ONLY_TITLE_LIST  h2 , .POLE_LIST___ONLY_TITLE_LIST  h2 {
 	line-height: 1.2;
 	font-size: 110%;font-size: 170%;
 	margin-bottom: 15%;font-variant: small-caps;
 }
 
 
-.SIMPLE_LIST___ONLY_TITLE_LIST  ol li.substep  {
+.SIMPLE_LIST___ONLY_TITLE_LIST  ol li.substep , .POLE_LIST___ONLY_TITLE_LIST  h2  {
 	line-height: 1.2;
-	font-size: 100%;
+	font-size: 180%;
 	margin-bottom: 5%;list-style: disc;
 	margin-left: 10%;
 }
@@ -222,3 +223,13 @@ img.updated {
 	font-size: 120%;
 	
 }
+
+
+.POLE_LIST___ONLY_TITLE_LIST  ul li {
+	line-height: 1.2;
+	font-size: 120%;
+	margin-bottom: 5%;
+	list-style: square;
+	margin-left: 10%;
+}
+
