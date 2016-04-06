@@ -92,21 +92,15 @@ public class EditAssessmentQuestionController extends HttpServlet {
 
                         if (fieldname.startsWith("option_")) {
                             String id = fieldname.substring(fieldname.indexOf("_") + 1, fieldname.length());
-                            String correctOption = request.getParameter("answers_"+id) != null ? request.getParameter("answers_"+id) : "off";
-                             System.out.println("correctOption : " + id + "  " + correctOption);
-                             if(correctOption.equalsIgnoreCase("on")) {
-                                  optionService.updateNewOption(Integer.parseInt(id), request.getParameter(fieldname), questionService.findById(Integer.parseInt(questionId1)), 1);
-                             } else {
-                                  optionService.updateNewOption(Integer.parseInt(id), request.getParameter(fieldname), questionService.findById(Integer.parseInt(questionId1)), null);
-                             }
-                           
+                            String correctOption = request.getParameter("answers_" + id) != null ? request.getParameter("answers_" + id) : "off";
+                            if (correctOption.equalsIgnoreCase("on")) {
+                                optionService.updateNewOption(Integer.parseInt(id), request.getParameter(fieldname), questionService.findById(Integer.parseInt(questionId1)), 1);
+                            } else {
+                                optionService.updateNewOption(Integer.parseInt(id), request.getParameter(fieldname), questionService.findById(Integer.parseInt(questionId1)), null);
+                            }
 
                         }
-//                        if (fieldname.startsWith("answers_")) {
-//                             String id = fieldname.substring(fieldname.indexOf("_") + 1, fieldname.length());
-//                             System.out.println("id : " + id + "  " + s[0]);
-//                            
-//                        }
+
                     }
 
                     request.setAttribute("__EDIT_QUESTION", "true");
