@@ -233,3 +233,38 @@ img.updated {
 	margin-left: 10%;
 }
 
+
+/* LADDER_LIST___ONLY_TITLE_LIST */
+
+.LADDER_LIST___ONLY_TITLE_LIST h2 {
+	    font-size: 120%;
+    font-size: 120%;
+    margin-top: 10%;
+    text-align: right;    margin-bottom: 29%;    color: #DAE6E5;
+}
+
+.LADDER_LIST___ONLY_TITLE_LIST {
+	background-image: url('/content/impress/ladder/ladder-reference.png')
+}
+
+
+.LADDER_LIST___ONLY_TITLE_LIST ol li {
+      height: 280px;
+    width: 61%;
+    margin-left: 38%;}
+	
+.LADDER_LIST___ONLY_TITLE_LIST ol li div.heading {
+text-align: right;
+    margin-bottom: 10%;
+    color: #E4EEEF;
+    font-size: 105%;
+	}
+	
+	.LADDER_LIST___ONLY_TITLE_LIST ol li p {
+	      text-align: right;
+    margin-bottom: 10%;
+    color: white;
+    font-size: 70%;
+    line-height: 1.2;
+	}
+
