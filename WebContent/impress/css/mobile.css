@@ -200,8 +200,21 @@ img.updated {
 	margin-bottom: 15%;font-variant: small-caps;
 }
 
+.POLE_LIST___ONLY_TITLE_LIST{
+		background-image: url('/content/impress/pole/pole.png')
+	
+	
+}
 
-.SIMPLE_LIST___ONLY_TITLE_LIST  ol li.substep , .POLE_LIST___ONLY_TITLE_LIST  h2  {
+
+.POLE_LIST___ONLY_TITLE_LIST  h2{
+	line-height: 1.2;
+	font-size: 120%;
+	margin-bottom: 5%;list-style: disc;
+	color:#13ACC2;
+	float:left;
+}
+.SIMPLE_LIST___ONLY_TITLE_LIST  ol li.substep  {
 	line-height: 1.2;
 	font-size: 180%;
 	margin-bottom: 5%;list-style: disc;
@@ -226,12 +239,14 @@ img.updated {
 
 
 .POLE_LIST___ONLY_TITLE_LIST  ul li {
-	line-height: 1.2;
-	font-size: 120%;
-	margin-bottom: 5%;
-	list-style: square;
-	margin-left: 10%;
+	line-height: 1.5;
+    font-size: 74%;
+    margin-bottom: 5%;
+    margin-left: 10%;
+    margin-top: 21%;
 }
+
+
 
 
 /* LADDER_LIST___ONLY_TITLE_LIST */
