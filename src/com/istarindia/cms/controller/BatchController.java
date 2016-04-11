@@ -134,7 +134,7 @@ public class BatchController extends HttpServlet {
                             }
                         }
 
-                    }
+                    }  
 
                     studentList = new ArrayList();
                     studentList = studentService.getAllStudents();
