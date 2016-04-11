@@ -107,7 +107,7 @@
                                         <th style='max-width:100px !important; word-wrap: break-word;'>&nbsp;</th>
                                         </thead>
                                         <tbody>
-
+ 
                                             <c:forEach items="${batchList}" var="item">
 
 
