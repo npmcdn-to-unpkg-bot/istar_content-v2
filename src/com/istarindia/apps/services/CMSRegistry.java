@@ -103,6 +103,8 @@ public class CMSRegistry {
 		listTypes.add(ListTypes.BURGER_LIST);
 		listTypes.add(ListTypes.POLE_LIST);
 		listTypes.add(ListTypes.LADDER_LIST);
+		listTypes.add(ListTypes.VERTICAL_POLE_LIST);
+
 	}
 
 	public static CMSFolder root = CMSFolder.init();
