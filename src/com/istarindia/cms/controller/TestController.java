@@ -118,11 +118,11 @@ public class TestController extends HttpServlet {
 
                     sb.append("<select name='test_time_min'>");
                     for (int x = 0; x < 60; x++) {
-                        if (test.getAssessmentMinutes() != null && test.getAssessmentMinutes() == x) {
-                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
-                        } else {
-                            sb.append("<option value='" + x + "'>" + x + "</option>");
-                        }
+//                        if (test.getAssessmentMinutes() != null && test.getAssessmentMinutes() == x) {
+//                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
+//                        } else {
+//                            sb.append("<option value='" + x + "'>" + x + "</option>");
+//                        }
 
                     }
                     sb.append("</select>");
@@ -131,11 +131,11 @@ public class TestController extends HttpServlet {
 
                     sb.append("<select name='test_duration_min'>");
                     for (int x = 0; x < 60; x++) {
-                        if (test.getAssessmentDurationMinutes() != null && test.getAssessmentDurationMinutes() == x) {
-                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
-                        } else {
-                            sb.append("<option value='" + x + "'>" + x + "</option>");
-                        }
+//                        if (test.getAssessmentDurationMinutes() != null && test.getAssessmentDurationMinutes() == x) {
+//                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
+//                        } else {
+//                            sb.append("<option value='" + x + "'>" + x + "</option>");
+//                        }
 
                     }
                     sb.append("</select>");
@@ -144,11 +144,11 @@ public class TestController extends HttpServlet {
 
                     sb.append("<select name='test_time_hr'>");
                     for (int x = 0; x < 24; x++) {
-                        if (test.getAssessmentHour() != null && test.getAssessmentHour() == x) {
-                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
-                        } else {
-                            sb.append("<option value='" + x + "'>" + x + "</option>");
-                        }
+//                        if (test.getAssessmentHour() != null && test.getAssessmentHour() == x) {
+//                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
+//                        } else {
+//                            sb.append("<option value='" + x + "'>" + x + "</option>");
+//                        }
 
                     }
                     sb.append("</select>");
@@ -157,11 +157,11 @@ public class TestController extends HttpServlet {
 
                     sb.append("<select name='test_duration_hr'>");
                     for (int x = 0; x < 24; x++) {
-                        if (test.getAssessmentDurationHours() != null && test.getAssessmentDurationHours() == x) {
-                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
-                        } else {
-                            sb.append("<option value='" + x + "'>" + x + "</option>");
-                        }
+//                        if (test.getAssessmentDurationHours() != null && test.getAssessmentDurationHours() == x) {
+//                            sb.append("<option value='" + x + "' selected=selected>" + x + "</option>");
+//                        } else {
+//                            sb.append("<option value='" + x + "'>" + x + "</option>");
+//                        }
                     }
                     sb.append("</select>");
                     request.setAttribute("durationhrdrop", sb.toString());
@@ -199,7 +199,7 @@ public class TestController extends HttpServlet {
                     if (!testId.equalsIgnoreCase("0")) {
                         test = service.getAssessment(Integer.parseInt(testId));
                         List<LearningObjective> objLs =  new ArrayList();
-                        objLs = (List<LearningObjective>) test.getLearningObjectiveCollection();
+                       // objLs = (List<LearningObjective>) test.getLearningObjectiveCollection();
                         for (int a = 0; a< objLs.size(); a++) {
                             oldLearningObjectiveList.add(objLs.get(a).getId());
                         }

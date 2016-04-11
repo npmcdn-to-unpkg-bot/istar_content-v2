@@ -38,7 +38,7 @@
                     <td><fmt:formatDate pattern="dd/MM/yyyy" value="${test.assessmentDate}"/>   </td>
                     <td>${test.assessmentHour} : ${test.assessmentMinutes}</td>
                     <td>${test.assessmentDurationHours} : ${test.assessmentDurationMinutes}</td>
-                    <td>${test.number_of_questions}</td>
+                    <td>${test.numberOfQuestions}</td>
                     <td><a href="tests_controller?_action=foredit&test_id=${test.id}">Edit</a></td>
                 </tr>
                 <c:set var="count" value="${count +1}" scope="page"/>

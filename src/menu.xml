@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <menu>
     <!-- Added By Kunal -->
-    <parent_links display_name="Event Listing">
+    <parent_links display_name="Batch">
+        <child_links display_name="View Batch-groups" url="/content/batch_controller?_action=findallbatchgrps" valid_roles="content_admin"/>
+        <child_links display_name="Create Batch-groups" url="/content/batch_controller?_action=createbatchgrp" valid_roles="content_admin"/>
+    </parent_links>
+<!--    <parent_links display_name="Event Listing">
         <child_links display_name="All Event Listing" url="/content/event_controller?_action=findall" valid_roles="content_admin" />
         <child_links display_name="Event Listing for Today" url="/content/event_controller?_action=findbydate" valid_roles="content_admin" />
         <child_links display_name="Event Listing for Week" url="/content/event_controller?_action=findbyweek" valid_roles="content_admin" />
         <child_links display_name="Event Listing for Month" url="/content/event_controller?_action=findbymonth" valid_roles="content_admin" />
-    </parent_links> 
+    </parent_links> -->
     <parent_links display_name="Session Listing">
         <child_links display_name="All Session Listing" url="/content/session_controller?_action=findall" valid_roles="content_admin" />
     </parent_links>

@@ -125,7 +125,7 @@
                     </c:choose>
 
                 </p>
-                     <p>Question Count: <input type="text" name="question_count" value="${testObject.number_of_questions}"/></p>           
+                     <p>Question Count: <input type="text" name="question_count" value="${testObject.numberOfQuestions}"/></p>           
 
                 <p>Test Date: <input type="text" id="datepicker" name="test_date" value='<fmt:formatDate pattern="dd/MM/yyyy" value="${testObject.assessmentDate}"/>'/>(dd/MM/yyyy) &nbsp;&nbsp;&nbsp; Hour : ${hourdrop} &nbsp;&nbsp;&nbsp; Minute : &nbsp;&nbsp;&nbsp; ${mindrop} </p>
                 <p>Duration:  HH: ${durationhrdrop} MM: ${durationmindrop} </p>
