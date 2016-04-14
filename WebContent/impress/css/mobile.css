@@ -1,0 +1,327 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+    min-height: 740px;
+    -webkit-font-smoothing: antialiased;font-family: 'Roboto', sans-serif;
+}
+
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+
+
+
+b, strong { font-weight: bold; 
+text-transform: uppercase;line-height: 2;
+text-align: center; }
+i, em { font-style: italic}
+
+
+/* enable clicking on elements 'hiding' behind body in 3D */
+body     { pointer-events: auto;      pointer-events: auto;
+    background: #C7FFFC;}
+#impress { pointer-events: auto; }
+
+/* COMMON STEP STYLES */
+
+.step {
+    width: 900px;
+    padding: 40px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+    font-size: 48px;
+    background-color: #fefefe
+    line-height: 1.5;
+}
+
+
+
+a {
+  text-decoration: none;
+}
+
+
+
+
+
+#sticky #controls {
+  text-align: center;
+  width: 220px;
+  position: absolute;
+  left: 49%;
+  z-index: 99950;
+  margin: 0 0 0 -100px;
+  top: 8px;
+}
+
+
+
+
+.slide {
+  display: block;
+  width: 960px;
+  height: 1650px;
+  border-radius: 24px;
+  background-color: #4db6ac;
+  border: 2px solid rgba(0, 0, 0, .3);
+  color: white;
+  
+  background-size: cover;
+}
+.slide::BEFORE {
+	background-color: rgba(0, 0, 0, 0.37);
+  
+}
+
+
+.arrows {
+  color: #fdbb30;
+  width: 84px;
+  height: 22px;
+  margin: 2px 0 0 0px;
+  font-size: 22px;
+  line-height: 13px;
+  margin-right: 20px;
+  font-size: 1em;
+  position: relative;
+ z-index: 999999;
+}
+
+.arrows:hover { 
+color: #eeeeee;
+  -webkit-transition: all 0.25s linear;  
+     -moz-transition: all 0.25s linear;  
+      -ms-transition: all 0.25s linear;  
+       -o-transition: all 0.25s linear;  
+          transition: all 0.25s linear;
+}
+
+
+
+
+.step {
+margin: 0;
+opacity: 0.3;
+
+-webkit-transition: opacity 1s;
+-moz-transition:    opacity 1s;
+-ms-transition:     opacity 1s;
+-o-transition:      opacity 1s;
+transition:         opacity 1s;
+}
+
+ .step.active { opacity: 1 }
+
+p {
+  padding: 0.5em 0;
+}
+ 
+ 
+img.updated {
+	width: 100%;
+}
+
+
+.ONLY_TITLE  h2 {
+	text-align: center;
+	line-height: 1.2;
+	font-variant: small-caps;
+	font-size: 170%;
+}
+
+.ONLY_TITLE_IMAGE  h2 {
+	text-align: center;
+	line-height: 1.2;
+	font-size: 170%;
+}
+
+.ONLY_TITLE_PARAGRAPH  h2.updated, .ONLY_TITLE_IMAGE h2.updated {
+	text-align: center;
+	line-height: 1.2;font-variant: small-caps;
+	border-bottom: 1px solid white;font-size: 170%;
+}
+
+.ONLY_TITLE_PARAGRAPH  div.paragraph {
+	margin-top: 10%;
+	line-height: 1.2;
+	font-size: 110%;
+	
+}
+
+.ONLY_PARAGRAPH  div.paragraph {
+	margin-top: 10%;
+	line-height: 1.2;
+	font-size: 110%;
+	
+}
+
+.SIMPLE_LIST___ONLY_TITLE_LIST  h2 {
+	line-height: 1.2;
+	font-size: 110%;font-size: 170%;
+	margin-bottom: 15%;font-variant: small-caps;
+}
+
+
+.SIMPLE_LIST___ONLY_TITLE_LIST  ol li.substep  {
+	line-height: 1.2;
+	font-size: 100%;
+	margin-bottom: 5%;list-style: disc;
+	margin-left: 10%;
+}
+
+.PROCESS_LIST___ONLY_TITLE_LIST h2{
+	margin-bottom: 200px;
+	text-align: center;
+	line-height: 1.2;
+	font-variant: small-caps;
+	
+}
+
+
+.viewport {
+    -webkit-perspective: 800px;
+    -webkit-perspective-origin: 50% 200px;
+    -webkit-transform: scale(0.75,0.75);
+    -moz-perspective: 800px;
+    -moz-perspective-origin: 50% 200px;
+    -moz-transform: scale(0.75,0.75);
+    perspective: 800px;
+    perspective-origin: 50% 200px;
+    transform: scale(0.75,0.75);
+}
+
+.cube {
+    position: relative;
+    margin: 0 auto 100px;
+    height: 400px;
+    width: 400px;
+    -webkit-transition: -webkit-transform 50ms linear;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotateX(-10deg) rotateY(20deg);
+    -moz-transition: -moz-transform 50ms linear;
+    -moz-transform-style: preserve-3d;
+    -moz-transform: rotateX(-10deg) rotateY(20deg);
+    transition: transform 50ms linear;
+    transform-style: preserve-3d;
+    transform: rotateX(-10deg) rotateY(20deg);
+}
+
+.cube h2 {
+    color: #fff;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.cube a {
+    color: #fff;
+}
+
+.cube > div {
+    position: absolute;
+    height: 360px;
+    width: 360px;
+    padding: 20px;
+    background-color: rgba(50, 50, 50, 0.85);
+    font-size: 1em;
+    line-height: 1em;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 3px;
+}
+
+.cube > div:first-child  {
+    -webkit-transform: rotateX(90deg) translateZ(200px);
+    -moz-transform: rotateX(90deg) translateZ(200px);
+    transform: rotateX(90deg) translateZ(200px);
+}
+
+.cube > div:nth-child(2) {
+    -webkit-transform: translateZ(200px);
+    -moz-transform: translateZ(200px);
+    transform: translateZ(200px);
+}
+
+.cube > div:nth-child(3) {
+    -webkit-transform: rotateY(90deg) translateZ(200px);
+    -moz-transform: rotateY(90deg) translateZ(200px);
+    transform: rotateY(90deg) translateZ(200px);
+    text-align: center;
+}
+
+.cube > div:nth-child(4) {
+    -webkit-transform: rotateY(180deg) translateZ(200px);
+    -moz-transform: rotateY(180deg) translateZ(200px);
+    transform: rotateY(180deg) translateZ(200px);
+}
+
+.cube > div:nth-child(5) {
+    -webkit-transform: rotateY(-90deg) translateZ(200px);
+    -moz-transform: rotateY(-90deg) translateZ(200px);
+    transform: rotateY(-90deg) translateZ(200px);
+}
+
+.cube > div:nth-child(5) p {
+    text-align: center;
+    font-size: 2.77em;
+    margin: 40px;
+    line-height: 60px;
+}
+
+.cube > div:nth-child(6) {
+    -webkit-transform: rotateX(-90deg) rotate(180deg) translateZ(200px);
+    -moz-transform: rotateX(-90deg) rotate(180deg) translateZ(200px);
+    transform: rotateX(-90deg) rotate(180deg) translateZ(200px);
+}
+
+object {
+    opacity: 0.5;
+}
+
+object:hover {
+    opacity: 1;
+}
+
+
+.ONLY_TITLE_PARAGRPH_IMAGE  p {
+	line-height: 1.2;
+	font-size: 120%;
+	
+}

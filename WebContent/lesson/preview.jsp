@@ -39,7 +39,7 @@ int cm_session_id = ppt.getLesson().getCmsession().getId();
 
 <div id="impress">
 
-			<%=((new CMSerializerImpress()).serializeLesson(ppt)) %>
+			<%=((new CMSerializerImpress()).serializeLesson(ppt,"mobile")) %>
 
 		</div>
 
