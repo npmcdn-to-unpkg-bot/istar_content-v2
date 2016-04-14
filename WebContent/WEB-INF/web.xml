@@ -19,6 +19,6 @@
     </filter>
     <filter-mapping>
         <filter-name>ImageFilter</filter-name>
-        <url-pattern>/play_session</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>
