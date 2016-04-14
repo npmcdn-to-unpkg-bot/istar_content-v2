@@ -15,7 +15,9 @@ import com.istarindia.apps.services.BatchService;
 import com.istarindia.apps.services.CourseService;
 import com.istarindia.apps.services.StudentService;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -61,7 +63,6 @@ public class BatchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try {
             /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("_action") != null ? request.getParameter("_action") : "_NO_VALUE";
@@ -128,13 +129,12 @@ public class BatchController extends HttpServlet {
                         Iterator it = studentSet.iterator();
                         while (it.hasNext()) {
                             BatchStudents batchStudents = (BatchStudents) it.next();
-                            System.out.println("batchStudents : " + batchStudents.getId());
                             if (!stList.contains(batchStudents.getStudent().getId())) {
                                 stList.add(batchStudents.getStudent().getId());
                             }
                         }
 
-                    }  
+                    }
 
                     studentList = new ArrayList();
                     studentList = studentService.getAllStudents();
@@ -161,10 +161,8 @@ public class BatchController extends HttpServlet {
                             stList.add(Integer.parseInt(idString));
                         }
                     }
+                    batchService.updateBatchGrpStudents(Integer.parseInt(id), stList);
 
-                    if (!stList.isEmpty()) {
-                        batchService.updateBatchGrpStudents(Integer.parseInt(id), stList);
-                    }
                     request.setAttribute("batchGroupList", getTableString(1));
                     request.getRequestDispatcher("batch/batchgroup_listing.jsp").forward(request, response);
 
@@ -211,10 +209,20 @@ public class BatchController extends HttpServlet {
                     id = request.getParameter("batchGrpId") != null ? request.getParameter("batchGrpId") : "0";
                     String batchId1 = request.getParameter("batchId") != null ? request.getParameter("batchId") : "0";
                     String batchName = request.getParameter("name") != null ? request.getParameter("name") : "";
+                    String dateString = request.getParameter("scheduledate") != null ? request.getParameter("scheduledate") : "0";
+
                     if (batchId1.equalsIgnoreCase("")) {
-                        batchService.createBatch(Integer.parseInt(id), batchName);
+                        if (dateString.trim().length() == 0) {
+                            batchService.createBatch(Integer.parseInt(id), batchName, null);
+                        } else {
+                            batchService.createBatch(Integer.parseInt(id), batchName, getDate(dateString));
+                        }   
                     } else {
-                        batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, null);
+                        if (dateString.trim().length() == 0) {
+                            batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, null);
+                        } else {
+                            batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, getDate(dateString));
+                        }
                     }
                     batchGroup = new BatchGroup();
                     batchGroup = batchService.findById(Integer.parseInt(id));
@@ -233,6 +241,13 @@ public class BatchController extends HttpServlet {
                     request.setAttribute("batchList", batchList1);
                     request.setAttribute("batchGrpName", batchGrpName2);
                     request.getRequestDispatcher("batch/batch_listing.jsp").forward(request, response);
+                    break;
+
+                case "schedulebatch":
+                    id = request.getParameter("batchgrpid") != null ? request.getParameter("batchgrpid") : "0";
+                    request.setAttribute("batchGrpId", id);
+                    request.setAttribute("action", "create");
+                    request.getRequestDispatcher("batch/create_edit_batch.jsp").forward(request, response);
                     break;
 
                 default:
@@ -308,9 +323,10 @@ public class BatchController extends HttpServlet {
                     BatchGroup batchGroup = batchGroupList.get(x);
                     Set<BatchCourse> set = new HashSet();
                     BatchCourse batchCourse = new BatchCourse();
+
                     set = batchGroup.getBatchCourses();
-                    Iterator it = set.iterator();
-                    while (it.hasNext()) {
+                    if (!set.isEmpty()) {
+                        Iterator it = set.iterator();
                         batchCourse = (BatchCourse) it.next();
                     }
                     tableString.append("<tr>");
@@ -336,6 +352,17 @@ public class BatchController extends HttpServlet {
         }
 
         return tableString.toString();
+    }
+
+    private Date getDate(String stringDate) {
+        Date date = null;
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            date = formatter.parse(stringDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
-import com.istarindia.apps.games.services.GameSerializer;
+//import com.istarindia.apps.games.services.GameSerializer;
 
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.cms.game.*;
@@ -40,7 +40,8 @@ public class PlayGameController extends IStarBaseServelet{
 		IstarUser user =(IstarUser) request.getSession().getAttribute("user");
 		
 		
-		GameXML game = new GameSerializer().getGame(Integer.parseInt(request.getParameter("parent_item_id")));
+		//GameXML game = new GameSerializer().getGame(Integer.parseInt(request.getParameter("parent_item_id")));
+                GameXML game = null;
 		ArrayList<Asset> assets = game.getAssets();
 		int item_id=0;
 		if(request.getParameter("stage_type").equalsIgnoreCase("INFORMATION_ONLY"))
@@ -70,7 +71,8 @@ public class PlayGameController extends IStarBaseServelet{
 					}
 					String marking_scheme =  option.getMakringScheme();
 					
-				String results = new GameSerializer().eval(game.getId(), marking_scheme, user.getId());
+				//String results = new GameSerializer().eval(game.getId(), marking_scheme, user.getId());
+                                String results = "";
 					
 				System.out.println("new scheme="+results);
 					
@@ -101,7 +103,8 @@ public class PlayGameController extends IStarBaseServelet{
 				}
 				System.err.println("jumpto in multiple option single choice----"+option.getJump_to());
 				item_id = option.getJump_to();
-				String results =new GameSerializer().eval(game.getId(), option.getMakringScheme(), user.getId());
+				//String results =new GameSerializer().eval(game.getId(), option.getMakringScheme(), user.getId());
+                                String results ="";
 				String xx[]= results.split(";");
 				for(Asset a : game.getAssets())
 				{
