@@ -1,5 +1,5 @@
 <%-- 
-    Document   : batchgroup_listing
+    Document   : batch_schedule
     Created on : 08 April, 2016, 12:52:00 PM
     Author     : Kunal Chakravertti
 --%>
@@ -27,6 +27,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="favicon.ico">
@@ -76,14 +77,12 @@
 
         <!-- CSS Customization -->
         <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
-
-        <script src="assets/js/datetimepicker_css.js"></script>
-        <script type="text/javascript">
-            function clearText() {
-                document.getElementById('scheduledate').value = '';
-            }
-        </script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+            });</script>
     </head>
 
     <body>
@@ -92,7 +91,7 @@
             <jsp:include page="includes/header.jsp"></jsp:include>
                 <div class="breadcrumbs">
                     <div class="container-fluid ">
-                        <h1 class="pull-left">Create/Update Batch</h1>
+                        <h1 class="pull-left">Create/Update Batch-Group</h1>
 
                     </div>
 
@@ -112,18 +111,17 @@
                                                 Batch*</b>
                                         </label>
                                     </section>
-                                    <section>
-                                        <label>Scheduled At</label> <label class="input" >   </label> 
-                                        <c:if test="${batchObj.getBatchSchedules().isEmpty()}">
-                                            <input type="text" id="scheduledate" maxlength="25" size="25" readonly="readonly" name="scheduledate" value=''/> 
-                                        </c:if>
-                                        <c:if test="${!batchObj.getBatchSchedules().isEmpty()}">
-                                            <input type="text" id="scheduledate" maxlength="25" size="25" readonly="readonly" name="scheduledate" value='<fmt:formatDate pattern="dd/MM/yyyy hh:mm" value="${batchObj.getBatchSchedules().iterator().next().timestamp}"/>'/>
-                                        </c:if>
 
-                                        <img src="assets/images2/cal.gif" onclick="javascript:NewCssCal('scheduledate', 'DDMMYYYY', 'dropdown', true)" style="cursor:pointer"/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp; <a href="###" onclick="clearText();">Clear</a>
-                                    </section>
+                                    <c:if test="${action == 'edit'}">
+<!--                                        <section>
+                                            <label>Scheduled At</label> <label class="input" > <input
+                                                    value="" id="datepicker" type="text" name="date">
+                                                <b class="tooltip tooltip-bottom-right">Scheduled time</b>
+                                            </label>
+                                        </section>-->
+                                    </c:if>
+
+
                                     <input type="hidden" name="batchGrpId" value="${batchGrpId}"/>
                                     <input type="hidden" name="batchId" value="${batchId}"/>
                                 </fieldset>
@@ -183,39 +181,39 @@ type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 <script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 <script type="text/javascript">
-                                            function myFunction() {
-                                                var selectedElmsIds = $('#html').jstree("get_selected");
-                                                if (selectedElmsIds == "") {
-                                                    event.preventDefault();
-                                                    document.getElementById("err").innerHTML = "Please select the session and try again";
-                                                    return false;
-                                                }
-                                                else {
-                                                    document.getElementById("err").innerHTML = "";
-                                                }
-                                                $('#selected_items').val(selectedElmsIds);
-                                                console.log(selectedElmsIds);
+            function myFunction() {
+                var selectedElmsIds = $('#html').jstree("get_selected");
+                if (selectedElmsIds == "") {
+                    event.preventDefault();
+                    document.getElementById("err").innerHTML = "Please select the session and try again";
+                    return false;
+                }
+                else {
+                    document.getElementById("err").innerHTML = "";
+                }
+                $('#selected_items').val(selectedElmsIds);
+                console.log(selectedElmsIds);
 
-                                            }
-                                            jQuery(document).ready(function () {
-                                                App.init();
-                                                Validation.lessonValidation();
-                                                $('#html1').jstree({
-                                                    "core": {
-                                                        "multiple": false,
-                                                        "themes": {
-                                                            "variant": "large"
-                                                        }
-                                                    },
-                                                    "checkbox": {
-                                                        "keep_selected_style": false,
-                                                        "three_state": false
-                                                    },
-                                                    "plugins": ["checkbox"]
-                                                });
-                                                $('#selected_items').val("aaaa");
+            }
+            jQuery(document).ready(function () {
+                App.init();
+                Validation.lessonValidation();
+                $('#html1').jstree({
+                    "core": {
+                        "multiple": false,
+                        "themes": {
+                            "variant": "large"
+                        }
+                    },
+                    "checkbox": {
+                        "keep_selected_style": false,
+                        "three_state": false
+                    },
+                    "plugins": ["checkbox"]
+                });
+                $('#selected_items').val("aaaa");
 
-                                            });
+            });
 </script>
 <!--[if lt IE 9]>
 <script src="assets/plugins/respond.js"></script>

@@ -4,7 +4,7 @@
     Author     : Kunal Chakravertti
 --%>
 
-<<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -104,15 +104,30 @@
                                         <thead>
                                         <th style='max-width:100px !important; word-wrap: break-word;'>Number</th>
                                         <th style='max-width:100px !important; word-wrap: break-word;'>Batch Name</th>
+                                        <th style='max-width:100px !important; word-wrap: break-word;'>Scheduled At</th>
                                         <th style='max-width:100px !important; word-wrap: break-word;'>&nbsp;</th>
                                         </thead>
                                         <tbody>
- 
+
                                             <c:forEach items="${batchList}" var="item">
 
 
                                                 <tr>
-                                                    <td style='max-width:100px !important; word-wrap: break-word;'>${count}</td> <td style='max-width:100px !important; word-wrap: break-word;'>${item.name}</td><td style='max-width:100px !important; word-wrap: break-word;'><a href="/content/batch_controller?_action=editbatch&batchgrpid=${batchGrpId}&id=${item.id}">View/Edit Batch</a></td>
+                                                    <td style='max-width:100px !important; word-wrap: break-word;'>${count}</td> 
+                                                    <td style='max-width:100px !important; word-wrap: break-word;'>${item.name}</td>
+                                                    <c:if test="${item.getBatchSchedules().isEmpty()}">
+                                                        <td style='max-width:100px !important; word-wrap: break-word;'>
+                                                            &nbsp;
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${!item.getBatchSchedules().isEmpty()}">
+                                                        <td style='max-width:100px !important; word-wrap: break-word;'>
+                                                            <fmt:formatDate pattern="dd/MM/yyyy hh:mm" value="${item.getBatchSchedules().iterator().next().timestamp}"/>
+                                                        </td>
+                                                    </c:if>
+
+                                                    <td style='max-width:100px !important; word-wrap: break-word;'><a href="/content/batch_controller?_action=editbatch&batchgrpid=${batchGrpId}&id=${item.id}">View/Edit Batch</a></td>
+                                                    
                                                 </tr>
 
                                                 <c:set var="count" value="${count +1}" scope="page"/>
