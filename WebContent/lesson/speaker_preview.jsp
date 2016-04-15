@@ -49,15 +49,34 @@ int cm_session_id = ppt.getLesson().getCmsession().getId();
 		<script src="assets/crossbrowserjs/respond.min.js"></script>
 		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
-<script src="<%=baseURL %>impress/js/substeps2.js"></script> 
+<script src="<%=baseURL %>assets/plugins/jquery/jquery.js"></script> 
 <script src="<%=baseURL %>impress/js/impress.js"></script>
   <script src="<%=baseURL %>impress/js/video.js"></script>
+<script src="<%=baseURL %>impress/js/substeps2.js"></script> 
 
 
 <script>
 document.onreadystatechange = function () {
     if (document.readyState == "complete") {
     	 impress().init();
+    	 
+    	 function setHeight() {
+    		    windowHeight = $(window).innerHeight();
+    		    $('.slide').css('min-height', windowHeight - 50);
+    		    $('.video-js').css('max-height', windowHeight-50);
+    		    $('#my-video_html5_api').css('max-height', windowHeight-200);
+    	 };
+    	 function setWidth() {
+ 		    windowWidth = $(window).innerWidth();
+ 		    $('.slide').css('min-width', windowWidth-40);
+ 	 };
+    	setHeight();
+    	setWidth();
+ 		  $(window).resize(function() {
+ 		    setHeight();setWidth();
+ 		  });
+ 		  
+ 		  
   }
 }
 </script>

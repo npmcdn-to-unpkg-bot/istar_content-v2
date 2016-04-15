@@ -11,7 +11,7 @@
     </welcome-file-list>
     <filter>
         <filter-name>ImageFilter</filter-name>
-        <filter-class>ImageFilter</filter-class>
+        <filter-class>com.istarindia.app.filters.ImageFilter</filter-class>
         <init-param>
             <param-name>deployment_type</param-name>
             <param-value>prod</param-value>
