@@ -124,6 +124,29 @@
                                         <img src="assets/images2/cal.gif" onclick="javascript:NewCssCal('scheduledate', 'DDMMYYYY', 'dropdown', true)" style="cursor:pointer"/>
                                         &nbsp;&nbsp;&nbsp;&nbsp; <a href="###" onclick="clearText();">Clear</a>
                                     </section>
+                                    <section>
+                                        <label>Trainer </label> <label class="input" >   </label> 
+                                        <select name="trainer">
+                                            <c:if test="${trainerId == '0'}">
+                                                <option value="0">--Select--</option>
+                                                <c:forEach items="${trainerList}" var="trn">
+                                                    <option value="${trn.id}">${trn.name}</option>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="${trainerId != '0'}">
+                                                <option value="0">--Select--</option>
+                                                <c:forEach items="${trainerList}" var="trn">
+                                                    <c:if test="${trainerId == trn.id}">
+                                                        <option value="${trn.id}" selected="selected">${trn.name}</option>
+                                                    </c:if>
+                                                    <c:if test="${trainerId != trn.id}">
+                                                        <option value="${trn.id}">${trn.name}</option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </c:if>
+                                        </select>
+
+                                    </section>
                                     <input type="hidden" name="batchGrpId" value="${batchGrpId}"/>
                                     <input type="hidden" name="batchId" value="${batchId}"/>
                                 </fieldset>
