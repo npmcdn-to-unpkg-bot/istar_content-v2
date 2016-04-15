@@ -207,9 +207,6 @@ public class BatchController extends HttpServlet {
                     String batchId = request.getParameter("id") != null ? request.getParameter("id") : "0";
                     batchObj = batchService.getBatchById(Integer.parseInt(batchId));
                     trainerList = batchService.getTrainerList();
-                    for(int a = 0; a< trainerList.size(); a++) {
-                        System.out.println("trainerList :: " + trainerList.get(a).getName());
-                    }
                     request.setAttribute("trainerId", batchObj.getTrainer() != null ? batchObj.getTrainer().getId()+"" : "0");
                     request.setAttribute("trainerList", trainerList);
                     request.setAttribute("batchGrpId", id);
