@@ -11,6 +11,7 @@ import com.istarindia.apps.dao.BatchGroup;
 import com.istarindia.apps.dao.BatchStudents;
 import com.istarindia.apps.dao.Course;
 import com.istarindia.apps.dao.Student;
+import com.istarindia.apps.dao.Trainer;
 import com.istarindia.apps.services.BatchService;
 import com.istarindia.apps.services.CourseService;
 import com.istarindia.apps.services.StudentService;
@@ -37,15 +38,19 @@ import javax.servlet.http.HttpServletResponse;
 public class BatchController extends HttpServlet {
 
     StringBuilder tableString = new StringBuilder();
+
+    BatchService batchService = new BatchService();
+    CourseService courseService = new CourseService();
+    StudentService studentService = new StudentService();
+
     List<BatchGroup> batchGroupList = new ArrayList();
     List<Course> courseList = new ArrayList();
     List<Student> studentList = new ArrayList();
     List<Integer> stList = new ArrayList();
+    List<Trainer> trainerList = new ArrayList();
+
     BatchGroup batchGroup = new BatchGroup();
     Batch batchObj = new Batch();
-    BatchService batchService = new BatchService();
-    CourseService courseService = new CourseService();
-    StudentService studentService = new StudentService();
 
     String id = "";
     String courseId = "";
@@ -189,8 +194,11 @@ public class BatchController extends HttpServlet {
 
                 case "createbatch":
                     id = request.getParameter("batchgrpid") != null ? request.getParameter("batchgrpid") : "0";
+                    trainerList = batchService.getTrainerList();
                     request.setAttribute("batchGrpId", id);
                     request.setAttribute("action", "create");
+                    request.setAttribute("trainerId", "0");
+                    request.setAttribute("trainerList", trainerList);
                     request.getRequestDispatcher("batch/create_edit_batch.jsp").forward(request, response);
                     break;
 
@@ -198,6 +206,12 @@ public class BatchController extends HttpServlet {
                     id = request.getParameter("batchgrpid") != null ? request.getParameter("batchgrpid") : "0";
                     String batchId = request.getParameter("id") != null ? request.getParameter("id") : "0";
                     batchObj = batchService.getBatchById(Integer.parseInt(batchId));
+                    trainerList = batchService.getTrainerList();
+                    for(int a = 0; a< trainerList.size(); a++) {
+                        System.out.println("trainerList :: " + trainerList.get(a).getName());
+                    }
+                    request.setAttribute("trainerId", batchObj.getTrainer() != null ? batchObj.getTrainer().getId()+"" : "0");
+                    request.setAttribute("trainerList", trainerList);
                     request.setAttribute("batchGrpId", id);
                     request.setAttribute("action", "edit");
                     request.setAttribute("batchObj", batchObj);
@@ -210,18 +224,19 @@ public class BatchController extends HttpServlet {
                     String batchId1 = request.getParameter("batchId") != null ? request.getParameter("batchId") : "0";
                     String batchName = request.getParameter("name") != null ? request.getParameter("name") : "";
                     String dateString = request.getParameter("scheduledate") != null ? request.getParameter("scheduledate") : "0";
+                    String trainerId = request.getParameter("trainer") != null ? request.getParameter("trainer") : "0";
 
                     if (batchId1.equalsIgnoreCase("")) {
                         if (dateString.trim().length() == 0) {
-                            batchService.createBatch(Integer.parseInt(id), batchName, null);
+                            batchService.createBatch(Integer.parseInt(id), batchName, null, Integer.parseInt(trainerId));
                         } else {
-                            batchService.createBatch(Integer.parseInt(id), batchName, getDate(dateString));
-                        }   
+                            batchService.createBatch(Integer.parseInt(id), batchName, getDate(dateString), Integer.parseInt(trainerId));
+                        }
                     } else {
                         if (dateString.trim().length() == 0) {
-                            batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, null);
+                            batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, null, Integer.parseInt(trainerId));
                         } else {
-                            batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, getDate(dateString));
+                            batchService.updateBatch(Integer.parseInt(id), Integer.parseInt(batchId1), batchName, getDate(dateString), Integer.parseInt(trainerId));
                         }
                     }
                     batchGroup = new BatchGroup();
