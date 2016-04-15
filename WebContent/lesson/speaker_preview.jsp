@@ -40,7 +40,7 @@ int cm_session_id = ppt.getLesson().getCmsession().getId();
 
 <div id="impress">
 
-			<%=((new CMSerializerImpress()).serializeLesson(ppt)) %>
+			<%=((new CMSerializerImpress()).serializeLesson(ppt,"speaker")) %>
 
 		</div>
 
@@ -50,7 +50,8 @@ int cm_session_id = ppt.getLesson().getCmsession().getId();
 		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
 <script src="<%=baseURL %>impress/js/substeps2.js"></script> 
-<script src="<%=baseURL %>impress/js/impress.js"></script>  <script src="<%=baseURL %>impress/js/video.js"></script>
+<script src="<%=baseURL %>impress/js/impress.js"></script>
+  <script src="<%=baseURL %>impress/js/video.js"></script>
 
 
 <script>

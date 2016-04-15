@@ -48,7 +48,7 @@ String slide_id = request.getParameter("slide_id");
 	<div class="reveal">
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id)) %>
+			<%=((new CMSerializer()).serializeBlankSlide("desktop_"+templateName, slide_id)) %>
 
 		</div>
 
