@@ -102,7 +102,7 @@
                         document.getElementById('sky-form4').submit();
                     } else {
                         alert('Date is less than current date');
-                    }
+                    } 
                 }
             }
 
