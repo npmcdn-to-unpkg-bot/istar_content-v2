@@ -82,8 +82,47 @@
             function clearText() {
                 document.getElementById('scheduledate').value = '';
             }
-        </script>
 
+            function checkDate() {
+                var url = "/content/date_checker?datestr=";
+                var datestr = document.getElementById('scheduledate').value;
+                url = url + datestr;
+                xmlHttp = GetXmlHttpObject()
+                xmlHttp.onreadystatechange = stateChanged
+                xmlHttp.open("GET", url, true)
+                xmlHttp.send(null)
+
+
+            }
+
+            function stateChanged() {
+                if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+                    var showdata = xmlHttp.responseText;
+                    if(showdata == '1' ) {
+                        document.getElementById('sky-form4').submit();
+                    } else {
+                        alert('Date is less than current date');
+                    }
+                }
+            }
+
+            function GetXmlHttpObject() {
+                var xmlHttp = null;
+                try {
+                    xmlHttp = new XMLHttpRequest();
+                }
+                catch (e) {
+                    try {
+                        xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                    }
+                    catch (e) {
+                        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                }
+                return xmlHttp;
+            }
+        </script>
+        <script type="text/javascript" src="assets/js/common.js" ></script>
     </head>
 
     <body>
@@ -115,10 +154,10 @@
                                     <section>
                                         <label>Scheduled At</label> <label class="input" >   </label> 
                                         <c:if test="${batchObj.getBatchSchedules().isEmpty()}">
-                                            <input type="text" id="scheduledate" maxlength="25" size="25" readonly="readonly" name="scheduledate" value=''/> 
+                                            <input type="text" id="scheduledate" maxlength="25" size="25" readonly="readonly" name="scheduledate" id='scheduledate' value=''/> 
                                         </c:if>
                                         <c:if test="${!batchObj.getBatchSchedules().isEmpty()}">
-                                            <input type="text" id="scheduledate" maxlength="25" size="25" readonly="readonly" name="scheduledate" value='<fmt:formatDate pattern="dd/MM/yyyy hh:mm" value="${batchObj.getBatchSchedules().iterator().next().timestamp}"/>'/>
+                                            <input type="text" id="scheduledate" maxlength="25" size="25" readonly="readonly" name="scheduledate" id='scheduledate' value='<fmt:formatDate pattern="dd/MM/yyyy hh:mm" value="${batchObj.getBatchSchedules().iterator().next().timestamp}"/>'/>
                                         </c:if>
 
                                         <img src="assets/images2/cal.gif" onclick="javascript:NewCssCal('scheduledate', 'DDMMYYYY', 'dropdown', true)" style="cursor:pointer"/>
@@ -152,10 +191,10 @@
                                 </fieldset>
                                 <footer>
                                     <c:if test="${action == 'create'}">
-                                        <button type="submit" class="btn-u"  >Create Batch</button>
+                                        <button type="button" class="btn-u"   onclick="validateInputs('sky-form4', true);">Create Batch</button>
                                     </c:if>
                                     <c:if test="${action == 'edit'}">
-                                        <button type="submit" class="btn-u"  >Update Batch</button>
+                                        <button type="button" class="btn-u"   onclick="validateInputs('sky-form4', true);">Update Batch</button>
                                     </c:if>
 
                                     <label id="err" style="display: block;color:#ee9393"></label>
@@ -218,7 +257,6 @@ type="text/javascript" charset="utf-8"></script>
                                                 }
                                                 $('#selected_items').val(selectedElmsIds);
                                                 console.log(selectedElmsIds);
-
                                             }
                                             jQuery(document).ready(function () {
                                                 App.init();
@@ -237,7 +275,6 @@ type="text/javascript" charset="utf-8"></script>
                                                     "plugins": ["checkbox"]
                                                 });
                                                 $('#selected_items').val("aaaa");
-
                                             });
 </script>
 <!--[if lt IE 9]>

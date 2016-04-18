@@ -326,9 +326,9 @@ public class BatchController extends HttpServlet {
                 tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "Name" + "</th>");
                 tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "Max Students" + "</th>");
                 tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "Course" + "</th>");
-                tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "&nbsp;" + "</th>");
-                tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "&nbsp;" + "</th>");
-                tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "&nbsp;" + "</th>");
+                tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "Edit" + "</th>");
+                tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "View/Assign Students" + "</th>");
+                tableString.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + "View/Edit Batch" + "</th>");
                 tableString.append("</tr></thead>");
                 tableString.append("<tbody>");
                 for (int x = 0; x < batchGroupList.size(); x++) {
