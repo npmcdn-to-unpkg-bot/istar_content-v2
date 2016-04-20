@@ -177,9 +177,9 @@
 							<section>
 								<label class="label">Teacher Notes</label> 
 								<label class="textarea"> <textarea rows="3" name="teacher_notes" 
-								data-parsley-required="true" data-parsley-length="[5,250]" 
+								data-parsley-required="true" data-parsley-length="[5,9250]" 
 								data-parsley-required-message="Please provide teacher notes" 
-								data-parsley-length-message="It should be 5-250 characters long">
+								data-parsley-length-message="It should be 5-9250 characters long">
 								<%=slide.getTeacherNotes()%> </textarea>
 
 								</label>
@@ -193,9 +193,9 @@
 							<section>
 								<label class="label">Student Notes</label> 
 								<label class="textarea"> <textarea rows="3"name="student_notes" 
-								data-parsley-required="true" data-parsley-length="[5,250]" 
+								data-parsley-required="true" data-parsley-length="[5,9250]" 
 								data-parsley-required-message="Please provide student notes" 
-								data-parsley-length-message="It should be 5-250 characters long"> 
+								data-parsley-length-message="It should be 5-9250 characters long"> 
 								<%=slide.getStudentNotes()%></textarea>
 								</label>
 								<div class="note">
