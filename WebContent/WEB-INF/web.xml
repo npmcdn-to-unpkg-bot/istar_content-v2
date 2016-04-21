@@ -9,12 +9,28 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
-    <filter>
+    <servlet>
+    <description></description>
+    <display-name>MediaUploadController</display-name>
+    <servlet-name>MediaUploadController</servlet-name>
+    <servlet-class>com.istarindia.cms.controller.MediaUploadController</servlet-class>
+    <init-param>
+      <description>Define storage path for file uploads</description>
+      <param-name>upload_path</param-name>
+      <param-value>C:\Users\vaibhav\Pictures\Camera Roll</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MediaUploadController</servlet-name>
+    <url-pattern>/media_upload</url-pattern>
+  </servlet-mapping>
+  
+   <filter>
         <filter-name>ImageFilter</filter-name>
         <filter-class>com.istarindia.app.filters.ImageFilter</filter-class>
         <init-param>
             <param-name>deployment_type</param-name>
-            <param-value>prod</param-value>
+            <param-value>prod11</param-value>
         </init-param>
     </filter>
     <filter-mapping>
