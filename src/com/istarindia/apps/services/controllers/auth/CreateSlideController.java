@@ -63,14 +63,15 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				
+				String title = request.getParameter("title");
 				
 				service.addTextParagraphSlideToLesson(request.getParameter("paragraph"), image,request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, "NO_TITLE",
+						request.getParameter("student_notes"), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"));
 			} else {
 				ImageDAO dao = new ImageDAO();
+				String title = request.getParameter("title");
 
 				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
 				CMSImage image = new CMSImage();
@@ -78,7 +79,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				service.addTextParagraphSlideToLessonUpdate(request.getParameter("paragraph"),image,request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, "NO_TITLE",
+						request.getParameter("student_notes"), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
 			}
@@ -229,6 +230,35 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
+		case "ONLY_IMAGE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				ImageDAO dao = new ImageDAO();
+
+				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				CMSImage image = new CMSImage();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addImageSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, "NO_TITLE",
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), image);
+			} else {
+				ImageDAO dao = new ImageDAO();
+
+				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				CMSImage image = new CMSImage();
+				image.setUrl(img.getUrl());
+				image.setTitle(img.getTitle());
+				image.setDescription(img.getDescription());
+				service.addImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, "NO_TITLE",
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"));
+
+			}
+			break;
+			
 		default:
 			break;
 		}

@@ -91,7 +91,8 @@ public class CMSRegistry {
 		//slideTemplates.add("ONLY_TITLE_TABLE_TITLE_TABLE");
 	//	slideTemplates.add("ONLY_TITLE_TABLE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
-
+		slideTemplates.add("ONLY_IMAGE");
+		slideTemplates.add("ONLY_TITLE_IMAGE_PARAGRPH");
 		listTypes.add(ListTypes.SIMPLE_LIST);
 		listTypes.add(ListTypes.PROCESS_LIST);
 		listTypes.add(ListTypes.CYCLE_LIST);
