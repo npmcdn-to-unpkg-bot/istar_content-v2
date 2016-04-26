@@ -27,7 +27,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="favicon.ico">
@@ -67,8 +68,7 @@
 
 <!-- CSS Theme -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/default.css"
-	id="style_color">
+	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet"
 	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 
@@ -76,7 +76,7 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
 
-<body  ng-app="">
+<body ng-app="">
 
 	<div class="wrapper">
 		<jsp:include page="content_admin/includes/header.jsp"></jsp:include>
@@ -93,10 +93,9 @@
 				CMSSlide slide = new CMSSlide();
 				Boolean newSlide = true;
 				if (request.getParameterMap().containsKey("slide_id")) {
-					System.err.println("Its an old SLide ");
 					newSlide = false;
 					SlideDAO dao = new SlideDAO();
-					
+
 					slide = (new LessonUtils())
 							.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 					slide.setTemplateName(request.getParameter("slide_type"));
@@ -116,13 +115,30 @@
 			%>
 			<div class="container-fluid" style="padding: 0px !important">
 				<input type="hidden" name="template"
-					value="<%=slide.getTemplateName()%>"> <input
-					type="hidden" name="ppt_id"
-					value="<%=request.getParameter("ppt_id")%>">
+					value="<%=slide.getTemplateName()%>"> <input type="hidden"
+					name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
-					<div class="col-md-5">
+					<%
+						ImageDAO dao1 = new ImageDAO();
+						ArrayList<Image> images = (ArrayList<Image>) dao1.findByProperty("sessionid",
+								ppt.getLesson().getCmsession().getId());
+					%><div class="col-md-5">
 						<%=utils.getEditProfileEdit(slide, ppt, newSlide)%>
 						<fieldset>
+							<section>
+								<label class="label">Select Image Background</label> <label
+									class="select"> <select name="image_bg"
+									id="image-bg-picker" value="<%=slide.getImage_BG()%>">
+										<%
+											for (Image type : images) {
+										%>
+										<option selected="selected" value="<%=type.getUrl()%>"><%=type.getUrl()%></option>
+										<%
+											}
+										%>
+								</select> <i></i>
+								</label>
+							</section>
 							<section>
 								<label class="label">Select Slide Transition</label> <label
 									class="select"> <select name="slideTransition"
@@ -175,11 +191,12 @@
 
 						<fieldset>
 							<section>
-								<label class="label">Teacher Notes</label> 
-								<label class="textarea"> <textarea rows="3" name="teacher_notes" 
-								data-parsley-required="true" data-parsley-length="[5,9250]" 
-								data-parsley-required-message="Please provide teacher notes" 
-								data-parsley-length-message="It should be 5-9250 characters long">
+								<label class="label">Teacher Notes</label> <label
+									class="textarea"> <textarea rows="3"
+										name="teacher_notes" data-parsley-required="true"
+										data-parsley-length="[5,9250]"
+										data-parsley-required-message="Please provide teacher notes"
+										data-parsley-length-message="It should be 5-9250 characters long">
 								<%=slide.getTeacherNotes()%> </textarea>
 
 								</label>
@@ -191,11 +208,12 @@
 						</fieldset>
 						<fieldset>
 							<section>
-								<label class="label">Student Notes</label> 
-								<label class="textarea"> <textarea rows="3"name="student_notes" 
-								data-parsley-required="true" data-parsley-length="[5,9250]" 
-								data-parsley-required-message="Please provide student notes" 
-								data-parsley-length-message="It should be 5-9250 characters long"> 
+								<label class="label">Student Notes</label> <label
+									class="textarea"> <textarea rows="3"
+										name="student_notes" data-parsley-required="true"
+										data-parsley-length="[5,9250]"
+										data-parsley-required-message="Please provide student notes"
+										data-parsley-length-message="It should be 5-9250 characters long"> 
 								<%=slide.getStudentNotes()%></textarea>
 								</label>
 								<div class="note">
@@ -219,37 +237,39 @@
 								class="panel-body no-padding mCustomScrollbar"
 								data-mcs-theme="minimal-dark">
 
-								<% 
-								
-								try {
-								TaskDAO TDAO = new  TaskDAO();
-								Task task = new Task();
-								task.setItemType("LESSON");
-								task.setItemId(ppt.getLesson().getId());
-								task = TDAO.findByExample(task).get(0);
-								TaskLogDAO dao = new TaskLogDAO();
-								TaskLog sample  = new TaskLog();
-								sample.setTaskId(task.getId());
-								sample.setItemType("SLIDE");
-								sample.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
-								
-								List<TaskLog> items = dao.findByExample(sample);
-								for(TaskLog log : items) {
-								
-									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-									
-									%>
+								<%
+									try {
+										TaskDAO TDAO = new TaskDAO();
+										Task task = new Task();
+										task.setItemType("LESSON");
+										task.setItemId(ppt.getLesson().getId());
+										task = TDAO.findByExample(task).get(0);
+										TaskLogDAO dao = new TaskLogDAO();
+										TaskLog sample = new TaskLog();
+										sample.setTaskId(task.getId());
+										sample.setItemType("SLIDE");
+										sample.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
+
+										List<TaskLog> items = dao.findByExample(sample);
+										for (TaskLog log : items) {
+
+											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+								%>
 								<div class="comment">
 									<img
 										src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
 										alt="">
 									<div class="overflow-h">
-										<strong><%=user.getName() %></strong>
-										<p><%=log.getComments() %></p>
+										<strong><%=user.getName()%></strong>
+										<p><%=log.getComments()%></p>
 
 									</div>
 								</div>
-								<% } } catch(Exception e) {} %>
+								<%
+									}
+									} catch (Exception e) {
+									}
+								%>
 
 							</div>
 						</div>
@@ -263,8 +283,11 @@
 								<div id="htc_one_emulator"
 									style="transform: scale(1); transform-origin: 0px 0px 0px;">
 									<div id="frame_htc_one_emulator" class="frame_scroller">
-<iframe src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"  
- frameborder="0" id='prv' style="background-color: #fff;margin-top: 217px;width: 360px;        height: 593px;"> </iframe>
+										<iframe
+											src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
+											frameborder="0" id='prv'
+											style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
+										</iframe>
 									</div>
 								</div>
 							</div>
@@ -303,11 +326,11 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
 		type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="<%=baseURL%>tinymce/4/tinymce.min.js"></script>
-
+	<script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-	 <script type="text/javascript" src="<%=baseURL %>assets/js/plugins/parsley.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/js/plugins/parsley.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
@@ -315,61 +338,127 @@
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
-	function initTextArea() {
-	try {
-		$("#image-picker").imagepicker()
-	} catch (err) {
-		// TODO: handle exception
-	}
-		tinymce.init({
-					selector : 'textarea',
-					height : 100,
-					plugins : [
-							'advlist autolink lists link image charmap print preview anchor',
-							'searchreplace visualblocks code fullscreen',
-							'insertdatetime media table contextmenu paste code' ],
-					toolbar : 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-					content_css : [
-							'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-							'//www.tinymce.com/css/codepen.min.css' ], 
-							setup: function (editor) {
-						        editor.on('change', function () {
-						        	var text1 = tinyMCE.activeEditor.getContent();
-						        	console.log("new COntent -> "+ tinyMCE.activeEditor.getContent());
-									var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
-						        	tinyMCE.triggerSave();
-						        });
-						    }
-				});
-	}
-	
-	function initHooks(){
-		$( ".updateble" ).each( function( index, listItem ) {
-			 var id = $(this).attr('id');
-			$('#'+id).keyup(function() {
-				console.log('new value ->'+ '#data_'+id);
-				var iframeInner = $('#prv').contents().find('#data_'+id).html($('#'+id).val());
-				
-			});
-		});
-		
-		$('#image-picker').on('change', function() {
-			var id = $(this).find(":checked").attr('id');
-			$('#prv').contents().find('#data_image_url').attr("src",$('#'+id).data('img-src'));
+		function initTextArea() {
+			try {
+				$("#image-picker").imagepicker();
 
+			} catch (err) {
+				// TODO: handle exception
+			}
+
+			/* tinymce.init({
+							selector : 'textarea',
+							height : 100,
+							plugins : [
+									'advlist autolink lists link image charmap print preview anchor',
+									'searchreplace visualblocks code fullscreen',
+									'insertdatetime media table contextmenu paste code' ],
+							toolbar : 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+							content_css : [
+									'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+									'//www.tinymce.com/css/codepen.min.css' ], 
+									setup: function (editor) {
+								        editor.on('change', function () {
+								        	var text1 = tinyMCE.activeEditor.getContent();
+								        	console.log("new COntent -> "+ tinyMCE.activeEditor.getContent());
+											var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
+								        	tinyMCE.triggerSave();
+								        });
+								    }
+						}); */
+
+			//CKEDITOR.replace( 'slide_paragraph' );
+			var bodyEditor = CKEDITOR.replace('slide_paragraph', {
+				readOnly : false
 			});
-	}
-	$( document ).ready(function() {
-		initTextArea();
-		initHooks();
-		
-		
-		
-	});
-	
-		
-		
-		
+
+			// Handle when the Source changes.
+			bodyEditor.on('mode', function() {
+				if (this.mode == 'source') {
+					var editable = bodyEditor.editable();
+					editable.attachListener(editable, 'input', function() {
+						//alert('source changed');
+						var text1 = CKEDITOR.instances.Editor.document
+								.getBody().getHtml()
+						console.log("new COntent 222-> " + text1);
+						var iframeInner = $('#prv').contents().find(
+								'#data_slide_paragraph').html(text1);
+					});
+				}
+			});
+
+			// Handle when the HTML changes.
+			bodyEditor.on('change', function() {
+				var text1 = bodyEditor.document.getBody().getHtml()
+				console.log("new COntent111 -> " + text1);
+				var iframeInner = $('#prv').contents().find(
+						'#data_slide_paragraph').html(text1);
+			});
+		}
+
+		function initHooks() {
+			$(".updateble").each(
+					function(index, listItem) {
+						var id = $(this).attr('id');
+						$('#' + id)
+								.keyup(
+										function() {
+											console.log('new value ->'
+													+ '#data_' + id);
+											var iframeInner = $('#prv')
+													.contents().find(
+															'#data_' + id)
+													.html($('#' + id).val());
+
+										});
+					});
+
+			$('#image-picker').on(
+					'change',
+					function() {
+						var id = $(this).find(":checked").attr('id');
+						$('#prv').contents().find('#data_image_url').attr(
+								"src", $('#' + id).data('img-src'));
+
+					});
+
+			$('#image-bg-picker').on(
+					'change',
+					function() {
+						var bgurl = $(this).find(":checked").val();
+						console.log(bgurl);
+						$('#prv').contents().find('.slide-background').css(
+								'background-image', "url(" + bgurl + ")");//
+						// background-image: url("/content/media_upload?getfile=goods1.png");
+						// background-size: cover;
+						//$('#prv').contents().find('#data_image_url').attr("src",$('#'+id).data('img-src'));
+						//$('myOjbect').css('background-image', 'url(' + imageUrl + ')');
+						$('#prv').contents().find('.slide-background').css(
+								'background-size', "cover");
+					});
+		}
+
+		function initColorChange() {
+
+			$('#slide_color').on(
+					'change',
+					function() {
+						console.log("color chnaged " + $('#slide_color').val()
+								+ " --- " + $('.slides section'));
+						//<div class="slides">		<section
+						//$('#prv').contents().find('.slides section').css('background-color', $('#slide_color').val());			
+						//$('#prv').contents().find('.slides').css('background-color', $('#slide_color').val());
+						$('#prv').contents().find('.slide-background').css(
+								'background-color', $('#slide_color').val());
+					});
+
+		}
+		$(document).ready(function() {
+			initTextArea();
+			initHooks();
+			initColorChange();//slide_color
+
+		});
 	</script>
 </body>
 </html>

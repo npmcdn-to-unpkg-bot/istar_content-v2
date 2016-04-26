@@ -1,70 +1,79 @@
+<%@page import="com.istarindia.apps.dao.LessonDAO"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="com.istarindia.cms.lessons.*"%>
-<%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%><!doctype html>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-int cm_session_id = ppt.getLesson().getCmsession().getId();
-%><!doctype html>
+
+PresentaionDAO dao = new PresentaionDAO();
+int lessonID = Integer.parseInt(request.getParameter("ppt_id"));
+Presentaion ppt =  dao.findById(lessonID);
+
+%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<title>reveal.js - The HTML Presentation Framework</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="<%=baseURL %>student/css/reveal.css"><link
+	href="<%=baseURL%>themes/mobile/<%=ppt.getLesson().getLesson_theme().toLowerCase()%>.css"
+	rel="stylesheet" />
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>	
+	<%
+	//if (request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+		if (true) {
+%><link href="<%=baseURL%>themes/mobile.css" rel="stylesheet"
+	type="text/css" />
+<link rel="stylesheet" href="<%=baseURL %>student/css/reveal.css"><link
+	href="<%=baseURL%>themes/mobile/<%=ppt.getLesson().getLesson_theme().toLowerCase()%>.css"
+	rel="stylesheet" />
+<%
+	} else {
+%>
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="<%=baseURL %>student/css/reveal.css"><link
+	href="<%=baseURL%>themes/desktop/<%=ppt.getLesson().getLesson_theme().toLowerCase()%>.css"
+	rel="stylesheet" />
+<%
+	}
+%>
 
-<title>reveal.js The HTML Presentation Framework</title>
-
- <link href="<%=baseURL %>impress/css/video-js.css" rel="stylesheet">
-
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
-    <link href="<%=baseURL %>impress/css/impress.css" rel="stylesheet" />
-    <link href="<%=baseURL %>impress/css/bootstrap.css" rel="stylesheet" />
-    <link href="<%=baseURL %>impress/css/substep.css" rel="stylesheet" />
-    <link href="<%=baseURL %>impress/cube/touch.css" rel="stylesheet" />
-    <link href="<%=baseURL %>impress/themes/<%=ppt.getLesson().getLesson_theme().toLowerCase() %>.css" rel="stylesheet" />
-    <% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-%><link href="<%=baseURL %>impress/css/mobile.css" rel="stylesheet" type="text/css"  />
-
-<%  } else { %>
-<link href="<%=baseURL %>impress/css/mobile.css" rel="stylesheet" type="text/css"  />
-<%  } %>
-
-</head>
-
-<body class="impress-not-supported" id="ppt" data-next_item="<%=request.getAttribute("next_item")%>" data-ppt_ID="<%=ppt.getId() %>">
-<!-- <div class="fallback-message">
-    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
-    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
-</div> -->
-
-<div id="impress">
-
-			<%=((new CMSerializerImpress()).serializeLesson(ppt,"mobile")) %>
-
+	</head>
+<body style="    background-size: cover;background-image: url('<%=baseURL%>student/subject_images/<%=ppt.getLesson().getLesson_subject().toLowerCase()%>.png')">
+	<div class="reveal">
+		<div class="slides">
+		<%=ppt.outputSlides() %>
 		</div>
 
-	<!--[if lt IE 9]>
-		<script src="assets/crossbrowserjs/html5shiv.js"></script>
-		<script src="assets/crossbrowserjs/respond.min.js"></script>
-		<script src="assets/crossbrowserjs/excanvas.min.js"></script>
-	<![endif]-->
-<script src="<%=baseURL %>impress/js/jquery-1.9.1.min.js"></script> 
+	</div>
+<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script src="<%=baseURL %>student/lib/js/head.min.js"></script>
+	<script src="<%=baseURL %>student/js/reveal.js"></script>
 
-<script src="<%=baseURL %>impress/js/substeps2.js"></script> 
-<script src="<%=baseURL %>impress/js/impress.js"></script>  
-<script src="<%=baseURL %>impress/js/video.js"></script>
-<script src="<%=baseURL %>impress/cube/touch.js"></script>
-<script src="<%=baseURL %>impress/cube/mousetrap.min.js"></script>
+	<script>
 
-<script>
-document.onreadystatechange = function () {
-    if (document.readyState == "complete") {
-    	 impress().init();
-  }
-}
-</script>
+			Reveal.initialize({  
+				center: false, 
+				width: 1210,
+		    height: 450, 
+		    margin: 0.0
 
-		<!-- Everything below this point is only used for the reveal.js demo page -->
+			
+			});
+			
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+			    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+			    //$('#prv').contents().find('.slide-background').css('background-color', $('#slide_color').val());
+			   // console.log(event.indexh + " -- "+ $('#'+event.indexh).css('background-image') );
+			    
+			    $('body').css('background-image', $('#'+event.indexh).css('background-image'));
+			    $('body').css('background-size', 'cover');
+			} );
+
+		</script>
+
 </body>
 </html>
-`

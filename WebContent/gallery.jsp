@@ -1,9 +1,12 @@
-<%@page import="com.istarindia.apps.services.MediaService"%>
+<%@page import="com.istarindia.apps.services.MediaService"%><%@page
+	import="com.istarindia.apps.services.task.MediaUploadHelper"%>
+
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.services.LessonService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
 <%
@@ -18,7 +21,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title> Media Gallery | iStar CMS</title>
+<title>Media Gallery | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -61,12 +64,12 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet"
 	href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/default.css"
-	id="style_color">
+	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet"
 	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 
@@ -83,65 +86,119 @@
 				<h1 class="pull-left">Gallery</h1>
 			</div>
 		</div>
-<div class="container height-1000 content">
+		<div class="container-full height-1000 content">
 			<div class="text-center margin-bottom-50">
 				<h2 class="title-v2 title-center">Gallery</h2>
 			</div>
-<% 
-				MediaService service = new MediaService();
-				List<Image> images = service.getAllPublishedImages();
-				for(Image image : images ) {
+			<a href="javascript:getSessions();">Filter on Session</a>
+			<input type="hidden" id="selected_items" name="selected_items" />
+			
+			<label id="err" style="display: block;color:#ee9393"></label>
+			<div id="html1" class="col-md-3">
+				<%=(new MediaUploadHelper().getMediaTree((IstarUser) request.getSession().getAttribute("user")))%>
+			
+				
+			</div>
+			<div class="col-md-9">
+				<%
+					MediaService service = new MediaService();
+					String sess = "1";
+					if(request.getParameterMap().containsKey("sessionids")) {
+						sess = request.getParameter("sessionids");
+					}
+				
+					List<Image> images = service.getAllPublishedImages(sess);
+					for (Image image : images) {
 				%>
 				<div class="col-sm-2 sm-margin-bottom-30">
-					<a href="<%=image.getUrl() %>" rel="gallery3" class="fancybox img-hover-v1" title="Image 1">
-						<span><img style="width: 165px; height: 165px; margin: 10px" class="img-responsive" src="<%=image.getThumbnailUrl() %>" alt=""></span>
+					<a href="<%=image.getUrl()%>" rel="gallery3"
+						class="fancybox img-hover-v1" title="Image 1"> <span><img
+							style="width: 165px; height: 165px; margin: 10px"
+							class="img-responsive" src="<%=image.getThumbnailUrl()%>" alt=""></span>
 					</a>
 				</div>
-				<% } %>
-	</div>
-	<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
+				<%
+					}
+				%>
+			</div>
+			</div></div>
+			<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
 
 
-	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- JS Implementing Plugins -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
-	<!-- JS Customization -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
-		type="text/javascript" charset="utf-8"></script>
-	<script
-		src="http://rvera.github.io/image-picker/image-picker/image-picker.js"
-		type="text/javascript"></script>
+			<!-- JS Global Compulsory -->
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+			<!-- JS Implementing Plugins -->
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+			<!-- JS Customization -->
+			<script
+				src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
+				type="text/javascript" charset="utf-8"></script>
+			<script
+				src="http://rvera.github.io/image-picker/image-picker/image-picker.js"
+				type="text/javascript"></script>
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
 
-	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
-		type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>	<script type="text/javascript" src="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-	
-	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/fancy-box.js"></script>
+			<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
+			<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
+				type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript"
+				src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 
-	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+			<script type="text/javascript"
+				src="<%=baseURL%>assets/js/plugins/fancy-box.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
+			<!-- JS Page Level -->
+			<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 
-	<!--[if lt IE 9]>
+			<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
-<script type="text/javascript">
-$( document ).ready(function() {
-	App.init();
-	FancyBox.initFancybox();
-	})
-	</script>
+			<script type="text/javascript">
+
+			function getSessions() {
+				var selectedElmsIds = $('#html1').jstree("get_selected");
+				if (selectedElmsIds == ""){
+					event.preventDefault();
+					document.getElementById("err").innerHTML = "Please select the session";
+					return false; 
+					}
+				$('#selected_items').val(selectedElmsIds);
+				window.location = '<%=baseURL%>gallery.jsp?sessionids='+selectedElmsIds;
+			}
+			
+			$(document).ready(function() {
+					App.init();
+					FancyBox.initFancybox();
+					
+
+					$('#html1').jstree({
+						"core" : {
+							"multiple": true,
+							"themes" : {
+								"variant" : "large"
+							}
+						},
+						"checkbox" : {
+							"keep_selected_style" : false,
+							"three_state" : false,
+						},
+						"plugins" : [ "checkbox"]
+					});
+				})
+			</script>
 </body>
 </html>

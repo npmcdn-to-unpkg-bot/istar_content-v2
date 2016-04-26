@@ -220,12 +220,12 @@ public class CreateSlideController extends IStarBaseServelet {
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"));*/
 				service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"), 
 						
-						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("image_bg"));
 				
 
 			} else {
 				service.addParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"), 
-						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("slide_id"));
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 
 			}
 
