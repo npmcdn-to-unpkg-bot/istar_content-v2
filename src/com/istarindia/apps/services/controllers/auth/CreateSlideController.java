@@ -57,8 +57,13 @@ public class CreateSlideController extends IStarBaseServelet {
 
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
-
-				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				int image_id = 0 ; //Dummy image id. To be added soon
+				
+				if (request.getParameterMap().containsKey("image_url")) {
+					image_id = Integer.parseInt(request.getParameter("image_url"));
+				}
+				
+				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -72,8 +77,13 @@ public class CreateSlideController extends IStarBaseServelet {
 			} else {
 				ImageDAO dao = new ImageDAO();
 				String title = request.getParameter("title");
-
-				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				int image_id = 0 ; //Dummy image id. To be added soon
+				
+				if (request.getParameterMap().containsKey("image_url")) {
+					image_id = Integer.parseInt(request.getParameter("image_url"));
+				}
+				
+				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -142,8 +152,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_TITLE_IMAGE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
-
-				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				int image_id = 0 ; //Dummy image id. To be added soon
+				
+				if (request.getParameterMap().containsKey("image_url")) {
+					image_id = Integer.parseInt(request.getParameter("image_url"));
+				}
+				
+				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -154,8 +169,13 @@ public class CreateSlideController extends IStarBaseServelet {
 						request.getParameter("backgroundTransition"), image);
 			} else {
 				ImageDAO dao = new ImageDAO();
-
-				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				int image_id = 0 ; //Dummy image id. To be added soon
+				
+				if (request.getParameterMap().containsKey("image_url")) {
+					image_id = Integer.parseInt(request.getParameter("image_url"));
+				}
+				
+				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -171,8 +191,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_TITLE_VIDEO":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				VideoDAO dao = new VideoDAO();
-
-				Video img = dao.findById(Integer.parseInt(request.getParameter("video_url")));
+				int video_id = 0 ; //Dummy video id. To be added soon
+				
+				if (request.getParameterMap().containsKey("video_url")) {
+					video_id = Integer.parseInt(request.getParameter("video_url"));
+				}
+				
+				Video img = dao.findById(video_id);
 				CMSVideo image = new CMSVideo();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -183,7 +208,13 @@ public class CreateSlideController extends IStarBaseServelet {
 						request.getParameter("backgroundTransition"), image);
 			} else {
 				VideoDAO dao = new VideoDAO();
-				Video img = dao.findById(Integer.parseInt(request.getParameter("video_url")));
+				int video_id = 0 ; //Dummy video id. To be added soon
+			
+				if (request.getParameterMap().containsKey("video_url")) {
+					video_id = Integer.parseInt(request.getParameter("video_url"));
+				}
+				
+				Video img = dao.findById(video_id);
 				CMSVideo image = new CMSVideo();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -233,8 +264,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_IMAGE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
-
-				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				int image_id = 0 ; //Dummy image id. To be added soon
+				
+				if (request.getParameterMap().containsKey("image_url")) {
+					image_id = Integer.parseInt(request.getParameter("image_url"));
+				}
+				
+				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
@@ -245,8 +281,13 @@ public class CreateSlideController extends IStarBaseServelet {
 						request.getParameter("backgroundTransition"), image);
 			} else {
 				ImageDAO dao = new ImageDAO();
-
-				Image img = dao.findById(Integer.parseInt(request.getParameter("image_url")));
+				int image_id = 0 ; //Dummy image id. To be added soon
+				
+				if (request.getParameterMap().containsKey("image_url")) {
+					image_id = Integer.parseInt(request.getParameter("image_url"));
+				}
+				
+				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
