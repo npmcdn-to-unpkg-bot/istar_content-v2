@@ -93,8 +93,10 @@ public class LessonUtils {
                     + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
             out.append("</form>");
             out.append("<form id='save_order' action='/content/save_order?ppt_id="+ ppt.getId()+">"
-            		+ "<input id='order_holder' name='slide_order' type='text'>"
-            		+ "<button type='submit' class='btn-u' id='kammm'>Save Slide Order</button></div>");
+            		+ "<input id='order_holder' name='order_holder' type='text'>"
+            		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"
+            		+ "<button type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
+            out.append("</div>");
             out.append("</div>");
             out.append("</div>");
 

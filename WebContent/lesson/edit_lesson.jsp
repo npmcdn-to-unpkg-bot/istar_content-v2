@@ -326,7 +326,6 @@
             })(jQuery);
             
             </script>
-                <script src="<%=baseURL%>assets/jquery.tablednd.js" type="text/javascript"></script>
         <script type="text/javascript"
         src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
         <script type="text/javascript"
@@ -364,13 +363,13 @@
                 $( "#slidess_ord" ).sortable();
                 $( "#save_order" ).submit(function( event ) {
                 	var idsInOrder = $('#slidess_ord').sortable("toArray");
-                	alert( idsInOrder );
+                	//alert( idsInOrder );
                 	$('#order_holder').val(idsInOrder);
                 	//<%=baseURL%>/content/edit_lesson?task_id=1
-                	//window.location = '<%=baseURL%>gallery.jsp?sessionids='+selectedElmsIds;
-                	return false;
+                	//window.location = '<%=baseURL%>/content/edit_lesson?task_id='+task_id;
+                	//return false;
                 	
-                	  event.preventDefault();
+                	 // event.preventDefault();
                 	});
             });
 
