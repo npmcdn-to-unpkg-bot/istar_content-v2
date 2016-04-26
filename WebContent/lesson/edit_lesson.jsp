@@ -198,19 +198,17 @@
                                                 </section>
                                                 <section>
                                                     <label class="label">List of Learning Objectives</label>
-                                                    <div class="row">
+                                                    
                                                         <%
                                                             for (LearningObjective obj : lesson.getLearningObjectives()) {
                                                         %>
                                                         <div class="col col-12">
-                                                            <label class="checkbox"><input type="checkbox"
-                                                                                           name="learningObjectives" checked="checked"
-                                                                                           value="<%=obj.getId()%>"> <i></i><%=obj.getTitle()%></label>
+                                                           <li><%=obj.getTitle()%> </li>
                                                         </div>
                                                         <%
                                                             }
                                                         %>
-                                                    </div>
+                                                    
                                                 </section>
 
 
