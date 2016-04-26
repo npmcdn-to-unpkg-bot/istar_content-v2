@@ -143,11 +143,13 @@
                                                     <label class="label">Lesson Themes</label>
                                                     <div class="row">
                                                         <%
+                                                        	boolean flag =false;
                                                             for (String themeName : Themes.lessonThemes) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
                                                                 if (lesson.getLesson_theme().equalsIgnoreCase(themeName)) {
+                                                                	flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_theme" checked="checked"
@@ -164,6 +166,15 @@
                                                         </div>
                                                         <%
                                                             }
+                                                            if (flag == false) {
+                                                        %>
+                                                        <div class="col col-4">
+                                                            <label class="radio">
+                                                            <input type="radio" name="lesson_theme" checked="checked"
+                                                             value="None"> <i class="rounded-x"></i>None</label>
+                                                        </div>
+                                                        <% 
+                                                        	}
                                                         %>
                                                     </div>
                                                 </section>
@@ -172,11 +183,13 @@
                                                     <label class="label">Subject </label>
                                                     <div class="row">
                                                         <%
+                                                      	    flag = false;
                                                             for (String subject : Themes.subjects) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
                                                                 if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
+                                                                flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_subject" checked="checked"
@@ -192,6 +205,15 @@
                                                                 %>
                                                         </div>
                                                         <%
+                                                            }
+                                                            if (flag == false) {
+                                                        %>
+                                                        <div class="col col-4">
+                                                            <label class="radio">
+                                                            <input type="radio" name="lesson_theme" checked="checked"
+                                                             value="None"> <i class="rounded-x"></i>None</label>
+                                                        </div>
+                                                        <% 
                                                             }
                                                         %>
                                                     </div>
