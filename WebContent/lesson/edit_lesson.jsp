@@ -253,7 +253,7 @@
 
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            <i class="fa fa-comments-o"></i> Review Comments
+                                            <i class="fa fa-comments-o"></i> Task History
                                         </h3>
                                     </div>
 
