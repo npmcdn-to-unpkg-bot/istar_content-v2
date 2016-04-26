@@ -92,7 +92,9 @@ public class LessonUtils {
             out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId()
                     + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
             out.append("</form>");
-            out.append("</div>");
+            out.append("<form id='save_order' action='/content/save_order?ppt_id="+ ppt.getId()+">"
+            		+ "<input id='order_holder' name='slide_order' type='text'>"
+            		+ "<button type='submit' class='btn-u' id='kammm'>Save Slide Order</button></div>");
             out.append("</div>");
             out.append("</div>");
 
@@ -101,7 +103,7 @@ public class LessonUtils {
             out.append("<div class='panel-heading'>");
             out.append("<h3 class='panel-title'><i class='fa fa-edit'></i> List of Slides</h3>");
             out.append("</div>");
-            out.append("<table class='table table-striped'>");
+            out.append( "<table class='table table-striped' id='sortable'>");
             out.append("<thead>");
             out.append("<tr>");
             out.append("<th>#</th>");
@@ -110,12 +112,12 @@ public class LessonUtils {
             out.append("<th>Slide Template</th>");
             out.append("</tr>");
             out.append("</thead>");
-            out.append("<tbody>");
+            out.append("<tbody id='slidess_ord'>");
             DBUtils db = new DBUtils();
             ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
             for (int i = 0; i < data.size(); i++) {
-                out.append("<tr>");
-                out.append("<td>" + data.get(i).get(0) + "</td>");
+                out.append("<tr class='mammama' id='"+data.get(i).get(0)+"'>");
+                out.append("<td id='id'>" + (i+1) + "</td>");
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("<td>");
                 out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
@@ -131,7 +133,7 @@ public class LessonUtils {
                 out.append("</tr>");
             }
 
-            out.append("</tbody>");
+            out.append(" </tbody>");
             out.append("</table>");
             out.append("</div>");
             out.append("</div>");

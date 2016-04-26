@@ -317,6 +317,16 @@
             <!-- JS Global Compulsory -->
             <script type="text/javascript"
             src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+            
+            <script type="text/javascript">
+            (function($) {
+                if (!$.curCSS) {
+                   $.curCSS = $.css;
+                }
+            })(jQuery);
+            
+            </script>
+                <script src="<%=baseURL%>assets/jquery.tablednd.js" type="text/javascript"></script>
         <script type="text/javascript"
         src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
         <script type="text/javascript"
@@ -350,6 +360,18 @@
             jQuery(document).ready(function () {
                 App.init();
                 Validation.lessonValidation();
+                //$('#sortable').tableDnD();
+                $( "#slidess_ord" ).sortable();
+                $( "#save_order" ).submit(function( event ) {
+                	var idsInOrder = $('#slidess_ord').sortable("toArray");
+                	alert( idsInOrder );
+                	$('#order_holder').val(idsInOrder);
+                	//<%=baseURL%>/content/edit_lesson?task_id=1
+                	//window.location = '<%=baseURL%>gallery.jsp?sessionids='+selectedElmsIds;
+                	return false;
+                	
+                	  event.preventDefault();
+                	});
             });
 
             $('input.correctOption').on('change', function() {
