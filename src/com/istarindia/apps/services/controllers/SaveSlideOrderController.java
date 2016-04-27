@@ -35,15 +35,15 @@ public class SaveSlideOrderController extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		for(Object key: request.getParameterMap().keySet()) {
+			System.err.println("key-> "+ key.toString() + " : value ->"+ request.getParameter(key.toString()));
+		}
 		if (request.getParameterMap().containsKey("order_holder")){
-			String[] order_holder = request.getParameterValues("order_holder");
+			String order_holder_string = request.getParameter("order_holder");
+			String[] order_holder = order_holder_string.split(",");
 			
 			updateSlideOrder(order_holder);
 			
-		} else {
-			for(Object key: request.getParameterMap().keySet()) {
-				System.err.println("key-> "+ key.toString() + " : value ->"+ request.getParameter(key.toString()));
-			}
 		}
 		
 		response.sendRedirect("/content/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id")) );

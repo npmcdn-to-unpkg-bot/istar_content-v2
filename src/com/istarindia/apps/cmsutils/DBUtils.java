@@ -27,7 +27,7 @@ public class DBUtils {
 		ArrayList<ArrayList<String>> table = new ArrayList<>();
 		IstarUserDAO dao = new IstarUserDAO();
 		Session session = dao.getSession();
-		String sql1 = "select * from slide where presentation_id="+integer+" order by id";
+		String sql1 = "select * from slide where presentation_id="+integer+" order by order_id";
 		SQLQuery query = session.createSQLQuery(sql1);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List<HashMap<String, Object>> results = query.list();
