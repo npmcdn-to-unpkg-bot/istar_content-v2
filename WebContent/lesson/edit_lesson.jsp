@@ -71,6 +71,8 @@
 
         <!-- CSS Customization -->
         <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
+        <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+        
     </head>
 
     <body>
@@ -143,13 +145,11 @@
                                                     <label class="label">Lesson Themes</label>
                                                     <div class="row">
                                                         <%
-                                                        	boolean flag =false;
                                                             for (String themeName : Themes.lessonThemes) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
                                                                 if (lesson.getLesson_theme().equalsIgnoreCase(themeName)) {
-                                                                	flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_theme" checked="checked"
@@ -166,15 +166,6 @@
                                                         </div>
                                                         <%
                                                             }
-                                                            if (flag == false) {
-                                                        %>
-                                                        <div class="col col-4">
-                                                            <label class="radio">
-                                                            <input type="radio" name="lesson_theme" checked="checked"
-                                                             value="None"> <i class="rounded-x"></i>None</label>
-                                                        </div>
-                                                        <% 
-                                                        	}
                                                         %>
                                                     </div>
                                                 </section>
@@ -183,13 +174,11 @@
                                                     <label class="label">Subject </label>
                                                     <div class="row">
                                                         <%
-                                                      	    flag = false;
                                                             for (String subject : Themes.subjects) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
                                                                 if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
-                                                                flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_subject" checked="checked"
@@ -206,31 +195,24 @@
                                                         </div>
                                                         <%
                                                             }
-                                                            if (flag == false) {
-                                                        %>
-                                                        <div class="col col-4">
-                                                            <label class="radio">
-                                                            <input type="radio" name="lesson_theme" checked="checked"
-                                                             value="None"> <i class="rounded-x"></i>None</label>
-                                                        </div>
-                                                        <% 
-                                                            }
                                                         %>
                                                     </div>
                                                 </section>
                                                 <section>
                                                     <label class="label">List of Learning Objectives</label>
-                                                    
+                                                    <div class="row">
                                                         <%
                                                             for (LearningObjective obj : lesson.getLearningObjectives()) {
                                                         %>
                                                         <div class="col col-12">
-                                                           <li><%=obj.getTitle()%> </li>
+                                                            <label class="checkbox"><input type="checkbox"
+                                                                                           name="learningObjectives" checked="checked"
+                                                                                           value="<%=obj.getId()%>"> <i></i><%=obj.getTitle()%></label>
                                                         </div>
                                                         <%
                                                             }
                                                         %>
-                                                    
+                                                    </div>
                                                 </section>
 
 
@@ -253,7 +235,7 @@
 
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            <i class="fa fa-comments-o"></i> Task History
+                                            <i class="fa fa-comments-o"></i> Review Comments
                                         </h3>
                                     </div>
 
@@ -338,14 +320,9 @@
             <script type="text/javascript"
             src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
             
-            <script type="text/javascript">
-            (function($) {
-                if (!$.curCSS) {
-                   $.curCSS = $.css;
-                }
-            })(jQuery);
+		<script src="http://code.jquery.com/jquery-2.2.3.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
             
-            </script>
         <script type="text/javascript"
         src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
         <script type="text/javascript"
@@ -360,7 +337,7 @@
         <script type="text/javascript"
         src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
         <script
-            src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
+            src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"
         type="text/javascript" charset="utf-8"></script>
 
         <script
@@ -383,13 +360,13 @@
                 $( "#slidess_ord" ).sortable();
                 $( "#save_order" ).submit(function( event ) {
                 	var idsInOrder = $('#slidess_ord').sortable("toArray");
-                	//alert( idsInOrder );
+                	alert( idsInOrder );
                 	$('#order_holder').val(idsInOrder);
                 	//<%=baseURL%>/content/edit_lesson?task_id=1
-                	//window.location = '<%=baseURL%>/content/edit_lesson?task_id='+task_id;
+                	//window.location = '<%=baseURL%>gallery.jsp?sessionids='+selectedElmsIds;
                 	//return false;
                 	
-                	 // event.preventDefault();
+                	//  event.preventDefault();
                 	});
             });
 
