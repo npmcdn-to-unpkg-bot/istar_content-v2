@@ -23,22 +23,19 @@ String slide_id = request.getParameter("slide_id");
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL %>themes/mobile/<%=request.getParameter("lesson_theme").toLowerCase()%>.css" id="theme">
+<link rel="stylesheet" href="/student/css/reveal.css">
+<link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
+<link rel="stylesheet" href="/themes/mobile/<%=request.getParameter("lesson_theme").toLowerCase()%>.css" id="theme">
 
 <!-- Code syntax highlighting -->
-<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css" /><!-- Printing and PDF exports -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL %>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL %>assets/plugins/reveal/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'student/css/print/pdf.css' : 'student/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
-<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
 </head>
 
 <body>
@@ -50,8 +47,8 @@ String slide_id = request.getParameter("slide_id");
 
 		</div>
 
-		<script src="<%=baseURL %>assets/plugins/reveal/lib/js/head.min.js"></script>
-		<script src="<%=baseURL %>assets/plugins/reveal/js/reveal.js"></script>
+		<script src="student/lib/js/head.min.js"></script>
+		<script src="student/js/reveal.js"></script>
 
 		<script>
 
@@ -61,18 +58,17 @@ String slide_id = request.getParameter("slide_id");
 				controls: true,
 				progress: true,
 				history: true,
-				center: true,
+				center: false,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
-					{ src: '<%=baseURL %>assets/plugins/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
-					{ src: '<%=baseURL %>assets/plugins/reveal/plugin/notes/notes.js', async: true }
+					{ src: 'student/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'student/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'student/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'student/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'student/plugin/notes/notes.js', async: true }
 				]
 			
 			

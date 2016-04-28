@@ -119,9 +119,8 @@
 					name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
 					<%
-						ImageDAO dao1 = new ImageDAO();
-						ArrayList<Image> images = (ArrayList<Image>) dao1.findByProperty("sessionid",
-								ppt.getLesson().getCmsession().getId());
+						ImageUtils dao1 = new ImageUtils();
+					ArrayList<Image> images = (ArrayList<Image>) dao1.findAllBackgrounds(request);
 					%><div class="col-md-5">
 						<%=utils.getEditProfileEdit(slide, ppt, newSlide)%>
 						<fieldset>
@@ -165,9 +164,9 @@
 									class="select"> <select name="backgroundTransition"
 									value="<%=slide.getBackgroundTransition()%>"%>>
 										<%
- 	for (String type : SlideTransition.BackgroundTransition) {
- 		if (type.equalsIgnoreCase(slide.getBackgroundTransition())) {
- %>
+ 											for (String type : SlideTransition.BackgroundTransition) {
+ 	 										if (type.equalsIgnoreCase(slide.getBackgroundTransition())) {
+										%>
 										<option selected="selected" value="<%=type%>"><%=type%></option>
 										<%
 											} else {
@@ -275,9 +274,13 @@
 						</div>
 					</div>
 
-					<div class="col-md-6" style="margin-top: -254px;">
-
-						<div id="phone_area" style="display: block;">
+					<div class="col-md-6">
+<iframe
+											src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
+											frameborder="0" id='prv'
+											style="background-color: #fff;width: 412px; height: 659px;">
+										</iframe>
+						<%-- <div id="phone_area" style="display: block;">
 							<div id="phone_placeholder"
 								style="display: block; height: 1024px;">
 								<div id="htc_one_emulator"
@@ -286,12 +289,12 @@
 										<iframe
 											src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
 											frameborder="0" id='prv'
-											style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
+											style="background-color: #fff;width: 364px; height: 647px;">
 										</iframe>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --%>
 					</div>
 
 				</div>
@@ -345,29 +348,6 @@
 			} catch (err) {
 				// TODO: handle exception
 			}
-
-			/* tinymce.init({
-							selector : 'textarea',
-							height : 100,
-							plugins : [
-									'advlist autolink lists link image charmap print preview anchor',
-									'searchreplace visualblocks code fullscreen',
-									'insertdatetime media table contextmenu paste code' ],
-							toolbar : 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-							content_css : [
-									'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-									'//www.tinymce.com/css/codepen.min.css' ], 
-									setup: function (editor) {
-								        editor.on('change', function () {
-								        	var text1 = tinyMCE.activeEditor.getContent();
-								        	console.log("new COntent -> "+ tinyMCE.activeEditor.getContent());
-											var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
-								        	tinyMCE.triggerSave();
-								        });
-								    }
-						}); */
-
-			//CKEDITOR.replace( 'slide_paragraph' );
 			var bodyEditor = CKEDITOR.replace('slide_paragraph', {
 				readOnly : false
 			});
@@ -429,10 +409,6 @@
 						console.log(bgurl);
 						$('#prv').contents().find('.slide-background').css(
 								'background-image', "url(" + bgurl + ")");//
-						// background-image: url("/content/media_upload?getfile=goods1.png");
-						// background-size: cover;
-						//$('#prv').contents().find('#data_image_url').attr("src",$('#'+id).data('img-src'));
-						//$('myOjbect').css('background-image', 'url(' + imageUrl + ')');
 						$('#prv').contents().find('.slide-background').css(
 								'background-size', "cover");
 					});
@@ -445,16 +421,13 @@
 					function() {
 						console.log("color chnaged " + $('#slide_color').val()
 								+ " --- " + $('.slides section'));
-						//<div class="slides">		<section
-						//$('#prv').contents().find('.slides section').css('background-color', $('#slide_color').val());			
-						//$('#prv').contents().find('.slides').css('background-color', $('#slide_color').val());
 						$('#prv').contents().find('.slide-background').css(
 								'background-color', $('#slide_color').val());
 					});
 
 		}
 		$(document).ready(function() {
-			initTextArea();
+			//initTextArea();
 			initHooks();
 			initColorChange();//slide_color
 

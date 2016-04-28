@@ -57,57 +57,57 @@ public class CreateSlideController extends IStarBaseServelet {
 
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
-				int image_id = 0 ; //Dummy image id. To be added soon
-				
+				int image_id = 0; // Dummy image id. To be added soon
+
 				if (request.getParameterMap().containsKey("image_url")) {
 					image_id = Integer.parseInt(request.getParameter("image_url"));
 				}
-				
+
 				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				String title = request.getParameter("title");
-				
-				service.addTextParagraphSlideToLesson(request.getParameter("paragraph"), image,request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, title,
+
+				service.addTextParagraphSlideToLesson(request.getParameter("paragraph"), image,
+						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"));
 			} else {
 				ImageDAO dao = new ImageDAO();
 				String title = request.getParameter("title");
-				int image_id = 0 ; //Dummy image id. To be added soon
-				
+				int image_id = 0; // Dummy image id. To be added soon
+
 				if (request.getParameterMap().containsKey("image_url")) {
 					image_id = Integer.parseInt(request.getParameter("image_url"));
 				}
-				
+
 				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				service.addTextParagraphSlideToLessonUpdate(request.getParameter("paragraph"),image,request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, title,
+				service.addTextParagraphSlideToLessonUpdate(request.getParameter("paragraph"), image,
+						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
 			}
 
 			break;
-		
+
 		case "ONLY_TITLE":
 
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				service.addTextSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"));
+						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
 				service.addTextSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
 
 			break;
@@ -152,12 +152,12 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_TITLE_IMAGE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
-				int image_id = 0 ; //Dummy image id. To be added soon
-				
+				int image_id = 0; // Dummy image id. To be added soon
+
 				if (request.getParameterMap().containsKey("image_url")) {
 					image_id = Integer.parseInt(request.getParameter("image_url"));
 				}
-				
+
 				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
@@ -169,12 +169,12 @@ public class CreateSlideController extends IStarBaseServelet {
 						request.getParameter("backgroundTransition"), image);
 			} else {
 				ImageDAO dao = new ImageDAO();
-				int image_id = 0 ; //Dummy image id. To be added soon
-				
+				int image_id = 0; // Dummy image id. To be added soon
+
 				if (request.getParameterMap().containsKey("image_url")) {
 					image_id = Integer.parseInt(request.getParameter("image_url"));
 				}
-				
+
 				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
@@ -187,16 +187,16 @@ public class CreateSlideController extends IStarBaseServelet {
 
 			}
 			break;
-			
+
 		case "ONLY_TITLE_VIDEO":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				VideoDAO dao = new VideoDAO();
-				int video_id = 0 ; //Dummy video id. To be added soon
-				
+				int video_id = 0; // Dummy video id. To be added soon
+
 				if (request.getParameterMap().containsKey("video_url")) {
 					video_id = Integer.parseInt(request.getParameter("video_url"));
 				}
-				
+
 				Video img = dao.findById(video_id);
 				CMSVideo image = new CMSVideo();
 				image.setUrl(img.getUrl());
@@ -208,12 +208,12 @@ public class CreateSlideController extends IStarBaseServelet {
 						request.getParameter("backgroundTransition"), image);
 			} else {
 				VideoDAO dao = new VideoDAO();
-				int video_id = 0 ; //Dummy video id. To be added soon
-			
+				int video_id = 0; // Dummy video id. To be added soon
+
 				if (request.getParameterMap().containsKey("video_url")) {
 					video_id = Integer.parseInt(request.getParameter("video_url"));
 				}
-				
+
 				Video img = dao.findById(video_id);
 				CMSVideo image = new CMSVideo();
 				image.setUrl(img.getUrl());
@@ -245,18 +245,18 @@ public class CreateSlideController extends IStarBaseServelet {
 			break;
 		case "ONLY_PARAGRAPH":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				/*service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"),
-						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), request.getParameter("paragraph"));*/
-				service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"), 
-						
-						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("image_bg"));
-				
+								service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"),
+
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						request.getParameter("paragraph"), request.getParameter("image_bg"));
 
 			} else {
-				service.addParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"), 
-						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), request.getParameter("paragraph"), request.getParameter("slide_id"), request.getParameter("image_bg"));
+				service.addParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"),
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
+						request.getParameter("paragraph"), request.getParameter("slide_id"),
+						request.getParameter("image_bg"));
 
 			}
 
@@ -264,53 +264,86 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_IMAGE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
-				int image_id = 0 ; //Dummy image id. To be added soon
-				
+				int image_id = 0; // Dummy image id. To be added soon
+
 				if (request.getParameterMap().containsKey("image_url")) {
 					image_id = Integer.parseInt(request.getParameter("image_url"));
 				}
-				
+
 				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				service.addImageSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, "NO_TITLE",
-						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), image);
+						request.getParameter("student_notes"), ppt, "NO_TITLE", request.getParameter("slideTransition"),
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image);
 			} else {
 				ImageDAO dao = new ImageDAO();
-				int image_id = 0 ; //Dummy image id. To be added soon
-				
+				int image_id = 0; // Dummy image id. To be added soon
+
 				if (request.getParameterMap().containsKey("image_url")) {
 					image_id = Integer.parseInt(request.getParameter("image_url"));
 				}
-				
+
 				Image img = dao.findById(image_id);
 				CMSImage image = new CMSImage();
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				service.addImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, "NO_TITLE",
-						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"));
+						request.getParameter("student_notes"), ppt, "NO_TITLE", request.getParameter("slideTransition"),
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image,
+						request.getParameter("slide_id"));
 
 			}
 			break;
+
+		
+		
+		case "NO_CONTENT":
+			//image_bg=%2Fcontent%2Fbackgrounds%2F6.png&slideTransition=Zoom&background
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.addNOTextSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
+			} else {
+				service.addNOTextSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
+			}
+			break;
 			
+		case "ONLY_2TITLE":
+			//image_bg=%2Fcontent%2Fbackgrounds%2F6.png&slideTransition=Zoom&background
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.add2TitleSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("image_bg"),  request.getParameter("title2"));
+			} else {
+				service.add2TitleSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"),  request.getParameter("title2"));
+			}
+			break;
+
+		
+		
 		default:
 			break;
 		}
 		CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"),
-				"A new Slide added with the template => "+ template +" created in the presentation wih ID ->"+ ppt.getId() );
+				"A new Slide added with the template => " + template + " created in the presentation wih ID ->"
+						+ ppt.getId());
 		Task t = new Task();
 		t.setItemId(ppt.getLesson().getId());
 		t.setItemType("LESSON");
 		t = new TaskDAO().findByExample(t).get(0);
-		response.sendRedirect("/content/edit_lesson?task_id=" +t.getId() );
-
+		response.sendRedirect("/content/edit_lesson?task_id=" + t.getId());
 
 	}
 

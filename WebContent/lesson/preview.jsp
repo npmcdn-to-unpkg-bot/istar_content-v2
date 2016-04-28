@@ -9,39 +9,40 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 PresentaionDAO dao = new PresentaionDAO();
 int lessonID = Integer.parseInt(request.getParameter("ppt_id"));
 Presentaion ppt =  dao.findById(lessonID);
+String lesson_theme = ppt.getLesson().getLesson_theme();
 
+
+String style_body = "background-size: cover;";
 %>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>reveal.js - The HTML Presentation Framework</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="stylesheet" href="<%=baseURL %>student/css/reveal.css"><link
-	href="<%=baseURL%>themes/mobile/<%=ppt.getLesson().getLesson_theme().toLowerCase()%>.css"
-	rel="stylesheet" />
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>	
-	<%
-	//if (request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-		if (true) {
-%><link href="<%=baseURL%>themes/mobile.css" rel="stylesheet"
-	type="text/css" />
-<link rel="stylesheet" href="<%=baseURL %>student/css/reveal.css"><link
-	href="<%=baseURL%>themes/mobile/<%=ppt.getLesson().getLesson_theme().toLowerCase()%>.css"
-	rel="stylesheet" />
-<%
-	} else {
-%>
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="<%=baseURL %>student/css/reveal.css"><link
-	href="<%=baseURL%>themes/desktop/<%=ppt.getLesson().getLesson_theme().toLowerCase()%>.css"
-	rel="stylesheet" />
-<%
-	}
-%>
 
-	</head>
-<body style="    background-size: cover;background-image: url('<%=baseURL%>student/subject_images/<%=ppt.getLesson().getLesson_subject().toLowerCase()%>.png')">
+<title>reveal.js The HTML Presentation Framework</title>
+
+<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+<meta name="author" content="Hakim El Hattab">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="/student/css/reveal.css">
+<link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
+<link rel="stylesheet" href="/themes/mobile/<%=lesson_theme.toLowerCase()%>.css" id="theme">
+
+<!-- Code syntax highlighting -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../student/css/print/pdf.css' : '../student/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+</head>
+<body style="<%=style_body%>">
 	<div class="reveal">
 		<div class="slides">
 		<%=ppt.outputSlides() %>
@@ -57,19 +58,16 @@ Presentaion ppt =  dao.findById(lessonID);
 
 			Reveal.initialize({  
 				center: false, 
-				width: 1210,
-		    height: 450, 
+				width: 1600,
+		    height: 900, 
 		    margin: 0.0
 
 			
 			});
 			
 			Reveal.addEventListener( 'slidechanged', function( event ) {
-			    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-			    //$('#prv').contents().find('.slide-background').css('background-color', $('#slide_color').val());
-			   // console.log(event.indexh + " -- "+ $('#'+event.indexh).css('background-image') );
-			    
-			    $('body').css('background-image', $('#'+event.indexh).css('background-image'));
+			    console.log($('#'+event.indexh).css('background-image'));
+				$('body').css('background-image', $('#'+event.indexh).css('background-image'));
 			    $('body').css('background-size', 'cover');
 			} );
 
