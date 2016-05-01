@@ -23,7 +23,7 @@ String slide_id = request.getParameter("slide_id");
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-<link rel="stylesheet" href="/student/css/reveal.css">
+<link rel="stylesheet" href="/content/student/css/reveal.css">
 <link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
 <link rel="stylesheet" href="/themes/mobile/<%=request.getParameter("lesson_theme").toLowerCase()%>.css" id="theme">
 

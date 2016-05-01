@@ -243,6 +243,23 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
+		case "ONLY_2TITLE_TREE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewTree(request);
+				service.add2TextTreeSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("image_bg"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewTree(request);
+				service.add2TextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("image_bg"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
 		case "ONLY_PARAGRAPH":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 								service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"),
