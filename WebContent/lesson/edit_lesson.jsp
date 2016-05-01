@@ -142,14 +142,15 @@
                                                 </section>
 
                                                 <section>
-                                                    <label class="label">Lesson Themes</label>
+                                                    <label>Lesson Themes</label>
                                                     <div class="row">
-                                                        <%
+                                                        <%  boolean flag = false;
                                                             for (String themeName : Themes.lessonThemes) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
                                                                 if (lesson.getLesson_theme().equalsIgnoreCase(themeName)) {
+                                                                	flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_theme" checked="checked"
@@ -162,23 +163,30 @@
                                                                                         class="rounded-x"></i><%=themeName%></label>
                                                                 <%
                                                                     }
-                                                                %>
-                                                        </div>
-                                                        <%
-                                                            }
+                                                                
+                                                            if (flag == false) { 
+                                                            %>
+                                                            	<label class="radio"><input type="radio"  checked="checked"
+                                                                        name="lesson_theme" value="none"> <i
+                                                                        class="rounded-x"></i>None</label>   </div>
+                                                        <%   
+                                                        	}
+                                                         }
                                                         %>
                                                     </div>
                                                 </section>
 
                                                 <section>
-                                                    <label class="label">Subject </label>
+                                                    <label>Subject </label>
                                                     <div class="row">
                                                         <%
+	                                                        flag = false;
                                                             for (String subject : Themes.subjects) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
                                                                 if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
+                                                                	flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_subject" checked="checked"
@@ -191,23 +199,26 @@
                                                                                         class="rounded-x"></i><%=subject%></label>
                                                                 <%
                                                                     }
-                                                                %>
-                                                        </div>
+                                                               
+                                                            if (flag == false) { 
+                                                            %>
+                                                            	<label class="radio"><input type="radio"  checked="checked"
+                                                                        name="lesson_subject" value="none"> <i
+                                                                        class="rounded-x"></i>None</label></div>
                                                         <%
                                                             }
+                                                         }
                                                         %>
                                                     </div>
                                                 </section>
                                                 <section>
-                                                    <label class="label">List of Learning Objectives</label>
+                                                    <label>List of Learning Objectives</label>
                                                     <div class="row">
                                                         <%
                                                             for (LearningObjective obj : lesson.getLearningObjectives()) {
                                                         %>
                                                         <div class="col col-12">
-                                                            <label class="checkbox"><input type="checkbox"
-                                                                                           name="learningObjectives" checked="checked"
-                                                                                           value="<%=obj.getId()%>"> <i></i><%=obj.getTitle()%></label>
+                                                            <li><%=obj.getTitle()%></li>
                                                         </div>
                                                         <%
                                                             }
