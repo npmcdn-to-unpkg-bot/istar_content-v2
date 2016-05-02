@@ -81,18 +81,18 @@ public class CMSRegistry {
 		}
  
 		slideTemplates.add("NO_CONTENT");
-		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_2TITLE");
-		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
-		slideTemplates.add("ONLY_TITLE_LIST");
-		slideTemplates.add("ONLY_TITLE_TREE");
-		slideTemplates.add("ONLY_PARAGRAPH");
-		slideTemplates.add("ONLY_TITLE_VIDEO");
-		slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
-		slideTemplates.add("ONLY_TITLE_IMAGE");
 		slideTemplates.add("ONLY_IMAGE");
+		slideTemplates.add("ONLY_PARAGRAPH_IMAGE");
+		slideTemplates.add("ONLY_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE_PARAGRPH");
-		
+		slideTemplates.add("ONLY_TITLE_IMAGE");
+		slideTemplates.add("ONLY_TITLE_LIST");
+		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
+		slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
+		slideTemplates.add("ONLY_TITLE");
+		//slideTemplates.add("ONLY_TITLE_TREE");
+		//slideTemplates.add("ONLY_TITLE_VIDEO");
 		
 		
 		listTypes.add(ListTypes.SIMPLE_LIST);
