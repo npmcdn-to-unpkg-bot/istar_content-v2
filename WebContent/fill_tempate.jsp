@@ -122,7 +122,7 @@
 						ImageUtils dao1 = new ImageUtils();
 					ArrayList<Image> images = (ArrayList<Image>) dao1.findAllBackgrounds(request);
 					%><div class="col-md-5">
-						<%=utils.getEditProfileEdit(slide, ppt, newSlide)%>
+						<%=utils.getEditProfileEdit(slide, ppt, newSlide,request)%>
 						<fieldset>
 							<section>
 								<label class="label">Select Image Background</label> <label
@@ -135,6 +135,7 @@
 										<%
 											}
 										%>
+									<option selected="selected" value="none">None</option>
 								</select> <i></i>
 								</label>
 							</section>

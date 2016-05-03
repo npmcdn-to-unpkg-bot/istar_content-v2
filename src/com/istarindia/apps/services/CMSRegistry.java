@@ -90,6 +90,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_VIDEO");
 		slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
+		slideTemplates.add("ONLY_2TITLE_IMAGE");
 		slideTemplates.add("ONLY_IMAGE");
 		slideTemplates.add("ONLY_PARAGRAPH_IMAGE");
 		slideTemplates.add("ONLY_PARAGRAPH");

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -24,6 +25,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import com.istarindia.apps.ImageUtils;
 import com.istarindia.apps.SlideTransition;
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentOption;
@@ -656,10 +658,10 @@ public class LessonUtils {
         return out;
     }
 
-    public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide) {
+    public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide,HttpServletRequest request) throws IOException {
         ImageDAO dao = new ImageDAO();
-        ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid",
-                ppt.getLesson().getCmsession().getId());
+        ImageUtils dao1 = new ImageUtils();
+        ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
         ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId",
                 ppt.getLesson().getCmsession().getId());
 
