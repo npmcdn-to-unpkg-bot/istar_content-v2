@@ -210,7 +210,47 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
+		case "ONLY_TITLE_ASSESSMENT_2COLUMNS":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewList(request);
+				list.setList_type("SIMPLE_LIST");
+				service.addListAssessment2ColumnSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
 
+			} else {
+				CMSList list = getNewList(request);
+				list.setList_type("SIMPLE_LIST");
+				service.addListAssessment2ColumnSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+			
+
+		case "ONLY_TITLE_ASSESSMENT_5COLUMNS":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewList(request);
+				list.setList_type("SIMPLE_LIST");
+				service.addListAssessment5ColumnSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewList(request);
+				list.setList_type("SIMPLE_LIST");
+				service.addListAssessment5ColumnSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+			
 		case "ONLY_2BOX":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);

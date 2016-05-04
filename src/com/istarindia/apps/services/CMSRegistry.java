@@ -104,7 +104,8 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_2TITLE_2TABLE");
 		slideTemplates.add("ONLY_2TITLE_5TABLE");
-		
+		slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
+		slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
 		//slideTemplates.add("ONLY_TITLE_TREE");
 		//slideTemplates.add("ONLY_TITLE_VIDEO");
 		
