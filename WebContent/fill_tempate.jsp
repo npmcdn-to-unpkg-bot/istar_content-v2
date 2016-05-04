@@ -345,7 +345,7 @@
 		function initTextArea() {
 			try {
 				$("#image-picker").imagepicker();
-
+				CKEDITOR.replace('paragraph', { height: 100 });
 			} catch (err) {
 				// TODO: handle exception
 			}

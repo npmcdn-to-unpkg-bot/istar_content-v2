@@ -126,6 +126,7 @@
 													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getTitle()%>
 														<ul>
 															<% for (Lesson lesson : session1.getAllLessons(session1.getId())) { 
+																try {
 																String reviewers = "label rounded label-sea";
 																String assigned = "label label-purple rounded-2x";
 																String statusLabel = "label rounded label-yellow";
@@ -149,6 +150,11 @@
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=statusLabel%>"> Status - <%=lesson.getStatus() %></span></li>
 															<%
 												}
+																
+																catch(Exception e) {
+																	System.out.println(lesson.getId());
+																}
+															}
 											%>
 														</ul></li>
 

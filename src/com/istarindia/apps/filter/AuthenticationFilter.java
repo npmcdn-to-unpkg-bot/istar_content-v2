@@ -80,6 +80,10 @@ public class AuthenticationFilter implements Filter {
 		if(((HttpServletRequest) request).getRequestURL().toString().endsWith("login")) {
 			 isStarticrequest = true;
 		}
+		
+		if(((HttpServletRequest) request).getRequestURL().toString().contains("media_upload")) {
+			 isStarticrequest = true;
+		}
 
 		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		if (!isStarticrequest) {

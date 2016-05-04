@@ -7,7 +7,7 @@
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
 PresentaionDAO dao = new PresentaionDAO();
-int lessonID = Integer.parseInt(request.getParameter("ppt_id"));
+int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
 Presentaion ppt =  dao.findById(lessonID);
 String lesson_theme = ppt.getLesson().getLesson_theme();
 
@@ -64,11 +64,21 @@ String style_body = "background-size: cover;";
 
 			
 			});
-			
+			function changeImage()
+			{
+				 Reveal.next();
+			}
 			Reveal.addEventListener( 'slidechanged', function( event ) {
-			    console.log($('#'+event.indexh).css('background-image'));
-				$('body').css('background-image', $('#'+event.indexh).css('background-image'));
-			    $('body').css('background-size', 'cover');
+				Reveal.addEventListener( 'stats', function() {
+					console.log( 'stats called!' );
+					
+					// Jump to next Slide after 30 secs 
+					
+					setTimeout("changeImage()", 30000);
+				} );
+
+			    
+			    
 			} );
 
 		</script>
