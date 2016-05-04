@@ -191,6 +191,46 @@ public class CreateSlideController extends IStarBaseServelet {
 
 			break;
 
+		case "ONLY_LIST":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewList(request);
+				list.setList_type(request.getParameter("list_type"));
+				service.addListSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt,
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewList(request);
+				list.setList_type(request.getParameter("list_type"));
+				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt,
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+
+		case "ONLY_2BOX":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewList(request);
+				list.setList_type(request.getParameter("SIMPLE_LIST"));
+				service.add2BoxSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewList(request);
+				list.setList_type(request.getParameter("SIMPLE_LIST"));
+				service.add2BoxSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+
 		case "ONLY_TITLE_IMAGE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();
@@ -320,6 +360,40 @@ public class CreateSlideController extends IStarBaseServelet {
 				CMSList list = getNewTree(request);
 				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+		case "ONLY_2TITLE_2TABLE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewTree(request);
+				service.add2Text2TableSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewTree(request);
+				service.add2Text2TableSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+		case "ONLY_2TITLE_5TABLE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewTree(request);
+				service.add2Text5TableSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewTree(request);
+				service.add2Text5TableSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
 			}
@@ -459,13 +533,15 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (key.toString().startsWith("parent_")) {
 				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
 					System.out.println("key>>>" + key.toString());
-					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
+					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()),request.getParameter("desc_"+key.toString()));
 					item.setList(getList(request, key));
 					list.getItems().add(item);
 
 					System.out.println("---->" + request.getParameter(key.toString()));
 				}
+			
 			}
+			
 		}
 
 		return list;
@@ -480,7 +556,7 @@ public class CreateSlideController extends IStarBaseServelet {
 		 */
 		list.setItems(new ArrayList<CMSTextItem>());
 		for (Object iterable_element : request.getParameterMap().keySet()) {
-			if (iterable_element.toString().endsWith("_" + key.toString())) {
+			if (iterable_element.toString().endsWith("_" + key.toString())&&(!(iterable_element.toString().startsWith("desc")))) {
 				CMSTextItem item = new CMSTextItem(request.getParameter(iterable_element.toString()));
 				list.getItems().add(item);
 				System.out.println("element here is -----" + iterable_element);
@@ -504,7 +580,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (key.toString().startsWith("list_item")) {
 				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
 					System.out.println(key.toString());
-					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()));
+					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()),request.getParameter("desc_"+key.toString()));
 					list.getItems().add(item);
 					System.out.println("---->" + request.getParameter(key.toString()));
 				}

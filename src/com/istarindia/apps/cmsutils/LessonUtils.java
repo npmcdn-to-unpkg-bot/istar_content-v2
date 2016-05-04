@@ -121,7 +121,7 @@ public class LessonUtils {
             ArrayList<ArrayList<String>> data = db.getSlides(ppt.getId());
             for (int i = 0; i < data.size(); i++) {
                 out.append("<tr class='mammama' id='"+data.get(i).get(0)+"'>");
-                out.append("<td id='id'>" + (i+1) + "</td>");
+                out.append("<td id='id'>" + data.get(i).get(0) + "</td>");
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("<td>");
                 out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
