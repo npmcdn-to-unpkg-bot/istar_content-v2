@@ -250,7 +250,25 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
-			
+		  case "ONLY_2TITLE_TABLE":
+              if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+                      CMSList list = getNewList(request);
+                      list.setList_type(request.getParameter("list_type"));
+                      service.add2TextTableSlideToLesson(request.getParameter("teacher_notes"),
+                                      request.getParameter("student_notes"), ppt, request.getParameter("title"),request.getParameter("title2"),
+                                      request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+                                      request.getParameter("backgroundTransition"), list);
+
+              } else {
+                      CMSList list = getNewList(request);
+                      list.setList_type(request.getParameter("list_type"));
+                      service.add2TextTableSlideToLessonUpdate(request.getParameter("teacher_notes"),
+                                      request.getParameter("student_notes"), ppt, request.getParameter("title"),request.getParameter("title2"),
+                                      request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+                                      request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+              }
+
+              break;
 		case "ONLY_2BOX":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
@@ -258,7 +276,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.add2BoxSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list);
+						request.getParameter("backgroundTransition"), list,request.getParameter("image_bg"));
 
 			} else {
 				CMSList list = getNewList(request);
@@ -266,7 +284,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.add2BoxSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"),request.getParameter("image_bg"));
 			}
 
 			break;

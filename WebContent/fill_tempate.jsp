@@ -349,11 +349,13 @@
 			} catch (err) {
 				// TODO: handle exception
 			}
+			
+			try {
+				// Handle when the Source changes.
 			var bodyEditor = CKEDITOR.replace('slide_paragraph', {
 				readOnly : false
 			});
 
-			// Handle when the Source changes.
 			bodyEditor.on('mode', function() {
 				if (this.mode == 'source') {
 					var editable = bodyEditor.editable();
@@ -375,6 +377,9 @@
 				var iframeInner = $('#prv').contents().find(
 						'#data_slide_paragraph').html(text1);
 			});
+		} catch (err) {
+			// TODO: handle exception
+		}
 		}
 
 		function initHooks() {
@@ -397,6 +402,7 @@
 			$('#image-picker').on(
 					'change',
 					function() {
+						console.log('Kamini');
 						var id = $(this).find(":checked").attr('id');
 						$('#prv').contents().find('#data_image_url').attr(
 								"src", $('#' + id).data('img-src'));
@@ -428,7 +434,7 @@
 
 		}
 		$(document).ready(function() {
-			//initTextArea();
+			initTextArea();
 			initHooks();
 			initColorChange();//slide_color
 

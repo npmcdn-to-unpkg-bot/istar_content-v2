@@ -11,6 +11,7 @@ int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", "
 Presentaion ppt =  dao.findById(lessonID);
 String lesson_theme = ppt.getLesson().getLesson_theme();
 
+String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
 
 String style_body = "background-size: cover;";
 %>
@@ -28,7 +29,7 @@ String style_body = "background-size: cover;";
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-<link rel="stylesheet" href="/content/student/css/reveal.css">
+<link rel="stylesheet" href="<%=nuetral%>student/css/reveal.css">
 <link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
 <link rel="stylesheet" href="/themes/mobile/<%=lesson_theme.toLowerCase()%>.css" id="theme">
 
@@ -37,7 +38,7 @@ String style_body = "background-size: cover;";
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '../student/css/print/pdf.css' : '../student/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=nuetral%>student/css/print/pdf.css' : '<%=nuetral%>student/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
@@ -51,8 +52,8 @@ String style_body = "background-size: cover;";
 	</div>
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script src="<%=baseURL %>student/lib/js/head.min.js"></script>
-	<script src="<%=baseURL %>student/js/reveal.js"></script>
+	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
+	<script src="<%=nuetral%>student/js/reveal.js"></script>
 
 	<script>
 
