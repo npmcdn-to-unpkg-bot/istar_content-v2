@@ -1,4 +1,4 @@
-<%@page import="com.istarindia.apps.dao.LessonDAO"%>
+<%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -11,10 +11,15 @@ int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", "
 Presentaion ppt =  dao.findById(lessonID);
 String lesson_theme = ppt.getLesson().getLesson_theme();
 
+UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
+
 String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
 
 String style_body = "background-size: cover;";
+
 %>
+
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -31,7 +36,7 @@ String style_body = "background-size: cover;";
 
 <link rel="stylesheet" href="<%=nuetral%>student/css/reveal.css">
 <link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
-<link rel="stylesheet" href="/themes/mobile/<%=lesson_theme.toLowerCase()%>.css" id="theme">
+<jsp:include page="/themes/mobile/yellow.jsp?theme_name=<%=lesson_theme %>"></jsp:include>
 
 <!-- Code syntax highlighting -->
 <script>

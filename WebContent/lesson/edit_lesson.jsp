@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.services.UiThemeService"%>
 <%@page import="com.istarindia.apps.Themes"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 
@@ -145,22 +146,22 @@
                                                     <label>Lesson Themes</label>
                                                     <div class="row">
                                                         <%  boolean flag = false;
-                                                            for (String themeName : Themes.lessonThemes) {
+                                                            for (UiTheme themeName : (List<UiTheme>)(new UiThemeDAO()).findAll()) {
                                                         %>
                                                         <div class="col col-4">
                                                             <%
-                                                                if (lesson.getLesson_theme().equalsIgnoreCase(themeName)) {
+                                                                if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getName())) {
                                                                 	flag = true;
                                                             %>
                                                             <label class="radio"><input type="radio"
                                                                                         name="lesson_theme" checked="checked"
-                                                                                        value="<%=themeName%>"> <i class="rounded-x"></i><%=themeName%></label>
+                                                                                        value="<%=themeName.getName()%>"> <i class="rounded-x"></i><%=themeName.getName()%></label>
                                                                 <%
                                                                 } else {
                                                                 %>
                                                             <label class="radio"><input type="radio"
-                                                                                        name="lesson_theme" value="<%=themeName%>"> <i
-                                                                                        class="rounded-x"></i><%=themeName%></label>
+                                                                                        name="lesson_theme" value="<%=themeName.getName()%>"> <i
+                                                                                        class="rounded-x"></i><%=themeName.getName()%></label>
                                                                 <%
                                                                     }
                                                                 
