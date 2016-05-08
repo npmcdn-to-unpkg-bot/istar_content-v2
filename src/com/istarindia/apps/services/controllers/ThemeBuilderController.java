@@ -48,10 +48,14 @@ public class ThemeBuilderController extends HttpServlet {
 		}
 
 		UiThemeService service = new UiThemeService();
-		service.addNewTheme(request.getParameterMap());
+		if(request.getParameterMap().containsKey("is_edit")){
+			service.editTheme(request.getParameterMap());
+		} else{
+			service.addNewTheme(request.getParameterMap());
+		}
 		
-		response.sendRedirect("/content/creative_admin/create_theme.jsp");
-
+		response.sendRedirect("/content/creative_admin/view_themes.jsp");
+		
 	}
 
 	/**

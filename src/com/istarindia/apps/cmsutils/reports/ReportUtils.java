@@ -72,7 +72,8 @@ public class ReportUtils {
 		Report report = new Report();
 		try {
 			URL url = (new CMSRegistry()).getClass().getClassLoader().getResource("/report_list.xml");
-			File file = new File(url.toURI());	JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
+			File file = new File(url.toURI());
+			JAXBContext jaxbContext = JAXBContext.newInstance(ReportCollection.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			reportCollection = (ReportCollection) jaxbUnmarshaller.unmarshal(file);
 

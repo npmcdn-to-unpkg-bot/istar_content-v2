@@ -241,8 +241,20 @@
 		<title> All Media Tasks in assigned state</title>
 	</reports>
 
-	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- Themes list for creative admin -->
+	<reports id="7" type_of_report="table">
+		<column columnHandler="NONE" display_name="Theme ID" isVisible="true" name="theme_id" />
+		<column columnHandler="NONE" display_name="Theme Name" isVisible="true" name="name" />
+		<column columnHandler="NONE" display_name="Action" isVisible="true" name="status" />
 
+		<sql>select id as theme_id, name as name
+			from ui_theme T
+			ORDER BY theme_id
+		</sql>
+		<title>Existing theme list</title>
+	</reports>
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 	<!-- Content Admin -->
 	<reports id="20" type_of_report="table">

@@ -15,6 +15,8 @@
 	if (request.getParameterMap().containsKey("theme_id")) {
 		theme = (new UiThemeDAO()).findById(Integer.parseInt(request.getParameter("theme_id")));
 	}
+	
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +82,8 @@
 			</div>
 		</div>
 		<form action="/content/theme_editor" class="sky-form">
+		<input name="is_edit" value="true" type="hidden"/>
+		<input name="theme_id" value=<%=theme.getId() %> type="hidden"/>
 			<div class="container-fluid height-1000 content"
 				style="padding: 0px !important">
 				<div class="col-md-6">
@@ -93,79 +97,223 @@
 								<section class="col col-md-6">
 								<label class="label">Name</label>
 									<label class="input"> <input type="text" name="name"
-										placeholder="Please enter new theme name">
+										placeholder="Please enter new theme name" value="<%=theme.getName() %>">
 									</label>
 								</section>
 								
 								<section class="col col-md-6">
 								<label class="label">Background Color</label>
 									<label class="select"> <input type="color"
-										name="background_color" value="#ffffff">
+										name="background_color" value="<%=theme.getBackground_color() %>">
 									</label>
 								</section>
 							</fieldset>
 						</div>
 					</div>
-					<%
-						ArrayList<String> entities = new ArrayList();
-						entities.add("title");
-						entities.add("subtitle");
-						entities.add("listitem");
-						entities.add("paragraph");;
 
-						for (String key : entities) {
-					%>
+					<!--title-->
 					<div class="row">
-						<header><%=key.toUpperCase()%></header>
+						<header>TITLE</header>
 						<div class="row">
 							<fieldset>
 								<section class="col col-4">
 									<!-- key.toUpperCase() -->
-									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
+									<label class="label">Title
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="200" name="<%=key%>_____font_size" value="60">
+										min="60" max="200" name="title_____font_size" value="<%=theme.getTitleFontSize() %>">
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
+									<label class="label">Title
 										Line height</label> <label class="input"> <input type="number"
-										name="<%=key%>_____line_height" step="0.1" min="1" max="3"
-										value="1">
+										name="title_____line_height" step="0.1" min="1" max="3" value="<%=theme.getTitleLineHeight() %>">
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
-										Font Weight</label> <label class="input"> <input type="number"
-										name="<%=key%>_____font_weight" step="100" min="100"
-										max="900" value="100">
+									<label class="label">Title
+										Font Weight</label> <label class="input"> <input type="number" name="title_____font_weight" 
+										step="100" min="100" max="900" value="<%=theme.getTitleFontWeight() %>" >
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
+									<label class="label">Title
 										Text alignment</label> <label class="select"> <select
-										name="<%=key%>_____text_alignment">
+										name="title_____text_alignment" >
+											<option value="<%=theme.getTitleTextAlignment() %>" selected><%=theme.getTitleTextAlignment() %></option>
 											<option value="center">Center</option>
-											<option value="left" selected>Left</option>
+											<option value="left">Left</option>
 											<option value="right">Right</option>
 									</select>
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
+									<label class="label">Title
 										Color</label> <label class="select"> <input type="color"
-										name="<%=key%>_____font_color" value="#000000">
+										name="title_____font_color" value="<%=theme.getTitleFontColor() %>" >
 									</label>
 								</section>
 							</fieldset>
 						</div>
 					</div>
-					<%
-						}
-					%>
+					
+					<!-- subtitle-->
+					
+					<div class="row">
+						<header>SUBTITLE</header>
+						<div class="row">
+							<fieldset>
+								<section class="col col-4">
+									<!-- key.toUpperCase() -->
+									<label class="label">Subtitle
+										Font Size </label> <label class="input"> <input type="number"
+										min="60" max="200" name="subtitle_____font_size" value="<%=theme.getSubtitleFontSize() %>">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Subtitle
+										Line height</label> <label class="input"> <input type="number"
+										name="subtitle_____line_height" step="0.1" min="1" max="3" value="<%=theme.getSubtitleLineHeight() %>"
+										>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Subtitle
+										Font Weight</label> <label class="input"> <input type="number"
+										name="subtitle_____font_weight" step="100" min="100" value="<%=theme.getSubtitleFontWeight() %>"
+										max="900">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Subtitle
+										Text alignment</label> <label class="select"> <select
+										name="subtitle_____text_alignment">
+											<option value="<%=theme.getSubtitleTextAlignment() %>" selected><%=theme.getSubtitleTextAlignment() %></option>
+											<option value="center">Center</option>
+											<option value="left" >Left</option>
+											<option value="right">Right</option>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Subtitle
+										Color</label> <label class="select"> <input type="color"
+										name="subtitle_____font_color" value="<%=theme.getSubtitleFontColor() %>">
+									</label>
+								</section>
+							</fieldset>
+						</div>
+					</div>
+					
+					<!-- listitem -->
+					
+					<div class="row">
+						<header>LISTITEM</header>
+						<div class="row">
+							<fieldset>
+								<section class="col col-4">
+									<!-- key.toUpperCase() -->
+									<label class="label">List Item
+										Font Size </label> <label class="input"> <input type="number"
+										min="60" max="200" name="listitem_____font_size" value="<%=theme.getListitemFontSize() %>">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">List Item
+										Line height</label> <label class="input"> <input type="number"
+										name="listitem_____line_height" step="0.1" min="1" max="3" value="<%=theme.getListitemLineHeight() %>">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">List Item
+										Font Weight</label> <label class="input"> <input type="number"
+										name="listitem_____font_weight" step="100" min="100" value="<%=theme.getListitemFontWeight() %>"
+										max="900" >
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">List Item
+										Text alignment</label> <label class="select"> <select
+										name="listitem_____text_alignment">
+											<option value="<%=theme.getListitemTextAlignment() %>" selected><%=theme.getListitemTextAlignment() %></option>
+											<option value="center">Center</option>
+											<option value="left" >Left</option>
+											<option value="right">Right</option>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">List Item
+										Color</label> <label class="select"> <input type="color"
+										name="listitem_____font_color" value="<%=theme.getListitemFontColor() %>">
+									</label>
+								</section>
+							</fieldset>
+						</div>
+					</div>
+					
+					<!-- paragraph -->
+					
+					<div class="row">
+						<header>PARAGRAPH</header>
+						<div class="row">
+							<fieldset>
+								<section class="col col-4">
+									<!-- key.toUpperCase() -->
+									<label class="label">Paragraph
+										Font Size </label> <label class="input"> <input type="number"
+										min="60" max="200" name="paragraph_____font_size" value="<%=theme.getParagraphFontSize() %>">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Paragraph
+										Line height</label> <label class="input"> <input type="number"
+										name="paragraph_____line_height" step="0.1" min="1" max="3" value="<%=theme.getParagraphLineHeight() %>">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Paragraph
+										Font Weight</label> <label class="input"> <input type="number"
+										name="paragraph_____font_weight" step="100" min="100"
+										max="900" value="<%=theme.getParagraphFontWeight() %>">
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Paragraph
+										Text alignment</label> <label class="select"> <select
+										name="paragraph_____text_alignment">
+											<option value="<%=theme.getParagraphTextAlignment() %>" selected><%=theme.getParagraphTextAlignment() %></option>
+											<option value="center">Center</option>
+											<option value="left" >Left</option>
+											<option value="right">Right</option>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Paragraph
+										Color</label> <label class="select"> <input type="color"
+										name="paragraph_____font_color" value="<%=theme.getParagraphFontColor() %>">
+									</label>
+								</section>
+							</fieldset>
+						</div>
+					</div>
+					
 					<footer>
 						<button type="submit" class="btn-u">Submit</button>
 						<button type="button" class="btn-u btn-u-default"

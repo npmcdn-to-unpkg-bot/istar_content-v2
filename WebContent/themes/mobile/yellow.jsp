@@ -20,120 +20,110 @@ body {
 }
 
 .reveal  .slide {
-	background-color: #FDC530 !important;
+	background-color: <%=theme.getBackground_color()%> ; /* #FDC530 !important; */
 }
 
 .reveal  .ONLY_TITLE h2 {
 	margin-top: -37%;
-	text-align: left;
 	padding-left: 2%;
 	color: <%=theme.getTitleColor()%>;
 	font-size: <%=theme.getTitleSize()%>px;
 	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
 .reveal  .ONLY_2TITLE h2 {
 	margin-top: -26%;
-	text-align: left;
 	padding-left: 10%;
 	color: <%=theme.getTitleColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleSize()%>px;
 	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
 .reveal  .ONLY_2TITLE h3 {
-	text-align: left;
 	padding-left: 10%;
 	color: <%=theme.getSubtitleColor()%>;
 	font-weight: <%=theme.getSubtitleFontWeight()%>;
 	font-size: <%=theme.getSubtitleSize()%>px;
 	line-height: <%=theme.getSubtitleColor()%> ;
+	text-align:  <%=theme.getSubtitleTextAlignment()%> ;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
 	margin-top: -26%;
-	text-align: left;
 	padding-left: 5%;
 	color: <%=theme.getTitleColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleSize()%>px;
 	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
-	text-align: left;
 	padding-left: 5%;
 	padding-right: 5%;
 	color: <%=theme.getSubtitleColor()%>;
 	font-weight: <%=theme.getSubtitleFontWeight()%>;
 	font-size: <%=theme.getSubtitleSize()%>px;
 	line-height: <%=theme.getSubtitleColor()%> ;
+	text-align:  <%=theme.getSubtitleTextAlignment()%> ;
 }
 
 .reveal .ONLY_PARAGRAPH  .paragraph {
 	margin-top: -26%;
-	text-align: left;
 	padding-left: 10%;
-	color: #7E4B0E;
-	font-weight: 400;
-	font-size: 100px;
+	color: <%=theme.getParagraphColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%> ;
+	text-align:  <%=theme.getParagraphTextAlignment()%> ;
 }
 
 .reveal .ONLY_PARAGRAPH  .p {
 	margin-top: -26%;
-	text-align: left;
 	padding-left: 10%;
-	color: #7E4B0E;
-	font-weight: 400;
-	font-size: 100px;
+	color: <%=theme.getParagraphColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%> ;
+	text-align:  <%=theme.getParagraphTextAlignment()%> ;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph {
-	text-align: left;
 	padding-left: 10px;
-	color: #7E4B0E;
-	font-size: 57px;
-    line-height: 1.1;
+	color: <%=theme.getParagraphColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%> ;
+	text-align:  <%=theme.getParagraphTextAlignment()%> ;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE  .p {
-	text-align: left;
 	padding-left: 10px;
-	color: #7E4B0E;
-	font-size: 57px;
-    line-height: 1.1;
+	color: <%=theme.getParagraphColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%> ;
+	text-align:  <%=theme.getParagraphTextAlignment()%> ;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph {
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p{
 	position: fixed;
-	font-size: 50px;
-	text-align: left;
 	margin-top: -10%;
 	padding-left: -5px;
 	padding-right: 7px;
-	line-height: 1.4;
-	color: #7E4B0E;
 	padding-top: 81px;
 	z-index: 9999;
-	line-height: 1;
-}
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .p {
-	position: fixed;
-	font-size: 50px;
-	text-align: left;
-	margin-top: -10%;
-	padding-left: -5px;
-	padding-right: 7px;
-	line-height: 1.4;
-	color: #7E4B0E;
-	padding-top: 81px;
-	z-index: 9999;
-	line-height: 1;
+	color: <%=theme.getParagraphColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%> ;
+	text-align:  <%=theme.getParagraphTextAlignment()%> ;
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
-	text-align: left !important;
 	margin-top: -38%;
 	position: fixed;
 	text-align: center;
@@ -142,45 +132,31 @@ body {
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleSize()%>px;
 	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
 	margin-top: -37%;
-	text-align: left;
 	padding-left: 2%;
 	color: <%=theme.getTitleColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleSize()%>px;
 	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
-	text-align: left;
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p{
 	padding-left: 40px;
-	color: #7E4B0E;
-	font-weight: 400;
-	font-size: 50px;
 	list-style: none;
-}
-.reveal .ONLY_TITLE_PARAGRAPH  .p {
-	text-align: left;
-	padding-left: 40px;
-	color: #7E4B0E;
-	font-weight: 400;
-	font-size: 50px;
-	list-style: none;
-}
-
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph ul {
 	margin-top: 10%;
-}
-
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p {
-	margin-top: 10%;
+	color: <%=theme.getParagraphColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%> ;
+	text-align:  <%=theme.getParagraphTextAlignment()%> ;
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
-	text-align: left;
 	min-height: 799px;
 	position: fixed;
 	top: -486px;
@@ -189,14 +165,17 @@ body {
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleSize()%>px;
 	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
 .ONLY_2TITLE_TREE h1 {
 	margin-top: -26%;
-	text-align: left;
 	padding-left: 10%;
-	color: #7E4B0E;
-	font-weight: 700;
+	color: <%=theme.getTitleColor()%>;
+	font-weight: <%=theme.getTitleFontWeight()%>;
+	font-size: <%=theme.getTitleSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
 .ONLY_2TITLE_TREE h2 {
@@ -246,26 +225,27 @@ body {
 }
 
 .reveal .ONLY_TITLE_LIST #data_slide_title {
-	font-weight: 700;
-	font-size: 85px;
-	color: #7E4B0E;
-	text-align: left;
 	padding-left: 42px;
 	margin-top: -35% !important;
+	color: <%=theme.getTitleColor()%>;
+	font-weight: <%=theme.getTitleFontWeight()%>;
+	font-size: <%=theme.getTitleSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%> ;
+	text-align:  <%=theme.getTitleTextAlignment()%> ;
 }
 
-.reveal .ONLY_TITLE_LIST ol li {
-	font-weight: 400;
-	font-size: 50px;
+.reveal .ONLY_TITLE_LIST ol li ul{
 	padding-bottom: 56px;
-	text-align: left;
 	padding-left: 29px;
 	padding-right: 52px;
-	color: #7E4B0E;
 	/* list-style-image: url('/themes/mobile/bullet_line.png'); */
 	margin-left: 82px;
-	line-height: 1;
 	list-style-type: decimal-leading-zero;
+	color: <%=theme.getListitemColor()%>;
+	font-weight: <%=theme.getListitemFontWeight()%>;
+	font-size: <%=theme.getListitemSize()%>px;
+	line-height: <%=theme.getListitemLineHeight()%> ;
+	text-align:  <%=theme.getListitemTextAlignment()%> ;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE img {
@@ -285,10 +265,6 @@ body {
 .reveal .ONLY_TITLE_IMAGE .holder .holder1 {
 	/*     border: 1px solid red; */
 	margin-top: 20% !important;
-}
-
-.reveal .ONLY_TITLE_LIST ol {
-	padding-left: 45px;
 }
 
 </style>
