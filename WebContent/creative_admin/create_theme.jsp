@@ -113,6 +113,25 @@
 						entities.add("listitem");
 						entities.add("paragraph");;
 
+						
+						ArrayList<String> fontNames = new ArrayList();
+						fontNames.add("Alice-Regular.ttf");
+						fontNames.add("Asap-Regular.ttf");
+						fontNames.add("Biryani-Regular.ttf");
+						fontNames.add("ComingSoon.ttf");
+						fontNames.add("Cookie-Regular.ttf");
+						fontNames.add("Domine-Regular.ttf");
+						fontNames.add("DroidSerif.ttf");
+						fontNames.add("Exo-Regular.ttf");
+						fontNames.add("Lato-Regular.ttf");
+						fontNames.add("LeagueScript.ttf");
+						fontNames.add("LibreBaskerville-Regular.ttf");
+						fontNames.add("NotoSerif-Regular.ttf");
+						fontNames.add("OpenSans-Regular.ttf");
+						fontNames.add("Prata-Regular.ttf");
+						fontNames.add("Quicksand-Regular.ttf");
+						fontNames.add("Raleway-Regular.ttf");
+						
 						for (String key : entities) {
 					%>
 					<div class="row">
@@ -150,6 +169,17 @@
 											<option value="center">Center</option>
 											<option value="left" selected>Left</option>
 											<option value="right">Right</option>
+									</select>
+									</label>
+								</section>
+								
+								<section class="col col-4">
+									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
+										Font Family</label> <label class="select"> <select
+										name="<%=key%>_____font_family">
+										<% for(String fontName : fontNames) {%>
+											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
+										<% }%>
 									</select>
 									</label>
 								</section>

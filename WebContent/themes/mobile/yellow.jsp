@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%><%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
-<%@page import="com.istarindia.apps.dao.Presentaion"%>
+<%@page import="com.istarindia.apps.dao.*"%>
 	
 	<% 
 	PresentaionDAO dao = new PresentaionDAO();
@@ -11,116 +11,120 @@
 	UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
 	%>
 <style>
-@import
-	url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic)
-	;
 
 body {
 	background: #FDC530 !important;
 }
 
+@font-face {
+    font-family: 'Alice';
+    src: url('/themes/fonts/Alice-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Asap-Bold';
+    src: url('/themes/fonts/Asap-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Asap-BoldItalic';
+    src: url('/themes/fonts/Asap-BoldItalic.ttf');
+}
+
+
 .reveal  .slide {
-	background-color: <%=theme.getBackground_color()%> ; /* #FDC530 !important; */
+	background-color: <%=theme.getBackgroundColor()%>;
+	/* #FDC530 !important; */
 }
 
 .reveal  .ONLY_TITLE h2 {
 	margin-top: -37%;
 	padding-left: 2%;
-	color: <%=theme.getTitleColor()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	color: <%=theme.getTitleFontColor()%>;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-weight: <%=theme.getTitleFontWeight()%>;
+	font-family: '<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;;
 }
 
 .reveal  .ONLY_2TITLE h2 {
 	margin-top: -26%;
 	padding-left: 10%;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family:: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE h3 {
 	padding-left: 10%;
-	color: <%=theme.getSubtitleColor()%>;
+	color: <%=theme.getSubtitleFontColor()%>;
 	font-weight: <%=theme.getSubtitleFontWeight()%>;
-	font-size: <%=theme.getSubtitleSize()%>px;
-	line-height: <%=theme.getSubtitleColor()%> ;
-	text-align:  <%=theme.getSubtitleTextAlignment()%> ;
+	font-size: <%=theme.getSubtitleFontSize()%>px;
+	line-height: <%=theme.getSubtitleLineHeight()%>;
+	text-align: <%=theme.getSubtitleTextAlignment()%>;
+	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
 	margin-top: -26%;
 	padding-left: 5%;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
 	padding-left: 5%;
 	padding-right: 5%;
-	color: <%=theme.getSubtitleColor()%>;
+	color: <%=theme.getSubtitleFontColor()%>;
 	font-weight: <%=theme.getSubtitleFontWeight()%>;
-	font-size: <%=theme.getSubtitleSize()%>px;
-	line-height: <%=theme.getSubtitleColor()%> ;
-	text-align:  <%=theme.getSubtitleTextAlignment()%> ;
+	font-size: <%=theme.getSubtitleFontSize()%>px;
+	line-height: <%=theme.getSubtitleFontColor()%>;
+	text-align: <%=theme.getSubtitleTextAlignment()%>;
+	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_PARAGRAPH  .paragraph {
+.reveal .ONLY_PARAGRAPH  .paragraph p {
 	margin-top: -26%;
 	padding-left: 10%;
-	color: <%=theme.getParagraphColor()%>;
+	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
+	font-size: <%=theme.getParagraphFontSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
-.reveal .ONLY_PARAGRAPH  .p {
-	margin-top: -26%;
-	padding-left: 10%;
-	color: <%=theme.getParagraphColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
-}
-
-.reveal .ONLY_PARAGRAPH_IMAGE  .paragraph {
+.reveal .ONLY_PARAGRAPH_IMAGE  .paragraph p {
 	padding-left: 10px;
-	color: <%=theme.getParagraphColor()%>;
+	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
+	font-size: <%=theme.getParagraphFontSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
-.reveal .ONLY_PARAGRAPH_IMAGE  .p {
-	padding-left: 10px;
-	color: <%=theme.getParagraphColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
-}
-
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p{
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
 	position: fixed;
 	margin-top: -10%;
 	padding-left: -5px;
 	padding-right: 7px;
 	padding-top: 81px;
 	z-index: 9999;
-	color: <%=theme.getParagraphColor()%>;
+	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
+	font-size: <%=theme.getParagraphFontSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
@@ -128,32 +132,35 @@ body {
 	position: fixed;
 	text-align: center;
 	width: 100%;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
 	margin-top: -37%;
 	padding-left: 2%;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p{
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p {
 	padding-left: 40px;
 	list-style: none;
 	margin-top: 10%;
-	color: <%=theme.getParagraphColor()%>;
+	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
+	font-size: <%=theme.getParagraphFontSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
@@ -161,21 +168,23 @@ body {
 	position: fixed;
 	top: -486px;
 	padding: 40px;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
 .ONLY_2TITLE_TREE h1 {
 	margin-top: -26%;
 	padding-left: 10%;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
 .ONLY_2TITLE_TREE h2 {
@@ -227,25 +236,27 @@ body {
 .reveal .ONLY_TITLE_LIST #data_slide_title {
 	padding-left: 42px;
 	margin-top: -35% !important;
-	color: <%=theme.getTitleColor()%>;
+	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
-.reveal .ONLY_TITLE_LIST ol li ul{
+.reveal .ONLY_TITLE_LIST ol li ul {
 	padding-bottom: 56px;
 	padding-left: 29px;
 	padding-right: 52px;
 	/* list-style-image: url('/themes/mobile/bullet_line.png'); */
 	margin-left: 82px;
 	list-style-type: decimal-leading-zero;
-	color: <%=theme.getListitemColor()%>;
+	color: <%=theme.getListitemFontColor()%>;
 	font-weight: <%=theme.getListitemFontWeight()%>;
-	font-size: <%=theme.getListitemSize()%>px;
-	line-height: <%=theme.getListitemLineHeight()%> ;
-	text-align:  <%=theme.getListitemTextAlignment()%> ;
+	font-size: <%=theme.getListitemFontSize()%>px;
+	line-height: <%=theme.getListitemLineHeight()%>;
+	text-align: <%=theme.getListitemTextAlignment()%>;
+	font-family: listitemFont;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE img {
@@ -266,5 +277,4 @@ body {
 	/*     border: 1px solid red; */
 	margin-top: 20% !important;
 }
-
 </style>

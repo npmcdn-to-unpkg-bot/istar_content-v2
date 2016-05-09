@@ -100,6 +100,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_IMAGE");
 		slideTemplates.add("ONLY_TITLE_LIST");
 		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
+		slideTemplates.add("ONLY_PARAGRAPH_TITLE");
 		slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
 		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_2TITLE_TABLE");
@@ -107,7 +108,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_2TITLE_5TABLE");
 		slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
 		slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
-		//slideTemplates.add("ONLY_TITLE_TREE");
+		slideTemplates.add("ONLY_TITLE_TREE");
 		//slideTemplates.add("ONLY_TITLE_VIDEO");
 		
 		
