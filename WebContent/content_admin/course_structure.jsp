@@ -115,15 +115,16 @@
 									%>
 									<li id="course_<%=course.getId()%>" data-jstree='{"opened":true}'><%=course.getId()%>. <%=course.getCourseName()%>
 										<ul>
-											<%
+											<%int cmsession_sno = 0;
 												for (Module module : course.getAllModules(course.getId())) {
 											%>
-											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'><%=module.getId()%>. <%=module.getModuleName()%>
+											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'> <%=module.getModuleName()%>
 												<ul>
-													<%
+													<% 
  												for (Cmsession session1 : module.getAllSession(module.getId())) {
+ 													cmsession_sno++;
  											%>
-													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=session1.getId()%>. <%=session1.getTitle()%>
+													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
 														<ul>
 															<% for (Lesson lesson : session1.getAllLessons(session1.getId())) { 
 																try {
