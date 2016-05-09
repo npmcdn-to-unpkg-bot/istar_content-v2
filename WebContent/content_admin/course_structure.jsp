@@ -109,13 +109,14 @@
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses
 								<ul>
-									<%
+									<%  int course_sno = 0;
 										CourseDAO dao = new CourseDAO();
 										for (Course course : (List<Course>) dao.findAll()) {
+											course_sno++;
 									%>
-									<li id="course_<%=course.getId()%>" data-jstree='{"opened":true}'><%=course.getId()%>. <%=course.getCourseName()%>
+									<li id="course_<%=course.getId()%>" data-jstree='{"opened":true}'><%=course_sno%>. <%=course.getCourseName()%>
 										<ul>
-											<%int cmsession_sno = 0;
+											<%  int cmsession_sno = 0;
 												for (Module module : course.getAllModules(course.getId())) {
 											%>
 											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'> <%=module.getModuleName()%>
