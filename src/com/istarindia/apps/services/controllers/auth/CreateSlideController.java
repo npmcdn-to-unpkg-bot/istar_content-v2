@@ -158,14 +158,14 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), request.getParameter("paragraph"));
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_TITLE_PARAGRAPH");
 
 			} else {
 				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
-						request.getParameter("slide_id"));
+						request.getParameter("slide_id"), "ONLY_TITLE_PARAGRAPH");
 
 			}
 
@@ -563,7 +563,23 @@ public class CreateSlideController extends IStarBaseServelet {
 			break;
 
 		
-		
+		case "ONLY_PARAGRAPH_TITLE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_PARAGRAPH_TITLE");
+
+			} else {
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
+						request.getParameter("slide_id"), "ONLY_PARAGRAPH_TITLE");
+
+			}
+
+			break;
 		default:
 			break;
 		}
