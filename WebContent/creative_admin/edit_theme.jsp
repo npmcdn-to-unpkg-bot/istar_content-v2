@@ -110,7 +110,27 @@
 							</fieldset>
 						</div>
 					</div>
-
+					
+					<%
+						ArrayList<String> fontNames = new ArrayList();
+						fontNames.add("Alice-Regular.ttf");
+						fontNames.add("Asap-Regular.ttf");
+						fontNames.add("Biryani-Regular.ttf");
+						fontNames.add("ComingSoon.ttf");
+						fontNames.add("Cookie-Regular.ttf");
+						fontNames.add("Domine-Regular.ttf");
+						fontNames.add("DroidSerif.ttf");
+						fontNames.add("Exo-Regular.ttf");
+						fontNames.add("Lato-Regular.ttf");
+						fontNames.add("LeagueScript.ttf");
+						fontNames.add("LibreBaskerville-Regular.ttf");
+						fontNames.add("NotoSerif-Regular.ttf");
+						fontNames.add("OpenSans-Regular.ttf");
+						fontNames.add("Prata-Regular.ttf");
+						fontNames.add("Quicksand-Regular.ttf");
+						fontNames.add("Raleway-Regular.ttf");
+						
+					%>
 					<!--title-->
 					<div class="row">
 						<header>TITLE</header>
@@ -146,6 +166,18 @@
 											<option value="center">Center</option>
 											<option value="left">Left</option>
 											<option value="right">Right</option>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Title
+										Font Family</label> <label class="select"> <select
+										name="title_____font_family">
+											<option value="<%=theme.getTitleFontFamily() %>" selected><%=theme.getTitleFontFamily().split(".ttf")[0] %></option>
+										<% for(String fontName : fontNames) { %>
+											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
+										<% } %>
 									</select>
 									</label>
 								</section>
@@ -204,6 +236,18 @@
 
 								<section class="col col-4">
 									<label class="label">Subtitle
+										Font Family</label> <label class="select"> <select
+										name="title_____font_family">
+											<option value="<%=theme.getSubtitleFontFamily() %>" selected><%=theme.getSubtitleFontFamily().split(".ttf")[0] %></option>
+										<% for(String fontName : fontNames) { %>
+											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
+										<% } %>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Subtitle
 										Color</label> <label class="select"> <input type="color"
 										name="subtitle_____font_color" value="<%=theme.getSubtitleFontColor() %>">
 									</label>
@@ -255,6 +299,18 @@
 
 								<section class="col col-4">
 									<label class="label">List Item
+										Font Family</label> <label class="select"> <select
+										name="title_____font_family">
+											<option value="<%=theme.getListitemFontFamily() %>" selected><%=theme.getListitemFontFamily().split(".ttf")[0] %></option>
+										<% for(String fontName : fontNames) { %>
+											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
+										<% } %>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">List Item
 										Color</label> <label class="select"> <input type="color"
 										name="listitem_____font_color" value="<%=theme.getListitemFontColor() %>">
 									</label>
@@ -300,6 +356,18 @@
 											<option value="center">Center</option>
 											<option value="left" >Left</option>
 											<option value="right">Right</option>
+									</select>
+									</label>
+								</section>
+
+								<section class="col col-4">
+									<label class="label">Paragraph
+										Font Family</label> <label class="select"> <select
+										name="title_____font_family">
+											<option value="<%=theme.getParagraphFontFamily() %>" selected><%=theme.getParagraphFontFamily().split(".ttf")[0] %></option>
+										<% for(String fontName : fontNames) { %>
+											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
+										<% } %>
 									</select>
 									</label>
 								</section>
