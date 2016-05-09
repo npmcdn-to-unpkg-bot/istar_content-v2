@@ -74,7 +74,7 @@ $(document).ready(function() {
 </head>
 <body style="height:674px; ">
 
-		<img id="the_pic" class="center fit" src="assets/error.png">  
+		<img id="the_pic" class="center fit" src="<%=baseURL %>assets/error.png">  
 	<!--=== End Content Part ===-->
 
 	<!--=== Footer v1 ===-->

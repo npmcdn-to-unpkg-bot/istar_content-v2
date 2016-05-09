@@ -3,12 +3,26 @@
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.*"%>
 	
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.HibernateException"%>
+<%@page import="org.hibernate.SQLQuery"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="org.hibernate.Transaction"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 	<% 
 	PresentaionDAO dao = new PresentaionDAO();
 	int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
 	Presentaion ppt =  dao.findById(lessonID);
 	String lesson_theme = ppt.getLesson().getLesson_theme();
-	UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
+	//UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
+	String sql = "select id from ui_theme where ui_theme.name='yellow';";
+	UiThemeDAO uiDao = new UiThemeDAO();
+	Session uiSession = uiDao.getSession();
+	SQLQuery query = uiSession.createSQLQuery(sql);
+	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+	List<HashMap<String, Object>> results = query.list();
+	UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(results.get(0).get("id").toString()));
 	%>
 <style>
 

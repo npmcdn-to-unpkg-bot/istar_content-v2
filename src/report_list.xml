@@ -243,13 +243,13 @@
 
 	<!-- Themes list for creative admin -->
 	<reports id="7" type_of_report="table">
-		<column columnHandler="NONE" display_name="Theme ID" isVisible="true" name="theme_id" />
+		<column columnHandler="NONE" display_name="Theme ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Theme Name" isVisible="true" name="name" />
-		<column columnHandler="NONE" display_name="Action" isVisible="true" name="status" />
+		<column columnHandler="THEME" display_name="Action" isVisible="true" name="action" />
 
-		<sql>select id as theme_id, name as name
+		<sql>select T.id as task_id, T.name as name, T.name as action
 			from ui_theme T
-			ORDER BY theme_id
+			ORDER BY task_id
 		</sql>
 		<title>Existing theme list</title>
 	</reports>
