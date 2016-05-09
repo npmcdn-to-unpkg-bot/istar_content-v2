@@ -11,15 +11,30 @@
 	UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
 	%>
 <style>
-@import
-	url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
 
 body {
 	background: #FDC530 !important;
 }
 
+@font-face {
+    font-family: 'Alice';
+    src: url('/themes/fonts/Alice-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Asap-Bold';
+    src: url('/themes/fonts/Asap-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Asap-BoldItalic';
+    src: url('/themes/fonts/Asap-BoldItalic.ttf');
+}
+
+
 .reveal  .slide {
-	background-color: <%=theme.getBackgroundColor()%> ; /* #FDC530 !important; */
+	background-color: <%=theme.getBackgroundColor()%>;
+	/* #FDC530 !important; */
 }
 
 .reveal  .ONLY_TITLE h2 {
@@ -27,10 +42,10 @@ body {
 	padding-left: 2%;
 	color: <%=theme.getTitleFontColor()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	font-family: '<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;;
 }
 
 .reveal  .ONLY_2TITLE h2 {
@@ -39,9 +54,9 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family:: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE h3 {
@@ -49,9 +64,9 @@ body {
 	color: <%=theme.getSubtitleFontColor()%>;
 	font-weight: <%=theme.getSubtitleFontWeight()%>;
 	font-size: <%=theme.getSubtitleFontSize()%>px;
-	line-height: <%=theme.getSubtitleLineHeight()%> ;
-	text-align:  <%=theme.getSubtitleTextAlignment()%> ;
-	font-family: <%=theme.getSubtitleFontFamily()%> ;
+	line-height: <%=theme.getSubtitleLineHeight()%>;
+	text-align: <%=theme.getSubtitleTextAlignment()%>;
+	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
@@ -60,9 +75,9 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
@@ -71,9 +86,9 @@ body {
 	color: <%=theme.getSubtitleFontColor()%>;
 	font-weight: <%=theme.getSubtitleFontWeight()%>;
 	font-size: <%=theme.getSubtitleFontSize()%>px;
-	line-height: <%=theme.getSubtitleFontColor()%> ;
-	text-align:  <%=theme.getSubtitleTextAlignment()%> ;
-	font-family: <%=theme.getSubtitleFontFamily()%> ;
+	line-height: <%=theme.getSubtitleFontColor()%>;
+	text-align: <%=theme.getSubtitleTextAlignment()%>;
+	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_PARAGRAPH  .paragraph p {
@@ -82,22 +97,22 @@ body {
 	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
 	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
-	font-family: <%=theme.getParagraphFontFamily()%> ;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
-.reveal .ONLY_PARAGRAPH_IMAGE  .paragraph p{
+.reveal .ONLY_PARAGRAPH_IMAGE  .paragraph p {
 	padding-left: 10px;
 	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
 	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
-	font-family: <%=theme.getParagraphFontFamily()%> ;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p{
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
 	position: fixed;
 	margin-top: -10%;
 	padding-left: -5px;
@@ -107,9 +122,9 @@ body {
 	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
 	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
-	font-family: <%=theme.getParagraphFontFamily()%> ;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
@@ -120,9 +135,9 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
@@ -131,21 +146,21 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p{
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p {
 	padding-left: 40px;
 	list-style: none;
 	margin-top: 10%;
 	color: <%=theme.getParagraphFontColor()%>;
 	font-weight: <%=theme.getParagraphFontWeight()%>;
 	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%> ;
-	text-align:  <%=theme.getParagraphTextAlignment()%> ;
-	font-family: <%=theme.getParagraphFontFamily()%> ;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: paragraphFont;
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
@@ -156,9 +171,9 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
 .ONLY_2TITLE_TREE h1 {
@@ -167,9 +182,9 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
 .ONLY_2TITLE_TREE h2 {
@@ -224,12 +239,12 @@ body {
 	color: <%=theme.getTitleFontColor()%>;
 	font-weight: <%=theme.getTitleFontWeight()%>;
 	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%> ;
-	text-align:  <%=theme.getTitleTextAlignment()%> ;
-	font-family: <%=theme.getTitleFontFamily()%> ;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;
+	font-family: titleFont;
 }
 
-.reveal .ONLY_TITLE_LIST ol li ul{
+.reveal .ONLY_TITLE_LIST ol li ul {
 	padding-bottom: 56px;
 	padding-left: 29px;
 	padding-right: 52px;
@@ -239,9 +254,9 @@ body {
 	color: <%=theme.getListitemFontColor()%>;
 	font-weight: <%=theme.getListitemFontWeight()%>;
 	font-size: <%=theme.getListitemFontSize()%>px;
-	line-height: <%=theme.getListitemLineHeight()%> ;
-	text-align:  <%=theme.getListitemTextAlignment()%> ;
-	font-family: <%=theme.getListitemFontFamily()%> ;
+	line-height: <%=theme.getListitemLineHeight()%>;
+	text-align: <%=theme.getListitemTextAlignment()%>;
+	font-family: listitemFont;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE img {
@@ -262,5 +277,4 @@ body {
 	/*     border: 1px solid red; */
 	margin-top: 20% !important;
 }
-
 </style>
