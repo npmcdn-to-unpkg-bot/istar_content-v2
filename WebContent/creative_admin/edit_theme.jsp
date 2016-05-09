@@ -104,7 +104,7 @@
 								<section class="col col-md-6">
 								<label class="label">Background Color</label>
 									<label class="select"> <input type="color"
-										name="background_color" value="<%=theme.getBackground_color() %>">
+										name="background_color" value="<%=theme.getBackgroundColor() %>">
 									</label>
 								</section>
 							</fieldset>
@@ -120,7 +120,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Title
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="200" name="title_____font_size" value="<%=theme.getTitleFontSize() %>">
+										min="60" max="300" name="title_____font_size" value="<%=theme.getTitleFontSize() %>">
 									</label>
 								</section>
 
@@ -170,7 +170,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Subtitle
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="200" name="subtitle_____font_size" value="<%=theme.getSubtitleFontSize() %>">
+										min="60" max="300" name="subtitle_____font_size" value="<%=theme.getSubtitleFontSize() %>">
 									</label>
 								</section>
 
@@ -222,7 +222,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">List Item
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="200" name="listitem_____font_size" value="<%=theme.getListitemFontSize() %>">
+										min="60" max="300" name="listitem_____font_size" value="<%=theme.getListitemFontSize() %>">
 									</label>
 								</section>
 
@@ -273,7 +273,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Paragraph
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="200" name="paragraph_____font_size" value="<%=theme.getParagraphFontSize() %>">
+										min="60" max="300" name="paragraph_____font_size" value="<%=theme.getParagraphFontSize() %>">
 									</label>
 								</section>
 

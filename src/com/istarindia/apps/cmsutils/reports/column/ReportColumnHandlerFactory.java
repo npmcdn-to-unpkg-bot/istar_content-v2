@@ -31,6 +31,7 @@ public class ReportColumnHandlerFactory {
 			return (new TaskHistoryHandler());	
 		case "ASSESSMENT":
 			return (new AssessmentHandler());
+		
 		default:
 			break;
 		}

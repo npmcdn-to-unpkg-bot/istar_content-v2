@@ -72,8 +72,8 @@
         </parent_links>
 
 	<parent_links display_name="Theme">
-		<child_links display_name="Create" url="/content/creative_admin/create_theme.jsp" valid_roles="creative_admin" />
-    	<child_links display_name="View" url="/content/creative_admin/view_themes.jsp" valid_roles="creative_admin" />
+		<child_links display_name="Create" url="/content/creative_admin/create_theme.jsp" valid_roles="creative_admin,content_creator" />
+    	<child_links display_name="View" url="/content/creative_admin/view_themes.jsp" valid_roles="creative_admin,content_creator" />
     </parent_links>
 
     <parent_links display_name="user_email">
