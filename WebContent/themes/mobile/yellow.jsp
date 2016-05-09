@@ -87,6 +87,20 @@ body {
     src: url('/themes/fonts/Open_Sans/OpenSans-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Prata';
+    src: url('/themes/fonts/Prata/Prata-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('/themes/fonts/Raleway/Raleway-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('/themes/fonts/Quicksand/Quicksand-Regular.ttf');
+}
 
 .reveal  .slide {
 	background-color: <%=theme.getBackgroundColor()%>;
