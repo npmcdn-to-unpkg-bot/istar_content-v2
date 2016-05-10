@@ -375,4 +375,36 @@ body {
 	/*     border: 1px solid red; */
 	margin-top: 20% !important;
 }
+
+
+.reveal .ONLY_PARAGRAPH_TITLE h2{
+	margin-top: 29%;
+	padding-left: 10%;
+	color: <%=theme.getTitleFontColor()%>;
+	font-weight: <%=theme.getTitleFontWeight()%>;
+	font-size: <%=theme.getTitleFontSize()%>px;
+	line-height: <%=theme.getTitleLineHeight()%>;
+	text-align: <%=theme.getTitleTextAlignment()%>;    text-transform: uppercase;
+	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	
+	}
+
+.reveal .ONLY_PARAGRAPH_TITLE p{
+	padding-left: 40px;
+	list-style: none;
+	margin-top: 3%;
+	color: <%=theme.getParagraphFontColor()%>;
+	font-weight: <%=theme.getParagraphFontWeight()%>;
+	font-size: <%=theme.getParagraphFontSize()%>px;
+	line-height: <%=theme.getParagraphLineHeight()%>;
+	text-align: <%=theme.getParagraphTextAlignment()%>;
+	font-family: '<%=theme.getParagraphFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+
+}
+
+
+.reveal .ONLY_PARAGRAPH_TITLE #data_slide_paragraph {
+	margin-top: -25%;
+	
+}
 </style>

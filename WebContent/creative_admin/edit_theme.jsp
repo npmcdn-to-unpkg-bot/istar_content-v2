@@ -140,7 +140,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Title
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="300" name="title_____font_size" value="<%=theme.getTitleFontSize() %>">
+										min="20" max="300" name="title_____font_size" value="<%=theme.getTitleFontSize() %>">
 									</label>
 								</section>
 
@@ -202,7 +202,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Subtitle
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="300" name="subtitle_____font_size" value="<%=theme.getSubtitleFontSize() %>">
+										min="20" max="300" name="subtitle_____font_size" value="<%=theme.getSubtitleFontSize() %>">
 									</label>
 								</section>
 
@@ -237,7 +237,7 @@
 								<section class="col col-4">
 									<label class="label">Subtitle
 										Font Family</label> <label class="select"> <select
-										name="title_____font_family">
+										name="subtitle_____font_family">
 											<option value="<%=theme.getSubtitleFontFamily() %>" selected><%=theme.getSubtitleFontFamily().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
@@ -266,7 +266,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">List Item
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="300" name="listitem_____font_size" value="<%=theme.getListitemFontSize() %>">
+										min="20" max="300" name="listitem_____font_size" value="<%=theme.getListitemFontSize() %>">
 									</label>
 								</section>
 
@@ -300,7 +300,7 @@
 								<section class="col col-4">
 									<label class="label">List Item
 										Font Family</label> <label class="select"> <select
-										name="title_____font_family">
+										name="listitem_____font_family">
 											<option value="<%=theme.getListitemFontFamily() %>" selected><%=theme.getListitemFontFamily().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
@@ -329,7 +329,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Paragraph
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="300" name="paragraph_____font_size" value="<%=theme.getParagraphFontSize() %>">
+										min="20" max="300" name="paragraph_____font_size" value="<%=theme.getParagraphFontSize() %>">
 									</label>
 								</section>
 
@@ -363,7 +363,7 @@
 								<section class="col col-4">
 									<label class="label">Paragraph
 										Font Family</label> <label class="select"> <select
-										name="title_____font_family">
+										name="paragraph_____font_family">
 											<option value="<%=theme.getParagraphFontFamily() %>" selected><%=theme.getParagraphFontFamily().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
