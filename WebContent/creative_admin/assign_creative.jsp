@@ -1,6 +1,7 @@
 <%@page import="com.istarindia.apps.StatusTypes"%>
 <%@page import="com.istarindia.apps.services.MediaService"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
+<%@page import="com.istarindia.apps.services.task.MediaUploadHelper"%>
 <%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
@@ -72,39 +73,19 @@
 					<button id="demo" onclick="myFunction()" class="btn-u"  data-target="#myModal">Select Creative Creator</button>
 							
 					
-					<div id="html1">
-						<ul>
-							<li id="none" data-jstree='{"opened":true}'>Tasks Not Assigned
-								<ul>
-									<%
-										TaskDAO dao = new TaskDAO();
-										for (Task task : (List<Task>) dao.findByItemType("IMAGE")) {
-									try {
-											Image img = new ImageDAO().findById(task.getItemId());
-												if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
-												{
-											%>
-									<li id="task_<%=task.getId()%>" data-jstree='{"opened":true}'><span class="label label-purple rounded-2x"><%=task.getTaskName()%> > <%=img.getTitle()%></span>
-									<% 		
-												}
-												}	catch(Exception e) {
-													e.printStackTrace();
-												}
-										}
-										for (Task task : (List<Task>) dao.findByItemType("VIDEO")) {
-											Video vid = new VideoDAO().findById(task.getItemId());
-											if(task.getStatus().equalsIgnoreCase(StatusTypes.CREATED))
-											{
-												%>
-												<li id="task_<%=task.getId()%>" data-jstree='{"opened":true}'><span class="label label-green rounded-2x"><%=task.getTaskName()%> > <%=vid.getTitle()%></span>
-												<% 
-											}
-										}
-								%>
-								</ul>
-							</li>
-						</ul>
-					</div>
+					<fieldset>
+
+							<div class="panel panel-grey margin-bottom-40" style="border:0">
+								<div class="panel-body">
+
+
+									<div id="html1">
+										<%=(new MediaUploadHelper()).getMediaTaskTree() %>
+									</div>
+
+								</div>
+							</div>
+						</fieldset>
 				</div>
 			</div>
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -184,7 +165,7 @@
 						},
 						"checkbox" : {
 							"keep_selected_style" : false,
-							"three_state" : false,
+							"three_state" : true,
 						},
 						"plugins" : [ "checkbox" ]
 					});
