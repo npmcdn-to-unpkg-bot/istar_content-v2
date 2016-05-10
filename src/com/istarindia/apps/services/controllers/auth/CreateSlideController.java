@@ -163,13 +163,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_TITLE_PARAGRAPH":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_TITLE_PARAGRAPH");
 
 			} else {
 				slide_id = service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
 						request.getParameter("slide_id"), "ONLY_TITLE_PARAGRAPH");
@@ -573,13 +573,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_PARAGRAPH_TITLE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_PARAGRAPH_TITLE");
 
 			} else {
 				slide_id = service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
 						request.getParameter("slide_id"), "ONLY_PARAGRAPH_TITLE");
