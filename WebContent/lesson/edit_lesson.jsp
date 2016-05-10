@@ -164,19 +164,19 @@
 												%>
 												<div class="col col-4">
 													<%
-														if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getName())) {
+														if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getId().toString())) {
 																flag = true;
 													%>
 													<label class="radio"><input type="radio"
 														name="lesson_theme" checked="checked"
-														value="<%=themeName.getName()%>"> <i
+														value="<%=themeName.getId()%>"> <i
 														class="rounded-x"></i><%=themeName.getName()%></label>
 												</div>
 													<%
 														} else {
 													%>
 													<label class="radio"><input type="radio"
-														name="lesson_theme" value="<%=themeName.getName()%>">
+														name="lesson_theme" value="<%=themeName.getId()%>">
 														<i class="rounded-x"></i><%=themeName.getName()%></label>
 												</div>
 													<%
@@ -187,7 +187,7 @@
 														if (flag == false) {
 													%><div class="col col-4">
 													<label class="radio"><input type="radio"
-														checked="checked" name="lesson_theme" value="none">
+														checked="checked" name="lesson_theme" value="null">
 														<i class="rounded-x"></i>None</label>
 												</div>
 												<%

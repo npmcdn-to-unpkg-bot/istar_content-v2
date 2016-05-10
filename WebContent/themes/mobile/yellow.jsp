@@ -15,19 +15,19 @@
 	int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
 	Presentaion ppt =  dao.findById(lessonID);
 	String lesson_theme = ppt.getLesson().getLesson_theme();
-	//UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
-	String sql = "select id from ui_theme where ui_theme.name='yellow';";
+	String sql = "select * from ui_theme as T where T.id="+lesson_theme;
 	UiThemeDAO uiDao = new UiThemeDAO();
 	Session uiSession = uiDao.getSession();
 	SQLQuery query = uiSession.createSQLQuery(sql);
 	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 	List<HashMap<String, Object>> results = query.list();
-	UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(results.get(0).get("id").toString()));
+	//UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(results.get(0).get("id").toString()));
+		HashMap<String, String> theme = (HashMap<String, String>)query.list().get(0);
 	%>
 <style>
 
 body {
-	background: background-color: <%=theme.getBackgroundColor()%>;
+	background: background-color: <%=theme.get("background_color")%>;
 	//#FDC530 !important;
 }
 
@@ -117,41 +117,41 @@ body {
 }
 
 .reveal  .slide {
-	background-color: <%=theme.getBackgroundColor()%>;
+	background-color: <%=theme.get("background_color")%>;
 	/* #FDC530 !important; */
 }
 
 .reveal  .ONLY_TITLE h2 {
 	margin-top: -37%;
 	padding-left: 2%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-family: '<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family: '<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal  .ONLY_2TITLE h2 {
 	margin-top: -26%;
 	padding-left: 10%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;    text-transform: uppercase;
-	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;    text-transform: uppercase;
+	font-family: <%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
 	margin-top: -26%;
 	padding-left: 5%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
@@ -159,23 +159,23 @@ body {
 	position: fixed;
 	text-align: center;
 	width: 100%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
 	margin-top: -37%;
 	padding-left: 2%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
@@ -183,54 +183,80 @@ body {
 	position: fixed;
 	top: -486px;
 	padding: 40px;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
+
+
+.reveal .ONLY_PARAGRAPH_TITLE h2{
+	margin-top: 29%;
+	padding-left: 10%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;    text-transform: uppercase;
+	font-family: <%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	
+	}
 
 .reveal  .ONLY_2TITLE h3 {
 	padding-left: 10%;
-	color: <%=theme.getSubtitleFontColor()%>;
-	font-weight: <%=theme.getSubtitleFontWeight()%>;
-	font-size: <%=theme.getSubtitleFontSize()%>px;
-	line-height: <%=theme.getSubtitleLineHeight()%>;
-	text-align: <%=theme.getSubtitleTextAlignment()%>;
-	font-family: <%=theme.getSubtitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("subtitle_____font_color")%>;
+	font-weight: <%=theme.get("subtitle_____font_weight")%>;
+	font-size: <%=theme.get("subtitle_____font_size")%>px;
+	line-height: <%=theme.get("subtitle_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family: <%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
 	padding-left: 5%;
 	padding-right: 5%;
-	color: <%=theme.getSubtitleFontColor()%>;
-	font-weight: <%=theme.getSubtitleFontWeight()%>;
-	font-size: <%=theme.getSubtitleFontSize()%>px;
-	line-height: <%=theme.getSubtitleFontColor()%>;
-	text-align: <%=theme.getSubtitleTextAlignment()%>;
-	font-family: <%=theme.getSubtitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("subtitle_____font_color")%>;
+	font-weight: <%=theme.get("subtitle_____font_weight")%>;
+	font-size: <%=theme.get("subtitle_____font_size")%>px;
+	line-height: <%=theme.get("subtitle_____line_height")%>;
+	text-align: <%=theme.get("subtitle_____text_alignment")%>;
+	font-family: <%=theme.get("subtitle_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+.reveal .ONLY_PARAGRAPH_TITLE p{
+	padding-left: 40px;
+	list-style: none;
+	margin-top: 3%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+
 }
 
 .reveal .ONLY_PARAGRAPH  .paragraph p {
 	margin-top: -26%;
 	padding-left: 10%;
-	color: <%=theme.getParagraphFontColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%>;
-	text-align: <%=theme.getParagraphTextAlignment()%>;
-	font-family: '<%=theme.getParagraphFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph p {
 	padding-left: 10px;
-	color: <%=theme.getParagraphFontColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%>;
-	text-align: <%=theme.getParagraphTextAlignment()%>;
-	font-family: '<%=theme.getParagraphFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
@@ -240,35 +266,35 @@ body {
 	padding-right: 7px;
 	padding-top: 81px;
 	z-index: 9999;
-	color: <%=theme.getParagraphFontColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%>;
-	text-align: <%=theme.getParagraphTextAlignment()%>;
-	font-family: '<%=theme.getParagraphFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  .paragraph p {
 	padding-left: 40px;
 	list-style: none;
 	margin-top: 10%;
-	color: <%=theme.getParagraphFontColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%>;
-	text-align: <%=theme.getParagraphTextAlignment()%>;
-	font-family: '<%=theme.getParagraphFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal .ONLY_TITLE_LIST #data_slide_title {
 	padding-left: 42px;
 	margin-top: -35% !important;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_TITLE_LIST ol li  {
@@ -278,12 +304,12 @@ body {
 	/* list-style-image: url('/themes/mobile/bullet_line.png'); */
 	margin-left: 82px;
 	list-style-type: decimal-leading-zero;
-	color: <%=theme.getListitemFontColor()%>;
-	font-weight: <%=theme.getListitemFontWeight()%>;
-	font-size: <%=theme.getListitemFontSize()%>px;
-	line-height: <%=theme.getListitemLineHeight()%>;
-	text-align: <%=theme.getListitemTextAlignment()%>;
-	font-family:<%=theme.getListitemFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_LIST  ul li{
@@ -293,23 +319,23 @@ body {
 	/* list-style-image: url('/themes/mobile/bullet_line.png'); */
 	margin-left: 82px;
 	list-style-type: decimal-leading-zero;
-	color: <%=theme.getListitemFontColor()%>;
-	font-weight: <%=theme.getListitemFontWeight()%>;
-	font-size: <%=theme.getListitemFontSize()%>px;
-	line-height: <%=theme.getListitemLineHeight()%>;
-	text-align: <%=theme.getListitemTextAlignment()%>;
-	font-family:<%=theme.getListitemFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .ONLY_2TITLE_TREE h1 {
 	margin-top: -26%;
 	padding-left: 10%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;
-	font-family:<%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .ONLY_2TITLE_TREE h2 {
@@ -374,32 +400,6 @@ body {
 .reveal .ONLY_TITLE_IMAGE .holder .holder1 {
 	/*     border: 1px solid red; */
 	margin-top: 20% !important;
-}
-
-
-.reveal .ONLY_PARAGRAPH_TITLE h2{
-	margin-top: 29%;
-	padding-left: 10%;
-	color: <%=theme.getTitleFontColor()%>;
-	font-weight: <%=theme.getTitleFontWeight()%>;
-	font-size: <%=theme.getTitleFontSize()%>px;
-	line-height: <%=theme.getTitleLineHeight()%>;
-	text-align: <%=theme.getTitleTextAlignment()%>;    text-transform: uppercase;
-	font-family: <%=theme.getTitleFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
-	
-	}
-
-.reveal .ONLY_PARAGRAPH_TITLE p{
-	padding-left: 40px;
-	list-style: none;
-	margin-top: 3%;
-	color: <%=theme.getParagraphFontColor()%>;
-	font-weight: <%=theme.getParagraphFontWeight()%>;
-	font-size: <%=theme.getParagraphFontSize()%>px;
-	line-height: <%=theme.getParagraphLineHeight()%>;
-	text-align: <%=theme.getParagraphTextAlignment()%>;
-	font-family: '<%=theme.getParagraphFontFamily().replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
-
 }
 
 

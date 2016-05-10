@@ -11,7 +11,7 @@ int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", "
 Presentaion ppt =  dao.findById(lessonID);
 String lesson_theme = ppt.getLesson().getLesson_theme();
 
-UiTheme theme = new UiThemeDAO().findByName(lesson_theme).get(0);
+UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(lesson_theme));
 
 String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
 

@@ -35,18 +35,6 @@ public class ThemeBuilderController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Enumeration<String> params = request.getParameterNames();
 		
-		while (params.hasMoreElements()){
-			
-			try {
-				String param = params.nextElement();
-				System.err.println(param+" :"+request.getParameter(param));
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
 		UiThemeService service = new UiThemeService();
 		if(request.getParameterMap().containsKey("is_edit")){
 			service.editTheme(request.getParameterMap());

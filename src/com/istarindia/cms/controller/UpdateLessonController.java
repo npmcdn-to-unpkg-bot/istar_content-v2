@@ -41,7 +41,6 @@ public class UpdateLessonController extends IStarBaseServelet {
 		String learningObjectives[];
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
 		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id") && request.getParameterMap().containsKey("duration") && request.getParameterMap().containsKey("title"))
-
 		{
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
 			Task task = new Task();
