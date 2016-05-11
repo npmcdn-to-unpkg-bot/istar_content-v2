@@ -1054,4 +1054,114 @@ WHERE C.id = M.course_id
 		</sql>
 		<title> Course List</title>
 	</reports>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+	<!-- Trainer -->
+	<!-- Trainer list -->
+	<reports id="100" type_of_report="table">
+		<column columnHandler="NONE" display_name="Trainer ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Name" isVisible="true" name="name" />
+		<column columnHandler="NONE" display_name="Gender" isVisible="true" name="gender" />
+		<column columnHandler="NONE" display_name="E-Mail" isVisible="true" name="email" />
+		<column columnHandler="TRAINER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>select id as task_id, name as name, gender as gender, email as email 
+			from trainer 
+			ORDER BY task_id
+		</sql>
+		<title> Trainer list </title>
+	</reports>
+	
+	<!-- Trainer Assessment list -->
+	<reports id="101" type_of_report="table">
+		<column columnHandler="NONE" display_name="Trainer ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Assessment Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Questions" isVisible="true" name="question_count" />
+		<column columnHandler="TRAINER" display_name="Score" isVisible="true" name="status" />
+		
+		<sql>select T.id as task_id, A.assessmenttitle as title, A.number_of_questions as question_count, (CASE WHEN R.score IS NULL THEN 'PENDING' ELSE R.score||'' END) as status
+			from assessment A, event  E, assessment_event  AE
+		  		 LEFT JOIN trainer T on (T.id = :trainer_id)
+				 LEFT JOIN report  R on (R.assessment_id = AE.assessment and R.user_id = T.id)
+			where AE.event_id = E.id and
+      			 AE.assessment = A.id and
+      			 E.actor_id = :trainer_id
+      		order by T.id
+		</sql>
+		<title> Trainer list </title>
+	</reports>
+	
+	<!-- Trainer Assessment Report -->
+	<reports id="102" type_of_report="table">
+		<column columnHandler="NONE" display_name="Question" isVisible="true" name="question" />
+		<column columnHandler="NONE" display_name="Result" isVisible="true" name="is_correct" />
+		<column columnHandler="NONE" display_name="Selected Options" isVisible="true" name="selected_options" />
+		<column columnHandler="NONE" display_name="Correct Options" isVisible="true" name="correct_options" />
+
+		<sql>
+SELECT 
+
+A.assessmenttitle as assessment_title,
+(
+CASE SA.correct 
+WHEN 'f' THEN 'incorrect'
+ELSE 'correct'
+END
+) is_correct,
+
+(
+CASE SA.option1
+WHEN 't' THEN ((SELECT AO.text||', ' as text FROM assessment_option AO WHERE AO.question_id=SA.question_id ORDER BY AO.id LIMIT 1 OFFSET 0))
+ELSE ''
+END
+)
+||
+(
+CASE SA.option2
+WHEN 't' THEN ((SELECT AO.text||', ' as text FROM assessment_option AO WHERE AO.question_id=SA.question_id ORDER BY AO.id LIMIT 1 OFFSET 1))
+ELSE ''
+END
+) 
+||
+(
+CASE SA.option3
+WHEN 't' THEN ((SELECT AO.text||', ' as text FROM assessment_option AO WHERE AO.question_id=SA.question_id ORDER BY AO.id LIMIT 1 OFFSET 2))
+ELSE ''
+END
+)
+||
+(
+CASE SA.option4
+WHEN 't' THEN ((SELECT AO.text||', ' as text FROM assessment_option AO WHERE AO.question_id=SA.question_id ORDER BY AO.id LIMIT 1 OFFSET 3))
+ELSE ''
+END
+)
+||
+(
+CASE SA.option5
+WHEN 't' THEN ((SELECT AO.text as text FROM assessment_option AO WHERE AO.question_id=SA.question_id ORDER BY AO.id LIMIT 1 OFFSET 4))
+ELSE ''
+END
+)as selected_options,
+
+(SELECT
+string_agg(AOO.text,', ')
+
+FROM  assessment_option AOO
+
+WHERE AOO.marking_scheme=1
+AND AOO.question_id=SA.question_id
+
+) as correct_options,
+Q.question_text as question
+
+FROM student_assessment SA, question Q, assessment A
+WHERE SA.student_id= :trainer_id
+AND Q.id = SA.question_id
+AND SA.assessment_id = :assessment_id
+		</sql>
+		<title> Trainer Assessment Report</title>
+	</reports>
 </istar_reports>
