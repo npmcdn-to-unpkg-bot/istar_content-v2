@@ -81,34 +81,28 @@ public class CMSRegistry {
 		}
  
 		slideTemplates.add("NO_CONTENT");
-		slideTemplates.add("ONLY_2TITLE");
-		slideTemplates.add("ONLY_2BOX");
+		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
-		slideTemplates.add("ONLY_TITLE_LIST");
-		slideTemplates.add("ONLY_LIST");
-		slideTemplates.add("ONLY_TITLE_TREE");
-		slideTemplates.add("ONLY_2TITLE_TREE");
-		slideTemplates.add("ONLY_PARAGRAPH");
-		slideTemplates.add("ONLY_TITLE_VIDEO");
 		slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
-		slideTemplates.add("ONLY_TITLE_IMAGE");
-		slideTemplates.add("ONLY_2TITLE_IMAGE");
-		slideTemplates.add("ONLY_IMAGE");
-		slideTemplates.add("ONLY_PARAGRAPH_IMAGE");
-		slideTemplates.add("ONLY_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
 		slideTemplates.add("ONLY_TITLE_LIST");
-		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
-		slideTemplates.add("ONLY_PARAGRAPH_TITLE");
-		//slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
-		slideTemplates.add("ONLY_TITLE");
-		slideTemplates.add("ONLY_2TITLE_TABLE");
-		slideTemplates.add("ONLY_2TITLE_2TABLE");
-		slideTemplates.add("ONLY_2TITLE_5TABLE");
-		slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
-		slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
+		slideTemplates.add("ONLY_TITLE_VIDEO");
 		slideTemplates.add("ONLY_TITLE_TREE");
+		slideTemplates.add("ONLY_2TITLE");
+		slideTemplates.add("ONLY_2TITLE_TREE");
+		slideTemplates.add("ONLY_2TITLE_TABLE");
+		slideTemplates.add("ONLY_2TITLE_IMAGE");
+		slideTemplates.add("ONLY_PARAGRAPH");
+		slideTemplates.add("ONLY_PARAGRAPH_IMAGE");
+		slideTemplates.add("ONLY_PARAGRAPH_TITLE");
+		slideTemplates.add("ONLY_IMAGE");
+		slideTemplates.add("ONLY_LIST");
+		//slideTemplates.add("ONLY_2TITLE_2TABLE");
+		//slideTemplates.add("ONLY_2TITLE_5TABLE");
+		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
+		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
+		//slideTemplates.add("ONLY_2BOX");
 		//slideTemplates.add("ONLY_TITLE_VIDEO");
 		
 		
