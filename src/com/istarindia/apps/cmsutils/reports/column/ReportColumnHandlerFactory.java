@@ -33,6 +33,8 @@ public class ReportColumnHandlerFactory {
 			return (new AssessmentHandler());
 		case "THEME":
 			return (new UiThemeHandler());
+		case "TRAINER":
+			return (new TrainerColumnHandler());
 		default:
 			break;
 		}

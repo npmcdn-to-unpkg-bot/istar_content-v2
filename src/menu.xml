@@ -75,6 +75,11 @@
 		<child_links display_name="Create" url="/content/creative_admin/create_theme.jsp" valid_roles="creative_admin,content_creator" />
     	<child_links display_name="List" url="/content/creative_admin/view_themes.jsp" valid_roles="creative_admin,content_creator" />
     </parent_links>
+    
+    <parent_links display_name="Trainer">
+        <child_links display_name="Create" url="/content/trainer/create_user.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
+   		<child_links display_name="List" url="/content/trainer/list_trainers.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
+   	</parent_links>
 
     <parent_links display_name="user_email">
         <child_links display_name="Dashboard" url="/content/content_admin/dashboard.jsp" valid_roles="content_admin" />

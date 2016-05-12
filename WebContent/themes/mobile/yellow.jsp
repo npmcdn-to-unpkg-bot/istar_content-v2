@@ -27,7 +27,7 @@
 <style>
 
 body {
-	background: background-color: <%=theme.get("background_color")%>;
+	background-color: <%=theme.get("background_color")%>;
 	//#FDC530 !important;
 }
 
@@ -238,9 +238,13 @@ body {
 
 }
 
-.reveal .ONLY_PARAGRAPH  .paragraph p {
-	margin-top: -26%;
-	padding-left: 10%;
+.reveal .ONLY_PARAGRAPH .paragraph p {
+	margin-top: -10%;
+	padding-left: -5px;
+	padding-right: 7px;
+	padding-top: 81px;
+	list-style: none;
+	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -260,11 +264,26 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
-	position: fixed;
 	margin-top: -10%;
 	padding-left: -5px;
 	padding-right: 7px;
 	padding-top: 81px;
+	list-style: none;
+	z-index: 9999;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE  .paragraph{
+	margin-top: -10%;
+	padding-left: -5px;
+	padding-right: 7px;
+	padding-top: 81px;
+	list-style: none;
 	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -390,6 +409,13 @@ body {
 .reveal .ONLY_TITLE_IMAGE img {
 	width: 122%;
 	margin-left: -10%;
+}
+
+.reveal .ONLY_IMAGE img {
+	width: 122%;
+	margin-left: -10%;
+    margin-top: 5%;
+	
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE img {

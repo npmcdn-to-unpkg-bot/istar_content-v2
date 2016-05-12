@@ -141,38 +141,53 @@
 							</section>
 							<section>
 								<label class="label">Select Slide Transition</label> <label
-									class="select"> <select name="slideTransition"
-									value="<%=slide.getTransition()%>">
+									class="select"> <select name="slideTransition" >
 										<%
+											
+											//REMOVE THE BELOW 3 LINES WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE
+											ArrayList<String> slidetransitions = SlideTransition.SlideTransitionTypes;
+											Collections.shuffle(slidetransitions);
+											int i=0;
+											
 											for (String type : SlideTransition.SlideTransitionTypes) {
-
+											
 												if (type.equalsIgnoreCase(slide.getTransition())) {
 										%>
-										<option selected="selected" value="<%=type%>"><%=type%></option>
+										<%-- REMOVE THE BELOW WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE --%>
+										<%-- <option selected="selected" value="<%=type%>"><%=type%></option> --%> 
 										<%
 											} else {
 										%>
-										<option value="<%=type%>"><%=type%></option>
+										<option value="<%=slidetransitions.get(i)%>"><%=slidetransitions.get(i++) %></option>
+										<%-- REPLACE THE BELOW WITH ABOVE LINE WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE --%>
+										<%--<option value="<%=type%>"><%=type%></option> --%>
 										<%
 											}
-											}
+										}
 										%>
 								</select> <i></i>
 								</label>
 							</section>
 							<section>
 								<label class="label">Select Background Transition</label> <label
-									class="select"> <select name="backgroundTransition"
-									value="<%=slide.getBackgroundTransition()%>"%>>
+									class="select"> <select name="backgroundTransition" >
 										<%
+										//REMOVE THE BELOW 3 LINES WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE
+										ArrayList<String> backgroundtransitions = SlideTransition.BackgroundTransition;
+										Collections.shuffle(backgroundtransitions);
+										int j=0;
+										
  											for (String type : SlideTransition.BackgroundTransition) {
  	 										if (type.equalsIgnoreCase(slide.getBackgroundTransition())) {
 										%>
-										<option selected="selected" value="<%=type%>"><%=type%></option>
+										<%-- REMOVE THE BELOW WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE --%>
+										<%-- <option selected="selected" value="<%=type%>"><%=type%></option> --%>
 										<%
 											} else {
 										%>
-										<option value="<%=type%>"><%=type%></option>
+										<option value="<%=backgroundtransitions.get(j)%>"><%=backgroundtransitions.get(j++) %></option>
+										<%-- REPLACE THE BELOW WITH ABOVE LINE WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE --%>
+										<%-- <option value="<%=type%>"><%=type%></option> --%>
 										<%
 											}
 											}
