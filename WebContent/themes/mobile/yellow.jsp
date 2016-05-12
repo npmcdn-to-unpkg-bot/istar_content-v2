@@ -116,9 +116,13 @@ body {
     src: url('/themes/fonts/Quicksand/Quicksand-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: url('/themes/fonts/Roboto/Roboto-Regular.ttf');
+}
+
 .reveal  .slide {
 	background-color: <%=theme.get("background_color")%>;
-	/* #FDC530 !important; */
 }
 
 .reveal  .ONLY_TITLE h2 {
@@ -144,9 +148,9 @@ body {
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
-	margin-top: -26%;
 	padding-left: 5%;
-	color: <%=theme.get("title_____font_color")%>;
+    padding-right: 5%;
+    color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
@@ -155,10 +159,8 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
-	margin-top: -38%;
-	position: fixed;
-	text-align: center;
-	width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -179,10 +181,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
-	min-height: 799px;
-	position: fixed;
-	top: -486px;
-	padding: 40px;
+    padding-right: 9%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -216,7 +215,7 @@ body {
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
 	padding-left: 5%;
-	padding-right: 5%;
+    padding-top: 4%;
 	color: <%=theme.get("subtitle_____font_color")%>;
 	font-weight: <%=theme.get("subtitle_____font_weight")%>;
 	font-size: <%=theme.get("subtitle_____font_size")%>px;
@@ -239,10 +238,6 @@ body {
 }
 
 .reveal .ONLY_PARAGRAPH .paragraph p {
-	margin-top: -10%;
-	padding-left: -5px;
-	padding-right: 7px;
-	padding-top: 81px;
 	list-style: none;
 	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -254,7 +249,8 @@ body {
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph p {
-	padding-left: 10px;
+	padding-left: 2%;
+	padding-right: 10%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -264,12 +260,11 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
-	margin-top: -10%;
-	padding-left: -5px;
-	padding-right: 7px;
-	padding-top: 81px;
-	list-style: none;
-	z-index: 9999;
+	padding-right: 10%;
+    padding-left: 15%;
+    padding-top: 5%;
+    list-style: none;
+    z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -316,13 +311,11 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST ol li  {
+.reveal .ONLY_TITLE_LIST ul li  {
 	padding-bottom: 56px;
 	padding-left: 29px;
 	padding-right: 52px;
-	/* list-style-image: url('/themes/mobile/bullet_line.png'); */
 	margin-left: 82px;
-	list-style-type: decimal-leading-zero;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -335,9 +328,7 @@ body {
 	padding-bottom: 56px;
 	padding-left: 29px;
 	padding-right: 52px;
-	/* list-style-image: url('/themes/mobile/bullet_line.png'); */
 	margin-left: 82px;
-	list-style-type: decimal-leading-zero;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -403,31 +394,24 @@ body {
 	margin-top: 104%;
 }
 .reveal .ONLY_PARAGRAPH_IMAGE img {
-	width: 184%;
+	width: 180%;
 }
 
 .reveal .ONLY_TITLE_IMAGE img {
-	width: 122%;
-	margin-left: -10%;
+	width: 180%;
+}
+
+.reveal .ONLY_2TITLE_IMAGE img {
+	width: 180%;
 }
 
 .reveal .ONLY_IMAGE img {
-	width: 122%;
-	margin-left: -10%;
-    margin-top: 5%;
-	
+	width: 180%;
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE img {
-	width: 118%;
-	margin-left: -5.5%;
+	width: 180%;
 }
-
-.reveal .ONLY_TITLE_IMAGE .holder .holder1 {
-	/*     border: 1px solid red; */
-	margin-top: 20% !important;
-}
-
 
 .reveal .ONLY_PARAGRAPH_TITLE #data_slide_paragraph {
 	margin-top: -25%;

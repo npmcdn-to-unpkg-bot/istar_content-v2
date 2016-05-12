@@ -15,6 +15,8 @@ import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.SlideDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.cms.lessons.SlideService;
 
 /**
@@ -37,12 +39,10 @@ public class DeleteSlideController extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//http://127.0.0.1:8080/content/delete_slide?ppt_id=6&slide_id=25
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		SlideDAO dao = new SlideDAO();
 		Slide slide= dao.findById(Integer.parseInt(request.getParameter("slide_id")));
 
-		
 		Session session = dao.getSession();
 		Transaction tx = null;
 		try {
@@ -58,9 +58,9 @@ public class DeleteSlideController extends HttpServlet {
 			session.close();
 		}
 		
+		Task task = new TaskDAO().findByItemId(ppt.getLesson().getId()).get(0);
 		
-
-		response.sendRedirect("/content/edit_lesson?task_id=" + ppt.getLesson().getId());
+		response.sendRedirect("/content/edit_lesson?task_id=" + task.getId());
 
 	}
 

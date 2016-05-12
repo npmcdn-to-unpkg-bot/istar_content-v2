@@ -63,8 +63,9 @@ String style_body = "background-size: cover;";
 	<script>
 
 			Reveal.initialize({  
-				center: false
-			
+				center: false,
+				width: 960,
+			    height: 700,
 			});
 			function changeImage()
 			{
