@@ -116,14 +116,16 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						<div class="row">
 							<fieldset>
 							<%
-							AssessmentDAO dao = new AssessmentDAO();
-							List<Assessment> assessments = dao.findAll();
-							for (Assessment assessment : assessments){
+							VacancyDAO dao  = new VacancyDAO();
+							List<Vacancy> vacancies = dao.findAll();
+							for (Vacancy vacancy : vacancies){	
 							%>
 							<section>
-									<input type="checkbox" name="assessments" value="<%=assessment.getId() %>>"> <%=assessment.getAssessmenttitle() %>
+									<input type="checkbox" name="vacancy_id" value="<%=vacancy.getId() %>>"> 
+									<%=vacancy.getRecruiterCompany().getName() %> - <%=vacancy.getProfileTitle() %>
 							</section>
-							<% }
+							<% 
+							}
 							%>
 							</fieldset>
 						</div>
