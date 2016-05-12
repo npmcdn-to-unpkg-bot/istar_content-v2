@@ -20,20 +20,7 @@
 <!--<![endif]-->
 <head>
 <title>Content Admin Dashboard | iStar CMS</title>
-<style>
-.pulse {
-    max-width: 6%;
-    float: left;
-    margin-top: 1%;
-    margin-right: 4%;
-    animation-name: pulse;
-    -webkit-animation-name: pulse;
-    animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
-</style>
+
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -267,13 +254,12 @@
 						<div class="panel panel-sea">
 
 							<div class="panel-heading">
-								<h3 class="panel-title" data-toggle="collapse" data-target="#demo">
-									<img src="assets/img/arrow.png" alt="Arrow" id="arrow" class="pulse">
-									Review Comments
+								<h3 >
+									<i class="fa fa-comments-o">Review Comments</i>
 								</h3>
 							</div>
 
-							<div class="panel-body collapse" id="demo">
+							<div class="panel-body" id="demo">
 
 								<div class="panel panel-profile profile">
 									<%

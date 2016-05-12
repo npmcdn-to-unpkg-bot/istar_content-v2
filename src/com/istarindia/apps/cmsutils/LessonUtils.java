@@ -114,6 +114,7 @@ public class LessonUtils {
             out.append("<th>Slide Title</th>");
             out.append("<th>Action</th>");
             out.append("<th>Slide Template</th>");
+            out.append("<th>Order Number</th>");
             out.append("</tr>");
             out.append("</thead>");
             out.append("<tbody id='slidess_ord'>");
@@ -122,10 +123,10 @@ public class LessonUtils {
             for (int i = 0; i < data.size(); i++) {
                 out.append("<tr class='mammama' id='"+data.get(i).get(0)+"'>");
                 out.append("<td id='id'>" + data.get(i).get(0) + "</td>");
-                out.append("<td>" + data.get(i).get(1) + "</td>");
+                out.append("<td>" + data.get(i).get(2) + "</td>");
                 out.append("<td>");
                 out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
-                        + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
+                        + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(3) + "'>"
                         + "<i class='fa fa-check'></i>Edit</a>");
 
                 out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
@@ -133,7 +134,8 @@ public class LessonUtils {
                         + "<i class='fa fa-remove'></i>Delete</a>");
 
                 out.append("</td>");
-                out.append("<td>" + data.get(i).get(2) + "</td>");
+                out.append("<td>" + data.get(i).get(3) + "</td>");
+                out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("</tr>");
             }
 

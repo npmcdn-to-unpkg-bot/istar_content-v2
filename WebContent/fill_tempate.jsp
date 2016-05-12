@@ -105,7 +105,7 @@
 				type="hidden">
 			<%
 				} else {
-					System.err.println("Its an new  SLide ");
+					System.err.println("It is a new Slide ");
 					newSlide = true;
 					slide.setTemplateName(request.getParameter("slide_type"));
 			%>
@@ -121,7 +121,7 @@
 					<%
 						ImageUtils dao1 = new ImageUtils();
 					ArrayList<Image> images = (ArrayList<Image>) dao1.findAllBackgrounds(request);
-					%><div class="col-md-5">
+					%><div class="col-md-7">
 						<%=utils.getEditProfileEdit(slide, ppt, newSlide,request)%>
 						<fieldset>
 							<section>
@@ -135,13 +135,45 @@
 										<%
 											}
 										%>
-									<option selected="selected" value="none">None</option>
+										<option selected="selected" value="none">None</option>
 								</select> <i></i>
 								</label>
 							</section>
+							
 							<section>
+								<label class="label">Teacher Notes</label> <label
+									class="textarea"> <textarea rows="3"
+										name="teacher_notes" data-parsley-required="true"
+										data-parsley-length="[5,9250]"
+										data-parsley-required-message="Please provide teacher notes"
+										data-parsley-length-message="It should be 5-9250 characters long">
+								<%=slide.getTeacherNotes()%> </textarea>
+
+								</label>
+								<div class="note">
+									<strong>Note:</strong> This is where we will put in the
+									paragraph.
+								</div>
+							</section>
+							<section>
+								<label class="label">Student Notes</label> <label
+									class="textarea"> <textarea rows="3"
+										name="student_notes" data-parsley-required="true"
+										data-parsley-length="[5,9250]"
+										data-parsley-required-message="Please provide student notes"
+										data-parsley-length-message="It should be 5-9250 characters long"> 
+								<%=slide.getStudentNotes()%></textarea>
+								</label>
+								<div class="note">
+									<strong>Note:</strong> This is where we will put in the
+									paragraph.
+								</div>
+							</section>
+							
+							<div class="row">
+							<section class="col col-md-6">
 								<label class="label">Select Slide Transition</label> <label
-									class="select"> <select name="slideTransition" >
+									class="select"> <select name="slideTransition">
 										<%
 											
 											//REMOVE THE BELOW 3 LINES WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE
@@ -154,7 +186,7 @@
 												if (type.equalsIgnoreCase(slide.getTransition())) {
 										%>
 										<%-- REMOVE THE BELOW WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE --%>
-										<%-- <option selected="selected" value="<%=type%>"><%=type%></option> --%> 
+										<%-- <option selected="selected" value="<%=type%>"><%=type%></option> --%>
 										<%
 											} else {
 										%>
@@ -168,9 +200,9 @@
 								</select> <i></i>
 								</label>
 							</section>
-							<section>
+							<section  class="col col-md-6">
 								<label class="label">Select Background Transition</label> <label
-									class="select"> <select name="backgroundTransition" >
+									class="select"> <select name="backgroundTransition">
 										<%
 										//REMOVE THE BELOW 3 LINES WHEN RANDOMIZING TRANSITIONS IS NOT NEEDED ANYMORE
 										ArrayList<String> backgroundtransitions = SlideTransition.BackgroundTransition;
@@ -195,55 +227,46 @@
 								</select> <i></i>
 								</label>
 							</section>
-							<section>
+							</div>
+						</fieldset>
+
+
+						<footer class="col col-md-12">
+							<section class="col col-md-6">
 								<label class="label">Select Slide Background color</label> <label
 									class="select"> <input type="color" id="slide_color"
 									name="backgroundColor" value="<%=slide.getBackground()%>">
 								</label>
 							</section>
-						</fieldset>
-
-
-						<fieldset>
-							<section>
-								<label class="label">Teacher Notes</label> <label
-									class="textarea"> <textarea rows="3"
-										name="teacher_notes" data-parsley-required="true"
-										data-parsley-length="[5,9250]"
-										data-parsley-required-message="Please provide teacher notes"
-										data-parsley-length-message="It should be 5-9250 characters long">
-								<%=slide.getTeacherNotes()%> </textarea>
-
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the
-									paragraph.
-								</div>
+							<% int order_id = 0;
+							if (request.getParameterMap().containsKey("slide_id")) {
+								order_id = (new SlideDAO()).findById(Integer.parseInt(request.getParameter("slide_id"))).getOrder_id();
+							} 	%>
+							
+							<section class="col col-md-3">
+								<label class="label">Slide number</label> <label class="input">
+									<input id="order_id" class="updateble" type="number"
+									name="order_id" value="<%=order_id%>">
 							</section>
-						</fieldset>
-						<fieldset>
-							<section>
-								<label class="label">Student Notes</label> <label
-									class="textarea"> <textarea rows="3"
-										name="student_notes" data-parsley-required="true"
-										data-parsley-length="[5,9250]"
-										data-parsley-required-message="Please provide student notes"
-										data-parsley-length-message="It should be 5-9250 characters long"> 
-								<%=slide.getStudentNotes()%></textarea>
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the
-									paragraph.
-								</div>
+							<section class="col col-md-3">
+								<label class="label"><br/></label> 
+								<button type="submit" class="btn-u">Submit</button>
 							</section>
-						</fieldset>
-
-						<footer>
-							<button type="submit" class="btn-u">Submit</button>
+						
 						</footer>
-						<div class="panel panel-profile profile">
+						
+					</div>
+
+					<div class="col-md-5">
+						<iframe
+							src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
+							frameborder="0" id='prv'
+							style="background-color: #fff; width: 412px; height: 659px;">
+						</iframe>
+					</div>
+					<div class="panel panel-profile profile" >
 							<div class="panel-heading overflow-h">
-								<h2 class="panel-title heading-sm pull-left">
+								<h2 style="margin-top: 50px;" class="panel-title heading-sm pull-left">
 									<i class="fa fa-comments-o"></i> Review Comments
 								</h2>
 
@@ -288,31 +311,6 @@
 
 							</div>
 						</div>
-					</div>
-
-					<div class="col-md-6">
-<iframe
-											src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
-											frameborder="0" id='prv'
-											style="background-color: #fff;width: 412px; height: 659px;">
-										</iframe>
-						<%-- <div id="phone_area" style="display: block;">
-							<div id="phone_placeholder"
-								style="display: block; height: 1024px;">
-								<div id="htc_one_emulator"
-									style="transform: scale(1); transform-origin: 0px 0px 0px;">
-									<div id="frame_htc_one_emulator" class="frame_scroller">
-										<iframe
-											src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"
-											frameborder="0" id='prv'
-											style="background-color: #fff;width: 364px; height: 647px;">
-										</iframe>
-									</div>
-								</div>
-							</div>
-						</div> --%>
-					</div>
-
 				</div>
 		</form>
 

@@ -35,6 +35,7 @@ public class DBUtils {
 			try {
 				ArrayList<String> row = new ArrayList<>();
 				row.add(object.get("id").toString());
+				row.add(object.get("order_id").toString());
 				row.add(object.get("title").toString());
 				row.add(object.get("template").toString());
 				table.add(row);

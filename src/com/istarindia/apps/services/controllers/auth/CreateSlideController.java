@@ -592,10 +592,16 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 		
 		// Set order_id for the slide -- only while creating new slide
-		if ( (slide_id != 0) && (request.getParameter("is_edit").equalsIgnoreCase("false")) ) {
+		if ((slide_id != 0) && (request.getParameter("is_edit").equalsIgnoreCase("false"))) {
 			SlideDAO dao = new SlideDAO();
 			Slide slide = dao.findById(slide_id);
-			slide.setOrder_id(slide_id);
+			
+			if (request.getParameter("order_id").equalsIgnoreCase("0")) {
+				slide.setOrder_id(slide_id);
+			} else {
+				slide.setOrder_id(Integer.parseInt(request.getParameter("order_id")));
+			}
+			
 			Session session = dao.getSession();
 			Transaction tx = null;
 			try {
