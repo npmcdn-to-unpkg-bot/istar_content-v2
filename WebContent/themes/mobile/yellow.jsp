@@ -324,6 +324,45 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
+.reveal .ONLY_TITLE_TREE #data_slide_title {
+	padding-left: 42px;
+	margin-top: -35% !important;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+.reveal .ONLY_TITLE_TREE li  {
+	padding-bottom: 56px;
+	padding-left: 29px;
+	padding-right: 52px;
+	margin-left: 82px;
+    list-style-type: lower-roman;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+.reveal .ONLY_TITLE_TREE ol  {
+	padding-bottom: 56px;
+    padding-right: 52px;
+    margin-left: 140px;
+    margin-top: 45px;
+    list-style-type: decimal;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
 .reveal .ONLY_LIST  ul li{
 	padding-bottom: 56px;
 	padding-left: 29px;
