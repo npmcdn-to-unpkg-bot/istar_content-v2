@@ -14,16 +14,25 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.dao.Address;
+import com.istarindia.apps.dao.AddressDAO;
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
 import com.istarindia.apps.dao.AssessmentEventDAO;
+import com.istarindia.apps.dao.BatchGroupDAO;
+import com.istarindia.apps.dao.BatchScheduleDAO;
+import com.istarindia.apps.dao.BatchStudents;
+import com.istarindia.apps.dao.BatchStudentsDAO;
 import com.istarindia.apps.dao.Event;
 import com.istarindia.apps.dao.EventDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Organization;
+import com.istarindia.apps.dao.OrganizationDAO;
+import com.istarindia.apps.dao.Pincode;
+import com.istarindia.apps.dao.PincodeDAO;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Student;
+import com.istarindia.apps.dao.StudentDAO;
 import com.istarindia.apps.dao.StudentInvites;
 import com.istarindia.apps.dao.StudentInvitesDAO;
 import com.istarindia.apps.dao.Trainer;
@@ -87,13 +96,13 @@ public class CreateTrainerController extends HttpServlet {
 			assessments = request.getParameter("assessments");
 		}
 		
-		Integer trainerID = service.createTrainer(email, gender, name, password, (double)1, (double)1, 1, "addressline1", "addressline2", 1, assessments);
-		
-		
+		Integer trainerID = createStudent(email, gender, name, password, (double)1, (double)1, 1, "addressline1", "addressline2", 1);
+	
 		String[]  vacancy_id = request.getParameterValues("vacancy_id");
-		
+		System.out.println(vacancy_id.length);
 		for(String vac : vacancy_id)
 		{
+			System.out.println(vac);
 			int vac_id = Integer.parseInt(vac);
 			VacancyWorkflowDAO dao = new VacancyWorkflowDAO();
 			
@@ -102,8 +111,10 @@ public class CreateTrainerController extends HttpServlet {
 			EventDAO evdao = new EventDAO();
 			Event event = new Event();
 			event.setType("RECRUITER_ASSESSMENT");
+		
 			event.setUpdatedat(new Date());
 			event.setCreatedat(new Date());
+			event.setEventdate(new Date());
 			event.setEventhour(0);
 			event.setEventminute(new AssessmentDAO().findById(vw.getAssessmentId()).getAssessmentdurationminutes());
 			event.setActor_id(trainerID);
@@ -126,16 +137,13 @@ public class CreateTrainerController extends HttpServlet {
 		        } finally {
 		            s.close();
 		        }
-			
-		        
-		        
+			 
 		        VacanyStatusDAO vsdao = new VacanyStatusDAO();
 		        VacanyStatus vs = new VacanyStatus();
 		        vs.setEvent_id(event.getId());
 		        vs.setUserId(trainerID);
 		        vs.setVacancyWorkflowId(vw.getId());
 		        vs.setStatus(vw.getStage());	
-			
 		        Session s1 = null;
 		        Transaction t1 = null;
 		        try {
@@ -150,11 +158,11 @@ public class CreateTrainerController extends HttpServlet {
 		            e.printStackTrace();
 		        } finally {
 		            s1.close();
-		        }
-			
-		}
-		
-	
+		        }	
+		        
+		        
+		       
+	}
 		if (true) {
 			request.setAttribute("message_success", "User created successfully!");
 			request.getRequestDispatcher("/trainer/create_user.jsp").forward(request, response);
@@ -165,6 +173,101 @@ public class CreateTrainerController extends HttpServlet {
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	
+	
+	public int createStudent(String email, String gender, String name, String password, Double longitide, Double latitude, int orgId, String addressline1, String addressline2, int pincode) {
+        int flag = 0;
+        Pincode pin = new PincodeDAO().findById(pincode);
+        Organization org = new OrganizationDAO().findById(orgId);
+        StudentDAO dao = new StudentDAO();
+        Student student = new Student();
+
+        Address address = new Address();
+        address.setAddressline1(addressline1);
+        address.setAddressline2(addressline2);
+        address.setPincode(pin);
+        AddressDAO adddao = new AddressDAO();
+
+      //  trainer.setAddressGeoLatitude(latitude);
+       // trainer.setAddressGeoLongitude(longitide);
+        student.setGender(gender);
+        student.setEmail(email);
+        student.setName(name);
+        student.setFatherName("dada");
+        student.setMotherName("momy");
+        Long mobile = 89L;
+        student.setMobile(mobile);
+        student.setPassword(password);
+        student.setOrganization(org);
+        student.setUserType("STUDENT");
+
+        Session s = null;
+        Transaction t = null;
+        try {
+            s = dao.getSession();
+            t = s.beginTransaction();
+            adddao.save(address);
+            student.setAddress(address);
+            dao.save(student);
+            t.commit();
+         
+        } catch (HibernateException e) {
+            if (t != null) {
+                t.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
+        
+        
+        student.setIstarAuthorizationToken(student.getId()+"");
+        Session s2 = null;
+        Transaction t2 = null;
+        try {
+            s2 = dao.getSession();
+            t2 = s2.beginTransaction();
+           
+            dao.attachDirty(student);
+            t2.commit();
+         
+        } catch (HibernateException e) {
+            if (t2 != null) {
+                t2.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            s2.close();
+        }
+        
+        
+        BatchStudentsDAO bsdao = new BatchStudentsDAO();
+        BatchStudents  bs = new  BatchStudents();
+        bs.setStudent(new StudentDAO().findById(student.getId()));
+        bs.setBatchGroup(new BatchGroupDAO().findById(1));
+        Session s3 = null;
+        Transaction t3 = null;
+        try {
+            s3 = bsdao.getSession();
+            t3 = s3.beginTransaction();		           
+            bsdao.save(bs);
+            t3.commit();
+        } catch (HibernateException e) {
+            if (t3 != null) {
+                t3.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            s3.close();
+        }	
+        
+        
+        
+        
+        return student.getId();
+    }
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

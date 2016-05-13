@@ -121,7 +121,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							for (Vacancy vacancy : vacancies){	
 							%>
 							<section>
-									<input type="checkbox" name="vacancy_id" value="<%=vacancy.getId() %>>"> 
+									<input type="checkbox" name="vacancy_id" value="<%=vacancy.getId() %>"> 
 									<%=vacancy.getRecruiterCompany().getName() %> - <%=vacancy.getProfileTitle() %>
 							</section>
 							<% 
