@@ -74,7 +74,12 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		
 		System.out.println(">>>"+lessonid);
 		TaskDAO dao = new  TaskDAO();
-		Task task  = dao.findByItemId(Integer.parseInt(lessonid)).get(0);
+		
+		Task example = new Task();
+		example.setItemId(Integer.parseInt(lessonid));
+		example.setItemType("LESSON");
+		Task task = dao.findByExample(example).get(0);
+		
 		task.setActorId(Integer.parseInt(content_id));
 		task.setStatus(StatusTypes.CONTENT_ASSIGNED);
 		Session session1 = dao.getSession();
