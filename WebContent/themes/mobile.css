@@ -285,3 +285,7 @@
 .reveal .ONLY_2TITLE h3 {
 	font-size: 170px;
 }
+
+.reveal {
+	text-transform: capitalize;
+}
