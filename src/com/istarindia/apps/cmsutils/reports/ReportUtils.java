@@ -32,6 +32,9 @@ import com.istarindia.apps.services.CMSRegistry;
  */
 public class ReportUtils {
 
+	
+	
+	
 	public ArrayList<ArrayList<String>> getReportData(String sql1, ArrayList<IStarColumn> keys, HashMap<String, String> conditions) {
 		ArrayList<ArrayList<String>> table = new ArrayList<>();
 		IstarUserDAO dao = new IstarUserDAO();
@@ -54,9 +57,15 @@ public class ReportUtils {
 		List<HashMap<String, Object>> results = query.list();
 		for (HashMap<String, Object> object : results) {
 			ArrayList<String> row = new ArrayList<>();
+			
+			
+			
 			for (IStarColumn string : keys) {
+				
+				
+				//System.out.println("key ---"+string.getName());
 				row.add(object.get(string.getName()) + "");
-				System.out.println(object.get(string.getName()));
+				//System.out.println("---"+object.get(string.getName()));
 			}
 
 			table.add(row);
@@ -156,4 +165,7 @@ public class ReportUtils {
 		return out;
 
 	}
+	
+	
+	
 }

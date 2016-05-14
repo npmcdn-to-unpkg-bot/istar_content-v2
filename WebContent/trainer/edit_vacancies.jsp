@@ -56,40 +56,45 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 </head>
 
 <body>
+<% Vacancy v = (new VacancyDAO()).findById(Integer.parseInt(request.getParameter("id"))); %>
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="col-md-12">
-				<!--  How the list of all trainers -->
-				
-				<div class="panel panel-red margin-bottom-40">
-						<div class="panel-heading">
-							<h3 class="panel-title"><i class="fa fa-user"></i> List of Users invited for Test</h3>
+				<form action="/content/update_vacany" id="sky-form1"
+				class="sky-form" method="GET">
+				<div class="row">
+					<div class="col-md-12">
+							<input name="id" type="hidden" value="<%=v.getId() %>">
+							<fieldset>
+								<section class="col-md-12">
+									<label> Title* </label> <label class="input"> <input
+										type="text" name="name" placeholder="Enter you name" value="<%=v.getProfileTitle() %>">
+									</label>
+								</section>
+								
+							</fieldset>
 						</div>
-						<div class="panel-body">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Test Allotted</th>
-										<th>Status</th>
-										<th>Report Link</th>
-										
-										<th>Course Report Link</th>
-									</tr>
-								</thead>
-								<tbody>
-									<%=(new TrainerReportUtils()).getStudents() %>
-								</tbody>
-							</table>
+						<div class="col-md-12">
+							<fieldset>
+								<section class="col-md-12">
+									<label> Description* </label> <label class="input"> 
+			<textarea rows="19" cols="100" name="desc"><%=v.getDescription() %></textarea>
+									</label>
+								</section>
+								]
+							</fieldset>
 						</div>
+
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn-u">Save Details</button>
+							<label id="err" style="display: block; color: #ee9393"></label>
+						</footer>
 					</div>
-			</div>
-		</div>
+				</form></div></div></div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 

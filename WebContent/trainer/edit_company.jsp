@@ -74,16 +74,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 									<tr>
 										<th>#</th>
 										<th>Name</th>
-										<th>Email</th>
-										<th>Test Allotted</th>
-										<th>Status</th>
-										<th>Report Link</th>
-										
-										<th>Course Report Link</th>
+										<th>Logo</th>
+										<th>Action</th>
+										<th>View</th>
 									</tr>
 								</thead>
 								<tbody>
-									<%=(new TrainerReportUtils()).getStudents() %>
+									<%=(new TrainerReportUtils()).getCompanies() %>
 								</tbody>
 							</table>
 						</div>

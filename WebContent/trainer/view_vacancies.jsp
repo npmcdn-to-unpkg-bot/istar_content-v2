@@ -66,7 +66,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				
 				<div class="panel panel-red margin-bottom-40">
 						<div class="panel-heading">
-							<h3 class="panel-title"><i class="fa fa-user"></i> List of Users invited for Test</h3>
+							<h3 class="panel-title"><i class="fa fa-user"></i> List of Vacancies</h3>
 						</div>
 						<div class="panel-body">
 							<table class="table">
@@ -74,16 +74,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 									<tr>
 										<th>#</th>
 										<th>Name</th>
-										<th>Email</th>
-										<th>Test Allotted</th>
-										<th>Status</th>
-										<th>Report Link</th>
-										
-										<th>Course Report Link</th>
+										<th>Description</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<%=(new TrainerReportUtils()).getStudents() %>
+									<%=(new TrainerReportUtils()).getVacancies(Integer.parseInt(request.getParameter("id"))) %>
 								</tbody>
 							</table>
 						</div>

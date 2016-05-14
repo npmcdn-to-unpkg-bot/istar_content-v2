@@ -73,17 +73,20 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Test Allotted</th>
+										<th>Question text</th>
+										<th>Right answer</th>
 										<th>Status</th>
-										<th>Report Link</th>
-										
-										<th>Course Report Link</th>
 									</tr>
 								</thead>
 								<tbody>
-									<%=(new TrainerReportUtils()).getStudents() %>
+								
+								<% 
+								//http://localhost:8080/content/trainer/detailed_result.jsp?student_id=34&assessment_id=9997
+								
+								int studentID = Integer.parseInt(request.getParameter("student_id"));
+								int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
+								%>
+									<%=(new TrainerReportUtils()).getStudentsDetailedResult(studentID, assessment_id) %>
 								</tbody>
 							</table>
 						</div>
