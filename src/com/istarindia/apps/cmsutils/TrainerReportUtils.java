@@ -6,6 +6,7 @@ package com.istarindia.apps.cmsutils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import com.istarindia.apps.cmsutils.reports.IStarColumn;
 import com.istarindia.apps.cmsutils.reports.ReportUtils;
@@ -227,5 +228,41 @@ public class TrainerReportUtils {
 	
 		return out;
 	
+	}
+	
+	
+	public StringBuffer getAllQuestions(){
+		StringBuffer out = new StringBuffer();
+		
+		QuestionDAO dao = new QuestionDAO();
+		List<Question> items = dao.findAll();
+		
+		for (Question q : items) {
+			out.append("<tr><td><a href='edit_question.jsp?id=" + q.getId() + "'> " + q.getId() + "</a></td>");
+			out.append("<td style='max-width: 100px !important; word-wrap:break-word;'>" + q.getQuestionText() + "</td>");
+			
+			Set<AssessmentOption> opts = q.getAssessmentOptions();
+			
+			for (AssessmentOption assessmentOption : opts) {
+				try {
+					if(assessmentOption.getMarkingScheme() ==1) {
+						out.append("<td style='max-width: 100px !important; word-wrap:break-word;background: green;color: white;'>" + assessmentOption.getText() + "</td>");
+					} else {
+						out.append("<td style='max-width: 100px !important; word-wrap:break-word;'>" + assessmentOption.getText() + "</td>");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
+			}
+			
+			
+			
+			
+			
+			out.append("</tr>");
+		}
+		
+		return out;
 	}
 }

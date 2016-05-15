@@ -121,6 +121,9 @@
 			<child_links display_name="List Companies"
 			url="/content/trainer/list_companies.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 			
+			<child_links display_name="List Companies"
+			url="/content/trainer/list_ass.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
+			
 			
 	</parent_links>
 
