@@ -559,6 +559,9 @@ body {
 
 
 /* Below are of no use.. just for the demo */
+.reveal .ONLY_2BOX {
+
+
 
 #top {
 	height: 900px;
