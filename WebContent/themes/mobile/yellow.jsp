@@ -281,8 +281,8 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
-	padding-right: 10%;
-    padding-left: 0%;
+	margin-left: 2%;
+    margin-right: -5%;
     list-style: none;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -295,7 +295,6 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE  .paragraph p{
 	padding-left: -5px;
-	padding-right: 7px;
 	list-style: none;
 	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -559,8 +558,6 @@ body {
 
 
 /* Below are of no use.. just for the demo */
-.reveal .ONLY_2BOX {
-
 
 
 #top {
