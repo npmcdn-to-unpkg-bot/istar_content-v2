@@ -99,12 +99,15 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_PARAGRAPH_TITLE");
 		slideTemplates.add("ONLY_IMAGE");
 		slideTemplates.add("ONLY_LIST");
+		slideTemplates.add("ONLY_VIDEO");
+		
+		
+		/*The below 5 templates were used for the sales demo[1st week of May 2016] */
+		//slideTemplates.add("ONLY_2BOX");
 		//slideTemplates.add("ONLY_2TITLE_2TABLE");
 		//slideTemplates.add("ONLY_2TITLE_5TABLE");
 		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
 		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
-		//slideTemplates.add("ONLY_2BOX");
-		//slideTemplates.add("ONLY_TITLE_VIDEO");
 		
 		
 		listTypes.add(ListTypes.SIMPLE_LIST);
