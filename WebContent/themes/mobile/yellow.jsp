@@ -345,6 +345,7 @@ body {
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph  {
 	padding-left: 2%;
 	padding-right: 10%;
+	margin-top: -20%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -552,4 +553,141 @@ body {
 	margin-top: -25%;
 	
 }
+
+
+
+
+
+/* Below are of no use.. just for the demo */
+
+#top {
+	height: 900px;
+	padding-top: 300px;
+	margin-top: -110%;
+	width: 129%;
+	margin-left: -10%;
+}
+
+#bottom {
+	height: 1000px;
+	padding-top: 41px;
+	margin-left: -10%;
+	width: 120%;
+}
+
+#top h2 {
+	color: rgb(102,197,187);
+	text-align: left;
+	font-size: 90px;
+	padding-left: 5%;
+	font-weight: bolder;
+	padding-top: 26%;
+	padding-left: 11%;
+	font-weight: 900;
+}
+#bottom h3 {
+	color: white;
+	text-align: left;
+	font-size: 90px;
+	padding-left: 5%;
+	font-weight: bolder;
+	padding-top: 26%;
+	padding-left: 11%;
+	font-weight: 900;
+}
+#top li {
+	color: rgb(93,93,93);
+	font-size: 55px;
+	list-style: none;
+	padding-left: 12%;
+	padding-right: 31%;
+	text-align: left;
+	line-height: 1.1;
+}
+
+#bottom li {
+	color: white;
+	font-size: 55px;
+	list-style: none;
+	padding-top: 23px;
+	padding-left: 12%;
+	padding-right: 31%;
+	text-align: left;
+	line-height: 1.1;
+}
+
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS {
+	background: white;;
+}
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS h2 {
+	font-weight: 700;
+	font-size: 90px;
+	color: white;
+	background-color: #9cc4a6;
+	line-height: 2.7;
+	width: 116%;
+	padding-top: 130px;
+	margin-top: -63%;
+	margin-left: -10%;
+	text-align: left;
+	padding-left: 7%;
+}
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS table tr td {
+	font-weight: 700;
+	font-size: 44px;
+	line-height: 1.2;
+	text-align: left;
+	padding-top: 83px !important;
+}
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS table tr td input {
+	width: 121px;
+	height: 101px;
+	padding-top: 44px;
+}
+
+.reveal .ONLY_2TITLE_TABLE h2 {
+	font-weight: bolder;
+	font-size: 133px;
+	padding-top: 130px;
+	color: #e89d81;
+	line-height: 2.7;
+	width: 100%;
+	margin-top: -64%;
+	text-align: left;
+	padding-left: 0%;
+}
+
+.reveal .ONLY_2TITLE_TABLE table tr td {
+	font-weight: 400;
+	font-size: 50px;
+	padding-top: 39px;
+	padding: 14px;
+	text-align: left;
+}
+
+.reveal .ONLY_2TITLE_TABLE table tr td input {
+	width: 121px;
+	height: 101px;
+	padding-top: 44px;
+}
+
+.reveal .ONLY_2TITLE_TABLE {
+	background: white;;
+}
+
+.reveal .ONLY_2TITLE_TABLE h3 {
+	font-weight: bold;
+	font-size: 67px;
+	color: #e89d81;
+	line-height: 2.7;
+	width: 100%;
+	margin-top: -17%;
+	text-align: left;
+	padding-left: 0%;
+}
+
 </style>
