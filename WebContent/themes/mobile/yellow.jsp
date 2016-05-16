@@ -459,6 +459,11 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
+.reveal .ONLY_LIST  ul{
+	margin-top: -30%;
+	list-style-type: none;
+}
+
 .reveal .ONLY_LIST  ul li{
 	padding-bottom: 56px;
 	padding-left: 29px;
