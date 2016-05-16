@@ -200,6 +200,18 @@ body {
 }
 
 
+.reveal .ONLY_TITLE_VIDEO h2 {
+	position: absolute;
+    margin-top: -50%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+
 .reveal .ONLY_PARAGRAPH_TITLE h2{
 	margin-top: 29%;
 	padding-left: 10%;
