@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><%@page import="com.istarindia.apps.dao.*"%>
+	pageEncoding="ISO-8859-1"%>
+	<%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.*"%>
 	
@@ -12,8 +14,14 @@
 <%@page import="java.util.HashMap"%>
 	<% 
 	PresentaionDAO dao = new PresentaionDAO();
-	int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
-	Presentaion ppt =  dao.findById(lessonID);
+	Presentaion ppt = new Presentaion();
+	
+	if(!request.getParameterMap().containsKey("ppt_id")){
+		ppt = (Presentaion) request.getAttribute("ppt");
+	} else {
+		int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
+		ppt =  dao.findById(lessonID);
+	}
 	String lesson_theme = ppt.getLesson().getLesson_theme();
 	String sql = "select * from ui_theme as T where T.id="+lesson_theme;
 	UiThemeDAO uiDao = new UiThemeDAO();
@@ -134,6 +142,7 @@ body {
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-family: '<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	
 }
 
 .reveal  .ONLY_2TITLE h2 {
@@ -159,8 +168,8 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 3%;
+    padding-right: 3%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -203,6 +212,17 @@ body {
 	
 	}
 
+.reveal .ONLY_TITLE_LIST h2 {
+	padding-left: 42px;
+	margin-top: -38%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
 .reveal  .ONLY_2TITLE h3 {
 	padding-left: 10%;
 	color: <%=theme.get("subtitle_____font_color")%>;
@@ -211,6 +231,7 @@ body {
 	line-height: <%=theme.get("subtitle_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-family: <%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
@@ -224,7 +245,7 @@ body {
 	font-family: <%=theme.get("subtitle_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_PARAGRAPH_TITLE p{
+.reveal .ONLY_PARAGRAPH_TITLE .paragraph p{
 	padding-left: 40px;
 	list-style: none;
 	margin-top: 3%;
@@ -261,8 +282,7 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
 	padding-right: 10%;
-    padding-left: 15%;
-    padding-top: 5%;
+    padding-left: 0%;
     list-style: none;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -273,11 +293,9 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE  .paragraph{
-	margin-top: -10%;
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE  .paragraph p{
 	padding-left: -5px;
 	padding-right: 7px;
-	padding-top: 81px;
 	list-style: none;
 	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -300,20 +318,85 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_LIST #data_slide_title {
-	padding-left: 42px;
-	margin-top: -35% !important;
-	color: <%=theme.get("title_____font_color")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+.reveal .ONLY_PARAGRAPH_TITLE .paragraph {
+	padding-left: 40px;
+	list-style: none;
+	margin-top: 3%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+
+}
+
+.reveal .ONLY_PARAGRAPH .paragraph  {
+	list-style: none;
+	z-index: 9999;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_PARAGRAPH_IMAGE  .paragraph  {
+	padding-left: 2%;
+	padding-right: 10%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph  {
+	padding-right: 10%;
+    padding-left: 5%;
+    list-style: none;
+    z-index: 9999;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_TITLE_PARAGRPH_IMAGE  .paragraph {
+	padding-left: -5px;
+	padding-right: 7px;
+	padding-top: 5%;
+    list-style: none;
+	z-index: 9999;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
+	padding-left: 40px;
+	list-style: none;
+	margin-top: 10%;
+	padding-right: 5%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal .ONLY_TITLE_LIST ul li  {
+	list-style: none !important;
 	padding-bottom: 56px;
-	padding-left: 29px;
+	padding-left: 10px;
 	padding-right: 52px;
 	margin-left: 82px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -325,13 +408,16 @@ body {
 }
 
 .reveal .ONLY_TITLE_LIST ul  {
-    margin-top: 10%;
+    padding-left: 10px;
+    padding-top: 6%;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	/* position: absolute;
+    margin-top: -2%; */
 }
 
 .reveal .ONLY_TITLE_TREE #data_slide_title {
