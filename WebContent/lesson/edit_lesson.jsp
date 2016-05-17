@@ -421,7 +421,7 @@
 
                 return false;
             }
-            jQuery(document)
+            /* jQuery(document)
                     .ready(
                             function () {
                                 App.init();
@@ -442,7 +442,7 @@
                                 } catch (err) {
                                     // TODO: handle exception
                                 }
-                            });
+                            }); */
         </script>
 	<!--[if lt IE 9]>
         <script src="assets/plugins/respond.js"></script>

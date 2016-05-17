@@ -35,6 +35,8 @@ public class ReportColumnHandlerFactory {
 			return (new UiThemeHandler());
 		case "TRAINER":
 			return (new TrainerColumnHandler());
+		case "HANDOUT_HANDLER":
+			return (new HandoutColumnHandler());	
 		default:
 			break;
 		}
