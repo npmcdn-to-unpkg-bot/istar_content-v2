@@ -1169,14 +1169,14 @@ AND SA.assessment_id = :assessment_id
 	<reports id="150" type_of_report="table">
 		<column columnHandler="NONE" display_name="Handout ID" isVisible="true" name="handout_id" />
 		<column columnHandler="NONE" display_name="Handout Title" isVisible="true" name="handout_title" />
-		<column columnHandler="NONE" display_name="Lesson ID" isVisible="true" name="lesson_id" />
+		<!-- <column columnHandler="NONE" display_name="Lesson ID" isVisible="true" name="lesson_id" /> -->
 		<column columnHandler="NONE" display_name="Lesson Name" isVisible="true" name="lesson_title" />
 		<column columnHandler="NONE" display_name="Handouts" isVisible="true" name="handout_data" />
 		<!-- <column columnHandler="NONE" display_name="Course Name" isVisible="true" name="course_name" /> -->
 		<column columnHandler="HANDOUT_HANDLER" display_name="Edit" isVisible="true" name="handout_id" />
 
 		<sql>
-		select DISTINCT ll.title as lesson_title, ll.id as lesson_id , hh.title as handout_title,  hh.id as handout_id , hh.\"data_bloB\" as handout_data
+		select DISTINCT ll.title as lesson_title, ll.id as lesson_id , hh.title as handout_title,  hh.id as handout_id , hh.data_blob as handout_data
 from handouts hh, lesson ll 
 where hh.lesson_id=ll.id 
 

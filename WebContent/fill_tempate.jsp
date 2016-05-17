@@ -343,7 +343,9 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
 		type="text/javascript" charset="utf-8"></script>
-	<script src="//cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
+	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
+	<script src="<%=baseURL%>assets/plugins/ckeditor/plugins/simple_image_browser/plugin.js"></script>
+	
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript"
@@ -356,6 +358,12 @@
 	<![endif]-->
 	<script type="text/javascript">
 		function initTextArea() {
+
+			// If you haven't build CKEditor with this plugin.
+			CKEDITOR.config.extraPlugins = 'simple-image-browser';
+
+			// Add this line to configure for AJAX / JSON Reponse.
+			CKEDITOR.config.simpleImageBrowserURL = "";
 			try {
 				$("#image-picker").imagepicker();
 				CKEDITOR.replace('paragraph', { height: 100 });
@@ -448,6 +456,7 @@
 		}
 		$(document).ready(function() {
 			initTextArea();
+			
 			initHooks();
 			initColorChange();//slide_color
 

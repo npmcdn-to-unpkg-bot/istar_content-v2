@@ -5,16 +5,27 @@
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.HibernateException"%>
+<%@page import="org.hibernate.SQLQuery"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="org.hibernate.Transaction"%>
 <%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <%
 	String url = request.getRequestURL().toString();
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
 			+ request.getContextPath() + "/";
-
-	UiTheme theme = new UiTheme();
+	int theme_id= 1;
 	if (request.getParameterMap().containsKey("theme_id")) {
-		theme = (new UiThemeDAO()).findById(Integer.parseInt(request.getParameter("theme_id")));
+		theme_id = Integer.parseInt(request.getParameter("theme_id"));
 	}
+	String sql = "select * from ui_theme as T where T.id="+theme_id;
+	UiThemeDAO uiDao = new UiThemeDAO();
+	Session uiSession = uiDao.getSession();
+	SQLQuery query = uiSession.createSQLQuery(sql);
+	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+	List<HashMap<String, Object>> results = query.list();
+	HashMap<String, String> theme = (HashMap<String, String>)query.list().get(0);
 	
 	
 %>
@@ -83,7 +94,7 @@
 		</div>
 		<form action="/content/theme_editor" class="sky-form">
 		<input name="is_edit" value="true" type="hidden"/>
-		<input name="theme_id" value=<%=theme.getId() %> type="hidden"/>
+		<input name="theme_id" value=<%=theme_id %> type="hidden"/>
 			<div class="container-fluid height-1000 content"
 				style="padding: 0px !important">
 				<div class="col-md-6">
@@ -97,14 +108,14 @@
 								<section class="col col-md-6">
 								<label class="label">Name</label>
 									<label class="input"> <input type="text" name="name"
-										placeholder="Please enter new theme name" value="<%=theme.getName() %>">
+										placeholder="Please enter new theme name" value="<%=theme.get("name") %>">
 									</label>
 								</section>
 								
 								<section class="col col-md-6">
 								<label class="label">Background Color</label>
 									<label class="select"> <input type="color"
-										name="background_color" value="<%=theme.getBackgroundColor() %>">
+										name="background_color" value="<%=theme.get("background_color") %>">
 									</label>
 								</section>
 							</fieldset>
@@ -141,21 +152,21 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Title
 										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="title_____font_size" value="<%=theme.getTitleFontSize() %>">
+										min="20" max="300" name="title_____font_size" value="<%=theme.get("title_____font_size")%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">Title
 										Line height</label> <label class="input"> <input type="number"
-										name="title_____line_height" step="0.1" min="1" max="3" value="<%=theme.getTitleLineHeight() %>">
+										name="title_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("title_____line_height")%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">Title
 										Font Weight</label> <label class="input"> <input type="number" name="title_____font_weight" 
-										step="100" min="100" max="900" value="<%=theme.getTitleFontWeight() %>" >
+										step="100" min="100" max="900" value="<%=theme.get("title_____font_weight") %>" >
 									</label>
 								</section>
 
@@ -163,7 +174,7 @@
 									<label class="label">Title
 										Text alignment</label> <label class="select"> <select
 										name="title_____text_alignment" >
-											<option value="<%=theme.getTitleTextAlignment() %>" selected><%=theme.getTitleTextAlignment() %></option>
+											<option value="<%=theme.get("title_____text_alignment") %>" selected><%=theme.get("title_____text_alignment") %></option>
 											<option value="center">Center</option>
 											<option value="left">Left</option>
 											<option value="right">Right</option>
@@ -175,7 +186,7 @@
 									<label class="label">Title
 										Font Family</label> <label class="select"> <select
 										name="title_____font_family">
-											<option value="<%=theme.getTitleFontFamily() %>" selected><%=theme.getTitleFontFamily().split(".ttf")[0] %></option>
+											<option value="<%=theme.get("title_____font_family") %>" selected><%=theme.get("title_____font_family").split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -186,7 +197,7 @@
 								<section class="col col-4">
 									<label class="label">Title
 										Color</label> <label class="select"> <input type="color"
-										name="title_____font_color" value="<%=theme.getTitleFontColor() %>" >
+										name="title_____font_color" value="<%=theme.get("title_____font_color") %>" >
 									</label>
 								</section>
 							</fieldset>
@@ -203,14 +214,14 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Subtitle
 										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="subtitle_____font_size" value="<%=theme.getSubtitleFontSize() %>">
+										min="20" max="300" name="subtitle_____font_size" value="<%=theme.get("subtitle_____font_size") %>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">Subtitle
 										Line height</label> <label class="input"> <input type="number"
-										name="subtitle_____line_height" step="0.1" min="1" max="3" value="<%=theme.getSubtitleLineHeight() %>"
+										name="subtitle_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("subtitle_____line_height") %>"
 										>
 									</label>
 								</section>
@@ -218,7 +229,7 @@
 								<section class="col col-4">
 									<label class="label">Subtitle
 										Font Weight</label> <label class="input"> <input type="number"
-										name="subtitle_____font_weight" step="100" min="100" value="<%=theme.getSubtitleFontWeight() %>"
+										name="subtitle_____font_weight" step="100" min="100" value="<%=theme.get("subtitle_____font_weight") %>"
 										max="900">
 									</label>
 								</section>
@@ -227,7 +238,7 @@
 									<label class="label">Subtitle
 										Text alignment</label> <label class="select"> <select
 										name="subtitle_____text_alignment">
-											<option value="<%=theme.getSubtitleTextAlignment() %>" selected><%=theme.getSubtitleTextAlignment() %></option>
+											<option value="<%=theme.get("subtitle_____text_alignment") %>" selected><%=theme.get("subtitle_____text_alignment") %></option>
 											<option value="center">Center</option>
 											<option value="left" >Left</option>
 											<option value="right">Right</option>
@@ -239,7 +250,7 @@
 									<label class="label">Subtitle
 										Font Family</label> <label class="select"> <select
 										name="subtitle_____font_family">
-											<option value="<%=theme.getSubtitleFontFamily() %>" selected><%=theme.getSubtitleFontFamily().split(".ttf")[0] %></option>
+											<option value="<%=theme.get("subtitle_____font_family") %>" selected><%=theme.get("subtitle_____font_family").split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -250,7 +261,7 @@
 								<section class="col col-4">
 									<label class="label">Subtitle
 										Color</label> <label class="select"> <input type="color"
-										name="subtitle_____font_color" value="<%=theme.getSubtitleFontColor() %>">
+										name="subtitle_____font_color" value="<%=theme.get("subtitle_____font_color") %>">
 									</label>
 								</section>
 							</fieldset>
@@ -267,21 +278,21 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">List Item
 										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="listitem_____font_size" value="<%=theme.getListitemFontSize() %>">
+										min="20" max="300" name="listitem_____font_size" value="<%=theme.get("listitem_____font_size") %>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">List Item
 										Line height</label> <label class="input"> <input type="number"
-										name="listitem_____line_height" step="0.1" min="1" max="3" value="<%=theme.getListitemLineHeight() %>">
+										name="listitem_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("listitem_____line_height") %>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">List Item
 										Font Weight</label> <label class="input"> <input type="number"
-										name="listitem_____font_weight" step="100" min="100" value="<%=theme.getListitemFontWeight() %>"
+										name="listitem_____font_weight" step="100" min="100" value="<%=theme.get("listitem_____font_weight") %>"
 										max="900" >
 									</label>
 								</section>
@@ -290,7 +301,7 @@
 									<label class="label">List Item
 										Text alignment</label> <label class="select"> <select
 										name="listitem_____text_alignment">
-											<option value="<%=theme.getListitemTextAlignment() %>" selected><%=theme.getListitemTextAlignment() %></option>
+											<option value="<%=theme.get("listitem_____text_alignment") %>" selected><%=theme.get("listitem_____text_alignment") %></option>
 											<option value="center">Center</option>
 											<option value="left" >Left</option>
 											<option value="right">Right</option>
@@ -302,7 +313,7 @@
 									<label class="label">List Item
 										Font Family</label> <label class="select"> <select
 										name="listitem_____font_family">
-											<option value="<%=theme.getListitemFontFamily() %>" selected><%=theme.getListitemFontFamily().split(".ttf")[0] %></option>
+											<option value="<%=theme.get("listitem_____font_family") %>" selected><%=theme.get("listitem_____font_family").split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -313,7 +324,7 @@
 								<section class="col col-4">
 									<label class="label">List Item
 										Color</label> <label class="select"> <input type="color"
-										name="listitem_____font_color" value="<%=theme.getListitemFontColor() %>">
+										name="listitem_____font_color" value="<%=theme.get("listitem_____font_color") %>">
 									</label>
 								</section>
 							</fieldset>
@@ -330,14 +341,14 @@
 									<!-- key.toUpperCase() -->
 									<label class="label">Paragraph
 										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="paragraph_____font_size" value="<%=theme.getParagraphFontSize() %>">
+										min="20" max="300" name="paragraph_____font_size" value="<%=theme.get("paragraph_____font_size") %>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">Paragraph
 										Line height</label> <label class="input"> <input type="number"
-										name="paragraph_____line_height" step="0.1" min="1" max="3" value="<%=theme.getParagraphLineHeight() %>">
+										name="paragraph_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("paragraph_____line_height") %>">
 									</label>
 								</section>
 
@@ -345,7 +356,7 @@
 									<label class="label">Paragraph
 										Font Weight</label> <label class="input"> <input type="number"
 										name="paragraph_____font_weight" step="100" min="100"
-										max="900" value="<%=theme.getParagraphFontWeight() %>">
+										max="900" value="<%=theme.get("paragraph_____font_weight") %>">
 									</label>
 								</section>
 
@@ -353,7 +364,7 @@
 									<label class="label">Paragraph
 										Text alignment</label> <label class="select"> <select
 										name="paragraph_____text_alignment">
-											<option value="<%=theme.getParagraphTextAlignment() %>" selected><%=theme.getParagraphTextAlignment() %></option>
+											<option value="<%=theme.get("paragraph_____text_alignment") %>" selected><%=theme.get("paragraph_____text_alignment") %></option>
 											<option value="center">Center</option>
 											<option value="left" >Left</option>
 											<option value="right">Right</option>
@@ -365,7 +376,7 @@
 									<label class="label">Paragraph
 										Font Family</label> <label class="select"> <select
 										name="paragraph_____font_family">
-											<option value="<%=theme.getParagraphFontFamily() %>" selected><%=theme.getParagraphFontFamily().split(".ttf")[0] %></option>
+											<option value="<%=theme.get("paragraph_____font_family") %>" selected><%=theme.get("paragraph_____font_family").split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -376,7 +387,7 @@
 								<section class="col col-4">
 									<label class="label">Paragraph
 										Color</label> <label class="select"> <input type="color"
-										name="paragraph_____font_color" value="<%=theme.getParagraphFontColor() %>">
+										name="paragraph_____font_color" value="<%=theme.get("paragraph_____font_color") %>">
 									</label>
 								</section>
 							</fieldset>
