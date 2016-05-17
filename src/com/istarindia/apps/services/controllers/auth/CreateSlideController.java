@@ -384,15 +384,15 @@ public class CreateSlideController extends IStarBaseServelet {
 					video_id = Integer.parseInt(request.getParameter("video_url"));
 				}
 
-				Video img = dao.findById(video_id);
-				CMSVideo image = new CMSVideo();
-				image.setUrl(img.getUrl());
-				image.setTitle(img.getTitle());
-				image.setDescription(img.getDescription());
+				Video video = dao.findById(video_id);
+				CMSVideo cmsVideo = new CMSVideo();
+				cmsVideo.setUrl(video.getUrl());
+				cmsVideo.setTitle(video.getTitle());
+				cmsVideo.setDescription(video.getDescription());
 				slide_id = service.addTextVideoSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), image);
+						request.getParameter("backgroundTransition"), cmsVideo);
 			} else {
 				VideoDAO dao = new VideoDAO();
 				int video_id = 0; // Dummy video id. To be added soon
@@ -401,15 +401,54 @@ public class CreateSlideController extends IStarBaseServelet {
 					video_id = Integer.parseInt(request.getParameter("video_url"));
 				}
 
-				Video img = dao.findById(video_id);
-				CMSVideo image = new CMSVideo();
-				image.setUrl(img.getUrl());
-				image.setTitle(img.getTitle());
-				image.setDescription(img.getDescription());
+				Video video = dao.findById(video_id);
+				CMSVideo cmsVideo = new CMSVideo();
+				cmsVideo.setUrl(video.getUrl());
+				cmsVideo.setTitle(video.getTitle());
+				cmsVideo.setDescription(video.getDescription());
 				service.addTextVideoSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), cmsVideo, request.getParameter("slide_id"));
+
+			}
+			break;
+
+		case "ONLY_VIDEO":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				VideoDAO dao = new VideoDAO();
+				int video_id = 0; // Dummy video id. To be added soon
+
+				if (request.getParameterMap().containsKey("video_url")) {
+					video_id = Integer.parseInt(request.getParameter("video_url"));
+				}
+
+				Video video = dao.findById(video_id);
+				CMSVideo cmsVideo = new CMSVideo();
+				cmsVideo.setUrl(video.getUrl());
+				cmsVideo.setTitle(video.getTitle());
+				cmsVideo.setDescription(video.getDescription());
+				slide_id = service.addVideoSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt,
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), cmsVideo);
+			} else {
+				VideoDAO dao = new VideoDAO();
+				int video_id = 0; // Dummy video id. To be added soon
+
+				if (request.getParameterMap().containsKey("video_url")) {
+					video_id = Integer.parseInt(request.getParameter("video_url"));
+				}
+
+				Video video = dao.findById(video_id);
+				CMSVideo cmsVideo = new CMSVideo();
+				cmsVideo.setUrl(video.getUrl());
+				cmsVideo.setTitle(video.getTitle());
+				cmsVideo.setDescription(video.getDescription());
+				service.addVideoSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt,
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), cmsVideo, request.getParameter("slide_id"));
 
 			}
 			break;
