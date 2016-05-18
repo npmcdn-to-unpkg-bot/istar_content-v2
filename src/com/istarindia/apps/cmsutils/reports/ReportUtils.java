@@ -151,7 +151,7 @@ public class ReportUtils {
 					if(column.getColumnHandler().equalsIgnoreCase("NONE")) {
 						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + row.get(i) + "</th>");
 					} else {
-						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i), user, taskType, Integer.parseInt(row.get(i))) + "</th>");
+						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID)) + "</th>");
 					}i++;
 				}
 			}
