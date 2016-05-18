@@ -214,6 +214,10 @@ public class AssessmentUploadController extends HttpServlet {
 			e.printStackTrace();
 		}
 	
+		//The above block isn't worling yet
+		//Add sendRedirect for redirecting to the same assessment page
+		
+		
 	}
 
 	/**
