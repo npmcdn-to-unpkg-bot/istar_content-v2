@@ -178,6 +178,25 @@ public class CreateSlideController extends IStarBaseServelet {
 
 			break;
 
+
+		case "ONLY_TITLE_TABLE":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_TITLE_TABLE");
+
+			} else {
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
+						request.getParameter("slide_id"), "ONLY_TITLE_TABLE");
+
+			}
+
+			break;
+
 		case "ONLY_TITLE_LIST":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
