@@ -66,7 +66,7 @@ public class AddQuestionController extends IStarBaseServelet {
 		
 		Question question = questionService.createNewQuestionForAssessment(request.getParameter("question_text"),
 				request.getParameter("question_type"), Integer.parseInt(request.getParameter("difficulty_level")),
-				Integer.parseInt(request.getParameter("assessment_id")), learningObjectiveSet, specifier);
+				Integer.parseInt(request.getParameter("assessment_id")), learningObjectiveSet, specifier,60); //replace 60 by the timeout from input form
 		
 		String[] answers = request.getParameterValues("answers");
 		Integer[] optionValue = new Integer[5];
