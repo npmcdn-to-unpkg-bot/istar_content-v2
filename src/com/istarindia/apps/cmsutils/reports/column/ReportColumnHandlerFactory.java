@@ -37,6 +37,10 @@ public class ReportColumnHandlerFactory {
 			return (new TrainerColumnHandler());
 		case "HANDOUT_HANDLER":
 			return (new HandoutColumnHandler());	
+		case "EDIT_DELETE_HANDLER":
+			return (new EDIT_DELETE_HANDLERColumnHandler());	
+		case "VACANCY_HANDLER":
+			return (new VACANCY_HANDLERColumnHandler());		
 		default:
 			break;
 		}

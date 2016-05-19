@@ -14,6 +14,8 @@ public class IStarColumn {
 	String columnHandler;
 	String displayName;
 	String name;
+	Boolean is_updatetable;
+	String table_column;
 	
 	
 	
@@ -28,6 +30,26 @@ public class IStarColumn {
 	public IStarColumn() {
 		super();
 	}
+	
+	
+	
+	
+	@XmlAttribute (name="is_updatetable")
+	public Boolean getIs_updatetable() {
+		return is_updatetable;
+	}
+	public void setIs_updatetable(Boolean is_updatetable) {
+		this.is_updatetable = is_updatetable;
+	}
+	
+	@XmlAttribute (name="table_column")
+	public String getTable_column() {
+		return table_column;
+	}
+	public void setTable_column(String table_column) {
+		this.table_column = table_column;
+	}
+	
 	@XmlAttribute (name="isVisible")
 	public Boolean getIsVisible() {
 		return isVisible;

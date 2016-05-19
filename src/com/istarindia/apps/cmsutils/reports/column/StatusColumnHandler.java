@@ -15,7 +15,7 @@ import com.istarindia.apps.services.task.TaskStage;
 public class StatusColumnHandler extends ColumnHandler {
 
 	@Override
-	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID) {
+	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
 		StringBuffer out = new StringBuffer();
 		HashMap<String, String> items = new HashMap<>();
 		

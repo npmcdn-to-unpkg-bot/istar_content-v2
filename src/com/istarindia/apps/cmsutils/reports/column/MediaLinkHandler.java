@@ -9,7 +9,7 @@ public class MediaLinkHandler extends ColumnHandler {
 	
 
 	@Override
-	public StringBuffer getHTML(String link, IstarUser user, String taskType, int taskID) {
+	public StringBuffer getHTML(String link, IstarUser user, String taskType, int taskID, int reportID) {
 		if(!link.equalsIgnoreCase("null"))
 		{
 			return new StringBuffer("<a href='"+link+"' target='_new'>Media Link</a>");
