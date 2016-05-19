@@ -15,13 +15,9 @@
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH p {
-	margin-top: 50px;
-	font-size: 67px;
 }
 
 .reveal .ONLY_PARAGRAPH p {
-	margin-top: 50px;
-	font-size: 200%;
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE img {
@@ -44,37 +40,26 @@
 }
 
 .reveal .ONLY_TITLE_TREE h2 {
-	font-size: 220%;
-	margin-top: -46%;
 }
 
 .reveal .ONLY_TITLE_TREE ol {
-	margin-top: 100px;
 }
 
 .reveal .ONLY_TITLE_TREE ol li {
-	font-size: 180%;
-	line-height: 2;
 }
 
 .reveal .ONLY_TITLE_TREE  .parent_tree_item {
-	font-size: 160%;
-	margin-left: 0px;
 }
 
 .reveal .ONLY_TITLE_TREE  .child_tree_item {
-	font-size: 140%;
 }
 
 .reveal .ONLY_TITLE_TABLE h2, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE h2,
 	.ONLY_TITLE_TABLE_PARAGRAPH h2 {
-	font-size: 220%;
 }
 
 .reveal .ONLY_TITLE_TABLE table, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE table,
 	.reveal .ONLY_TITLE_TABLE_PARAGRAPH table {
-	border-top: 1px solid white;
-	margin-top: 80px;
 }
 
 .reveal .ONLY_TITLE_TABLE table td, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE table td
