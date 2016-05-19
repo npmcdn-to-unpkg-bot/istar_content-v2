@@ -1203,7 +1203,7 @@ where hh.lesson_id=ll.id
 		<column columnHandler="NONE" display_name="profile_title" is_updatetable="true" isVisible="true" name="profile_title" />
 		<column columnHandler="NONE" display_name="location" is_updatetable="true" isVisible="true" name="location" />
 		<column columnHandler="NONE" display_name="description" is_updatetable="true" isVisible="true" name="description" />
-		<column columnHandler="NONE" display_name="Edit" is_updatetable="false"  isVisible="true" name="id" />
+		<column columnHandler="EDIT_DELETE_HANDLER" display_name="Edit" is_updatetable="false"  isVisible="true" name="id" />
 	<table_name>
 		 vacancy
 		</table_name>
