@@ -18,7 +18,29 @@ public class Report {
 	String title;
 	String type_of_report;
 	int id;
+	String updateSQL;
+	String tableName;
 	
+	
+	
+	
+	
+	
+	@XmlElement (name="table_name",  required=false)
+	public String getTableName() {
+		return tableName;
+	}
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+	
+	@XmlElement (name="update_sql",  required=false)
+	public String getUpdateSQL() {
+		return updateSQL;
+	}
+	public void setUpdateSQL(String updateSQL) {
+		this.updateSQL = updateSQL;
+	}
 	public Report() {
 		super();
 	}

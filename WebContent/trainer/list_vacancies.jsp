@@ -61,15 +61,17 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="col-md-12">
+			
 				<!--  How the list of all trainers -->
 				
 				<div class="panel panel-red margin-bottom-40">
 						<% HashMap<String, String> conditions = new HashMap();
+						String company_id = request.getParameter("company_id");
+						conditions.put("company_id", company_id);
 				%>
-				<%=(new ReportUtils()).getReport(151, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				<%=(new ReportUtils()).getReport(152, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 				</div>
-			</div>
+			
 		</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>

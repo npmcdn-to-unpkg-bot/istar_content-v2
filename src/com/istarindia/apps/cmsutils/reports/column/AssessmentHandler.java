@@ -6,7 +6,7 @@ import com.istarindia.apps.dao.*;
 public class AssessmentHandler extends ColumnHandler {
 
 	@Override
-	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID) {
+	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
 		
 		Task t = new TaskDAO().findById(taskID);
 		Lesson l = new LessonDAO().findById(t.getItemId());
@@ -25,5 +25,7 @@ public class AssessmentHandler extends ColumnHandler {
 		
 		
 	}
+
+	
 
 }

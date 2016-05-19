@@ -1184,4 +1184,66 @@ where hh.lesson_id=ll.id
 		</sql>
 		<title> All Handouts</title>
 	</reports>
+	
+	
+	<reports id="151" type_of_report="table">
+		<column columnHandler="NONE" display_name="Company ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Company Name" isVisible="true" name="company_name" />
+		<column columnHandler="VACANCY_HANDLER" display_name="Vacancies" isVisible="true" name="task_id" /> 
+		<sql>
+		select id as task_id, name as company_name from recruiter_company;
+		</sql>
+		<title> All Companies</title>
+	</reports>
+	
+	<reports id="152" type_of_report="table">
+		
+			<column columnHandler="NONE" display_name="JD ID"  is_updatetable="false" isVisible="true" name="id" />
+			   
+		<column columnHandler="NONE" display_name="profile_title" is_updatetable="true" isVisible="true" name="profile_title" />
+		<column columnHandler="NONE" display_name="location" is_updatetable="true" isVisible="true" name="location" />
+		<column columnHandler="NONE" display_name="description" is_updatetable="true" isVisible="true" name="description" />
+		<column columnHandler="NONE" display_name="Edit" is_updatetable="false"  isVisible="true" name="id" />
+	<table_name>
+		 vacancy
+		</table_name>
+		<sql>select id ,  profile_title, location, description  from vacancy where company_id=:company_id</sql>
+		<update_sql>
+		SELECT distinct RC.id as task_id, 
+RC.name as company_name,
+V.profile_title as jd_title,
+V.location as jd_location,
+V.description as jd_description
+FROM
+	recruiter_company RC,
+	vacancy V
+WHERE
+RC.id = V.company_id
+AND V.id =:id
+		</update_sql>
+		<title> All Vacancies</title>
+	</reports>
+	
+	<reports id="153" type_of_report="table">
+		<column columnHandler="NONE" display_name="JD ID" is_updatetable="false" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Company Name" is_updatetable="false" isVisible="true" name="company_name" />
+		<column columnHandler="NONE" display_name="JD Title" is_updatetable="true" isVisible="true" name="jd_title" />
+		<column columnHandler="NONE" display_name="JD Location" is_updatetable="true" isVisible="true" name="jd_location" />
+		<column columnHandler="NONE" display_name="JD Description" is_updatetable="true" isVisible="true" name="jd_description" />
+		<!-- <column columnHandler="EDIT_DELETE_HANDLER" display_name="Edit" is_updatetable="" isVisible="true" name="task_id" /> -->
+		<sql>
+		SELECT distinct RC.id as task_id, 
+RC.name as company_name,
+V.profile_title as jd_title,
+V.location as jd_location,
+V.description as jd_description
+FROM
+	recruiter_company RC,
+	vacancy V
+WHERE
+RC.id = V.company_id
+AND V.id =:id
+		</sql>
+		<title> Edit Vacancy</title>
+	</reports>
 </istar_reports>
