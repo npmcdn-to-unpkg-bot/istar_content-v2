@@ -201,6 +201,17 @@ public class LessonUtils {
                 AssessmentService assessmentService = new AssessmentService();
                 number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
                 if (number_of_questions < assessment.getNumber_of_questions()) {
+                    out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
+                    		+ "<div class='panel-heading'> <h3 class='panel-title'> "
+                    		+ "<i class='fa fa-tasks'></i>Upload Questions </h3> </div>  <div class='panel-body'>"
+                    		+ "<form action='<%=baseURL%>assessment_upload' class='sky-form' method='post' enctype='multipart/form-data'>  "
+                    		+ "<fieldset> <section><p>File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample format from"
+                    		+ "<a href='assets/excel/format.xls' style='color: RED'> here</a> )</p>"
+							+ "<label for='file' class='input input-file'> <div class='button'>"
+                    		+ "<input type='file' id='file' name='file' onchange='DisplayFilePath()'>Browse</div> "
+                    		+ "<input type='text' id='formfield' readonly> </label> </section> </fieldset> <footer> "
+                    		+ "<button type='submit' class='btn-u'>Submit</button> </footer> </form> </div> </div></div>");
+                	
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
@@ -232,9 +243,14 @@ public class LessonUtils {
                             + "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
                             + "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
                             + "<option value='10'>10(HARDEST)</option></select></label> </section>"
+                            + "<section class='col col-md-4'><label>Duration for Question (In Sec)</label> "
+                            + "<label class='input'>"
+                            + "<input type='number' value=60 name='duration_in_sec' placeholder='Duration for Question'> <b class='tooltip tooltip-bottom-right'>"
+                            + "Duration to Attempt Question</b>"
+                            + "</label> </section>"
                             /*  + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
                              + "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
-                             + "<option value='1'>1</option><option value='2'>2</option></select></label></section>"*/ //Add this later for tree
+                             + "<option value='1'>1</option><option value='2'>2</option></select></label></section>"*/ //Add this later for tree type assessment
 
                             + "</div>"
                             + "<section><label>Question Text</label> "
@@ -405,13 +421,25 @@ public class LessonUtils {
                         + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px'>");
                 out.append(getDifficultyLevelDropDown(question.getDifficultyLevel()));
 
-                out.append("</select></label> </section>"
-                        + "<section class='col col-md-4'><label>Depth</label> <label class='input'> ");
+                out.append("</select></label> </section>");
 
+                out.append("<section class='col col-md-4'><label>Question Duration</label> <label class='input'> <input value='"+question.getDurationInSec());
+                
+                out.append("'type='number' name='duration_in_sec' placeholder='Duration of Question'> "
+                		+ "<b class='tooltip tooltip-bottom-right'>The duration of the Question</b> </label> </section>");
+                
+                
+/* 
+                out.append("<section class='col col-md-4'><label>Depth</label> <label class='input'> ");
                 out.append(getSpecifierDropDown(question.getSpecifier()));
+                
+*/ //Enable for tree assessment type in future
+                
+                
                 out.append("<section><label>Question Text</label> "
                         + "<label class='input'> <TEXTAREA NAME='question_text' ROWS='5' cols='75'>" + question.getQuestionText() + "</TEXTAREA> </label> </section> ");
 
+                
                 int increment = 1;
                 for (int a = 0; a < optionSetStringArray.length; a++) {
                     int idVerifier = Integer.parseInt(optionSetStringArray[a][0]);
