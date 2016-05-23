@@ -89,7 +89,7 @@ public class CreateLessonController  extends IStarBaseServelet {
 			ite.addAll(lesss.getLearningObjectives());
 		}
 		System.out.println(ite.size());
-		String lessonTheme = "Beige";
+		String lessonTheme = "0";
 		Lesson lesson = new LessonService().createLessonForBulk(cmsession_id, duration, LessonTypes.LESSON, tags, lessonTheme, title, ite, user_id);
 		(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
 

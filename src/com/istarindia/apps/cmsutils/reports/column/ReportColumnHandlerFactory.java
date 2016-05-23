@@ -27,6 +27,8 @@ public class ReportColumnHandlerFactory {
 			return (new MediaLinkHandler());
 		case "LESSON_LINK_HANDLER":
 			return (new LessonLinkHandler());	
+		case "COURSE_HANDLER":
+			return (new CourseLinkHandler());	
 		case "TASK_HISTORY":
 			return (new TaskHistoryHandler());	
 		case "ASSESSMENT":

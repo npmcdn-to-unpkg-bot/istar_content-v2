@@ -20,10 +20,9 @@
 
 	<!-- Added by Kunal ends -->
 	<parent_links display_name="Course">
-		<child_links display_name="View Course Structure"
-			url="/content/content_admin/course_structure.jsp" valid_roles="content_admin" />
-		<child_links display_name="View Learning Objectives"
-			url="/content/content_admin/course_learning_objectives.jsp"
+		<child_links display_name="View Course Structure" url="/content/content_admin/course_structure.jsp" valid_roles="content_admin" />
+		<child_links display_name="View Learning Objectives" url="/content/content_admin/course_learning_objectives.jsp" valid_roles="content_admin" />
+		<child_links display_name="Modify Course details" url="/content/content_admin/modify_course_structure.jsp"
 			valid_roles="content_admin" />
 	</parent_links>
 	
@@ -45,14 +44,8 @@
 		<child_links display_name="Published Lesson"
 			url="/content/content_reviewer/published_lesson.jsp" valid_roles="content_reviewer" />
 			
-			
-	</parent_links>
-	<parent_links display_name="Handouts">
-	<child_links display_name="View/Edit/Create Handout"
+			<child_links display_name="Create Handut"
 			url="/content/content_creator/handouts.jsp" valid_roles="content_admin,content_creator" />
-			
-			<child_links display_name="View Handouts"
-			url="/content/content_creator/view_handouts.jsp" valid_roles="content_admin,content_creator" />
 	</parent_links>
 	<parent_links display_name="Task">
 		<child_links display_name="Create Task" url="/content/media/create_task.jsp"

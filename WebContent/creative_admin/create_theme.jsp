@@ -143,7 +143,7 @@
 									<!-- key.toUpperCase() -->
 									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
 										Font Size </label> <label class="input"> <input type="number"
-										min="60" max="200" name="<%=key%>_____font_size" value="60">
+										min="20" max="200" name="<%=key%>_____font_size" value="60">
 									</label>
 								</section>
 

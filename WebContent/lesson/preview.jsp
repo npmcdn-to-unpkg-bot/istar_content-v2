@@ -11,8 +11,6 @@ int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", "
 Presentaion ppt =  dao.findById(lessonID);
 String lesson_theme = ppt.getLesson().getLesson_theme();
 
-UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(lesson_theme));
-
 String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
 
 String style_body = "background-size: cover;";
@@ -35,8 +33,12 @@ String style_body = "background-size: cover;";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="<%=nuetral%>student/css/reveal.css">
-<link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
-<jsp:include page="/themes/mobile/yellow.jsp?theme_name=<%=lesson_theme %>"></jsp:include>
+<link rel="stylesheet" href="/themes/mobile.css"  type="text/css" />
+<link rel="stylesheet" href="/themes/mobile/default.css"  type="text/css" />
+
+<%if (!lesson_theme.equalsIgnoreCase("0")) { %>
+<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
+<%}%> 
 
 <!-- Code syntax highlighting -->
 <script>

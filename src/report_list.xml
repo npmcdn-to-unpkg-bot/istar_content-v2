@@ -361,7 +361,7 @@
 			WHERE
 			A.status LIKE 'DRAFT' AND A.item_type ='LESSON'
 			GROUP BY A.ID, L.id, d.email, L.title, CM.title,
-			M.module_name, CC.course_name
+			M.module_name, CC.course_name, A.status
 			ORDER BY a.id
 		</sql>
 		<title> All Tasks in progress</title>
@@ -520,6 +520,91 @@
 			ORDER BY a.id
 		</sql>
 		<title> All Lessons in assigned state</title>
+	</reports>
+
+	<!-- Course list for content admin -->
+	<reports id="30" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Course Title" isVisible="true" name="course_title" />
+		<column columnHandler="NONE" display_name="Modules" isVisible="true" name="module_count" />
+		<column columnHandler="NONE" display_name="Sessions" isVisible="true" name="session_count" />
+		<column columnHandler="NONE" display_name="Lessons" isVisible="true" name="lesson_count" />
+		<column columnHandler="NONE" display_name="Published Lessons" isVisible="true" name="published_lesson_count" />
+		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
+
+		<sql>select C.id as task_id , C.course_name as course_title, count( DISTINCT M) as module_count, count(DISTINCT S) as session_count, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
+from course C, module M
+	left join cmsession S on S.module_id=M.id 
+	left join lesson L on L.session_id=S.id
+	left join task T on T.item_id=L.id
+where C.id= M.course_id and T.item_type='LESSON'
+group by course_title, task_id
+order by task_id
+
+		</sql>
+		<title> Course list</title>
+	</reports>
+
+	<!-- Module list for content admin -->
+	<reports id="31" type_of_report="table">
+		<column columnHandler="NONE" display_name="Order" isVisible="true" name="order_id" />
+		<column columnHandler="NONE" display_name="Module ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_title" />
+		<column columnHandler="NONE" display_name="Sessions" isVisible="true" name="session_count" />
+		<column columnHandler="NONE" display_name="Lessons" isVisible="true" name="lesson_count" />
+		<column columnHandler="NONE" display_name="Published Lessons" isVisible="true" name="published_lesson_count" />
+		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
+
+		<sql>select M.order_id as order_id, M.id as task_id , M.module_name as module_title, count(DISTINCT S) as session_count, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
+from  module M
+	left join cmsession S on S.module_id=M.id 
+	left join lesson L on L.session_id=S.id
+	left join task T on T.item_id=L.id
+where  T.item_type='LESSON' and M.course_id=:course_id
+group by task_id
+order by order_id
+		</sql>
+		<title> Module list</title>
+	</reports>
+
+	<!-- Session list for content admin -->
+	<reports id="32" type_of_report="table">
+		<column columnHandler="NONE" display_name="Order" isVisible="true" name="order_id" />
+		<column columnHandler="NONE" display_name="Session ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Lessons" isVisible="true" name="lesson_count" />
+		<column columnHandler="NONE" display_name="Published Lessons" isVisible="true" name="published_lesson_count" />
+		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
+
+		<sql>select S.order_id as order_id, S.id as task_id , S.title as session_title, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
+from  cmsession S
+	left join lesson L on L.session_id=S.id
+	left join task T on T.item_id=L.id
+where  T.item_type='LESSON' and S.module_id=:module_id
+group by task_id
+order by order_id
+		</sql>
+		<title> Session list</title>
+	</reports>
+
+	<!-- Lesson list for content admin -->
+	<reports id="33" type_of_report="table">
+		<column columnHandler="NONE" display_name="Order" isVisible="true" name="order_id" />
+		<column columnHandler="NONE" display_name="Lesson ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Status" isVisible="true" name="status" />
+		<column columnHandler="NONE" display_name="Lesson Type" isVisible="true" name="lesson_type" />
+		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
+
+		<sql>select DISTINCT T.id as task_id, L.order_id as order_id, T.status as status, L.title as lesson_title, (case when L.id = P.lesson_id then 'Presentation' when L.id=A.lesson_id then 'Assessment' when L.id=G.lesson_id then 'Game' else 'EMPTY' end) as lesson_type
+from task T, lesson L 
+	left join presentaion P on P.lesson_id = L.id 
+	left join assessment A on A.lesson_id = L.id
+	left join game G on G.lesson_id = L.id
+where T.item_id = L.id and T.item_type= 'LESSON' and L.session_id = :session_id
+order by order_id
+		</sql>
+		<title> Lesson list</title>
 	</reports>
 
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
