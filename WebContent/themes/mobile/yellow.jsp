@@ -280,30 +280,81 @@ body {
 }
 
 .reveal .ONLY_TITLE_TABLE  table  {
-	padding: 0;
+	margin: auto;
+    border-collapse: collapse;
+    vertical-align: baseline;
+    display: table;
+    color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+    width: 100%;
+}
+
+.reveal .ONLY_TITLE_TABLE  thead  {
+	display: table-header-group;
+	border-collapse: collapse;
+    margin: 0;
+    padding: 0;
     border: 0;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    display: table;
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;    
 }
 
-.reveal .ONLY_TITLE_TABLE  thead  {
+.reveal .ONLY_TITLE_TABLE   td  {
+	text-align: left;
+    padding: 8px;
 }
 
-.reveal .ONLY_TITLE_TABLE  tbody  {
+.reveal .ONLY_TITLE_TABLE  tr:nth-child(even){
+	background-color: #f2f2f2
 }
 
-.reveal .ONLY_TITLE_TABLE  table td  {
+.reveal .ONLY_TITLE_TABLE  th {
+	text-align: left;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
 }
 
-.reveal .ONLY_TITLE_TABLE  table tr  {
+.reveal .ONLY_TITLE_TABLE  tr  {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
-.reveal .ONLY_TITLE_TABLE  table th  {
+.reveal .ONLY_TITLE_TABLE  p:first-child {
+	padding-bottom: 4%;
+    list-style: none;
+	margin-top: 3%;
+	padding-right: 5%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+
+.reveal .ONLY_TITLE_TABLE  p:last-child {
+	padding-bottom: 4%;
+    list-style: none;
+	margin-top: 3%;
+	padding-right: 5%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
 .reveal .ONLY_PARAGRAPH_TITLE .paragraph {

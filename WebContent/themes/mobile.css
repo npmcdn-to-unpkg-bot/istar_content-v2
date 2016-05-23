@@ -64,7 +64,6 @@
 
 .reveal .ONLY_TITLE_TABLE table td, .reveal .ONLY_TITLE_TABLE_TITLE_TABLE table td
 	{
-	font-size: 140%;
 }
 
 .ONLY_TITLE_TABLE_TITLE_TABLE h2.second_heading {
@@ -82,7 +81,6 @@
 }
 
 .reveal .ONLY_TITLE_TABLE_PARAGRAPH table td {
-	font-size: 140%;
 }
 
 .reveal .ONLY_TITLE_TABLE_PARAGRAPH p {
