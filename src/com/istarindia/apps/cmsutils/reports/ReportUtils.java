@@ -113,7 +113,7 @@ public class ReportUtils {
 				query.setParameter(key, conditions.get(key));
 			}
 		}
-
+		
 		List<HashMap<String, Object>> results = query.list();
 		for (HashMap<String, Object> object : results) {
 			ArrayList<String> row = new ArrayList<>();
@@ -191,10 +191,10 @@ public class ReportUtils {
 		}
 		out.append("</tr></tfoot>");
 		}
-		out.append("<tbody>");
+		out.append("<tbody id='datatable_report_"+reportID+"_body'>");
 		String ROWID = "";
 		for (ArrayList<String> row : data) {
-			out.append("<tr>");
+			out.append("<tr id="+row.get(1)+">");
 			int i=0;
 			for (IStarColumn column : report.getColumns()) {
 				if(column.getName().equalsIgnoreCase("task_id") || column.getName().equalsIgnoreCase("id")) {
@@ -202,7 +202,9 @@ public class ReportUtils {
 				}
 				if(column.isVisible) {
 					if(column.getColumnHandler().equalsIgnoreCase("NONE")) {
+					
 						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + row.get(i) + "</th>");
+					
 					} else {
 
 						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler()).getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID) + "</th>");
