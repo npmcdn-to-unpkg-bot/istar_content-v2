@@ -380,7 +380,7 @@
                 
                 //Slide list is sortable
                 $( "#slidess_ord" ).sortable();
-                $( "#save_order" ).submit(function( event ) {
+                $( "#update_order" ).submit(function( event ) {
                 	var idsInOrder = $('#slidess_ord').sortable("toArray");
                 	$('#order_holder').val(idsInOrder);
                 	});
