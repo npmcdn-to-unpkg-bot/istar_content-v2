@@ -1331,4 +1331,35 @@ AND V.id =:id
 		</sql>
 		<title> Edit Vacancy</title>
 	</reports>
+	
+	
+	<!--  DOubt List  -->
+	
+	<reports id="159" type_of_report="table">
+		<column columnHandler="NONE" display_name="JD ID" is_updatetable="false" isVisible="true" name="id" />
+		<column columnHandler="NONE" display_name="Student Email " is_updatetable="false" isVisible="true" name="student_email" />
+		<column columnHandler="NONE" display_name="Orgnaization Name" is_updatetable="true" isVisible="true" name="organization_email" />
+		<column columnHandler="NONE" display_name="Quesstion" is_updatetable="true" isVisible="true" name="dquestion" />
+		<column columnHandler="NONE" display_name="Answer" is_updatetable="true" isVisible="true" name="danswer" />
+		<column columnHandler="ANSWER_DOUBT" display_name="Edit" is_updatetable="" isVisible="true" name="task_id" />
+		<sql>
+		SELECT
+	DISTINCT d. ID AS id,
+	s.email AS student_email,
+	o. NAME AS organization_email,
+	d.question AS dquestion,
+	d.answer danswer,  d. ID task_id
+FROM
+	doubt d,
+	student s,
+	organization o, 
+  content_creator cc
+WHERE
+	s. ID = d.student_id
+AND s.organization_id = o.ID
+
+
+		</sql>
+		<title>View Doubts by Students</title>
+	</reports>
 </istar_reports>

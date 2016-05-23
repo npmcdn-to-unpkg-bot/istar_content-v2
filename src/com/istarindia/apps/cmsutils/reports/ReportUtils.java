@@ -259,11 +259,13 @@ public class ReportUtils {
 		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
 		out.append("<div class='panel panel-yellow margin-bottom-40' "+style+"> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
-				+ "<table "+tableStyle+" class='table table-striped table-bordered display responsive  dataTable datatable_report' "
+				+ "<table "+tableStyle+" class='table table-striped table-bordered display responsive  dataTable1 datatable_report1' "
 				+ "id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "  "
 						+ " data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID +
 						"'>");
 		out.append("<thead><tr>");
+		
+			
 		for (IStarColumn column : report.getColumns()) {
 			if(column.isVisible) {
 				out.append("<th style='max-width:100px !important; word-wrap: break-word;'>" + column.getDisplayName() + "</th>");
@@ -284,19 +286,33 @@ public class ReportUtils {
 		String ROWID = "";
 		HashMap< String , String> row  = value;
 	//	System.err.println("l;dfjhcaldskjhflsdkjh"+value.toString());
-			out.append("<tr>");
+		out.append("<form name='update_entity' id='update_en' action='/content/edit_entity' method='POST'>");
+		out.append("<input type='hidden' name='report_id' value='"+reportID+"' >");
+		out.append("<input type='hidden' name='entity_name' value='"+report.getTableName().trim()+"' >");
+		
+		
+		out.append("<tr>");
 			int i=0;
 			for (IStarColumn column : report.getColumns()) {
 				try {
-					if(column.getName().equalsIgnoreCase("task_id")) {
+					if(column.getName().equalsIgnoreCase("task_id") || column.getName().equalsIgnoreCase("id")) {
 						ROWID = row.get(i);
+						
 					}
 					//for(String value: )
 					
 					if(column.isVisible) {
 						if(column.getColumnHandler().equalsIgnoreCase("NONE") && column.is_updatetable) {
-							out.append("<td style='max-width:100px !important; word-wrap: break-word;'>"
-									+ "<input value='"+row.get(column.getName())+"' type='text' name='"+column.getName()+"' ></th>");
+							out.append("<td style='max-width:100px !important; word-wrap: break-word;'>");
+							if(row.get(column.getName()).length()<50)
+							{
+								out.append("<input value='"+row.get(column.getName())+"' type='text' name='"+column.getName()+"' ></th>");
+							}
+							else
+							{
+								 out.append("<textarea rows='10' cols='40' name="+column.getName()+" >"+row.get(column.getName())+" </textarea>");
+							}		
+								
 						}
 						else if(column.getColumnHandler().equalsIgnoreCase("NONE") ) {
 							out.append("<td style='max-width:100px !important; word-wrap: break-word;'>"+row.get(column.getName())+"</th>");
@@ -311,9 +327,14 @@ public class ReportUtils {
 				}
 			
 			
-		}
+		} 
+			out.append("<input type='hidden' name='ROWID' value='"+row.get("id")+"' >");
+			out.append("<td><button type='submit' name='submit' value='update' class='btn-u'>Update</button> &nbsp;&nbsp;&nbsp;&nbsp;<button type='submit' name='submit' value='delete' class='btn-u'>Delete</button> </td></form>");
+			
+			
 			ROWID = "";
 			out.append("</tr>");
+			out.append("");
 		out.append("</tbody>");
 		out.append("</table>");
 		out.append("<div id='report_container_" + reportID+"'></div>");

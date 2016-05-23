@@ -25,6 +25,12 @@
 		<child_links display_name="Modify Course details" url="/content/content_admin/modify_course_structure.jsp"
 			valid_roles="content_admin" />
 	</parent_links>
+	
+	<parent_links display_name="Doubt">
+		<child_links display_name="Doubt List"
+			url="/content/content_admin/doubt_list.jsp" valid_roles="content_admin,content_creator" />
+		
+	</parent_links>
 
 	<parent_links display_name="Lesson">
 		<child_links display_name="Create Lesson" url="/content/lesson/new_lesson.jsp"
