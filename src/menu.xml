@@ -43,10 +43,16 @@
 			url="/content/content_creator/published_lesson.jsp" valid_roles="content_creator" />
 		<child_links display_name="Published Lesson"
 			url="/content/content_reviewer/published_lesson.jsp" valid_roles="content_reviewer" />
-			
-			<child_links display_name="Create Handut"
-			url="/content/content_creator/handouts.jsp" valid_roles="content_admin,content_creator" />
 	</parent_links>
+	
+	<parent_links display_name="Handouts">
+	<child_links display_name="View/Edit/Create Handout"
+			url="/content/content_creator/handouts.jsp" valid_roles="content_admin,content_creator" />
+			
+			<child_links display_name="View Handouts"
+			url="/content/content_creator/view_handouts.jsp" valid_roles="content_admin,content_creator" />	
+	</parent_links>
+	
 	<parent_links display_name="Task">
 		<child_links display_name="Create Task" url="/content/media/create_task.jsp"
 			valid_roles="content_creator" />
