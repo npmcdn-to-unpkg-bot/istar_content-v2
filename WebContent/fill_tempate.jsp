@@ -131,11 +131,28 @@
 										<%
 											for (Image type : images) {
 										%>
-										<option selected="selected" value="<%=type.getUrl()%>"><%=type.getUrl()%></option>
+										<option  value="<%=type.getUrl()%>"><%=type.getUrl()%></option>
 										<%
 											}
+										if (request.getParameterMap().containsKey("slide_id")){ 
+											Slide slide1 = (new SlideDAO()).findById(Integer.parseInt((request.getParameter("slide_id")).toString()));
+											LessonUtils lUtils = new LessonUtils();
+											CMSSlide cmsslide = lUtils.convertSlide(slide1);
+											String BG_url = cmsslide.getImage_BG();
+											
 										%>
-										<option selected="selected" value="none">None</option>
+										
+										<option selected="selected" value="<%=BG_url%>"><%=BG_url%></option>
+										
+										<%	
+											} else {
+										%>
+										
+										<option  value="none">None</option>
+										
+										<% 
+										}
+										%>
 								</select> <i></i>
 								</label>
 							</section>
