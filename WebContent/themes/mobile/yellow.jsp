@@ -15,21 +15,33 @@
 	<% 
 	PresentaionDAO dao = new PresentaionDAO();
 	Presentaion ppt = new Presentaion();
-	
-	if(!request.getParameterMap().containsKey("ppt_id")){
-		ppt = (Presentaion) request.getAttribute("ppt");
+	int lessonID = 0 ;
+	int pptID =  0;
+	if ((request.getParameterMap().containsKey("ppt_id"))){
+		pptID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
+		ppt =  dao.findById(pptID);
+	} else if ((request.getParameterMap().containsKey("lesson_id"))) {
+		 lessonID = Integer.parseInt(request.getParameter("lesson_id").toString());
+		 Lesson lesson = (new LessonDAO()).findById(lessonID);
+		 ppt = lesson.getPresentaion();
 	} else {
-		int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
-		ppt =  dao.findById(lessonID);
+		ppt = (Presentaion) request.getAttribute("ppt");
 	}
-	String lesson_theme = ppt.getLesson().getLesson_theme();
+	
+	String lesson_theme = "0";
+	try {
+		lesson_theme = ppt.getLesson().getLesson_theme();
+		System.err.println("debuggggggggg "+lesson_theme);
+	} catch(NullPointerException npe) {
+		System.out.println( ppt.getLesson().getId());
+	}
+	
 	String sql = "select * from ui_theme as T where T.id="+lesson_theme;
 	UiThemeDAO uiDao = new UiThemeDAO();
 	Session uiSession = uiDao.getSession();
 	SQLQuery query = uiSession.createSQLQuery(sql);
 	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 	List<HashMap<String, Object>> results = query.list();
-	//UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(results.get(0).get("id").toString()));
 		HashMap<String, String> theme = (HashMap<String, String>)query.list().get(0);
 	%>
 <style>
@@ -284,6 +296,7 @@ body {
     border-collapse: collapse;
     vertical-align: baseline;
     display: table;
+    margin-top: 15%;
     color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -298,7 +311,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 0;
+    border: 1px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -307,10 +320,7 @@ body {
 .reveal .ONLY_TITLE_TABLE   td  {
 	text-align: left;
     padding: 8px;
-}
-
-.reveal .ONLY_TITLE_TABLE  tr:nth-child(even){
-	background-color: #f2f2f2
+    border: 1px solid black;
 }
 
 .reveal .ONLY_TITLE_TABLE  th {
@@ -318,13 +328,14 @@ body {
     padding: 8px;
     background-color: #4CAF50;
     color: white;
+    border: 1px solid black;
 }
 
 .reveal .ONLY_TITLE_TABLE  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 0;
+    border: 1px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;

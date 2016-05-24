@@ -1261,7 +1261,7 @@ AND SA.assessment_id = :assessment_id
 		<column columnHandler="HANDOUT_HANDLER" display_name="Edit" isVisible="true" name="handout_id" />
 
 		<sql>
-		select DISTINCT ll.title as lesson_title, ll.id as lesson_id , hh.title as handout_title,  hh.id as handout_id , hh.data_blob as handout_data
+		select DISTINCT ll.title as lesson_title, ll.id as lesson_id , hh.title as handout_title,  hh.id as handout_id , hh.handout_text as handout_data
 from handouts hh, lesson ll 
 where hh.lesson_id=ll.id 
 
