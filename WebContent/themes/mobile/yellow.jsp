@@ -297,13 +297,13 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 15%;
+    font-size: 6vw;
     color: <%=theme.get("paragraph_____font_color")%>;
-	font-weight: <%=theme.get("paragraph_____font_weight")%>;
-	font-size: <%=theme.get("paragraph_____font_size")%>px;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
     width: 100%;
+    font-weight: 400;
 }
 
 .reveal .ONLY_TITLE_TABLE  thead  {
@@ -311,7 +311,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
+    border: 2px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -320,22 +320,21 @@ body {
 .reveal .ONLY_TITLE_TABLE   td  {
 	text-align: left;
     padding: 8px;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .reveal .ONLY_TITLE_TABLE  th {
 	text-align: left;
     padding: 8px;
-    background-color: #4CAF50;
-    color: white;
-    border: 1px solid black;
+    border: 2px solid black;
+    font-weight: bold;
 }
 
 .reveal .ONLY_TITLE_TABLE  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
+    border: 2px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
