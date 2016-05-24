@@ -296,6 +296,7 @@ body {
     border-collapse: collapse;
     vertical-align: baseline;
     display: table;
+    margin-top: 15%;
     color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
