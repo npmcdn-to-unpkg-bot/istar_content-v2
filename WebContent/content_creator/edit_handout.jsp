@@ -95,13 +95,24 @@
 				<form action="/content/update_handout" id="sky-form4" class="sky-form" onsubmit="myFunction()">
 					
 					<%
-					int handout_id = Integer.parseInt(request.getParameter("handout_id")); 
-					HandoutsDAO dao = new HandoutsDAO();
-					Handouts handout = dao.findById(handout_id);
-					
+					int handout_id = Integer.parseInt(request.getParameter("lesson_id")); 
+					HandoutsDAO dao = new HandoutsDAO();Handouts handout = new Handouts();
+					if(dao.findByLessonId(handout_id).size() != 0) {
+						handout = dao.findByLessonId(handout_id).get(0);	
+						%>
+						<input type="hidden" id="handout_id" name="handout_id" value="<%=handout_id%>"/>
+						<input type="hidden" id="handout_id" name="is_edit" value="true"/>
+						<% 
+					}else {
+						
+						%>
+						<input type="hidden" id="handout_id" name="is_edit" value="false"/>
+						<input type="hidden" id="handout_id" name="lessson_id" value="<%=request.getParameter("lesson_id")%>"/>
+						<%
+					}
 					
 					%>
-					<input type="hidden" id="handout_id" name="handout_id" value="<%=handout_id%>"/>
+					
 					
 					<div class="col-md-6">
 					<div class="alert alert-warning fade in text-center">

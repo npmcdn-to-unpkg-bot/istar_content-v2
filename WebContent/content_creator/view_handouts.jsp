@@ -100,7 +100,8 @@
  											%>
 													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'>
 													
-													<span class="label rounded label-sea"> <a style='color:white' href='view_handout.jsp?sess_id=<%=session1.getId()%>'> View Handouts </a></span><%=cmsession_sno%>. <%=session1.getTitle()%>
+													<span class="label rounded label-sea"> 
+													<a style='color:white' href='view_handout.jsp?sess_id=<%=session1.getId()%>'> View Handouts </a></span><%=cmsession_sno%>. <%=session1.getTitle()%>
 														<ul>
 															<% for (Lesson lesson : session1.getAllLessons(session1.getId())) { 
 																try {
@@ -122,7 +123,8 @@
 															%>
 															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
 															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
-															 
+															 <span class="label rounded label-sea"> 
+													<a style='color:white' href='/content/content_creator/edit_handout.jsp?lesson_id=<%=lesson.getId()%>'> Edit Handouts </a></span>
 															<%
 												}
 																
