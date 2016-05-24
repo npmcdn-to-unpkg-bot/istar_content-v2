@@ -363,7 +363,8 @@
 			CKEDITOR.config.extraPlugins = 'simple-image-browser';
 
 			// Add this line to configure for AJAX / JSON Reponse.
-			CKEDITOR.config.simpleImageBrowserURL = "";
+			// Link to plugin- http://ckeditor.com/addon/simple-image-browser
+			CKEDITOR.config.simpleImageBrowserURL = [{}];
 			try {
 				$("#image-picker").imagepicker();
 				CKEDITOR.replace('paragraph', { height: 100 });
