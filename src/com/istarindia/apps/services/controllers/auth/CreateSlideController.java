@@ -221,7 +221,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes"),
+				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
@@ -229,7 +229,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"),
+				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
@@ -477,14 +477,14 @@ public class CreateSlideController extends IStarBaseServelet {
 				slide_id = service.addTextTreeSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list);
+						request.getParameter("backgroundTransition"), list, request.getParameter("image_bg"));
 
 			} else {
 				CMSList list = getNewTree(request);
 				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
 
 			break;
