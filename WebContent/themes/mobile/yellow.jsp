@@ -298,7 +298,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 0;
+    border: 1px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -307,10 +307,7 @@ body {
 .reveal .ONLY_TITLE_TABLE   td  {
 	text-align: left;
     padding: 8px;
-}
-
-.reveal .ONLY_TITLE_TABLE  tr:nth-child(even){
-	background-color: #f2f2f2
+    border: 1px solid black;
 }
 
 .reveal .ONLY_TITLE_TABLE  th {
@@ -318,13 +315,14 @@ body {
     padding: 8px;
     background-color: #4CAF50;
     color: white;
+    border: 1px solid black;
 }
 
 .reveal .ONLY_TITLE_TABLE  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 0;
+    border: 1px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
