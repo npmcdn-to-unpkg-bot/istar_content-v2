@@ -36,10 +36,24 @@ String style_body = "background-size: cover;";
 <link rel="stylesheet" href="/themes/mobile.css"  type="text/css" />
 <link rel="stylesheet" href="/themes/mobile/default.css"  type="text/css" />
 
-<%if (!lesson_theme.equalsIgnoreCase("0")) { %>
-<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
-<%}%> 
-
+<!-- Include the yellow.jsp for styling only if everything is good for inclusion.
+lesson may not have theme saved
+lesson_theme may have a string in place
+lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
+ -->
+<%
+try {
+int themeID = Integer.parseInt(lesson_theme);
+if ((new UiThemeDAO()).findById(themeID) != null) {
+%>
+	<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
+<% 
+	} 
+} catch (Exception e){
+	//nothing ToDo
+}
+%>
+	
 <!-- Code syntax highlighting -->
 <script>
 			var link = document.createElement( 'link' );

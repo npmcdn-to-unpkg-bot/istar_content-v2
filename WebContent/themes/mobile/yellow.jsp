@@ -15,21 +15,33 @@
 	<% 
 	PresentaionDAO dao = new PresentaionDAO();
 	Presentaion ppt = new Presentaion();
-	
-	if(!request.getParameterMap().containsKey("ppt_id")){
-		ppt = (Presentaion) request.getAttribute("ppt");
+	int lessonID = 0 ;
+	int pptID =  0;
+	if ((request.getParameterMap().containsKey("ppt_id"))){
+		pptID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
+		ppt =  dao.findById(pptID);
+	} else if ((request.getParameterMap().containsKey("lesson_id"))) {
+		 lessonID = Integer.parseInt(request.getParameter("lesson_id").toString());
+		 Lesson lesson = (new LessonDAO()).findById(lessonID);
+		 ppt = lesson.getPresentaion();
 	} else {
-		int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
-		ppt =  dao.findById(lessonID);
+		ppt = (Presentaion) request.getAttribute("ppt");
 	}
-	String lesson_theme = ppt.getLesson().getLesson_theme();
+	
+	String lesson_theme = "0";
+	try {
+		lesson_theme = ppt.getLesson().getLesson_theme();
+		System.err.println("debuggggggggg "+lesson_theme);
+	} catch(NullPointerException npe) {
+		System.out.println( ppt.getLesson().getId());
+	}
+	
 	String sql = "select * from ui_theme as T where T.id="+lesson_theme;
 	UiThemeDAO uiDao = new UiThemeDAO();
 	Session uiSession = uiDao.getSession();
 	SQLQuery query = uiSession.createSQLQuery(sql);
 	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 	List<HashMap<String, Object>> results = query.list();
-	//UiTheme theme = new UiThemeDAO().findById(Integer.parseInt(results.get(0).get("id").toString()));
 		HashMap<String, String> theme = (HashMap<String, String>)query.list().get(0);
 	%>
 <style>
