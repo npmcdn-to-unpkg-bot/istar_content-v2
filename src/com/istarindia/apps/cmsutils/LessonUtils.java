@@ -205,7 +205,7 @@ public class LessonUtils {
                     out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
                     		+ "<div class='panel-heading'> <h3 class='panel-title'> "
                     		+ "<i class='fa fa-tasks'></i>Upload Questions </h3> </div>  <div class='panel-body'>"
-                    		+ "<form action='<%=baseURL%>assessment_upload' class='sky-form' method='post' enctype='multipart/form-data'>  "
+                    		+ "<form action='assessment_upload' class='sky-form' method='post' enctype='multipart/form-data'>  "
                     		+ "<fieldset> <section><p>File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample format from"
                     		+ "<a href='assets/excel/format.xls' style='color: RED'> here</a> )</p>"
 							+ "<label for='file' class='input input-file'> <div class='button'>"
