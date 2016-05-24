@@ -258,6 +258,17 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
+.reveal .ONLY_TITLE_LIST_NUMBERED h2 {
+	padding-left: 42px;
+	margin-top: -38%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
 .reveal  .ONLY_2TITLE h3 {
 	padding-left: 2%;
 	color: <%=theme.get("subtitle_____font_color")%>;
@@ -289,6 +300,117 @@ body {
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_PARAGRAPH  p:last-child {
+	padding-bottom: 4%;
+    list-style: none;
+	margin-top: 8%;
+	padding-right: 5%;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .ONLY_PARAGRAPH  table  {
+	margin: auto;
+    border-collapse: collapse;
+    vertical-align: baseline;
+    display: table;
+    margin-top: 15%;
+    font-size: 6vw;
+    color: <%=theme.get("paragraph_____font_color")%>;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+    width: 100%;
+    font-weight: 400;
+}
+
+.reveal .ONLY_PARAGRAPH  thead  {
+	display: table-header-group;
+	border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    border: 2px solid black;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.reveal .ONLY_PARAGRAPH   td  {
+	text-align: left;
+    padding: 8px;
+    border: 2px solid black;
+}
+
+.reveal .ONLY_PARAGRAPH  th {
+	text-align: left;
+    padding: 8px;
+    border: 2px solid black;
+    font-weight: bold;
+}
+
+.reveal .ONLY_PARAGRAPH  tr  {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+    border: 2px solid black;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH  table  {
+	margin: auto;
+    border-collapse: collapse;
+    vertical-align: baseline;
+    display: table;
+    margin-top: 15%;
+    font-size: 6vw;
+    color: <%=theme.get("paragraph_____font_color")%>;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+    width: 100%;
+    font-weight: 400;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH  thead  {
+	display: table-header-group;
+	border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    border: 2px solid black;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH   td  {
+	text-align: left;
+    padding: 8px;
+    border: 2px solid black;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH  th {
+	text-align: left;
+    padding: 8px;
+    border: 2px solid black;
+    font-weight: bold;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH  tr  {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+    border: 2px solid black;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 .reveal .ONLY_TITLE_TABLE  table  {
@@ -452,6 +574,30 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
+.reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
+	list-style: none !important;
+	padding-bottom: 48px;
+	padding-right: 52px;
+	list-style-type: decimal-leading-zero;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+.reveal .ONLY_TITLE_LIST_NUMBERED ul  {
+    padding-left: 42px;
+    padding-top: 10%;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
 .reveal .ONLY_TITLE_TREE #data_slide_title {
 	padding-left: 42px;
 	margin-top: -35% !important;
@@ -496,6 +642,24 @@ body {
 }
 
 .reveal .ONLY_LIST ul  {
+    padding-left: 42px;
+    margin-top: -41%;
+}
+
+.reveal .ONLY_LIST_NUMBERED ul li  {
+	list-style: none !important;
+	padding-bottom: 48px;
+	padding-right: 52px;
+	list-style-type: decimal-leading-zero;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+.reveal .ONLY_LIST_NUMBERED ul  {
     padding-left: 42px;
     margin-top: -41%;
 }

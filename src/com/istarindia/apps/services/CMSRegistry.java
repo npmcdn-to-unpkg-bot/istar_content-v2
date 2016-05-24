@@ -87,6 +87,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_IMAGE_PARAGRAPH");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
 		slideTemplates.add("ONLY_TITLE_LIST");
+		slideTemplates.add("ONLY_TITLE_LIST_NUMBERED");
 		slideTemplates.add("ONLY_TITLE_TREE");
 		slideTemplates.add("ONLY_TITLE_TABLE");
 		slideTemplates.add("ONLY_TITLE_VIDEO");
@@ -99,6 +100,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_PARAGRAPH_TITLE");
 		slideTemplates.add("ONLY_IMAGE");
 		slideTemplates.add("ONLY_LIST");
+		slideTemplates.add("ONLY_LIST_NUMBERED");
 		slideTemplates.add("ONLY_VIDEO");
 		
 		
