@@ -152,7 +152,7 @@ public class MAIN {
 				if (lll.isEmpty()) {
 					// craete new Lo
 
-					System.err.println("Creating a new Leanring objectve");
+					//System.err.println("Creating a new Leanring objectve");
 
 					LearningObjective lo = new LearningObjective();
 					lo.setTitle(singleLOItem.trim().toLowerCase());
@@ -174,7 +174,7 @@ public class MAIN {
 					}
 
 				} else {
-					System.err.println("Update  a new Leanring objectve");
+					//System.err.println("Update  a new Leanring objectve");
 
 					LearningObjective lo = lll.get(0);
 					lo.setSubject(subject);
