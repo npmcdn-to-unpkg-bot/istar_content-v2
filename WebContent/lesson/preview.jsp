@@ -82,8 +82,9 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			Reveal.initialize({  
 				center: false,
 				width: 960,
-			    height: 700,
+			    height: 700
 			});
+			
 			function changeImage()
 			{
 				 Reveal.next();
@@ -110,6 +111,10 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 					document.body.style.background = orgBgColor;
 				}
 			} );
+			
+
+			//disable arrow key display on slides
+			(document.getElementsByClassName('controls')[0]).style.display='none';
 			
 		</script>
 
