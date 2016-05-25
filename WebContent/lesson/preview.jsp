@@ -20,6 +20,7 @@ String style_body = "background-size: cover;";
 
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 
 <title>reveal.js The HTML Presentation Framework</title>
@@ -97,9 +98,19 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 				} );
 
 			    
-			    
 			} );
 
+			
+			//Takes care of slide specific background-color update logic
+			var orgBgColor = $("body").css("background-color");
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+				document.body.style.background = $('.present').css('background-color');
+				
+				if ( ($('.present').attr("style")).indexOf("background-color")<0){
+					document.body.style.background = orgBgColor;
+				}
+			} );
+			
 		</script>
 
 </body>
