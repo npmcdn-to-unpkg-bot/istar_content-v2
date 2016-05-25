@@ -345,6 +345,7 @@ body {
     padding: 8px;
     border: 2px solid black;
     font-weight: bold;
+    background: #cccccc;
 }
 
 .reveal .ONLY_PARAGRAPH  tr  {
@@ -394,6 +395,7 @@ body {
     padding: 8px;
     border: 2px solid black;
     font-weight: bold;
+    background: #cccccc;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  tr  {
@@ -443,6 +445,7 @@ body {
     padding: 8px;
     border: 2px solid black;
     font-weight: bold;
+    background: #cccccc;
 }
 
 .reveal .ONLY_TITLE_TABLE  tr  {
@@ -459,6 +462,7 @@ body {
 	text-align: left;
     padding: 8px;
     font-weight: bold;
+    background: #cccccc;
 }
 
 
