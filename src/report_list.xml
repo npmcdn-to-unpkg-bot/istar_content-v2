@@ -537,7 +537,7 @@ from course C, module M
 	left join cmsession S on S.module_id=M.id 
 	left join lesson L on L.session_id=S.id
 	left join task T on T.item_id=L.id
-where C.id= M.course_id and T.item_type='LESSON'
+where C.id = M.course_id and T.item_type = 'LESSON' and T.status!='DELETED'
 group by course_title, task_id
 order by task_id
 
@@ -560,7 +560,7 @@ from  module M
 	left join cmsession S on S.module_id=M.id 
 	left join lesson L on L.session_id=S.id
 	left join task T on T.item_id=L.id
-where  T.item_type='LESSON' and M.course_id=:course_id
+where  T.item_type='LESSON' and T.status!='DELETED' and M.course_id=:course_id
 group by task_id
 order by order_id
 		</sql>
@@ -580,7 +580,7 @@ order by order_id
 from  cmsession S
 	left join lesson L on L.session_id=S.id
 	left join task T on T.item_id=L.id
-where  T.item_type='LESSON' and S.module_id=:module_id
+where  T.item_type='LESSON' and T.status!='DELETED' and S.module_id=:module_id
 group by task_id
 order by order_id
 		</sql>
@@ -601,7 +601,7 @@ from task T, lesson L
 	left join presentaion P on P.lesson_id = L.id 
 	left join assessment A on A.lesson_id = L.id
 	left join game G on G.lesson_id = L.id
-where T.item_id = L.id and T.item_type= 'LESSON' and L.session_id = :session_id
+where T.item_id = L.id and T.item_type= 'LESSON' and T.status!='DELETED' and L.session_id = :session_id
 order by order_id
 		</sql>
 		<title> Lesson list</title>
