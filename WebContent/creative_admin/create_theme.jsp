@@ -134,6 +134,7 @@
 						fontNames.add("Raleway-Regular.ttf");
 						
 						int default_font_size = 60;
+						
 						for (String key : entities) {
 					%>
 					<div class="row">
@@ -206,7 +207,7 @@
 								<section class="col col-4">
 									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
 										Color</label> <label class="select"> <input type="color"
-										name="<%=key%>_____font_color" value="#000000">
+										name="<%=key%>_____font_color" value="#5d5d5d">
 									</label>
 								</section>
 							</fieldset>
