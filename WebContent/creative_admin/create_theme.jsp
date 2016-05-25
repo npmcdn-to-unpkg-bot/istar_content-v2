@@ -133,6 +133,7 @@
 						fontNames.add("Quicksand-Regular.ttf");
 						fontNames.add("Raleway-Regular.ttf");
 						
+						int default_font_size = 60;
 						for (String key : entities) {
 					%>
 					<div class="row">
@@ -140,17 +141,34 @@
 						<div class="row">
 							<fieldset>
 								<section class="col col-4">
-									<!-- key.toUpperCase() -->
+								<%
+									
+									switch(key){
+										case "title":
+											default_font_size = 100;
+											break;
+										case "subtitle":
+											default_font_size = 120;
+											break;
+										case "listitem":
+											default_font_size = 37;
+											break;
+										case "paragraph":
+											default_font_size = 47;
+											break;
+									}
+								%>
+								
 									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
 										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="200" name="<%=key%>_____font_size" value="60">
+										min="20" max="200" name="<%=key%>_____font_size" value="<%=default_font_size%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label"><%=StringUtils.capitalizeFirstLetter(key)%>
 										Line height</label> <label class="input"> <input type="number"
-										name="<%=key%>_____line_height" step="0.1" min="1" max="3"
+										name="<%=key%>_____line_height" step="0.1" min="0.5" max="3"
 										value="1">
 									</label>
 								</section>
