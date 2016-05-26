@@ -16,6 +16,14 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
+<style>
+.image-task{
+color:red;
+}
+.video-task{
+color:blue;
+}
+</style>
 <title> Assigned Creative | iStar CMS</title>
 
 <!-- Meta -->
