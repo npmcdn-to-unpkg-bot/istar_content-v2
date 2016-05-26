@@ -104,6 +104,10 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			
 			//Takes care of slide specific background-color update logic
 			var orgBgColor = $("body").css("background-color");
+			document.body.style.background = $('.present').css('background-color');
+			if ( ($('.present').attr("style")).indexOf("background-color")<0){
+				document.body.style.background = orgBgColor;
+			}
 			Reveal.addEventListener( 'slidechanged', function( event ) {
 				document.body.style.background = $('.present').css('background-color');
 				
