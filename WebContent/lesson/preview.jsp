@@ -20,6 +20,7 @@ String style_body = "background-size: cover;";
 
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 
 <title>reveal.js The HTML Presentation Framework</title>
@@ -81,8 +82,9 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			Reveal.initialize({  
 				center: false,
 				width: 960,
-			    height: 700,
+			    height: 700
 			});
+			
 			function changeImage()
 			{
 				 Reveal.next();
@@ -97,9 +99,23 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 				} );
 
 			    
-			    
 			} );
 
+			
+			//Takes care of slide specific background-color update logic
+			var orgBgColor = $("body").css("background-color");
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+				document.body.style.background = $('.present').css('background-color');
+				
+				if ( ($('.present').attr("style")).indexOf("background-color")<0){
+					document.body.style.background = orgBgColor;
+				}
+			} );
+			
+
+			//disable arrow key display on slides
+			(document.getElementsByClassName('controls')[0]).style.display='none';
+			
 		</script>
 
 </body>

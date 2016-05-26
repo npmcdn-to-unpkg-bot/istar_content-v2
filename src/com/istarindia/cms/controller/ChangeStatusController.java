@@ -1,16 +1,25 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
+import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.auth.CreateSlideController;
@@ -63,7 +72,23 @@ public class ChangeStatusController extends HttpServlet {
 			else if(new_status.equalsIgnoreCase(StatusTypes.DELETED)) {
 				request.setAttribute("message_success", "The task has been successfully deleted!");
 			}
-			String redirectUrl=user.getUserType().toLowerCase() + "/dashboard.jsp";
+			
+			String redirectUrl = new String();
+			if (request.getParameterMap().containsKey("source_link")){
+				IstarUserDAO dao = new IstarUserDAO();
+				Session session = dao.getSession();
+				String sql = "select L.session_id from task T, Lesson L where T.item_type= 'LESSON' and T.item_id=L.id and T.id="+task_id;
+				
+				SQLQuery query = session.createSQLQuery(sql);
+				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+				
+				HashMap<String, Object> result = (HashMap<String, Object>) query.list().get(0);
+				int session_id = Integer.parseInt(result.get("session_id").toString());
+				redirectUrl = "content_admin/modify_course_structure.jsp?session_id="+session_id;
+				
+			} else {
+				redirectUrl=user.getUserType().toLowerCase() + "/dashboard.jsp";
+			}
 			request.getRequestDispatcher(redirectUrl).forward(request, response);
 			//response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
 		}
