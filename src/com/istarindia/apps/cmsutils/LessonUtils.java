@@ -75,7 +75,7 @@ public class LessonUtils {
         int z = 0;
         for (AssessmentOption option : options) {
 			if(option.getMarkingScheme()!=null) {
-				markingScheme[z++] = "selected";
+				markingScheme[z++] = "checked=checked";
 			} else {
 				markingScheme[z++] = "";
 			}

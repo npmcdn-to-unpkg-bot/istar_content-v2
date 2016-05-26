@@ -7,15 +7,20 @@ package com.istarindia.cms.controller;
 
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
+import com.istarindia.apps.dao.AssessmentOption;
+import com.istarindia.apps.dao.AssessmentOptionDAO;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Question;
+import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.AssessmentOptionService;
 import com.istarindia.apps.services.OptionService;
 import com.istarindia.apps.services.QuestionService;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,10 +32,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Kunal Chakravertti
- */
 @WebServlet("/edit_question")
 public class EditQuestionController extends HttpServlet {
 
@@ -47,6 +48,7 @@ public class EditQuestionController extends HttpServlet {
             throws ServletException, IOException {
     	
     	int question_id = Integer.parseInt(request.getParameter("question_id"));
+    	Question question = (new QuestionDAO()).findById(question_id);
     	int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
     	String question_text = request.getParameter("question_text");
     	String question_type = request.getParameter("question_type");
@@ -56,9 +58,27 @@ public class EditQuestionController extends HttpServlet {
     	QuestionService service = new QuestionService();
     	service.updateQuestion(question_id, question_text, question_type, difficulty_level,duration_in_sec);
     	
-    	OptionService oservice = new OptionService();
-    	
-    	oservice.updateNewOption(optionId, optionText, question, optionValue);
+    	OptionService opService = new OptionService();
+
+		String[] answers = request.getParameterValues("answers");
+		Integer[] optionValue = new Integer[5];
+		
+		if(answers!=null){
+			for (int i= 0 ; i<5;i++){
+				optionValue[i] = null;
+			}
+			for (int j = 0; j < answers.length; j++){
+				optionValue[Integer.parseInt(answers[j])-1] = 1;
+			}
+		}
+
+		opService.updateNewOption(Integer.parseInt(request.getParameter("option1_id")), request.getParameter("option1"), question, optionValue[0]);
+		opService.updateNewOption(Integer.parseInt(request.getParameter("option2_id")), request.getParameter("option2"), question, optionValue[1]);
+		opService.updateNewOption(Integer.parseInt(request.getParameter("option3_id")), request.getParameter("option3"), question, optionValue[2]);
+		opService.updateNewOption(Integer.parseInt(request.getParameter("option4_id")), request.getParameter("option4"), question, optionValue[3]);
+		opService.updateNewOption(Integer.parseInt(request.getParameter("option5_id")), request.getParameter("option5"), question, optionValue[4]);
+
+		response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + assessment_id);
     }
 
     /**
