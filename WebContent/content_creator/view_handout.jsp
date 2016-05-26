@@ -64,10 +64,15 @@
 		items  = h.getHandoutsPerCourse(Integer.parseInt(request.getParameter("course_id")));
 		
 	} else if (request.getParameterMap().containsKey("sess_id")) {
-HandoutUtils h = new HandoutUtils();
+       HandoutUtils h = new HandoutUtils();
 		
 		items  = h.getHandoutsPerSession(Integer.parseInt(request.getParameter("sess_id")));
 	}
+	
+	String title="Handout Title";
+	try {
+		title = items.get(0).getTitle();
+	} catch(Exception e) {}
 %>
 <body>
  
@@ -75,7 +80,7 @@ HandoutUtils h = new HandoutUtils();
 		<div class="breadcrumbs-v1 text-center">
 			<div class="container">
 				<span>Handouts</span>
-				<h1><%=items.get(0).getTitle() %></h1>
+				<h1><%=title%></h1>
 			</div>
 
 
@@ -101,7 +106,6 @@ HandoutUtils h = new HandoutUtils();
 			</div>
 		</div>
 	</div>
-	<jsp:include page="includes/footer.jsp"></jsp:include>
 
 
 	<!-- JS Global Compulsory -->

@@ -92,7 +92,7 @@
 		<div class="container-fluid height-1000"
 			style="padding: 0px !important">
 			<div class="row">
-				<form action="/content/update_handout" id="sky-form4" class="sky-form" onsubmit="myFunction()">
+				<form action="/content/update_handout" id="sky-form4" class="sky-form" onsubmit="myFunction()" method="POST">
 					
 					<%
 					int handout_id = Integer.parseInt(request.getParameter("lesson_id")); 
@@ -127,7 +127,8 @@
 							</section>
 							<section>
 								<label>Handouts*</label>
-								 <label class="textarea"> <textarea rows="10" name="handouts_text" placeholder="Handouts"> <%=handout.getDataBloB() %></textarea>
+								 <label class="textarea"> 
+								 <textarea rows="10" id="handouts_text1" name="handouts_text" placeholder="Handouts"> <%=handout.getDataBloB() %></textarea>
 							</section>
 							
 
@@ -172,6 +173,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
 		type="text/javascript" charset="utf-8"></script>
 	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
@@ -212,7 +214,13 @@
 				"plugins" : [ "checkbox" ]
 			});
 			$('#selected_items').val("aaaa");
-
+			try {
+				CKEDITOR.replace('handouts_text1', { height: 100 });
+			} catch (err) {
+				// TODO: handle exception
+			}
+			
+			
 		});
 	</script>
 	<!--[if lt IE 9]>

@@ -45,6 +45,8 @@ public class ReportColumnHandlerFactory {
 			return (new VACANCY_HANDLERColumnHandler());		
 		case "ANSWER_DOUBT":
 			return (new ANSWER_DOUBTColumnHandler());		
+		case "LO_LINK_HANDLER":
+			return (new LO_LINK_HANDLERColumnHandler());		
 		default:
 			break;
 		}
