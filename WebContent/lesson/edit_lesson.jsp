@@ -262,35 +262,7 @@
 							<div class="panel-body" id="demo">
 
 								<div class="panel panel-profile profile">
-									<%
-                                                TaskLogDAO dao = new TaskLogDAO();
-                                                TaskLog sample = new TaskLog();
-                                                if (request.getParameterMap().containsKey("task_id")) {
-                                                    sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
-                                                } else {
-                                                    sample.setTaskId(Integer.parseInt(request.getAttribute("task_id").toString()));
-                                                }
-                                                sample.setItemType("LESSON");
-
-                                                List<TaskLog> items = dao.findByExample(sample);
-                                                for (TaskLog log : items) {
-
-                                                    IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-                                            %>
-
-
-									<div class="comment">
-										<img
-											src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
-											alt="">
-										<div class="overflow-h">
-											<strong><%=user.getName()%></strong>
-											<p><%=log.getComments()%></p>
-										</div>
-									</div>
-									<%
-                                                }
-                                            %>
+									
 								</div>
 
 							</div>

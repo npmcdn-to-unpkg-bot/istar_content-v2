@@ -74,7 +74,7 @@ public class LessonUtils {
         
         int z = 0;
         for (AssessmentOption option : options) {
-			if(option.getMarkingScheme()!=null) {
+			if(option.getMarkingScheme()==1) {
 				markingScheme[z++] = "checked=checked";
 			} else {
 				markingScheme[z++] = "";
@@ -87,7 +87,7 @@ public class LessonUtils {
             Integer number_of_questions = new Integer(0);
             AssessmentService assessmentService = new AssessmentService();
             number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-            if (number_of_questions < assessment.getNumber_of_questions()) {
+            //if (number_of_questions < assessment.getNumber_of_questions()) {
             	
                 //Fix upload-assessment part anad  uncomment the below part
             	/*out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
@@ -166,7 +166,7 @@ public class LessonUtils {
                         + "<input type='hidden' name='option5_id' value=" + options.get(4).getId() + "> "
                         + "</fieldset> "
                         + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label id='err' style='color:red'></label></footer></form></div></div></div>");
-            }
+            //}
             
             out.append("<div class=' col-md-12 '>");
             out.append("<div class='panel panel-sea margin-bottom-40'>");

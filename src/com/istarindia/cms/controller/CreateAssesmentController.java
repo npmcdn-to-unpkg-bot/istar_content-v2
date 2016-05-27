@@ -68,6 +68,23 @@ public class CreateAssesmentController extends HttpServlet {
 		}
 		
 		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
+		
+			lesson.setDtype("ASSESSMENT");
+			LessonDAO ldao = new LessonDAO();
+ 			Session session1 = ldao.getSession();
+			Transaction tx1 = null;
+			try {
+				tx1 = session1.beginTransaction();
+				ldao.attachDirty(lesson);
+				tx1.commit();
+			} catch (HibernateException e) {
+				if (tx1 != null)
+					tx1.rollback();
+				e.printStackTrace();
+			} finally {
+				session1.close();
+			}
+		
 		CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "An Assessment for the lesson was created.");
 		
 		request.setAttribute("lesson", lesson);

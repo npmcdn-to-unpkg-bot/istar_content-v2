@@ -69,7 +69,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 							<h3 class="panel-title"><i class="fa fa-user"></i> List of Users invited for Test</h3>
 						</div>
 						<div class="panel-body">
-							<table class="table">
+							<table class="table table-striped table-bordered display responsive  dataTable datatable_report">
 								<thead>
 									<tr>
 										<th>#</th>

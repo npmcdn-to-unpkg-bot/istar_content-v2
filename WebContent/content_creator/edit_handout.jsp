@@ -95,7 +95,7 @@
 				<form action="/content/update_handout" id="sky-form4" class="sky-form" onsubmit="myFunction()" method="POST">
 					
 					<%
-					int handout_id = Integer.parseInt(request.getParameter("lesson_id")); 
+					int handout_id = Integer.parseInt(request.getParameter("handout_id")); 
 					HandoutsDAO dao = new HandoutsDAO();Handouts handout = new Handouts();
 					if(dao.findByLessonId(handout_id).size() != 0) {
 						handout = dao.findByLessonId(handout_id).get(0);	
@@ -215,7 +215,7 @@
 			});
 			$('#selected_items').val("aaaa");
 			try {
-				CKEDITOR.replace('handouts_text1', { height: 100 });
+				CKEDITOR.replace('handouts_text1', { height: 500 });
 			} catch (err) {
 				// TODO: handle exception
 			}
