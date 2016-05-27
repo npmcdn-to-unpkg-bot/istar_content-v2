@@ -18,10 +18,9 @@
 <head>
 <style>
 .image-task{
-color:red;
 }
 .video-task{
-color:blue;
+font-weight: bold;
 }
 </style>
 <title> Assigned Creative | iStar CMS</title>
@@ -77,6 +76,8 @@ color:blue;
 					</h3>
 				</div>
 				<div class="panel-body">
+				  <label  style="display: block;">[Video tasks can be found in bold font]</label>
+				
 					<label id="err" style="display: block;color:#ee9393"></label>
 					<button id="demo" onclick="myFunction()" class="btn-u"  data-target="#myModal">Select Creative Creator</button>
 							
