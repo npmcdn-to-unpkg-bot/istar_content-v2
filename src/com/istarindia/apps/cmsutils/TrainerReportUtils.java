@@ -62,60 +62,66 @@ public class TrainerReportUtils {
 
 		for (VacanyStatus vacanyStatus : listOfTest) {
 
-			int studentID = vacanyStatus.getUserId();
-			IstarUser user = (new IstarUserDAO()).findById(studentID);
-			String name = user.getName();
-			String email = user.getEmail();
+			try {
+				int studentID = vacanyStatus.getUserId();
+				IstarUser user = (new IstarUserDAO()).findById(studentID);
+				String name = user.getName();
+				String email = user.getEmail();
 
-			VacancyWorkflowDAO wfDAO = new VacancyWorkflowDAO();
-			VacancyWorkflow vwfd = wfDAO.findById(vacanyStatus.getVacancyWorkflowId());
+				VacancyWorkflowDAO wfDAO = new VacancyWorkflowDAO();
+				VacancyWorkflow vwfd = wfDAO.findById(vacanyStatus.getVacancyWorkflowId());
 
-			Vacancy v = (new VacancyDAO()).findById(vwfd.getVacancyId());
+				Vacancy v = (new VacancyDAO()).findById(vwfd.getVacancyId());
+				
+				
+				// FInd Data in reports to check wether he has completed or not
+				// String sql1, ArrayList<IStarColumn> keys, HashMap<String, String>
+				// conditions
 
-			// FInd Data in reports to check wether he has completed or not
-			// String sql1, ArrayList<IStarColumn> keys, HashMap<String, String>
-			// conditions
+				String sql = "select report.score as score, assessment.number_of_questions as number_of_questions from report, "
+						+ "assessment where report.assessment_id=" + vwfd.getAssessmentId() + "   and report.user_id="
+						+ studentID + " and assessment.id=" + vwfd.getAssessmentId();
+				ReportUtils rutils = new ReportUtils();
+				ArrayList<IStarColumn> keys = new ArrayList();
+				IStarColumn kk = new IStarColumn();
+				kk.setName("score");
+				kk.setDisplayName("score");
 
-			String sql = "select report.score as score, assessment.number_of_questions as number_of_questions from report, "
-					+ "assessment where report.assessment_id=" + vwfd.getAssessmentId() + "   and report.user_id="
-					+ studentID + " and assessment.id=" + vwfd.getAssessmentId();
-			ReportUtils rutils = new ReportUtils();
-			ArrayList<IStarColumn> keys = new ArrayList();
-			IStarColumn kk = new IStarColumn();
-			kk.setName("score");
-			kk.setDisplayName("score");
+				IStarColumn kk1 = new IStarColumn();
+				kk1.setName("number_of_questions");
+				kk1.setDisplayName("number_of_questions");
+				keys.add(kk);
+				keys.add(kk1);
+				ArrayList<ArrayList<String>> items = rutils.getReportData(sql, keys, new HashMap());
 
-			IStarColumn kk1 = new IStarColumn();
-			kk1.setName("number_of_questions");
-			kk1.setDisplayName("number_of_questions");
-			keys.add(kk);
-			keys.add(kk1);
-			ArrayList<ArrayList<String>> items = rutils.getReportData(sql, keys, new HashMap());
-
-			String completionStatus = "NOT COMPLETED";
-			int score = 0;
-			int total = 0;
-			if (items.size() != 0) {
-				completionStatus = "COMPLETED";
-				try {
-					score = Integer.parseInt(items.get(0).get(0));
-					total = Integer.parseInt(items.get(0).get(1));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				String completionStatus = "NOT COMPLETED";
+				int score = 0;
+				int total = 0;
+				if (items.size() != 0) {
+					completionStatus = "COMPLETED";
+					try {
+						score = Integer.parseInt(items.get(0).get(0));
+						total = Integer.parseInt(items.get(0).get(1));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}
-			out.append("<tr><td>" + studentID + "</td>");
-			out.append("<td>" + name + "</td>");
-			out.append("<td>" + email + "</td>");
-			out.append("<td>" + v.getProfileTitle() + " --- " + vwfd.getAssessmentId() + "</td>");
+				out.append("<tr><td>" + studentID + "</td>");
+				out.append("<td>" + name + "</td>");
+				out.append("<td>" + email + "</td>");
+				out.append("<td>" + v.getProfileTitle() + " --- " + vwfd.getAssessmentId() + "</td>");
 
-			out.append("<td>" + completionStatus + "</td>");
-			out.append("<td><a href='detailed_result.jsp?student_id=" + studentID + "&assessment_id="
-					+ vwfd.getAssessmentId() + "' >View Details Results " + score + " / " + total + "</a></td>");
-			out.append("<td><a href='detailed_result_course.jsp?student_id=" + studentID + "&assessment_id="
-					+ vwfd.getAssessmentId() + "' >View Details Results " + score + " / " + total + "</a></td>");
-			out.append("</tr>");
+				out.append("<td>" + completionStatus + "</td>");
+				out.append("<td><a href='detailed_result.jsp?student_id=" + studentID + "&assessment_id="
+						+ vwfd.getAssessmentId() + "' >View Details Results " + score + " / " + total + "</a></td>");
+				out.append("<td><a href='detailed_result_course.jsp?student_id=" + studentID + "&assessment_id="
+						+ vwfd.getAssessmentId() + "' >View Details Results " + score + " / " + total + "</a></td>");
+				out.append("</tr>");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return out;
 	}

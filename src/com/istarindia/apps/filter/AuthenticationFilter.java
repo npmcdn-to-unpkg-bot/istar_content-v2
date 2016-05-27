@@ -84,7 +84,7 @@ public class AuthenticationFilter implements Filter {
 		if(((HttpServletRequest) request).getRequestURL().toString().contains("media_upload")) {
 			 isStarticrequest = true;
 		}
-		if(((HttpServletRequest) request).getRequestURL().toString().contains("media_upload")) {
+		if(((HttpServletRequest) request).getRequestURL().toString().contains("pdf")) {
 			 isStarticrequest = true;
 		}
 		
