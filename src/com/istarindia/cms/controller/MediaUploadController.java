@@ -34,6 +34,8 @@ import com.istarindia.apps.dao.FolderItems;
 import com.istarindia.apps.dao.FolderItemsDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
@@ -62,6 +64,10 @@ public class MediaUploadController extends IStarBaseServelet {
     public void init(ServletConfig config) {
     	String folder =config.getInitParameter("upload_path");
     	fileUploadPath = new File(folder);
+    	
+    	
+    	
+    	
     }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

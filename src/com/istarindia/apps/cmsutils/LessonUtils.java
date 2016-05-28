@@ -74,11 +74,12 @@ public class LessonUtils {
         
         int z = 0;
         for (AssessmentOption option : options) {
-        	try {
+
+			try {
 				if(option.getMarkingScheme()==1) {
-					markingScheme[z] = "checked=checked";
+					markingScheme[z++] = "checked=checked";
 				} else {
-					markingScheme[z] = "";
+					markingScheme[z++] = "";
 				}
 			} catch (Exception e) {
 				markingScheme[z] = "";
