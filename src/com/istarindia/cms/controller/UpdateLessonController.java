@@ -71,9 +71,11 @@ public class UpdateLessonController extends IStarBaseServelet {
 			request.setAttribute("task_id", task.getId());
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 		} else {
-			System.out.println("Something missing .... ");
+			System.out.println("Recieved params:");
+			printParams(request);
+			request.setAttribute("message_failure", "Something was missing !");
+			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);
 		}
-
 	}
 
 	/**

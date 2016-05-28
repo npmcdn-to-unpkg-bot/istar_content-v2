@@ -104,8 +104,12 @@ var Validation = function () {
         },
         
         lessonValidation: function () {
-        	$("#sky-form4").validate({                   
-            // Rules for form validation
+        	$('.sky-form').each( function(){
+
+        		var form = $(this);
+        		form.validate({               
+        		
+        		// Rules for form validation
         		rules:
         		{
         			title:
@@ -121,6 +125,16 @@ var Validation = function () {
         			tags:
         			{
         				required: true
+        			},
+        			number_of_questions:
+        			{
+        				required: true,
+        				min: 1
+        			},
+        			duration_in_sec:
+        			{
+        				required: true,
+        				min: 1
         			}
         		},
                                 
@@ -129,7 +143,7 @@ var Validation = function () {
 	            {
 	            	title:
 	            	{
-	            		required: 'Please enter valid lesson title',
+	            		required: 'Please enter valid title',
 	            		rangelength: 'Title should be between 5 to 50 characters long'
 	            	},
 	            	duration:
@@ -149,6 +163,7 @@ var Validation = function () {
 	                error.insertAfter(element.parent());
 	            }
 	        });
+        });
         }
     };
 }();
