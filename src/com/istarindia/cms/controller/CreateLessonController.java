@@ -71,6 +71,10 @@ public class CreateLessonController  extends IStarBaseServelet {
 		}
 		else
 		{
+			System.err.println("Recieved parameters:");
+			printParams(request);
+			request.setAttribute("message_failure", "Something was missing!");
+			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);
 			
 		}	
 		

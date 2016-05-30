@@ -170,7 +170,7 @@ public class ReportUtils {
 			tableStyle = "style='display:none'";
 		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
-		out.append("<div class='panel panel-yellow margin-bottom-40' "+style+"> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div class='panel-body'></div>"
+		out.append("<div class='panel panel-yellow margin-bottom-40' "+style+"> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "+report.getTitle()+" </h3> </div><div id='datatable_report_panel_body' class='panel-body'></div>"
 				+ "<table "+tableStyle+" class='table table-striped table-bordered display responsive  dataTable datatable_report' "
 				+ "id='datatable_report_" + reportID + "' data-graph_type='" + report.getType_of_report() + "' " + "" + "  "
 						+ " data-graph_title='" + report.getTitle() + "' " + "data-graph_containter='report_container_" + reportID +

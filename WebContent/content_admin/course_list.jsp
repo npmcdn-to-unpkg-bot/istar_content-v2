@@ -58,64 +58,29 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
-		<div class="breadcrumbs"><div class="container-fluid">
+		<div class="breadcrumbs">
+			<div class="container-fluid">
 				<h1 class="pull-left">
-					<a href="<%=baseURL %>content_admin/dashboard.jsp">Modify Course Details</a>
+					<a href="<%=baseURL%>content_admin/dashboard.jsp">Dashboard</a>
 				</h1>
 
 			</div>
-			</div>
+		</div>
+		
+			<br/>
+			
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			
-			
+
 			<div class="col-md-12">
 				<% HashMap<String, String> conditions = new HashMap();
 				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
-				int reportID = 30;
-				String entityID = new String();
-				if(request.getParameterMap().containsKey("course_id")){
-					reportID = 31;
-					entityID = (request.getParameter("course_id")).toString();
-					conditions.put("course_id", entityID);
 				%>
-					<form id="update_order" action="/content/update_order">
-            			<input id='course_id' name='course_id' type='hidden' value='<%=entityID%>'>
-            			<input id='entity_type' name='entity_type' type='hidden' value='modules'>
-						<input id='order_holder' name='order_holder' type='hidden'>
-            			<button type="submit" class="btn-u" style="float:right;">Update Order</button>
-            		</form>
-				<%
-				} else if (request.getParameterMap().containsKey("module_id")){
-					reportID = 32;
-					entityID = (request.getParameter("module_id")).toString();
-					conditions.put("module_id", entityID);
-				%>
-					<form id="update_order" action="/content/update_order">
-            			<input id='module_id' name='module_id' type='hidden' value='<%=entityID%>'>
-            			<input id='entity_type' name='entity_type' type='hidden' value='sessions'>
-						<input id='order_holder' name='order_holder' type='hidden'>
-            			<button type="submit" class="btn-u" style="float:right;">Update Order</button>
-            		</form>
-				<%
-				} else if (request.getParameterMap().containsKey("session_id")){
-					reportID = 33;
-					entityID = (request.getParameter("session_id")).toString();
-					conditions.put("session_id", entityID);
-				%>
-					<form id="update_order" action="/content/update_order">
-            			<input id='session_id' name='session_id' type='hidden' value='<%=entityID%>'>
-            			<input id='entity_type' name='entity_type' type='hidden' value='lessons'>
-						<input id='order_holder' name='order_holder' type='hidden'>
-            			<button type="submit" class="btn-u" style="float:right;">Update Order</button>
-            		</form>
-				<%
-				}
-				%>
-            	<%=(new ReportUtils()).getReport(reportID, conditions, ((IstarUser)request.getSession().getAttribute("user")), "NONE").toString() %>
-					
+				<%=(new ReportUtils()).getReport(30, conditions, ((IstarUser)request.getSession().getAttribute("user")), "NONE").toString() %>
+
 			</div>
+			
 		</div>
-	<jsp:include page="includes/footer.jsp"></jsp:include>
+		<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
 	<!-- JS Global Compulsory -->
@@ -149,35 +114,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	};
 	jQuery(document).ready(function() {
 			App.init();
-
-			var report_id = <%=reportID%>;
-			
-			if (report_id<=33 && report_id>=31) {
-				var tableID = "datatable_report_"+report_id;
-        		var tableBodyID = "datatable_report_"+report_id+"_body";
-	            //table contents are sortable
-    	        $( "#"+tableBodyID).sortable();
-        	    $( "#update_order" ).submit(function( event ) {
-            		var idsInOrder = $("#"+tableBodyID).sortable("toArray");
-            		$('#order_holder').val(idsInOrder);
-            		});
-        	    
-        	    // Show all results in single page. No need for search
-        	    // Retrieve the existing DataTable instance and destroy and then reconfigure
-        	    if ( $.fn.dataTable.isDataTable( "#"+tableID ) ) {
-        	        table = $("#"+tableID).DataTable({
-        	        	destroy: true,
-        	        	sorting: false,
-        	        	searching: false,
-        	        	paging: false
-        	        } );
-        	    }
-        	    else {
-        	        table = $("#"+tableID).DataTable( {
-        	            paging: false
-        	        } );
-        	    }
-			}
 		});
 	</script>
 	<!--[if lt IE 9]>

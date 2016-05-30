@@ -412,7 +412,8 @@ public class LessonUtils {
             out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId()
                     + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
             out.append("</form>");
-            out.append("<form id='update_order' action='/content/update_order?ppt_id="+ ppt.getId()+"'>"
+            out.append("<form id='update_order' action='/content/update_course?ppt_id="+ ppt.getId()+"'>"
+            		+ "<input id='action' name='action' type='hidden' value='reorder'> "
             		+ "<input id='order_holder' name='order_holder' type='hidden'>"
             		+ "<input id='entity_type' name='entity_type' type='hidden' value='slides'>"
             		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"
