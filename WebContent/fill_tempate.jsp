@@ -143,6 +143,7 @@
 										%>
 										
 										<option selected="selected" value="<%=BG_url%>"><%=BG_url%></option>
+										<option  value="none">None</option>
 										
 										<%	
 											} else {
