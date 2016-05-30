@@ -249,6 +249,7 @@
 
 		<sql>select T.id as task_id, T.name as name, T.name as action
 			from ui_theme T
+			where T.id > 0
 			ORDER BY task_id
 		</sql>
 		<title>Existing theme list</title>
