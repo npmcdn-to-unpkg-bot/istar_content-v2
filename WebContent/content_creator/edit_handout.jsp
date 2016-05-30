@@ -97,7 +97,7 @@
 					<%
 					int handout_id = Integer.parseInt(request.getParameter("handout_id")); 
 					HandoutsDAO dao = new HandoutsDAO();Handouts handout = new Handouts();
-					if(dao.findByLessonId(handout_id).size() != 0) {
+					if(!dao.findByLessonId(handout_id).isEmpty()) {
 						handout = dao.findByLessonId(handout_id).get(0);	
 						%>
 						<input type="hidden" id="handout_id" name="handout_id" value="<%=handout_id%>"/>
