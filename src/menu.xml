@@ -22,7 +22,7 @@
 	<parent_links display_name="Course">
 		<child_links display_name="View Course Structure" url="/content/content_admin/course_structure.jsp" valid_roles="content_admin" />
 		<child_links display_name="View Learning Objectives" url="/content/content_admin/course_learning_objectives.jsp" valid_roles="content_admin" />
-		<child_links display_name="Modify Course details" url="/content/content_admin/modify_course_structure.jsp"
+		<child_links display_name="Modify Course details" url="/content/content_admin/course_list.jsp"
 			valid_roles="content_admin" />
 	</parent_links>
 	
@@ -35,7 +35,9 @@
 	<parent_links display_name="Lesson">
 		<child_links display_name="Create Lesson" url="/content/lesson/new_lesson.jsp"
 			valid_roles="content_admin,content_creator" />
-		<child_links display_name="Assessment"
+		<child_links display_name="Create Assessment" url="/content/create_assessment"
+			valid_roles="content_admin,content_creator" />
+		<child_links display_name="Assessment List"
 			url="/content/content_creator/assessments.jsp" valid_roles="content_admin,content_creator" />
 		<child_links display_name="Published Lesson"
 			url="/content/content_admin/published_lesson.jsp" valid_roles="content_admin" />

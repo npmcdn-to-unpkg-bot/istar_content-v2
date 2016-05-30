@@ -314,7 +314,7 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 5%;
-    font-size: 6vw;
+    font-size: 4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -364,7 +364,7 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 5%;
-    font-size: 6vw;
+    font-size: 4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -414,7 +414,7 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 5%;
-    font-size: 6vw;
+    font-size: 4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;

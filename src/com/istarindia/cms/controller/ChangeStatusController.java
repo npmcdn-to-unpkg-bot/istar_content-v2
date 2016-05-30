@@ -75,6 +75,7 @@ public class ChangeStatusController extends HttpServlet {
 			
 			String redirectUrl = new String();
 			if (request.getParameterMap().containsKey("source_link")){
+				//The request is from the "modify course details" page!
 				IstarUserDAO dao = new IstarUserDAO();
 				Session session = dao.getSession();
 				String sql = "select L.session_id from task T, Lesson L where T.item_type= 'LESSON' and T.item_id=L.id and T.id="+task_id;
@@ -84,7 +85,7 @@ public class ChangeStatusController extends HttpServlet {
 				
 				HashMap<String, Object> result = (HashMap<String, Object>) query.list().get(0);
 				int session_id = Integer.parseInt(result.get("session_id").toString());
-				redirectUrl = "content_admin/modify_course_structure.jsp?session_id="+session_id;
+				redirectUrl = "content_admin/modify_session.jsp?session_id="+session_id;
 				
 			} else {
 				redirectUrl=user.getUserType().toLowerCase() + "/dashboard.jsp";

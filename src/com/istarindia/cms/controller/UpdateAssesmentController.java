@@ -52,11 +52,29 @@ public class UpdateAssesmentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String assessment_type = "";
-		if (request.getParameterMap().containsKey("assessment_id") && request.getParameterMap().containsKey("assessment_type") && request.getParameterMap().containsKey("number_of_questions"))
- {
-			int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
+		int assessment_id, number_of_questions, duration;
 		
-			int number_of_questions = Integer.parseInt(request.getParameter("number_of_questions"));
+		if (request.getParameterMap().containsKey("update_assessment")) {
+
+			assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
+			String title = request.getParameter("title");
+			number_of_questions = Integer.parseInt(request.getParameter("number_of_questions"));
+			assessment_type = request.getParameter("assessment_type");
+			duration = Integer.parseInt(request.getParameter("duration"));
+
+			AssessmentService service = new AssessmentService();
+			Assessment assessment = (Assessment) service.updateAssessment(assessment_id, title, duration,
+					assessment_type, number_of_questions);
+
+			request.setAttribute("message_success", "Assessment updated successfully!");
+			response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + assessment_id);
+
+		} else if (request.getParameterMap().containsKey("assessment_id")
+				&& request.getParameterMap().containsKey("assessment_type")
+				&& request.getParameterMap().containsKey("number_of_questions")) {
+			assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
+
+			number_of_questions = Integer.parseInt(request.getParameter("number_of_questions"));
 			assessment_type = request.getParameter("assessment_type");
 
 			AssessmentService service = new AssessmentService();
@@ -72,9 +90,10 @@ public class UpdateAssesmentController extends HttpServlet {
 			Task t = new Task();
 			t.setItemType("LESSON");
 			t.setItemId(lesson.getId());
-			
+
 			request.setAttribute("task_id", dao.findByExample(t).get(0).getId());
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+
 		} else {
 			System.out.println("Something missing .... ");
 		}

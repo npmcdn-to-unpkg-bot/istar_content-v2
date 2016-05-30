@@ -74,11 +74,17 @@ public class LessonUtils {
         
         int z = 0;
         for (AssessmentOption option : options) {
-			if(option.getMarkingScheme()!=null) {
-				markingScheme[z++] = "checked=checked";
-			} else {
-				markingScheme[z++] = "";
+
+			try {
+				if(option.getMarkingScheme()==1) {
+					markingScheme[z++] = "checked=checked";
+				} else {
+					markingScheme[z++] = "";
+				}
+			} catch (Exception e) {
+				markingScheme[z] = "";
 			}
+        	z++;
 		}
         
         //TODO: get learning objectives of  the assessment
@@ -87,7 +93,7 @@ public class LessonUtils {
             Integer number_of_questions = new Integer(0);
             AssessmentService assessmentService = new AssessmentService();
             number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-            if (number_of_questions < assessment.getNumber_of_questions()) {
+            //if (number_of_questions < assessment.getNumber_of_questions()) {
             	
                 //Fix upload-assessment part anad  uncomment the below part
             	/*out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
@@ -127,16 +133,33 @@ public class LessonUtils {
                 
                 out.append("<div class='row'><section class='col col-md-4'><label>Question Type</label> "
                         + "<label class='input'>"
-                        + "<select class='form-control valid' id='qType' name='question_type' style='margin-right: 50px' value='"+question.getQuestionType()+"'>"
-                        + "<option value='1'>Single correct option</option>"
-                        + "<option value='2'>Multiple correct options</option></select></label> </section>"
+                        + "<select class='form-control valid' id='qType' name='question_type' style='margin-right: 50px' '>");
+
+                try {
+					if(question.getQuestionType().equalsIgnoreCase("1")){
+					out.append( "<option value='1' selected='selected'>Single correct option</option>"
+					        + "<option value='2'>Multiple correct options</option>");
+					        }
+
+					else if(question.getQuestionType().equalsIgnoreCase("2")){
+					out.append( "<option value='1'>Single correct option</option>"
+					        + "<option value='2' selected='selected'>Multiple correct options</option>");
+					        }
+				} catch (Exception e) {
+					out.append( "<option value='1'>Single correct option</option>"
+					        + "<option value='2'>Multiple correct options</option>");
+				}
+                
+                out.append( "</select></label> </section>"
                         + "<section class='col col-md-4'><label>Difficulty Level</label> "
                         + "<label class='input'>"
-                        + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px' value='"+question.getDifficultyLevel()+"'>"
+                        + "<select class='form-control valid' name='difficulty_level' style='margin-right: 50px' >" 
+                        + "<option value='"+question.getDifficultyLevel()+"' selected='selected'>"+question.getDifficultyLevel()+" (Selected)</option>"
                         + "<option value='1'>1(EASIEST)</option> <option value='2'>2</option> <option value='3'>3</option>"
                         + "<option value='4'>4</option> <option value='5'>5</option> <option value='6'>6</option>"
                         + "<option value='7'>7</option> <option value='8'>8</option> <option value='9'>9</option>"
-                        + "<option value='10'>10(HARDEST)</option></select></label> </section>"
+                        + "<option value='10'>10(HARDEST)</option>"
+                        + "</select></label> </section>"
                         + "<section class='col col-md-4'><label>Duration for Question (In Sec)</label> "
                         + "<label class='input'>"
                         + "<input type='number' value='"+question.getDurationInSec()+"' name='duration_in_sec' placeholder='Duration for Question'> <b class='tooltip tooltip-bottom-right'>"
@@ -166,7 +189,7 @@ public class LessonUtils {
                         + "<input type='hidden' name='option5_id' value=" + options.get(4).getId() + "> "
                         + "</fieldset> "
                         + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label id='err' style='color:red'></label></footer></form></div></div></div>");
-            }
+            //}
             
             out.append("<div class=' col-md-12 '>");
             out.append("<div class='panel panel-sea margin-bottom-40'>");
@@ -233,10 +256,9 @@ public class LessonUtils {
                         + "<option value='RANDOM'>RANDOM</option></select></label> </section> "
                         + "<section class='col col-6'> <label>Number of Questions</label> <label class='input'> "
                         + "<input value='' type='number' name='number_of_questions' placeholder='Number of questions'>  </label> </section> ");
-
                 out.append(" </div>");
-                out.append("</fieldset> "
-                        + "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
+                out.append("</fieldset>  <footer> <button type='submit' style='float: right' class='btn-u'>"
+                		+ "Proceed</button> </footer></form></div></div></div>");
             } else {
                 Integer number_of_questions = new Integer(0);
                 AssessmentService assessmentService = new AssessmentService();
@@ -390,7 +412,8 @@ public class LessonUtils {
             out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId()
                     + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
             out.append("</form>");
-            out.append("<form id='update_order' action='/content/update_order?ppt_id="+ ppt.getId()+"'>"
+            out.append("<form id='update_order' action='/content/update_course?ppt_id="+ ppt.getId()+"'>"
+            		+ "<input id='action' name='action' type='hidden' value='reorder'> "
             		+ "<input id='order_holder' name='order_holder' type='hidden'>"
             		+ "<input id='entity_type' name='entity_type' type='hidden' value='slides'>"
             		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"

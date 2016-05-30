@@ -52,7 +52,7 @@ public class EditQuestionController extends HttpServlet {
     	int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
     	String question_text = request.getParameter("question_text");
     	String question_type = request.getParameter("question_type");
-    	int difficulty_level = Integer.parseInt(request.getParameter("difficulty_level"));
+    	int difficulty_level = Integer.parseInt(request.getParameter("difficulty_level").toString());
     	int duration_in_sec = Integer.parseInt(request.getParameter("duration_in_sec"));
     	
     	QuestionService service = new QuestionService();

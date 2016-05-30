@@ -108,17 +108,55 @@
 								</h3>
 							</div>
 							<div class="panel-body">
-								<form action="/content/update_lesson" id="sky-form4"
+								<form action="/content/update_assessment" id="sky-form4"
 									class="sky-form">
-									<input type="hidden" name="assessment_id"
-										value="<%=assessment_id%>" /> 
+									<input type="hidden" name="assessment_id" value="<%=assessment_id%>" /> 
+									<input type="hidden" name="update_assessment" value="true" /> 
 									<fieldset>
-
+									
 										<section>
 											<label>Assessment Title</label> <label class="input">
 												<input value="<%=assessment.getAssessmenttitle()%>" type="text"
 												name="title" placeholder="Assessment Title"> <b
 												class="tooltip tooltip-bottom-right">Assessment Title</b>
+											</label>
+										</section>
+										
+										<%
+											ArrayList<String> types = new ArrayList();
+											types.add("STATIC");
+											types.add("ADAPTIVE");
+											types.add("TREE");
+											types.add("RANDOM");
+											
+											String selected = "";
+											
+										%>
+
+
+										<section>
+											<label>Assessment Type</label> <label class='input'>
+												<select class='form-control valid' name='assessment_type'>
+
+													<%
+														for (String type : types) {
+															if (assessment.getAssessmentType().equalsIgnoreCase(type)) {
+													%>
+
+													<option value='<%=type%>' selected='selected'><%=type%></option>
+
+													<%
+														} else {
+													%>
+													<option value='<%=type%>'><%=type%></option>
+
+													<%
+														}
+
+														}
+													%>
+
+											</select>
 											</label>
 										</section>
 
@@ -129,10 +167,18 @@
 												class="tooltip tooltip-bottom-right">The duration of the Assessment</b>
 											</label>
 										</section>
+										
+										<section>
+											<label>Number of Questions</label> <label class="input">
+												<input value="<%=assessment.getNumber_of_questions()%>" type="number"
+												name="number_of_questions" placeholder="Number of Questions"> <b
+												class="tooltip tooltip-bottom-right">Number of Questions</b>
+											</label>
+										</section>
 									</fieldset>
-
+									
 									<footer>
-										<button type="submit" class="btn-u">Update</button>
+										<button type="submit" class="btn-u" style="float:right;" >Update</button>
 									</footer>
 								</form>
 
@@ -199,13 +245,6 @@
                 App.init();
                 Validation.lessonValidation();
                 
-                //Slide list is sortable
-                $( "#slidess_ord" ).sortable();
-                $( "#update_order" ).submit(function( event ) {
-                	var idsInOrder = $('#slidess_ord').sortable("toArray");
-                	$('#order_holder').val(idsInOrder);
-                	});
-                
             });
 
 			function DisplayFilePath(){
@@ -236,17 +275,6 @@
                 });
             });
             
-            function openWin(url) {
-                myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
-
-                return false;
-            }
-
-            function openWinSpeaker(url) {
-                myWindow = window.open(url, "", "width=1024, height=768"); // Opens a new window
-
-                return false;
-            }
             /* jQuery(document)
                     .ready(
                             function () {
