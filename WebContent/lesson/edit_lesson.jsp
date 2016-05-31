@@ -174,8 +174,8 @@
 														if (flag == false) {
 													%><div class="col col-4">
 													<label class="radio"><input type="radio"
-														checked="checked" name="lesson_theme" value="null">
-														<i class="rounded-x"></i>None</label>
+														checked="checked" name="lesson_theme" value="0">
+														<i class="rounded-x"></i>Dafault</label>
 												</div>
 												<%
 														}

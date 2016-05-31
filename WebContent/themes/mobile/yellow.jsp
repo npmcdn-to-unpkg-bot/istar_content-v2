@@ -271,6 +271,18 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
+.reveal .ONLY_TITLE_TREE h2 {
+	margin-left: 2%;
+	margin-top: -35% !important;
+	padding-bottom: 40px;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
 .reveal  .ONLY_2TITLE h3 {
 	margin-left: 2%;
 	color: <%=theme.get("subtitle_____font_color")%>;
@@ -314,7 +326,7 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 5%;
-    font-size: 6vw;
+    font-size: 4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -328,7 +340,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -337,22 +349,22 @@ body {
 .reveal .ONLY_PARAGRAPH   td  {
 	text-align: left;
     padding: 8px;
-    border: 2px solid black;
+    border: 3px solid black;
 }
 
 .reveal .ONLY_PARAGRAPH  th {
 	text-align: left;
     padding: 8px;
-    border: 2px solid black;
+    border: 3px solid black;
     font-weight: bold;
-    background: #cccccc;
+    background: #e0e0e0;
 }
 
 .reveal .ONLY_PARAGRAPH  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -364,7 +376,7 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 5%;
-    font-size: 6vw;
+    font-size: 4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -378,7 +390,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -387,22 +399,22 @@ body {
 .reveal .ONLY_TITLE_PARAGRAPH   td  {
 	text-align: left;
     padding: 8px;
-    border: 2px solid black;
+    border: 3px solid black;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  th {
 	text-align: left;
     padding: 8px;
-    border: 2px solid black;
+    border: 3px solid black;
     font-weight: bold;
-    background: #cccccc;
+    background: #e0e0e0;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -414,7 +426,7 @@ body {
     vertical-align: baseline;
     display: table;
     margin-top: 5%;
-    font-size: 6vw;
+    font-size:4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -428,7 +440,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -437,22 +449,22 @@ body {
 .reveal .ONLY_TITLE_TABLE   td  {
 	text-align: left;
     padding: 8px;
-    border: 2px solid black;
+    border: 3px solid black;
 }
 
 .reveal .ONLY_TITLE_TABLE  th {
 	text-align: left;
     padding: 8px;
-    border: 2px solid black;
+    border: 3px solid black;
     font-weight: bold;
-    background: #cccccc;
+    background: #e0e0e0;
 }
 
 .reveal .ONLY_TITLE_TABLE  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -462,7 +474,7 @@ body {
 	text-align: left;
     padding: 8px;
     font-weight: bold;
-    background: #cccccc;
+    background: #e0e0e0;
 }
 
 
@@ -586,18 +598,6 @@ body {
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
-}
-
-.reveal .ONLY_TITLE_TREE #data_slide_title {
-	margin-left: 2%;
-	margin-top: -35% !important;
-	padding-bottom: 40px;
-	color: <%=theme.get("title_____font_color")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
 .reveal .ONLY_TITLE_TREE ul li  {

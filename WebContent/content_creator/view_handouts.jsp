@@ -124,7 +124,7 @@
 															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
 															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
 															 <span class="label rounded label-sea"> 
-													<a style='color:white' href='/content/content_creator/edit_handout.jsp?lesson_id=<%=lesson.getId()%>'> Edit Handouts </a></span>
+													<a style='color:white' href='/content/content_creator/edit_handout.jsp?handout_id=<%=lesson.getId()%>'> Edit Handouts </a></span>
 															<%
 												}
 																
