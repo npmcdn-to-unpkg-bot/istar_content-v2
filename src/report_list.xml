@@ -553,10 +553,11 @@ order by task_id
 		<column columnHandler="NONE" display_name="Module Title" isVisible="true" name="module_title" />
 		<column columnHandler="NONE" display_name="Sessions" isVisible="true" name="session_count" />
 		<column columnHandler="NONE" display_name="Lessons" isVisible="true" name="lesson_count" />
+		<column columnHandler="NONE" display_name="In Progress" isVisible="true" name="draft_lesson_count" />
 		<column columnHandler="NONE" display_name="Published Lessons" isVisible="true" name="published_lesson_count" />
 		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
 
-		<sql>select M.order_id as order_id, M.id as task_id , M.module_name as module_title, count(DISTINCT S) as session_count, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
+		<sql>select M.order_id as order_id, M.id as task_id , M.module_name as module_title, count(DISTINCT S) as session_count, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count,  sum(case when T.status = 'DRAFT' then 1 else 0 end) as draft_lesson_count
 from  module M
 	left join cmsession S on S.module_id=M.id 
 	left join lesson L on L.session_id=S.id
@@ -574,10 +575,11 @@ order by order_id
 		<column columnHandler="NONE" display_name="Session ID" isVisible="true" name="task_id" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Lessons" isVisible="true" name="lesson_count" />
+		<column columnHandler="NONE" display_name="In Progress" isVisible="true" name="draft_lesson_count" />
 		<column columnHandler="NONE" display_name="Published Lessons" isVisible="true" name="published_lesson_count" />
 		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
 
-		<sql>select S.order_id as order_id, S.id as task_id , S.title as session_title, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
+		<sql>select S.order_id as order_id, S.id as task_id , S.title as session_title, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count,  sum(case when T.status = 'DRAFT' then 1 else 0 end) as draft_lesson_count
 from  cmsession S
 	left join lesson L on L.session_id=S.id
 	left join task T on T.item_id=L.id
