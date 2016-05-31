@@ -40,8 +40,12 @@ public class DBUtils {
 				row.add(object.get("template").toString());
 				table.add(row);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ArrayList<String> row = new ArrayList<>();
+				row.add(object.get("id").toString());
+				row.add(object.get("id").toString());	
+				row.add(object.get("title").toString());
+				row.add(object.get("template").toString());
+				table.add(row);
 			}
 		}
 		return table;
