@@ -95,7 +95,7 @@
 				<form action="/content/update_handout" id="sky-form4" class="sky-form" onsubmit="myFunction()" method="POST">
 					
 					<%
-					int handout_id = Integer.parseInt(request.getParameter("handout_id")); 
+					int handout_id = Integer.parseInt(request.getParameter("lesson_id")); 
 					HandoutsDAO dao = new HandoutsDAO();Handouts handout = new Handouts();
 					if(!dao.findByLessonId(handout_id).isEmpty()) {
 						handout = dao.findByLessonId(handout_id).get(0);	
