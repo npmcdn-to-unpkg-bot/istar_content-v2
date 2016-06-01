@@ -73,7 +73,7 @@ public class CourseUploadController extends HttpServlet {
 			// constructs the directory path to store upload file
 			// this path is relative to application's directory
 			String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
-
+			System.err.println(uploadPath); 
 			// creates the directory if it does not exist
 			File uploadDir = new File(uploadPath);
 			if (!uploadDir.exists()) {
@@ -101,7 +101,7 @@ public class CourseUploadController extends HttpServlet {
 					}
 				}
 				new CourseService().readFile(storeFile, (ContentAdmin) user);
-				System.out.println(formItems.get(0).getName());
+				//System.out.println(formItems.get(0).getName());
 				request.setAttribute("message_success", "Upload has been done successfully!");
 				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 			}catch (org.apache.poi.poifs.filesystem.NotOLE2FileException e) {
