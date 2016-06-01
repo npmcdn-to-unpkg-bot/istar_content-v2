@@ -120,15 +120,14 @@ public class CreateTrainerController extends HttpServlet {
 		}finally {
             session4.close();
         }
-		ComplexObjectPublisher p = new ComplexObjectPublisher();
-		p.publish(trainerID);
+		
 		
 		
 		String[]  vacancy_id = request.getParameterValues("vacancy_id");
-		System.out.println(vacancy_id.length);
+		System.out.println("------------"+vacancy_id.length);
 		for(String vac : vacancy_id)
 		{
-			System.out.println(vac);
+			System.out.println("0000000"+vac);
 			int vac_id = Integer.parseInt(vac);
 			VacancyWorkflowDAO dao = new VacancyWorkflowDAO();
 			
@@ -189,6 +188,10 @@ public class CreateTrainerController extends HttpServlet {
 		        
 		       
 	}
+		
+		ComplexObjectPublisher p = new ComplexObjectPublisher();
+		p.publish(trainerID);
+		
 		if (true) {
 			request.setAttribute("message_success", "User created successfully!");
 			request.getRequestDispatcher("/trainer/create_user.jsp").forward(request, response);
