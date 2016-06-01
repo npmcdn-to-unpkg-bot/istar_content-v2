@@ -121,7 +121,7 @@ public class CreateTrainerController extends HttpServlet {
             session4.close();
         }
 		ComplexObjectPublisher p = new ComplexObjectPublisher();
-		p.publish();
+		p.publish(trainerID);
 		
 		
 		String[]  vacancy_id = request.getParameterValues("vacancy_id");
