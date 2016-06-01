@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -43,6 +45,7 @@ import com.istarindia.apps.dao.VacancyWorkflow;
 import com.istarindia.apps.dao.VacancyWorkflowDAO;
 import com.istarindia.apps.dao.VacanyStatus;
 import com.istarindia.apps.dao.VacanyStatusDAO;
+import com.istarindia.apps.service.ComplexObjectPublisher;
 import com.istarindia.apps.services.TrainerService;
 
 /**
@@ -97,7 +100,30 @@ public class CreateTrainerController extends HttpServlet {
 		}
 		
 		Integer trainerID = createStudent(email, gender, name, password, (double)1, (double)1, 1, "addressline1", "addressline2", 1);
-	
+		
+		IstarUserDAO dao1 = new IstarUserDAO();
+		Session session4 = null;
+		Transaction t5 = null;
+		try {
+			session4 = dao1.getSession();
+			 t5 = session4.beginTransaction();
+			String sql1 = "insert into user_profile (id, image_url) values ("+trainerID+", '/content/assets/game_images/app_images/22.jpg')";
+			SQLQuery query = session4.createSQLQuery(sql1);
+			System.out.println(sql1);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);	
+			
+			query.executeUpdate();	
+			t5.commit();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally {
+            session4.close();
+        }
+		ComplexObjectPublisher p = new ComplexObjectPublisher();
+		p.publish();
+		
+		
 		String[]  vacancy_id = request.getParameterValues("vacancy_id");
 		System.out.println(vacancy_id.length);
 		for(String vac : vacancy_id)
