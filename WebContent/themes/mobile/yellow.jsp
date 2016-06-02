@@ -188,6 +188,7 @@ body {
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	width: 120%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {

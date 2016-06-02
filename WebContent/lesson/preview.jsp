@@ -78,49 +78,32 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 	<script src="<%=nuetral%>student/js/reveal.js"></script>
 
 	<script>
+	Reveal.initialize({
+		center : false,
+		controls : false, 
+		});
+	var orgBgColor = $("body").css("background-color");
+	document.body.style.background = $('.present').css('background-color');
+	if ( ($('.present').attr("style")).indexOf("background-color")<0){
+		document.body.style.background = orgBgColor;
+	}
+	(document.getElementsByClassName('controls')[0]).style.display='none';
+	
+	
+	Reveal.addEventListener( 'slidechanged', function( event ) {
+		document.body.style.background = $('.present').css('background-color');
+		if ( ($('.present').attr("style")).indexOf("background-color")<0){
+			document.body.style.background = orgBgColor;
+		}
+		var currentURL = window.location.href; //currentURL+"#/"+ 
+		var res = currentURL.split("#");
+		currentURL= res[0] ///#1001
+		console.log(currentURL+"#/"+ event.currentSlide.id);
+		history.pushState({},"URL Rewrite Example",currentURL+"#"+ event.currentSlide.id);
 
-			Reveal.initialize({  
-				center: false,
-				width: 960,
-			    height: 700
-			});
-			
-			function changeImage()
-			{
-				 Reveal.next();
-			}
-			Reveal.addEventListener( 'slidechanged', function( event ) {
-				Reveal.addEventListener( 'stats', function() {
-					console.log( 'stats called!' );
-					
-					// Jump to next Slide after 30 secs 
-					
-					setTimeout("changeImage()", 30000);
-				} );
-
-			    
-			} );
-
-			
-			//Takes care of slide specific background-color update logic
-			var orgBgColor = $("body").css("background-color");
-			document.body.style.background = $('.present').css('background-color');
-			if ( ($('.present').attr("style")).indexOf("background-color")<0){
-				document.body.style.background = orgBgColor;
-			}
-			Reveal.addEventListener( 'slidechanged', function( event ) {
-				document.body.style.background = $('.present').css('background-color');
-				
-				if ( ($('.present').attr("style")).indexOf("background-color")<0){
-					document.body.style.background = orgBgColor;
-				}
-			} );
-			
-
-			//disable arrow key display on slides
-			(document.getElementsByClassName('controls')[0]).style.display='none';
-			
-		</script>
+	    
+	} );
+</script>
 
 </body>
 </html>
