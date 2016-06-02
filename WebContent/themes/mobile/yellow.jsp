@@ -286,6 +286,7 @@ body {
 
 .reveal  .ONLY_2TITLE h3 {
 	margin-left: 2%;
+	margin-top: 8%;
 	color: <%=theme.get("subtitle_____font_color")%>;
 	font-weight: <%=theme.get("subtitle_____font_weight")%>;
 	font-size: <%=theme.get("subtitle_____font_size")%>px;
