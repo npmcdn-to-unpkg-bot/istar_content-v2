@@ -120,7 +120,7 @@
 		<child_links display_name="Gallery" url="/content/gallery.jsp"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 			
-			<child_links display_name="Backgrounds" url="/content/backgrounds.jsp"
+			<child_links display_name="Backgrounds" url="/content/bg_controller?show=true"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 	</parent_links>
 

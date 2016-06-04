@@ -17,12 +17,27 @@
     <init-param>
       <description>Define storage path for file uploads</description>
       <param-name>upload_path</param-name>
-      <param-value>C:\Users\vaibhav\Pictures\Camera Roll</param-value>
+      <param-value>C:\Users\ayrus\Pictures\Camera Roll</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>MediaUploadController</servlet-name>
     <url-pattern>/media_upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BackgroundUploader</display-name>
+    <servlet-name>BackgroundUploader</servlet-name>
+    <servlet-class>com.istarindia.cms.controller.BackgroundUploader</servlet-class>
+    <init-param>
+      <description>Define storage path for background uploads</description>
+      <param-name>bg_upload_path</param-name>
+      <param-value>C:\Users\ayrus\Pictures\Camera Roll\backgrounds</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BackgroundUploader</servlet-name>
+    <url-pattern>/bg_controller</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>ImageFilter</filter-name>

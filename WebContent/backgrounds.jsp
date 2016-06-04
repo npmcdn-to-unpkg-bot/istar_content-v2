@@ -75,39 +75,61 @@
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+
+
 </head>
 
 <body>
 
 	<div class="wrapper">
 		<jsp:include page="content_admin/includes/header.jsp"></jsp:include>
+		
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">Gallery</h1>
+				<h1 class="pull-left">Backgrounds</h1>
 			</div>
 		</div>
-		<div class="container-full height-1000 content">
-			<div class="text-center margin-bottom-50">
-				<h2 class="title-v2 title-center">Gallery</h2>
-			</div>
-			<a href="javascript:getSessions();">Filter on Session</a>
-			<input type="hidden" id="selected_items" name="selected_items" />
-			
-			<label id="err" style="display: block;color:#ee9393"></label>
-			
-			<form action="<%=baseURL%>media_upload" class="sky-form"
-					method="POST" novalidate="novalidate" onsubmit="myFunction()"
-					enctype="multipart/form-data">
 		
-			
-			<section>
-								<label class="label">File input</label>
+		<div class="container-fluid height-1000 content">
+			<div class="panel panel-orange" style="margin-left: 100px; margin-right: 100px">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-tasks"></i> Upload new background
+					</h3>
+				</div>
+				<div class="panel-body">
+					<form action="<%=baseURL%>bg_upload" class="sky-form" method="post"
+						enctype="multipart/form-data">
+						
+						<fieldset>
+							<section>
+								<p style="color: red;">
+									[<b>NOTE</b>: Please ensure to use none other than
+									alphabets/numbers/underscores in the file name]
+								</p>
 								<label for="file" class="input input-file">
-																		<div class="button">
-																		<input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly>
-
+									<div class="button">
+										<input type="file" id="file" name="file"
+											onchange="DisplayFilePath()">Browse
+									</div> <input type="text" id="formfield" readonly>
 								</label>
 							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn-u" style="float: right;">Submit</button>
+						</footer>
+					</form>
+				</div>
+			</div>
+			
+			<br>
+			
+			<div class="text-center margin-bottom-50">
+				<h2 class="title-v2 title-center">Background Image Gallery</h2>
+			</div>
+			
 			<div class="col-md-12">
 				<%
 				ImageUtils i = new ImageUtils();
@@ -115,19 +137,22 @@
 				
 					for (Image image : list) {
 				%>
-				
-			
-				
+
 				<div class="col-sm-2 sm-margin-bottom-30">
 					<a href="<%=image.getUrl()%>" rel="gallery3"
-						class="fancybox img-hover-v1" title="Image 1"> <span><img
-							style="width: 165px; height: 165px; margin: 10px"
-							class="img-responsive" src="<%=image.getUrl()%>" alt=""></span>
+						class="fancybox img-hover-v1" title="Image 1"> <span>
+						<img
+							style="width: 92%; margin: 10px" class="img-responsive"
+							src="<%=image.getUrl()%>" alt=""></span>
 					</a>
+					
+					<p style="word-wrap: break-word"><%=image.getTitle()%> </p>
 				</div>
+				
 				<%
 					}
 				%>
+				
 			</div>
 			</div></div>
 			<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
@@ -177,36 +202,18 @@
 	<![endif]-->
 			<script type="text/javascript">
 
-			function getSessions() {
-				var selectedElmsIds = $('#html1').jstree("get_selected");
-				if (selectedElmsIds == ""){
-					event.preventDefault();
-					document.getElementById("err").innerHTML = "Please select the session";
-					return false; 
-					}
-				$('#selected_items').val(selectedElmsIds);
-				window.location = '<%=baseURL%>gallery.jsp?sessionids='+selectedElmsIds;
-			}
 			
 			$(document).ready(function() {
 					App.init();
 					FancyBox.initFancybox();
 					
-
-					$('#html1').jstree({
-						"core" : {
-							"multiple": true,
-							"themes" : {
-								"variant" : "large"
-							}
-						},
-						"checkbox" : {
-							"keep_selected_style" : false,
-							"three_state" : false,
-						},
-						"plugins" : [ "checkbox"]
-					});
 				})
+				
+				function DisplayFilePath(){
+                    var filepath=$(":file").val();
+                    var filename=filepath.substr(filepath.lastIndexOf('\\')+1,filepath.length);
+                document.getElementById("formfield").value = filename;
+                }
 			</script>
 </body>
 </html>
