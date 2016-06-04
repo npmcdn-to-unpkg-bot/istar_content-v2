@@ -100,7 +100,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="<%=baseURL%>bg_upload" class="sky-form" method="post"
+					<form action="<%=baseURL%>bg_controller" class="sky-form" method="post"
 						enctype="multipart/form-data">
 						
 						<fieldset>

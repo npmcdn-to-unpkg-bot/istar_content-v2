@@ -141,10 +141,6 @@ body {
     src: url('/themes/fonts/Roboto/Roboto-Regular.ttf');
 }
 
-.reveal  .slide {
-	background-color: <%=theme.get("background_color")%>;
-}
-
 .reveal  .ONLY_TITLE h2 {
 	margin-top: -37%;
 	margin-left: 2%;
@@ -250,7 +246,7 @@ body {
 	
 	}
 
-.reveal .ONLY_TITLE_LIST h2 {
+.reveal .SIMPLE_LIST___ONLY_TITLE_LIST h2 {
 	margin-left: 2%;
 	margin-top: -38%;
 	color: <%=theme.get("title_____font_color")%>;
@@ -555,7 +551,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_LIST ul li  {
+.reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li  {
 	list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
@@ -567,7 +563,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST ul  {
+.reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul  {
     margin-left: 2%;
     padding-top: 10%;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -981,7 +977,4 @@ body {
 	list-style-image: url("/content/assets/img/smallcoin_io1.png");
 }
 
-.reveal .slide {
-	visibility: hidden;
-}
 </style>

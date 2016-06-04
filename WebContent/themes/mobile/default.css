@@ -1,10 +1,5 @@
 
 
-body {
-	background-color: #ffffff;
-	//#FDC530 !important;
-}
-
 @font-face {
     font-family: 'Alice';
     src: url('/themes/fonts/Alice/Alice-Regular.ttf');
@@ -95,9 +90,6 @@ body {
     src: url('/themes/fonts/Roboto/Roboto-Regular.ttf');
 }
 
-.reveal  .slide {
-	background-color: #ffffff;
-}
 
 .reveal  .ONLY_TITLE h2 {
 	margin-top: -37%;
