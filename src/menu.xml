@@ -119,6 +119,9 @@
 			url="/content/creative_creator/published.jsp" valid_roles="creative_creator" />
 		<child_links display_name="Gallery" url="/content/gallery.jsp"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
+			
+			<child_links display_name="Backgrounds" url="/content/backgrounds.jsp"
+			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 	</parent_links>
 
 	<parent_links display_name="Theme">
