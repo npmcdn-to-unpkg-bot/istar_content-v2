@@ -79,7 +79,7 @@ public class CMSRegistry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
- 
+
 		slideTemplates.add("NO_CONTENT");
 		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
@@ -104,16 +104,18 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_VIDEO");
 		slideTemplates.add("ONLY_2BOX");
 		
-		
-		/*The below 5 templates were used for the sales demo[1st week of May 2016] */
+		/* The below 5 templates were used for the sales demo[1st week of May 2016] */
 		//slideTemplates.add("ONLY_2TITLE_2TABLE");
 		//slideTemplates.add("ONLY_2TITLE_5TABLE");
 		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
 		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
 		
-		
+
 		listTypes.add(ListTypes.SIMPLE_LIST);
-		listTypes.add(ListTypes.PROCESS_LIST);
+		listTypes.add(ListTypes.IN_OUT_1);
+		
+		//Enable the below only after making the vm files ready
+		/* listTypes.add(ListTypes.PROCESS_LIST);
 		listTypes.add(ListTypes.CYCLE_LIST);
 		listTypes.add(ListTypes.IDEAS_LIST);
 		listTypes.add(ListTypes.SQUARE_LIST);
@@ -123,7 +125,7 @@ public class CMSRegistry {
 		listTypes.add(ListTypes.BURGER_LIST);
 		listTypes.add(ListTypes.POLE_LIST);
 		listTypes.add(ListTypes.LADDER_LIST);
-		listTypes.add(ListTypes.VERTICAL_POLE_LIST);
+		listTypes.add(ListTypes.VERTICAL_POLE_LIST);*/
 
 	}
 

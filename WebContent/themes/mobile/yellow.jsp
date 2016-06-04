@@ -873,4 +873,115 @@ body {
 	margin-left: 0%;
 }
 
+
+/* Infographics */
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST h2 {
+    margin-left: 35%;
+    margin-top: -48%;
+    color: #ffffff;
+    padding-bottom: 9%;
+    font-weight: 100;
+    font-size: 64px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST h3 {
+    margin-left: 45%;
+    margin-top: 19%;
+    color: #ffffff;
+    padding-bottom: 12%;
+    font-weight: 100;
+    font-size: 64px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .left {
+    list-style: none !important;
+    color: #ffffff;
+    font-weight: 100;
+    /* font-size: 37px; */
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    padding-bottom: 7%;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .right  {
+    list-style: none !important;
+    color: #ffffff;
+    font-weight: 100;
+    /* font-size: 37px; */
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    padding-bottom: 11%;
+    margin-left: 51%;
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .top  {
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 41px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    /* margin-top: 9%; */
+    margin-left: 29%;
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom  {
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 41px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    /* margin-top: 13%; */
+    margin-left: 30%;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-top{
+    position: absolute;
+    margin-left: -39%;
+    width: 24%;
+    margin-top: 38%;
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-bottom{
+    position: absolute;
+    margin-left: -50%;
+    width: 45%;
+    margin-top: 5%;
+}
+    
+.reveal .IN_OUT_1___ONLY_TITLE_LIST li.left{
+	list-style-image: url("/content/assets/img/coin_io1.png");
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST li.right{
+	list-style-image: url("/content/assets/img/piglet_io1.png");
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST li.bottom-left{
+	list-style-image: url("/content/assets/img/piglet_io1.png");
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST li.bottom-right{
+	list-style-image: url("/content/assets/img/smallcoin_io1.png");
+}
+
+.reveal .slide {
+	visibility: hidden;
+}
 </style>

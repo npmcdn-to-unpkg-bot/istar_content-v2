@@ -77,12 +77,12 @@ public class LessonUtils {
 
 			try {
 				if(option.getMarkingScheme()==1) {
-					markingScheme[z++] = "checked=checked";
+					markingScheme[z] = "checked=checked";	//correct answer with marking scheme 1
 				} else {
-					markingScheme[z++] = "";
+					markingScheme[z] = "";					//wrong answer with marking scheme 0
 				}
 			} catch (Exception e) {
-				markingScheme[z] = "";
+				markingScheme[z] = "";						//wrong answer with marking scheme NULL
 			}
         	z++;
 		}

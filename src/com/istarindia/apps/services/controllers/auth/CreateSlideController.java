@@ -54,6 +54,7 @@ public class CreateSlideController extends IStarBaseServelet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.err.println("controller :");
 		printParams(request);
 		int slide_id = 0;
 		String template = request.getParameter("template");
@@ -196,7 +197,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
-
+/*
 		case "ONLY_TITLE_LIST":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
@@ -216,7 +217,8 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
-
+*/
+			
 		case "ONLY_TITLE_LIST_NUMBERED":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
@@ -372,7 +374,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				slide_id = service.addTextImageSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), image);
+						request.getParameter("backgroundTransition"), image,request.getParameter("image_bg"));
 			} else {
 				ImageDAO dao = new ImageDAO();
 				int image_id = 0; // Dummy image id. To be added soon
@@ -389,7 +391,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addTextImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"),request.getParameter("image_bg"));
 
 			}
 			break;
@@ -685,6 +687,27 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
+			
+		case "ONLY_TITLE_LIST":
+			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				CMSList list = getNewList(request);
+				list.setList_type(request.getParameter("list_type"));
+				service.addListToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list);
+
+			} else {
+				CMSList list = getNewList(request);
+				list.setList_type(request.getParameter("list_type"));
+				service.addListToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
+						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+			}
+
+			break;
+
 		default:
 			break;
 		}
