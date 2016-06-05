@@ -86,7 +86,7 @@
 				<h1 class="pull-left">Gallery</h1>
 			</div>
 		</div>
-		<div class="container-full height-1000 content">
+		<div class="container-fluid height-1000 content">
 			<div class="text-center margin-bottom-50">
 				<h2 class="title-v2 title-center">Gallery</h2>
 			</div>
