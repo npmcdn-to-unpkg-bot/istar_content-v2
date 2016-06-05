@@ -5,6 +5,8 @@
 <%@page import="com.istarindia.apps.services.task.TaskStage"%>
 <%@page import="com.istarindia.apps.dao.IstarUser"%>
 <%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="com.istarindia.apps.dao.LearningObjective"%>
+<%@page import="com.istarindia.apps.dao.LearningObjectiveDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.istarindia.apps.cmsutils.reports.*"%>
@@ -53,6 +55,10 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 
 <!-- CSS Theme -->
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
 
@@ -66,6 +72,67 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 		<div class="container-fluid height-1000" style="padding: 0px !important">
+
+			<div class="panel panel-orange" style="margin: 10px; border: 3px solid #e67e22;">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-tasks"></i> Learning Objective Details
+					</h3>
+				</div>
+				<div class="panel-body">
+
+				<form id="lo_form" action="/content/lo_controller" class="sky-form"
+					method="post">
+
+					<%
+					String lo_title = "";
+					String lo_subject = "";
+						if (request.getParameterMap().containsKey("lo_id")) {
+							String lo_id = (request.getParameter("lo_id")).toString();
+							LearningObjective lo = (new LearningObjectiveDAO()).findById(Integer.parseInt(lo_id));
+							lo_title = lo.getTitle();
+							lo_subject = lo.getSubject();
+					%>
+					<input id='lo_id' name='lo_id' type='hidden' value='<%=lo_id%>'>
+					<input id='action' name='action' type='hidden' value='update'>
+					<%
+						} else {
+					%>
+					<input id='action' name='action' type='hidden' value='create'>
+					<%
+						}
+					%>
+					<fieldset>
+						<div class="row">
+							<section class="col-md-8">
+								<label>Title</label> <label class="input"> <input
+									value="<%=lo_title%>" type="text" name="title"
+									placeholder="Title">
+								</label>
+							</section>
+							<section class="col-md-3">
+								<label>Subject</label> <label class="input"> <input
+									value="<%=lo_subject%>" type="text" name="subject"
+									placeholder="Subject">
+								</label>
+							</section>
+
+							<section>
+								<button type="submit" class="btn-u"
+									style="margin-top: 2%;">Submit</button>
+							</section>
+						</div>
+
+					</fieldset>
+
+				</form> </div>
+			</div>
+			
+			<br/>
+			
+			
+			
+			
 			<div class="col-md-12">
 				<% HashMap<String, String> conditions = new HashMap();
 				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
@@ -73,6 +140,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<%=(new ReportUtils()).getReport(88, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 			</div>
 		</div>
+			</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 

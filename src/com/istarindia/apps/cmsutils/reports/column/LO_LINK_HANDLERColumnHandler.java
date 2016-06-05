@@ -17,7 +17,7 @@ public class LO_LINK_HANDLERColumnHandler extends ColumnHandler {
 	@Override
 	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
 		// TODO Auto-generated method stub
-		return new StringBuffer("EDIT LINK");
+		return new StringBuffer("<a href='/content/content_admin/course_learning_objectives.jsp?lo_id=" + taskID + "'> Edit</a>  ");
 	}
 
 }
