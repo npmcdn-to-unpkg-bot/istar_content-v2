@@ -184,27 +184,25 @@ public class ReviewLessonController extends IStarBaseServelet {
 				session = dao.getSession();
 				
 				ArrayList<Slide> items = new ArrayList<>();
-				
-				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " order by id";
+				int order_id = 0;
+				try {
+					order_id = slide.getOrder_id();
+				} catch (Exception e) {
+					order_id = slide.getId();
+				}
+				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " and order_id >"+order_id;
 				SQLQuery query = session.createSQLQuery(sql1);
 				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 				List<HashMap<String, Object>> results = query.list();
-				for (HashMap<String, Object> slide1 : results) {
-					Slide slide2 = new Slide();
-					slide2.setSlideText(slide1.get("slide_text").toString());
-					slide2.setTemplate(slide1.get("template").toString());
-					slide2.setId(Integer.parseInt(slide1.get("id").toString()));
-					items.add(slide2);
-				}
-				
-				for (int i=0;i< items.size();i++) {
-					//System.err.println("slide.getId() --> "+slide.getId());
-					//System.err.println("slide.getPresentaion().getSlides().get(i).getId() --> "+items.get(i).getId());
-					if(slide.getId() == items.get(i).getId()) {
-						nextSlide = items.get(i+1);
-					}
-				}
-				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+nextSlide.getId()+"&slide_type="+nextSlide.getTemplate());
+
+				HashMap<String, Object> slide1 = results.get(0);
+
+				Slide slide2 = new Slide();
+				slide2.setSlideText(slide1.get("slide_text").toString());
+				slide2.setTemplate(slide1.get("template").toString());
+				slide2.setId(Integer.parseInt(slide1.get("id").toString()));
+
+				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide2.getId()+"&slide_type="+slide2.getTemplate());
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			} catch (Exception e) {
 				response.sendRedirect("/content/review_task?task_id="+task.getId());
