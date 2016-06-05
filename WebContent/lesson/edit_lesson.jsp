@@ -220,23 +220,64 @@
                                                         %>
 											</div>
 										</section>
-										<section>
-											<label>List of Learning Objectives</label>
-											<div class="row">
-												<%
-                                                            for (LearningObjective obj : lesson.getLearningObjectives()) {
-                                                        %>
-												<div class="col col-12">
-													<li><%=obj.getTitle()%></li>
-												</div>
-												<%
-                                                            }
-                                                        %>
-											</div>
-										</section>
+
+							<section>
+
+								<%
+									LessonUtils lessonUtils = new LessonUtils();
+									ArrayList<LearningObjective> lesson_lo_list = lessonUtils.getSelectedLOsOftheLesson(lesson.getId());
+									ArrayList<LearningObjective> session_lo_list = lessonUtils.getUnselectedLOsInTheSameSession(lesson.getId());
+									if (!lesson_lo_list.isEmpty()) {
+								%>
+
+								<label>List of Selected Learning Objectives</label>
+								<div class="row">
+
+									<%
+										for (LearningObjective lesson_lo : lesson_lo_list) {
+									%>
+
+									<div class="col col-12">
+										<label class="checkbox"><input type="checkbox"
+											name="learningObjectives" checked="checked"
+											value="<%=lesson_lo.getId()%>"> <i></i><%=lesson_lo.getTitle()%></label>
+									</div>
+
+									<%
+										}
+									%>
+
+								</div>
+
+								<%
+									}
+									if (!session_lo_list.isEmpty()) {
+								%>
+								<label>List of Learning Objectives in the Session</label>
+								<div class="row">
+
+									<%
+										for (LearningObjective session_lo : session_lo_list) {
+									%>
+
+									<div class="col col-12">
+										<label class="checkbox"><input type="checkbox"
+											name="learningObjectives" value="<%=session_lo.getId()%>">
+											<i></i><%=session_lo.getTitle()%></label>
+									</div>
+
+									<%
+										}
+									%>
+
+								</div>
+								<%
+									}
+								%>
+							</section>
 
 
-									</fieldset>
+							</fieldset>
 
 									<footer>
 										<button type="submit" class="btn-u">Update Lesson</button>
@@ -291,12 +332,11 @@
 				<%
                             } else {
                                 //Edited By Kunal on 24/03/2016 for editing question
-                                LessonUtils utils = new LessonUtils();
                                 if (request.getAttribute("__EDIT_QUESTION") != null) {
                                     String questionId = request.getAttribute("__QUESTION_ID").toString();
-                                    out.println(utils.getFormForQuestionEdit(lesson, questionId));
+                                    out.println(lessonUtils.getFormForQuestionEdit(lesson, questionId));
                                 } else {
-                                    out.println(utils.getEditForm(lesson, task_id));
+                                    out.println(lessonUtils.getEditForm(lesson, task_id));
                                 }
 
                                 // Create Two block 

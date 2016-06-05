@@ -1170,4 +1170,52 @@ public class LessonUtils {
 
         return out;
     }
+    
+
+    public ArrayList<LearningObjective> getSelectedLOsOftheLesson(int lesson_id) {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> lesson_lo_list = new ArrayList<>();
+        IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+            String sql = "SELECT lol.learning_objectiveid as id, lo.title as title, lo.subject as subject "
+            		+ " FROM learning_objective_lesson lol, learning_objective lo "
+            		+ " WHERE lol.learning_objectiveid = lo.id and lol.lessonid = "+lesson_id;
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            List<HashMap<String, Object>> results = query.list();
+            for (HashMap<String, Object> object : results) {
+            	LearningObjective lo = new LearningObjective();
+                lo.setId((Integer)object.get("id"));
+                lo.setTitle(object.get("title").toString());
+                lo.setSubject(object.get("subject").toString());
+                lesson_lo_list.add(lo);
+            }
+        return lesson_lo_list;
+    }
+
+    public ArrayList<LearningObjective> getUnselectedLOsInTheSameSession(int lesson_id) {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> session_lo_list = new ArrayList<>();
+        IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+            String sql = "SELECT lol.learning_objectiveid as id, lo.title as title, lo.subject as subject "
+            		+ " FROM learning_objective_lesson lol, lesson lsn, learning_objective lo "
+            		+ " WHERE lol.learning_objectiveid= lo.id and lol.lessonid = lsn. ID AND lsn.session_id IN "
+            		+ 	" ( SELECT C . ID FROM cmsession C, lesson l "
+            		+ 	" WHERE C . ID = l.session_id AND l. ID = "+lesson_id+" )  AND lol.learning_objectiveid not in "
+            		+ 		"  (SELECT lol.learning_objectiveid FROM learning_objective_lesson lol "
+            		+ 		"WHERE lol.lessonid = "+lesson_id+") ";
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            List<HashMap<String, Object>> results = query.list();
+            for (HashMap<String, Object> object : results) {
+            	LearningObjective lo = new LearningObjective();
+                lo.setId((Integer)object.get("id"));
+                lo.setTitle(object.get("title").toString());
+                lo.setSubject(object.get("subject").toString());
+                session_lo_list.add(lo);
+            }
+        return session_lo_list;
+    }
+    
 }
