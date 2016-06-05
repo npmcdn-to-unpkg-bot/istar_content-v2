@@ -1203,8 +1203,9 @@ public class LessonUtils {
             		+ " WHERE lol.learning_objectiveid= lo.id and lol.lessonid = lsn. ID AND lsn.session_id IN "
             		+ 	" ( SELECT C . ID FROM cmsession C, lesson l "
             		+ 	" WHERE C . ID = l.session_id AND l. ID = "+lesson_id+" )  AND lol.learning_objectiveid not in "
-            		+ 		"  (SELECT lol.learning_objectiveid FROM learning_objective_lesson lol "
-            		+ 		"WHERE lol.lessonid = "+lesson_id+") ";
+            		+ 	  " (SELECT lol.learning_objectiveid FROM learning_objective_lesson lol "
+            		+ 	  " WHERE lol.lessonid = "+lesson_id+") group by lol.learning_objectiveid, lo.title, lo.subject";
+            System.err.println(sql);
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             List<HashMap<String, Object>> results = query.list();

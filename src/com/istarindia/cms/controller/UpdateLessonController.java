@@ -38,7 +38,9 @@ public class UpdateLessonController extends IStarBaseServelet {
 		printParams(request);
 		IstarUser user = (IstarUser) request.getSession().getAttribute("user");
 		String tags = "";
-		String learningObjectives[];
+		String[] learningObjectives = null;
+		StringBuffer lo_ids = new StringBuffer();
+		
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
 		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id") && request.getParameterMap().containsKey("duration") && request.getParameterMap().containsKey("title"))
 		{
@@ -55,17 +57,20 @@ public class UpdateLessonController extends IStarBaseServelet {
 			if (request.getParameterMap().containsKey("Tags")) {
 				tags = request.getParameter("Tags");
 			}
+			
 			if (request.getParameterMap().containsKey("learningObjectives")) {
 				learningObjectives = (String[]) request.getParameterMap().get("learningObjectives");
-				for (String element : learningObjectives) {
-					System.err.println("Seected LO -->"+ element);
-					ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
+				for (int i = 0; learningObjectives != null && i < learningObjectives.length; i++) {
+					lo_ids.append(learningObjectives[i]);
+					if (i < learningObjectives.length - 1) {
+						lo_ids.append(',');
+					}
 				}
+				System.err.println("LOs: "+lo_ids);
 			}
+			
 			LessonService service = new LessonService();
-			Lesson lesson = (Lesson) service.updateLesson(lesson_id, cmsession_id, duration, tags, title, "dtype", ite, lesson_theme, lesson_subject);
-			(new CourseService()).clearLearningObjectiveWithLesson(lesson, ite);
-			(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
+			Lesson lesson = (Lesson) service.updateLesson(lesson_id, title, duration, tags, lesson_theme, lesson_subject, lo_ids.toString()) ;
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", task.getId());

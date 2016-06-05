@@ -253,6 +253,7 @@
 									}
 									if (!session_lo_list.isEmpty()) {
 								%>
+								<br>
 								<label>List of Learning Objectives in the Session</label>
 								<div class="row">
 
