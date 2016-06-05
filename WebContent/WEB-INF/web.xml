@@ -24,20 +24,6 @@
     <servlet-name>MediaUploadController</servlet-name>
     <url-pattern>/media_upload</url-pattern>
   </servlet-mapping>
-
-<!--   <servlet>
-    <description></description>
-    <display-name>BackgroundUploader</display-name>
-    <servlet-name>BackgroundUploader</servlet-name>
-    <servlet-class>com.istarindia.cms.controller.BackgroundUploader</servlet-class>
-    <init-param>
-      <description>Define storage path for background uploads</description>
-      <param-name>bg_upload_path</param-name>
-      <param-value>C:\Users\ayrus\Pictures\Camera Roll\backgrounds</param-value>
-    </init-param>
-  </servlet>
- -->  
- 
   <filter>
     <filter-name>ImageFilter</filter-name>
     <filter-class>com.istarindia.app.filters.ImageFilter</filter-class>
@@ -50,8 +36,4 @@
     <filter-name>ImageFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <context-param>
-    <param-name>bg_upload_path</param-name>
-    <param-value>C:\Users\ayrus\Pictures\Camera Roll\backgrounds</param-value>
-</context-param>
 </web-app>

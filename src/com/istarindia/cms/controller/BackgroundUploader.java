@@ -59,7 +59,7 @@ public class BackgroundUploader extends IStarBaseServelet {
 			throws ServletException, IOException {
 		printParams(request);
 
-		fileUploadPath = new File(request.getSession().getServletContext().getInitParameter("bg_upload_path"));
+		fileUploadPath = new File(request.getSession().getServletContext().getRealPath("/backgrounds"));
 		
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException(
