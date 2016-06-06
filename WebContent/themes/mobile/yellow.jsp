@@ -896,7 +896,7 @@ body {
 }
 
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST h3 {
+.reveal .IN_OUT_1___ONLY_TITLE_LIST h3 {    
     margin-left: 44%;
     margin-top: 19%;
     color: #ffffff;
@@ -940,14 +940,14 @@ body {
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .img-top{
-    position: absolute;
+    position: fixed;
     margin-left: -38%;
     width: 16%;
     margin-top: 55%;
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .img-bottom{
-	position: absolute;
+    position: fixed;
     margin-left: -48%;
     width: 33%;
     margin-top: 21%;

@@ -807,11 +807,10 @@ public class CreateSlideController extends IStarBaseServelet {
 		list.setItems(items);
 		for (Object key : request.getParameterMap().keySet()) {
 			if (key.toString().startsWith("list_item")) {
-				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
-					System.out.println(key.toString());
+				if (!request.getParameter(key.toString()).equalsIgnoreCase("") || !request.getParameter("desc_"+key.toString()).equalsIgnoreCase("")) {
 					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()),request.getParameter("desc_"+key.toString()));
+					System.err.println(request.getParameter(key.toString())+","+request.getParameter("desc_"+key.toString()));
 					list.getItems().add(item);
-					System.out.println("---->" + request.getParameter(key.toString()));
 				}
 			}
 		}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -88,7 +89,7 @@ public class LessonUtils {
 		}
         
         //TODO: get learning objectives of  the assessment
-        //ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
+        ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getSelectedLOsForQuestion(question_id));
 
             Integer number_of_questions = new Integer(0);
             AssessmentService assessmentService = new AssessmentService();
@@ -120,16 +121,26 @@ public class LessonUtils {
                         + "<fieldset>");
                 
                 //enable below block after learning objectives are added
-                /*
-                out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
-                
+                out.append("<section><label>Learning Objectives selected</label>"
+                		+ "<button class='btn-u' data-target='#myModal' style='float: right;'>Choose LOs</button> <div class='row'>");
                 
                 for (LearningObjective obj : items) {
 
                     out.append("<div class='col col-12'><label class='checkbox'>"
                             + "<input type='checkbox' name='learningObjectives' checked='checked' value="
                             + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div></div></section></br>");
-                }*/
+                }
+                out.append("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'> "
+                		+ "<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> "
+                		+ "<button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button> "
+                		+ "<h4 id='myModalLabel1' class='modal-title'>Choose Learning Objectives</h4> </div> "
+                		+ "<div class='modal-body'> "
+                		+ "<form class='form-horizontal' role='form' onsubmit='myFunction()' action='#' method='POST'> "
+                		+ "<input type='hidden' id='selected_items' name='selected_items' /> <div class='form-group'> </div> "
+                		+ "<div class='form-group'> <div class='col-lg-offset-2 col-lg-10'> "
+                		+ "<button type='submit' class='btn-u btn-u-green'>Select</button> </div> </div> </form> </div> "
+                		+ "<div class='modal-footer'> <button data-dismiss='modal' class='btn-u btn-u-default' type='button'>Close"
+                		+ "</button> </div> </div> </div> </div>");
                 
                 out.append("<div class='row'><section class='col col-md-4'><label>Question Type</label> "
                         + "<label class='input'>"
@@ -212,7 +223,7 @@ public class LessonUtils {
                 out.append("<td>" + data.get(i).get(0) + "</td>");
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/edit_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-check'></i>Edit</a>");
+                out.append("<a class='btn btn-success btn-xs' href='/content/lesson/edit_assessment.jsp?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-check'></i>Edit</a>");
 
                 out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
                         + "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
@@ -229,8 +240,9 @@ public class LessonUtils {
     return out;
 }
     
-    
-    public StringBuffer getAssessmentEditForm(int assessment_id) {
+
+
+	public StringBuffer getAssessmentEditForm(int assessment_id) {
         StringBuffer out = new StringBuffer();
         
             Assessment assessment = (new AssessmentDAO()).findById(assessment_id);
@@ -1187,7 +1199,11 @@ public class LessonUtils {
             	LearningObjective lo = new LearningObjective();
                 lo.setId((Integer)object.get("id"));
                 lo.setTitle(object.get("title").toString());
-                lo.setSubject(object.get("subject").toString());
+                try {
+					lo.setSubject(object.get("subject").toString());
+				} catch (Exception e) {
+					lo.setSubject("NONE");
+				}
                 lesson_lo_list.add(lo);
             }
         return lesson_lo_list;
@@ -1213,10 +1229,63 @@ public class LessonUtils {
             	LearningObjective lo = new LearningObjective();
                 lo.setId((Integer)object.get("id"));
                 lo.setTitle(object.get("title").toString());
-                lo.setSubject(object.get("subject").toString());
+                try {
+					lo.setSubject(object.get("subject").toString());
+				} catch (Exception e) {
+					lo.setSubject("NONE");
+				}
                 session_lo_list.add(lo);
             }
         return session_lo_list;
     }
-    
+
+    private ArrayList<LearningObjective> getLOsForAssessment() {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> assessment_lo_list = new ArrayList<>();
+        IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+            String sql = "select lo.id as id , lo.title as title, lo.subject as subject from learning_objective lo";
+            System.err.println(sql);
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            List<HashMap<String, Object>> results = query.list();
+            for (HashMap<String, Object> object : results) {
+            	LearningObjective lo = new LearningObjective();
+                lo.setId((Integer)object.get("id"));
+                lo.setTitle(object.get("title").toString());
+                try {
+					lo.setSubject(object.get("subject").toString());
+				} catch (Exception e) {
+					lo.setSubject("NONE");
+				}
+                assessment_lo_list.add(lo);
+            }
+        return assessment_lo_list;
+    }
+
+   	private ArrayList<LearningObjective> getSelectedLOsForQuestion(int question_id) {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> question_lo_list = new ArrayList<>();
+        IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+            String sql = "select lo.id, lo.title, lo.subject from learning_objective lo, learning_objective_question loq "
+            			 + "where loq.learning_objectiveid=lo.id and loq.questionid = "+question_id;
+            System.err.println(sql);
+            SQLQuery query = session.createSQLQuery(sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            List<HashMap<String, Object>> results = query.list();
+            for (HashMap<String, Object> object : results) {
+            	LearningObjective lo = new LearningObjective();
+                lo.setId((Integer)object.get("id"));
+                lo.setTitle(object.get("title").toString());
+                try {
+					lo.setSubject(object.get("subject").toString());
+				} catch (Exception e) {
+					lo.setSubject("NONE");
+				}
+                question_lo_list.add(lo);
+            }
+        return question_lo_list;
+    }
+
 }
