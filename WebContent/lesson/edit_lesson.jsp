@@ -149,7 +149,7 @@
 													boolean flag = false;
 													for (UiTheme themeName : (List<UiTheme>) (new UiThemeDAO()).findAll()) {
 												%>
-												<div class="col col-4">
+												<div class="col col-6">
 													<%
 														if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getId().toString())) {
 																flag = true;
