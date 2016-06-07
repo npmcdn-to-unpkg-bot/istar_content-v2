@@ -98,6 +98,13 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
+			
+			$('.slide-background.step.slide.NO_CONTENT.present').css("background-size","contain");
+
+
+			
+			//background-size: contain; slide-background step slide NO_CONTENT present
+			$();
 
 		});
 	</script>
