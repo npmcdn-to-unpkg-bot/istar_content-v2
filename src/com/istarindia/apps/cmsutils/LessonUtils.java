@@ -435,8 +435,7 @@ public class LessonUtils {
             out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
                     + "\")'  href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
             out.append("</div>");
-            out.append("<a onclick='openWinSpeaker(\"/content/lesson/speaker_preview.jsp?ppt_id=" + ppt.getId()
-                    + "\")'  href='#' class='btn-u btn-u-default'>Speaker Preview</a>");
+            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' class='btn-u btn-u-default'>Speaker Preview</a>");
             out.append("</form>");
             out.append("<form id='update_order' action='/content/update_course?ppt_id="+ ppt.getId()+"'>"
             		+ "<input id='action' name='action' type='hidden' value='reorder'> "
