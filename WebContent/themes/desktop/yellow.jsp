@@ -185,9 +185,8 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
-    margin-top: -20%;
-    padding-bottom: 3%;    
-	color: <%=theme.get("title_____font_color")%>;
+    margin-top: -15%;
+    color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
@@ -239,6 +238,7 @@ body {
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST h2 {
 	margin-left: 2%;
+	padding-bottom: 3%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -495,7 +495,6 @@ body {
 }
 
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph  {
-	margin-left: 2%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -517,7 +516,9 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
-	list-style: none;
+	margin-top: 2%;
+    padding-left: 10%;
+    list-style: none;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
