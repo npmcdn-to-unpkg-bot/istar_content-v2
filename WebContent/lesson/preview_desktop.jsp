@@ -32,8 +32,8 @@ String style_body = "background-size: cover;";
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-<link rel="stylesheet" href="<%=nuetral%>student/css/reveal_orig.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"><link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
 
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
@@ -73,20 +73,19 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
-	<script src="<%=nuetral%>student/js/reveal.js"></script>
+	<script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
 
 	<script>
 		Reveal.initialize({
 			center : true,
-			controls : false,
+			controls : true,
 		});
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
 		if (($('.present').attr("style")).indexOf("background-color") < 0) {
 			document.body.style.background = orgBgColor;
 		}
-		(document.getElementsByClassName('controls')[0]).style.display = 'none';
-
+		
 		Reveal.addEventListener('slidechanged', function(event) {
 			document.body.style.background = $('.present').css(
 					'background-color');

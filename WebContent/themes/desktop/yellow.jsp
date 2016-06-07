@@ -204,9 +204,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
-    margin-left: 2%;
-    margin-right: -2%;
-	color: <%=theme.get("title_____font_color")%>;
+ 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
@@ -683,7 +681,6 @@ body {
 }
 
 .reveal .ONLY_TITLE_IMAGE img {
-	width: 180%;
 }
 
 .reveal .ONLY_2TITLE_IMAGE img {
