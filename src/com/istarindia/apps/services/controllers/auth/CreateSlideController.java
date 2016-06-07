@@ -81,7 +81,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				slide_id = service.addTextParagraphSlideToLesson(request.getParameter("paragraph"), image,
 						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"));
+						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
 				ImageDAO dao = new ImageDAO();
 				String title = request.getParameter("title");
@@ -99,7 +99,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addTextParagraphSlideToLessonUpdate(request.getParameter("paragraph"), image,
 						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
 
 			break;
