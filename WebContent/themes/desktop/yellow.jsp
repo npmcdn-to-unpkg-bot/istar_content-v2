@@ -185,7 +185,8 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
-	margin-left: 2%;
+    margin-top: -20%;
+    padding-bottom: 3%;    
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -516,9 +517,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
-	margin-left: 2%;
 	list-style: none;
-	padding-right: 2%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
