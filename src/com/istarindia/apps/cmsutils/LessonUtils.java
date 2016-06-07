@@ -28,6 +28,7 @@ import org.hibernate.Session;
 
 import com.istarindia.apps.ImageUtils;
 import com.istarindia.apps.SlideTransition;
+import com.istarindia.apps.cmsutils.reports.ReportUtils;
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
 import com.istarindia.apps.dao.AssessmentOption;
@@ -35,6 +36,7 @@ import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.Game;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
@@ -62,7 +64,7 @@ import java.util.Set;
  */
 public class LessonUtils {
 	
-    public StringBuffer getFormForAssessmentQuestionEdit(int assessment_id, int question_id) {
+    public StringBuffer getFormForAssessmentQuestionEdit(int assessment_id, int question_id,HttpServletRequest request) {
         StringBuffer out = new StringBuffer();
         
         Assessment assessment = (new AssessmentDAO()).findById(assessment_id);
@@ -122,25 +124,15 @@ public class LessonUtils {
                 
                 //enable below block after learning objectives are added
                 out.append("<section><label>Learning Objectives selected</label>"
-                		+ "<button class='btn-u' data-target='#myModal' style='float: right;'>Choose LOs</button> <div class='row'>");
+                		+ "<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' style='float: right;'>Choose others</button> <div class='row'>");
                 
                 for (LearningObjective obj : items) {
 
                     out.append("<div class='col col-12'><label class='checkbox'>"
-                            + "<input type='checkbox' name='learningObjectives' checked='checked' value="
-                            + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div></div></section></br>");
+                            + "<input type='checkbox' name='selected_items' checked='checked' value="
+                            + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
                 }
-                out.append("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'> "
-                		+ "<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> "
-                		+ "<button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button> "
-                		+ "<h4 id='myModalLabel1' class='modal-title'>Choose Learning Objectives</h4> </div> "
-                		+ "<div class='modal-body'> "
-                		+ "<form class='form-horizontal' role='form' onsubmit='myFunction()' action='#' method='POST'> "
-                		+ "<input type='hidden' id='selected_items' name='selected_items' /> <div class='form-group'> </div> "
-                		+ "<div class='form-group'> <div class='col-lg-offset-2 col-lg-10'> "
-                		+ "<button type='submit' class='btn-u btn-u-green'>Select</button> </div> </div> </form> </div> "
-                		+ "<div class='modal-footer'> <button data-dismiss='modal' class='btn-u btn-u-default' type='button'>Close"
-                		+ "</button> </div> </div> </div> </div>");
+                out.append("</div></section></br>");
                 
                 out.append("<div class='row'><section class='col col-md-4'><label>Question Type</label> "
                         + "<label class='input'>"
@@ -201,7 +193,29 @@ public class LessonUtils {
                         + "</fieldset> "
                         + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label id='err' style='color:red'></label></footer></form></div></div></div>");
             //}
-            
+
+                out.append("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'> "
+                		+ "<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> "
+                		+ "<button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button> "
+                		+ "<h4 id='myModalLabel1' class='modal-title'>Choose Learning Objectives</h4> </div> "
+                		+ "<div class='modal-body'> "
+                		+ "<form id='lo_form' class='form-horizontal' role='form' action='/content/edit_question' method='POST'> "
+                        + "<input type='hidden' name='assessment_id' value=" + assessment_id + "> "
+                        + "<input type='hidden' name='question_id' value=" + question_id + "> "
+                		+ "<input type='hidden' id='selected_items' name='selected_items' />"
+                		+ "<input type='hidden' id='only_learning_objevtives' value='true' name='only_learning_objevtives' /> <div class='form-group'> "
+                		+ "<label style='margin-left: 1%;color: gray'>[NOTE: Select learning objectves and submit]</label><label id='errLO' style='color:red'></label> "
+                		+ "<button type='submit' id='loBtn' class='btn-u' style='float: right;margin-right: 1%;'>Proceed</button>"
+                		+ "<div class='col-lg-offset-2 col-lg-10' style='margin:0% !important; width:100%'>");
+                
+               HashMap<String, String> conditions = new HashMap();
+				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+			
+				out.append((new ReportUtils()).getReport(91, conditions, ((IstarUser)request.getSession().getAttribute("user")), "").toString()); 
+                	out.append(" </div>  </div></form> </div> "
+                		+ "<div class='modal-footer'> <button data-dismiss='modal' class='btn-u btn-u-default' type='button'>Close"
+                		+ "</button> </div> </div> </div> </div>");
+                
             out.append("<div class=' col-md-12 '>");
             out.append("<div class='panel panel-sea margin-bottom-40'>");
             out.append("<div class='panel-heading'>");

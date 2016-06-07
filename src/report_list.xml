@@ -1052,7 +1052,7 @@ order by order_id
 
 		<sql>select id as task_id, obj_type, title, subject from learning_objective
 		</sql>
-		<title> All Tasks Published</title>
+		<title> All Learning Objectives</title>
 	</reports>
 	
 	<reports id="89" type_of_report="table">
@@ -1106,6 +1106,56 @@ WHERE C.id = M.course_id
 
 		</sql>
 		<title> Course List</title>
+	</reports>
+	
+	<reports id="91" type_of_report="table">
+		<column columnHandler="NONE" display_name="LO ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="LO" isVisible="true" name="lo_title" />
+		<column columnHandler="NONE" display_name="Subject" isVisible="true" name="lo_subject" />
+		<column columnHandler="NONE" display_name="Lessons attached" isVisible="true" name="lesson_list" />
+		<column columnHandler="NONE" display_name="Sessions attached" isVisible="true" name="session_list" />
+
+		<sql>SELECT distinct
+	lo. ID AS task_id,
+	lo.title AS lo_title,
+	(
+		CASE
+		WHEN lo.subject IS NULL THEN
+			'NONE'
+		ELSE
+			lo.subject
+		END
+	) AS lo_subject,
+	(
+		CASE
+		WHEN string_agg (l.title, ',') IS NULL THEN
+			'NONE'
+		ELSE
+			string_agg (l.title, ',')
+		END
+	) AS lesson_list,
+	(
+		CASE
+		WHEN C .title IS NULL THEN
+			'NONE'
+		ELSE
+			C .title
+		END
+	) AS session_list
+FROM
+	learning_objective lo
+LEFT JOIN learning_objective_lesson lol ON lol.learning_objectiveid = lo. ID
+LEFT JOIN lesson l ON l. ID = lol.lessonid
+LEFT JOIN cmsession C ON C . ID = l.session_id
+GROUP BY
+	lo_title,
+	task_id,
+	lo_subject,
+	session_list
+ORDER BY
+	task_id
+		</sql>
+		<title> All Learning Objectives</title>
 	</reports>
 	
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

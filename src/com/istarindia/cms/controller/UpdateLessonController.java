@@ -41,23 +41,8 @@ public class UpdateLessonController extends IStarBaseServelet {
 		String[] learningObjectives = null;
 		StringBuffer lo_ids = new StringBuffer();
 		
-		Set<LearningObjective> ite = new HashSet<LearningObjective>();
-		if (request.getParameterMap().containsKey("lesson_id") && request.getParameterMap().containsKey("cmsession_id") && request.getParameterMap().containsKey("duration") && request.getParameterMap().containsKey("title"))
-		{
-			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
-			Task task = new Task();
-			task.setItemId(lesson_id);
-			task.setItemType("LESSON");
-			task = (new TaskDAO()).findByExample(task).get(0);
-			int cmsession_id = Integer.parseInt(request.getParameter("cmsession_id"));
-			int duration = Integer.parseInt(request.getParameter("duration"));
-			String lesson_theme = request.getParameter("lesson_theme");
-			String title = request.getParameter("title");
-			String lesson_subject = request.getParameter("lesson_subject");
-			if (request.getParameterMap().containsKey("Tags")) {
-				tags = request.getParameter("Tags");
-			}
-			
+		Set<LearningObjective> ite = new HashSet<LearningObjective>();LessonService service = new LessonService();
+			Lesson lesson = new Lesson();
 			if (request.getParameterMap().containsKey("learningObjectives")) {
 				learningObjectives = (String[]) request.getParameterMap().get("learningObjectives");
 				for (int i = 0; learningObjectives != null && i < learningObjectives.length; i++) {
@@ -69,18 +54,35 @@ public class UpdateLessonController extends IStarBaseServelet {
 				System.err.println("LOs: "+lo_ids);
 			}
 			
-			LessonService service = new LessonService();
-			Lesson lesson = (Lesson) service.updateLesson(lesson_id, title, duration, tags, lesson_theme, lesson_subject, lo_ids.toString()) ;
+			
+			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
+			Task task = new Task();
+			task.setItemId(lesson_id);
+			task.setItemType("LESSON");
+			task = (new TaskDAO()).findByExample(task).get(0);
+			
+			if(request.getParameterMap().containsKey("only_learning_objectives")) {
+				
+				lesson = (Lesson) service.updateLesson(lesson_id, lo_ids.toString());
+				
+			} else {
+
+				int duration = Integer.parseInt(request.getParameter("duration"));
+				String lesson_theme = request.getParameter("lesson_theme");
+				String title = request.getParameter("title");
+				String lesson_subject = request.getParameter("lesson_subject");
+				if (request.getParameterMap().containsKey("Tags")) {
+					tags = request.getParameter("Tags");
+				}
+
+				lesson = (Lesson) service.updateLesson(lesson_id, title, duration, tags, lesson_theme, lesson_subject, lo_ids.toString());
+			}
+			
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", task.getId());
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
-		} else {
-			System.out.println("Recieved params:");
-			printParams(request);
-			request.setAttribute("message_failure", "Something was missing !");
-			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);
-		}
+		
 	}
 
 	/**

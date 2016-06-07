@@ -101,6 +101,7 @@ public class ReportUtils {
 		IstarUserDAO dao = new IstarUserDAO();
 		Session session = dao.getSession();
 		SQLQuery query = session.createSQLQuery(sql1);
+		System.err.println(sql1);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		
 		for(String key : conditions.keySet()) {

@@ -1,6 +1,7 @@
 <%@page import="com.istarindia.apps.services.UiThemeService"%>
 <%@page import="com.istarindia.apps.Themes"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.ReportUtils"%>
 
 <%@page import="com.istarindia.apps.services.LessonService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -19,6 +20,19 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
+<style type="text/css">
+.modal-dialog {
+	width: 100% !important;
+    height: 100% !important;
+    padding-right: 2% !important;
+    padding-left: 2% !important;
+}
+
+.modal-content {
+  height: auto !important;
+  min-height: 100% !important;
+  border-radius: 0 !important;
+}</style>
 <title>Content Admin Dashboard | iStar CMS</title>
 
 <!-- Meta -->
@@ -51,6 +65,8 @@
 	href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
 	href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
@@ -75,6 +91,10 @@
 	href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"
 	rel="stylesheet">
 
+<link
+	href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+	
 </head>
 
 <body>
@@ -159,67 +179,66 @@
 														value="<%=themeName.getId()%>"> <i
 														class="rounded-x"></i><%=themeName.getName()%></label>
 												</div>
-													<%
-														} else {
-													%>
-													<label class="radio"><input type="radio"
-														name="lesson_theme" value="<%=themeName.getId()%>">
-														<i class="rounded-x"></i><%=themeName.getName()%></label>
-												</div>
-													<%
-														}
-														}
-													%>
 												<%
-														if (flag == false) {
-													%><div class="col col-4">
-													<label class="radio"><input type="radio"
-														checked="checked" name="lesson_theme" value="0">
-														<i class="rounded-x"></i>Dafault</label>
-												</div>
-												<%
-														}
-													%>
-
+													} else {
+												%>
+												<label class="radio"><input type="radio"
+													name="lesson_theme" value="<%=themeName.getId()%>">
+													<i class="rounded-x"></i><%=themeName.getName()%></label>
 											</div>
-										</section>
-
-										<section>
-											<label>Subject </label>
-											<div class="row">
-												<%
-                                                        	flag = false;
-                                                        	for (String subject : Themes.subjects) {
-                                                        %>
-												<div class="col col-4">
-													<%
-                                                            	if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
-                                                            			flag = true;
-                                                            %>
-													<label class="radio"><input type="radio"
-														name="lesson_subject" checked="checked"
-														value="<%=subject%>"> <i class="rounded-x"></i><%=subject%></label>
-													<%
-                                                                } else {
-                                                                %>
-													<label class="radio"><input type="radio"
-														name="lesson_subject" value="<%=subject%>"> <i
-														class="rounded-x"></i><%=subject%></label>
-													<%
-                                                                    }
-                                                               
-                                                            if (flag == false) { 
-                                                            %>
-													<label class="radio"><input type="radio"
-														checked="checked" name="lesson_subject" value="none">
-														<i class="rounded-x"></i>None</label>
-												</div>
-												<%
-                                                            }
-                                                         }
-                                                        %>
+											<%
+												}
+												}
+											%>
+											<%
+												if (flag == false) {
+											%><div class="col col-4">
+												<label class="radio"><input type="radio"
+													checked="checked" name="lesson_theme" value="0"> <i
+													class="rounded-x"></i>Dafault</label>
 											</div>
-										</section>
+											<%
+												}
+											%>
+									
+							</section>
+
+							<section>
+								<label>Subject </label>
+								<div class="row">
+									<%
+										flag = false;
+										for (String subject : Themes.subjects) {
+									%>
+									<div class="col col-4">
+										<%
+											if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
+													flag = true;
+										%>
+										<label class="radio"><input type="radio"
+											name="lesson_subject" checked="checked" value="<%=subject%>">
+											<i class="rounded-x"></i><%=subject%></label>
+										<%
+											} else {
+										%>
+										<label class="radio"><input type="radio"
+											name="lesson_subject" value="<%=subject%>"> <i
+											class="rounded-x"></i><%=subject%></label>
+										<%
+											}
+
+												if (flag == false) {
+										%>
+										<label class="radio"><input type="radio"
+											checked="checked" name="lesson_subject" value="none">
+											<i class="rounded-x"></i>None</label>
+									</div>
+									<%
+										}
+										}
+									%>
+								</div>
+							</section>
 
 							<section>
 
@@ -227,14 +246,14 @@
 									LessonUtils lessonUtils = new LessonUtils();
 									ArrayList<LearningObjective> lesson_lo_list = lessonUtils.getSelectedLOsOftheLesson(lesson.getId());
 									ArrayList<LearningObjective> session_lo_list = lessonUtils.getUnselectedLOsInTheSameSession(lesson.getId());
-									if (!lesson_lo_list.isEmpty()) {
 								%>
 
 								<label>List of Selected Learning Objectives</label>
 								<div class="row">
 
 									<%
-										for (LearningObjective lesson_lo : lesson_lo_list) {
+										if (!lesson_lo_list.isEmpty()) {
+											for (LearningObjective lesson_lo : lesson_lo_list) {
 									%>
 
 									<div class="col col-12">
@@ -245,20 +264,25 @@
 
 									<%
 										}
+										} else {
 									%>
 
-								</div>
+									<div class="col col-12">
+										<label class="checkbox"><i class="fa fa-exclamation"></i>
+											None</label>
+									</div>
 
-								<%
-									}
-									if (!session_lo_list.isEmpty()) {
-								%>
-								<br>
-								<label>List of Learning Objectives in the Session</label>
+									<%
+										}
+									%>
+								</div>
+								<br> <label>List of Learning Objectives in the
+									Session</label>
 								<div class="row">
 
 									<%
-										for (LearningObjective session_lo : session_lo_list) {
+										if (!session_lo_list.isEmpty()) {
+											for (LearningObjective session_lo : session_lo_list) {
 									%>
 
 									<div class="col col-12">
@@ -269,12 +293,18 @@
 
 									<%
 										}
+										} else {
 									%>
 
+									<div class="col col-12">
+										<label class="checkbox"><i class="fa fa-exclamation"></i>None</label>
+									</div>
+
+									<%
+										}
+									%>
+									<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose others</button>
 								</div>
-								<%
-									}
-								%>
 							</section>
 
 
@@ -286,6 +316,55 @@
 								</form>
 
 							</div>
+							<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
+								aria-labelledby='myModalLabel' aria-hidden='true'>
+								<div class='modal-dialog'>
+									<div class='modal-content'>
+										<div class='modal-header'>
+											<button aria-hidden='true' data-dismiss='modal' class='close'
+												type='button'>×</button>
+											<h4 id='myModalLabel1' class='modal-title'>Choose
+												Learning Objectives</h4>
+										</div>
+										<div class='modal-body'>
+											<form id='lo_form' class='form-horizontal' role='form'
+												action='/content/update_lesson' method='POST'>
+												<input type="hidden" name="lesson_id"
+										value="<%=lesson.getId()%>" /> <input type="hidden"
+										name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+										<input type='hidden' name='lesson_id'
+													value=" <%=lesson.getId()%>"> <input
+													type='hidden' id='learningObjectives' name='learningObjectives' />
+												<input type='hidden' id='only_learning_objectives'
+													value='true' name='only_learning_objectives' />
+												<div class='form-group'>
+													<label style='margin-left: 1%; color: gray'>[NOTE:
+														Select learning objectives and submit]</label><label id='errLO'
+														style='color: red'></label>
+													<button type='submit' id='loBtn' class='btn-u'
+														style='float: right; margin-right: 1%;'>Proceed</button>
+													<div class='col-lg-offset-2 col-lg-10'
+														style='margin: 0% !important; width: 100%'>
+
+														<%
+															HashMap<String, String> conditions = new HashMap();
+															conditions.put("lesson_id",lesson.getId().toString());
+														
+														%>
+														<%=(new ReportUtils()).getReport(91, conditions, ((IstarUser) request.getSession().getAttribute("user")), "LESSON").toString()%>
+
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class='modal-footer'>
+											<button data-dismiss='modal' class='btn-u btn-u-default'
+												type='button'>Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</div>
 					</div>
 
@@ -385,18 +464,96 @@
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+	
 	<script type="text/javascript">
+	var responsiveHelper_dt_basic = undefined;
+	var responsiveHelper_datatable_fixed_column = undefined;
+	var responsiveHelper_datatable_col_reorder = undefined;
+	var responsiveHelper_datatable_tabletools = undefined;
+	
+	var breakpointDefinition = {
+		tablet : 1024,
+		phone : 480
+	};
         	//Lesson details validation
             jQuery(document).ready(function () {
                 App.init();
                 Validation.lessonValidation();
-                
+
                 //Slide list is sortable
                 $( "#slidess_ord" ).sortable();
                 $( "#update_order" ).submit(function( event ) {
                 	var idsInOrder = $('#slidess_ord').sortable("toArray");
                 	$('#order_holder').val(idsInOrder);
                 	});
+                
+                
+				var selected = [];
+                
+                if ( $.fn.dataTable.isDataTable( "#datatable_report_91" ) ) {
+        	        table = $("#datatable_report_91" ).DataTable({
+        	        	destroy: true,
+        	        	"processing": true,
+                        "rowCallback": function( row, data ) {
+                            if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                                $(row).addClass('selected');
+                                
+                            }
+                        }
+        	        } );
+        	    }
+        	    else {
+        	        table = $( "#datatable_report_91" ).DataTable( {
+        	        	"processing": true,
+                        "rowCallback": function( row, data ) {
+                            if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                                $(row).addClass('selected');
+                            }
+                        }
+        	        } );
+        	    }
+                $('#datatable_report_91_body').on('click', 'tr', function () {
+                    var id = this.id;
+                    var index = $.inArray(id, selected);
+             
+                    if ( index === -1 ) {
+                        selected.push( id );
+                    } else {
+                        selected.splice( index, 1 );
+                    }
+             
+                    $(this).toggleClass('selected');
+                } );
+                
+                $('#checkBtn').on('click', function(e) {
+                    var cnt = $("input[name='answers']:checked").length;
+                    if (cnt < 1) 
+                    {
+                    	$("#err").text("(Note: At least one correct option should be selected before proceeding)");
+                        e.preventDefault();
+                    }
+
+                });
+
+            	$('#loBtn').on('click', function(e) {
+                    var ids = $.map(table.rows('.selected').data(), function (item) {
+                        return item[0]
+                    });
+                    
+                    if (ids.length < 1) 
+                    {
+                    	$("#errLO").text("  (Note: Please select at least one learning objective before proceeding)");
+                        e.preventDefault();
+                    } else {
+            			$('#learningObjectives').val(ids);
+                    }
+
+                });
                 
             });
 
@@ -418,14 +575,6 @@
             });
             
             $(document).ready(function() {
-                $('#checkBtn').on('click', function(e) {
-                    var cnt = $("input[name='answers']:checked").length;
-                    if (cnt < 1) 
-                    {
-                    	$("#err").text("(Note: At least one correct option should be selected before proceeding)");
-                        e.preventDefault();
-                    }
-                });
             });
             
             function openWin(url) {
