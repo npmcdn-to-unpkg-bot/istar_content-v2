@@ -1115,7 +1115,7 @@ WHERE C.id = M.course_id
 		<column columnHandler="NONE" display_name="Lessons attached" isVisible="true" name="lesson_list" />
 		<column columnHandler="NONE" display_name="Sessions attached" isVisible="true" name="session_list" />
 
-		<sql>SELECT distinct
+		<sql>SELECT DISTINCT
 	lo. ID AS task_id,
 	lo.title AS lo_title,
 	(
@@ -1147,6 +1147,15 @@ FROM
 LEFT JOIN learning_objective_lesson lol ON lol.learning_objectiveid = lo. ID
 LEFT JOIN lesson l ON l. ID = lol.lessonid
 LEFT JOIN cmsession C ON C . ID = l.session_id
+WHERE
+	lo. ID NOT IN (
+		SELECT
+			le_ob_le.learning_objectiveid
+		FROM
+			learning_objective_lesson le_ob_le
+		WHERE
+			le_ob_le.lessonid = :lesson_id
+	)
 GROUP BY
 	lo_title,
 	task_id,
@@ -1155,7 +1164,67 @@ GROUP BY
 ORDER BY
 	task_id
 		</sql>
-		<title> All Learning Objectives</title>
+		<title> List of Learning Objectives for lesson</title>
+	</reports>
+	
+	
+	<reports id="92" type_of_report="table">
+		<column columnHandler="NONE" display_name="LO ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="LO" isVisible="true" name="lo_title" />
+		<column columnHandler="NONE" display_name="Subject" isVisible="true" name="lo_subject" />
+		<column columnHandler="NONE" display_name="Lessons attached" isVisible="true" name="lesson_list" />
+		<column columnHandler="NONE" display_name="Sessions attached" isVisible="true" name="session_list" />
+
+		<sql>SELECT DISTINCT
+	lo. ID AS task_id,
+	lo.title AS lo_title,
+	(
+		CASE
+		WHEN lo.subject IS NULL THEN
+			'NONE'
+		ELSE
+			lo.subject
+		END
+	) AS lo_subject,
+	(
+		CASE
+		WHEN string_agg (l.title, ',') IS NULL THEN
+			'NONE'
+		ELSE
+			string_agg (l.title, ',')
+		END
+	) AS lesson_list,
+	(
+		CASE
+		WHEN C .title IS NULL THEN
+			'NONE'
+		ELSE
+			C .title
+		END
+	) AS session_list
+FROM
+	learning_objective lo
+LEFT JOIN learning_objective_lesson lol ON lol.learning_objectiveid = lo. ID
+LEFT JOIN lesson l ON l. ID = lol.lessonid
+LEFT JOIN cmsession C ON C . ID = l.session_id
+WHERE
+	lo. ID NOT IN (
+		SELECT
+			le_ob_qu.learning_objectiveid
+		FROM
+			learning_objective_question le_ob_qu
+		WHERE
+			le_ob_qu.questionid = :question_id
+	)
+GROUP BY
+	lo_title,
+	task_id,
+	lo_subject,
+	session_list
+ORDER BY
+	task_id
+		</sql>
+		<title> List of Learning Objectives for question</title>
 	</reports>
 	
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

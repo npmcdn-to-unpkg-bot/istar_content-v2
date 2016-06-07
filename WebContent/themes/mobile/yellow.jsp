@@ -734,12 +734,7 @@ body {
 
 
 
-
-
-/* Below are of no use.. just for the demo */
-
-
-#top {
+.reveal .ONLY_2BOX #top {
 	height: 900px;
 	padding-top: 300px;
 	margin-top: -110%;
@@ -747,53 +742,68 @@ body {
 	margin-left: -10%;
 }
 
-#bottom {
+
+.reveal .ONLY_2BOX #bottom {
 	height: 1000px;
 	padding-top: 41px;
 	margin-left: -10%;
 	width: 120%;
 }
 
-#top h2 {
-	color: rgb(102,197,187);
-	text-align: left;
-	font-size: 90px;
-	margin-left: 5%;
-	font-weight: bolder;
+
+.reveal .ONLY_2BOX #top h2 {
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family: '<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 	padding-top: 26%;
+	padding-bottom: 5%;
 	margin-left: 11%;
-	font-weight: 900;
-}
-#bottom h3 {
-	color: white;
-	text-align: left;
-	font-size: 90px;
-	margin-left: 5%;
-	font-weight: bolder;
-	padding-top: 26%;
-	margin-left: 11%;
-	font-weight: 900;
-}
-#top li {
-	color: rgb(93,93,93);
-	font-size: 55px;
-	list-style: none;
-	margin-left: 12%;
-	padding-right: 31%;
-	text-align: left;
-	line-height: 1.1;
 }
 
-#bottom li {
-	color: white;
-	font-size: 55px;
+.reveal .ONLY_2BOX #bottom h3 {
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family: <%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+	padding-top: 26%;
+	margin-left: 11%;
+	padding-bottom: 4%;
+}
+
+.reveal .ONLY_2BOX #top li {
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 	list-style: none;
-	padding-top: 23px;
 	margin-left: 12%;
 	padding-right: 31%;
-	text-align: left;
-	line-height: 1.1;
 }
+
+
+.reveal .ONLY_2BOX #bottom li {
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	list-style: none;
+	margin-left: 12%;
+	padding-right: 31%;
+}
+
+
+
+/* Below are of no use.. just for the demo */
+
 
 
 .reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS {

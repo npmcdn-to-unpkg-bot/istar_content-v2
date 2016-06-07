@@ -279,8 +279,8 @@
                 Validation.lessonValidation();
                 var selected = [];
                 
-                if ( $.fn.dataTable.isDataTable( "#datatable_report_91" ) ) {
-        	        table = $("#datatable_report_91" ).DataTable({
+                if ( $.fn.dataTable.isDataTable( "#datatable_report_92" ) ) {
+        	        table = $("#datatable_report_92" ).DataTable({
         	        	destroy: true,
         	        	"processing": true,
                         "rowCallback": function( row, data ) {
@@ -292,7 +292,7 @@
         	        } );
         	    }
         	    else {
-        	        table = $( "#datatable_report_91" ).DataTable( {
+        	        table = $( "#datatable_report_92" ).DataTable( {
         	        	"processing": true,
                         "rowCallback": function( row, data ) {
                             if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
@@ -301,7 +301,7 @@
                         }
         	        } );
         	    }
-                $('#datatable_report_91_body').on('click', 'tr', function () {
+                $('#datatable_report_92_body').on('click', 'tr', function () {
                     var id = this.id;
                     var index = $.inArray(id, selected);
              

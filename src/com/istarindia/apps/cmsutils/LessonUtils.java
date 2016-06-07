@@ -209,9 +209,9 @@ public class LessonUtils {
                 		+ "<div class='col-lg-offset-2 col-lg-10' style='margin:0% !important; width:100%'>");
                 
                HashMap<String, String> conditions = new HashMap();
-				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				conditions.put("question_id", ((Integer)question_id).toString());
 			
-				out.append((new ReportUtils()).getReport(91, conditions, ((IstarUser)request.getSession().getAttribute("user")), "").toString()); 
+				out.append((new ReportUtils()).getReport(92, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString()); 
                 	out.append(" </div>  </div></form> </div> "
                 		+ "<div class='modal-footer'> <button data-dismiss='modal' class='btn-u btn-u-default' type='button'>Close"
                 		+ "</button> </div> </div> </div> </div>");
