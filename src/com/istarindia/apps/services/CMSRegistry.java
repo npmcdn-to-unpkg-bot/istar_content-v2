@@ -103,6 +103,8 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_LIST_NUMBERED");
 		slideTemplates.add("ONLY_VIDEO");
 		slideTemplates.add("ONLY_2BOX");
+		slideTemplates.add("IN_OUT_1___ONLY_TITLE_LIST");
+		slideTemplates.add("SIMPLE_LIST___ONLY_TITLE_LIST");
 		
 		/* The below 5 templates were used for the sales demo[1st week of May 2016] */
 		//slideTemplates.add("ONLY_2TITLE_2TABLE");

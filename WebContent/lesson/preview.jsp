@@ -78,32 +78,32 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 	<script src="<%=nuetral%>student/js/reveal.js"></script>
 
 	<script>
-	Reveal.initialize({
-		center : false,
-		controls : false, 
+		Reveal.initialize({
+			center : false,
+			controls : false,
 		});
-	var orgBgColor = $("body").css("background-color");
-	document.body.style.background = $('.present').css('background-color');
-	if ( ($('.present').attr("style")).indexOf("background-color")<0){
-		document.body.style.background = orgBgColor;
-	}
-	(document.getElementsByClassName('controls')[0]).style.display='none';
-	
-	
-	Reveal.addEventListener( 'slidechanged', function( event ) {
+		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
-		if ( ($('.present').attr("style")).indexOf("background-color")<0){
+		if (($('.present').attr("style")).indexOf("background-color") < 0) {
 			document.body.style.background = orgBgColor;
 		}
-		var currentURL = window.location.href; //currentURL+"#/"+ 
-		var res = currentURL.split("#");
-		currentURL= res[0] ///#1001
-		console.log(currentURL+"#/"+ event.currentSlide.id);
-		history.pushState({},"URL Rewrite Example",currentURL+"#"+ event.currentSlide.id);
+		(document.getElementsByClassName('controls')[0]).style.display = 'none';
 
-	    
-	} );
-</script>
+		Reveal.addEventListener('slidechanged', function(event) {
+			document.body.style.background = $('.present').css(
+					'background-color');
+			if (($('.present').attr("style")).indexOf("background-color") < 0) {
+				document.body.style.background = orgBgColor;
+			}
+			var currentURL = window.location.href; //currentURL+"#/"+ 
+			var res = currentURL.split("#");
+			currentURL = res[0] ///#1001
+			console.log(currentURL + "#/" + event.currentSlide.id);
+			history.pushState({}, "URL Rewrite Example", currentURL + "#"
+					+ event.currentSlide.id);
+
+		});
+	</script>
 
 </body>
 </html>

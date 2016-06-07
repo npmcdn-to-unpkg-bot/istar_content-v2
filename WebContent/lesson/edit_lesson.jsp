@@ -303,10 +303,10 @@
 									<%
 										}
 									%>
-									<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose others</button>
+									
 								</div>
 							</section>
-
+<section><button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button></section>
 
 							</fieldset>
 
