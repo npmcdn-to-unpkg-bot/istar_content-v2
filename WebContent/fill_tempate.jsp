@@ -128,6 +128,8 @@
 								<label class="label">Select Image Background</label> <label
 									class="select"> <select name="image_bg"
 									id="image-bg-picker" value="<%=slide.getImage_BG()%>">
+									<option selected="selected" value="none">None</option>
+										
 										<%
 											for (Image type : images) {
 										%>
@@ -143,13 +145,6 @@
 										%>
 										
 										<option selected="selected" value="<%=BG_url%>"><%=BG_url%></option>
-										<option  value="none">None</option>
-										
-										<%	
-											} else {
-										%>
-										
-										<option  value="none">None</option>
 										
 										<% 
 										}
