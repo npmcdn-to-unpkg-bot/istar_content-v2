@@ -1,4 +1,3 @@
-<%@page import="com.istarindia.apps.services.UiThemeService"%>
 <%@page import="com.istarindia.apps.Themes"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 

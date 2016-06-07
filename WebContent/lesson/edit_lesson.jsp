@@ -268,7 +268,7 @@
 									%>
 
 									<div class="col col-12">
-										<label class="checkbox"><i class="fa fa-exclamation"></i>
+										<label><i class="fa fa-exclamation"></i>
 											None</label>
 									</div>
 
@@ -276,8 +276,7 @@
 										}
 									%>
 								</div>
-								<br> <label>List of Learning Objectives in the
-									Session</label>
+								<br> <label>List of Learning Objectives to choose from Session</label>
 								<div class="row">
 
 									<%
@@ -297,7 +296,7 @@
 									%>
 
 									<div class="col col-12">
-										<label class="checkbox"><i class="fa fa-exclamation"></i>None</label>
+										<label class='label'><i class="fa fa-exclamation"></i> None</label>
 									</div>
 
 									<%
