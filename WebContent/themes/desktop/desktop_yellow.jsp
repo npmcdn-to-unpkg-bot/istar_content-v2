@@ -517,7 +517,7 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
 	margin-top: 2%;
-    padding-left: 10%;
+    padding-left: 5%;
     list-style: none;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -695,8 +695,17 @@ body {
 	width: 180%;
 }
 
-.reveal .ONLY_PARAGRAPH_TITLE #data_slide_paragraph {
-	
+.reveal  #data_slide_list_item {
+	font-size: 110%
+}
+.reveal  #data_slide_paragraph {
+	font-size: 110%
+}
+.reveal  #data_slide_title {
+	font-size: 90%
+}
+.reveal  #data_slide_subtitle {
+	font-size: 90%
 }
 
 

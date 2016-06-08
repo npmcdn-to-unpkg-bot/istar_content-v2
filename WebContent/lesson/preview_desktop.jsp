@@ -79,6 +79,8 @@ lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
 		Reveal.initialize({
 			center : true,
 			controls : true,
+		    width: 1193,
+	   		height: 712
 		});
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
@@ -100,9 +102,6 @@ lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
 					+ event.currentSlide.id);
 			
 			$('.slide-background.step.slide.NO_CONTENT.present').css("background-size","contain");
-
-
-			
 			//background-size: contain; slide-background step slide NO_CONTENT present
 			$();
 

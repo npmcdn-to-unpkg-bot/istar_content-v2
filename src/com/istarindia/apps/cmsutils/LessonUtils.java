@@ -1234,7 +1234,6 @@ public class LessonUtils {
             		+ 	" WHERE C . ID = l.session_id AND l. ID = "+lesson_id+" )  AND lol.learning_objectiveid not in "
             		+ 	  " (SELECT lol.learning_objectiveid FROM learning_objective_lesson lol "
             		+ 	  " WHERE lol.lessonid = "+lesson_id+") group by lol.learning_objectiveid, lo.title, lo.subject";
-            System.err.println(sql);
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             List<HashMap<String, Object>> results = query.list();
@@ -1258,7 +1257,6 @@ public class LessonUtils {
         IstarUserDAO dao = new IstarUserDAO();
         Session session = dao.getSession();
             String sql = "select lo.id as id , lo.title as title, lo.subject as subject from learning_objective lo";
-            System.err.println(sql);
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             List<HashMap<String, Object>> results = query.list();
@@ -1283,7 +1281,6 @@ public class LessonUtils {
         Session session = dao.getSession();
             String sql = "select lo.id, lo.title, lo.subject from learning_objective lo, learning_objective_question loq "
             			 + "where loq.learning_objectiveid=lo.id and loq.questionid = "+question_id;
-            System.err.println(sql);
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             List<HashMap<String, Object>> results = query.list();

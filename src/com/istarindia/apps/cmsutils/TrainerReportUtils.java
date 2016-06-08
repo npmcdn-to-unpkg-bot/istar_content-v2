@@ -26,7 +26,6 @@ public class TrainerReportUtils {
 		String sql = "SELECT learning_objective_question.learning_objectiveid FROM learning_objective_question "
 				+ " WHERE learning_objective_question.questionid IN ( SELECT assessment_question.questionid FROM "
 				+ " assessment_question WHERE assessment_question.assessmentid = "+assessment_id+" ) ";
-		System.err.println(sql);
 		ReportUtils rutils = new ReportUtils();
 		ArrayList<IStarColumn> keys = new ArrayList();
 		IStarColumn kk = new IStarColumn();

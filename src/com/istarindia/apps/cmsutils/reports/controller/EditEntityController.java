@@ -79,8 +79,6 @@ key-> description : value ->ISTAR provides training in Accounts, Finance, Econom
 				} 
 			}
 			sql = "UPDATE  "+tableName+"  SET  "+ upd.substring(0, upd.length()-2)  + " WHERE (id='"+rowID+"')";
-			
-			System.err.println(sql);
 		}
 		else if(request.getParameter("submit").equalsIgnoreCase("delete"))
 		{

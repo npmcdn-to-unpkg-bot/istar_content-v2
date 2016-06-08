@@ -692,7 +692,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				service.addListToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
+				slide_id = service.addListToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
