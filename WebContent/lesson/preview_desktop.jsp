@@ -23,7 +23,7 @@ String style_body = "background-size: cover;";
 
 <meta charset="utf-8">
 
-<title>Desktop Preview</title>
+<title>TALENTIFY</title>
 
 <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 <meta name="author" content="Hakim El Hattab">
@@ -100,10 +100,10 @@ lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
-			
+			/* 
 			$('.slide-background.step.slide.NO_CONTENT.present').css("background-size","contain");
 			//background-size: contain; slide-background step slide NO_CONTENT present
-			$();
+			$(); */
 
 		});
 	</script>

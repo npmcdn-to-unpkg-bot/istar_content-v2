@@ -48,7 +48,9 @@
 
 body {
 	background-color: <%=theme.get("background_color")%>;
-	//#FDC530 !important;
+}
+.slide-background .slide .NO_CONTENT {
+	background-size: contain !important;
 }
 
 @font-face {
@@ -163,8 +165,7 @@ body {
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
-	 padding-right: 2%;
-    color: <%=theme.get("title_____font_color")%>;
+	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
@@ -269,7 +270,7 @@ body {
 }
 
 .reveal  .ONLY_2TITLE h3 {
-	margin-left: 2%;
+	padding-top: 8%
 	color: <%=theme.get("subtitle_____font_color")%>;
 	font-weight: <%=theme.get("subtitle_____font_weight")%>;
 	font-size: <%=theme.get("subtitle_____font_size")%>px;
@@ -280,8 +281,7 @@ body {
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
-	margin-left: 2%;
-    color: <%=theme.get("subtitle_____font_color")%>;
+	color: <%=theme.get("subtitle_____font_color")%>;
 	font-weight: <%=theme.get("subtitle_____font_weight")%>;
 	font-size: <%=theme.get("subtitle_____font_size")%>px;
 	line-height: <%=theme.get("subtitle_____line_height")%>;
@@ -504,6 +504,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph  {
+    margin-top: 5%;
 	margin-left: 2%;
     list-style: none;
     z-index: 9999;
@@ -549,8 +550,8 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
-	list-style: none !important;
+.reveal .ONLY_TITLE_LIST_NUMBERED ol li  {
+	list-style-type: decimal-leading-zero;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	list-style-type: decimal-leading-zero;
@@ -562,7 +563,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ul  {
+.reveal .ONLY_TITLE_LIST_NUMBERED ol  {
     margin-left: 2%;
     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
@@ -696,7 +697,7 @@ body {
 }
 
 .reveal  #data_slide_list_item {
-	font-size: 110%
+	font-size: 90%
 }
 .reveal  #data_slide_paragraph {
 	font-size: 110%
