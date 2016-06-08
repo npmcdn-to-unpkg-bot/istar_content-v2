@@ -49,7 +49,8 @@
 body {
 	background-color: <%=theme.get("background_color")%>;
 }
-.slide-background .slide .NO_CONTENT {
+
+.reveal .slide-background .NO_CONTENT {
 	background-size: contain !important;
 }
 

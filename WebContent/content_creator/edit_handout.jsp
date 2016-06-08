@@ -8,6 +8,7 @@
 	String url = request.getRequestURL().toString();
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
 			+ request.getContextPath() + "/";
+	
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -174,6 +175,7 @@
 		type="text/javascript" charset="utf-8"></script>
 	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
+	<script src="<%=baseURL%>assets/plugins/ckeditor/plugins/simple-image-browser/plugin.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
@@ -197,7 +199,20 @@
 			console.log(selectedElmsIds);
 
 		}
+		function initTextArea() {
+			
+			// If you haven't build CKEditor with this plugin.
+			CKEDITOR.config.extraPlugins = 'simple-image-browser';
+
+			// Add this line to configure for AJAX / JSON Reponse.
+			// Link to plugin- http://ckeditor.com/addon/simple-image-browser
+			CKEDITOR.config.simpleImageBrowserURL = "/content/GalleryJsonController";
+			
+			
+		}
+		
 		jQuery(document).ready(function() {
+			initTextArea();
 			App.init();
 			Validation.lessonValidation();
 			$('#html1').jstree({

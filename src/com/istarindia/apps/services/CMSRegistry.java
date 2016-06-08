@@ -115,6 +115,7 @@ public class CMSRegistry {
 
 		listTypes.add(ListTypes.SIMPLE_LIST);
 		listTypes.add(ListTypes.IN_OUT_1);
+		listTypes.add(ListTypes.IN_OUT_2);
 		
 		//Enable the below only after making the vm files ready
 		/* listTypes.add(ListTypes.PROCESS_LIST);
