@@ -304,7 +304,6 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
 	list-style: none;
-	margin-top: 8%;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
