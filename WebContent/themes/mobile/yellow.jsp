@@ -981,7 +981,7 @@ body {
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_top{
 	position:fixed;
-	margin-top: -50%;
+	margin-top: -57%;
 }
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_bottom{
 	position:fixed;
@@ -990,7 +990,6 @@ body {
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .top_title{
 	position:fixed;
 	height:50%;
-	width:50%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
@@ -1002,7 +1001,6 @@ body {
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_title{
 	position:fixed;
 	height:50%;
-	width:50%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
@@ -1012,9 +1010,10 @@ body {
 }
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .top_title .img-top{
-	position:fixed;
-	margin-top: 35%;
-    zoom: 90%;
+    position: fixed;
+	margin-top: 53%;
+    zoom: 120%;
+    margin-left: -2%;
 }
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_title .img-bottom{
@@ -1028,15 +1027,20 @@ body {
     line-height: 1;
     text-align: left;
     font-family: Roboto;
-	position:fixed;    margin-top: 10%;
+	position:fixed;   
+    margin-top: 15%;
+    margin-left: 40%;
 }
+
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list{
     font-weight: 100;
     font-size: 37px;
     line-height: 1;
     text-align: left;
     font-family: Roboto;
-	position:fixed;    margin-top: 10%;
+	position:fixed;
+    margin-top: 25%;
+    margin-left: 27%;
 }
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list .parent{
