@@ -1049,14 +1049,15 @@ public class LessonUtils {
                 newList.getItems().add(item);
                 try {
                     if (item.getList().getItems().size() != 0) {
-                        // System.err.println("111");
                         CMSList childList = new CMSList();
                         ArrayList<CMSTextItem> items3 = new ArrayList<>();
                         childList.setItems(items3);
                         for (CMSTextItem childItem : item.getList().getItems()) {
                             if (!childItem.getText().trim().startsWith("$slide")) {
-                                childList.getItems().add(childItem);
-                            }
+                            	childList.getItems().add(childItem);
+                            } else if(item.getDescription().trim().equalsIgnoreCase("NO_DESC")){
+                        		childList.getItems().add(childItem);
+                        	}
                         }
                         item.setList(childList);
                     }
