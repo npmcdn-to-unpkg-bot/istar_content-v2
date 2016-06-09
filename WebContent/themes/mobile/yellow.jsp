@@ -183,7 +183,7 @@ body {
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
-	width: 120%;
+	width: 95%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
@@ -304,6 +304,7 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
 	list-style: none;
+	margin-top: 8%;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -516,6 +517,7 @@ body {
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph  {
 	margin-top: -45%;
 	margin-left: 2%;
+	width: 130%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
