@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@page import="com.istarindia.apps.dao.*"%>
@@ -974,5 +973,98 @@ body {
 .reveal .IN_OUT_1___ONLY_TITLE_LIST li.child{
 	list-style-image: url("/content/assets/img/box.png") !important;
     padding-left: 6%;
+}
+
+
+
+/* IN_OUT_2 infographic */
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_top{
+	position:fixed;
+	margin-top: -50%;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_bottom{
+	position:fixed;
+	margin-top: 28%;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_title{
+	position:fixed;
+	height:50%;
+	width:50%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family: '<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+	
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_title{
+	position:fixed;
+	height:50%;
+	width:50%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family: '<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_title .img-top{
+	position:fixed;
+	margin-top: 35%;
+    zoom: 90%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_title .img-bottom{
+	position:fixed;
+	margin-top: 65%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list{
+    font-weight: 100;
+    font-size: 37px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+	position:fixed;    margin-top: 10%;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list{
+    font-weight: 100;
+    font-size: 37px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+	position:fixed;    margin-top: 10%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list .parent{
+font-size: 40px;margin-left: 130%;padding-bottom: 10%;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list .child{
+font-size: 40px;margin-left: 175%;padding-bottom: 10%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list .parent{
+font-size: 40px; margin-left: 235%;padding-bottom: 25%;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list .child{
+font-size: 40px; margin-left: 335%;padding-bottom: 25%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list li.parent{
+	list-style-image: url("/content/assets/img/in_out_2_infographic/top_drop_big.png") !important;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list li.child{
+	list-style-image: url("/content/assets/img/in_out_2_infographic/top_drop_small.png") !important;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list li.parent{
+	list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_1.png") !important;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list li.child{
+	list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.png") !important;
 }
 </style>
