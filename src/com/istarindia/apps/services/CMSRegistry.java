@@ -83,7 +83,7 @@ public class CMSRegistry {
 		slideTemplates.add("NO_CONTENT");
 		slideTemplates.add("ONLY_TITLE");
 		slideTemplates.add("ONLY_TITLE_PARAGRAPH");
-		slideTemplates.add("ONLY_TITLE_PARAGRPH_IMAGE");
+		slideTemplates.add("ONLY_TITLE_PARAGRAPH_IMAGE");
 		slideTemplates.add("ONLY_TITLE_IMAGE");
 		slideTemplates.add("ONLY_TITLE_LIST");
 		slideTemplates.add("ONLY_TITLE_LIST_NUMBERED");

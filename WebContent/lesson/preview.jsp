@@ -34,8 +34,6 @@ String style_body = "background-size: cover;";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="<%=nuetral%>student/css/reveal.css">
-<link rel="stylesheet" href="/themes/mobile.css"  type="text/css" />
-<link rel="stylesheet" href="/themes/mobile/default.css"  type="text/css" />
 
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved

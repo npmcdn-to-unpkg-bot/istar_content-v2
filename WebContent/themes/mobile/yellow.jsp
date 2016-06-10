@@ -174,7 +174,7 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE h2 {
     margin-left: 2%;
     padding-right: 3%;
 	color: <%=theme.get("title_____font_color")%>;
@@ -187,16 +187,6 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
-	margin-top: -37%;
-	margin-left: 2%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
-}
-.reveal .ONLY_TITLE_TABLE h2 {
 	margin-top: -37%;
 	margin-left: 2%;
 	color: <%=theme.get("title_____font_color")%>;
@@ -302,7 +292,7 @@ body {
 	font-family: <%=theme.get("subtitle_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph p {
 	list-style: none;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -313,7 +303,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_PARAGRPH  p {
+.reveal .ONLY_PARAGRAPH  p {
 	    margin-top: 4%;
 }
 
@@ -417,76 +407,6 @@ body {
     vertical-align: baseline;
 }
 
-.reveal .ONLY_TITLE_TABLE  table  {
-	margin: auto;
-    border-collapse: collapse;
-    vertical-align: baseline;
-    display: table;
-    margin-top: 5%;
-    font-size:4vh;
-    color: <%=theme.get("paragraph_____font_color")%>;
-	line-height: <%=theme.get("paragraph_____line_height")%>;
-	text-align: <%=theme.get("paragraph_____text_alignment")%>;
-	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
-    width: 100%;
-    font-weight: 400;
-}
-
-.reveal .ONLY_TITLE_TABLE  thead  {
-	display: table-header-group;
-	border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    border: 3px solid black;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.reveal .ONLY_TITLE_TABLE   td  {
-	text-align: left;
-    padding: 8px;
-    border: 3px solid black;
-}
-
-.reveal .ONLY_TITLE_TABLE  th {
-	text-align: left;
-    padding: 8px;
-    border: 3px solid black;
-    font-weight: bold;
-    background: #e0e0e0;
-}
-
-.reveal .ONLY_TITLE_TABLE  tr  {
-    display: table-row;
-    margin: 0;
-    padding: 0;
-    border: 3px solid black;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.reveal .ONLY_TITLE_TABLE th p {
-	text-align: left;
-    padding: 8px;
-    font-weight: bold;
-    background: #e0e0e0;
-}
-
-
-.reveal .ONLY_TITLE_TABLE .paragraph>p {
-	padding-bottom: 4%;
-    list-style: none;
-	margin-top: 3%;
-	padding-right: 5%;
-	color: <%=theme.get("paragraph_____font_color")%>;
-	font-weight: <%=theme.get("paragraph_____font_weight")%>;
-	font-size: <%=theme.get("paragraph_____font_size")%>px;
-	line-height: <%=theme.get("paragraph_____line_height")%>;
-	text-align: <%=theme.get("paragraph_____text_alignment")%>;
-	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
-}
 
 .reveal .ONLY_PARAGRAPH_TITLE .paragraph {
 	list-style: none;
@@ -525,7 +445,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph  {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph  {
 	margin-left: 2%;
     margin-top: 3%;
 	list-style: none;
@@ -651,62 +571,6 @@ body {
     margin-top: -41%;
 }
 
-.ONLY_2TITLE_TREE h1 {
-	margin-top: -26%;
-	margin-left: 2%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
-}
-
-.ONLY_2TITLE_TREE h2 {
-	text-align: left;
-	margin-left: 2%;
-	color: #7E4B0E;
-	font-weight: 400;
-	margin-top: 13%;
-	position: absolute;
-}
-
-.ONLY_2TITLE_TREE h3 {
-	text-align: left;
-	margin-left: 2%;
-	color: #FDC530;
-	font-weight: 400;
-	position: absolute;
-	margin-top: 49%;
-}
-
-.ONLY_2TITLE_TREE h4 {
-	text-align: left;
-	margin-left: 2%;
-	color: #FDC530;
-	font-weight: 400;
-	position: absolute;
-	margin-top: 75%;
-}
-
-.ONLY_2TITLE_TREE h5 {
-	text-align: left;
-	margin-left: 2%;
-	color: #FDC530;
-	font-weight: 400;
-	position: absolute;
-	margin-top: 49%;
-	margin-left: 55%;
-}
-
-.ONLY_2TITLE_TREE h6 {
-	text-align: left;
-	margin-left: 2%;
-	color: #FDC530;
-	font-weight: 400;
-	position: absolute;
-	margin-top: 104%;
-}
 .reveal .ONLY_PARAGRAPH_IMAGE img {
 	width: 180%;
 }
@@ -723,7 +587,7 @@ body {
 	width: 180%;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE img {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE img {
 	width: 180%;
 }
 
@@ -801,84 +665,6 @@ body {
 	padding-right: 31%;
 }
 
-
-
-/* Below are of no use.. just for the demo */
-
-
-
-.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS {
-	background: white;;
-}
-
-.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS h2 {
-	font-weight: 700;
-	font-size: 90px;
-	color: white;
-	background-color: #9cc4a6;
-	line-height: 2.7;
-	width: 116%;
-	padding-top: 130px;
-	margin-top: -63%;
-	margin-left: -10%;
-	text-align: left;
-	margin-left: 7%;
-}
-
-.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS table tr td {
-	font-weight: 700;
-	font-size: 44px;
-	line-height: 1.2;
-	text-align: left;
-	padding-top: 83px !important;
-}
-
-.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS table tr td input {
-	width: 121px;
-	height: 101px;
-	padding-top: 44px;
-}
-
-.reveal .ONLY_2TITLE_TABLE h2 {
-	font-weight: bolder;
-	font-size: 133px;
-	padding-top: 130px;
-	color: #e89d81;
-	line-height: 2.7;
-	width: 100%;
-	margin-top: -64%;
-	text-align: left;
-	margin-left: 0%;
-}
-
-.reveal .ONLY_2TITLE_TABLE table tr td {
-	font-weight: 400;
-	font-size: 50px;
-	padding-top: 39px;
-	padding: 14px;
-	text-align: left;
-}
-
-.reveal .ONLY_2TITLE_TABLE table tr td input {
-	width: 121px;
-	height: 101px;
-	padding-top: 44px;
-}
-
-.reveal .ONLY_2TITLE_TABLE {
-	background: white;;
-}
-
-.reveal .ONLY_2TITLE_TABLE h3 {
-	font-weight: bold;
-	font-size: 67px;
-	color: #e89d81;
-	line-height: 2.7;
-	width: 100%;
-	margin-top: -17%;
-	text-align: left;
-	margin-left: 0%;
-}
 
 
 
@@ -1073,4 +859,147 @@ font-size: 40px; margin-left: 335%;padding-bottom: 25%;
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list li.child{
 	list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.png") !important;
 }
+
+
+
+/* Working templates but never-used */
+
+.ONLY_2TITLE_TREE h1 {
+	margin-top: -26%;
+	margin-left: 2%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
+}
+
+.ONLY_2TITLE_TREE h2 {
+	text-align: left;
+	margin-left: 2%;
+	color: #7E4B0E;
+	font-weight: 400;
+	margin-top: 13%;
+	position: absolute;
+}
+
+.ONLY_2TITLE_TREE h3 {
+	text-align: left;
+	margin-left: 2%;
+	color: #FDC530;
+	font-weight: 400;
+	position: absolute;
+	margin-top: 49%;
+}
+
+.ONLY_2TITLE_TREE h4 {
+	text-align: left;
+	margin-left: 2%;
+	color: #FDC530;
+	font-weight: 400;
+	position: absolute;
+	margin-top: 75%;
+}
+
+.ONLY_2TITLE_TREE h5 {
+	text-align: left;
+	margin-left: 2%;
+	color: #FDC530;
+	font-weight: 400;
+	position: absolute;
+	margin-top: 49%;
+	margin-left: 55%;
+}
+
+.ONLY_2TITLE_TREE h6 {
+	text-align: left;
+	margin-left: 2%;
+	color: #FDC530;
+	font-weight: 400;
+	position: absolute;
+	margin-top: 104%;
+}
+
+
+.reveal .ONLY_2TITLE_TABLE h2 {
+	font-weight: bolder;
+	font-size: 133px;
+	padding-top: 130px;
+	color: #e89d81;
+	line-height: 2.7;
+	width: 100%;
+	margin-top: -64%;
+	text-align: left;
+	margin-left: 0%;
+}
+
+.reveal .ONLY_2TITLE_TABLE table tr td {
+	font-weight: 400;
+	font-size: 50px;
+	padding-top: 39px;
+	padding: 14px;
+	text-align: left;
+}
+
+.reveal .ONLY_2TITLE_TABLE table tr td input {
+	width: 121px;
+	height: 101px;
+	padding-top: 44px;
+}
+
+.reveal .ONLY_2TITLE_TABLE {
+	background: white;;
+}
+
+.reveal .ONLY_2TITLE_TABLE h3 {
+	font-weight: bold;
+	font-size: 67px;
+	color: #e89d81;
+	line-height: 2.7;
+	width: 100%;
+	margin-top: -17%;
+	text-align: left;
+	margin-left: 0%;
+}
+
+
+
+
+
+/* Below are of no use.. just for the demo */
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS {
+	background: white;;
+}
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS h2 {
+	font-weight: 700;
+	font-size: 90px;
+	color: white;
+	background-color: #9cc4a6;
+	line-height: 2.7;
+	width: 116%;
+	padding-top: 130px;
+	margin-top: -63%;
+	margin-left: -10%;
+	text-align: left;
+	margin-left: 7%;
+}
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS table tr td {
+	font-weight: 700;
+	font-size: 44px;
+	line-height: 1.2;
+	text-align: left;
+	padding-top: 83px !important;
+}
+
+.reveal .ONLY_TITLE_ASSESSMENT_2COLUMNS table tr td input {
+	width: 121px;
+	height: 101px;
+	padding-top: 44px;
+}
+
+
 </style>
