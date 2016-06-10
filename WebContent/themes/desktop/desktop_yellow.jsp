@@ -700,9 +700,6 @@ body {
 .reveal  #data_slide_list_item {
 	font-size: 90%
 }
-.reveal  #data_slide_paragraph {
-	font-size: 110%
-}
 .reveal  #data_slide_title {
 	font-size: 90%
 }
