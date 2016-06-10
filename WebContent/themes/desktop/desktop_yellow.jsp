@@ -408,7 +408,7 @@ body {
     border-collapse: collapse;
     vertical-align: baseline;
     display: table;
-    font-size:2.5vh;
+    font-size:4vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -530,7 +530,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li  {
-	list-style: square;
+	list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -593,7 +593,7 @@ body {
 }
 
 .reveal .ONLY_LIST ul li  {
-	list-style: square;
+	list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -698,16 +698,13 @@ body {
 }
 
 .reveal  #data_slide_list_item {
-	font-size: 75%
-}
-.reveal  #data_slide_paragraph {
-	font-size: 110%
+	font-size: 90%
 }
 .reveal  #data_slide_title {
-	font-size: 80%
+	font-size: 90%
 }
 .reveal  #data_slide_subtitle {
-	font-size: 80%
+	font-size: 90%
 }
 
 
