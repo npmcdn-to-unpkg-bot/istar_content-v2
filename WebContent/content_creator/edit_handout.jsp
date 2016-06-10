@@ -230,7 +230,9 @@
 			});
 			$('#selected_items').val("aaaa");
 			try {
-				CKEDITOR.replace('handouts_text1', { height: 500 });
+				CKEDITOR.replace('handouts_text1', { height: 500 , 
+					  filebrowserBrowseUrl: '/content/gallery.jsp',
+					    filebrowserUploadUrl: '/uploader/upload.php'});
 			} catch (err) {
 				// TODO: handle exception
 			}

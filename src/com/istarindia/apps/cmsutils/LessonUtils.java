@@ -1045,6 +1045,8 @@ public class LessonUtils {
         newList.setItems(new ArrayList<>());
         for (CMSTextItem item : slide.getList().getItems()) {
             if (item.getText().trim().equalsIgnoreCase("")) {
+            	System.err.println("<---><===Igrnared => "+ item.getDescription());
+            	//newList.getItems().add(item);
             } else {
                 newList.getItems().add(item);
                 try {
@@ -1053,20 +1055,29 @@ public class LessonUtils {
                         ArrayList<CMSTextItem> items3 = new ArrayList<>();
                         childList.setItems(items3);
                         for (CMSTextItem childItem : item.getList().getItems()) {
-                            if (!childItem.getText().trim().startsWith("$slide")) {
+                        	//childList.getItems().add(childItem);
+                        	System.err.println("<---><====> "+ item.getDescription());
+                        	
+                        	if (!childItem.getText().trim().startsWith("$slide")) {
+                        		System.err.println(item.getText());
+                        		System.err.println(item.getDescription());
                             	childList.getItems().add(childItem);
-                            } else if(item.getDescription().trim().equalsIgnoreCase("NO_DESC")){
+                            } 
+                        	if(childItem.getDescription().trim().equalsIgnoreCase("NO_DESC")){
+                        		System.err.println(item.getText());
+                        		System.err.println(item.getDescription());
                         		childList.getItems().add(childItem);
                         	}
                         }
                         item.setList(childList);
                     }
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    // e.printStackTrace();
+                   // e.printStackTrace();
                 }
             }
         }
+        
+        System.err.println("Count of Items -> "+newList.getItems().size() );
         if (!newSlide) {
             slide.setList(newList);
         }
