@@ -202,11 +202,11 @@
 		function initTextArea() {
 			
 			// If you haven't build CKEditor with this plugin.
-			//CKEDITOR.config.extraPlugins = 'simple-image-browser';
+			CKEDITOR.config.extraPlugins = 'simple-image-browser';
 
 			// Add this line to configure for AJAX / JSON Reponse.
 			// Link to plugin- http://ckeditor.com/addon/simple-image-browser
-			//CKEDITOR.config.simpleImageBrowserURL = "/content/GalleryJsonController";
+			CKEDITOR.config.simpleImageBrowserURL = "/content/GalleryJsonController";
 			
 			
 		}
@@ -230,9 +230,9 @@
 			});
 			$('#selected_items').val("aaaa");
 			try {
-				CKEDITOR.replace('handouts_text1', { height: 500,   
-					filebrowserBrowseUrl: 'http://cms.talentify.in/content/gallery.jsp'});
-					//,filebrowserUploadUrl: '/uploader/upload.php' });
+				CKEDITOR.replace('handouts_text1', { height: 500 , 
+					  filebrowserBrowseUrl: '/content/gallery.jsp',
+					    filebrowserUploadUrl: '/uploader/upload.php'});
 			} catch (err) {
 				// TODO: handle exception
 			}
