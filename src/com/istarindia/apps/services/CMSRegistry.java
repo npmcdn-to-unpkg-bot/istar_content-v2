@@ -88,11 +88,7 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_TITLE_LIST");
 		slideTemplates.add("ONLY_TITLE_LIST_NUMBERED");
 		slideTemplates.add("ONLY_TITLE_TREE");
-		slideTemplates.add("ONLY_TITLE_TABLE");
-		slideTemplates.add("ONLY_TITLE_VIDEO");
 		slideTemplates.add("ONLY_2TITLE");
-		slideTemplates.add("ONLY_2TITLE_TREE");
-		slideTemplates.add("ONLY_2TITLE_TABLE");
 		slideTemplates.add("ONLY_2TITLE_IMAGE");
 		slideTemplates.add("ONLY_PARAGRAPH");
 		slideTemplates.add("ONLY_PARAGRAPH_IMAGE");
@@ -102,6 +98,10 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_LIST_NUMBERED");
 		slideTemplates.add("ONLY_VIDEO");
 		slideTemplates.add("ONLY_2BOX");
+		
+		/* Not used even once in first 4000 slides*/
+		//slideTemplates.add("ONLY_2TITLE_TREE");
+		//slideTemplates.add("ONLY_2TITLE_TABLE");
 		
 		/* The below 5 templates were used for the sales demo[1st week of May 2016] */
 		//slideTemplates.add("ONLY_2TITLE_2TABLE");
