@@ -50,7 +50,7 @@ body {
 	background-color: <%=theme.get("background_color")%>;
 }
 
-.reveal .slide-background .NO_CONTENT {
+.reveal  .backgrounds .NO_CONTENT {
 	background-size: contain !important;
 }
 
@@ -187,7 +187,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
-    margin-top: -15%;
+    margin-top: -8%;
     color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -542,7 +542,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul  {
-    margin-left: 2%;
+    margin-left: 5%;
     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -712,6 +712,100 @@ body {
 
 
 
+/* Infographics */
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .fragment.first {
+
+  -webkit-transform: translate(0, -20%);
+          transform: translate(0, -20%); 
+          }
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .fragment.first.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST h2 {
+    margin-left: 44%;
+    margin-top: -42%;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 64px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    padding-bottom: 10%;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST h3 {    
+    margin-left: 44%;
+    margin-top: 19%;
+    color: #ffffff;
+    padding-bottom: 16%;
+    font-weight: 100;
+    font-size: 64px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .parent {
+    list-style: none !important;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 37px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    margin-left: 9%;
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .child  {    
+	list-style: none !important;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 37px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    margin-left: 26%;
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-init{
+    position: absolute;
+    margin-top: -8%;
+    margin-left: -56%;
+    zoom: 119%;
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-top{
+    position: fixed;
+    margin-left: -38%;
+    width: 16%;
+    margin-top: 55%;
+}
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-bottom{
+    position: fixed;
+    margin-left: -48%;
+    width: 33%;
+    margin-top: 21%;
+}
+    
+.reveal .IN_OUT_1___ONLY_TITLE_LIST li.parent{
+	background: url("/content/assets/img/coin.png") no-repeat top left !important;
+    padding: 5%;
+    padding-left: 8%;
+
+}
+
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST li.child{
+	list-style-image: url("/content/assets/img/box.png") !important;
+    padding-left: 6%;
+}
 
 
 /* Below are of no use.. just for the demo */
@@ -849,98 +943,4 @@ body {
 
 
 
-/* Infographics */
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .fragment.first {
-
-  -webkit-transform: translate(0, -20%);
-          transform: translate(0, -20%); 
-          }
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .fragment.first.visible {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0); }
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST h2 {
-    margin-left: 44%;
-    margin-top: -42%;
-    color: #ffffff;
-    font-weight: 100;
-    font-size: 64px;
-    line-height: 1;
-    text-align: left;
-    font-family: Roboto;
-    padding-bottom: 10%;
-}
-
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST h3 {    
-    margin-left: 44%;
-    margin-top: 19%;
-    color: #ffffff;
-    padding-bottom: 16%;
-    font-weight: 100;
-    font-size: 64px;
-    line-height: 1;
-    text-align: left;
-    font-family: Roboto;
-}
-
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .parent {
-    list-style: none !important;
-    color: #ffffff;
-    font-weight: 100;
-    font-size: 37px;
-    line-height: 1;
-    text-align: left;
-    font-family: Roboto;
-    margin-left: 9%;
-}
-
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .child  {    
-	list-style: none !important;
-    color: #ffffff;
-    font-weight: 100;
-    font-size: 37px;
-    line-height: 1;
-    text-align: left;
-    font-family: Roboto;
-    margin-left: 26%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-init{
-    position: absolute;
-    margin-top: -8%;
-    margin-left: -56%;
-    zoom: 119%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-top{
-    position: fixed;
-    margin-left: -38%;
-    width: 16%;
-    margin-top: 55%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .img-bottom{
-    position: fixed;
-    margin-left: -48%;
-    width: 33%;
-    margin-top: 21%;
-}
-    
-.reveal .IN_OUT_1___ONLY_TITLE_LIST li.parent{
-	background: url("/content/assets/img/coin.png") no-repeat top left !important;
-    padding: 5%;
-    padding-left: 8%;
-
-}
-
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST li.child{
-	list-style-image: url("/content/assets/img/box.png") !important;
-    padding-left: 6%;
-}
 </style>

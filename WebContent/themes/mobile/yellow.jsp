@@ -527,7 +527,7 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph  {
 	margin-left: 2%;
-    margin-top: 1%;
+    margin-top: 3%;
 	list-style: none;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -552,7 +552,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li  {
-	list-style: none !important;
+	list-style-type: square;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -564,7 +564,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul  {
-    margin-left: 2%;
+	margin-left: 2%;
     padding-top: 10%;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
@@ -575,7 +575,6 @@ body {
 }
 
 .reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
-	list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	list-style-type: decimal-leading-zero;
@@ -761,6 +760,7 @@ body {
 	padding-top: 26%;
 	padding-bottom: 5%;
 	margin-left: 11%;
+	margin-right: 15%;
 }
 
 .reveal .ONLY_2BOX #bottom h3 {
@@ -773,6 +773,7 @@ body {
 	padding-top: 26%;
 	margin-left: 11%;
 	padding-bottom: 4%;
+	margin-right: 10%;
 }
 
 .reveal .ONLY_2BOX #top li {
