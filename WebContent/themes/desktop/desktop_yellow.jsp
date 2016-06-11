@@ -725,7 +725,7 @@ body {
             transform: translate(0, 0); }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST h2 {
-    margin-left: 44%;
+    margin-left: 25%;
     margin-top: -42%;
     color: #ffffff;
     font-weight: 100;
@@ -733,7 +733,7 @@ body {
     line-height: 1;
     text-align: left;
     font-family: Roboto;
-    padding-bottom: 10%;
+    padding-bottom: 24%;
 }
 
 
@@ -758,12 +758,12 @@ body {
     line-height: 1;
     text-align: left;
     font-family: Roboto;
-    margin-left: 9%;
+    margin-left: 6%;
 }
 
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .child  {    
-	list-style: none !important;
+    list-style: none !important;
     color: #ffffff;
     font-weight: 100;
     font-size: 37px;
@@ -774,24 +774,24 @@ body {
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .img-init{
-    position: absolute;
+	position: absolute;
     margin-top: -8%;
-    margin-left: -56%;
+    margin-left: -76%;
     zoom: 119%;
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .img-top{
     position: fixed;
-    margin-left: -38%;
-    width: 16%;
-    margin-top: 55%;
+    margin-left: -23%;
+    width: 10%;
+    margin-top: 27%;
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .img-bottom{
     position: fixed;
-    margin-left: -48%;
-    width: 33%;
-    margin-top: 21%;
+    margin-left: -25%;
+    width: 15%;
+    margin-top: 10%;
 }
     
 .reveal .IN_OUT_1___ONLY_TITLE_LIST li.parent{
@@ -805,6 +805,118 @@ body {
 .reveal .IN_OUT_1___ONLY_TITLE_LIST li.child{
 	list-style-image: url("/content/assets/img/box.png") !important;
     padding-left: 6%;
+}
+
+/* IN_OUT_2 infographic */
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .fragment.first {
+
+  -webkit-transform: translate(0, -20%);
+          transform: translate(0, -20%); 
+          }
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .fragment.first.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST h2 {
+    margin-left: 25%;
+    margin-top: -42%;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 64px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    padding-bottom: 9%;
+}
+
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST h3 {    
+    margin-left: 44%;
+    margin-top: 19%;
+    color: #ffffff;
+    padding-bottom: 16%;
+    font-weight: 100;
+    font-size: 64px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+}
+
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .parent {
+    list-style: none !important;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 37px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    margin-left: 6%;
+}
+
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .child  {    
+    list-style: none !important;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 37px;
+    line-height: 1;
+    text-align: left;
+    font-family: Roboto;
+    margin-left: 26%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .img-top{
+    position: fixed;
+    margin-left: -23%;
+    width: 10%;
+    margin-top: 19%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .img-bottom{
+	position: fixed;
+    margin-left: -24%;
+    width: 15%;
+    margin-top: 22%;
+}
+  
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_top li.parent {
+	list-style-image:
+		url("/content/assets/img/in_out_2_infographic/top_drop_big.png")
+		!important;
+	padding-left: 15%;
+	padding-bottom: 120%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_top li.child {
+	margin-top: -67%;
+	margin-bottom: 65%;
+	margin-left: 535%;
+	list-style-image:
+		url("/content/assets/img/in_out_2_infographic/top_drop_small.png")
+		!important;
+	padding-left: 15%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_bottom li.parent {
+	padding-bottom: 120%;
+	margin-left: 100%;
+	list-style-image:
+		url("/content/assets/img/in_out_2_infographic/bottom_smoke_1.png")
+		!important;
+	padding-left: 15%;
+}
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_bottom li.child {
+	margin-top: -67%;
+	margin-bottom: 65%;
+	margin-left: 535%;
+	list-style-image:
+		url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.png")
+		!important;
+	padding-left: 15%;
 }
 
 

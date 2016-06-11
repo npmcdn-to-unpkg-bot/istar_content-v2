@@ -785,7 +785,7 @@ body {
 	font-family: Roboto;
 	position: fixed;
 	margin-top: -25%;
-	margin-left: 16%;
+	margin-left: 7%;
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_list {
@@ -833,7 +833,7 @@ body {
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .top_list li.child {
 	margin-top: -110%;
     margin-bottom: -5%;
-	margin-left: 585%;
+	margin-left: 385%;
 	list-style-image:
 		url("/content/assets/img/in_out_1_infographic/box.png") !important;
 	padding-left: 15%;
