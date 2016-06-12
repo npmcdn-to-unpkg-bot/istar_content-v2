@@ -120,15 +120,17 @@
 		<child_links display_name="Gallery" url="/content/gallery.jsp"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 			
-			<child_links display_name="Backgrounds" url="/content/backgrounds.jsp"
+		<child_links display_name="Backgrounds" url="/content/backgrounds.jsp"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
+		<child_links display_name="Handout Media" url="/content/handout_media.jsp"
+			valid_roles="content_creator,content_admin,content_reviewer" />
 	</parent_links>
 
 	<parent_links display_name="Theme">
 		<child_links display_name="Create"
-			url="/content/creative_admin/create_theme.jsp" valid_roles="creative_admin,content_creator" />
+			url="/content/creative_admin/create_theme.jsp" valid_roles="creative_admin,creative_creator,content_admin,content_creator" />
 		<child_links display_name="List"
-			url="/content/creative_admin/view_themes.jsp" valid_roles="creative_admin,content_creator" />
+			url="/content/creative_admin/view_themes.jsp" valid_roles="creative_admin,creative_creator,content_admin,content_creator" />
 	</parent_links>
 
 	<parent_links display_name="Trainer">
