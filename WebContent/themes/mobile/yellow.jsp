@@ -163,8 +163,8 @@ body {
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	text-transform: uppercase;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
@@ -175,8 +175,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH_IMAGE h2 {
@@ -187,8 +187,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 	width: 95%;
 }
 
@@ -200,8 +200,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_IMAGE h2 {
@@ -213,8 +213,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_VIDEO h2 {
@@ -226,8 +226,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_PARAGRAPH_TITLE h2 {
@@ -239,8 +239,8 @@ body {
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	text-transform: uppercase;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST h2 {
@@ -251,8 +251,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_LIST_NUMBERED h2 {
@@ -263,8 +263,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_TREE h2 {
@@ -276,8 +276,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal  .ONLY_2TITLE h3 {
@@ -288,8 +288,8 @@ body {
 	font-size: <%=theme.get("subtitle_____font_size")%>px;
 	line-height: <%=theme.get("subtitle_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h3 {
@@ -300,8 +300,8 @@ body {
 	font-size: <%=theme.get("subtitle_____font_size")%>px;
 	line-height: <%=theme.get("subtitle_____line_height")%>;
 	text-align: <%=theme.get("subtitle_____text_alignment")%>;
-	font-family: <%= theme.get ( "subtitle_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "subtitle_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph p {
@@ -506,8 +506,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul {
@@ -518,8 +518,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_LIST_NUMBERED ul li {
@@ -531,8 +531,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_LIST_NUMBERED ul {
@@ -543,8 +543,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_TREE ul li {
@@ -556,8 +556,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_TITLE_TREE ul {
@@ -576,8 +576,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_LIST ul {
@@ -595,8 +595,8 @@ body {
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
-	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .reveal .ONLY_LIST_NUMBERED ul {
@@ -664,8 +664,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 	padding-top: 26%;
 	margin-left: 11%;
 	padding-bottom: 4%;
@@ -700,161 +700,92 @@ body {
 	padding-right: 31%;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* Infographics */
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .IN_OUT_1_top {
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .first-set {
 	position: fixed;
-	margin-top: -57%;
+	margin-top: -50%;
+}
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .second-set {
+	position: fixed;
+ padding-top: 21%;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .IN_OUT_1_bottom {
+.reveal .IN_OUT_1___ONLY_TITLE_LIST #element_2 {
 	position: fixed;
-	margin-top: 28%;
+	margin-left: -5%;
+	zoom: 117%;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_title {
+.reveal .IN_OUT_1___ONLY_TITLE_LIST #element_3 {
 	position: fixed;
-	height: 50%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-family:
-		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
-		serif;
+    paddin-top:2%;
+    margin-left: -38%;
+	zoom: 120%;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_title {
-	position: fixed;
-	height: 50%;
-	margin-top: 50%;
-    margin-left: 40%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-family:
-		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
-		serif;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_title .img-top {
-	position: fixed;
-    margin-top: -50%;
-    zoom: 120%;
-    margin-left: -5%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_title #data_slide_title {
-	position: fixed;
-    margin-top: -45%;
-    zoom: 120%;
-    margin-left: 35%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_title .img-middle {
-	position: fixed;
-    margin-top: 30%;
-    zoom: 120%;
-    margin-left: 12%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_title .img-bottom {
+.reveal .IN_OUT_1___ONLY_TITLE_LIST #element_5 {
     position: fixed;
-    margin-top: -14%;
-    margin-left: -36%;
-    zoom: 116%;
-}
+    margin-left: 4%;
+    zoom: 120%;
+    margin-top: -2%;}
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_list {
-	font-weight: 100;
-	font-size: 37px;
-	line-height: 1;
-	text-align: left;
-	font-family: Roboto;
+.reveal .IN_OUT_1___ONLY_TITLE_LIST h2 {
 	position: fixed;
-	margin-top: -25%;
-	margin-left: 7%;
+	margin-left: 40%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family:
+		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
+		serif;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_list {
-	font-weight: 100;
-	font-size: 37px;
-	line-height: 1;
-	text-align: left;
-	font-family: Roboto;
-	position: fixed;
-    margin-top: 68%;
-    margin-left: 17%;
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .in {
+	margin-left: 18%;
+	margin-top: -26%;    margin-bottom: 5%;
+	color: <%=theme.get("title_____font_color")%>;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_list .parent {
-	font-size: 40px;
-	margin-left: 130%;
-	padding-bottom: 10%;
+.reveal .IN_OUT_1___ONLY_TITLE_LIST .out {
+	margin-left: 18%;
+	margin-top: 38%;
+	color: <%=theme.get("title_____font_color")%>;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_list .child {
-	font-size: 40px;
-	margin-left: 175%;
-	padding-bottom: 10%;
+
+.reveal .IN_OUT_1___ONLY_TITLE_LIST  ul {
+	list-style: none;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_list .parent {
-	font-size: 40px;
-	margin-left: 235%;
-	padding-bottom: 25%;
+.reveal .IN_OUT_1___ONLY_TITLE_LIST  ul li.parent {zoom: 120%;
+	background: url("/content/assets/img/coin.png") no-repeat top left
+		!important;
+	padding: 5%;
+	padding-left: 11%;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_list .child {
-	font-size: 40px;
-	margin-left: 525%;
-	padding-bottom: 25%;
+.reveal .IN_OUT_1___ONLY_TITLE_LIST  ul li.child {
+list-style-image: url("/content/assets/img/box.png") !important;
+    padding-left: 3%;
+	    margin-left: 35%;
+    margin-top: -2%;
+    zoom: 125%;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_list li.parent {
-	list-style-image:
-		url("/content/assets/img/in_out_1_infographic/coin.png") !important;
-	padding-left: 15%;
-	padding-bottom: 120%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .top_list li.child {
-	margin-top: -110%;
-    margin-bottom: -5%;
-	margin-left: 385%;
-	list-style-image:
-		url("/content/assets/img/in_out_1_infographic/box.png") !important;
-	padding-left: 15%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_list li.parent {
-	padding-bottom: 120%;
-	margin-left: 100%;
-	list-style-image:
-		url("/content/assets/img/in_out_1_infographic/coin.png") !important;
-	padding-left: 15%;
-}
-
-.reveal .IN_OUT_1___ONLY_TITLE_LIST .bottom_list li.child {
-    margin-top: -115%;
-    margin-bottom: -28%;
-	margin-left: 535%;
-	list-style-image:
-		url("/content/assets/img/in_out_1_infographic/box.png") !important;
-	padding-left: 15%;
-}
 
 /* IN_OUT_2 infographic */
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_top {
@@ -998,8 +929,8 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( ".ttf",
-		"") .replaceAll ( "-Regular", "") %>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
 .ONLY_2TITLE_TREE h2 {
