@@ -758,7 +758,7 @@ body {
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .out {
 	margin-left: 18%;
-	margin-top: 38%;
+	margin-top: 48%;
 	color: <%=theme.get("title_____font_color")%>;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
