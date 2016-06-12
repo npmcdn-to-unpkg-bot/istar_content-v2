@@ -42,7 +42,7 @@ public class GalleryJsonController extends HttpServlet {
 
 		response.setContentType("application/json");
 		
-		String sql = "select I.url from image I, task T where T.item_type='IMAGE' and T.item_id=I.id ";
+		String sql = "select I.url, I.thumbnail_url from image I, task T where T.item_type='IMAGE' and T.status='COMPLETED' and T.item_id=I.id and I.url IS NOT NULL";
 		IstarUserDAO dao = new IstarUserDAO();
         Session session = dao.getSession();
         SQLQuery query = session.createSQLQuery(sql);
@@ -53,10 +53,12 @@ public class GalleryJsonController extends HttpServlet {
 		for (HashMap<String, Object> object : results) {
         	json = new JSONObject();
 			try {
-				json.put("url", object.get("url").toString());
+				json.put("image", object.get("url").toString());
+				json.put("thumb", object.get("thumbnail_url").toString());
+				json.put("folder", "small");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			arr.put(json);
 		}

@@ -175,7 +175,7 @@
 		type="text/javascript" charset="utf-8"></script>
 	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
-	<script src="<%=baseURL%>assets/plugins/ckeditor/plugins/simple-image-browser/plugin.js"></script>
+	<script src="<%=baseURL%>assets/plugins/ckeditor/plugins/imagebrowser/plugin.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
@@ -185,6 +185,7 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
+
 		function myFunction() {
 			var selectedElmsIds = $('#html1').jstree("get_selected");
 			if (selectedElmsIds == ""){
@@ -200,15 +201,8 @@
 
 		}
 		function initTextArea() {
-			
-			// If you haven't build CKEditor with this plugin.
-			CKEDITOR.config.extraPlugins = 'simple-image-browser';
-
-			// Add this line to configure for AJAX / JSON Reponse.
-			// Link to plugin- http://ckeditor.com/addon/simple-image-browser
-			CKEDITOR.config.simpleImageBrowserURL = "/content/GalleryJsonController";
-			
-			
+			CKEDITOR.config.extraPlugins = 'imagebrowser';
+			CKEDITOR.config.imageBrowser_listUrl = "/content/GalleryJsonController";
 		}
 		
 		jQuery(document).ready(function() {

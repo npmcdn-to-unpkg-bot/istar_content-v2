@@ -305,7 +305,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph p {
-	list-style: none;
+	list-style: none !important;
 	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -322,6 +322,7 @@ body {
 }
 
 .reveal .ONLY_PARAGRAPH  table {
+	list-style: none !important;
 	margin: auto;
 	border-collapse: collapse;
 	vertical-align: baseline;
@@ -374,6 +375,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  table {
+	list-style: none !important;
 	margin: auto;
 	border-collapse: collapse;
 	vertical-align: baseline;
@@ -426,7 +428,7 @@ body {
 }
 
 .reveal .ONLY_PARAGRAPH_TITLE .paragraph {
-	list-style: none;
+	list-style: none !important;
 	margin-top: -45%;
 	margin-left: 2%;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -470,7 +472,7 @@ body {
 .reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph {
 	margin-left: 2%;
 	margin-top: 3%;
-	list-style: none;
+	list-style: none !important;
 	z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -484,7 +486,7 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
 	margin-left: 2%;
-	list-style: none;
+	list-style: none !important;
 	margin-top: 3%;
 	padding-right: 2%;
 	color: <%=theme.get("paragraph_____font_color")%>;
