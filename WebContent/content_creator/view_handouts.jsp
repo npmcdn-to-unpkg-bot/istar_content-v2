@@ -48,11 +48,6 @@
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
-
-
-
-
-
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
@@ -87,18 +82,18 @@
 										for (Course course : (List<Course>) dao.findAll()) {
 											course_sno++;
 									%>
-									<li id="course_<%=course.getId()%>" data-jstree='{"opened":true}'><a href='view_handout.jsp?course_id=<%=course_sno%>'> <%=course_sno%>. <%=course.getCourseName()%></a>
-										<ul>
+									<li id="course_<%=course.getId()%>" data-jstree='{"opened":false}'><a href='view_handout.jsp?course_id=<%=course_sno%>'> <%=course_sno%>. <%=course.getCourseName()%></a>
+										<ul >
 											<%  int cmsession_sno = 0;
 												for (Module module : course.getAllModules(course.getId())) {
 											%>
-											<li id="module_<%=module.getId()%>" data-jstree='{"opened":true}'> <%=module.getModuleName()%>
-												<ul>
+											<li  id="module_<%=module.getId()%>" data-jstree='{"opened":true}'> <%=module.getModuleName()%>
+												<ul >
 													<% 
  												for (Cmsession session1 : module.getAllSession(module.getId())) {
  													cmsession_sno++;
  											%>
-													<li id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'>
+													<li  id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'>
 													
 													<span class="label rounded label-sea"> 
 													<a style='color:white' href='view_handout.jsp?sess_id=<%=session1.getId()%>'> View Handouts </a></span><%=cmsession_sno%>. <%=session1.getTitle()%>
@@ -121,7 +116,7 @@
 																	assigned = "label label-default ";
 																}
 															%>
-															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
+															<li style="padding:2% !important; margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
 															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
 															 <span class="label rounded label-sea"> 
 													<a style='color:white' href='/content/content_creator/edit_handout.jsp?lesson_id=<%=lesson.getId()%>'> Edit Handouts </a></span>

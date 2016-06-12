@@ -1340,17 +1340,16 @@ AND SA.assessment_id = :assessment_id
 	
 	<reports id="150" type_of_report="table">
 		<column columnHandler="NONE" display_name="Handout ID" isVisible="true" name="handout_id" />
-		<column columnHandler="NONE" display_name="Handout Title" isVisible="true" name="handout_title" />
-		<!-- <column columnHandler="NONE" display_name="Lesson ID" isVisible="true" name="lesson_id" /> -->
-		<column columnHandler="NONE" display_name="Lesson Name" isVisible="true" name="lesson_title" />
-		<column columnHandler="NONE" display_name="Handouts" isVisible="true" name="handout_data" />
-		<!-- <column columnHandler="NONE" display_name="Course Name" isVisible="true" name="course_name" /> -->
+		<column columnHandler="NONE" display_name="Lesson" isVisible="true" name="lesson_title" />
+		<column columnHandler="NONE" display_name="Session" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Module" isVisible="true" name="module_title" />
+		<column columnHandler="NONE" display_name="Course" isVisible="true" name="course_title" />
 		<column columnHandler="HANDOUT_HANDLER" display_name="Edit" isVisible="true" name="handout_id" />
 
 		<sql>
-		select DISTINCT ll.title as lesson_title, ll.id as lesson_id , hh.title as handout_title,  hh.id as handout_id , hh.handout_text as handout_data
-from handouts hh, lesson ll 
-where hh.lesson_id=ll.id 
+		select DISTINCT s.title as session_title, m.module_name as module_title, c.course_name as course_title, ll.title as lesson_title, ll.id as lesson_id , hh.title as handout_title,  hh.id as handout_id , hh.handout_text as handout_data
+from handouts hh, lesson ll , cmsession s, module m , course c
+where hh.lesson_id=ll.id  and s.id = ll.session_id and m.id=s.module_id and c.id=m.course_id
 
 		
 		</sql>

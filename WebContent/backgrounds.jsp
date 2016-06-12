@@ -138,15 +138,11 @@
 					for (Image image : list) {
 				%>
 
-				<div class="col-sm-2 sm-margin-bottom-30">
-					<a href="<%=image.getUrl()%>" rel="gallery3"
-						class="fancybox img-hover-v1" title="Image 1"> <span>
-						<img
-							style="width: 92%; margin: 10px" class="img-responsive"
-							src="<%=image.getUrl()%>" alt=""></span>
-					</a>
+				<div class="col-sm-3 sm-margin-bottom-30" style="margin-top:2%">
 					
-					<p style="word-wrap: break-word"><%=image.getTitle()%> </p>
+					<a href="<%=image.getUrl()%>" rel="gallery3"
+						class="fancybox img-hover-v1" title="Image 1"><span><%=image.getTitle().replaceAll("_", " ") %></span>
+					</a>
 				</div>
 				
 				<%

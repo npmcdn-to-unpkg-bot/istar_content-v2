@@ -21,6 +21,11 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
+<style type="text/css">
+.jstree-anchor{
+height:    auto   !important;
+ white-space:  normal  !important;}
+ </style>
 <title>Media Gallery | iStar CMS</title>
 
 <!-- Meta -->
@@ -83,38 +88,36 @@
 		<jsp:include page="content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">Gallery</h1>
+				<div class="text-center margin-bottom-50">
+				<h2 class="title-v2 title-center">Gallery</h2>
+			</div>
 			</div>
 		</div>
 		<div class="container-fluid height-1000 content">
-			<div class="text-center margin-bottom-50">
-				<h2 class="title-v2 title-center">Gallery</h2>
-			</div>
-			<a href="javascript:getSessions();">Filter on Session</a>
+			
+			<button style="margin-bottom: 1%;" onClick="getSessions();" type="submit" class="btn-u">Filter on Session</button>
 			<input type="hidden" id="selected_items" name="selected_items" />
+			<label id="err" style="display: block;color:#ff0000"></label>
 			
-			<label id="err" style="display: block;color:#ee9393"></label>
-			<div id="html1" class="col-md-3">
+			<div id="html1" class="col-md-4"style="padding-right : 4% ;background-color: aliceblue; ">
 				<%=(new MediaUploadHelper().getMediaTree((IstarUser) request.getSession().getAttribute("user")))%>
-			
-				
 			</div>
-			<div class="col-md-9">
+			
+			<div class="col-md-8" style="padding-left : 2%  ;background-color: #f2f2f2">
 				<%
 					MediaService service = new MediaService();
-					String sess = "1";
+					String sess = new String();
 					if(request.getParameterMap().containsKey("sessionids")) {
 						sess = request.getParameter("sessionids");
+					} else {
+						sess = "show_all";
 					}
-				
 					List<Image> images = service.getAllPublishedImages(sess);
 					for (Image image : images) {
 				%>
-				<div class="col-sm-2 sm-margin-bottom-30">
+				<div class="col-sm-2 sm-margin-bottom-30" style="margin-top: 2%;  word-wrap: break-word;">
 					<a href="<%=image.getUrl()%>" rel="gallery3"
-						class="fancybox img-hover-v1" title="Image 1"> <span><img
-							style="width: 165px; height: 165px; margin: 10px"
-							class="img-responsive" src="<%=image.getThumbnailUrl()%>" alt=""></span>
+						class="fancybox img-hover-v1" title="Image 1"><span><%=image.getTitle().replaceAll("_", " ") %></span>
 					</a>
 				</div>
 				<%
@@ -173,7 +176,7 @@
 				var selectedElmsIds = $('#html1').jstree("get_selected");
 				if (selectedElmsIds == ""){
 					event.preventDefault();
-					document.getElementById("err").innerHTML = "Please select the session";
+					document.getElementById("err").innerHTML = "Please select at least one session";
 					return false; 
 					}
 				$('#selected_items').val(selectedElmsIds);
