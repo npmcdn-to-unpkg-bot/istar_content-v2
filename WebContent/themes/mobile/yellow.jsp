@@ -788,137 +788,108 @@ list-style-image: url("/content/assets/img/box.png") !important;
 
 
 /* IN_OUT_2 infographic */
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_top {
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .first-set {
 	position: fixed;
 	margin-top: -57%;
 }
-
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .in_out_2_bottom {
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .second-set {
 	position: fixed;
-	margin-top: 28%;
+ padding-top: 21%;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_title {
-	position: fixed;
-	height: 50%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-family:
-		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
-		serif;
+.reveal .IN_OUT_2___ONLY_TITLE_LIST #element_2 {
+    position: fixed;
+       zoom: 118%;
+    margin-top: -11%;
+    margin-left: -51%;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_title {
+.reveal .IN_OUT_2___ONLY_TITLE_LIST #element_3 {
 	position: fixed;
-	height: 50%;
-	margin-top: 12%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-family:
-		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
-		serif;
-}
-
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_title .img-top {
-	position: fixed;
-	margin-top: 53%;
+    paddin-top:2%;
+    margin-left: -38%;
 	zoom: 120%;
-	margin-left: -2%;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_title .img-bottom {
+.reveal .IN_OUT_2___ONLY_TITLE_LIST #element_5 {
+    position: fixed;
+    margin-left: -6%;
+    zoom: 120%;
+    margin-top: 64%;
+   }
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST h2 {
 	position: fixed;
-	margin-top: 55%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family:
+		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
+		serif;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list {
-	font-weight: 100;
-	font-size: 37px;
-	line-height: 1;
-	text-align: left;
-	font-family: Roboto;
-	position: fixed;
-	margin-top: 11%;
-	margin-left: 40%;
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in {
+	    margin-left: 40%;
+    margin-top: -46%;
+    margin-bottom: 5%;
+    color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list {
-	font-weight: 100;
-	font-size: 37px;
-	line-height: 1;
-	text-align: left;
-	font-family: Roboto;
-	position: fixed;
-	margin-top: 30%;
-	margin-left: 40%;
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .out {
+	    margin-left: 40%;
+    margin-top: 47%;
+	color: <%=theme.get("title_____font_color")%>;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list .parent {
-	font-size: 40px;
-	margin-left: 130%;
-	padding-bottom: 10%;
+
+.reveal .IN_OUT_2___ONLY_TITLE_LIST  ul {
+	list-style: none;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list .child {
-	font-size: 40px;
-	margin-left: 175%;
-	padding-bottom: 10%;
-}
-
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list .parent {
-	font-size: 40px;
-	margin-left: 235%;
-	padding-bottom: 25%;
-}
-
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list .child {
-	font-size: 40px;
-	margin-left: 525%;
-	padding-bottom: 25%;
-}
-
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list li.parent {
-	list-style-image:
-		url("/content/assets/img/in_out_2_infographic/top_drop_big.png")
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in ul li.parent {zoom: 120%;
+	background: url("/content/assets/img/in_out_2_infographic/top_drop_big.png") no-repeat top left
 		!important;
-	padding-left: 15%;
-	padding-bottom: 120%;
+	padding: 5%;
+	padding-left: 11%;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .top_list li.child {
-	margin-top: -67%;
-	margin-bottom: 65%;
-	margin-left: 535%;
-	list-style-image:
-		url("/content/assets/img/in_out_2_infographic/top_drop_small.png")
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .out ul li.parent {zoom: 120%;
+	background: url("/content/assets/img/in_out_2_infographic/bottom_smoke_1.png") no-repeat top left
 		!important;
-	padding-left: 15%;
+	padding: 5%;
+	padding-left: 11%;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list li.parent {
-	padding-bottom: 120%;
-	margin-left: 100%;
-	list-style-image:
-		url("/content/assets/img/in_out_2_infographic/bottom_smoke_1.png")
-		!important;
-	padding-left: 15%;
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .in ul li.child {
+list-style-image: url("/content/assets/img/in_out_2_infographic/top_drop_small.png") !important;
+        padding-left: 3%;
+    margin-left: 46%;
+    margin-top: -2%;
+    zoom: 125%;
+    padding-bottom: 6%;
+}
+.reveal .IN_OUT_2___ONLY_TITLE_LIST .out ul li.child {
+list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.png") !important;
+   padding-left: 3%;
+    margin-left: 48%;
+    padding-bottom: 5%;
+    margin-top: -2%;
+    zoom: 125%;
 }
 
-.reveal .IN_OUT_2___ONLY_TITLE_LIST .bottom_list li.child {
-	margin-top: -67%;
-	margin-bottom: 65%;
-	margin-left: 535%;
-	list-style-image:
-		url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.png")
-		!important;
-	padding-left: 15%;
-}
 
 /* Working templates but never-used */
 .ONLY_2TITLE_TREE h1 {
