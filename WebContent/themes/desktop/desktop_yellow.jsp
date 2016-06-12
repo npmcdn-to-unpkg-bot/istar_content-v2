@@ -174,7 +174,7 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE h2 {
+.reveal .ONLY_TITLE_paragraph_IMAGE h2 {
     margin-left: 2%;
     padding-right: 3%;
 	color: <%=theme.get("title_____font_color")%>;
@@ -290,7 +290,7 @@ body {
 	font-family: <%=theme.get("subtitle_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph p {
+.reveal .ONLY_TITLE_paragraph_IMAGE .paragraph p {
 	list-style: none;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -301,7 +301,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_PARAGRPH  p {
+.reveal .ONLY_paragraph  p {
 	 
 }
 
@@ -504,7 +504,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE .paragraph  {
+.reveal .ONLY_TITLE_paragraph_IMAGE .paragraph  {
     margin-top: 5%;
 	margin-left: 2%;
     list-style: none;
@@ -693,7 +693,7 @@ body {
 	width: 180%;
 }
 
-.reveal .ONLY_TITLE_PARAGRPH_IMAGE img {
+.reveal .ONLY_TITLE_paragraph_IMAGE img {
 	width: 180%;
 }
 
