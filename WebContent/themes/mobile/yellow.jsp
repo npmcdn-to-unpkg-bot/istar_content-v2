@@ -513,7 +513,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul {
-	margin-left: 2%;
+	margin-left: 5%;
 	padding-top: 10%;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
@@ -538,7 +538,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_LIST_NUMBERED ul {
-	margin-left: 2%;
+	margin-left: 5%;
 	padding-top: 10%;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
@@ -583,7 +583,7 @@ body {
 }
 
 .reveal .ONLY_LIST ul {
-	margin-left: 2%;
+	margin-left: 5%;
 	margin-top: -41%;
 }
 
@@ -602,7 +602,7 @@ body {
 }
 
 .reveal .ONLY_LIST_NUMBERED ul {
-	margin-left: 2%;
+	margin-left: 5%;
 	margin-top: -41%;
 }
 
