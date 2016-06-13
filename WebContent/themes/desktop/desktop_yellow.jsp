@@ -310,7 +310,7 @@ body {
     border-collapse: collapse;
     vertical-align: baseline;
     display: table;
-    font-size: 4vh;
+    font-size: 2.5vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
@@ -359,7 +359,7 @@ body {
     border-collapse: collapse;
     vertical-align: baseline;
     display: table;
-    font-size: 4vh;
+    font-size: 2.5vh;
     color: <%=theme.get("paragraph_____font_color")%>;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
