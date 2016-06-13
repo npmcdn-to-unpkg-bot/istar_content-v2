@@ -131,7 +131,7 @@ public class CreateTrainerController extends HttpServlet {
 			int vac_id = Integer.parseInt(vac);
 			VacancyWorkflowDAO dao = new VacancyWorkflowDAO();
 			
-			VacancyWorkflow vw = dao.findById(Integer.parseInt(vac));
+			VacancyWorkflow vw = dao.findByVacancyId(vac_id).get(0);
 			
 			EventDAO evdao = new EventDAO();
 			Event event = new Event();
