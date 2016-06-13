@@ -174,7 +174,7 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_paragraph_IMAGE h2 {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE h2 {
     margin-left: 2%;
     padding-right: 3%;
 	color: <%=theme.get("title_____font_color")%>;
@@ -290,7 +290,7 @@ body {
 	font-family: <%=theme.get("subtitle_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_paragraph_IMAGE .paragraph p {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph p {
 	list-style: none;
     z-index: 9999;
 	color: <%=theme.get("paragraph_____font_color")%>;
@@ -504,7 +504,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_paragraph_IMAGE .paragraph  {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph  {
     margin-top: 5%;
 	margin-left: 2%;
     list-style: none;
@@ -693,7 +693,7 @@ body {
 	width: 180%;
 }
 
-.reveal .ONLY_TITLE_paragraph_IMAGE img {
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE img {
 	width: 180%;
 }
 
@@ -743,7 +743,7 @@ body {
     margin-top: -5%;
     margin-left: 20%;
 	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
+	font-size: 40px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
@@ -755,7 +755,6 @@ body {
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .in {
     margin-left: 18%;
     margin-top: 10%;
-	color: <%=theme.get("title_____font_color")%>;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -767,7 +766,6 @@ body {
 .reveal .IN_OUT_1___ONLY_TITLE_LIST .out {
     margin-left: 12%;
     margin-top: 10%;
-	color: <%=theme.get("title_____font_color")%>;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -787,6 +785,7 @@ body {
     zoom: 70%;
     padding: 5%;
     padding-left: 11%;
+	font-size: 55px;
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST  ul li.child {
@@ -821,7 +820,7 @@ body {
 	position: fixed;
     margin-left: 20%;
 	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
+	font-size: 40px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
@@ -833,8 +832,7 @@ body {
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .in {
     margin-left: 25%;
     margin-top: 20%;
-    color: <%=theme.get("title_____font_color")%>;
-	color: <%=theme.get("listitem_____font_color")%>;
+     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
@@ -845,8 +843,7 @@ body {
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .out {
     margin-left: 30%;
     margin-top: 20%;
-    color: <%=theme.get("title_____font_color")%>;
-	color: <%=theme.get("listitem_____font_color")%>;
+     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
@@ -865,6 +862,7 @@ body {
 		!important;
 	padding: 5%;
 	padding-left: 11%;
+	font-size: 55px;
 }
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .in ul li.child {
@@ -879,6 +877,7 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/top_drop_small.p
 		!important;
 	padding: 5%;
 	padding-left: 11%;
+	font-size: 55px;
 }
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .out ul li.child {

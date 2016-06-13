@@ -735,7 +735,7 @@ body {
 	position: fixed;
 	margin-left: 40%;
 	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
+	font-size: 70px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
@@ -796,7 +796,7 @@ list-style-image: url("/content/assets/img/box.png") !important;
 }
 .reveal .IN_OUT_2___ONLY_TITLE_LIST .second-set {
 	position: fixed;
- padding-top: 21%;
+ padding-top: 26%;
 }
 
 .reveal .IN_OUT_2___ONLY_TITLE_LIST #element_2 {
@@ -823,7 +823,7 @@ list-style-image: url("/content/assets/img/box.png") !important;
 .reveal .IN_OUT_2___ONLY_TITLE_LIST h2 {
 	position: fixed;
 	color: <%=theme.get("title_____font_color")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
+	font-size: 70px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
