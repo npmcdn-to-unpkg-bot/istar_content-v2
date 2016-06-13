@@ -499,6 +499,20 @@ body {
 		serif;
 }
 
+.reveal .ONLY_PARAGRAPH  table ul{
+	list-style-type: none !important;
+}
+.reveal .ONLY_TITLE_PARAGRAPH  table ul{
+	list-style-type: none !important;
+}
+
+.reveal .ONLY_TABLE  table ul{
+	list-style-type: none !important;
+}
+.reveal .ONLY_TITLE_TABLE  table ul{
+	list-style-type: none !important;
+}
+
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li {
 	list-style-type: square;
 	padding-bottom: 48px;
