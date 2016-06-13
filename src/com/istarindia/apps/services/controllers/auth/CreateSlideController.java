@@ -124,7 +124,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				slide_id = service.addImageParagraphSlideToLesson(request.getParameter("paragraph"), image,
 						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"));
+						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
 				ImageDAO dao = new ImageDAO();
 				int image_id = 0; // Dummy image id.
@@ -141,7 +141,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addImageParagraphSlideToLessonUpdate(request.getParameter("paragraph"), image,
 						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
 
 			break;
@@ -615,7 +615,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setDescription(img.getDescription());
 				slide_id = service.addImageSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, "NO_TITLE", request.getParameter("slideTransition"),
-						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image);
+						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image,
+						request.getParameter("image_bg"));
 			} else {
 				ImageDAO dao = new ImageDAO();
 				int image_id = 0; // Dummy image id. To be added soon
@@ -632,13 +633,11 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, "NO_TITLE", request.getParameter("slideTransition"),
 						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image,
-						request.getParameter("slide_id"));
+						request.getParameter("slide_id"), request.getParameter("image_bg"));
 
 			}
 			break;
 
-		
-		
 		case "NO_CONTENT":
 			//image_bg=%2Fcontent%2Fbackgrounds%2F6.png&slideTransition=Zoom&background
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {

@@ -348,6 +348,7 @@ body {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	color: #333333;
 }
 
 .reveal .ONLY_PARAGRAPH   td {
@@ -401,6 +402,7 @@ body {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	color: #333333;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH   td {
@@ -458,6 +460,7 @@ body {
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph {
 	margin-top: -45%;
 	margin-left: 2%;
+	max-width: 99%;
 	width: 130%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -467,6 +470,11 @@ body {
 	font-family:
 		'<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
 		serif;
+}
+
+
+.reveal .ONLY_PARAGRAPH_IMAGE  .paragraph p{
+	margin-top: 5%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH_IMAGE .paragraph {
@@ -597,7 +605,7 @@ body {
 }
 
 .reveal .ONLY_LIST ul li {
-	list-style: none !important;
+	list-style: square !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
