@@ -563,10 +563,23 @@ body {
 		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
-.reveal .ONLY_TITLE_TREE ul li {
+.reveal .ONLY_TITLE_TREE ul li.child_tree_item  {
 	margin-bottom: 20px;
 	padding-right: 40px;
-	list-style-type: none;
+	list-style-type: disc;
+	color: <%=theme.get("listitem_____font_color")%>;
+	font-weight: <%=theme.get("listitem_____font_weight")%>;
+	font-size: <%=theme.get("listitem_____font_size")%>px;
+	line-height: <%=theme.get("listitem_____line_height")%>;
+	text-align: <%=theme.get("listitem_____text_alignment")%>;
+	font-family: <%= theme.get ( "listitem_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
+}
+
+.reveal .ONLY_TITLE_TREE ul li.parent_tree_item  {
+	margin-bottom: 20px;
+	padding-right: 40px;
+	list-style-type: square;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
