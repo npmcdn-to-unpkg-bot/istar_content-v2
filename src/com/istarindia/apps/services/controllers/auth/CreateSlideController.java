@@ -61,7 +61,7 @@ public class CreateSlideController extends IStarBaseServelet {
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 		switch (template) {
-		case "ONLY_TITLE_PARAGRPH_IMAGE":
+		case "ONLY_TITLE_PARAGRAPH_IMAGE":
 
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				ImageDAO dao = new ImageDAO();

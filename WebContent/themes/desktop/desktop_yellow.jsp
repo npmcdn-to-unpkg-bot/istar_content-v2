@@ -205,7 +205,7 @@ body {
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_IMAGE h2 {
+.reveal .ONLY_TITLE_IMAGE h2 {    vertical-align: middle;
  	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -887,6 +887,39 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
     margin-top: -2%;
     zoom: 75%;
 }
+
+.reveal .ONLY_2BOX   h2 {
+	color: <%=theme.get("title_____font_color")%>;
+	font-size: 70px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-family:
+		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
+		serif;
+	padding-top: 8%;
+	padding-bottom: 5%;
+	margin-left: 5%;
+}
+.reveal .ONLY_2BOX li {
+	color: <%=theme.get("paragraph_____font_color")%>;
+	font-weight: <%=theme.get("paragraph_____font_weight")%>;
+	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family:
+		'<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
+		serif;
+	list-style: none;
+	margin-left: 5%;
+}
+
+
+.reveal .ONLY_2BOX p {
+	list-style: none;
+	padding-bottom: 5%
+}
+
 
 
 /* Below are of no use.. just for the demo */
