@@ -152,6 +152,8 @@
 										<button type="submit" class="btn-u" name="review"
 											value="DIS_APPROVED">Dis Approve</button>
 									</footer>
+										<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=<%= lesson.getPresentaion().getId()%> ' class='btn-u btn-u-default'>Speaker Preview</a>
+										<a onclick="openWin('/content/lesson/preview.jsp?ppt_id=<%= lesson.getPresentaion().getId()%>')" href="#" class="btn-u btn-u-default">Mobile Preview</a>
 								</form>
 
 							</div>
