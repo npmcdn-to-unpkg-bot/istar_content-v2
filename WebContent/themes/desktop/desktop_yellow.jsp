@@ -187,7 +187,6 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
-    margin-top: -8%;
     color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
