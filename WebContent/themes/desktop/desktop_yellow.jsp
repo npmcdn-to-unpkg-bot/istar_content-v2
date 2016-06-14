@@ -187,7 +187,6 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
-    margin-top: -8%;
     color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -475,6 +474,7 @@ body {
 .reveal .ONLY_PARAGRAPH_TITLE .paragraph {
 	list-style: none;
 	margin-left: 2%;
+	margin-bottom: 5%;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
 	font-size: <%=theme.get("paragraph_____font_size")%>px;
@@ -527,6 +527,9 @@ body {
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
+}
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p{
+	margin-bottom: 2%;
 }
 
 .reveal .ONLY_PARAGRAPH  table ul{
