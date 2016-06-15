@@ -167,7 +167,10 @@
 											<div class="row">
 												<%
 													boolean flag = false;
-													for (UiTheme themeName : (List<UiTheme>) (new UiThemeDAO()).findAll()) {
+												List thes = (new UiThemeDAO()).findAll();
+												 Collections.sort(thes);
+
+													for (UiTheme themeName : (List<UiTheme>)thes) {
 												%>
 												<div class="col col-6">
 													<%
