@@ -109,10 +109,10 @@ public class CMSRegistry {
 		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_2COLUMNS");
 		//slideTemplates.add("ONLY_TITLE_ASSESSMENT_5COLUMNS");
 		
-
 		listTypes.add(ListTypes.SIMPLE_LIST);
 		listTypes.add(ListTypes.IN_OUT_1);
 		listTypes.add(ListTypes.IN_OUT_2);
+		listTypes.add(ListTypes.TWO_LIST);
 		
 		//Enable the below only after making the vm files ready
 		/* listTypes.add(ListTypes.PROCESS_LIST);
