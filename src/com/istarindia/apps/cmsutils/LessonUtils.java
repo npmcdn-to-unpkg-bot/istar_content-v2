@@ -1121,7 +1121,7 @@ public class LessonUtils {
             cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
             cMSlide.setTeacherNotes(slide.getTeacherNotes());
             cMSlide.setStudentNotes(slide.getStudentNotes());
-            System.out.println(slide);
+            System.out.println(slide.getSlideText());
         } catch (JAXBException e) {
             System.err.println(slide.getId());
             e.printStackTrace();
