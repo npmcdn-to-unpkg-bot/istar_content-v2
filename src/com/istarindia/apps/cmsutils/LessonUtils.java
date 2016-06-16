@@ -1044,10 +1044,12 @@ public class LessonUtils {
         newList.setList_type(slide.getList().getList_type());
         newList.setItems(new ArrayList<>());
         for (CMSTextItem item : slide.getList().getItems()) {
-            if (item.getText().trim().equalsIgnoreCase("")) {
-            	System.err.println("<---><===Igrnared => "+ item.getDescription());
+            if (item.getText().trim().equalsIgnoreCase("")&&(item.getDescription().trim().equalsIgnoreCase("")||item.getDescription().trim().equalsIgnoreCase("NO_DESC"))) {
+            	//System.err.println("<---><===Igrnared => "+ item.getDescription());
             	//newList.getItems().add(item);
             } else {
+            	//System.err.println("<---><=== not Igrnared => "+ item.getText());
+            	
                 newList.getItems().add(item);
                 try {
                     if (item.getList().getItems().size() != 0) {
@@ -1055,17 +1057,16 @@ public class LessonUtils {
                         ArrayList<CMSTextItem> items3 = new ArrayList<>();
                         childList.setItems(items3);
                         for (CMSTextItem childItem : item.getList().getItems()) {
-                        	//childList.getItems().add(childItem);
-                        	System.err.println("<---><====> "+ item.getDescription());
+                        	//System.err.println("<---><====> "+ item.getDescription());
                         	
                         	if (!childItem.getText().trim().startsWith("$slide")) {
-                        		System.err.println(item.getText());
-                        		System.err.println(item.getDescription());
+                        		System.err.println("textfrom$"+item.getText());
+                        		System.err.println("textfrom$"+item.getDescription());
                             	childList.getItems().add(childItem);
-                            } 
+                            } else
                         	if(childItem.getDescription().trim().equalsIgnoreCase("NO_DESC")){
-                        		System.err.println(item.getText());
-                        		System.err.println(item.getDescription());
+                        		System.err.println("textfromND"+item.getText());
+                        		System.err.println("descfromND"+item.getDescription());
                         		childList.getItems().add(childItem);
                         	}
                         }

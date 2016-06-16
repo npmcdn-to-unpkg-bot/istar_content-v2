@@ -760,12 +760,12 @@ public class CreateSlideController extends IStarBaseServelet {
 		for (Object key : request.getParameterMap().keySet()) {
 			if (key.toString().startsWith("parent_")) {
 				if (!request.getParameter(key.toString()).equalsIgnoreCase("")) {
-					System.out.println("key>>>" + key.toString());
+					//System.out.println("key>>>" + key.toString());
 					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()),request.getParameter("desc_"+key.toString()));
 					item.setList(getList(request, key));
 					list.getItems().add(item);
 
-					System.out.println("---->" + request.getParameter(key.toString()));
+					//System.out.println("---->" + request.getParameter(key.toString()));
 				}
 			
 			}
@@ -787,7 +787,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (iterable_element.toString().endsWith("_" + key.toString())&&(!(iterable_element.toString().startsWith("desc")))) {
 				CMSTextItem item = new CMSTextItem(request.getParameter(iterable_element.toString()));
 				list.getItems().add(item);
-				System.out.println("element here is -----" + iterable_element);
+				//System.out.println("element here is -----" + iterable_element);
 			}
 		}
 		// TODO Auto-generated method stub
@@ -808,7 +808,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (key.toString().startsWith("list_item")) {
 				if (!request.getParameter(key.toString()).equalsIgnoreCase("") || !request.getParameter("desc_"+key.toString()).equalsIgnoreCase("")) {
 					CMSTextItem item = new CMSTextItem(request.getParameter(key.toString()),request.getParameter("desc_"+key.toString()));
-					System.err.println(request.getParameter(key.toString())+","+request.getParameter("desc_"+key.toString()));
+					//System.err.println(request.getParameter(key.toString())+","+request.getParameter("desc_"+key.toString()));
 					list.getItems().add(item);
 				}
 			}
