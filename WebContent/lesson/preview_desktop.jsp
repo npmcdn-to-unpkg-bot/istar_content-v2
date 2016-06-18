@@ -43,8 +43,9 @@ lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
  -->
 
 <%
-	try {
-		int themeID = Integer.parseInt(lesson_theme);
+int themeID = 100;
+try {
+		themeID = Integer.parseInt(lesson_theme);
 		if ((new UiThemeDAO()).findById(themeID) != null) {
 %>
 	<jsp:include page="/themes/desktop/desktop_yellow.jsp"></jsp:include>
@@ -75,14 +76,40 @@ lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
 	<script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
+		<script src="http://lab.hakim.se/zoom-js/js/zoom.js"></script>
 
 	<script>
+	  var orginalsize =  <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%>; 
+	  
+	$( document ).ready(function() {
+		
+		  var wi = $( window ).width();
 		Reveal.initialize({
 			center : true,
 			controls : true,
-		    width: 1193,
-	   		height: 712
+			 width: wi*1.05
 		});
+		});	
+	
+		Reveal.addEventListener( 'fragmentshown', function( event ) {
+			 
+			var new1 = orginalsize;
+		       $('.fragment').each(function (index, value) { 
+				  try {
+					  if($(this).attr('id').indexOf("-") != -1 ) {
+						 $('#'+$(this).attr('id')).css({'font-size': orginalsize+'px' });
+					  }
+			  		}  
+				  catch (errr) {
+				
+			}
+			});
+		    $('#'+event.fragment.id).css({'font-size': new1*1.5+'px' });
+		  
+    
+	} );
+		//$( window ).width();
+
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
 		if (($('.present').attr("style")).indexOf("background-color") < 0) {
@@ -101,10 +128,7 @@ lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
-			/* 
-			$('.slide-background.step.slide.NO_CONTENT.present').css("background-size","contain");
-			//background-size: contain; slide-background step slide NO_CONTENT present
-			$(); */
+			
 
 		});
 	</script>

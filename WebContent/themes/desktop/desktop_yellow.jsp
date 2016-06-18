@@ -183,7 +183,7 @@ body {
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-family:<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
-	width: 120%;
+	width: 100%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
@@ -372,8 +372,7 @@ body {
 	border-collapse: collapse;
     margin: 0;
     padding: 0;
-    border: 3px solid black;
-    font-size: 100%;
+     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
 }
@@ -381,22 +380,30 @@ body {
 .reveal .ONLY_TITLE_PARAGRAPH   td  {
 	text-align: left;
     padding: 8px;
-    border: 3px solid black;
+    border: 2px solid rgba(255,255,255,0.3);;font-size: 120%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  th {
 	text-align: left;
     padding: 8px;
-    border: 3px solid black;
     font-weight: bold;
-    background: #e0e0e0;
+    background: rgba(224,224,224,0.67);
+    color: black;
+    padding: 20px;
+    font-size: 120%;
+    border: 2px solid rgba(0,0,0,0.3);
 }
-
+.reveal .ONLY_TITLE_PARAGRAPH .paragraph  td p {
+     margin-bottom: 0%; 
+}
+.reveal .ONLY_TITLE_PARAGRAPH .paragraph  td {
+     margin-bottom: 2%; 
+     padding: 0.6%;
+}
 .reveal .ONLY_TITLE_PARAGRAPH  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
-    border: 3px solid black;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -498,7 +505,7 @@ body {
 .reveal .ONLY_PARAGRAPH_IMAGE  .paragraph  {
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
-	font-size: <%=theme.get("paragraph_____font_size")%>px;
+	font-size: <%=theme.get("paragraph_____font_size")%>px !important;;
 	line-height: <%=theme.get("paragraph_____line_height")%>;
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
@@ -519,7 +526,7 @@ body {
 
 .reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
 	margin-top: 2%;
-    padding-left: 5%;
+    padding-left: 0%;
     list-style: none;
 	color: <%=theme.get("paragraph_____font_color")%>;
 	font-weight: <%=theme.get("paragraph_____font_weight")%>;
@@ -1084,5 +1091,11 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
 }
 
 
+
+.reveal .slides section .fragment.grow.visible {
+    -webkit-transform: scale(1.2) !important;
+    transform: scale(1.2) !important;
+    margin-left: 4% !important;
+}
 
 </style>
