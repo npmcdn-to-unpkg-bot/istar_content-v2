@@ -132,8 +132,7 @@
 			
 			<div class="col-md-12">
 				<%
-				ImageUtils i = new ImageUtils();
-				ArrayList<Image> list = i.findAllBackgrounds(request);
+				ArrayList<Image> list = (ArrayList<Image>) request.getAttribute("list");
 				
 					for (Image image : list) {
 				%>

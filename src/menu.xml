@@ -120,9 +120,9 @@
 		<child_links display_name="Gallery" url="/content/gallery.jsp"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
 			
-		<child_links display_name="Backgrounds" url="/content/backgrounds.jsp"
+		<child_links display_name="Backgrounds" url="/content/bg_controller"
 			valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
-		<child_links display_name="Handout Media" url="/content/handout_media.jsp"
+		<child_links display_name="Handout Media" url="/content/handout_media_controller"
 			valid_roles="content_creator,content_admin,content_reviewer" />
 	</parent_links>
 
