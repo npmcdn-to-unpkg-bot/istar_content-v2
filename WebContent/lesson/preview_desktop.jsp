@@ -79,43 +79,21 @@ try {
 		<script src="http://lab.hakim.se/zoom-js/js/zoom.js"></script>
 
 	<script>
-	  var orginalsize =  <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%>; 
-	  
-	$( document ).ready(function() {
-		
-		  var wi = $( window ).width();
+		var orginalsize = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
+
+		var wi = $(window).width();
 		Reveal.initialize({
 			center : true,
 			controls : true,
-			 width: wi*1.05
+			width : wi * 1.05
 		});
-		});	
-	
-		Reveal.addEventListener( 'fragmentshown', function( event ) {
-			 
-			var new1 = orginalsize;
-		       $('.fragment').each(function (index, value) { 
-				  try {
-					  if($(this).attr('id').indexOf("-") != -1 ) {
-						 $('#'+$(this).attr('id')).css({'font-size': orginalsize+'px' });
-					  }
-			  		}  
-				  catch (errr) {
-				
-			}
-			});
-		    $('#'+event.fragment.id).css({'font-size': new1*1.5+'px' });
-		  
-    
-	} );
-		//$( window ).width();
 
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
 		if (($('.present').attr("style")).indexOf("background-color") < 0) {
 			document.body.style.background = orgBgColor;
 		}
-		
+
 		Reveal.addEventListener('slidechanged', function(event) {
 			document.body.style.background = $('.present').css(
 					'background-color');
@@ -128,9 +106,27 @@ try {
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
-			
 
 		});
+
+		Reveal.addEventListener('fragmentshown', function(event) {
+			var new1 = orginalsize;
+			$('.fragment').each(function(index, value) {
+				try {
+					if ($(this).attr('id').indexOf("-") != -1) {
+						$('#' + $(this).attr('id')).css({
+							'font-size' : orginalsize + 'px'
+						});
+					}
+				} catch (errr) {
+					//Console.log($(this).attr('id'));
+				}
+			});
+			$('#' + event.fragment.id).css({
+				'font-size' : new1 * 1.5 + 'px'
+			});
+		});
+		
 	</script>
 
 </body>
