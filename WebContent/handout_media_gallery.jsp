@@ -132,10 +132,10 @@
 			
 			<div class="col-md-12">
 				<%
-				ImageUtils i = new ImageUtils();
-				ArrayList<Image> list = i.findAllHandoutMedia(request);
-				
+					
+					ArrayList<Image> list = (ArrayList<Image>) request.getAttribute("list");
 					for (Image image : list) {
+				
 				%>
 
 				<div class="col-sm-3 sm-margin-bottom-30" style="margin-top:2%">

@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,15 +33,12 @@ import com.istarindia.apps.dao.FolderItems;
 import com.istarindia.apps.dao.FolderItemsDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
-import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.CMSUtils;
 import com.istarindia.apps.services.FolderService;
-import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -84,8 +80,6 @@ public class MediaUploadController extends IStarBaseServelet {
 		
 		int item_id=0;
 		String folders[] = null;
-		
-		
 		
 		try {
 			List<FileItem> items = uploadHandler.parseRequest(request);
