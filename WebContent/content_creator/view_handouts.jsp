@@ -1,5 +1,7 @@
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
+<%@page import="org.hibernate.*"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
 	String url = request.getRequestURL().toString();
@@ -77,54 +79,95 @@
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses
 								<ul>
-									<%  int course_sno = 0;
-										CourseDAO dao = new CourseDAO();
-										for (Course course : (List<Course>) dao.findAll()) {
+									<% 
+									 IstarUserDAO dao = new IstarUserDAO();
+					                Session session_hib = dao.getSession();
+					                String sql1 ="select * from course";
+					                SQLQuery query = session_hib.createSQLQuery(sql1);
+					            	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+					                List<HashMap<String, Object>> results = query.list();
+									
+									int course_sno = 0;
+										//CourseDAO dao = new CourseDAO();
+										for (HashMap<String, Object> course : results) {
 											course_sno++;
+											int course_id = (int)course.get("id");
+											String course_name = (String) course.get("course_name");
 									%>
-									<li id="course_<%=course.getId()%>" data-jstree='{"opened":false}'><a href='view_handout.jsp?course_id=<%=course_sno%>'> <%=course_sno%>. <%=course.getCourseName()%></a>
+									<li id="course_<%=course_id%>" data-jstree='{"opened":false}'><a href='view_handout.jsp?course_id=<%=course_sno%>'> <%=course_sno%>. <%=course_name%></a>
 										<ul >
 											<%  int cmsession_sno = 0;
-												for (Module module : course.getAllModules(course.getId())) {
+											
+												String sql_mod ="select * from module where course_id ="+course_id;
+								                SQLQuery query_mod = session_hib.createSQLQuery(sql_mod);
+								            	query_mod.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+								                List<HashMap<String, Object>> results_mod = query_mod.list();
+												for (HashMap<String, Object> mod : results_mod) {
+													int module_id = (int) mod.get("id");
+													String module_name = (String) mod.get("module_name");
 											%>
-											<li  id="module_<%=module.getId()%>" data-jstree='{"opened":true}'> <%=module.getModuleName()%>
+											<li  id="module_<%=module_id%>" data-jstree='{"opened":true}'> <%=module_name%>
 												<ul >
 													<% 
- 												for (Cmsession session1 : module.getAllSession(module.getId())) {
+													String sql_session ="select * from cmsession where module_id ="+module_id;
+									                SQLQuery query_session = session_hib.createSQLQuery(sql_session);
+									                query_session.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+									                List<HashMap<String, Object>> results_session = query_session.list();
+													
+ 												for (HashMap<String, Object> cms : results_session) {
  													cmsession_sno++;
+ 													int cmsession_id = (int) cms.get("id");
+ 													String title = (String) cms.get("title");
+ 													
  											%>
-													<li  id="session_<%=session1.getId()%>" data-jstree='{"opened":true}'>
+													<li  id="session_<%=cmsession_id%>" data-jstree='{"opened":true}'>
 													
 													<span class="label rounded label-sea"> 
-													<a style='color:white' href='view_handout.jsp?sess_id=<%=session1.getId()%>'> View Handouts </a></span><%=cmsession_sno%>. <%=session1.getTitle()%>
+													<a style='color:white' href='view_handout.jsp?sess_id=<%=cmsession_id%>'> View Handouts </a></span><%=cmsession_sno%>. <%=title%>
 														<ul>
-															<% for (Lesson lesson : session1.getAllLessons(session1.getId())) { 
+															<% 
+															String sql_lesson ="SELECT 	distinct T.status as status, L.id as lesson_id, L.title as title,  T.id as task_id , CC.email as assignee FROM 	lesson L, task T, task_reviewer TR, content_creator CC WHERE T.item_type='LESSON' AND T.item_id = L.id AND CC.id = T.actor_id AND session_id="+cmsession_id;
+											                SQLQuery query_lesson = session_hib.createSQLQuery(sql_lesson);
+											                query_lesson.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+											                List<HashMap<String, Object>> results_lesson = query_lesson.list();
+															
+															
+															for (HashMap<String, Object> lesson : results_lesson) { 
+																int task_id = (int ) lesson.get("task_id");
+																int lesson_id = (int )lesson.get("lesson_id");
+																String status = (String) lesson.get("status");
+																String assignee = (String) lesson.get("assignee");
+																
 																try {
 																String reviewers = "label rounded label-sea";
 																String assigned = "label label-purple rounded-2x";
 																String statusLabel = "label rounded label-yellow";
-																if(lesson.getREviewers().equalsIgnoreCase("reviewer not assigned")) {
+																String sql_reviewer ="SELECT * from task_reviewer where task_id="+task_id;
+												                SQLQuery query_review = session_hib.createSQLQuery(sql_reviewer);
+												                query_review.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+												                List<HashMap<String, Object>> results_review = query_review.list();
+																 if(results_review.size()>0) {
 																	reviewers = "label label-default ";
-																}
+																} 
 																
 																
-																if(lesson.getStatus().equalsIgnoreCase("CREATED")) {
+																if(status.equalsIgnoreCase("CREATED")) {
 																	statusLabel = "label label-default ";
 																}
 																String email = ((IstarUser)request.getSession().getAttribute("user")).getEmail();
-																if(lesson.getAsignee().equalsIgnoreCase(email)) {
+																if(assignee.equalsIgnoreCase(email)) {
 																	assigned = "label label-default ";
 																}
 															%>
-															<li style="padding:2% !important; margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
-															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
+															<li style="padding:2% !important; margin-bottom: 4px" id="lesson_<%=lesson_id%>" data-jstree='{"opened":true}'><%=title %> 
+															<span class="<%=assigned%>"> Assigned to - <%=assignee %></span> 
 															 <span class="label rounded label-sea"> 
-													<a style='color:white' href='/content/content_creator/edit_handout.jsp?lesson_id=<%=lesson.getId()%>'> Edit Handouts </a></span>
+													<a style='color:white' href='/content/content_creator/edit_handout.jsp?lesson_id=<%=lesson_id%>'> Edit Handouts </a></span>
 															<%
 												}
 																
 																catch(Exception e) {
-																	System.out.println(lesson.getId());
+																	System.out.println(lesson_id);
 																}
 															}
 											%>

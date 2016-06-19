@@ -66,7 +66,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 <body style="<%=style_body%>">
 	<div class="reveal">
 		<div class="slides">
-		<%=ppt.outputSlides(Integer.parseInt(request.getParameter("slide_id"))) %>
+		<%=ppt.outputSlide(Integer.parseInt(request.getParameter("slide_id"))) %>
 		</div>
 
 	</div>
