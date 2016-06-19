@@ -60,10 +60,6 @@ public class MediaUploadController extends IStarBaseServelet {
     public void init(ServletConfig config) {
     	String folder =config.getInitParameter("upload_path");
     	fileUploadPath = new File(folder);
-    	
-    	
-    	
-    	
     }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

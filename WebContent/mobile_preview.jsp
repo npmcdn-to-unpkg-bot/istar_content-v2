@@ -26,7 +26,6 @@ String nuetral = url.substring(0, url.length() - request.getRequestURI().length(
 
 <link rel="stylesheet" href="/student/css/reveal.css">
 <link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
-<link rel="stylesheet" href="/themes/mobile/<%=request.getParameter("lesson_theme").toLowerCase()%>.css" id="theme">
 
 <!-- Code syntax highlighting -->
 <script>

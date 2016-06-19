@@ -1,8 +1,11 @@
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.LessonService"%><%@page import="com.istarindia.apps.*"%><%@page import="com.istarindia.apps.SlideTransition"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@page import="com.istarindia.apps.services.LessonService"%>
+<%@page import="com.istarindia.apps.*"%>
+<%@page import="com.istarindia.apps.SlideTransition"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
 <%
@@ -100,7 +103,7 @@
 				<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
 					<%
-						ImageUtils dao1 = new ImageUtils();
+					ImageUtils dao1 = new ImageUtils();
 					ArrayList<Image> images = (ArrayList<Image>) dao1.findAllBackgrounds(request);
 					%><div class="col-md-7">
 						<%=utils.getEditProfileEdit(slide, ppt, newSlide,request)%>
@@ -112,7 +115,7 @@
 										<%
 											for (Image type : images) {
 										%>
-										<option value="<%=type.getUrl()%>"><%=type.getUrl()%></option>
+										<option value="<%=type.getUrl()%>"><%=type.getTitle()%></option>
 										<%
 											}
 										if (request.getParameterMap().containsKey("slide_id")){ 
@@ -314,7 +317,6 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
-	<script src="<%=baseURL%>assets/plugins/ckeditor/plugins/simple_image_browser/plugin.js"></script>
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
@@ -345,12 +347,9 @@
 				if (this.mode == 'source') {
 					var editable = bodyEditor.editable();
 					editable.attachListener(editable, 'input', function() {
-						//alert('source changed');
-						var text1 = CKEDITOR.instances.Editor.document
-								.getBody().getHtml()
+						var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
 						console.log("new COntent 222-> " + text1);
-						var iframeInner = $('#prv').contents().find(
-								'#data_slide_paragraph').html(text1);
+						var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
 					});
 				}
 			});
@@ -359,8 +358,7 @@
 			bodyEditor.on('change', function() {
 				var text1 = bodyEditor.document.getBody().getHtml()
 				console.log("new COntent111 -> " + text1);
-				var iframeInner = $('#prv').contents().find(
-						'#data_slide_paragraph').html(text1);
+				var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
 			});
 		} catch (err) {
 			// TODO: handle exception
@@ -368,61 +366,40 @@
 		}
 
 		function initHooks() {
-			$(".updateble").each(
-					function(index, listItem) {
-						var id = $(this).attr('id');
-						$('#' + id)
-								.keyup(
-										function() {
-											console.log('new value ->'
-													+ '#data_' + id);
-											var iframeInner = $('#prv')
-													.contents().find(
-															'#data_' + id)
-													.html($('#' + id).val());
-
-										});
+			$(".updateble").each(function(index, listItem) {
+				var id = $(this).attr('id');
+				$('#' + id).keyup(function() {
+					console.log('new value ->' + '#data_' + id);
+					var iframeInner = $('#prv').contents().find('#data_' + id).html($('#' + id).val());
 					});
+			});
 
-			$('#image-picker').on(
-					'change',
-					function() {
-						console.log('Kamini');
-						var id = $(this).find(":checked").attr('id');
-						$('#prv').contents().find('#data_image_url').attr(
-								"src", $('#' + id).data('img-src'));
+			$('#image-picker').on('change',function() {
+				console.log('Kamini');
+				var id = $(this).find(":checked").attr('id');
+				$('#prv').contents().find('#data_image_url').attr("src", $('#' + id).data('img-src'));
+			});
 
-					});
-
-			$('#image-bg-picker').on(
-					'change',
-					function() {
-						var bgurl = $(this).find(":checked").val();
-						console.log(bgurl);
-						$('#prv').contents().find('.slide-background').css(
-								'background-image', "url(" + bgurl + ")");//
-						$('#prv').contents().find('.slide-background').css(
-								'background-size', "cover");
-					});
+			$('#image-bg-picker').on('change',function() {
+					var bgurl = $(this).find(":checked").val();
+					console.log(bgurl);
+					$('#prv').contents().find('.slide-background').css('background-image', "url(" + bgurl + ")");
+					$('#prv').contents().find('.slide-background').css('background-size', "cover");
+			});
 		}
 
 		function initColorChange() {
 
-			$('#slide_color').on(
-					'change',
-					function() {
-						console.log("color chnaged " + $('#slide_color').val()
-								+ " --- " + $('.slides section'));
-						$('#prv').contents().find('.slide-background').css(
-								'background-color', $('#slide_color').val());
-					});
+			$('#slide_color').on('change',function() {
+				console.log("color chnaged " + $('#slide_color').val() + " --- " + $('.slides section'));
+				$('#prv').contents().find('.slide-background').css('background-color', $('#slide_color').val());
+			});
 
 		}
 		$(document).ready(function() {
 			initTextArea();
-			
 			initHooks();
-			initColorChange();//slide_color
+			initColorChange(); //slide_color
 			<%-- 
 			$( "#slidy_type_id" ).change(function() {
 				  console.log( "Handler for .change() called." );
@@ -431,7 +408,6 @@
 				  window.location.href=url;
 				});
 			  --%>
-
 		});
 	</script>
 </body>

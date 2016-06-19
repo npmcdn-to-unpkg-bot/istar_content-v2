@@ -28,9 +28,9 @@
   
   <servlet>
     <description></description>
-    <display-name>BackgroundUploader</display-name>
-    <servlet-name>BackgroundUploader</servlet-name>
-    <servlet-class>com.istarindia.cms.controller.BackgroundUploader</servlet-class>
+    <display-name>BackgroundMediaController</display-name>
+    <servlet-name>BackgroundMediaController</servlet-name>
+    <servlet-class>com.istarindia.cms.controller.BackgroundMediaController</servlet-class>
     <init-param>
       <description>Define storage path for background image uploads</description>
       <param-name>bg_upload_path</param-name>
@@ -38,7 +38,7 @@
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BackgroundUploader</servlet-name>
+    <servlet-name>BackgroundMediaController</servlet-name>
     <url-pattern>/bg_controller</url-pattern>
   </servlet-mapping>
   
