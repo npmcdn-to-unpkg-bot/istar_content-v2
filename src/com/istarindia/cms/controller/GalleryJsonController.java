@@ -65,10 +65,23 @@ public class GalleryJsonController extends HttpServlet {
 			}
 			arr.put(json);
 		}
-		
+
 		ImageUtils imageUtils = new ImageUtils();
 		ArrayList<Image> list = imageUtils.findAllHandoutMedia();
-		
+		System.err.println("wqrwqrqwr "+list.size());
+		for (Image image : list) {
+			json = new JSONObject();
+			try {
+				json.put("image", image.getUrl());
+				json.put("thumb", image.getUrl());
+				json.put("folder", "small");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+			}
+			arr.put(json);
+
+		}
 		PrintWriter out = response.getWriter();
 		out.print(arr.toString().replaceAll("\"url\"", "url"));
 	}
