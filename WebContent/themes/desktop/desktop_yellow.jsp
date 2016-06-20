@@ -932,7 +932,6 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
 	font-family:
 		'<%=theme.get("title_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
 		serif;
-	padding-top: 8%;
 	padding-bottom: 5%;
 	margin-left: 5%;
 }
