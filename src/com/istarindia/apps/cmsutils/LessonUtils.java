@@ -1044,7 +1044,7 @@ public class LessonUtils {
         newList.setList_type(slide.getList().getList_type());
         newList.setItems(new ArrayList<>());
         for (CMSTextItem item : slide.getList().getItems()) {
-            if (item.getText().trim().equalsIgnoreCase("")&&(item.getDescription().trim().equalsIgnoreCase("")||item.getDescription().trim().equalsIgnoreCase("NO_DESC"))) {
+            if (item.getText().trim().equalsIgnoreCase("")&&(item.getDescription().trim().equalsIgnoreCase("")||item.getDescription().trim().equalsIgnoreCase("NO_DESC")||item.getDescription().trim().startsWith("Lorem Ipsum is simply"))) {
             	//System.err.println("<---><===Igrnared => "+ item.getDescription());
             	//newList.getItems().add(item);
             } else {

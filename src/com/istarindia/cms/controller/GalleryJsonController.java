@@ -2,6 +2,7 @@ package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +19,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.istarindia.apps.ImageUtils;
+import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.sun.imageio.plugins.common.ImageUtil;
 
 /**
  * Servlet implementation class GalleryJsonController
@@ -41,7 +45,6 @@ public class GalleryJsonController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("application/json");
-		
 		String sql = "select I.url, I.thumbnail_url from image I, task T where T.item_type='IMAGE' and T.status='COMPLETED' and T.item_id=I.id and I.url IS NOT NULL";
 		IstarUserDAO dao = new IstarUserDAO();
         Session session = dao.getSession();
@@ -62,6 +65,10 @@ public class GalleryJsonController extends HttpServlet {
 			}
 			arr.put(json);
 		}
+		
+		ImageUtils imageUtils = new ImageUtils();
+		ArrayList<Image> list = imageUtils.findAllHandoutMedia();
+		
 		PrintWriter out = response.getWriter();
 		out.print(arr.toString().replaceAll("\"url\"", "url"));
 	}

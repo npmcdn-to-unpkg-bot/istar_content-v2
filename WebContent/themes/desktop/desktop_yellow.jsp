@@ -623,7 +623,7 @@ body {
 
 .reveal .ONLY_TITLE_TREE ul  {
     margin-left: 6%;
-    padding-bottom: 56px;
+    padding-bottom: 6px;
     list-style-type: none;
 }
 
