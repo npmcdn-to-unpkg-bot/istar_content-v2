@@ -741,6 +741,9 @@ body {
 .reveal  #data_slide_title {
 	font-size: 80%
 }
+.reveal  #data_slide_title2 {
+	font-size: 80%
+}
 .reveal  #data_slide_subtitle {
 	font-size: 80%
 }
