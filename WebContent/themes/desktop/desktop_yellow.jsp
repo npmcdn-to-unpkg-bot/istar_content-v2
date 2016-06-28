@@ -51,7 +51,7 @@ body {
 }
 
 .reveal  .backgrounds .NO_CONTENT {
-	background-size: contain !important;
+	background-size: cover !important;
 }
 
 @font-face {
@@ -714,10 +714,18 @@ body {
 	position: absolute;
 }
 .reveal .ONLY_PARAGRAPH_IMAGE img {
-	width: 180%;
+	width: 180%;-webkit-transform: rotateZ(-7deg) important;
+    -ms-transform: rotateZ(-7deg) important;
+    transform: rotateZ(-7deg) scale(1.1)   important;  
+        margin-top: -5%;
+    
 }
 
 .reveal .ONLY_TITLE_IMAGE img {
+    -webkit-transform: rotateZ(-7deg)  !important;;
+    -ms-transform: rotateZ(-7deg)  !important;;
+    transform: rotateZ(-7deg) scale(1.1)  !important;
+        margin-top: -5%;
 }
 
 .reveal .ONLY_2TITLE_IMAGE img {
@@ -1096,8 +1104,24 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
 
 .reveal .slides section .fragment.grow.visible {
     -webkit-transform: scale(1.2) !important;
-    transform: scale(1.2) !important;
+    transform: scale(1.1) !important;
     margin-left: 4% !important;
 }
 
+
+.css-typing
+{
+    overflow:hidden;
+   -webkit-animation: type 5s steps(50, end);
+    animation: type 5s steps(50, end);
+    line-height: 1.2 !important;
+}
+
+@keyframes type{
+    from { width: 0; }
+}
+
+@-webkit-keyframes type{
+    from { width: 0; }
+}
 </style>
