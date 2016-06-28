@@ -34,13 +34,14 @@ String style_body = "background-size: cover;";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
 
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
 lesson_theme may have a string in place
 lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
  -->
+  <link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css" />
 
 <%
 int themeID = 100;
@@ -74,6 +75,8 @@ try {
 	</div>
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+		src="https://paulund.co.uk/playground/demo/typing-effect/download/js/typed.js"></script>
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
 	<script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
 		<script src="http://lab.hakim.se/zoom-js/js/zoom.js"></script>
@@ -85,6 +88,7 @@ try {
 		Reveal.initialize({
 			center : true,
 			controls : true,
+			width:wi
 		});
 		
 		var orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor() %>';
@@ -111,14 +115,21 @@ try {
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
+			
+			//data_slide_title 
+			console.log(" typing "+ $('.present').attr('id'));
+			var slideID = $('.present').attr('id');
+			//$('#'+slideID + " #data_slide_title").addClass( "animated infinite bounce" );// css('class','css-typing');
 
 		});
 
 		Reveal.addEventListener('fragmentshown', function(event) {
 			/* var new1 = orginalsize; */			
-
+	
 			$('.fragment').each(function(index, value) {
+				
 				try {
+					
 					if ($(this).attr('id').indexOf("-") != -1) {
 						$('#' + $(this).attr('id')).css({
 							'font-size' : orginalsize + 'px'
