@@ -961,7 +961,7 @@ public class LessonUtils {
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("<td>");
                 out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate_review.jsp?ppt_id="
-                        + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(2) + "'>"
+                        + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
                         + "<i class='fa fa-check'></i>View Slide</a>");
 
                 out.append("</td>");

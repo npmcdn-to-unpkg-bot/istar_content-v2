@@ -178,34 +178,27 @@ public class ReviewLessonController extends IStarBaseServelet {
 			} finally {
 				session.close();
 			}
-			Slide nextSlide;
 			try {
-				nextSlide = new Slide();
 				session = dao.getSession();
 				
-				ArrayList<Slide> items = new ArrayList<>();
 				int order_id = 0;
 				try {
 					order_id = slide.getOrder_id();
 				} catch (Exception e) {
 					order_id = slide.getId();
 				}
-				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " and order_id >"+order_id;
+				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " and order_id > "+order_id+" order by order_id ";
 				SQLQuery query = session.createSQLQuery(sql1);
 				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 				List<HashMap<String, Object>> results = query.list();
-
 				HashMap<String, Object> slide1 = results.get(0);
-
-				Slide slide2 = new Slide();
-				slide2.setSlideText(slide1.get("slide_text").toString());
-				slide2.setTemplate(slide1.get("template").toString());
-				slide2.setId(Integer.parseInt(slide1.get("id").toString()));
-
-				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide2.getId()+"&slide_type="+slide2.getTemplate());
+				int next_slide_id = Integer.parseInt(slide1.get("id").toString());
+				
+				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+next_slide_id);
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			} catch (Exception e) {
 				response.sendRedirect("/content/review_task?task_id="+task.getId());
+				System.err.println("oops");
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			}
 			

@@ -1,3 +1,4 @@
+<%@page import="com.istarindia.apps.services.SlideService"%>
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
@@ -89,36 +90,30 @@
 			class="sky-form">
 			<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-				LessonUtils utils = new LessonUtils();
-				CMSSlide slide = new CMSSlide();
-				if (request.getParameterMap().containsKey("slide_id")) {
-					SlideDAO dao = new SlideDAO();
-					slide = (new LessonUtils())
-							.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
+				SlideService service = new SlideService();
+				int slide_id = Integer.parseInt(request.getParameter("slide_id"));
+				int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
+				int previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
+				int next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+				
 			%>
 			<input name="is_edit" value="true" type="hidden"> <input
 				name="slide_id" value="<%=request.getParameter("slide_id")%>"
 				type="hidden">
-			<%
-				} else {
-					slide.setTemplateName(request.getParameter("slide_type"));
-			%>
-			<input name="is_edit" value="false" type="hidden">
-			<%
-				}
-			%>
+			
 			<div class="container-fluid" style="padding: 0px !important">
-				<input type="hidden" name="template"
-					value="<%=slide.getTemplateName()%>"> <input type="hidden"
+				<input type="hidden"
 					name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
-					<div class="col-md-1"
-						style="margin-left: 39px; vertical-align: middle;">
-						<a class="left carousel-control" href="#myCarousel"> <span
-							class="glyphicon glyphicon-chevron-left"></span> <span
-							class="sr-only">Previous</span>
-						</a>
+					<div class="col-md-1" style="margin-left: 39px; vertical-align: middle;">
+						<% if(previous_slide_id != 0) { %>
+							<a class="left carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>"> <span
+								class="glyphicon glyphicon-chevron-left"></span> <span
+								class="sr-only">Previous</span>
+							</a>
+						<% }%>
 					</div>
+					
 					<div class="col-md-3">
 						<fieldset>
 							<section>
@@ -156,13 +151,13 @@
 								task.setItemType("LESSON");
 								task.setItemId(ppt.getLesson().getId());
 								task = TDAO.findByExample(task).get(0);
-								TaskLogDAO dao = new TaskLogDAO();
+								TaskLogDAO dao1 = new TaskLogDAO();
 								TaskLog sample  = new TaskLog();
 								sample.setTaskId(task.getId());
 								sample.setItemType("SLIDE");
 								sample.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
 								
-								List<TaskLog> items = dao.findByExample(sample);
+								List<TaskLog> items = dao1.findByExample(sample);
 								for(TaskLog log : items) {
 								
 									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
@@ -200,21 +195,21 @@
 								<div id="frame_htc_one_emulator" class="frame_scroller">
 									<iframe
 										src="/content/lesson/slide_preview.jsp?ppt_id=<%=ppt.getId() %>&slide_id=<%=request.getParameter("slide_id")%>"
-										frameborder="0" id='prv'
-										style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
+										frameborder="0" id='prv' style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
 									</iframe>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
+					
 				<div class="col-md-1">
-					<a class="right carousel-control" href="#myCarousel" role="button"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<% if(next_slide_id != 0) { %>
+					<a class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						<span class="sr-only">Next</span>
 					</a>
+				<% }%>
 				</div>
 
 			</div>
@@ -261,11 +256,6 @@
 	<![endif]-->
 	<script type="text/javascript">
 		function initTextArea() {
-			try {
-				$("#image-picker").imagepicker()
-			} catch (err) {
-				// TODO: handle exception
-			}
 			tinymce
 					.init({
 						selector : 'textarea',
@@ -293,39 +283,10 @@
 					});
 		}
 
-		function initHooks() {
-			$(".updateble").each(
-					function(index, listItem) {
-						var id = $(this).attr('id');
-						$('#' + id)
-								.keyup(
-										function() {
-											console.log('new value ->'
-													+ '#data_' + id);
-											var iframeInner = $('#prv')
-													.contents().find(
-															'#data_' + id)
-													.html($('#' + id).val());
-
-										});
-					});
-
-			$('#image-picker').on(
-					'change',
-					function() {
-						var id = $(this).find(":checked").attr('id');
-						$('#prv').contents().find('#data_image_url').attr(
-								"src", $('#' + id).data('img-src'));
-
-					});
-		}
 		$(document).ready(function() {
 			initTextArea();
 			initHooks();
 
-			$("#slide_paragraph").on('change keyup paste', function() {
-				console.log('sss');
-			});
 		});
 	</script>
 </body>
