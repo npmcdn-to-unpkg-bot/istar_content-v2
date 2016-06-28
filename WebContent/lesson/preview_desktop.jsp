@@ -65,7 +65,7 @@ try {
 		</script>
 
 </head>
-<body style="<%=style_body%>">
+<body style="<%=style_body%>;background-color:  ">
 	<div class="reveal">
 		<div class="slides">
 		<%=ppt.outputSlidesForDesktop() %>
@@ -79,27 +79,32 @@ try {
 		<script src="http://lab.hakim.se/zoom-js/js/zoom.js"></script>
 
 	<script>
-		var orginalsize = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
-
+		<%-- var orginalsize = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ; --%>
+		
 		var wi = $(window).width();
 		Reveal.initialize({
 			center : true,
 			controls : true,
-			width : wi * 1.05
 		});
-
-		var orgBgColor = $("body").css("background-color");
-		document.body.style.background = $('.present').css('background-color');
-		if (($('.present').attr("style")).indexOf("background-color") < 0) {
+		
+		var orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor() %>';
+		//console.log("orgBgColor: "+orgBgColor);
+		document.body.style.background = $('.present').data("bgcolor");
+		if ($('.present').data("bgcolor") == "none") {
+			//console.log("first silde doesnt  have bg color");
 			document.body.style.background = orgBgColor;
+			//console.log("#95: body-bgcolor: "+document.body.style.background);
 		}
 
 		Reveal.addEventListener('slidechanged', function(event) {
-			document.body.style.background = $('.present').css(
-					'background-color');
-			if (($('.present').attr("style")).indexOf("background-color") < 0) {
+			document.body.style.background = $('.present').data("bgcolor");
+			//console.log('#111 slide bg color: '+ $('.present').data("bgcolor") );
+			//console.log('#112 body bg color: '+ document.body.style.background );
+			if ( $('.present').data("bgcolor") == "none") {
 				document.body.style.background = orgBgColor;
+				//console.log('#115 body bg color(to be theme) ->'+ document.body.style.background );
 			}
+			
 			var currentURL = window.location.href; //currentURL+"#/"+ 
 			var res = currentURL.split("#");
 			currentURL = res[0] ///#1001
@@ -110,7 +115,8 @@ try {
 		});
 
 		Reveal.addEventListener('fragmentshown', function(event) {
-			var new1 = orginalsize;
+			/* var new1 = orginalsize; */			
+
 			$('.fragment').each(function(index, value) {
 				try {
 					if ($(this).attr('id').indexOf("-") != -1) {
