@@ -475,9 +475,9 @@ public class LessonUtils {
                         + "<i class='fa fa-check'></i>Edit</a>");
 
                 out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-                        + "href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
+                        + "href='#' id='delete-slide-btn' data-toggle='modal' data-target='#confirm-delete-slide-modal' data-slide-id='"+data.get(i).get(0)+"'>"
                         + "<i class='fa fa-remove'></i>Delete</a>");
-
+                
                 out.append("</td>");
                 out.append("<td>" + data.get(i).get(3) + "</td>");
                 out.append("<td>" + data.get(i).get(1) + "</td>");
@@ -488,6 +488,14 @@ public class LessonUtils {
             out.append("</table>");
             out.append("</div>");
             out.append("</div>");
+            
+            //form submit confirm modal:
+			out.append( "  <div class='modal fade' id='confirm-delete-slide-modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>");
+			out.append( "  <div  class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> Confirm Submit </div>");
+			out.append( " <div class='modal-body'> Are you sure you want to continue?  </div> <div class='modal-footer'>  ");
+			out.append(" <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button> ");
+			out.append( "<a href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=' id='confirm-delete-slide-btn' class='btn btn-success success'>Delete</a> </div> </div> </div> </div>");
+			
         } else if (lesson.getGame() != null) {
             Game game = lesson.getGame();
             out.append("This is where we wil have a form to generate a Asssesment Screen Input....");

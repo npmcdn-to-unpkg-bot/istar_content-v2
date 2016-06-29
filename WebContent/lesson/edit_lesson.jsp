@@ -21,18 +21,20 @@
 <!--<![endif]-->
 <head>
 <style type="text/css">
-.modal-dialog {
+#lo-modal-dialog {
 	width: 100% !important;
     height: 100% !important;
     padding-right: 2% !important;
     padding-left: 2% !important;
 }
 
-.modal-content {
+#lo.modal-content {
   height: auto !important;
   min-height: 100% !important;
   border-radius: 0 !important;
-}</style>
+}
+
+</style>
 <title>Content Admin Dashboard | iStar CMS</title>
 
 <!-- Meta -->
@@ -320,8 +322,8 @@
 							</div>
 							<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
 								aria-labelledby='myModalLabel' aria-hidden='true'>
-								<div class='modal-dialog'>
-									<div class='modal-content'>
+								<div id='lo-modal-dialog' class='modal-dialog'>
+									<div id='lo-modal-content' class='modal-content'>
 										<div class='modal-header'>
 											<button aria-hidden='true' data-dismiss='modal' class='close'
 												type='button'>×</button>
@@ -556,63 +558,70 @@
                     }
 
                 });
-                
-            });
 
-			function DisplayFilePath(){
-                var filepath=$(":file").val();
-                var filename=filepath.substr(filepath.lastIndexOf('\\')+1,filepath.length);
-            document.getElementById("formfield").value = filename;
-            }
-            $('input.correctOption').on('change', function() {
-            	if($('#qType').val()=='1'){
-                $('input.correctOption').not(this).prop('checked', false);  
-            	}
-            });
+				$('#confirm-delete-slide-modal').on( 'show.bs.modal', function(e) {
+						var $invoker = $(e.relatedTarget);
+						var slide_id = $invoker.data('slide-id');
+						var delete_url = $('#confirm-delete-slide-btn').attr("href").split('slide_id=')[0] +"slide_id="+ slide_id;
+						$('#confirm-delete-slide-btn').attr("href", delete_url);
+					});
+				});
 
-            $('#qType').on('change', function() {
-            	if($('#qType').val()=='1'){
-            		$('input.correctOption').removeAttr('checked');
-            	}
-            });
-            
-            $(document).ready(function() {
-            });
-            
-            function openWin(url) {
-                myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
+		function DisplayFilePath() {
+			var filepath = $(":file").val();
+			var filename = filepath.substr(filepath.lastIndexOf('\\') + 1,
+					filepath.length);
+			document.getElementById("formfield").value = filename;
+		}
+		$('input.correctOption').on('change', function() {
+			if ($('#qType').val() == '1') {
+				$('input.correctOption').not(this).prop('checked', false);
+			}
+		});
 
-                return false;
-            }
+		$('#qType').on('change', function() {
+			if ($('#qType').val() == '1') {
+				$('input.correctOption').removeAttr('checked');
+			}
+		});
 
-            function openWinSpeaker(url) {
-                myWindow = window.open(url, "", "width=1024, height=768"); // Opens a new window
+		$(document).ready(function() {
+		});
 
-                return false;
-            }
-            /* jQuery(document)
-                    .ready(
-                            function () {
-                                App.init();
-                                try {
-                                    tinymce
-                                            .init({
-                                                selector: 'textarea',
-                                                height: 50,
-                                                plugins: [
-                                                    'advlist autolink lists link image charmap print preview anchor',
-                                                    'searchreplace visualblocks code fullscreen',
-                                                    'insertdatetime media table contextmenu paste code'],
-                                                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                                                content_css: [
-                                                    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-                                                    '//www.tinymce.com/css/codepen.min.css']
-                                            });
-                                } catch (err) {
-                                    // TODO: handle exception
-                                }
-                            }); */
-        </script>
+		function openWin(url) {
+			myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
+
+			return false;
+		}
+
+		function openWinSpeaker(url) {
+			myWindow = window.open(url, "", "width=1024, height=768"); // Opens a new window
+
+			return false;
+		}
+		/* jQuery(document)
+		        .ready(
+		                function () {
+		                    App.init();
+		                    try {
+		                        tinymce
+		                                .init({
+		                                    selector: 'textarea',
+		                                    height: 50,
+		                                    plugins: [
+		                                        'advlist autolink lists link image charmap print preview anchor',
+		                                        'searchreplace visualblocks code fullscreen',
+		                                        'insertdatetime media table contextmenu paste code'],
+		                                    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+		                                    content_css: [
+		                                        '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+		                                        '//www.tinymce.com/css/codepen.min.css']
+		                                });
+		                    } catch (err) {
+		                        // TODO: handle exception
+		                    }
+		                }); */
+	</script>
 	<!--[if lt IE 9]>
         <script src="assets/plugins/respond.js"></script>
         <script src="assets/plugins/html5shiv.js"></script>

@@ -453,9 +453,7 @@ div.dtr-modal div.dtr-modal-background {
 #frame_htc_one_emulator {
 	width: 360px;
 	height: 640px;
-	margin: 173px 0 0 119px;
-	/* left: -4px; 
-	border: 1px solid red;*/
+	margin: 0 0 0 119px;
 }
 
 #frame_htc_one_emulator1 {

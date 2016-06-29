@@ -86,6 +86,7 @@
 				<h1 class="pull-left">Review Slide</h1>
 			</div>
 		</div>
+		<div class="container-fluid">
 		<form action="/content/review_lesson" name="" method="GET"
 			class="sky-form">
 			<%
@@ -101,20 +102,18 @@
 				name="slide_id" value="<%=request.getParameter("slide_id")%>"
 				type="hidden">
 			
-			<div class="container-fluid" style="padding: 0px !important">
 				<input type="hidden"
 					name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
-					<div class="col-md-1" style="margin-left: 39px; vertical-align: middle;">
+					<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
-							<a class="left carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>"> <span
-								class="glyphicon glyphicon-chevron-left"></span> <span
-								class="sr-only">Previous</span>
+							<a style="width: 100%;" class="left carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>"> 
+								<span  class="glyphicon glyphicon-chevron-left"></span> 
 							</a>
 						<% }%>
 					</div>
 					
-					<div class="col-md-3">
+					<div class="col-md-5">
 						<fieldset>
 							<section>
 								<label class="label">Review Notes</label> <label
@@ -185,16 +184,14 @@
 						</div>
 					</div>
 				
-				<div class="col-md-6" style="margin-top: -254px;">
+				<div class="col-md-5" >
 
-					<div id="phone_area" style="display: block;">
-						<div id="phone_placeholder"
-							style="display: block; height: 1024px;">
+					<div id="phone_area" style="display: block;    margin-top: -7%;">
+						<div id="phone_placeholder" style="display: block; height: 1024px;">
 							<div id="htc_one_emulator"
 								style="transform: scale(1); transform-origin: 0px 0px 0px;">
 								<div id="frame_htc_one_emulator" class="frame_scroller">
-									<iframe
-										src="/content/lesson/slide_preview.jsp?ppt_id=<%=ppt.getId() %>&slide_id=<%=request.getParameter("slide_id")%>"
+									<iframe src="/content/lesson/slide_preview.jsp?ppt_id=<%=ppt.getId() %>&slide_id=<%=request.getParameter("slide_id")%>"
 										frameborder="0" id='prv' style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
 									</iframe>
 								</div>
@@ -203,11 +200,10 @@
 					</div>
 				</div>
 					
-				<div class="col-md-1">
+				<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
 				<% if(next_slide_id != 0) { %>
-					<a class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
+					<a style="width: 100%;" class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
+						<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</a>
 				<% }%>
 				</div>
@@ -218,7 +214,6 @@
 	</div>
 	</div>
 	<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
-	</div>
 
 
 	<!-- JS Global Compulsory -->

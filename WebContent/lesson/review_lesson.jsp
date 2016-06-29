@@ -103,11 +103,11 @@
 							</div>
 							<div class="panel-body">
 
-								<form action="/content/review_lesson" id="sky-form4"
+								<form action="/content/review_lesson" id="review-lesson-form"
 									class="sky-form">
-									<input type="hidden" name="lesson_id"
-										value="<%=lesson.getId()%>" /> <input type="hidden"
-										name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+									<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> 
+									<input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+									<input type="hidden" id="status" name="review" value="none" />
 									<fieldset>
 
 										<section>
@@ -147,17 +147,36 @@
 									</fieldset>
 
 									<footer>
-										<button type="submit" class="btn-u" name="review"
-											value="APPROVED">Approved</button>
-										<button type="submit" class="btn-u" name="review"
-											value="DIS_APPROVED">Dis Approve</button>
+										<a class="btn-u" id="approved-slide-btn" data-toggle="modal" data-value="APPROVED"
+											data-target="#confirm-lesson-review-modal">Approved</a>
+
+										<a class="btn-u"  id="disapprove-slide-btn" data-toggle="modal"  data-value="DIS_APPROVED"
+											data-target="#confirm-lesson-review-modal">Dis Approve</a>
+											
 									</footer>
-										<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=<%= lesson.getPresentaion().getId()%> ' class='btn-u btn-u-default'>Speaker Preview</a>
-										<a onclick="openWin('/content/lesson/preview.jsp?ppt_id=<%= lesson.getPresentaion().getId()%>')" href="#" class="btn-u btn-u-default">Mobile Preview</a>
+									<a target='_blank'
+										href='/content/lesson/preview_desktop.jsp?ppt_id=<%= lesson.getPresentaion().getId()%> '
+										class='btn-u btn-u-default'>Speaker Preview</a> <a
+										onclick="openWin('/content/lesson/preview.jsp?ppt_id=<%= lesson.getPresentaion().getId()%>')"
+										href="#" class="btn-u btn-u-default">Mobile Preview</a>
 								</form>
-
 							</div>
-
+							
+							<div class="modal fade" id="confirm-lesson-review-modal"
+								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">Confirm Submit</div>
+										<div class="modal-body">Are you sure you want to continue?</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+											<button id="confirm-lesson-review-btn" type="submit" class="btn btn-success success">Confirm</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 						</div>
 
 					</div>
@@ -302,6 +321,19 @@
 															});
 										}
 									});
+
+							//On modal activation; update "status" input field with the value from respective button clicked (approved/disapproved)
+							$('#confirm-lesson-review-modal').on( 'show.bs.modal', function(e) {
+									var $invoker = $(e.relatedTarget);
+									var status = $invoker.data("value");
+									$('#status').attr("value", status);
+							});
+
+							//On confirm button (in the modal) click; submit the form
+							$('#confirm-lesson-review-btn').click(function() {
+									$( "#review-lesson-form" ).submit();
+							});
+
 						});
 
 		function openWin(url) {
