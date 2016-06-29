@@ -1182,5 +1182,15 @@ body {
 }
 
 
+b, strong {
+    font-weight: bold !important;
+}
 
+i, cite, em, var, address, dfn {
+    font-style: italic !important;
+}
+
+.marker {
+    background-color: Yellow !important;
+}
 
