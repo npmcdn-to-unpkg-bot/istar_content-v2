@@ -34,14 +34,14 @@ String style_body = "background-size: cover;";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-
+<link rel="stylesheet" href="<%=baseURL%>assets/reveal/css/reveal.css">
+<link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css" />
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
 lesson_theme may have a string in place
 lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
  -->
-  <link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css" />
+  
 
 <%
 int themeID = 100;
@@ -75,72 +75,82 @@ try {
 	</div>
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
+ <script src="<%=baseURL%>assets/reveal/js/reveal.js"></script>
+		<script src="<%=baseURL %>assets/reveal/plugin/zoom-js/zoom.js"></script>
 <script type="text/javascript"
 		src="https://paulund.co.uk/playground/demo/typing-effect/download/js/typed.js"></script>
-	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
-	<script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
-		<script src="http://lab.hakim.se/zoom-js/js/zoom.js"></script>
 
 	<script>
-		<%-- var orginalsize = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ; --%>
+	
+		var orginal_listitem_font_size = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
+		var window_size = $(window).width();
 		
-		var wi = $(window).width();
 		Reveal.initialize({
 			center : true,
 			controls : true,
-			width:wi
+			width: window_size 
 		});
 		
-		var orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor() %>';
-		//console.log("orgBgColor: "+orgBgColor);
-		document.body.style.background = $('.present').data("bgcolor");
+		//Save background colour from the theme to a global variable
+		var orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';			
+		//console.log("background colour from theme: "+orgBgColor);
+		
+		//Set first slide's bg color to the body
+		document.body.style.background = $('.present').data("bgcolor");								
 		if ($('.present').data("bgcolor") == "none") {
-			//console.log("first silde doesnt  have bg color");
+			//console.log("first silde doesnt have bg color");
+			//if the first slide doesn't have bg color set; then reset the body color to the original from theme
 			document.body.style.background = orgBgColor;
 			//console.log("#95: body-bgcolor: "+document.body.style.background);
 		}
 
 		Reveal.addEventListener('slidechanged', function(event) {
+			//Set present slide's bg color to the body
 			document.body.style.background = $('.present').data("bgcolor");
+			
 			//console.log('#111 slide bg color: '+ $('.present').data("bgcolor") );
 			//console.log('#112 body bg color: '+ document.body.style.background );
-			if ( $('.present').data("bgcolor") == "none") {
+			if ($('.present').data("bgcolor") == "none") {
+				
+				//if the present slide doesn't have bg color set; then reset the body color to the original from theme
 				document.body.style.background = orgBgColor;
 				//console.log('#115 body bg color(to be theme) ->'+ document.body.style.background );
 			}
-			
+
 			var currentURL = window.location.href; //currentURL+"#/"+ 
 			var res = currentURL.split("#");
 			currentURL = res[0] ///#1001
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
+
+			//To make the title animated as typing - 
 			
-			//data_slide_title 
-			console.log(" typing "+ $('.present').attr('id'));
-			var slideID = $('.present').attr('id');
+			//var slideID = $('.present').attr('id');
+			//console.log(" typing " + slideID);
 			//$('#'+slideID + " #data_slide_title").addClass( "animated infinite bounce" );// css('class','css-typing');
 
 		});
 
 		Reveal.addEventListener('fragmentshown', function(event) {
-			/* var new1 = orginalsize; */			
-	
+			//var temp = orginal_listitem_font_size;
+
 			$('.fragment').each(function(index, value) {
-				
 				try {
-					
+
 					if ($(this).attr('id').indexOf("-") != -1) {
 						$('#' + $(this).attr('id')).css({
-							'font-size' : orginalsize + 'px'
+							'font-size' : orginal_listitem_font_size + 'px'
 						});
 					}
 				} catch (errr) {
 					//Console.log($(this).attr('id'));
 				}
 			});
+			
 			$('#' + event.fragment.id).css({
-				'font-size' : new1 * 1.5 + 'px'
+				'font-size' : orginal_listitem_font_size * 1.5 + 'px'
 			});
 		});
 		
