@@ -1043,10 +1043,9 @@ public class LessonUtils {
 
     public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide,HttpServletRequest request) throws IOException {
         ImageDAO dao = new ImageDAO();
-        ImageUtils dao1 = new ImageUtils();
-        ArrayList<Image> images = (ArrayList<Image>) dao.findByProperty("sessionid", ppt.getLesson().getCmsession().getId());
-        ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId",
-                ppt.getLesson().getCmsession().getId());
+        ImageUtils imageUtils = new ImageUtils();
+        ArrayList<Image> images = imageUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
+        ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId", ppt.getLesson().getCmsession().getId());
 
         CMSList newList = new CMSList();
         newList.setList_type(slide.getList().getList_type());
