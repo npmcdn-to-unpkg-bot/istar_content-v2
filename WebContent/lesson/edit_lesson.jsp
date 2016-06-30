@@ -310,7 +310,8 @@
 									
 								</div>
 							</section>
-<section><button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button></section>
+							
+							<section><button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button></section>
 
 							</fieldset>
 
@@ -373,28 +374,69 @@
 					</div>
 
 				</div>
+				
+				<% if(lesson.getPresentaion() != null) { %>
+				
 				<div class="col-sm-12">
 
 					<div class=" col-md-12 ">
-						<div class="panel panel-sea">
+						<div class="panel panel-sea profile">
 
-							<div class="panel-heading">
+							<div class="panel-heading overflow-h">
 								<h3 >
 									<i class="fa fa-comments-o">Review Comments</i>
 								</h3>
 							</div>
 
-							<div class="panel-body" id="demo">
+							<div id="scrollbar4 " style="height: auto !important" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
 
-								<div class="panel panel-profile profile">
-									
+							<%
+									try {
+										SlideDAO slideDAO = new SlideDAO();
+										TaskDAO TDAO = new TaskDAO();
+										Task task = new Task();
+										task.setItemType("LESSON");
+										task.setItemId(lesson.getId());
+										task = TDAO.findByExample(task).get(0);
+										TaskLogDAO dao = new TaskLogDAO();
+										TaskLog sample = new TaskLog();
+										sample.setTaskId(task.getId());
+										sample.setItemType("SLIDE");
+										List<TaskLog> items = dao.findByExample(sample);
+										for (TaskLog log : items) {
+
+											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+								%>
+							<div class="comment" style="padding-bottom: 15px;">
+								<div class="overflow-h">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-md-3">
+												<strong><%=user.getName()%> : </strong> 
+											</div>
+											<div class="col-md-9">
+												<%=log.getComments()%>
+											</div>
+										</div>
+									</div>
+									<div style="float: right;">
+										<a class="" target="_blank" href="/content/fill_tempate.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>&slide_type=<%=slideDAO.findById(log.getItem_id()).getTemplate() %>">Edit slide</a>
+									</div>
 								</div>
-
 							</div>
+							<%
+									}
+									} catch (Exception e) {
+									}
+								%>
+
+						</div>
 
 						</div>
 					</div>
 				</div>
+				<% } %>
+				
 			</div>
 
 			<div class="col-md-8">

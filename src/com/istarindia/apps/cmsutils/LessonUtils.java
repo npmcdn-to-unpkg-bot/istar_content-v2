@@ -491,14 +491,14 @@ public class LessonUtils {
             
             //form submit confirm modal:
 			out.append( "  <div class='modal fade' id='confirm-delete-slide-modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>");
-			out.append( "  <div  class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> Confirm Submit </div>");
+			out.append( "  <div  class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> Confirm! </div>");
 			out.append( " <div class='modal-body'> Are you sure you want to continue?  </div> <div class='modal-footer'>  ");
 			out.append(" <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button> ");
 			out.append( "<a href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=' id='confirm-delete-slide-btn' class='btn btn-success success'>Delete</a> </div> </div> </div> </div>");
 			
         } else if (lesson.getGame() != null) {
             Game game = lesson.getGame();
-            out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
+//            out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
 
             out.append("<div class=' col-md-12 '>"
                     + "<div class='panel panel-sea'>"
