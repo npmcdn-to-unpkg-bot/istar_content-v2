@@ -406,7 +406,7 @@
 										for (TaskLog log : items) {
 
 											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-											if(slideDAO.findById(log.getItem_id()) != null) {
+											if(slideDAO.findById(log.getItem_id()) != null  && !(log.getComments().trim().isEmpty()) ) {
 											
 								%>
 							<div class="comment" style="padding-bottom: 15px;">
