@@ -33,16 +33,15 @@ String style_body = "background-size: cover;";
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="<%=baseURL%>assets/reveal/css/reveal.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
+
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
 lesson_theme may have a string in place
 lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
  -->
-  
-
 <%
 int themeID = 100;
 try {
@@ -66,20 +65,20 @@ try {
 		</script>
 
 </head>
+
 <body style="<%=style_body%>;background-color:  ">
+	
 	<div class="reveal">
 		<div class="slides">
-		<%=ppt.outputSlidesForDesktop() %>
+			<%=ppt.outputSlidesForDesktop() %>
 		</div>
-
 	</div>
-<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
- <script src="<%=baseURL%>assets/reveal/js/reveal.js"></script>
-		<script src="<%=baseURL %>assets/reveal/plugin/zoom-js/zoom.js"></script>
-<script type="text/javascript"
-		src="https://paulund.co.uk/playground/demo/typing-effect/download/js/typed.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
 
 	<script>
 	
