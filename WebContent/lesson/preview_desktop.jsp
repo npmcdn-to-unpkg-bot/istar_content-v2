@@ -120,10 +120,12 @@ try {
 			var currentURL = window.location.href; //currentURL+"#/"+ 
 			var res = currentURL.split("#");
 			currentURL = res[0] ///#1001
-			console.log(currentURL + "#/" + event.currentSlide.id);
+			//console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
-
+			
+			
+			
 			//To make the title animated as typing - 
 			
 			//var slideID = $('.present').attr('id');
