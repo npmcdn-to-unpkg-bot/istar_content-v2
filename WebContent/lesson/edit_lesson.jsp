@@ -377,7 +377,7 @@
 				
 				<% if(lesson.getPresentaion() != null) { %>
 				
-				<div class="col-sm-12">
+				 <div class="col-sm-12">
 
 					<div class=" col-md-12 ">
 						<div class="panel panel-sea profile">
@@ -406,6 +406,8 @@
 										for (TaskLog log : items) {
 
 											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+											if(slideDAO.findById(log.getItem_id()) != null) {
+											
 								%>
 							<div class="comment" style="padding-bottom: 15px;">
 								<div class="overflow-h">
@@ -426,6 +428,7 @@
 							</div>
 							<%
 									}
+									}
 									} catch (Exception e) {
 									}
 								%>
@@ -434,7 +437,7 @@
 
 						</div>
 					</div>
-				</div>
+				</div> 
 				<% } %>
 				
 			</div>
