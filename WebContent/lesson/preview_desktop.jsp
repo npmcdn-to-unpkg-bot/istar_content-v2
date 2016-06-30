@@ -35,7 +35,7 @@ String style_body = "background-size: cover;";
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link rel="stylesheet" href="<%=baseURL%>assets/reveal/css/reveal.css">
-<link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css" />
+<link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
 lesson_theme may have a string in place

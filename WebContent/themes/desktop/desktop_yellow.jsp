@@ -713,21 +713,14 @@ body {
 	font-weight: 400;
 	position: absolute;
 }
-.reveal .ONLY_PARAGRAPH_IMAGE img {
-	width: 180%;-webkit-transform: rotateZ(-7deg) important;
-    -ms-transform: rotateZ(-7deg) important;
-    transform: rotateZ(-7deg) scale(1.1)   important;  
-        margin-top: -5%;
-    
-}
 
-.reveal .ONLY_TITLE_IMAGE img {
-    -webkit-transform: rotateZ(-7deg)  !important;;
-    -ms-transform: rotateZ(-7deg)  !important;;
-    transform: rotateZ(-7deg) scale(1.1)  !important;
-        margin-top: -5%;
-}
-
+.reveal img.current-fragment {
+    animation-name: pulse;
+    -webkit-animation-name: pulse;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+} 
+ 
 .reveal .ONLY_2TITLE_IMAGE img {
 	width: 180%;
 }
