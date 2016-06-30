@@ -1328,4 +1328,20 @@ html:-moz-full-screen-ancestor {
   background: none; }
 
 .zoomed .reveal .roll span:after {
-  visibility: hidden; }
+	visibility: hidden;
+}
+
+
+b, strong {
+    font-weight: bold !important;
+}
+
+i, cite, em, var, address, dfn {
+    font-style: italic !important;
+}
+
+.marker {
+    background-color: Yellow !important;
+}
+
+>>>>>>> branch 'master' of https://github.com/ISTARSkills/istar_content.git
