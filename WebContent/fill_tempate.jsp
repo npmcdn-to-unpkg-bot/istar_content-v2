@@ -235,7 +235,6 @@
 					</div>
 
 					<div class="col-md-5">
-<%-- 
 						<select id="slidy_type_id" class="form-control" name="slide_type" style="    margin-top: 50px;    width: 317px;">
 							<% for (String template : CMSRegistry.slideTemplates) {  
 							if(template.equalsIgnoreCase(request.getParameter("slide_type"))) {%>
@@ -246,11 +245,19 @@
            }
            }%>
 						</select>
- --%>
+<div id="phone_area" style="display: block;">
+						<div id="phone_placeholder" style="display: block; height: 1024px;">
+							<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
+								<div id="frame_htc_one_emulator" class="frame_scroller">
 
-
-						<iframe src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 412px; height: 659px;"> </iframe>
+						<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="    background-color: #fff;
+    width: 365px;
+    height: 636px;
+    margin-top: 176px;"> </iframe>
 					</div>
+							</div>
+						</div>
+					</div></div>
 					<div class="panel panel-profile profile">
 						<div class="panel-heading overflow-h">
 							<h2 style="margin-top: 50px;" class="panel-title heading-sm pull-left">
@@ -383,7 +390,7 @@
 			$('#image-bg-picker').on('change',function() {
 					var bgurl = $(this).find(":checked").val();
 					console.log(bgurl);
-					$('#prv').contents().find('.slide-background').css('background-image', "url(" + bgurl + ")");
+					$('#prv').contents().find('.slide-backgrund').css('background-image', "url(" + bgurl + ")");
 					$('#prv').contents().find('.slide-background').css('background-size', "cover");
 			});
 		}
@@ -400,14 +407,14 @@
 			initTextArea();
 			initHooks();
 			initColorChange(); //slide_color
-			<%-- 
+			
 			$( "#slidy_type_id" ).change(function() {
 				  console.log( "Handler for .change() called." );
 				  var url = "<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
 				  console.log(url);
 				  window.location.href=url;
 				});
-			  --%>
+			  
 		});
 	</script>
 </body>

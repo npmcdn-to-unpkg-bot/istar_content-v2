@@ -33,8 +33,8 @@ String style_body = "background-size: cover;";
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-<link rel="stylesheet" href="<%=nuetral%>student/css/reveal.css">
-
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
 lesson_theme may have a string in place
@@ -72,13 +72,14 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 	</div>
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
-	<script src="<%=nuetral%>student/js/reveal.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 
 	<script>
 		Reveal.initialize({
 			center : false,
 			controls : false,
+		    slideNumber: true
+
 		});
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
@@ -88,6 +89,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		(document.getElementsByClassName('controls')[0]).style.display = 'none';
 
 		Reveal.addEventListener('slidechanged', function(event) {
+			
 			document.body.style.background = $('.present').css(
 					'background-color');
 			if (($('.present').attr("style")).indexOf("background-color") < 0) {
@@ -99,6 +101,9 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			console.log(currentURL + "#/" + event.currentSlide.id);
 			history.pushState({}, "URL Rewrite Example", currentURL + "#"
 					+ event.currentSlide.id);
+			
+			///console.log(event.currentSlide.id);
+			$('.slide-number-a').text('event.currentSlide.id');
 
 		});
 	</script>
