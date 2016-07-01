@@ -341,44 +341,55 @@
 				$("#image-picker").imagepicker();
 				CKEDITOR.replace('paragraph', { height: 100 });
 			} catch (err) {
-				// TODO: handle exception
+				console.log(err);
 			}
 			
 			try {
 				// Handle when the Source changes.
-			var bodyEditor = CKEDITOR.replace('slide_paragraph', {
-				readOnly : false
-			});
+				
+				console.log('err11');
+				var bodyEditor = CKEDITOR.replace('slide_paragraph', {
+					readOnly : false
+				});
+				console.log('err22');
 
-			bodyEditor.on('mode', function() {
-				if (this.mode == 'source') {
-					var editable = bodyEditor.editable();
-					editable.attachListener(editable, 'input', function() {
-						var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
-						console.log("new COntent 222-> " + text1);
-						var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
-					});
-				}
-			});
+				bodyEditor.on('mode', function() {
+					if (this.mode == 'source') {
+						var editable = bodyEditor.editable();
+						editable.attachListener(editable, 'input', function() {
+							console.log('err3333');
+
+							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
+							console.log("new COntent 222-> " + text1);
+							var iframeInner = $('#prv').contents().find('#slide_paragraph').html(text1);
+						});
+					}
+				});
 
 			// Handle when the HTML changes.
-			bodyEditor.on('change', function() {
+		 bodyEditor.on('change', function() {
 				var text1 = bodyEditor.document.getBody().getHtml()
 				console.log("new COntent111 -> " + text1);
 				var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
 			});
 		} catch (err) {
-			// TODO: handle exception
+			console.log(err);
 		}
 		}
 
 		function initHooks() {
 			$(".updateble").each(function(index, listItem) {
+				
 				var id = $(this).attr('id');
+				if($("#"+id).is("input") )  {
+
 				$('#' + id).keyup(function() {
 					console.log('new value ->' + '#data_' + id);
 					var iframeInner = $('#prv').contents().find('#data_' + id).html($('#' + id).val());
-					});
+				});
+				} else {
+					console.log(id);
+				}
 			});
 
 			$('#image-picker').on('change',function() {
@@ -407,7 +418,7 @@
 			initTextArea();
 			initHooks();
 			initColorChange(); //slide_color
-			
+			//initTextArea();
 			$( "#slidy_type_id" ).change(function() {
 				  console.log( "Handler for .change() called." );
 				  var url = "<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
