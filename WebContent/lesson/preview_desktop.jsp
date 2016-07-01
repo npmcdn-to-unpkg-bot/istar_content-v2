@@ -73,12 +73,27 @@ try {
 			<%=ppt.outputSlidesForDesktop() %>
 		</div>
 	</div>
+	<% 
+	IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+    String displayName = "Welcome " + user.getName();
+    if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
+<button onclick="add_review_comment()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%">
+<img src="http://i.stack.imgur.com/8BVKM.png"></button>
 
+<% } else {
+%>
+<button onclick="add_edit()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%">
+<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+<% } %>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
+
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
+	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
 	<script>
 	
@@ -154,8 +169,76 @@ try {
 				'font-size' : orginal_listitem_font_size * 1.5 + 'px'
 			});
 		});
+		//http://localhost:8080/content/lesson/preview_desktop.jsp?ppt_id=22#4187
+		function add_edit() {
+			var currentURL = window.location.href; //currentURL+"#/"+ 
+			var slideID = <%=request.getParameter("slide_id")%>;
+			if(currentURL.indexOf("#") > -1) {
+				slideID  = currentURL.split("#")[1];
+				
+			}
+			var url = '/content/fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id='+slideID+'&slide_type=ONLY_TITLE_PARAGRAPH';
+			console.log(url);
+			var win = window.open(url, '_blank');
+			win.focus();
+		}
 		
+		<% 
+		 if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
+			function add_review_comment() {
+				console.log('blkjghlkj');
+				var currentURL = window.location.href; //currentURL+"#/"+ 
+				var slideID = <%=request.getParameter("slide_id")%>;
+				// take # from url and put into slide_id
+				if(currentURL.indexOf("#") > -1) {
+					slideID  = currentURL.split("#")[1];
+					$('#slidee_id').val(slideID);
+				}
+				
+			}
+	<% }	%>
 	</script>
+	<% 
+		 if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+       <form action="/content/review_lesson" name="" method="POST" target="_blank" >
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Review Comment </h4>
+      </div>
+      <div class="modal-body" style="min-height: 500px">
+			<input name="is_edit" value="true" type="hidden"> <input id='slidee_id'
+				name="slide_id" value="<%=request.getParameter("slide_id")%>"
+				type="hidden">
+			
+				<input type="hidden"
+					name="ppt_id" value="<%=request.getParameter("ppt_id")%>"> <fieldset>
+							<section>
+								<label class="label">Review Notes</label> 
+								<label class="textarea"> 
+                                     <textarea rows="30" cols="60"
+										name="review_notes" placeholder=" Please enter text"></textarea>
+								</label>
+								<div class="note">
+									<strong>Note:</strong> This is where we will put in the Review
+									Notes.
+								</div>
+							</section>
+						</fieldset>
+						
+      </div>
+      <div class="modal-footer">
+			<button type="submit" class="btn-u btn-block">Submit</button>
+      </div>
+    </div>
+</form>
+  </div>
+</div><% }	%>
 </body>
+
+
 </html>
