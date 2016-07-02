@@ -1,7 +1,9 @@
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="com.istarindia.cms.lessons.*"%>
+<%@ page import="com.istarindia.cms.lessons.*"%><%@page import="com.istarindia.apps.dao.*"%>
+<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
+<%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
@@ -23,23 +25,36 @@ String nuetral = url.substring(0, url.length() - request.getRequestURI().length(
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
 
-<link rel="stylesheet" href="/student/css/reveal.css">
-<link rel="stylesheet" href="/themes/mobile.css"  type="text/css" /><!-- Printing and PDF exports -->
-
-<!-- Code syntax highlighting -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=nuetral%>student/css/print/pdf.css' : '<%=nuetral%>student/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'http://localhost:8080/student/css/print/pdf.css' : 'http://localhost:8080/student/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+
 
 </head>
 
 <body>
+<%
 
+String lesson_theme = request.getParameter("lesson_theme");
+
+try {
+int themeID = Integer.parseInt(lesson_theme);
+if ((new UiThemeDAO()).findById(themeID) != null) {
+%>
+	<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
+<% 
+	} 
+} catch (Exception e){
+	//nothing ToDo
+}
+%>
 	<div class="reveal">
 
 		<div class="slides">
@@ -47,34 +62,41 @@ String nuetral = url.substring(0, url.length() - request.getRequestURI().length(
 
 		</div>
 
-		<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
-		<script src="<%=nuetral%>student/js/reveal.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 
-		<script>
+		<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: false,
+	<script>
+		Reveal.initialize({
+			center : false,
+			controls : false,
+		});
+		var orgBgColor = $("body").css("background-color");
+		document.body.style.background = $('.present').css('background-color');
+		if (($('.present').attr("style")).indexOf("background-color") < 0) {
+			document.body.style.background = orgBgColor;
+		}
+		(document.getElementsByClassName('controls')[0]).style.display = 'none';
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+		Reveal.addEventListener('slidechanged', function(event) {
+			document.body.style.background = $('.present').css(
+					'background-color');
+			if (($('.present').attr("style")).indexOf("background-color") < 0) {
+				document.body.style.background = orgBgColor;
+			}
+			var currentURL = window.location.href; //currentURL+"#/"+ 
+			var res = currentURL.split("#");
+			currentURL = res[0] ///#1001
+			console.log(currentURL + "#/" + event.currentSlide.id);
+			history.pushState({}, "URL Rewrite Example", currentURL + "#"
+					+ event.currentSlide.id);
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: '<%=nuetral%>student/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '<%=nuetral%>student/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '<%=nuetral%>student/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '<%=nuetral%>student/plugin/zoom-js/zoom.js', async: true },
-					{ src: '<%=nuetral%>student/plugin/notes/notes.js', async: true }
-				]
-			
-			
-			});
-
-		</script>
+		});
+	</script>
 
 		<!-- Everything below this point is only used for the reveal.js demo page -->
 </body>

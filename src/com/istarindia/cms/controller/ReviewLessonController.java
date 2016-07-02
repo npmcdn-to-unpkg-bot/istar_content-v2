@@ -20,6 +20,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.istarindia.apps.cmsutils.reports.IStarColumn;
 import com.istarindia.apps.dao.ContentReviewer;
 import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.IstarUser;
@@ -144,8 +145,29 @@ public class ReviewLessonController extends IStarBaseServelet {
 				
 				else {
 			SlideDAO dao1 = new SlideDAO();
-			Slide slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
+			Slide slide = new Slide();
+			int slideID = 0;
+			if(request.getParameter("slide_id").equalsIgnoreCase("null")) {
 			
+				String sql1 = "SELECT s.id FROM 	slide s WHERE 	s.presentation_id = "+request.getParameter("ppt_id") +"  ORDER BY 	s.order_id ASC";
+				IstarUserDAO dao = new IstarUserDAO();
+				Session session = dao.getSession();
+				SQLQuery query = session.createSQLQuery(sql1);
+				System.err.println(sql1);
+				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+				List<HashMap<String, Object>> results = query.list();
+				for (HashMap<String, Object> object : results) {
+						for (String string : object.keySet()) {
+							//System.out.println(object.get(string));
+							slideID = Integer.parseInt(object.get(string).toString());
+						}
+				}
+				slide = dao1.findById(slideID);
+			} else {
+				
+				slideID = Integer.parseInt(request.getParameter("slide_id"));
+				slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
+			}
 			TaskDAO dao = new TaskDAO();
 			Task task = new Task();
 			task.setItemId(slide.getPresentaion().getLesson().getId());
@@ -163,12 +185,11 @@ public class ReviewLessonController extends IStarBaseServelet {
 			log.setCreatedAt(currentTimestamp);
 			log.setComments(request.getParameter("review_notes"));
 			log.setItemType("SLIDE");
-			log.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
+			log.setItem_id(slideID);
 			Session session = lDAO.getSession();
 			Transaction tx = null;
 			try {
 				tx = session.beginTransaction();
-
 				lDAO.attachDirty(log);
 				tx.commit();
 			} catch (HibernateException e) {

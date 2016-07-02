@@ -235,7 +235,6 @@
 					</div>
 
 					<div class="col-md-5">
-<%-- 
 						<select id="slidy_type_id" class="form-control" name="slide_type" style="    margin-top: 50px;    width: 317px;">
 							<% for (String template : CMSRegistry.slideTemplates) {  
 							if(template.equalsIgnoreCase(request.getParameter("slide_type"))) {%>
@@ -246,11 +245,19 @@
            }
            }%>
 						</select>
- --%>
+<div id="phone_area" style="display: block;">
+						<div id="phone_placeholder" style="display: block; height: 1024px;">
+							<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
+								<div id="frame_htc_one_emulator" class="frame_scroller">
 
-
-						<iframe src="/content/mobile_preview.jsp?template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 412px; height: 659px;"> </iframe>
+						<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="    background-color: #fff;
+    width: 365px;
+    height: 636px;
+    margin-top: 176px;"> </iframe>
 					</div>
+							</div>
+						</div>
+					</div></div>
 					<div class="panel panel-profile profile">
 						<div class="panel-heading overflow-h">
 							<h2 style="margin-top: 50px;" class="panel-title heading-sm pull-left">
@@ -334,44 +341,55 @@
 				$("#image-picker").imagepicker();
 				CKEDITOR.replace('paragraph', { height: 100 });
 			} catch (err) {
-				// TODO: handle exception
+				console.log(err);
 			}
 			
 			try {
 				// Handle when the Source changes.
-			var bodyEditor = CKEDITOR.replace('slide_paragraph', {
-				readOnly : false
-			});
+				
+				console.log('err11');
+				var bodyEditor = CKEDITOR.replace('slide_paragraph', {
+					readOnly : false
+				});
+				console.log('err22');
 
-			bodyEditor.on('mode', function() {
-				if (this.mode == 'source') {
-					var editable = bodyEditor.editable();
-					editable.attachListener(editable, 'input', function() {
-						var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
-						console.log("new COntent 222-> " + text1);
-						var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
-					});
-				}
-			});
+				bodyEditor.on('mode', function() {
+					if (this.mode == 'source') {
+						var editable = bodyEditor.editable();
+						editable.attachListener(editable, 'input', function() {
+							console.log('err3333');
+
+							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
+							console.log("new COntent 222-> " + text1);
+							var iframeInner = $('#prv').contents().find('#slide_paragraph').html(text1);
+						});
+					}
+				});
 
 			// Handle when the HTML changes.
-			bodyEditor.on('change', function() {
+		 bodyEditor.on('change', function() {
 				var text1 = bodyEditor.document.getBody().getHtml()
 				console.log("new COntent111 -> " + text1);
 				var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(text1);
 			});
 		} catch (err) {
-			// TODO: handle exception
+			console.log(err);
 		}
 		}
 
 		function initHooks() {
 			$(".updateble").each(function(index, listItem) {
+				
 				var id = $(this).attr('id');
+				if($("#"+id).is("input") )  {
+
 				$('#' + id).keyup(function() {
 					console.log('new value ->' + '#data_' + id);
 					var iframeInner = $('#prv').contents().find('#data_' + id).html($('#' + id).val());
-					});
+				});
+				} else {
+					console.log(id);
+				}
 			});
 
 			$('#image-picker').on('change',function() {
@@ -383,7 +401,7 @@
 			$('#image-bg-picker').on('change',function() {
 					var bgurl = $(this).find(":checked").val();
 					console.log(bgurl);
-					$('#prv').contents().find('.slide-background').css('background-image', "url(" + bgurl + ")");
+					$('#prv').contents().find('.slide-backgrund').css('background-image', "url(" + bgurl + ")");
 					$('#prv').contents().find('.slide-background').css('background-size', "cover");
 			});
 		}
@@ -400,14 +418,14 @@
 			initTextArea();
 			initHooks();
 			initColorChange(); //slide_color
-			<%-- 
+			//initTextArea();
 			$( "#slidy_type_id" ).change(function() {
 				  console.log( "Handler for .change() called." );
 				  var url = "<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
 				  console.log(url);
 				  window.location.href=url;
 				});
-			  --%>
+			  
 		});
 	</script>
 </body>
