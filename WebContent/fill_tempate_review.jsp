@@ -107,7 +107,7 @@
 				<div class="row">
 					<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
-							<a style="width: 100%;" class="left carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>"> 
+							<a style="z-index:99999; width: 100%;" class="left carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>"> 
 								<span  class="glyphicon glyphicon-chevron-left"></span> 
 							</a>
 						<% }%>
@@ -202,7 +202,7 @@
 					
 				<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
 				<% if(next_slide_id != 0) { %>
-					<a style="width: 100%;" class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
+					<a style="z-index:99999; width: 100%;" class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
 						<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</a>
 				<% }%>

@@ -1117,4 +1117,5 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
 @-webkit-keyframes type{
     from { width: 0; }
 }
+
 </style>

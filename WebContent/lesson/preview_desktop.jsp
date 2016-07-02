@@ -140,7 +140,11 @@ try {
 					+ event.currentSlide.id);
 			
 			
-			
+			//$('.video111').css('position','absolute');
+			$('.video111').css('height',(window.screen.availHeight+100)+'px');
+			$('.video111').css('position','absolute');
+			$('.video111').css('top', '-'+(window.screen.availHeight-50)/2+'px');
+			$('.video111').css('margin-left','-18%');
 			//To make the title animated as typing - 
 			
 			//var slideID = $('.present').attr('id');
@@ -186,7 +190,8 @@ try {
 		<% 
 		 if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
 			function add_review_comment() {
-				console.log('blkjghlkj');
+				$('#idreview_notes').val("");
+				
 				var currentURL = window.location.href; //currentURL+"#/"+ 
 				var slideID = <%=request.getParameter("slide_id")%>;
 				// take # from url and put into slide_id
@@ -196,6 +201,8 @@ try {
 				}
 				
 			}
+			
+			
 	<% }	%>
 	</script>
 	<% 
@@ -220,7 +227,7 @@ try {
 							<section>
 								<label class="label">Review Notes</label> 
 								<label class="textarea"> 
-                                     <textarea rows="30" cols="60"
+                                     <textarea rows="30" cols="60" id='idreview_notes'
 										name="review_notes" placeholder=" Please enter text"></textarea>
 								</label>
 								<div class="note">
@@ -232,7 +239,7 @@ try {
 						
       </div>
       <div class="modal-footer">
-			<button type="submit" class="btn-u btn-block">Submit</button>
+			<button id='sbnmm' type="submit" class="btn-u btn-block">Submit</button>
       </div>
     </div>
 </form>
