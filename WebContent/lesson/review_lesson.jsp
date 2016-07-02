@@ -182,8 +182,118 @@
 					</div>
 				</div>
 
-			</div>
+				<% if(lesson.getPresentaion() != null) { %>
+				
+				 <div class="col-sm-12">
 
+					<div class=" col-md-12 ">
+						<div class="panel panel-sea profile">
+
+							<div class="panel-heading overflow-h">
+								<h3 >
+									<i class="fa fa-comments-o">Review Comments</i>
+								</h3>
+							</div>
+
+							<div id="scrollbar4 " style="height: auto !important" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
+								
+								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
+									<label>Lesson comments:</label>
+								</div>		
+								<%
+								//lesson comments-
+								SlideDAO slideDAO = new SlideDAO();
+								TaskDAO TDAO = new TaskDAO();
+								Task task = new Task();
+								TaskLogDAO dao = new TaskLogDAO();
+									try {
+										TaskLog sample1 = new TaskLog();
+										sample1.setTaskId(task.getId());
+										sample1.setItemType("LESSON");
+										sample1.setItem_id(lesson.getId());
+										sample1.setChangedStatus("COMPLETED");
+										List<TaskLog> items = dao.findByExample(sample1);
+										for (TaskLog log : items) {
+
+											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+											if( !(log.getComments().trim().isEmpty()) ) {
+											
+								%>
+					
+								<div class="comment" style="padding-bottom: 15px;">
+								<div class="overflow-h">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-md-3">
+												<strong><%=user.getName()%> : </strong> 
+											</div>
+											<div class="col-md-9">
+												<%=log.getComments()%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<%
+									}
+									}
+									} catch (Exception e) {
+									}
+								%>
+
+								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
+									<label>Slide comments:</label>
+								</div>
+							<%
+									//SLide comments-
+									try {
+										task.setItemType("LESSON");
+										task.setItemId(lesson.getId());
+										task = TDAO.findByExample(task).get(0);
+										TaskLog sample = new TaskLog();
+										sample.setTaskId(task.getId());
+										sample.setItemType("SLIDE");
+										List<TaskLog> items = dao.findByExample(sample);
+										for (TaskLog log : items) {
+
+											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+											if(slideDAO.findById(log.getItem_id()) != null  && !(log.getComments().trim().isEmpty()) ) {
+											
+								%>
+							<div class="comment" style="padding-bottom: 15px;">
+								<div class="overflow-h">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-md-3">
+												<strong><%=user.getName()%> : </strong> 
+											</div>
+											<div class="col-md-9">
+												<%=log.getComments()%>
+											</div>
+										</div>
+									</div>
+									<div style="float: right;">
+										<a class="" target="_blank" href="/content/fill_tempate_review.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Review slide</a>
+									</div>
+								</div>
+							</div>
+							<%
+									}
+									}
+									} catch (Exception e) {
+									}
+								%>
+
+						</div>
+
+						</div>
+					</div>
+				</div> 
+				<% } %>
+				
+			</div>
+				
 
 			<div class="col-md-8">
 				<%
@@ -203,49 +313,7 @@
 					}
 				%>
 
-				<div class=" col-md-12 ">
-					<div class="panel panel-sea">
-
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<i class="fa fa-comments-o"></i> Review Comments
-							</h3>
-						</div>
-
-						<div class="panel-body">
-
-							<div class="panel panel-profile profile">
-
-								<%
-									TaskLogDAO dao = new TaskLogDAO();
-									TaskLog sample = new TaskLog();
-									sample.setTaskId(Integer.parseInt(request.getParameter("task_id")));
-									sample.setItemType("LESSON");
-
-									List<TaskLog> items = dao.findByExample(sample);
-									for (TaskLog log : items) {
-
-										IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-								%>
-								<div class="comment">
-									<img
-										src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
-										alt="">
-									<div class="overflow-h">
-										<strong><%=user.getName()%></strong>
-										<p><%=log.getComments()%></p>
-
-									</div>
-								</div>
-								<%
-									}
-								%>
-
-							</div>
-						</div>
-					</div>
-
-				</div>
+				
 			</div>
 		</div>
 		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>

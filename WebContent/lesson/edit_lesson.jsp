@@ -389,16 +389,61 @@
 							</div>
 
 							<div id="scrollbar4 " style="height: auto !important" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-
-							<%
+								
+								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
+									<label>Lesson comments:</label>
+								</div>		
+								<%
+								//lesson comments-
+								SlideDAO slideDAO = new SlideDAO();
+								TaskDAO TDAO = new TaskDAO();
+								Task task = new Task();
+								TaskLogDAO dao = new TaskLogDAO();
 									try {
-										SlideDAO slideDAO = new SlideDAO();
-										TaskDAO TDAO = new TaskDAO();
-										Task task = new Task();
+										TaskLog sample1 = new TaskLog();
+										sample1.setTaskId(task.getId());
+										sample1.setItemType("LESSON");
+										sample1.setItem_id(lesson.getId());
+										sample1.setChangedStatus("COMPLETED");
+										List<TaskLog> items = dao.findByExample(sample1);
+										for (TaskLog log : items) {
+
+											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+											if( !(log.getComments().trim().isEmpty()) ) {
+											
+								%>
+					
+								<div class="comment" style="padding-bottom: 15px;">
+								<div class="overflow-h">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-md-3">
+												<strong><%=user.getName()%> : </strong> 
+											</div>
+											<div class="col-md-9">
+												<%=log.getComments()%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<%
+									}
+									}
+									} catch (Exception e) {
+									}
+								%>
+
+								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
+									<label>Slide comments:</label>
+								</div>
+							<%
+									//SLide comments-
+									try {
 										task.setItemType("LESSON");
 										task.setItemId(lesson.getId());
 										task = TDAO.findByExample(task).get(0);
-										TaskLogDAO dao = new TaskLogDAO();
 										TaskLog sample = new TaskLog();
 										sample.setTaskId(task.getId());
 										sample.setItemType("SLIDE");
