@@ -56,92 +56,92 @@ body {
 
 @font-face {
     font-family: 'Alice';
-    src: url('/themes/fonts/Alice/Alice-Regular.ttf');
+    src: url('/content/themes/fonts/Alice/Alice-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Asap-Bold';
-    src: url('/themes/fonts/Asap/Asap-Bold.ttf');
+    src: url('/content/themes/fonts/Asap/Asap-Bold.ttf');
 }
 
 @font-face {
     font-family: 'Asap-BoldItalic';
-    src: url('/themes/fonts/Asap/Asap-BoldItalic.ttf');
+    src: url('/content/themes/fonts/Asap/Asap-BoldItalic.ttf');
 }
 
 @font-face {
     font-family: 'Biryani';
-    src: url('/themes/fonts/Biryani/Biryani-Regular.ttf');
+    src: url('/content/themes/fonts/Biryani/Biryani-Regular.ttf');
 }
 
 @font-face {
     font-family: 'ComingSoon';
-    src: url('/themes/fonts/Coming_Soon/ComingSoon.ttf');
+    src: url('/content/themes/fonts/Coming_Soon/ComingSoon.ttf');
 }
 
 @font-face {
     font-family: 'Coockie';
-    src: url('/themes/fonts/Coockie/Coockie-Regular.ttf');
+    src: url('/content/themes/fonts/Coockie/Coockie-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Domine';
-    src: url('/themes/fonts/Domine/Domine-Regular.ttf');
+    src: url('/content/themes/fonts/Domine/Domine-Regular.ttf');
 }
 
 @font-face {
     font-family: 'DroidSerif';
-    src: url('/themes/fonts/Droid_Serif/DroidSerif.ttf');
+    src: url('/content/themes/fonts/Droid_Serif/DroidSerif.ttf');
 }
 
 @font-face {
     font-family: 'Exo';
-    src: url('/themes/fonts/Exo/Exo-Regular.ttf');
+    src: url('/content/themes/fonts/Exo/Exo-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Lato';
-    src: url('/themes/fonts/Lato/Lato-Regular.ttf');
+    src: url('/content/themes/fonts/Lato/Lato-Regular.ttf');
 }
 
 @font-face {
     font-family: 'LeagueScript';
-    src: url('/themes/fonts/League_Script/LeagueScript.ttf');
+    src: url('/content/themes/fonts/League_Script/LeagueScript.ttf');
 }
 
 @font-face {
     font-family: 'LibreBaskerville';
-    src: url('/themes/fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf');
+    src: url('/content/themes/fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf');
 }
 
 @font-face {
     font-family: 'NatoSerif';
-    src: url('/themes/fonts/Nato_Serif/NatoSerif-Regular.ttf');
+    src: url('/content/themes/fonts/Nato_Serif/NatoSerif-Regular.ttf');
 }
 
 @font-face {
     font-family: 'OpenSans';
-    src: url('/themes/fonts/Open_Sans/OpenSans-Regular.ttf');
+    src: url('/content/themes/fonts/Open_Sans/OpenSans-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Prata';
-    src: url('/themes/fonts/Prata/Prata-Regular.ttf');
+    src: url('/content/themes/fonts/Prata/Prata-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Raleway';
-    src: url('/themes/fonts/Raleway/Raleway-Regular.ttf');
+    src: url('/content/themes/fonts/Raleway/Raleway-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Quicksand';
-    src: url('/themes/fonts/Quicksand/Quicksand-Regular.ttf');
+    src: url('/content/themes/fonts/Quicksand/Quicksand-Regular.ttf');
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: url('/themes/fonts/Roboto/Roboto-Regular.ttf');
+    src: url('/content/themes/fonts/Roboto/Roboto-Regular.ttf');
 }
 
 .reveal  .ONLY_TITLE h2 {
@@ -734,7 +734,7 @@ body {
 }
 
 .reveal  #data_slide_list_item {
-	font-size: 75%
+	font-size: 100%
 }
 .reveal  #data_slide_paragraph {
 	font-size: 110%

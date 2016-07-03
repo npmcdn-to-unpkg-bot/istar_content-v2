@@ -262,7 +262,8 @@ var App = function () {
 		            } );
 		        }, 
 			 responsive: true, 
-			 stateSave: true
+			 stateSave: true, 
+			 "pageLength": 50
 			 });
 	} catch (err) {
 		console.log(err);
@@ -271,7 +272,8 @@ var App = function () {
 	$('.datatable_report').each(function(i, obj) {
 		var tableID  = $(this).attr('id');
 		$('#'+tableID).DataTable({
-			 initComplete: function () {
+			"pageLength": 16, 
+			initComplete: function () {
 		            this.api().columns().every( function () {
 		                var column = this;
 		                var select = $('<select><option value=""></option></select>')
@@ -292,7 +294,8 @@ var App = function () {
 		            } );
 		        }, 
 			 responsive: true, 
-			 stateSave: true
+			 stateSave: true, 
+			 "pageLength": 50
 			 });
 	});
 	
