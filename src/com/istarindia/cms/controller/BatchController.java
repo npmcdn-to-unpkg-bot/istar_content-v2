@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package com.istarindia.cms.controller;
 
 import com.istarindia.apps.dao.Batch;
@@ -30,10 +30,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
+*//**
  *
  * @author Kunal Chakravertti
- */
+ *//*
 @WebServlet(urlPatterns = "/batch_controller")
 public class BatchController extends HttpServlet {
 
@@ -57,7 +57,7 @@ public class BatchController extends HttpServlet {
     String tableStyle = "style='width: 98%;margin-left: 1%;margin-right: 1%;'";
     String style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
 
-    /**
+    *//**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -65,11 +65,11 @@ public class BatchController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+     *//*
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            /* TODO output your page here. You may use following sample code. */
+             TODO output your page here. You may use following sample code. 
             String action = request.getParameter("_action") != null ? request.getParameter("_action") : "_NO_VALUE";
 
             switch (action) {
@@ -271,39 +271,39 @@ public class BatchController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    *//**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+     *//*
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    *//**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+     *//*
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    *//**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
-     */
+     *//*
     @Override
     public String getServletInfo() {
         return "Short description";
@@ -378,3 +378,4 @@ public class BatchController extends HttpServlet {
     }
 
 }
+*/

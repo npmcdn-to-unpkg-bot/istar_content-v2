@@ -1118,4 +1118,12 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
     from { width: 0; }
 }
 
+
+
+.list {
+     list-style:disc outside none;
+     display:list-item; 
+     }
+     
+     
 </style>

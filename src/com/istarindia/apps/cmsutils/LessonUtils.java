@@ -1045,6 +1045,7 @@ public class LessonUtils {
         ImageDAO dao = new ImageDAO();
         ImageUtils imageUtils = new ImageUtils();
         ArrayList<Image> images = imageUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
+       System.err.println(">>>>>"+ppt.getLesson().getCmsession().getId());
         ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId", ppt.getLesson().getCmsession().getId());
 
         CMSList newList = new CMSList();

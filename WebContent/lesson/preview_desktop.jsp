@@ -150,7 +150,16 @@ try {
 			//var slideID = $('.present').attr('id');
 			//console.log(" typing " + slideID);
 			//$('#'+slideID + " #data_slide_title").addClass( "animated infinite bounce" );// css('class','css-typing');
-
+			// find the hright of the slide and make it the height f the row 
+			//height: 1024px;display: table-cell;vertical-align: middle;
+			
+			var height_slide = $('#'+event.currentSlide.id).css('height');
+			$('#'+event.currentSlide.id).css('display','table');
+			console.log('height_slide->'+ height_slide);
+			$('#'+event.currentSlide.id+ " .row").css('height',height_slide);
+			$('#'+event.currentSlide.id+ " .row").css('display','table-cell');
+			$('#'+event.currentSlide.id+ " .row").css('vertical-align','middle');
+			
 		});
 
 		Reveal.addEventListener('fragmentshown', function(event) {
@@ -203,13 +212,40 @@ try {
 			}
 			
 			
-	<% }	%>
+	<% }
+		
+		
+		
+		%>
+		
+		/* 
+		key-> is_edit : value ->true
+key-> slide_id : value ->252
+key-> ppt_id : value ->20
+key-> review_notes : value ->sssssssssssssss*/
+		
+		$( "#sbnmm" ).click(function() {
+			
+			console.log('mgkjhgkjhg');
+			
+			var slide_id = $('slidee_id').val();
+			var is_edit = "true";
+			var idreview_notes = $('idreview_notes').val();
+			$.ajax({
+				  type: "POST",
+				  url: '/content/review_lesson',
+				  data: 'is_edit=true&ppt_id=<%=request.getParameter("ppt_id")%>&slide_id='+slide_id+'&review_notes='+idreview_notes,
+				  success: success,
+				  dataType: dataType
+				});
+		
+		});
 	</script>
 	<% 
 		 if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-       <form action="/content/review_lesson" name="" method="POST" target="_blank" >
+<!--        <form action="/content/review_lesson" name="" method="POST" target="_blank" > -->
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -218,9 +254,8 @@ try {
         <h4 class="modal-title">Review Comment </h4>
       </div>
       <div class="modal-body" style="min-height: 500px">
-			<input name="is_edit" value="true" type="hidden"> <input id='slidee_id'
-				name="slide_id" value="<%=request.getParameter("slide_id")%>"
-				type="hidden">
+			<input name="is_edit" value="true" type="hidden"> '
+			<input id='slidee_id' name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
 			
 				<input type="hidden"
 					name="ppt_id" value="<%=request.getParameter("ppt_id")%>"> <fieldset>
@@ -239,11 +274,11 @@ try {
 						
       </div>
       <div class="modal-footer">
-			<button id='sbnmm' type="submit" class="btn-u btn-block">Submit</button>
+			<button id='sbnmm' class="btn-u btn-block">Submit</button>
       </div>
     </div>
-</form>
-  </div>
+<!-- </form>
+ -->  </div>
 </div><% }	%>
 </body>
 

@@ -323,8 +323,7 @@
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
-
+<script src="//cdn.ckeditor.com/4.5.9/full/ckeditor.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/parsley.js"></script>
