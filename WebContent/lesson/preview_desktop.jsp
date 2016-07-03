@@ -77,12 +77,12 @@ try {
 	IstarUser user = (IstarUser) request.getSession().getAttribute("user");
     String displayName = "Welcome " + user.getName();
     if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-<button onclick="add_review_comment()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%">
+<button onclick="add_review_comment()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
 
 <% } else {
 %>
-<button onclick="add_edit()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%">
+<button onclick="add_edit()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
 <% } %>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
