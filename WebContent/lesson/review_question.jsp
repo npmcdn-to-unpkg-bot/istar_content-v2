@@ -247,7 +247,7 @@
 								options_list = service.getOptionIdsForQuestion(question_id);
 								AssessmentOptionDAO dao = new AssessmentOptionDAO();
 								String[] check = new String[]{"unchecked","unchecked","unchecked","unchecked","unchecked"};
-								for(int i=0; i < options_list.size(); i++){
+								for(int i=0; i < options_list.size() && dao.findById(options_list.get(i)).getText().length()>0 ; i++){
 								if (dao.findById(options_list.get(i)).getMarkingScheme()!=null){
 									check[i]="checked";
 								}%>

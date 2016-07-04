@@ -2,6 +2,8 @@
 <%@page import="com.istarindia.apps.dao.Assessment"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
+<%@page import="com.istarindia.apps.dao.UiThemeDAO"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.istarindia.cms.lessons.*"%>
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
@@ -24,17 +26,26 @@ Assessment assessment = /* (new AssessmentDAO()).findById(1);//  */  (new Assess
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/css/theme/<%=assessment.getLesson().getLesson_theme().toLowerCase() %>.css" id="theme">
 
 <!-- Code syntax highlighting -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/reveal/lib/css/zenburn.css">
-<% if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-	//System.err.println("This is Mobile");
-%><link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
 
-<%  } else { %>
-	<link href="<%=baseURL %>assets/plugins/reveal/css/mobile.css" rel="stylesheet" type="text/css"  />
-<%  } %><!-- Printing and PDF exports -->
+
+<%
+try {
+	String lesson_theme = assessment.getLesson().getLesson_theme();
+
+int themeID = Integer.parseInt(lesson_theme);
+if ((new UiThemeDAO()).findById(themeID) != null) {
+%>
+	<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
+<% 
+	} 
+} catch (Exception e){
+	//nothing ToDo
+}
+%>
+<!-- Printing and PDF exports -->
 <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
