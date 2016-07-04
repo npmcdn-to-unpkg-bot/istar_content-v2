@@ -338,7 +338,7 @@
 
 			try {
 				$("#image-picker").imagepicker();
-				CKEDITOR.replace('paragraph', { height: 200 });
+				CKEDITOR.replace('paragraph', { height: 100 });
 			} catch (err) {
 				console.log(err);
 			}
