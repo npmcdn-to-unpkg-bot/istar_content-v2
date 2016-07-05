@@ -158,7 +158,6 @@
 								
 								List<TaskLog> items = dao1.findByExample(sample);
 								for(TaskLog log : items) {
-								
 									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
 									
 									%>

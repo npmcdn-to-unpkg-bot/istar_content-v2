@@ -23,6 +23,7 @@ import org.hibernate.Transaction;
 import com.istarindia.apps.cmsutils.reports.IStarColumn;
 import com.istarindia.apps.dao.ContentReviewer;
 import com.istarindia.apps.dao.ContentReviewerDAO;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Question;
@@ -200,7 +201,6 @@ public class ReviewLessonController extends IStarBaseServelet {
 				session.close();
 			}
 			try {
-				session = dao.getSession();
 				
 				int order_id = 0;
 				try {
@@ -209,9 +209,10 @@ public class ReviewLessonController extends IStarBaseServelet {
 					order_id = slide.getId();
 				}
 				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " and order_id > "+order_id+" order by order_id ";
-				SQLQuery query = session.createSQLQuery(sql1);
-				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-				List<HashMap<String, Object>> results = query.list();
+				
+				
+				DBUTILS db = new DBUTILS();
+				List<HashMap<String, Object>> results = db.executeQuery(sql1);
 				HashMap<String, Object> slide1 = results.get(0);
 				int next_slide_id = Integer.parseInt(slide1.get("id").toString());
 				
