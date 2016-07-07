@@ -40,7 +40,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
+ 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">

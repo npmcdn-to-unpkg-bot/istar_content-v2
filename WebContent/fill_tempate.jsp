@@ -15,17 +15,29 @@
 			+ request.getContextPath() + "/";
 	
 	
-%><%
+%>
+<%
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				SlideService service = new SlideService();
-				int slide_id = Integer.parseInt(request.getParameter("slide_id"));
 				int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
+				int slide_id = 0;
+				int previous_slide_id = 0 ;
+				int next_slide_id = 0;
+				String previous_slide_type = "NO_CONTENT"; 
+				String next_slide_type = "NO_CONTENT"; 
+				try {
+					slide_id = Integer.parseInt(request.getParameter("slide_id"));
+					
+					previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
+					next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+					
+					previous_slide_type = service.getPreviousSlideType(ppt_id, slide_id);
+					next_slide_type = service.getNextSlideType(ppt_id, slide_id);
+				} catch (Exception e ) {
+					
+				}
 				
-				int previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
-				int next_slide_id = service.getNextSlideId(ppt_id, slide_id);
-				
-				String previous_slide_type = service.getPreviousSlideType(ppt_id, slide_id);
-				String next_slide_type = service.getNextSlideType(ppt_id, slide_id);
+				String new_media_title = service.getNewMediaTitle(slide_id, ppt.getLesson().getCmsession().getId());
 				
 			%>
 <!DOCTYPE html>
@@ -133,6 +145,19 @@
 							%><div class="col-md-7">
 								<%=utils.getEditProfileEdit(slide, ppt, newSlide, request)%>
 								<fieldset>
+									
+								<% try {
+									
+									if (request.getParameter("slide_type").toLowerCase().contains("image")) { %>
+										<section style="margin-top: -8%;     margin-right: 5%; float: right;">
+												<button type='button' class='btn-u' data-target='#imageModal' data-toggle='modal'>Upload Image</button>
+										</section>
+								
+								<% 	} 
+								} catch (Exception e ) {
+									//TODO: nothing
+								} %>
+								
 									<section>
 										<label class="label">Select Image Background</label> <label class="select"> <select name="image_bg" id="image-bg-picker" value="<%=slide.getImage_BG()%>">
 												<option selected="selected" value="none">None</option>
@@ -370,6 +395,56 @@
 			</div>
 		</form>
 	</div>
+
+  <div class='modal fade' id='imageModal' tabindex='-1' 
+  	role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel4">Upload Media</h4>
+				</div>
+				<form action="<%=baseURL%>media_upload" class="sky-form" method="POST" 
+							novalidate="novalidate"  enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="row">
+							<input type="hidden" id="item_id" name="item_id" value="0" />
+							<input type="hidden" id="slide_id" name="slide_id" value="<%=request.getParameter("slide_id")%>" />
+							<input type="hidden" id="slide_type" name="slide_type" value="<%=request.getParameter("slide_type")%>" />
+							<input type="hidden" id="selected_items" name="selected_items" value="0" />
+							<input type="hidden" id="session_id" name="session_id" value="<%=ppt.getLesson().getCmsession().getId() %>" />
+							<input type="hidden" id="ppt_id" name="ppt_id" value="<%=ppt.getId() %>" />
+							<input type="hidden" id="new_media_title" name="new_media_title" value="<%=new_media_title %>" />
+							
+							<fieldset>
+								<section class="label">
+									<label class="label">Tags</label> <label class="input">
+										<input type="text" name="tags" data-role="tagsinput" class="tagcontainer">
+									</label>
+								</section>
+								<section>
+									<label class="label">File input</label>
+									<label for="file" class="input input-file">
+										<div class="button">
+											<input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
+										</div>
+										<input type="text" readonly="">
+									</label>
+								</section>
+							</fieldset>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn-u btn-u-default"
+							data-dismiss="modal">Close</button>
+						<button type="submit" class="btn-u btn-u-primary">Upload</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
 
 
 

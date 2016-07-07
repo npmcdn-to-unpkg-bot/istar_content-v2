@@ -18,7 +18,16 @@ public class LessonLinkHandler extends ColumnHandler {
 		if(new PresentaionDAO().findByProperty("lesson", l).size()>0)
 		{
 			Presentaion ppt = (Presentaion)new PresentaionDAO().findByProperty("lesson", l).get(0);
-			return new StringBuffer("<a href='#' onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "\")' > Preview</a>  ");	
+			
+			StringBuffer button = new StringBuffer();
+			button.append("<div class='btn-group '>  <button style='width: 115%;' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='true'> Choose Preview <i class='fa fa-angle-down'></i> </button>  <ul class='dropdown-menu' role='menu'><li>");
+			button.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "\")'  href='#' >Mobile Preview</a>");
+			button.append("</li>  <li>");
+			button.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' >Speaker Preview</a>");
+			button.append("</li> </ul> </div>");
+			
+			return button;	
+ 
 		} else if(new AssessmentDAO().findByProperty("lesson", l).size()>0)
 		{
 			Assessment assessment = (Assessment)new AssessmentDAO().findByProperty("lesson", l).get(0);

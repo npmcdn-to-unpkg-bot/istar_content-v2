@@ -33,12 +33,14 @@ import com.istarindia.apps.dao.FolderItems;
 import com.istarindia.apps.dao.FolderItemsDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.CMSUtils;
 import com.istarindia.apps.services.FolderService;
+import com.istarindia.apps.services.MediaService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -73,196 +75,71 @@ public class MediaUploadController extends IStarBaseServelet {
 		ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
 		
 		String tags ="";
-		
-		int item_id=0;
+
+		int slideId = 0;
+		int pptId = 0;
+		int itemId=0;
+		int cmsessionId = 0;
+		String slideType = "";
 		String folders[] = null;
+		String mediaTitle = "";
+		int userId = ((IstarUser)request.getSession().getAttribute("user")).getId();
+		
+		MediaService mediaService = new MediaService();
 		
 		try {
 			List<FileItem> items = uploadHandler.parseRequest(request);
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
 					File file = new File(fileUploadPath, item.getName());
-					System.out.println(file.getAbsolutePath());
 					item.write(file);
-					System.out.println("item name "+item.getName());
-					System.out.println("item size "+item.getSize());
-					System.out.println("url "+"upload?getfile=" + item.getName());
-					System.out.println("thumb url "+"upload?getthumb=" + item.getName());
-					System.out.println("delt url "+"upload?delfile=" + item.getName());
-					System.out.println("del type "+ "GET");
-					System.out.println("location "+"upload?getfile=" + item.getName());
-
-					if (item.getName().toString().endsWith(".mp4")) {
-						VideoDAO dao = new VideoDAO();
-						Session session = dao.getSession();
-						Transaction tx = null;
-						System.out.println("item id="+item_id);
-						Video transientInstance = dao.findById(item_id);
-						try {
-							tx = session.beginTransaction();
-							transientInstance.setUrl("/content/media_upload?getfile=" + item.getName());
-							transientInstance.setTags(tags);
-							dao.attachDirty(transientInstance);
-							tx.commit();
-						} catch (HibernateException e) {
-							e.printStackTrace();
-							if (tx != null)
-								tx.rollback();
-							e.printStackTrace();
-						} finally {
-							session.close();
-						}
-						
-						for(String folder_id : folders)
-						{
-							System.out.println("----------------->" + folder_id);
-							
-							FolderItemsDAO itemDAO = new FolderItemsDAO();
-							FolderItems item2 = new FolderItems();
-							
-							item2.setFolderId(Integer.parseInt(folder_id));
-							item2.setItemType(MediaTypes.VIDEO);
-							item2.setItemId(transientInstance.getId());
-							Session session1 = itemDAO.getSession();
-							Transaction tx1 = null;
-							try {
-								tx1 = session1.beginTransaction();
-								itemDAO.save(item2);
-								tx1.commit();
-							} catch (HibernateException e) {
-								if (tx1 != null)
-									tx1.rollback();
-								e.printStackTrace();
-							} finally {
-								session1.close();
-							}
-						}
-						
-						//System.err.println();
-						TaskDAO d = new TaskDAO();
-						Task t = null;
-						for(Task tt :d.findByItemId(item_id))
-						{
-							if(tt.getItemType().equalsIgnoreCase(MediaTypes.VIDEO))
-							{
-								t= tt;
-								break;
-							}	
-						}
-						//System.err.println("task here is "+t.getId());
-						t.setStatus(StatusTypes.COMPLETED);
-						Session session111 = d.getSession();
-						Transaction tx111 = null;
-						try {
-							tx111 = session111.beginTransaction();
-							d.attachDirty(t);
-							tx111.commit();
-						} catch (HibernateException e) {
-							if (tx111 != null)
-								tx111.rollback();
-							e.printStackTrace();
-						} finally {
-							session111.close();
-						}
-						//CMSRegistry.writeAuditLog("Video with title " + transientInstance.getTitle() + " and " + transientInstance.getUrl() + " created. ", (Users) request.getSession().getAttribute("user"));
-					} 
-					else 
-					{
-						ImageDAO dao = new ImageDAO();
-						Session session = dao.getSession();
-						Transaction tx = null;
-						Image transientInstance2 = dao.findById(item_id);
-						
-						
-						try {
-							tx = session.beginTransaction();
-							
-							
-							transientInstance2.setUrl("/content/media_upload?getfile=" + item.getName());
-							transientInstance2.setDeleteUrl("/content/media_upload?delfile=" + item.getName());
-							transientInstance2.setThumbnailUrl("/content/media_upload?getthumb=" + item.getName());
-							transientInstance2.setTags(tags);
-							
-							request.setAttribute("msg", "Image with title " + transientInstance2.getTitle() + " and " + transientInstance2.getUrl() + " created. ");
-							dao.attachDirty(transientInstance2);
-							tx.commit();
-						} catch (HibernateException e) {
-							if (tx != null)
-								tx.rollback();
-							e.printStackTrace();
-						} finally {
-							session.close();
-						}
-						
-						System.out.println("-------tags---------->" + tags);
-						
-						
-						
-						for(String folder_id : folders)
-						{
-							System.out.println("----------------->" + folder_id);
-							
-							FolderItemsDAO itemDAO = new FolderItemsDAO();
-							FolderItems item2 = new FolderItems();
-							
-							item2.setFolderId(Integer.parseInt(folder_id));
-							item2.setItemType(MediaTypes.IMAGE);
-							item2.setItemId(transientInstance2.getId());
-							Session session1 = itemDAO.getSession();
-							Transaction tx1 = null;
-							try {
-								tx1 = session1.beginTransaction();
-								itemDAO.save(item2);
-								tx1.commit();
-							} catch (HibernateException e) {
-								if (tx1 != null)
-									tx1.rollback();
-								e.printStackTrace();
-							} finally {
-								session1.close();
-							}
-						}
-						
-						TaskDAO d = new TaskDAO();
-						Task t = null;
-						for(Task tt :d.findByItemId(item_id))
-						{
-							if(tt.getItemType().equalsIgnoreCase(MediaTypes.IMAGE))
-							{
-								t= tt;
-								break;
-							}	
-						}
-						System.out.println("task here is "+t.getId());
-						t.setStatus(StatusTypes.COMPLETED);
-						Session session11 = d.getSession();
-						Transaction tx11 = null;
-						try {
-							tx11 = session11.beginTransaction();
-							d.attachDirty(t);
-							tx11.commit();
-						} catch (HibernateException e) {
-							if (tx11 != null)
-								tx11.rollback();
-							e.printStackTrace();
-						} finally {
-							session11.close();
-						}
-						
-						
 					
+					if (item.getName().toString().endsWith(".mp4")) {
+						Video video = mediaService.saveVideo(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
+						
+						// TODO: return status from saveImage to return the same in request
+						request.setAttribute("msg", "Video with title " + video.getTitle() + " and " + video.getUrl() + " created. ");
+
+						mediaService.saveMediaInFolders(video.getId(), MediaTypes.VIDEO, folders);
+						mediaService.updateMediTask(video.getId(), MediaTypes.VIDEO, userId);
+
+					} else {
+						Image image = mediaService.saveImage(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
+						
+						//TODO: return status from saveImage to return the same in request
+						request.setAttribute("msg", "Image with title " + image.getTitle() + " and " + image.getUrl() + " created. ");
+						
+						mediaService.saveMediaInFolders(image.getId(), MediaTypes.IMAGE, folders);
+						mediaService.updateMediTask(image.getId(), MediaTypes.IMAGE, userId);
+						 						
 					}
 					
 				} else {
 					if (item.getFieldName().equalsIgnoreCase("tags")) {
 						tags = item.getString();
-					}  else if (item.getFieldName().equalsIgnoreCase("selected_items")) {
+						
+					} else if (item.getFieldName().equalsIgnoreCase("selected_items")) {
 						folders = item.getString().split(",");
 						
-					}
-					else if (item.getFieldName().equalsIgnoreCase("item_id")) {
-						item_id = Integer.parseInt(item.getString());
-					}
+					} else if (item.getFieldName().equalsIgnoreCase("item_id")) {
+						itemId = Integer.parseInt(item.getString());
+						
+					} else if (item.getFieldName().equalsIgnoreCase("session_id")) {
+						cmsessionId = Integer.parseInt(item.getString());
+					
+					} else if (item.getFieldName().equalsIgnoreCase("slide_id")) {
+						slideId = Integer.parseInt(item.getString());
+						
+					} else if (item.getFieldName().equalsIgnoreCase("ppt_id")) {
+						pptId = Integer.parseInt(item.getString());
+						
+					} else if (item.getFieldName().equalsIgnoreCase("slide_type")) {
+						slideType = item.getString();
+						
+ 					} else if (item.getFieldName().equalsIgnoreCase("new_media_title")) {
+						mediaTitle = item.getString();
+						
+ 					}
 					
 				}
 				
@@ -277,9 +154,15 @@ public class MediaUploadController extends IStarBaseServelet {
 		} finally {
 
 		}
+		
+		if (slideType == "" || slideId == 0 || pptId == 0) {
+			request.setAttribute("message_success", "Media file has been uploaded successfully and sent for review!");
+			request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("fill_tempate.jsp?ppt_id="+pptId+"&slide_id="+slideId+"&slide_type="+slideType);
+		}
 
-		request.setAttribute("message_success", "Media file has been uploaded successfully and sent for review!");
-		request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
+
 	}
 
 	/**
