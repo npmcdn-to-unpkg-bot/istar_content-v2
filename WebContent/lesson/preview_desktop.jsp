@@ -120,16 +120,9 @@ try {
 		}
 
 		Reveal.addEventListener('slidechanged', function(event) {
-			//Set present slide's bg color to the body
 			document.body.style.background = $('.present').data("bgcolor");
-			
-			//console.log('#111 slide bg color: '+ $('.present').data("bgcolor") );
-			//console.log('#112 body bg color: '+ document.body.style.background );
 			if ($('.present').data("bgcolor") == "none") {
-				
-				//if the present slide doesn't have bg color set; then reset the body color to the original from theme
 				document.body.style.background = orgBgColor;
-				//console.log('#115 body bg color(to be theme) ->'+ document.body.style.background );
 			}
 
 			var currentURL = window.location.href; //currentURL+"#/"+ 

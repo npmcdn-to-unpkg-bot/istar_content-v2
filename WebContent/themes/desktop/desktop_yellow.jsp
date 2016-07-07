@@ -1126,4 +1126,8 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
      }
      
      
+     
+#data_slide_paragraph ul li{
+margin-bottom: 22px;}
+     
 </style>
