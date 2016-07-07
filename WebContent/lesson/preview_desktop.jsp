@@ -70,7 +70,13 @@ try {
 	
 	<div class="reveal">
 		<div class="slides">
-			<%=ppt.outputSlidesForDesktop() %>
+			<%=ppt.outputSlidesForDesktop().replaceAll("data-transition='fade'", "data-transition='slide'").
+			replaceAll("data-transition='concave'", "data-transition='slide'").
+			replaceAll("data-transition='convex'", "data-transition='slide'").
+			replaceAll("data-transition='zoom'", "data-transition='slide'").
+			replaceAll("data-background-transition='zoom'", "data-background-transition='slide'").
+			replaceAll("data-background-transition='fade'", "data-background-transition='slide'").
+			replaceAll("data-background-transition='concave'", "data-background-transition='slide'")%>
 		</div>
 	</div>
 	<% 
@@ -103,7 +109,8 @@ try {
 		Reveal.initialize({
 			center : true,
 			controls : true,
-			width: window_size 
+			width: window_size,
+			transition: 'slide'
 		});
 		
 		//Save background colour from the theme to a global variable
