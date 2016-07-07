@@ -26,16 +26,16 @@
 				String previous_slide_type = "NO_CONTENT"; 
 				String next_slide_type = "NO_CONTENT"; 
 				try {
-					slide_id = Integer.parseInt(request.getParameter("slide_id"));
-					
-					previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
-					next_slide_id = service.getNextSlideId(ppt_id, slide_id);
-					
-					previous_slide_type = service.getPreviousSlideType(ppt_id, slide_id);
-					next_slide_type = service.getNextSlideType(ppt_id, slide_id);
-				} catch (Exception e ) {
-					
-				}
+					if (request.getParameterMap().containsKey("slide_id")) {
+						slide_id = Integer.parseInt(request.getParameter("slide_id"));
+						
+						previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
+						next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+						
+						previous_slide_type = service.getPreviousSlideType(ppt_id, slide_id);
+						next_slide_type = service.getNextSlideType(ppt_id, slide_id);
+					}
+				} catch (Exception e ) { }
 				
 				String new_media_title = service.getNewMediaTitle(slide_id, ppt.getLesson().getCmsession().getId());
 				
@@ -106,7 +106,7 @@
 				<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
 							<a style="z-index:99999; width: 100%;" class="left carousel-control" 
-							href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>&slide_type=<%=previous_slide_type %>"> 
+							href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>&slide_type=<%=previous_slide_type %>"> 
 								<span  class="glyphicon glyphicon-chevron-left"></span> 
 							</a>
 						<% }%>
@@ -124,7 +124,8 @@
 									.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 							slide.setTemplateName(request.getParameter("slide_type"));
 					%>
-					<input name="is_edit" value="true" type="hidden"> <input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
+					<input name="is_edit" value="true" type="hidden"> 
+					<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
 					<%
 						} else {
 							System.err.println("It is a new Slide ");
@@ -354,45 +355,42 @@
 										} catch (Exception e) {
 										}
 									%>
-			<form action="/content/review_lesson" name="" method="GET" class="sky-form">
-			<!--  is_edit=true&slide_id=6080&ppt_id=27&review_notes=%3Cp%3ESSSSSSSSSSSSSSS%3C%2Fp%3E 
-			int slide_id = Integer.parseInt(request.getParameter("slide_id"));
-				int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
-				-->
-			
-			<input name='is_edit' type="hidden" value="true" />
-			<input name='slide_id' type="hidden" value="<%=slide_id %>" />
-			<input name='ppt_id' type="hidden" value="<%=ppt_id %>" />
-			
-			<fieldset>
-							<section>
-								<label class="label">Review Notes</label> <label
-									class="textarea"> <textarea rows="3"
-										name="review_notes" placeholder=" Please enter text"></textarea>
-
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the Review
-									Notes.
-								</div>
-							</section>
-						<button type="submit" class="btn-u">Submit</button></fieldset>
-
-							
-						</form>
+									
+									<form action="/content/review_lesson" name="" method="GET" class="sky-form">
+										<input name='is_edit' type="hidden" value="true" />
+										<input name='slide_id' type="hidden" value="<%=slide_id %>" />
+										<input name='ppt_id' type="hidden" value="<%=ppt_id %>" />
+										
+										<fieldset>
+											<section>
+												<label class="label">Review Notes</label> <label
+													class="textarea"> <textarea rows="3"
+														name="review_notes" placeholder=" Please enter text"></textarea>
+						
+												</label>
+												<div class="note">
+													<strong>Note:</strong> This is where we will put in the Review
+													Notes.
+												</div>
+											</section>
+											<button type="submit" class="btn-u">Submit</button>
+										</fieldset>
+									</form>
 
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			<div class='col-md-1'><% if(next_slide_id != 0) { %>
+			<div class='col-md-1' style= "min-height: 1000px;  vertical-align: middle;">
+				<% if(next_slide_id != 0) { %>
 					<a style="z-index:99999; width: 100%;" class="right carousel-control" 
 					href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>&slide_type=<%=next_slide_type %>"> 
 						<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</a>
-				<% }%></div>
+				<% }%>
 			</div>
+		</div>
 		</form>
 	</div>
 
@@ -409,7 +407,7 @@
 					<div class="modal-body">
 						<div class="row">
 							<input type="hidden" id="item_id" name="item_id" value="0" />
-							<input type="hidden" id="slide_id" name="slide_id" value="<%=request.getParameter("slide_id")%>" />
+							<input type="hidden" id="slide_id" name="slide_id" value="<%=slide_id%>" />
 							<input type="hidden" id="slide_type" name="slide_type" value="<%=request.getParameter("slide_type")%>" />
 							<input type="hidden" id="selected_items" name="selected_items" value="0" />
 							<input type="hidden" id="session_id" name="session_id" value="<%=ppt.getLesson().getCmsession().getId() %>" />
@@ -573,22 +571,22 @@
 					});
 
 		}
-		$(document)
-				.ready(
-						function() {
-							initTextArea();
-							initHooks();
-							initColorChange(); //slide_color
-							//initTextArea();
-							$("#slidy_type_id")
-									.change(
-											function() {
-												console
-														.log("Handler for .change() called.");
-												var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
-				  console.log(url);
-				  window.location.href=url;
-				});
+		$(document).ready(function() {
+			initTextArea();
+			initHooks();
+			initColorChange(); //slide_color
+			//initTextArea();
+			$("#slidy_type_id").change(function() {
+				var slideId = <%=request.getParameter("slide_id")%> ;
+				if(slideId != null) {
+					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
+	 					
+				} else {
+					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
+				}
+				console.log(url);
+				window.location.href=url;
+			});
 			  
 		});
 	</script>
