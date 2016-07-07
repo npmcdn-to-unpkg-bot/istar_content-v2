@@ -70,7 +70,13 @@ try {
 	
 	<div class="reveal">
 		<div class="slides">
-			<%=ppt.outputSlidesForDesktop() %>
+			<%=ppt.outputSlidesForDesktop().replaceAll("data-transition='fade'", "data-transition='slide'").
+			replaceAll("data-transition='concave'", "data-transition='slide'").
+			replaceAll("data-transition='convex'", "data-transition='slide'").
+			replaceAll("data-transition='zoom'", "data-transition='slide'").
+			replaceAll("data-background-transition='zoom'", "data-background-transition='slide'").
+			replaceAll("data-background-transition='fade'", "data-background-transition='slide'").
+			replaceAll("data-background-transition='concave'", "data-background-transition='slide'")%>
 		</div>
 	</div>
 	<% 
@@ -103,7 +109,8 @@ try {
 		Reveal.initialize({
 			center : true,
 			controls : true,
-			width: window_size 
+			width: window_size,
+			transition: 'slide'
 		});
 		
 		//Save background colour from the theme to a global variable
@@ -120,16 +127,9 @@ try {
 		}
 
 		Reveal.addEventListener('slidechanged', function(event) {
-			//Set present slide's bg color to the body
 			document.body.style.background = $('.present').data("bgcolor");
-			
-			//console.log('#111 slide bg color: '+ $('.present').data("bgcolor") );
-			//console.log('#112 body bg color: '+ document.body.style.background );
 			if ($('.present').data("bgcolor") == "none") {
-				
-				//if the present slide doesn't have bg color set; then reset the body color to the original from theme
 				document.body.style.background = orgBgColor;
-				//console.log('#115 body bg color(to be theme) ->'+ document.body.style.background );
 			}
 
 			var currentURL = window.location.href; //currentURL+"#/"+ 
