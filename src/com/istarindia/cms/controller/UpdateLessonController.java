@@ -62,20 +62,22 @@ public class UpdateLessonController extends IStarBaseServelet {
 			task = (new TaskDAO()).findByExample(task).get(0);
 			
 			if(request.getParameterMap().containsKey("only_learning_objectives")) {
-				
 				lesson = (Lesson) service.updateLesson(lesson_id, lo_ids.toString());
-				
 			} else {
 
 				int duration = Integer.parseInt(request.getParameter("duration"));
 				String lesson_theme = request.getParameter("lesson_theme");
+				
+				String lesson_desktop_theme = request.getParameter("lesson_desktop_theme");
+				
+				
 				String title = request.getParameter("title");
 				String lesson_subject = request.getParameter("lesson_subject");
 				if (request.getParameterMap().containsKey("Tags")) {
 					tags = request.getParameter("Tags");
 				}
 
-				lesson = (Lesson) service.updateLesson(lesson_id, title, duration, tags, lesson_theme, lesson_subject, lo_ids.toString());
+				lesson = (Lesson) service.updateLesson(lesson_id, title, duration, tags, lesson_theme, lesson_subject, lo_ids.toString(), lesson_desktop_theme);
 			}
 			
 			request.setAttribute("message_success", "Lesson updated successfully!");

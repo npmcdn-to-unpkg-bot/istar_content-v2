@@ -163,10 +163,9 @@
 													lesson</b>
 											</label>
 										</section>
-
 										<section>
-											<label>Lesson Themes</label>
-											<div class="row">
+											<label>Mobile Lesson Themes</label>
+											<select class="form-control input-lg" name="lesson_theme">
 												<%
 													boolean flag = false;
 												List thes = (new UiThemeDAO()).findAll();
@@ -174,40 +173,37 @@
 
 													for (UiTheme themeName : (List<UiTheme>)thes) {
 												%>
-												<div class="col col-6">
-													<%
+												<%
 														if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getId().toString())) {
 																flag = true;
 													%>
-													<label class="radio"><input type="radio"
-														name="lesson_theme" checked="checked"
-														value="<%=themeName.getId()%>"> <i
-														class="rounded-x"></i><%=themeName.getName()%></label>
-												</div>
+													
+													<option value="<%=themeName.getId() %>" selected='selected'><%=themeName.getName() %></option>
+												<% } else {  %>
+													<option value="<%=themeName.getId() %>"><%=themeName.getName() %></option>
+												
+												<% } } %>
+											</select>
+										</section>
+										<section>
+											<label>Desktop Lesson Themes</label>
+											<select class="form-control input-lg" name="lesson_desktop_theme">
 												<%
-													} else {
-												%>
-												<label class="radio"><input type="radio"
-													name="lesson_theme" value="<%=themeName.getId()%>">
-													<i class="rounded-x"></i><%=themeName.getName()%></label>
-											</div>
-											<%
-												}
-												}
-											%>
-											<%
-												if (flag == false) {
-											%><div class="col col-4">
-												<label class="radio"><input type="radio"
-													checked="checked" name="lesson_theme" value="0"> <i
-													class="rounded-x"></i>Dafault</label>
-											</div>
-											<%
-												}
-											%>
-									
-							</section>
+												
 
+													for (UiTheme themeName : (List<UiTheme>)thes) {
+												%>
+												<%
+														if (lesson.getLesson_theme_desktop().equalsIgnoreCase(themeName.getId().toString())) {
+																flag = true;
+													%>
+													<option value="<%=themeName.getId() %>" selected='selected'><%=themeName.getName() %></option>
+												<% } else {  %>
+													<option value="<%=themeName.getId() %>"><%=themeName.getName() %></option>
+												
+												<% } } %>
+											</select>
+										</section>
 							<section>
 								<label>Subject </label>
 								<div class="row">
