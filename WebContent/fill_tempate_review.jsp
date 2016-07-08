@@ -87,23 +87,22 @@
 			</div>
 		</div>
 		<div class="container-fluid">
-		<form action="/content/review_lesson" name="" method="GET"
-			class="sky-form">
-			<%
-				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-				SlideService service = new SlideService();
-				int slide_id = Integer.parseInt(request.getParameter("slide_id"));
-				int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
-				int previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
-				int next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+			<form action="/content/review_lesson" name="" method="GET"
+				class="sky-form">
+				<%
+					Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+					SlideService service = new SlideService();
+					int slide_id = Integer.parseInt(request.getParameter("slide_id"));
+					int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
+					int previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
+					int next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+					
+				%>
+				<input name="is_edit" value="true" type="hidden"> 
+				<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
+				<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
+				<input type="hidden" name="from" value="review_slide">
 				
-			%>
-			<input name="is_edit" value="true" type="hidden"> <input
-				name="slide_id" value="<%=request.getParameter("slide_id")%>"
-				type="hidden">
-			
-				<input type="hidden"
-					name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
 				<div class="row">
 					<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
@@ -116,32 +115,31 @@
 					<div class="col-md-5">
 						<fieldset>
 							<section>
-								<label class="label">Review Notes</label> <label
-									class="textarea"> <textarea rows="3"
-										name="review_notes" placeholder=" Please enter text"></textarea>
-
+								<label class="label">Review Notes</label> 
+								<label class="textarea"> 
+									<textarea rows="3" name="review_notes" placeholder=" Please enter text"></textarea>
 								</label>
 								<div class="note">
-									<strong>Note:</strong> This is where we will put in the Review
-									Notes.
+									<strong>Note:</strong> This is where we will put in the Review Notes.
 								</div>
 							</section>
 						</fieldset>
-
+	
 						<footer>
 							<button type="submit" class="btn-u">Submit</button>
 						</footer>
+						
 						<div class="panel panel-profile profile">
 							<div class="panel-heading overflow-h">
 								<h2 class="panel-title heading-sm pull-left">
 									<i class="fa fa-comments-o"></i> Review Comments
 								</h2>
-
+	
 							</div>
 							<div id="scrollbar4"
 								class="panel-body no-padding mCustomScrollbar"
 								data-mcs-theme="minimal-dark">
-
+	
 								<% 
 							
 								try {
@@ -168,7 +166,7 @@
 									<div class="overflow-h">
 										<strong><%=user.getName() %></strong>
 										<p><%=log.getComments() %></p>
-
+	
 									</div>
 								</div>
 								<% } 
@@ -178,40 +176,38 @@
 								}
 								
 								%>
-
+	
 							</div>
 						</div>
 					</div>
-				
-				<div class="col-md-5" >
-
-					<div id="phone_area" style="display: block;    margin-top: -7%;">
-						<div id="phone_placeholder" style="display: block; height: 1024px;">
-							<div id="htc_one_emulator"
-								style="transform: scale(1); transform-origin: 0px 0px 0px;">
-								<div id="frame_htc_one_emulator" class="frame_scroller">
-									<iframe src="/content/lesson/slide_preview.jsp?ppt_id=<%=ppt.getId() %>&slide_id=<%=request.getParameter("slide_id")%>"
-										frameborder="0" id='prv' style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
-									</iframe>
+					
+					<div class="col-md-5" >
+						<div id="phone_area" style="display: block;    margin-top: -7%;">
+							<div id="phone_placeholder" style="display: block; height: 1024px;">
+								<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
+									<div id="frame_htc_one_emulator" class="frame_scroller">
+										<iframe src="/content/lesson/slide_preview.jsp?ppt_id=<%=ppt.getId() %>&slide_id=<%=request.getParameter("slide_id")%>"
+											frameborder="0" id='prv' style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
+										</iframe>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+						
+					<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
+						<% if(next_slide_id != 0) { %>
+							<a style="z-index:99999; width: 100%;" class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
+								<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							</a>
+						<% }%>
+					</div>
+	
 				</div>
-					
-				<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
-				<% if(next_slide_id != 0) { %>
-					<a style="z-index:99999; width: 100%;" class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
-						<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</a>
-				<% }%>
-				</div>
-
-			</div>
-		</form>
-
+			</form>
+		</div>
 	</div>
-	</div>
+	
 	<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
 
 

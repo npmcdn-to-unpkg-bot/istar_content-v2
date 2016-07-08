@@ -155,11 +155,15 @@ public class MediaUploadController extends IStarBaseServelet {
 
 		}
 		
-		if (slideType == "" || slideId == 0 || pptId == 0) {
+		if (slideType != "" && pptId != 0 && slideId != 0) {
+			request.setAttribute("message_success", "Media file has been uploaded successfully ");
+			response.sendRedirect("fill_tempate.jsp?ppt_id="+pptId+"&slide_id="+slideId+"&slide_type="+slideType);
+		} else if (slideType != "" && pptId != 0&& slideId == 0 ) {
+			request.setAttribute("message_success", "Media file has been uploaded successfully ");
+			response.sendRedirect("fill_tempate.jsp?ppt_id="+pptId+"&slide_type="+slideType);
+		} else {
 			request.setAttribute("message_success", "Media file has been uploaded successfully and sent for review!");
 			request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("fill_tempate.jsp?ppt_id="+pptId+"&slide_id="+slideId+"&slide_type="+slideType);
 		}
 
 

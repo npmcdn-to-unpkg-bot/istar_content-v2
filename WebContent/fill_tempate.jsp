@@ -103,7 +103,7 @@
 
 		<form action="/content/create_slide" name="" method="GET" data-parsley-validate="" novalidate="" class="sky-form">
 			<div class='row-fluid'>
-				<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
+				<div class="col-md-1" style="min-height: 2000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
 							<a style="z-index:99999; width: 100%;" class="left carousel-control" 
 							href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>&slide_type=<%=previous_slide_type %>"> 
@@ -116,26 +116,32 @@
 						LessonUtils utils = new LessonUtils();
 						CMSSlide slide = new CMSSlide();
 						Boolean newSlide = true;
+						String slide_type = "";
 						if (request.getParameterMap().containsKey("slide_id")) {
 							newSlide = false;
 							SlideDAO dao = new SlideDAO();
+							slide_type = request.getParameter("slide_type");
 
 							slide = (new LessonUtils())
 									.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 							slide.setTemplateName(request.getParameter("slide_type"));
 					%>
+					
 					<input name="is_edit" value="true" type="hidden"> 
 					<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
+					
 					<%
 						} else {
-							System.err.println("It is a new Slide ");
 							newSlide = true;
 							slide.setTemplateName(request.getParameter("slide_type"));
 					%>
+					
 					<input name="is_edit" value="false" type="hidden">
+					
 					<%
 						}
 					%>
+					
 					<div class="container-fluid" style="padding: 0px !important">
 						<input type="hidden" name="template" value="<%=slide.getTemplateName()%>"> 
 						<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
@@ -143,30 +149,32 @@
 							<%
 								ImageUtils dao1 = new ImageUtils();
 								ArrayList<Image> images = (ArrayList<Image>) dao1.findAllBackgrounds(request);
-							%><div class="col-md-7">
+							%>
+							<div class="col-md-7">
+								
 								<%=utils.getEditProfileEdit(slide, ppt, newSlide, request)%>
-								<fieldset>
-									
-								<% try {
-									
-									if (request.getParameter("slide_type").toLowerCase().contains("image")) { %>
-										<section style="margin-top: -8%;     margin-right: 5%; float: right;">
-												<button type='button' class='btn-u' data-target='#imageModal' data-toggle='modal'>Upload Image</button>
-										</section>
 								
-								<% 	} 
-								} catch (Exception e ) {
-									//TODO: nothing
-								} %>
-								
+								<fieldset style=" margin-top: 5%;">
+									
+									<% try {
+										if (request.getParameter("slide_type").toLowerCase().contains("image")
+										    || request.getParameter("slide_type").toLowerCase().contains("video")) { %>
+										    
+											<section style="margin-top: -12%;     margin-right: 5%; float: right;">
+													<button type='button' class='btn-u' data-target='#imageModal' data-toggle='modal'>Upload new Media</button>
+											</section>
+											
+									<% 	}  } catch (Exception e ) { } %>
+									
 									<section>
-										<label class="label">Select Image Background</label> <label class="select"> <select name="image_bg" id="image-bg-picker" value="<%=slide.getImage_BG()%>">
+										<label class="label">Select Image Background</label> 
+										<label class="select"> 
+											<select name="image_bg" id="image-bg-picker" value="<%=slide.getImage_BG()%>">
 												<option selected="selected" value="none">None</option>
-
 												<%
 													for (Image type : images) {
 												%>
-												<option value="<%=type.getUrl()%>"><%=type.getTitle()%></option>
+													<option value="<%=type.getUrl()%>"><%=type.getTitle()%></option>
 												<%
 													}
 													if (request.getParameterMap().containsKey("slide_id")) {
@@ -176,28 +184,31 @@
 														CMSSlide cmsslide = lUtils.convertSlide(slide1);
 														String BG_url = cmsslide.getImage_BG();
 												%>
-
-												<option selected="selected" value="<%=BG_url%>"><%=BG_url%></option>
-
+													<option selected="selected" value="<%=BG_url%>"><%=BG_url%></option>
 												<%
 													}
 												%>
-										</select> <i></i>
-										</label>
+											</select> 
+										<i></i> </label>
 									</section>
 
 									<section>
-										<label class="label">Teacher Notes</label> <label class="textarea"> <textarea rows="3" name="teacher_notes" data-parsley-required="true" data-parsley-length="[5,9250]" data-parsley-required-message="Please provide teacher notes" data-parsley-length-message="It should be 5-9250 characters long">
-								<%=slide.getTeacherNotes()%> </textarea>
-
+										<label class="label">Teacher Notes</label> 
+										<label class="textarea"> 
+											<textarea rows="3" name="teacher_notes" data-parsley-required="true" data-parsley-length="[5,9250]" data-parsley-required-message="Please provide teacher notes" data-parsley-length-message="It should be 5-9250 characters long">
+												<%=slide.getTeacherNotes()%> 
+											</textarea>
 										</label>
 										<div class="note">
 											<strong>Note:</strong> This is where we will put in the paragraph.
 										</div>
 									</section>
 									<section>
-										<label class="label">Student Notes</label> <label class="textarea"> <textarea rows="3" name="student_notes" data-parsley-required="true" data-parsley-length="[5,9250]" data-parsley-required-message="Please provide student notes" data-parsley-length-message="It should be 5-9250 characters long"> 
-								<%=slide.getStudentNotes()%></textarea>
+										<label class="label">Student Notes</label> 
+										<label class="textarea"> 
+											<textarea rows="3" name="student_notes" data-parsley-required="true" data-parsley-length="[5,9250]" data-parsley-required-message="Please provide student notes" data-parsley-length-message="It should be 5-9250 characters long"> 
+												<%=slide.getStudentNotes()%>
+											</textarea>
 										</label>
 										<div class="note">
 											<strong>Note:</strong> This is where we will put in the paragraph.
@@ -261,7 +272,6 @@
 									</div>
 								</fieldset>
 
-
 								<footer class="col col-md-12">
 									<section class="col col-md-6">
 										<label class="label">Select Slide Background color</label> <label class="select"> <input type="color" id="slide_color" name="backgroundColor" value="<%=slide.getBackground()%>">
@@ -273,7 +283,6 @@
 											order_id = (new SlideDAO()).findById(Integer.parseInt(request.getParameter("slide_id"))).getOrder_id();
 										}
 									%>
-
 									<section class="col col-md-3">
 										<label class="label">Slide number</label> <label class="input"> <input id="order_id" class="updateble" type="number" name="order_id" value="<%=order_id%>">
 									</section>
@@ -315,13 +324,16 @@
 							</div>
 							<div class="panel panel-profile profile">
 								<div class="panel-heading overflow-h">
-									<h2 style="margin-top: 50px;" class="panel-title heading-sm pull-left">
+									<h2 class="panel-title heading-sm pull-left">
 										<i class="fa fa-comments-o"></i> Review Comments
 									</h2>
-
+									<% if(request.getParameterMap().containsKey("slide_id")) {%>
+									<section style=" float: right;">
+											<button type='button' class='btn-u' data-target='#reviewCommentModal' data-toggle='modal'>Add new comment</button>
+									</section>
+									<% } %>
 								</div>
 								<div id="scrollbar4" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-
 									<%
 										try {
 											TaskDAO TDAO = new TaskDAO();
@@ -348,41 +360,17 @@
 
 										</div>
 									</div>
-									
-									
 									<%
 										}
 										} catch (Exception e) {
 										}
 									%>
-									
-									<form action="/content/review_lesson" name="" method="GET" class="sky-form">
-										<input name='is_edit' type="hidden" value="true" />
-										<input name='slide_id' type="hidden" value="<%=slide_id %>" />
-										<input name='ppt_id' type="hidden" value="<%=ppt_id %>" />
-										
-										<fieldset>
-											<section>
-												<label class="label">Review Notes</label> <label
-													class="textarea"> <textarea rows="3"
-														name="review_notes" placeholder=" Please enter text"></textarea>
-						
-												</label>
-												<div class="note">
-													<strong>Note:</strong> This is where we will put in the Review
-													Notes.
-												</div>
-											</section>
-											<button type="submit" class="btn-u">Submit</button>
-										</fieldset>
-									</form>
-
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			<div class='col-md-1' style= "min-height: 1000px;  vertical-align: middle;">
+			<div class='col-md-1' style= "min-height: 2000px;  vertical-align: middle;">
 				<% if(next_slide_id != 0) { %>
 					<a style="z-index:99999; width: 100%;" class="right carousel-control" 
 					href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>&slide_type=<%=next_slide_type %>"> 
@@ -402,50 +390,82 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title" id="myModalLabel4">Upload Media</h4>
 				</div>
-				<form action="<%=baseURL%>media_upload" class="sky-form" method="POST" 
-							novalidate="novalidate"  enctype="multipart/form-data">
-					<div class="modal-body">
-						<div class="row">
-							<input type="hidden" id="item_id" name="item_id" value="0" />
-							<input type="hidden" id="slide_id" name="slide_id" value="<%=slide_id%>" />
-							<input type="hidden" id="slide_type" name="slide_type" value="<%=request.getParameter("slide_type")%>" />
-							<input type="hidden" id="selected_items" name="selected_items" value="0" />
-							<input type="hidden" id="session_id" name="session_id" value="<%=ppt.getLesson().getCmsession().getId() %>" />
-							<input type="hidden" id="ppt_id" name="ppt_id" value="<%=ppt.getId() %>" />
-							<input type="hidden" id="new_media_title" name="new_media_title" value="<%=new_media_title %>" />
-							
-							<fieldset>
-								<section class="label">
-									<label class="label">Tags</label> <label class="input">
-										<input type="text" name="tags" data-role="tagsinput" class="tagcontainer">
-									</label>
-								</section>
-								<section>
-									<label class="label">File input</label>
-									<label for="file" class="input input-file">
-										<div class="button">
-											<input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
-										</div>
-										<input type="text" readonly="">
-									</label>
-								</section>
-							</fieldset>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn-u btn-u-default"
-							data-dismiss="modal">Close</button>
-						<button type="submit" class="btn-u btn-u-primary">Upload</button>
-					</div>
-				</form>
+				
+				<div class="modal-body">
+					<form action="<%=baseURL%>media_upload" class="sky-form" method="POST"  novalidate="novalidate"  enctype="multipart/form-data">
+						<input type="hidden" id="item_id" name="item_id" value="0" />
+						<input type="hidden" id="slide_id" name="slide_id" value="<%=slide_id%>" />
+						<input type="hidden" id="slide_type" name="slide_type" value="<%=request.getParameter("slide_type")%>" />
+						<input type="hidden" id="selected_items" name="selected_items" value="0" />
+						<input type="hidden" id="session_id" name="session_id" value="<%=ppt.getLesson().getCmsession().getId() %>" />
+						<input type="hidden" id="ppt_id" name="ppt_id" value="<%=ppt.getId() %>" />
+						<input type="hidden" id="new_media_title" name="new_media_title" value="<%=new_media_title %>" />
+						<fieldset>
+							<section class="label">
+								<label class="label">Tags</label> <label class="input">
+									<input type="text" name="tags" data-role="tagsinput" class="tagcontainer">
+								</label>
+							</section>
+							<section>
+								<label class="label">File input</label>
+								<label for="file" class="input input-file">
+									<div class="button">
+										<input type="file" id="file" name="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
+									</div>
+									<input type="text" readonly="">
+								</label>
+							</section>
+							<section style="margin-bottom: 2%; float: right;">
+								<button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn-u btn-u-primary" >Upload</button> 
+							</section>
+						</fieldset>
+					</form>
+				</div>
+				
+				<div class="modal-footer"> </div>
+				
 			</div>
 		</div>
 	</div>
 
-	
-
-
-
+	<div class='modal fade' id='reviewCommentModal' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+					<h4 class="modal-title" id="myModalLabel4">Add comment</h4>
+				</div>
+				
+				<div class="modal-body">
+					<form action="/content/review_lesson" name="" method="GET" class="sky-form">
+						<input name='is_edit' type="hidden" value="true" />
+						<input name='slide_id' type="hidden" value="<%=slide_id %>" />
+						<input name='ppt_id' type="hidden" value="<%=ppt_id %>" />
+						<input name='from' type=hidden value="edit_slide" />
+						<fieldset>							
+							<section>								
+								<label class="label">Review Notes</label> 
+								<label class="textarea"> 
+									<textarea rows="3" name="review_notes" placeholder=" Please enter text"></textarea>
+								</label>
+								<div class="note">
+									<strong>Note:</strong> This is where we will put in the Review Notes.
+								</div>
+							</section>
+							<section style="margin-bottom: 2%; float: right;">
+								<button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn-u" >Submit</button> 
+							</section>
+						</fieldset>
+					</form>
+				</div>
+				
+				<div class="modal-footer"> </div>
+				
+			</div>
+		</div>
+	</div>
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
@@ -472,7 +492,6 @@
 	<![endif]-->
 	<script type="text/javascript">
 		function initTextArea() {
-
 			try {
 				$("#image-picker").imagepicker();
 				CKEDITOR.replace('paragraph', {
@@ -483,33 +502,22 @@
 			}
 
 			try {
-				// Handle when the Source changes.
-
-				console.log('err11');
 				var bodyEditor = CKEDITOR.replace('slide_paragraph', {
 					readOnly : false
 				});
-				console.log('err22');
 
 				bodyEditor.on('mode', function() {
 					if (this.mode == 'source') {
 						var editable = bodyEditor.editable();
 						editable.attachListener(editable, 'input', function() {
-							console.log('err3333');
-
-							var text1 = CKEDITOR.instances.Editor.document
-									.getBody().getHtml()
-							console.log("new COntent 222-> " + text1);
-							var iframeInner = $('#prv').contents().find(
-									'#slide_paragraph').html(text1);
+							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
+							var iframeInner = $('#prv').contents().find('#slide_paragraph').html(text1);
 						});
 					}
 				});
 
-				// Handle when the HTML changes.
 				bodyEditor.on('change', function() {
 					var text1 = bodyEditor.document.getBody().getHtml()
-					console.log("new COntent111 -> " + text1);
 					var iframeInner = $('#prv').contents().find(
 							'#data_slide_paragraph').html(text1);
 				});
@@ -519,72 +527,47 @@
 		}
 
 		function initHooks() {
-			$(".updateble").each(
-					function(index, listItem) {
-
-						var id = $(this).attr('id');
-						if ($("#" + id).is("input")) {
-
-							$('#' + id).keyup(
-									function() {
-										console.log('new value ->' + '#data_'
-												+ id);
-										var iframeInner = $('#prv').contents()
-												.find('#data_' + id).html(
-														$('#' + id).val());
-									});
-						} else {
-							console.log(id);
-						}
+			$(".updateble").each( function(index, listItem) {
+				var id = $(this).attr('id');
+				if ($("#" + id).is("input")) {
+					$('#' + id).keyup( function() {
+						var iframeInner = $('#prv').contents().find('#data_' + id).html($('#' + id).val());
 					});
+				} else {
+					console.log(id);
+				}
+			});
 
-			$('#image-picker').on(
-					'change',
-					function() {
-						console.log('Kamini');
-						var id = $(this).find(":checked").attr('id');
-						$('#prv').contents().find('#data_image_url').attr(
-								"src", $('#' + id).data('img-src'));
-					});
+			$('#image-picker').on( 'change', function() {
+				var id = $(this).find(":checked").attr('id');
+				$('#prv').contents().find('#data_image_url').attr( "src", $('#' + id).data('img-src'));
+			});
 
-			$('#image-bg-picker').on(
-					'change',
-					function() {
-						var bgurl = $(this).find(":checked").val();
-						console.log(bgurl);
-						$('#prv').contents().find('.slide-backgrund').css(
-								'background-image', "url(" + bgurl + ")");
-						$('#prv').contents().find('.slide-background').css(
-								'background-size', "cover");
-					});
+			$('#image-bg-picker').on( 'change', function() {
+				var bgurl = $(this).find(":checked").val();
+				$('#prv').contents().find('.slide-backgrund').css( 'background-image', "url(" + bgurl + ")");
+				$('#prv').contents().find('.slide-background').css( 'background-size', "cover");
+			});
 		}
 
 		function initColorChange() {
-
-			$('#slide_color').on(
-					'change',
-					function() {
-						console.log("color chnaged " + $('#slide_color').val()
-								+ " --- " + $('.slides section'));
-						$('#prv').contents().find('.slide-background').css(
-								'background-color', $('#slide_color').val());
-					});
-
+			$('#slide_color').on( 'change', function() {
+				$('#prv').contents().find('.slide-background').css( 'background-color', $('#slide_color').val());
+			});
 		}
+		
 		$(document).ready(function() {
 			initTextArea();
 			initHooks();
-			initColorChange(); //slide_color
-			//initTextArea();
+			initColorChange();
+			
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
 					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
-	 					
-				} else {
+	 			} else {
 					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
 				}
-				console.log(url);
 				window.location.href=url;
 			});
 			  

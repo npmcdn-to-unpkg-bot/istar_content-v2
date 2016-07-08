@@ -57,121 +57,54 @@ public class ReviewLessonController extends IStarBaseServelet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		printParams(request);
 
-		// Add comments on question
-				 if(request.getParameterMap().containsKey("question_id")){
-						//response.getWriter().append("Served at: ").append(request.getContextPath());
-
-						QuestionDAO questiondao = new QuestionDAO();
-						Question question = questiondao.findById(Integer.parseInt(request.getParameter("question_id")));
-						
-						TaskDAO dao = new TaskDAO();
-						Task task = new Task();
-						task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
-						task.setItemType("LESSON");
-						task = dao.findByExample(task).get(0);
-
-						TaskLogDAO lDAO = new TaskLogDAO();
-						TaskLog log = new TaskLog();
-						IstarUser user = (IstarUser) request.getSession().getAttribute("user");
-						log.setActorId(user.getId());
-						log.setChangedStatus("COMPLETED");
-						log.setTaskId(task.getId());
-						Calendar calendar = Calendar.getInstance();
-						Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
-						log.setCreatedAt(currentTimestamp);
-						log.setComments(request.getParameter("review_notes"));
-						log.setItemType("QUESTION");
-						log.setItem_id(Integer.parseInt(request.getParameter("question_id")));
-						Session session = lDAO.getSession();
-						Transaction tx = null;
-						try {
-							tx = session.beginTransaction();
-
-							lDAO.attachDirty(log);
-							tx.commit();
-						} catch (HibernateException e) {
-							if (tx != null)
-								tx.rollback();
-							e.printStackTrace();
-						} finally {
-							session.close();
-						}
-						response.sendRedirect("/content/lesson/review_question.jsp?question_id="+question.getId()+"&lesson_id="+Integer.parseInt(request.getParameter("lesson_id")));
-					}
-				
-				else if (!request.getParameterMap().containsKey("is_edit")) {
-
-					TaskDAO dao = new TaskDAO();
-					Task task = new Task();
-					task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
-					task.setItemType("LESSON");
-					task = dao.findByExample(task).get(0);
-
-					TaskLogDAO lDAO = new TaskLogDAO();
-					TaskLog log = new TaskLog();
-					IstarUser user = (IstarUser) request.getSession().getAttribute("user");
-					log.setActorId(user.getId());
-					log.setChangedStatus("COMPLETED");
-					log.setTaskId(task.getId());
-					Calendar calendar = Calendar.getInstance();
-					Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
-					log.setCreatedAt(currentTimestamp);
-					log.setComments(request.getParameter("review_notes"));
-					log.setItemType("LESSON");
-					log.setItem_id(Integer.parseInt(request.getParameter("lesson_id")));
-					Session session = lDAO.getSession();
-					Transaction tx = null;
-					try {
-						tx = session.beginTransaction();
-
-						lDAO.attachDirty(log);
-						tx.commit();
-					} catch (HibernateException e) {
-						if (tx != null)
-							tx.rollback();
-						e.printStackTrace();
-					} finally {
-						session.close();
-					}
-					// content/content_reviewer/dashboard.jsp
-					 markLessonAsReviewed(request);
-					
-					response.sendRedirect("/content/content_reviewer/dashboard.jsp");
-					response.getWriter().append("Served at: ").append(request.getContextPath());
-				}
-				
-				else {
-			SlideDAO dao1 = new SlideDAO();
-			Slide slide = new Slide();
-			int slideID = 0;
-			if(request.getParameter("slide_id").equalsIgnoreCase("null")) {
+		if(request.getParameterMap().containsKey("question_id")){
+			//response.getWriter().append("Served at: ").append(request.getContextPath());
 			
-				String sql1 = "SELECT s.id FROM 	slide s WHERE 	s.presentation_id = "+request.getParameter("ppt_id") +"  ORDER BY 	s.order_id ASC";
-				IstarUserDAO dao = new IstarUserDAO();
-				Session session = dao.getSession();
-				SQLQuery query = session.createSQLQuery(sql1);
-				System.err.println(sql1);
-				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-				List<HashMap<String, Object>> results = query.list();
-				for (HashMap<String, Object> object : results) {
-						for (String string : object.keySet()) {
-							//System.out.println(object.get(string));
-							slideID = Integer.parseInt(object.get(string).toString());
-						}
-				}
-				slide = dao1.findById(slideID);
-			} else {
-				
-				slideID = Integer.parseInt(request.getParameter("slide_id"));
-				slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
-			}
+			QuestionDAO questiondao = new QuestionDAO();
+			Question question = questiondao.findById(Integer.parseInt(request.getParameter("question_id")));
+			
 			TaskDAO dao = new TaskDAO();
 			Task task = new Task();
-			task.setItemId(slide.getPresentaion().getLesson().getId());
+			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
+			task.setItemType("LESSON");
+			task = dao.findByExample(task).get(0);
+			
+			TaskLogDAO lDAO = new TaskLogDAO();
+			TaskLog log = new TaskLog();
+			IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+			log.setActorId(user.getId());
+			log.setChangedStatus("COMPLETED");
+			log.setTaskId(task.getId());
+			Calendar calendar = Calendar.getInstance();
+			Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+			log.setCreatedAt(currentTimestamp);
+			log.setComments(request.getParameter("review_notes"));
+			log.setItemType("QUESTION");
+			log.setItem_id(Integer.parseInt(request.getParameter("question_id")));
+			Session session = lDAO.getSession();
+			Transaction tx = null;
+			try {
+				tx = session.beginTransaction();
+			
+				lDAO.attachDirty(log);
+				tx.commit();
+			} catch (HibernateException e) {
+				if (tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+			response.sendRedirect("/content/lesson/review_question.jsp?question_id="+question.getId()+"&lesson_id="+Integer.parseInt(request.getParameter("lesson_id")));
+
+		 } else if (!request.getParameterMap().containsKey("is_edit")) {
+
+			TaskDAO dao = new TaskDAO();
+			Task task = new Task();
+			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
 			task.setItemType("LESSON");
 			task = dao.findByExample(task).get(0);
 
@@ -185,12 +118,13 @@ public class ReviewLessonController extends IStarBaseServelet {
 			Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 			log.setCreatedAt(currentTimestamp);
 			log.setComments(request.getParameter("review_notes"));
-			log.setItemType("SLIDE");
-			log.setItem_id(slideID);
+			log.setItemType("LESSON");
+			log.setItem_id(Integer.parseInt(request.getParameter("lesson_id")));
 			Session session = lDAO.getSession();
 			Transaction tx = null;
 			try {
 				tx = session.beginTransaction();
+
 				lDAO.attachDirty(log);
 				tx.commit();
 			} catch (HibernateException e) {
@@ -200,35 +134,87 @@ public class ReviewLessonController extends IStarBaseServelet {
 			} finally {
 				session.close();
 			}
-			try {
-				
-				int order_id = 0;
-				try {
-					order_id = slide.getOrder_id();
-				} catch (Exception e) {
-					order_id = slide.getId();
-				}
-				String sql1 = "select * from slide where presentation_id=" + slide.getPresentaion().getId() + " and order_id > "+order_id+" order by order_id ";
-				
-				
-				DBUTILS db = new DBUTILS();
-				List<HashMap<String, Object>> results = db.executeQuery(sql1);
-				HashMap<String, Object> slide1 = results.get(0);
-				int next_slide_id = Integer.parseInt(slide1.get("id").toString());
-				
-				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+next_slide_id);
-				response.getWriter().append("Served at: ").append(request.getContextPath());
-			} catch (Exception e) {
-				response.sendRedirect("/content/review_task?task_id="+task.getId());
-				System.err.println("oops");
-				response.getWriter().append("Served at: ").append(request.getContextPath());
+			// content/content_reviewer/dashboard.jsp
+			markLessonAsReviewed(request);
+			
+			response.sendRedirect("/content/content_reviewer/dashboard.jsp");
+			response.getWriter().append("Served at: ").append(request.getContextPath());
+			
+		} else {
+			
+		SlideDAO dao1 = new SlideDAO();
+		Slide slide = new Slide();
+		int slideID = 0;
+		if(request.getParameter("slide_id").equalsIgnoreCase("null")) {
+		
+			String sql1 = "SELECT s.id FROM 	slide s WHERE 	s.presentation_id = "+request.getParameter("ppt_id") +"  ORDER BY 	s.order_id ASC";
+			IstarUserDAO dao = new IstarUserDAO();
+			Session session = dao.getSession();
+			SQLQuery query = session.createSQLQuery(sql1);
+			System.err.println(sql1);
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			List<HashMap<String, Object>> results = query.list();
+			for (HashMap<String, Object> object : results) {
+					for (String string : object.keySet()) {
+						//System.out.println(object.get(string));
+						slideID = Integer.parseInt(object.get(string).toString());
+					}
 			}
+			slide = dao1.findById(slideID);
+		} else {
 			
-			
+			slideID = Integer.parseInt(request.getParameter("slide_id"));
+			slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
 		}
 		
+		TaskDAO dao = new TaskDAO();
+		Task task = new Task();
+		task.setItemId(slide.getPresentaion().getLesson().getId());
+		task.setItemType("LESSON");
+		task = dao.findByExample(task).get(0);
+
+		TaskLogDAO lDAO = new TaskLogDAO();
+		TaskLog log = new TaskLog();
+		IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+		log.setActorId(user.getId());
+		log.setChangedStatus("COMPLETED");
+		log.setTaskId(task.getId());
+		Calendar calendar = Calendar.getInstance();
+		Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+		log.setCreatedAt(currentTimestamp);
+		log.setComments(request.getParameter("review_notes"));
+		log.setItemType("SLIDE");
+		log.setItem_id(slideID);
+		Session session = lDAO.getSession();
+		Transaction tx = null;
 		
+		try {
+			tx = session.beginTransaction();
+			lDAO.attachDirty(log);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 		
+		try {
+			if (request.getParameterMap().containsKey("from") && request.getParameter("from").equalsIgnoreCase("review_slide")) {
+				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide.getId());
+			} else if (request.getParameterMap().containsKey("from") && request.getParameter("from").equalsIgnoreCase("edit_slide")) {
+				response.sendRedirect("/content/fill_tempate.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide.getId()+"&slide_type="+slide.getTemplate());
+			} else {
+				response.sendRedirect("/content/index.jsp");
+			}
+		} catch (Exception e) {
+			response.sendRedirect("/content/review_task?task_id="+task.getId());
+			System.err.println("oops");
+			response.getWriter().append("Served at: ").append(request.getContextPath());
+		}
+		
+	}
 		
 	}
 
@@ -288,9 +274,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 				session.close();
 			}
 			
-		}
-		else
-		{
+		} else	{
 			TaskDAO dao = new TaskDAO();
 			Task task = new Task();
 			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
