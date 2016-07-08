@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<%@page import="com.istarindia.apps.dao.*"%>
@@ -166,6 +165,7 @@ body {
 }
 
 .reveal  .ONLY_2TITLE_IMAGE h2 {
+    padding-bottom: 3%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -187,6 +187,7 @@ body {
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  h2 {
+    padding-bottom: 3%;
     color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -250,6 +251,7 @@ body {
 
 .reveal .ONLY_TITLE_LIST_NUMBERED h2 {
 	margin-left: 2%;
+	  padding-bottom: 3%;
 	color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
 	font-size: <%=theme.get("title_____font_size")%>px;
@@ -575,7 +577,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ol li  {
+.reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
 	list-style-type: decimal-leading-zero;
 	padding-bottom: 48px;
 	padding-right: 52px;
@@ -588,7 +590,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ol  {
+.reveal .ONLY_TITLE_LIST_NUMBERED ul  {
     margin-left: 2%;
     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;

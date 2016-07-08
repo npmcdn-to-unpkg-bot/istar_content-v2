@@ -9,7 +9,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 PresentaionDAO dao = new PresentaionDAO();
 int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
 Presentaion ppt =  dao.findById(lessonID);
-String lesson_theme = ppt.getLesson().getLesson_theme();
+String lesson_theme = ppt.getLesson().getLesson_theme_desktop();
 
 String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
 
@@ -86,10 +86,21 @@ try {
 <button onclick="add_review_comment()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
 
+<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
+
+<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
+
+
 <% } else {
 %>
 <button onclick="add_edit()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
+
+<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
+<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
+
+
+
 <% } %>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 
@@ -103,6 +114,14 @@ try {
 
 	<script>
 	
+	function view_teacher_notes(){
+		var id =$('.present').attr('id');
+		console.log(id);
+		
+		
+	}
+	
+	
 		var orginal_listitem_font_size = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
 		var window_size = $(window).width();
 		
@@ -110,7 +129,14 @@ try {
 			center : true,
 			controls : true,
 			width: window_size,
-			transition: 'slide'
+			transition: 'slide', 
+			showNotes: true, 
+			
+			
+			dependencies: [
+							{ src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true },
+							{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true }
+						]
 		});
 		
 		//Save background colour from the theme to a global variable
