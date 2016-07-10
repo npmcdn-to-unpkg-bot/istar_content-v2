@@ -125,6 +125,7 @@
 							slide = (new LessonUtils())
 									.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 							slide.setTemplateName(request.getParameter("slide_type"));
+							
 					%>
 					
 					<input name="is_edit" value="true" type="hidden"> 
@@ -296,6 +297,26 @@
 							</div>
 
 							<div class="col-md-5">
+								
+								<a href='/content/media/create_task.jsp' class='btn-u' target="_blank">Create New Media Task</a>
+								
+								<% 
+								// If there is a theme assigned 
+								// If there is a slide edit page 
+								try {
+								PresentaionDAO pDAO = new PresentaionDAO();
+								int themeID  = Integer.parseInt(pDAO.findById(ppt_id).getLesson().getLesson_theme_desktop());
+								
+								if(request.getParameterMap().containsKey("slide_id")) {
+									
+								
+								
+								
+								%>
+								
+								<a href='/content/creative_admin/edit_theme.jsp?theme_id=<%=themeID %>&slide_id=<%=slide_id %>' class='btn-u' target="_blank">Preview/Edit Theme</a>
+								
+								<% } } catch(Exception e) {} %>
 								<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
 									<%
 										for (String template : CMSRegistry.slideTemplates) {
@@ -316,7 +337,7 @@
 										<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
 											<div id="frame_htc_one_emulator" class="frame_scroller">
 
-												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
+												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=request.getParameter("slide_type")%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
 											</div>
 										</div>
 									</div>
