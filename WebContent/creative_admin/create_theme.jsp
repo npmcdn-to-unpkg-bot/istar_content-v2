@@ -82,7 +82,7 @@
 		<form action="/content/theme_editor" class="sky-form">
 			<div class="container-fluid height-1000 content"
 				style="padding: 0px !important">
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<br />
 					<div class="row">
 
@@ -222,6 +222,10 @@
 							onclick="window.history.back();">Back</button>
 					</footer>
 				</div>
+			
+			
+			
+			
 			</div>
 		</form>
 		<jsp:include page="includes/footer.jsp"></jsp:include>

@@ -300,6 +300,23 @@
 								
 								<a href='/content/media/create_task.jsp' class='btn-u' target="_blank">Create New Media Task</a>
 								
+								<% 
+								// If there is a theme assigned 
+								// If there is a slide edit page 
+								try {
+								PresentaionDAO pDAO = new PresentaionDAO();
+								int themeID  = Integer.parseInt(pDAO.findById(ppt_id).getLesson().getLesson_theme_desktop());
+								
+								if(request.getParameterMap().containsKey("slide_id")) {
+									
+								
+								
+								
+								%>
+								
+								<a href='/content/creative_admin/edit_theme.jsp?theme_id=<%=themeID %>&slide_id=<%=slide_id %>' class='btn-u' target="_blank">Preview/Edit Theme</a>
+								
+								<% } } catch(Exception e) {} %>
 								<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
 									<%
 										for (String template : CMSRegistry.slideTemplates) {

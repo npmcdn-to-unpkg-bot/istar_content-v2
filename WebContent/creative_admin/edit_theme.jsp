@@ -20,12 +20,10 @@
 		theme_id = Integer.parseInt(request.getParameter("theme_id"));
 	}
 	String sql = "select * from ui_theme as T where T.id="+theme_id;
-	UiThemeDAO uiDao = new UiThemeDAO();
-	Session uiSession = uiDao.getSession();
-	SQLQuery query = uiSession.createSQLQuery(sql);
-	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-	List<HashMap<String, Object>> results = query.list();
-	HashMap<String, String> theme = (HashMap<String, String>)query.list().get(0);
+	
+	DBUTILS db = new DBUTILS();
+	List<HashMap<String, Object>> results = db.executeQuery(sql);
+	HashMap<String, Object> theme = results.get(0);
 	
 	
 %>
@@ -89,7 +87,7 @@
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid">
-				<h1>Create new theme</h1>
+				<h1>Edit theme</h1>
 			</div>
 		</div>
 		<form action="/content/theme_editor" class="sky-form">
@@ -97,7 +95,7 @@
 		<input name="theme_id" value=<%=theme_id %> type="hidden"/>
 			<div class="container-fluid height-1000 content"
 				style="padding: 0px !important">
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<br />
 					<div class="row">
 
@@ -114,8 +112,7 @@
 								
 								<section class="col col-md-6">
 								<label class="label">Background Color</label>
-									<label class="select"> <input type="color"
-										name="background_color" value="<%=theme.get("background_color") %>">
+									<label class="select"> <input type="color" id='bg_color' name="background_color" value="<%=theme.get("background_color") %>">
 									</label>
 								</section>
 							</fieldset>
@@ -151,21 +148,21 @@
 								<section class="col col-4">
 									<!-- key.toUpperCase() -->
 									<label class="label">Title
-										Font Size </label> <label class="input"> <input type="number"
+										Font Size </label> <label class="input"> <input id='id_title_____font_size' type="number"
 										min="20" max="300" name="title_____font_size" value="<%=theme.get("title_____font_size")%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">Title
-										Line height</label> <label class="input"> <input type="number"
-										name="title_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("title_____line_height")%>">
+										Line height</label> <label class="input"> <input type="number" id="id_title_____line_height" 
+										name="title_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("title_____line_height")%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
 									<label class="label">Title
-										Font Weight</label> <label class="input"> <input type="number" name="title_____font_weight" 
+										Font Weight</label> <label class="input"> <input type="number" id="id_title_____font_weight" name="title_____font_weight" 
 										step="100" min="100" max="900" value="<%=theme.get("title_____font_weight") %>" >
 									</label>
 								</section>
@@ -173,7 +170,7 @@
 								<section class="col col-4">
 									<label class="label">Title
 										Text alignment</label> <label class="select"> <select
-										name="title_____text_alignment" >
+										name="title_____text_alignment" id="id_title_____text_alignment" >
 											<option value="<%=theme.get("title_____text_alignment") %>" selected><%=theme.get("title_____text_alignment") %></option>
 											<option value="center">Center</option>
 											<option value="left">Left</option>
@@ -184,9 +181,9 @@
 
 								<section class="col col-4">
 									<label class="label">Title
-										Font Family</label> <label class="select"> <select
+										Font Family</label> <label class="select"> <select id="id_title_____font_family"  
 										name="title_____font_family">
-											<option value="<%=theme.get("title_____font_family") %>" selected><%=theme.get("title_____font_family").split(".ttf")[0] %></option>
+											<option value="<%=theme.get("title_____font_family") %>" selected><%=theme.get("title_____font_family").toString().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -196,7 +193,7 @@
 
 								<section class="col col-4">
 									<label class="label">Title
-										Color</label> <label class="select"> <input type="color"
+										Color</label> <label class="select"> <input type="color" id="id_title_____font_color"
 										name="title_____font_color" value="<%=theme.get("title_____font_color") %>" >
 									</label>
 								</section>
@@ -221,7 +218,7 @@
 								<section class="col col-4">
 									<label class="label">Subtitle
 										Line height</label> <label class="input"> <input type="number"
-										name="subtitle_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("subtitle_____line_height") %>"
+										name="subtitle_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("subtitle_____line_height") %>"
 										>
 									</label>
 								</section>
@@ -250,7 +247,7 @@
 									<label class="label">Subtitle
 										Font Family</label> <label class="select"> <select
 										name="subtitle_____font_family">
-											<option value="<%=theme.get("subtitle_____font_family") %>" selected><%=theme.get("subtitle_____font_family").split(".ttf")[0] %></option>
+											<option value="<%=theme.get("subtitle_____font_family") %>" selected><%=theme.get("subtitle_____font_family").toString().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -285,7 +282,7 @@
 								<section class="col col-4">
 									<label class="label">List Item
 										Line height</label> <label class="input"> <input type="number"
-										name="listitem_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("listitem_____line_height") %>">
+										name="listitem_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("listitem_____line_height") %>">
 									</label>
 								</section>
 
@@ -313,7 +310,7 @@
 									<label class="label">List Item
 										Font Family</label> <label class="select"> <select
 										name="listitem_____font_family">
-											<option value="<%=theme.get("listitem_____font_family") %>" selected><%=theme.get("listitem_____font_family").split(".ttf")[0] %></option>
+											<option value="<%=theme.get("listitem_____font_family") %>" selected><%=theme.get("listitem_____font_family").toString().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -348,7 +345,7 @@
 								<section class="col col-4">
 									<label class="label">Paragraph
 										Line height</label> <label class="input"> <input type="number"
-										name="paragraph_____line_height" step="0.1" min="1" max="3" value="<%=theme.get("paragraph_____line_height") %>">
+										name="paragraph_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("paragraph_____line_height") %>">
 									</label>
 								</section>
 
@@ -376,7 +373,7 @@
 									<label class="label">Paragraph
 										Font Family</label> <label class="select"> <select
 										name="paragraph_____font_family">
-											<option value="<%=theme.get("paragraph_____font_family") %>" selected><%=theme.get("paragraph_____font_family").split(".ttf")[0] %></option>
+											<option value="<%=theme.get("paragraph_____font_family") %>" selected><%=theme.get("paragraph_____font_family").toString().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -400,6 +397,23 @@
 							onclick="window.history.back();">Back</button>
 					</footer>
 				</div>
+			
+			<div  class="col-md-7">
+			
+			<% 
+			try {
+			
+			SlideDAO dao = new SlideDAO();
+			Slide s = dao.findById(Integer.parseInt(request.getParameter("slide_id")));
+			
+			%>
+			<iframe style="width: 100%; height: 100vh;" id='theme_preview' src="/content/lesson/preview_desktop.jsp?ppt_id=<%=s.getPresentaion().getId()%>"></iframe>
+			
+			<% } catch(Exception e) {} %>
+			
+			</div>
+			
+			
 			</div>
 		</form>
 		<jsp:include page="includes/footer.jsp"></jsp:include>
@@ -444,6 +458,71 @@
 		jQuery(document).ready(function() {
 			App.init();
 
+			
+			// on chnage of params do this ... 
+			$( "#bg_color" ).change(function () {
+			    var str = $('#bg_color').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('body').css('background-color',str);//: #ffffff;
+			    
+			    $('#theme_preview').contents().find('.slide-background').css('background-color',str);//: #ffffff;
+			    
+			    	
+			}) ;
+			
+			
+			$( "#id_title_____font_size" ).change(function () {
+			    var str = $('#id_title_____font_size').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('h2').css('font-size',str+"px");//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_title').css('font-size',str+"px");//: #ffffff;
+			}) ;
+			
+			
+			$( "#id_title_____line_height" ).change(function () {
+			    var str = $('#id_title_____line_height').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('h2.updated').css('line-height',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_title').css('line-height',str);//: #ffffff;
+			}) ;
+			
+			
+			$( "#id_title_____font_weight" ).change(function () {
+			    var str = $('#id_title_____font_weight').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('h2.updated').css('font-weight',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_title').css('font-weight',str);//: #ffffff;
+
+			}) ;
+			
+			
+			$( "#id_title_____text_alignment" ).change(function () {
+			    var str = $('#id_title_____text_alignment').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('h2').css('text-align',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_title').css('text-align',str);//: #ffffff;
+
+			}) ;
+			
+			
+			$( "#id_title_____font_family" ).change(function () {
+			    var str = $('#id_title_____font_family').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('h2').css('font-family',str.replace('-Regular.ttf',''));//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_title').css('font-family',str.replace('-Regular.ttf',''));//: #ffffff;
+
+			}) ;
+			
+			$( "#id_title_____font_color" ).change(function () {
+			    var str = $('#id_title_____font_color').val();
+			    console.log(str);
+			    $('#theme_preview').contents().find('h2').css('color',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_title').css('color',str);//: #ffffff;
+
+			}) ;
+			
+			
+			
 		});
 	</script>
 	<!--[if lt IE 9]>
