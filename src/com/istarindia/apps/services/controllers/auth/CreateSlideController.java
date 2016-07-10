@@ -54,9 +54,9 @@ public class CreateSlideController extends IStarBaseServelet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.err.println("controller :");
 		printParams(request);
 		int slide_id = 0;
+		boolean is_numbered ;		
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
@@ -197,56 +197,36 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 			break;
-/*
-		case "ONLY_TITLE_LIST":
-			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				CMSList list = getNewList(request);
-				list.setList_type(request.getParameter("list_type"));
-				slide_id = service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
-						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list);
-
-			} else {
-				CMSList list = getNewList(request);
-				list.setList_type(request.getParameter("list_type"));
-				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
-						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
-			}
-
-			break;
-*/
 			
 		case "ONLY_TITLE_LIST_NUMBERED":
+			is_numbered = true;
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
 				slide_id = service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list);
-
+						request.getParameter("backgroundTransition"), list, is_numbered);
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
 				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), is_numbered);
 			}
 
 			break;
 
 		case "ONLY_LIST":
+			is_numbered = false;
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
 				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list);
+						request.getParameter("backgroundTransition"), list, is_numbered);
 
 			} else {
 				CMSList list = getNewList(request);
@@ -254,19 +234,20 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), is_numbered);
 			}
 
 			break;
 
 		case "ONLY_LIST_NUMBERED":
+			is_numbered = true;
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
 				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list);
+						request.getParameter("backgroundTransition"), list, is_numbered);
 
 			} else {
 				CMSList list = getNewList(request);
@@ -274,7 +255,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), is_numbered);
 			}
 
 			break;
@@ -688,6 +669,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			break;
 			
 		case "ONLY_TITLE_LIST":
+			is_numbered = false;
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
@@ -702,7 +684,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				service.addListToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
-						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
+						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id") );
 			}
 
 			break;

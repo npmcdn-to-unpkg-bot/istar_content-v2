@@ -502,6 +502,7 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
 	<script src="//cdn.ckeditor.com/4.5.9/full/ckeditor.js"></script>
+	
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/parsley.js"></script>
@@ -521,12 +522,10 @@
 			} catch (err) {
 				console.log(err);
 			}
-
 			try {
 				var bodyEditor = CKEDITOR.replace('slide_paragraph', {
 					readOnly : false
 				});
-
 				bodyEditor.on('mode', function() {
 					if (this.mode == 'source') {
 						var editable = bodyEditor.editable();
@@ -536,7 +535,7 @@
 						});
 					}
 				});
-
+				
 				bodyEditor.on('change', function() {
 					var text1 = bodyEditor.document.getBody().getHtml()
 					var iframeInner = $('#prv').contents().find(
@@ -546,7 +545,6 @@
 				console.log(err);
 			}
 		}
-
 		function initHooks() {
 			$(".updateble").each( function(index, listItem) {
 				var id = $(this).attr('id');
@@ -558,19 +556,16 @@
 					console.log(id);
 				}
 			});
-
 			$('#image-picker').on( 'change', function() {
 				var id = $(this).find(":checked").attr('id');
 				$('#prv').contents().find('#data_image_url').attr( "src", $('#' + id).data('img-src'));
 			});
-
 			$('#image-bg-picker').on( 'change', function() {
 				var bgurl = $(this).find(":checked").val();
 				$('#prv').contents().find('.slide-backgrund').css( 'background-image', "url(" + bgurl + ")");
 				$('#prv').contents().find('.slide-background').css( 'background-size', "cover");
 			});
 		}
-
 		function initColorChange() {
 			$('#slide_color').on( 'change', function() {
 				$('#prv').contents().find('.slide-background').css( 'background-color', $('#slide_color').val());

@@ -162,7 +162,6 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	text-transform: uppercase;
 	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
 		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
@@ -238,7 +237,6 @@ body {
 	font-size: <%=theme.get("title_____font_size")%>px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
-	text-transform: uppercase;
 	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
 		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
