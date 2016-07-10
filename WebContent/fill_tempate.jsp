@@ -125,6 +125,7 @@
 							slide = (new LessonUtils())
 									.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
 							slide.setTemplateName(request.getParameter("slide_type"));
+							
 					%>
 					
 					<input name="is_edit" value="true" type="hidden"> 
@@ -316,7 +317,7 @@
 										<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
 											<div id="frame_htc_one_emulator" class="frame_scroller">
 
-												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
+												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=request.getParameter("slide_type")%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
 											</div>
 										</div>
 									</div>
