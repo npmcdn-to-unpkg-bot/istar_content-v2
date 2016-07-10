@@ -297,6 +297,9 @@
 							</div>
 
 							<div class="col-md-5">
+								
+								<a href='/content/media/create_task.jsp' class='btn-u' target="_blank">Create New Media Task</a>
+								
 								<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
 									<%
 										for (String template : CMSRegistry.slideTemplates) {
