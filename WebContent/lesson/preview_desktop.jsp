@@ -37,11 +37,12 @@ String style_body = "background-size: cover;";
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
 
-<!-- Include the yellow.jsp for styling only if everything is good for inclusion.
-lesson may not have theme saved
-lesson_theme may have a string in place
-lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
- -->
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
+
 <%
 int themeID = 100;
 try {
@@ -83,7 +84,7 @@ try {
 	IstarUser user = (IstarUser) request.getSession().getAttribute("user");
     String displayName = "Welcome " + user.getName();
     if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-<button onclick="add_review_comment()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+<button onclick="add_review_comment()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
 
 <button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
@@ -93,7 +94,7 @@ try {
 
 <% } else {
 %>
-<button onclick="add_edit()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+<button onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
 
 <button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
@@ -269,43 +270,44 @@ key-> review_notes : value ->sssssssssssssss*/
 	</script>
 	<% 
 		 if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-<!--        <form action="/content/review_lesson" name="" method="POST" target="_blank" > -->
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Review Comment </h4>
-      </div>
-      <div class="modal-body" style="min-height: 500px">
-			<input name="is_edit" value="true" type="hidden"> '
-			<input id='slidee_id' name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
-			
-				<input type="hidden"
-					name="ppt_id" value="<%=request.getParameter("ppt_id")%>"> <fieldset>
-							<section>
+<div class='modal fade' id='reviewCommentModal' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+					<h4 class="modal-title" id="myModalLabel4">Add comment</h4>
+				</div>
+				
+				<div class="modal-body">
+						<input name='is_edit' type="hidden" value="true" />
+						<input name='slide_id' type="hidden" value="<%=request.getParameter("slide_id")%>" />
+						<input name='ppt_id' type="hidden" value="<%=request.getParameter("ppt_id")%>" />
+						<input name='from' type=hidden value="review_slide" />
+						<fieldset>							
+							<section>								
 								<label class="label">Review Notes</label> 
 								<label class="textarea"> 
-                                     <textarea rows="30" cols="60" id='idreview_notes'
-										name="review_notes" placeholder=" Please enter text"></textarea>
+									<textarea rows="3" name="review_notes" placeholder=" Please enter text"></textarea>
 								</label>
 								<div class="note">
-									<strong>Note:</strong> This is where we will put in the Review
-									Notes.
+									<strong>Note:</strong> This is where we will put in the Review Notes.
 								</div>
 							</section>
+							<section style="margin-bottom: 2%; float: right;">
+								<button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn-u" >Submit</button> 
+							</section>
 						</fieldset>
-						
-      </div>
-      <div class="modal-footer">
-			<button id='sbnmm' class="btn-u btn-block">Submit</button>
-      </div>
-    </div>
-<!-- </form>
- -->  </div>
-</div><% }	%>
+				</div>
+				
+				<div class="modal-footer"> </div>
+				
+			</div>
+		</div>
+	</div>
+
+<% }	%>
 </body>
 
 
