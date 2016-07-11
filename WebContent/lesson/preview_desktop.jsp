@@ -85,7 +85,7 @@ try {
     String displayName = "Welcome " + user.getName();
     SlideDAO sDao = new SlideDAO();
     if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-<button onclick="add_review_comment()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+<button  data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
 <img src="http://i.stack.imgur.com/8BVKM.png"></button>
 
 <button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
@@ -104,6 +104,45 @@ try {
 
 
 <% } %>
+
+
+	<% if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
+	<div class='modal fade' id='reviewCommentModal' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+					<h4 class="modal-title" id="myModalLabel4">Add comment</h4>
+				</div>
+				
+				<div class="modal-body">
+				<form class="sky-form" action="#" method="#">
+					<fieldset>							
+						<section>								
+							<label class="label">Review Notes</label> 
+							<label class="textarea"> 
+								<textarea rows="3" name="review_notes" id="review-notes" placeholder=" Please enter text"></textarea>
+							</label>
+							<div class="note">
+								<strong>Note:</strong> This is where we will put in the Review Notes.
+							</div>
+						</section>
+					</fieldset>
+				</form>
+				</div>
+				<div class="modal-footer">
+					<section style="float: right">
+						<button type="submit" id="submit-review" class="btn-u" >Submit</button> 
+					</section>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<% } %>
+	
+
+
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
@@ -169,7 +208,6 @@ try {
 		Reveal.addEventListener('fragmentshown', function(event) {
 			$('.fragment').each(function(index, value) {
 				try {
-
 					if ($(this).attr('id').indexOf("-") != -1) {
 						$('#' + $(this).attr('id')).css({
 							'font-size' : orginal_listitem_font_size + 'px'
@@ -187,75 +225,27 @@ try {
 
 		function add_edit() {
 			var currentURL = window.location.href;
-			var slideID = <%=request.getParameter("slide_id")%>;
-			if(currentURL.indexOf("#") > -1) {
-				slideID  = currentURL.split("#")[1];
-				var slide_type = <%=sDao.findById(Integer.parseInt(request.getParameter("slide_id").toString())).getTemplate() %>;
-			}
-			var url = '/content/fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id='+slideID+'&slide_type='+slide_type;
+			var slideID = $('.present').attr('id');
+			var url = '/content/fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id='+slideID;
 			var win = window.open(url, '_blank');
 			win.focus();
 		}
 		
-		<% if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-			function add_review_comment() {
-				$('#idreview_notes').val("");
-				var currentURL = window.location.href; 
-				var slideID = <%=request.getParameter("slide_id")%>;
-				if(currentURL.indexOf("#") > -1) {
-					slideID  = currentURL.split("#")[1];
-					$('#slidee_id').val(slideID);
-				}
-			}
-		<% } %>
-		
 		$( "#submit-review" ).click(function() {
-			var slide_id = <%=request.getParameter("slide_id")%>;
+			var slide_id = $('.present').attr('id');;
 			var ppt_id = <%=request.getParameter("ppt_id")%>;
 			var review_notes = $('#review-notes').val();
+			console.log(' - > '+review_notes+' ; ; id - >' + slide_id + ' ; ; ' + ppt_id);
 			$.ajax({
 				  type: "POST",
 				  url: '/content/review_lesson',
 				  data: 'is_edit=true&from=review_slide&ppt_id='+ppt_id+'&slide_id='+slide_id+'&review_notes='+review_notes,
-				  success: success,
-				  dataType: dataType
 			});
+			$('#review-notes').val("");
+			$('#reviewCommentModal').modal('hide');
 		});
+		
 	</script>
-	
-	<% if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-	<div class='modal fade' id='reviewCommentModal' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-					<h4 class="modal-title" id="myModalLabel4">Add comment</h4>
-				</div>
-				
-				<div class="modal-body">
-						<fieldset>							
-							<section>								
-								<label class="label">Review Notes</label> 
-								<label class="textarea"> 
-									<textarea rows="3" name="review_notes" id="review-notes" placeholder=" Please enter text"></textarea>
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the Review Notes.
-								</div>
-							</section>
-							<section style="margin-bottom: 2%; float: right;">
-								<button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
-								<button type="submit" id="submit-review" class="btn-u" >Submit</button> 
-							</section>
-						</fieldset>
-				</div>
-				
-				<div class="modal-footer"> </div>
-				
-			</div>
-		</div>
-	</div>
-	<% } %>
 	
 </body>
 

@@ -120,11 +120,15 @@
 						if (request.getParameterMap().containsKey("slide_id")) {
 							newSlide = false;
 							SlideDAO dao = new SlideDAO();
-							slide_type = request.getParameter("slide_type");
-
+							Slide slideDb = dao.findById(Integer.parseInt(request.getParameter("slide_id")));
+							if(request.getParameterMap().containsKey("slide_type")) {
+								slide_type = request.getParameter("slide_type");
+							} else {
+								slide_type = slideDb.getTemplate();
+							}
 							slide = (new LessonUtils())
-									.convertSlide(dao.findById(Integer.parseInt(request.getParameter("slide_id"))));
-							slide.setTemplateName(request.getParameter("slide_type"));
+									.convertSlide(slideDb);
+							slide.setTemplateName(slide_type);
 							
 					%>
 					
@@ -135,6 +139,7 @@
 						} else {
 							newSlide = true;
 							slide.setTemplateName(request.getParameter("slide_type"));
+							slide_type = request.getParameter("slide_type");
 					%>
 					
 					<input name="is_edit" value="false" type="hidden">
@@ -158,8 +163,8 @@
 								<fieldset style=" margin-top: 5%;">
 									
 									<% try {
-										if (request.getParameter("slide_type").toLowerCase().contains("image")
-										    || request.getParameter("slide_type").toLowerCase().contains("video")) { %>
+										if (slide.getTemplateName().toLowerCase().contains("image")
+										    || slide.getTemplateName().toLowerCase().contains("video")) { %>
 										    
 											<section style="margin-top: -12%;     margin-right: 5%; float: right;">
 													<button type='button' class='btn-u' data-target='#imageModal' data-toggle='modal'>Upload new Media</button>
@@ -320,7 +325,7 @@
 								<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
 									<%
 										for (String template : CMSRegistry.slideTemplates) {
-											if (template.equalsIgnoreCase(request.getParameter("slide_type"))) {
+											if (template.equalsIgnoreCase(slide.getTemplateName())) {
 									%>
 									<option value='<%=template%>' selected='selected'><%=template%></option>
 									<%
@@ -337,7 +342,7 @@
 										<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
 											<div id="frame_htc_one_emulator" class="frame_scroller">
 
-												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=request.getParameter("slide_type")%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
+												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
 											</div>
 										</div>
 									</div>
@@ -416,7 +421,7 @@
 					<form action="<%=baseURL%>media_upload" class="sky-form" method="POST"  novalidate="novalidate"  enctype="multipart/form-data">
 						<input type="hidden" id="item_id" name="item_id" value="0" />
 						<input type="hidden" id="slide_id" name="slide_id" value="<%=slide_id%>" />
-						<input type="hidden" id="slide_type" name="slide_type" value="<%=request.getParameter("slide_type")%>" />
+						<input type="hidden" id="slide_type" name="slide_type" value="<%=slide.getTemplateName()%>" />
 						<input type="hidden" id="selected_items" name="selected_items" value="0" />
 						<input type="hidden" id="session_id" name="session_id" value="<%=ppt.getLesson().getCmsession().getId() %>" />
 						<input type="hidden" id="ppt_id" name="ppt_id" value="<%=ppt.getId() %>" />
