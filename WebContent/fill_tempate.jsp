@@ -82,6 +82,7 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+    <link href="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
@@ -503,6 +504,7 @@
 	<!-- JS Customization -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="http://rvera.github.io/image-picker/image-picker/image-picker.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
@@ -590,6 +592,28 @@
 				}
 				window.location.href=url;
 			});
+			
+			
+			
+			 $.contextMenu({
+		            selector: '.thumbnail', 
+		            callback: function(key, options) {
+		                var url = $(this).find('img').first().attr('src');
+		                $.ajax({
+		                	type: "GET",
+		                	url: "/content/media_upload?delfile="+url, 
+		                });    
+	                    location.reload(); 
+		            },
+		            
+		            items: {
+		                "delete": {name: "Delete", icon: "delete"}
+		            }
+		        });
+
+		        $('.context-menu-one').on('click', function(e){
+		            //console.log('===>clicked', this.attr('id'));
+		        })    
 			  
 		});
 	</script>
