@@ -17,7 +17,7 @@
     <init-param>
       <description>Define storage path for image uploads</description>
       <param-name>upload_path</param-name>
-      <param-value>C:/Users/ayrus/Pictures/Camera Roll</param-value>
+      <param-value>C:/Users/vaibhav/Documents/deployment/8july/Camera Roll</param-value>
     </init-param>
   </servlet>
   
@@ -34,7 +34,7 @@
     <init-param>
       <description>Define storage path for background image uploads</description>
       <param-name>bg_upload_path</param-name>
-      <param-value>C:/Users/vaibhav/Pictures/Camera Roll/backgrounds</param-value>
+      <param-value>C:/Users/vaibhav/Documents/deployment/8july/Camera Roll/backgrounds</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -50,7 +50,7 @@
     <init-param>
       <description>Define storage path for background image uploads</description>
       <param-name>handout_media_upload_path</param-name>
-      <param-value>C:/Users/vaibhav/Pictures/Camera Roll/handout_media</param-value>
+      <param-value>C:/Users/vaibhav/Documents/deployment/8july/Camera Roll/handout_media</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

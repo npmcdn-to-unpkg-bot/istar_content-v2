@@ -224,7 +224,7 @@ public class ReportUtils {
 							out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + row.get(i)
 									+ "</th>");
 						} else {
-							out.append("<td style='max-width:100px !important; word-wrap: break-word;'>"
+							out.append("<td india style='max-width:100px !important; word-wrap: break-word;'>"
 									+ ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler())
 											.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID)
 									+ "</th>");

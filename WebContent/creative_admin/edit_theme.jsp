@@ -148,6 +148,8 @@
 					items.put("title","h2");items.put("subtitle","h3");
 					items.put("paragraph", "p");items.put("listitem", "li");
 					
+					//items.put("tablerow", "td");
+					
 					for(String item: items.keySet()) { %>
 					<div class="row">
 						<header><%=item.toUpperCase() %></header>
@@ -224,12 +226,23 @@
 			
 			<% 
 			try {
-			
-			SlideDAO dao = new SlideDAO();
-			Slide s = dao.findById(Integer.parseInt(request.getParameter("slide_id")));
-			
+			if(request.getParameterMap().containsKey("slide_id")) {
+				SlideDAO dao = new SlideDAO();
+				Slide s = dao.findById(Integer.parseInt(request.getParameter("slide_id")));
+				%>
+							<iframe style="width: 100%; height: 100vh;" id='theme_preview' src="/content/lesson/preview_desktop.jsp?ppt_id=<%=s.getPresentaion().getId()%>"></iframe>
+				
+				<%
+			} else if(request.getParameterMap().containsKey("ppt_id")) {
+				PresentaionDAO dao = new PresentaionDAO();
+				Presentaion ppp = dao.findById(Integer.parseInt(request.getParameter("ppt_id")));
+				
+				%>
+				<iframe style="width: 100%; height: 100vh;" id='theme_preview' src="/content/lesson/preview_desktop.jsp?ppt_id=<%=ppp.getId()%>"></iframe>
+	
+				<%	
+			}
 			%>
-			<iframe style="width: 100%; height: 100vh;" id='theme_preview' src="/content/lesson/preview_desktop.jsp?ppt_id=<%=s.getPresentaion().getId()%>"></iframe>
 			
 			<% } catch(Exception e) {} %>
 			

@@ -43,6 +43,7 @@ import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
+import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
@@ -442,7 +443,19 @@ public class LessonUtils {
             		+ "<input id='order_holder' name='order_holder' type='hidden'>"
             		+ "<input id='entity_type' name='entity_type' type='hidden' value='slides'>"
             		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"
-            		+ "<button type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
+            		+ "<button style='float: right; margin-top: -40px;' type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
+			
+           
+            try {
+				
+				String themeID =  lesson.getLesson_theme_desktop();
+	            out.append("<a style='float: right; margin-top: -40px; margin-right: 149px;' target='_blank' href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
+	            		+ " class='btn-u btn-u-default'>Edit Visualize Theme</a>");
+
+			} catch (Exception e) {
+			}
+            
+            
             out.append("</div>");
             out.append("</div>");
             out.append("</div>");
