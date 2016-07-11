@@ -120,7 +120,7 @@
 		<BR />
 		<div class="container-fluid height-1000"
 			style="padding: 0px !important">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="col-md-12">
 					<div class=" col-md-12 ">
 						<div class="panel panel-sea">
@@ -483,7 +483,7 @@
 				
 			</div>
 
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<%
                             if (LessonService.isEmptyLesson(lesson)) {
                         %>
