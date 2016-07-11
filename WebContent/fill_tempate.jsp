@@ -599,10 +599,10 @@
 			 $.contextMenu({
 		            selector: '.thumbnail', 
 		            callback: function(key, options) {
-		                var url = $(this).find('img').first().attr('src');
+		                var mediaUrl = $(this).find('img').first().attr('src');
 		                $.ajax({
 		                	type: "GET",
-		                	url: "/content/media_upload?delfile="+url, 
+		                	url: "/content/media_upload?delfile="+mediaUrl, 
 		                });    
 	                    location.reload(); 
 		            },
