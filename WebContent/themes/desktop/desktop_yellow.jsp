@@ -29,7 +29,7 @@
 	
 	String lesson_theme = "0";
 	try {
-		lesson_theme = ppt.getLesson().getLesson_theme();
+		lesson_theme = ppt.getLesson().getLesson_theme_desktop();
 		System.err.println("debuggggggggg "+lesson_theme);
 	} catch(NullPointerException npe) {
 		System.out.println( ppt.getLesson().getId());
@@ -735,21 +735,6 @@ body {
 	width: 180%;
 }
 
-.reveal  #data_slide_list_item {
-	font-size: 100%
-}
-.reveal  #data_slide_paragraph {
-	font-size: 110%
-}
-.reveal  #data_slide_title {
-	font-size: 80%
-}
-.reveal  #data_slide_title2 {
-	font-size: 80%
-}
-.reveal  #data_slide_subtitle {
-	font-size: 80%
-}
 
 
 

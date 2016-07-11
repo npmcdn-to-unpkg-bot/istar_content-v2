@@ -141,37 +141,45 @@
 						
 					%>
 					<!--title-->
+					
+					<% 
+					
+					HashMap<String, String> items = new HashMap();
+					items.put("title","h2");items.put("subtitle","h3");
+					items.put("paragraph", "p");items.put("listitem", "li");
+					
+					for(String item: items.keySet()) { %>
 					<div class="row">
-						<header>TITLE</header>
+						<header><%=item.toUpperCase() %></header>
 						<div class="row">
 							<fieldset>
 								<section class="col col-4">
 									<!-- key.toUpperCase() -->
-									<label class="label">Title
-										Font Size </label> <label class="input"> <input id='id_title_____font_size' type="number"
-										min="20" max="300" name="title_____font_size" value="<%=theme.get("title_____font_size")%>">
+									<label class="label"><%=item.toUpperCase() %>
+										Font Size </label> <label class="input"> <input id='id_<%=item%>_____font_size' type="number"
+										min="20" max="300" name="<%=item%>_____font_size" value="<%=theme.get(item+"_____font_size")%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label">Title
-										Line height</label> <label class="input"> <input type="number" id="id_title_____line_height" 
-										name="title_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("title_____line_height")%>">
+									<label class="label"><%=item.toUpperCase() %>
+										Line height</label> <label class="input"> <input type="number" id="id_<%=item%>_____line_height" 
+										name="<%=item%>_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get(item+"_____line_height")%>">
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label">Title
-										Font Weight</label> <label class="input"> <input type="number" id="id_title_____font_weight" name="title_____font_weight" 
-										step="100" min="100" max="900" value="<%=theme.get("title_____font_weight") %>" >
+									<label class="label"><%=item.toUpperCase() %>
+										Font Weight</label> <label class="input"> <input type="number" id="id_<%=item%>_____font_weight" name="<%=item%>_____font_weight" 
+										step="100" min="100" max="900" value="<%=theme.get(item+"_____font_weight") %>" >
 									</label>
 								</section>
 
 								<section class="col col-4">
-									<label class="label">Title
+									<label class="label"><%=item.toUpperCase() %>
 										Text alignment</label> <label class="select"> <select
-										name="title_____text_alignment" id="id_title_____text_alignment" >
-											<option value="<%=theme.get("title_____text_alignment") %>" selected><%=theme.get("title_____text_alignment") %></option>
+										name="<%=item%>_____text_alignment" id="id_<%=item%>_____text_alignment" >
+											<option value="<%=theme.get(item+"_____text_alignment") %>" selected><%=theme.get(item+"_____text_alignment") %></option>
 											<option value="center">Center</option>
 											<option value="left">Left</option>
 											<option value="right">Right</option>
@@ -180,10 +188,10 @@
 								</section>
 
 								<section class="col col-4">
-									<label class="label">Title
-										Font Family</label> <label class="select"> <select id="id_title_____font_family"  
-										name="title_____font_family">
-											<option value="<%=theme.get("title_____font_family") %>" selected><%=theme.get("title_____font_family").toString().split(".ttf")[0] %></option>
+									<label class="label"><%=item.toUpperCase() %>
+										Font Family</label> <label class="select"> <select id="id_<%=item%>_____font_family"  
+										name="<%=item%>_____font_family">
+											<option value="<%=theme.get(item+"_____font_family") %>" selected><%=theme.get(item+"_____font_family").toString().split(".ttf")[0] %></option>
 										<% for(String fontName : fontNames) { %>
 											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
 										<% } %>
@@ -192,204 +200,18 @@
 								</section>
 
 								<section class="col col-4">
-									<label class="label">Title
-										Color</label> <label class="select"> <input type="color" id="id_title_____font_color"
-										name="title_____font_color" value="<%=theme.get("title_____font_color") %>" >
+									<label class="label"><%=item.toUpperCase() %>
+										Color</label> 
+										<label class="select"> 
+											<input type="color" id="id_<%=item%>_____font_color" name="<%=item%>_____font_color" value="<%=theme.get(item+"_____font_color") %>" >
 									</label>
 								</section>
 							</fieldset>
 						</div>
 					</div>
 					
-					<!-- subtitle-->
+					<% } %>
 					
-					<div class="row">
-						<header>SUBTITLE</header>
-						<div class="row">
-							<fieldset>
-								<section class="col col-4">
-									<!-- key.toUpperCase() -->
-									<label class="label">Subtitle
-										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="subtitle_____font_size" value="<%=theme.get("subtitle_____font_size") %>">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Subtitle
-										Line height</label> <label class="input"> <input type="number"
-										name="subtitle_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("subtitle_____line_height") %>"
-										>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Subtitle
-										Font Weight</label> <label class="input"> <input type="number"
-										name="subtitle_____font_weight" step="100" min="100" value="<%=theme.get("subtitle_____font_weight") %>"
-										max="900">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Subtitle
-										Text alignment</label> <label class="select"> <select
-										name="subtitle_____text_alignment">
-											<option value="<%=theme.get("subtitle_____text_alignment") %>" selected><%=theme.get("subtitle_____text_alignment") %></option>
-											<option value="center">Center</option>
-											<option value="left" >Left</option>
-											<option value="right">Right</option>
-									</select>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Subtitle
-										Font Family</label> <label class="select"> <select
-										name="subtitle_____font_family">
-											<option value="<%=theme.get("subtitle_____font_family") %>" selected><%=theme.get("subtitle_____font_family").toString().split(".ttf")[0] %></option>
-										<% for(String fontName : fontNames) { %>
-											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
-										<% } %>
-									</select>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Subtitle
-										Color</label> <label class="select"> <input type="color"
-										name="subtitle_____font_color" value="<%=theme.get("subtitle_____font_color") %>">
-									</label>
-								</section>
-							</fieldset>
-						</div>
-					</div>
-					
-					<!-- listitem -->
-					
-					<div class="row">
-						<header>LISTITEM</header>
-						<div class="row">
-							<fieldset>
-								<section class="col col-4">
-									<!-- key.toUpperCase() -->
-									<label class="label">List Item
-										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="listitem_____font_size" value="<%=theme.get("listitem_____font_size") %>">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">List Item
-										Line height</label> <label class="input"> <input type="number"
-										name="listitem_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("listitem_____line_height") %>">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">List Item
-										Font Weight</label> <label class="input"> <input type="number"
-										name="listitem_____font_weight" step="100" min="100" value="<%=theme.get("listitem_____font_weight") %>"
-										max="900" >
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">List Item
-										Text alignment</label> <label class="select"> <select
-										name="listitem_____text_alignment">
-											<option value="<%=theme.get("listitem_____text_alignment") %>" selected><%=theme.get("listitem_____text_alignment") %></option>
-											<option value="center">Center</option>
-											<option value="left" >Left</option>
-											<option value="right">Right</option>
-									</select>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">List Item
-										Font Family</label> <label class="select"> <select
-										name="listitem_____font_family">
-											<option value="<%=theme.get("listitem_____font_family") %>" selected><%=theme.get("listitem_____font_family").toString().split(".ttf")[0] %></option>
-										<% for(String fontName : fontNames) { %>
-											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
-										<% } %>
-									</select>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">List Item
-										Color</label> <label class="select"> <input type="color"
-										name="listitem_____font_color" value="<%=theme.get("listitem_____font_color") %>">
-									</label>
-								</section>
-							</fieldset>
-						</div>
-					</div>
-					
-					<!-- paragraph -->
-					
-					<div class="row">
-						<header>PARAGRAPH</header>
-						<div class="row">
-							<fieldset>
-								<section class="col col-4">
-									<!-- key.toUpperCase() -->
-									<label class="label">Paragraph
-										Font Size </label> <label class="input"> <input type="number"
-										min="20" max="300" name="paragraph_____font_size" value="<%=theme.get("paragraph_____font_size") %>">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Paragraph
-										Line height</label> <label class="input"> <input type="number"
-										name="paragraph_____line_height" step="0.1" min="0.5" max="3" value="<%=theme.get("paragraph_____line_height") %>">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Paragraph
-										Font Weight</label> <label class="input"> <input type="number"
-										name="paragraph_____font_weight" step="100" min="100"
-										max="900" value="<%=theme.get("paragraph_____font_weight") %>">
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Paragraph
-										Text alignment</label> <label class="select"> <select
-										name="paragraph_____text_alignment">
-											<option value="<%=theme.get("paragraph_____text_alignment") %>" selected><%=theme.get("paragraph_____text_alignment") %></option>
-											<option value="center">Center</option>
-											<option value="left" >Left</option>
-											<option value="right">Right</option>
-									</select>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Paragraph
-										Font Family</label> <label class="select"> <select
-										name="paragraph_____font_family">
-											<option value="<%=theme.get("paragraph_____font_family") %>" selected><%=theme.get("paragraph_____font_family").toString().split(".ttf")[0] %></option>
-										<% for(String fontName : fontNames) { %>
-											<option value="<%=fontName %>"><%=fontName.split(".ttf")[0] %></option>
-										<% } %>
-									</select>
-									</label>
-								</section>
-
-								<section class="col col-4">
-									<label class="label">Paragraph
-										Color</label> <label class="select"> <input type="color"
-										name="paragraph_____font_color" value="<%=theme.get("paragraph_____font_color") %>">
-									</label>
-								</section>
-							</fieldset>
-						</div>
-					</div>
 					
 					<footer>
 						<button type="submit" class="btn-u">Submit</button>
@@ -470,58 +292,58 @@
 			    	
 			}) ;
 			
-			
-			$( "#id_title_____font_size" ).change(function () {
-			    var str = $('#id_title_____font_size').val();
+			<% for(String item: items.keySet()) { %>
+			$( "#id_<%=item%>_____font_size" ).change(function () {
+			    var str = $('#id_<%=item%>_____font_size').val();
 			    console.log(str);
-			    $('#theme_preview').contents().find('h2').css('font-size',str+"px");//: #ffffff;
-			    $('#theme_preview').contents().find('#data_slide_title').css('font-size',str+"px");//: #ffffff;
+			    $('#theme_preview').contents().find('<%=items.get(item)%>').css('font-size',str+"px");//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_<%=item%>').css('font-size',str+"px");//: #ffffff;
 			}) ;
 			
 			
-			$( "#id_title_____line_height" ).change(function () {
-			    var str = $('#id_title_____line_height').val();
+			$( "#id_<%=item%>_____line_height" ).change(function () {
+			    var str = $('#id_<%=item%>_____line_height').val();
 			    console.log(str);
-			    $('#theme_preview').contents().find('h2.updated').css('line-height',str);//: #ffffff;
-			    $('#theme_preview').contents().find('#data_slide_title').css('line-height',str);//: #ffffff;
+			    $('#theme_preview').contents().find('<%=items.get(item)%>.updated').css('line-height',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_<%=item%>').css('line-height',str);//: #ffffff;
 			}) ;
 			
 			
-			$( "#id_title_____font_weight" ).change(function () {
-			    var str = $('#id_title_____font_weight').val();
+			$( "#id_<%=item%>_____font_weight" ).change(function () {
+			    var str = $('#id_<%=item%>_____font_weight').val();
 			    console.log(str);
-			    $('#theme_preview').contents().find('h2.updated').css('font-weight',str);//: #ffffff;
-			    $('#theme_preview').contents().find('#data_slide_title').css('font-weight',str);//: #ffffff;
+			    $('#theme_preview').contents().find('<%=items.get(item)%>.updated').css('font-weight',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_<%=item%>').css('font-weight',str);//: #ffffff;
 
 			}) ;
 			
 			
-			$( "#id_title_____text_alignment" ).change(function () {
-			    var str = $('#id_title_____text_alignment').val();
+			$( "#id_<%=item%>_____text_alignment" ).change(function () {
+			    var str = $('#id_<%=item%>_____text_alignment').val();
 			    console.log(str);
-			    $('#theme_preview').contents().find('h2').css('text-align',str);//: #ffffff;
-			    $('#theme_preview').contents().find('#data_slide_title').css('text-align',str);//: #ffffff;
+			    $('#theme_preview').contents().find('<%=items.get(item)%>').css('text-align',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_<%=item%>').css('text-align',str);//: #ffffff;
 
 			}) ;
 			
 			
-			$( "#id_title_____font_family" ).change(function () {
+			$( "#id_<%=item%>_____font_family" ).change(function () {
 			    var str = $('#id_title_____font_family').val();
 			    console.log(str);
-			    $('#theme_preview').contents().find('h2').css('font-family',str.replace('-Regular.ttf',''));//: #ffffff;
-			    $('#theme_preview').contents().find('#data_slide_title').css('font-family',str.replace('-Regular.ttf',''));//: #ffffff;
+			    $('#theme_preview').contents().find('<%=items.get(item)%>').css('font-family',str.replace('-Regular.ttf',''));//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_<%=item%>').css('font-family',str.replace('-Regular.ttf',''));//: #ffffff;
 
 			}) ;
 			
-			$( "#id_title_____font_color" ).change(function () {
-			    var str = $('#id_title_____font_color').val();
+			$( "#id_<%=item%>_____font_color" ).change(function () {
+			    var str = $('#id_<%=item%>_____font_color').val();
 			    console.log(str);
-			    $('#theme_preview').contents().find('h2').css('color',str);//: #ffffff;
-			    $('#theme_preview').contents().find('#data_slide_title').css('color',str);//: #ffffff;
+			    $('#theme_preview').contents().find('<%=items.get(item)%>').css('color',str);//: #ffffff;
+			    $('#theme_preview').contents().find('#data_slide_<%=item%>').css('color',str);//: #ffffff;
 
 			}) ;
 			
-			
+			<% } %>
 			
 		});
 	</script>
