@@ -535,7 +535,6 @@
 						});
 					}
 				});
-				
 				bodyEditor.on('change', function() {
 					var text1 = bodyEditor.document.getBody().getHtml()
 					var iframeInner = $('#prv').contents().find(

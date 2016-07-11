@@ -1045,7 +1045,6 @@ public class LessonUtils {
         ImageDAO dao = new ImageDAO();
         ImageUtils imageUtils = new ImageUtils();
         ArrayList<Image> images = imageUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
-       System.err.println(">>>>>"+ppt.getLesson().getCmsession().getId());
         ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId", ppt.getLesson().getCmsession().getId());
 
         CMSList newList = new CMSList();
@@ -1054,9 +1053,7 @@ public class LessonUtils {
         for (CMSTextItem item : slide.getList().getItems()) {
             if (item.getText().trim().equalsIgnoreCase("")&&(item.getDescription().trim().equalsIgnoreCase("")||item.getDescription().trim().equalsIgnoreCase("NO_DESC")||item.getDescription().trim().startsWith("Lorem Ipsum is simply"))) {
             	//System.err.println("<---><===Igrnared => "+ item.getDescription());
-            	//newList.getItems().add(item);
             } else {
-            	//System.err.println("<---><=== not Igrnared => "+ item.getText());
             	
                 newList.getItems().add(item);
                 try {
@@ -1065,7 +1062,6 @@ public class LessonUtils {
                         ArrayList<CMSTextItem> items3 = new ArrayList<>();
                         childList.setItems(items3);
                         for (CMSTextItem childItem : item.getList().getItems()) {
-                        	//System.err.println("<---><====> "+ item.getDescription());
                         	
                         	if (!childItem.getText().trim().startsWith("$slide")) {
                         		System.err.println("textfrom$"+item.getText());
@@ -1081,7 +1077,7 @@ public class LessonUtils {
                         item.setList(childList);
                     }
                 } catch (Exception e) {
-                   // e.printStackTrace();
+                	//TODO: nothing
                 }
             }
         }
@@ -1092,16 +1088,18 @@ public class LessonUtils {
         }
 
         StringBuffer out = new StringBuffer();
+        
         VelocityEngine ve = new VelocityEngine();
         ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         ve.init();
         VelocityContext context = new VelocityContext();
+        
         context.put("slide", slide);
         context.put("images", images);
-
-        context.put("videos", videos);//context.put("tag_string", tagString);
+        context.put("videos", videos);
         context.put("list_types", CMSRegistry.listTypes);
+        
         Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
         StringWriter writer = new StringWriter();
         try {
@@ -1116,9 +1114,9 @@ public class LessonUtils {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
         out.append(writer.toString());
         return out;
-
     }
 
     public CMSSlide convertSlide(Slide slide) {

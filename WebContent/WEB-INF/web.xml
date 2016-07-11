@@ -17,7 +17,7 @@
     <init-param>
       <description>Define storage path for image uploads</description>
       <param-name>upload_path</param-name>
-      <param-value>C:/Users/vaibhav/Pictures/Camera Roll</param-value>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll</param-value>
     </init-param>
   </servlet>
   

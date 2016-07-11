@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -49,7 +50,8 @@ import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 public class MediaUploadController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
-	public static File fileUploadPath;
+	public static File uploadFolder;
+	public static File trashFolder;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -60,8 +62,9 @@ public class MediaUploadController extends IStarBaseServelet {
 
     @Override
     public void init(ServletConfig config) {
-    	String folder =config.getInitParameter("upload_path");
-    	fileUploadPath = new File(folder);
+    	String fileUploadPath =config.getInitParameter("upload_path");
+    	uploadFolder = new File(fileUploadPath);
+    	trashFolder = new File(fileUploadPath+"/trash");
     }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -91,7 +94,7 @@ public class MediaUploadController extends IStarBaseServelet {
 			List<FileItem> items = uploadHandler.parseRequest(request);
 			for (FileItem item : items) {
 				if (!item.isFormField()) {
-					File file = new File(fileUploadPath, item.getName());
+					File file = new File(uploadFolder, item.getName());
 					item.write(file);
 					
 					if (item.getName().toString().endsWith(".mp4")) {
@@ -173,8 +176,10 @@ public class MediaUploadController extends IStarBaseServelet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MediaService mediaService = new MediaService();
+		
 		if (request.getParameter("getfile") != null && !request.getParameter("getfile").isEmpty()) {
-			File file = new File(fileUploadPath, request.getParameter("getfile"));
+			File file = new File(uploadFolder, request.getParameter("getfile"));
 			if (file.exists()) {
 				int bytes = 0;
 				ServletOutputStream op = response.getOutputStream();
@@ -192,12 +197,38 @@ public class MediaUploadController extends IStarBaseServelet {
 				op.close();
 			}
 		} else if (request.getParameter("delfile") != null && !request.getParameter("delfile").isEmpty()) {
-			File file = new File(fileUploadPath, request.getParameter("delfile"));
-			if (file.exists()) {
-				file.delete(); // TODO:check and report success
+			String url = request.getParameter("delfile").toString().replace("/video/", "/content/media_upload?getfile=");
+			String media_type = new String();
+			int media_id = 0;
+			if(!(new ImageDAO()).findByUrl(url).isEmpty()) {
+				media_type = "IMAGE" ;
+				media_id = (new ImageDAO()).findByUrl(url).get(0).getId();
+				mediaService.moveImageToTrash(media_id);
+			
+			} else if(!(new VideoDAO()).findByUrl(url).isEmpty()) {
+				media_type = "VIDEO" ;
+				media_id = (new VideoDAO()).findByUrl(url).get(0).getId();
+				mediaService.moveVideoToTrash(media_id);
+				
+			} else {
+				request.setAttribute("message_failure", "Problem deleting the file!");
+				request.getRequestDispatcher("/delete_media.jsp").forward(request, response);
 			}
+			
+			mediaService.UpdateMediaTaskDeleted(media_id, media_type);
+			
+			try{
+	    		File sourceFile = new File(uploadFolder, url.split("getfile=")[1]);
+		   		FileUtils.moveFileToDirectory(sourceFile, trashFolder, true);
+		    }catch(Exception e){
+		    	e.printStackTrace();
+		    }
+
+			request.setAttribute("message_success", "Media file has been deleted successfully!");
+			request.getRequestDispatcher("/delete_media.jsp").forward(request, response);
+			
 		} else if (request.getParameter("getthumb") != null && !request.getParameter("getthumb").isEmpty()) {
-			File file = new File(fileUploadPath, request.getParameter("getthumb"));
+			File file = new File(uploadFolder, request.getParameter("getthumb"));
 			if (file.exists()) {
 				String mimetype = getMimeType(file);
 				if (mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
