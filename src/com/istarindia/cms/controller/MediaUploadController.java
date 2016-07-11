@@ -200,6 +200,7 @@ public class MediaUploadController extends IStarBaseServelet {
 			String url = request.getParameter("delfile").toString().replace("/video/", "/content/media_upload?getfile=");
 			String media_type = new String();
 			int media_id = 0;
+			int task_id = 0;
 			if(!(new ImageDAO()).findByUrl(url).isEmpty()) {
 				media_type = "IMAGE" ;
 				media_id = (new ImageDAO()).findByUrl(url).get(0).getId();
@@ -215,7 +216,7 @@ public class MediaUploadController extends IStarBaseServelet {
 				request.getRequestDispatcher("/delete_media.jsp").forward(request, response);
 			}
 			
-			mediaService.UpdateMediaTaskDeleted(media_id, media_type);
+			task_id = mediaService.UpdateMediaTaskDeleted(media_id, media_type);
 			
 			try{
 	    		File sourceFile = new File(uploadFolder, url.split("getfile=")[1]);
@@ -223,7 +224,8 @@ public class MediaUploadController extends IStarBaseServelet {
 		    }catch(Exception e){
 		    	e.printStackTrace();
 		    }
-
+			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+			mediaService.saveTaskLog(user, task_id, media_id, media_type, "COMPLETED", "Image has been deleted by "+user.getName());
 			request.setAttribute("message_success", "Media file has been deleted successfully!");
 			request.getRequestDispatcher("/delete_media.jsp").forward(request, response);
 			

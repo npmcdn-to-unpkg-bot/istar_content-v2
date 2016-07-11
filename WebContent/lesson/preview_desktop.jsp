@@ -84,26 +84,19 @@ try {
 	IstarUser user = (IstarUser) request.getSession().getAttribute("user");
     String displayName = "Welcome " + user.getName();
     SlideDAO sDao = new SlideDAO();
+    
     if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-<button  data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
-<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+		<button  data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+		<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
+		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
 
-<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
-
-<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
-
-
-<% } else {
-%>
-<button onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
-<img src="http://i.stack.imgur.com/8BVKM.png"></button>
-
-<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
-<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
-
-
-
-<% } %>
+	<% } else { %>
+		<button onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+		<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
+		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
+	<% } %>
 
 
 	<% if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>

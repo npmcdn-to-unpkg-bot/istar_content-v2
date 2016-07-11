@@ -105,7 +105,7 @@ height:    auto   !important;
 			
 			<div class="col-md-8" style="padding-left : 2%  ;background-color: #f2f2f2">
 				<form action="/content/media_upload" name="" method="GET" data-parsley-validate="" novalidate="" class="sky-form">
-				<button style="margin-bottom: 1%;" type="submit" class="btn-u">Filter on Session</button>
+				<button style="margin-bottom: 1%;" type="submit" class="btn-u">Delete</button>
 				
 				<%
 					MediaService service = new MediaService();
