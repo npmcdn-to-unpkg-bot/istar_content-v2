@@ -348,8 +348,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="panel panel-profile profile">
+								<div class="panel panel-profile profile">
 								<div class="panel-heading overflow-h">
 									<h2 class="panel-title heading-sm pull-left">
 										<i class="fa fa-comments-o"></i> Review Comments
@@ -394,6 +393,8 @@
 									%>
 								</div>
 							</div>
+							</div>
+							
 						</div>
 					</div>
 				</div>

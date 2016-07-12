@@ -556,7 +556,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li  {
-	list-style: square;
+	list-style-image: url('https://cdn3.iconfinder.com/data/icons/price-tags/512/price-sale-cart-shopping-list-ecommerce-tag-18-64.png');
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -577,7 +577,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ol li  {
+.reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
 	list-style-type: decimal-leading-zero;
 	padding-bottom: 48px;
 	padding-right: 52px;
@@ -590,8 +590,8 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ol  {
-    margin-left: 5%;
+.reveal .ONLY_TITLE_LIST_NUMBERED ul  {
+    margin-left: 2%;
     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -646,8 +646,8 @@ body {
    
 }
 
-.reveal .ONLY_LIST_NUMBERED ol li  {
-	
+.reveal .ONLY_LIST_NUMBERED ul li  {
+	list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	list-style-type: decimal-leading-zero;
@@ -659,7 +659,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_LIST_NUMBERED ol  {
+.reveal .ONLY_LIST_NUMBERED ul  {
     margin-left: 2%;
    
 }
