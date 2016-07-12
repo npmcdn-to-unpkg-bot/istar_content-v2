@@ -382,7 +382,8 @@ body {
 .reveal .ONLY_TITLE_PARAGRAPH   td  {
 	text-align: left;
     padding: 8px;
-    border: 2px solid rgba(255,255,255,0.3);;font-size: 120%;
+    border: 2px solid rgba(214, 201, 201, 0.3);
+    ;font-size: 120%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  th {
