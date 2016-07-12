@@ -556,7 +556,7 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li  {
-	list-style: square;
+	list-style-image: url('https://cdn3.iconfinder.com/data/icons/price-tags/512/price-sale-cart-shopping-list-ecommerce-tag-18-64.png');
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
