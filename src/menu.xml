@@ -59,17 +59,17 @@
 		<child_links display_name="Create Task" url="/content/media/create_task.jsp"
 			valid_roles="content_creator" />
 		<child_links display_name="Created"
-			url="/content/content_admin/created_lesson.jsp" valid_roles="content_admin" />
+			url="/content/content_admin/created_lesson.jsp" valid_roles="content_admin,creative_admin" />
 		<child_links display_name="Assigned"
-			url="/content/content_admin/assigned.jsp" valid_roles="content_admin" />
+			url="/content/content_admin/assigned.jsp" valid_roles="content_admin,creative_admin" />
 		<child_links display_name="Inprogress"
-			url="/content/content_admin/draft_lesson.jsp" valid_roles="content_admin" />
+			url="/content/content_admin/draft_lesson.jsp" valid_roles="content_admin,creative_admin" />
 		<child_links display_name="Completed"
-			url="/content/content_admin/completed_lesson.jsp" valid_roles="content_admin" />
+			url="/content/content_admin/completed_lesson.jsp" valid_roles="content_admin,creative_admin" />
 		<child_links display_name="Not Reviewed"
-			url="/content/content_admin/review_pending.jsp" valid_roles="content_admin" />
+			url="/content/content_admin/review_pending.jsp" valid_roles="content_admin,creative_admin" />
 		<child_links display_name="Requested to Publish"
-			url="/content/content_admin/not_published.jsp" valid_roles="content_admin" />
+			url="/content/content_admin/not_published.jsp" valid_roles="content_admin,creative_admin" />
 
 		<child_links display_name="Assigned"
 			url="/content/content_creator/assigned_lesson.jsp" valid_roles="content_creator" />
