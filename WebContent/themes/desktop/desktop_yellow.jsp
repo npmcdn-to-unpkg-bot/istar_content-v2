@@ -577,7 +577,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
+.reveal .ONLY_TITLE_LIST_NUMBERED ol li  {
 	list-style-type: decimal-leading-zero;
 	padding-bottom: 48px;
 	padding-right: 52px;
@@ -590,8 +590,8 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_TITLE_LIST_NUMBERED ul  {
-    margin-left: 2%;
+.reveal .ONLY_TITLE_LIST_NUMBERED ol  {
+    margin-left: 5%;
     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
 	font-size: <%=theme.get("listitem_____font_size")%>px;
@@ -646,8 +646,8 @@ body {
    
 }
 
-.reveal .ONLY_LIST_NUMBERED ul li  {
-	list-style: none !important;
+.reveal .ONLY_LIST_NUMBERED ol li  {
+	
 	padding-bottom: 48px;
 	padding-right: 52px;
 	list-style-type: decimal-leading-zero;
@@ -659,7 +659,7 @@ body {
 	font-family:<%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
 }
 
-.reveal .ONLY_LIST_NUMBERED ul  {
+.reveal .ONLY_LIST_NUMBERED ol  {
     margin-left: 2%;
    
 }
