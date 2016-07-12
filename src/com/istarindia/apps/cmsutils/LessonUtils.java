@@ -443,13 +443,13 @@ public class LessonUtils {
             		+ "<input id='order_holder' name='order_holder' type='hidden'>"
             		+ "<input id='entity_type' name='entity_type' type='hidden' value='slides'>"
             		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"
-            		+ "<button style='float: right; margin-top: -40px;' type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
+            		+ "<button style='float: right; ' type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
 			
            
             try {
 				
 				String themeID =  lesson.getLesson_theme_desktop();
-	            out.append("<a style='float: right; margin-top: -40px; margin-right: 149px;' target='_blank' href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
+	            out.append("<a style='float: right; margin-right: 149px;' target='_blank' href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
 	            		+ " class='btn-u btn-u-default'>Edit Visualize Theme</a>");
 
 			} catch (Exception e) {
