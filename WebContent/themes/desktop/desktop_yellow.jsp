@@ -749,7 +749,8 @@ list-style: none !important;
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST #element_2 {
 	position: fixed;
-	margin-top: -5%;
+    margin-top: -2%;
+    margin-left: 75px;
     zoom: 60%;
 }
 
@@ -762,7 +763,8 @@ list-style: none !important;
 .reveal .IN_OUT_1___ONLY_TITLE_LIST #element_5 {
     position: fixed;
 	zoom: 75%;
-    margin-top: -5%;
+	margin-top: -2%;
+    margin-left: 2%;
 }
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST h2 {
@@ -770,7 +772,7 @@ list-style: none !important;
     margin-top: -5%;
     margin-left: 20%;
 	color: <%=theme.get("title_____font_color")%>;
-	font-size: 40px;
+	font-size: 60px;
 	line-height: <%=theme.get("title_____line_height")%>;
 	text-align: <%=theme.get("title_____text_alignment")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
