@@ -557,7 +557,8 @@ body {
 }
 
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li  {
-	list-style-image: url('https://cdn3.iconfinder.com/data/icons/price-tags/512/price-sale-cart-shopping-list-ecommerce-tag-18-64.png');
+/*	list-style-image: url('https://cdn3.iconfinder.com/data/icons/price-tags/512/price-sale-cart-shopping-list-ecommerce-tag-18-64.png');*/
+list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -1117,5 +1118,65 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
      
 #data_slide_paragraph ul li{
 margin-bottom: 22px;}
-     
+
+.row img {
+	-webkit-border-radius: 22px;
+    -moz-border-radius: 22px;
+    -o-border-radius: 22px;
+    border-radius: 22px;
+    background-color: white;
+}
+
+.p-xl {
+    padding: 40px;
+}
+.lazur-bg {
+    background-color: #23c6c8;
+    color: #ffffff;
+}
+.widget {
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+        padding: 20px !important;
+}
+
+.grid {
+  background: #EEE;
+  max-width: 1200px;
+}
+
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-item {
+ 
+  float: left;
+  background: #D26;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+}
+
+.grid-item--width2 { width: 320px; }
+.grid-item--width3 { width: 480px; }
+.grid-item--width4 { width: 640px; }
+
+.grid-item--height2 { height: 200px; }
+.grid-item--height3 { height: 260px; }
+.grid-item--height4 { height: 360px; }  
+
+fragment.current-visible.visible:not(.current-fragment) {
+   display: none;
+   height:0px;
+   line-height: 0px;
+   font-size: 0px;
+}   
 </style>

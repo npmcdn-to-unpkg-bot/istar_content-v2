@@ -145,7 +145,7 @@ try {
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
 	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-
+<script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 	<script>
 	
 		function view_teacher_notes(){
@@ -211,9 +211,9 @@ try {
 			$('.fragment').each(function(index, value) {
 				try {
 					if ($(this).attr('id').indexOf("-") != -1) {
-						$('#' + $(this).attr('id')).css({
-							'font-size' : orginal_listitem_font_size + 'px'
-						});
+					//	$('#' + $(this).attr('id')).css({
+					//		'font-size' : orginal_listitem_font_size + 'px'
+					//	});
 					}
 				} catch (errr) { 
 					/* Console.log($(this).attr('id')); */
@@ -221,10 +221,17 @@ try {
 			});
 			
 			$('#' + event.fragment.id).css({
-				'font-size' : orginal_listitem_font_size * 1.5 + 'px'
+				'font-size' : orginal_listitem_font_size * 1.6 + 'px'
 			});
 		});
 
+		
+		if (Reveal.remainingFragmentCount() == 0 ) {
+			   console.log("last fragment reached");
+			   $('.fragment').each(function(index, value) {
+				   $(this).show();
+			   });
+		}
 		function add_edit() {
 			var currentURL = window.location.href;
 			var slideID = $('.present').attr('id');

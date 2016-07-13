@@ -651,10 +651,10 @@
 	}
 
 	/**
-	 * This is an unfortunate necessity. Some actions – such as
+	 * This is an unfortunate necessity. Some actions â€“ such as
 	 * an input field being focused in an iframe or using the
 	 * keyboard to expand text selection beyond the bounds of
-	 * a slide – can trigger our content to be pushed out of view.
+	 * a slide â€“ can trigger our content to be pushed out of view.
 	 * This scrolling can not be prevented by hiding overflow in
 	 * CSS (we already do) so we have to resort to repeatedly
 	 * checking if the slides have been offset :(
@@ -3032,6 +3032,25 @@
 	}
 
 	/**
+	 * Returns number of remianing fragment count
+	 * returns -1 if the fragments are not configured
+	 *
+	 */
+	function remainingFragmentCount() {
+	
+		var count ;
+		if( currentSlide && config.fragments ) {
+			var hiddenFragments = currentSlide.querySelectorAll( '.fragment:not(.visible)' );
+			count = hiddenFragments.length;
+		} else {
+			count = -1 ;
+		}
+		
+		return count;
+	}
+
+
+	/**
 	 * Enforces origin-specific format rules for embedded media.
 	 */
 	function formatEmbeddedContent() {
@@ -4613,6 +4632,9 @@
 
 		// Returns an object with the available fragments as booleans (prev/next)
 		availableFragments: availableFragments,
+		
+		//Returns number of remaining fragments in the slide
+		remainingFragmentCount: remainingFragmentCount, 
 
 		// Toggles the overview mode on/off
 		toggleOverview: toggleOverview,
