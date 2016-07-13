@@ -1179,4 +1179,13 @@ fragment.current-visible.visible:not(.current-fragment) {
    line-height: 0px;
    font-size: 0px;
 }   
+.reveal .slides section .fragment.current-visible.current-fragment {
+    position: absolute;
+    top: 100px;
+}  
+.reveal .slides .rrr {
+    position: static !important;
+    
+}
+ 
 </style>

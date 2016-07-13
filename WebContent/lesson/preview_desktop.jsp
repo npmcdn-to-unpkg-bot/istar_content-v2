@@ -208,12 +208,14 @@ try {
 		});
 
 		Reveal.addEventListener('fragmentshown', function(event) {
+			//console.log(Reveal.remainingFragmentCount());
+			
 			$('.fragment').each(function(index, value) {
 				try {
 					if ($(this).attr('id').indexOf("-") != -1) {
-					//	$('#' + $(this).attr('id')).css({
-					//		'font-size' : orginal_listitem_font_size + 'px'
-					//	});
+						$('#' + $(this).attr('id')).css({
+							'font-size' : orginal_listitem_font_size + 'px'
+						});
 					}
 				} catch (errr) { 
 					/* Console.log($(this).attr('id')); */
@@ -221,10 +223,20 @@ try {
 			});
 			
 			$('#' + event.fragment.id).css({
-				'font-size' : orginal_listitem_font_size * 1.6 + 'px'
+				'font-size' : orginal_listitem_font_size * 1.5 + 'px'
 			});
+			
+			if (Reveal.remainingFragmentCount() == 0 ) {
+				event.preventDefault();
+				$(event.fragment).siblings().each(function(index, value) {
+					//console.log($(this));
+					$(this).addClass("current-fragment rrr");
+				});
+				$(event.fragment).removeClass("current-fragment");
+			}
+			
 		});
-
+		
 		
 		if (Reveal.remainingFragmentCount() == 0 ) {
 			   console.log("last fragment reached");
