@@ -68,7 +68,7 @@ public class EditAssessmentQuestionController extends HttpServlet {
 
                     LearningObjectiveDAO learningObjectiveDAO = new LearningObjectiveDAO();
 
-                    Integer specifier = Integer.parseInt(request.getParameter("specifier"));
+                    Integer specifier = 1;//Integer.parseInt(request.getParameter("specifier"));
                     String[] learningObjectiveIds = request.getParameterValues("learningObjectives");
                     Set<LearningObjective> learningObjectiveSet = new HashSet<LearningObjective>();
                     if (learningObjectiveIds != null) {
