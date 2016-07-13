@@ -580,7 +580,6 @@ list-style: none !important;
 }
 
 .reveal .ONLY_TITLE_LIST_NUMBERED ul li  {
-	list-style-type: decimal-leading-zero;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	list-style-type: decimal-leading-zero;
@@ -632,7 +631,7 @@ list-style: none !important;
 }
 
 .reveal .ONLY_LIST ul li  {
-	list-style: square;
+	list-style: none !important;
 	padding-bottom: 48px;
 	padding-right: 52px;
 	color: <%=theme.get("listitem_____font_color")%>;
@@ -804,7 +803,7 @@ list-style: none !important;
 
 
 .reveal .IN_OUT_1___ONLY_TITLE_LIST  ul {
-	list-style: none;
+	list-style: none !important;
 	padding-bottom: 5%;
 }
 
@@ -1108,12 +1107,12 @@ list-style-image: url("/content/assets/img/in_out_2_infographic/bottom_smoke_2.p
 }
 
 
-
+/* 
 .list {
      list-style:disc outside none;
      display:list-item; 
      }
-     
+      */
      
      
 #data_slide_paragraph ul li{
@@ -1124,7 +1123,6 @@ margin-bottom: 22px;}
     -moz-border-radius: 22px;
     -o-border-radius: 22px;
     border-radius: 22px;
-     background-color: white;
  }
 
 .p-xl {
