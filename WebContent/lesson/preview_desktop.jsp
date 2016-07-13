@@ -194,10 +194,10 @@ try {
 			currentURL = res[0];
 			history.pushState({}, "URL Rewrite Example", currentURL + "#" + event.currentSlide.id);
 			
-			$('.video111').css('height',(window.screen.availHeight)+'px');
-			$('.video111').css('position','absolute');
-			$('.video111').css('top', '-'+(window.screen.availHeight-50)/2+'px');
-			$('.video111').css('margin-left','-18%');
+//			$('.video111').css('height',(window.screen.availHeight)+'px');
+//			$('.video111').css('position','absolute');
+//			$('.video111').css('top', '-'+(window.screen.availHeight-50)/2+'px');
+//			$('.video111').css('margin-left','-18%');/
 
 			//var height_slide = $('#'+event.currentSlide.id).css('height');
 			//$('#'+event.currentSlide.id).css('display','table');
