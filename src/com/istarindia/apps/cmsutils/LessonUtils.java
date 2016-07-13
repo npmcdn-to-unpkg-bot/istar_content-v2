@@ -417,11 +417,16 @@ public class LessonUtils {
             out.append("</h3>");
             out.append("</div>");
             out.append("<div class='panel-body'>");
+            
+            out.append( "<table class='table table-striped' id='sortable'>");
+            out.append("<tbody id=''>");
+            out.append(" <tr>");
+            out.append(" <td>");
             out.append("<form class='form-inline' role='form' action='/content/fill_tempate.jsp'>");
             out.append("<input name='ppt_id' value='" + ppt.getId() + "' type='hidden'/>");
 
             out.append("<div class='form-group'>");
-            out.append("<select class='form-control' name='slide_type' style='margin-right: 50px'>");
+            out.append("<select class='form-control' name='slide_type' style='margin-right: 0px'>");
 
             for (String template : CMSRegistry.slideTemplates) {
                 out.append("<option value='" + template + "'>" + template + "</option>");
@@ -429,28 +434,39 @@ public class LessonUtils {
             out.append("</select>");
 
             out.append("</div>");
-            out.append("<div class='form-group'  style='margin-right: 50px'>");
-            out.append("<button type='submit' class='btn-u btn-u-default'>Add Slide</button>");
+            out.append(" </td><td>");
+            
+            out.append("<div class='form-group'  style='margin-right: 0px'>");
+            out.append("<button type='submit' class='btn-u btn-u-default'style='margin-left: 10px'>Add Slide</button>");
             out.append("</div>");
-            out.append("<div class='checkbox'  style='margin-right: 50px'>");
+            out.append(" </td><td>");
+            out.append("<div class='checkbox'  style='margin-right: 0px'>");
             out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
-                    + "\")'  href='#' class='btn-u btn-u-default'>Mobile Preview</a>");
+                    + "\")'  href='#' class='btn-u btn-u-default'style='margin-left: 10px'>Mobile Preview</a>");
             out.append("</div>");
-            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' class='btn-u btn-u-default'>Speaker Preview</a>");
+            out.append(" </td><td>");
+            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' class='btn-u btn-u-default'style='margin-left: 10px'>Speaker Preview</a>");
             out.append("</form>");
+            out.append(" </td><td>");
             out.append("<form id='update_order' action='/content/update_course?ppt_id="+ ppt.getId()+"'>"
             		+ "<input id='action' name='action' type='hidden' value='reorder'> "
             		+ "<input id='order_holder' name='order_holder' type='hidden'>"
             		+ "<input id='entity_type' name='entity_type' type='hidden' value='slides'>"
             		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"
-            		+ "<button style='float: right; ' type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
+            		+ "<button style=' ' type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
+            out.append(" </td><td>");
 			
            
             try {
 				
 				String themeID =  lesson.getLesson_theme_desktop();
-	            out.append("<a style='float: right; margin-right: 149px;' target='_blank' href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
+				out.append("<div>");
+	            out.append("<a style='float: none; margin-right: 0px;' target='_blank' href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
 	            		+ " class='btn-u btn-u-default'>Edit Visualize Theme</a>");
+	            out.append("</div>");
+	            out.append(" </td></tr>");
+	            out.append(" </tbody>");
+	            out.append("</table>");
 
 			} catch (Exception e) {
 			}

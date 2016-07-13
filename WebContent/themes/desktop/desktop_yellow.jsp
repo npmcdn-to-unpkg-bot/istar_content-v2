@@ -1124,8 +1124,8 @@ margin-bottom: 22px;}
     -moz-border-radius: 22px;
     -o-border-radius: 22px;
     border-radius: 22px;
-    background-color: white;
-}
+     background-color: white;
+ }
 
 .p-xl {
     padding: 40px;

@@ -117,7 +117,7 @@ height:    auto   !important;
 				%>
 				<div class="col-sm-2 sm-margin-bottom-30" style="margin-top: 2%;  word-wrap: break-word;">
 					<a href="<%=image.getUrl()%>" rel="gallery3"
-						class="fancybox img-hover-v1" title="Image 1"><span><%=image.getTitle().replaceAll("_", " ") %></span>
+						class="fancybox img-hover-v1" title="Image 1"><span><%=image.getTitle() %></span>
 					</a>
 				</div>
 				<%
