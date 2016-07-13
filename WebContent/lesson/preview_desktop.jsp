@@ -175,18 +175,18 @@ try {
 		
 		var orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';			
 
-		//document.body.style.background = $('.present').data("bgcolor");								
+		document.body.style.background = $('.present').data("bgcolor");								
 		if ($('.present').data("bgcolor") == "none") {
-		//	document.body.style.background = orgBgColor;
+			document.body.style.background = orgBgColor;
 		}
 
 		Reveal.addEventListener('slidechanged', function(event) {
 			//$('section.slide').css('height',window_height+"px");
 			$('.slides').css('height',window_height+"px");
 			
-			//document.body.style.background = $('.present').data("bgcolor");
+			document.body.style.background = $('.present').data("bgcolor");
 			if ($('.present').data("bgcolor") == "none") {
-			//	document.body.style.background = orgBgColor;
+				document.body.style.background = orgBgColor;
 			}
 
 			var currentURL = window.location.href; 
