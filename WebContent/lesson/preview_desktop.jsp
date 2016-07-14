@@ -134,116 +134,69 @@ try {
 	</div>
 	<% } %>
 	
-
-
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
-
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
 	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-<script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
-	<script>
+	<script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 	
-		function view_teacher_notes(){
-			var id =$('.present').attr('id');
-			console.log(id);
-		}
-		
-		var orginal_listitem_font_size = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
+	<script>
 		var window_size = $(window).width();
 		var window_height = $(window).height();
-		//$('section.slide').css('height',window_height+"px");
-		$('.slides').css('height',window_height+"px");
-		//$('.slides').css('top','0');
+		var orgBgColor = '#ffffff';			
+		
+		$(document).ready(function(){
+			orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';
+			updateSlideBgColor();
+		});
+
 		Reveal.initialize({
 			center : false,
-			controls : true,
+			controls : true, 
+			showNotes: true, 
+			height: window_height,
 			width: window_size,
 			transition: 'slide', 
-			showNotes: true, 
-			height: window_height, 
 			minScale: (0.97), 
 			maxScale: (0.97), 
 			
 			dependencies: [ { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true },
 							{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true } ]
 		});
-		
-		var orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';			
 
-		document.body.style.background = $('.present').data("bgcolor");								
-		if ($('.present').data("bgcolor") == "none") {
-			document.body.style.background = orgBgColor;
-		}
-
-		Reveal.addEventListener('slidechanged', function(event) {
-			//$('section.slide').css('height',window_height+"px");
-			$('.slides').css('height',window_height+"px");
-			
-			document.body.style.background = $('.present').data("bgcolor");
+		function updateSlideBgColor() {
 			if ($('.present').data("bgcolor") == "none") {
 				document.body.style.background = orgBgColor;
+			} else {
+				document.body.style.background = $('.present').data("bgcolor");
 			}
-
+		}
+		
+		var orginal_listitem_font_size = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
+		
+		Reveal.addEventListener('slidechanged', function(event) {
+			updateSlideBgColor();
+			
 			var currentURL = window.location.href; 
 			var res = currentURL.split("#");
 			currentURL = res[0];
 			history.pushState({}, "URL Rewrite Example", currentURL + "#" + event.currentSlide.id);
 			
-//			$('.video111').css('height',(window.screen.availHeight)+'px');
-//			$('.video111').css('position','absolute');
-//			$('.video111').css('top', '-'+(window.screen.availHeight-50)/2+'px');
-//			$('.video111').css('margin-left','-18%');/
+			/* $('.video111').css('height',(window.screen.availHeight)+'px');
+			$('.video111').css('position','absolute');
+			$('.video111').css('top', '-'+(window.screen.availHeight-50)/2+'px');
+			$('.video111').css('margin-left','-18%'); */
 
-			//var height_slide = $('#'+event.currentSlide.id).css('height');
-			//$('#'+event.currentSlide.id).css('display','table');
-			//$('#'+event.currentSlide.id+ " .row").css('height',height_slide);
-			//$('#'+event.currentSlide.id+ " .row").css('display','table-cell');
-			//$('#'+event.currentSlide.id+ " .row").css('vertical-align','middle');
-			
+			/* var height_slide = $('#'+event.currentSlide.id).css('height');
+			$('#'+event.currentSlide.id).css('display','table');
+			$('#'+event.currentSlide.id+ " .row").css('height',height_slide);
+			$('#'+event.currentSlide.id+ " .row").css('display','table-cell');
+			$('#'+event.currentSlide.id+ " .row").css('vertical-align','middle'); */
 		});
 
-		Reveal.addEventListener('fragmentshown', function(event) {
-			//console.log(Reveal.remainingFragmentCount());
-			
-			$('.fragment').each(function(index, value) {
-				try {
-					if ($(this).attr('id').indexOf("-") != -1) {
-						$('#' + $(this).attr('id')).css({
-							'font-size' : orginal_listitem_font_size + 'px'
-						});
-					}
-				} catch (errr) { 
-					/* Console.log($(this).attr('id')); */
-				}
-			});
-			
-			$('#' + event.fragment.id).css({
-				'font-size' : orginal_listitem_font_size * 1.5 + 'px'
-			});
-			
-			if (Reveal.remainingFragmentCount() == 0 ) {
-				event.preventDefault();
-				$(event.fragment).siblings().each(function(index, value) {
-					//console.log($(this));
-					$(this).addClass("current-fragment rrr");
-				});
-				$(event.fragment).removeClass("current-fragment");
-			}
-			
-		});
-		
-		
-		if (Reveal.remainingFragmentCount() == 0 ) {
-			   console.log("last fragment reached");
-			   $('.fragment').each(function(index, value) {
-				   $(this).show();
-			   });
-		}
 		function add_edit() {
 			var currentURL = window.location.href;
 			var slideID = $('.present').attr('id');
@@ -256,16 +209,33 @@ try {
 			var slide_id = $('.present').attr('id');;
 			var ppt_id = <%=request.getParameter("ppt_id")%>;
 			var review_notes = $('#review-notes').val();
-			console.log(' - > '+review_notes+' ; ; id - >' + slide_id + ' ; ; ' + ppt_id);
+			
 			$.ajax({
-				  type: "POST",
-				  url: '/content/review_lesson',
+				  type: "POST", url: '/content/review_lesson',
 				  data: 'is_edit=true&from=review_slide&ppt_id='+ppt_id+'&slide_id='+slide_id+'&review_notes='+review_notes,
 			});
+			
 			$('#review-notes').val("");
 			$('#reviewCommentModal').modal('hide');
 		});
-		
+
+		function view_teacher_notes(){
+			var id =$('.present').attr('id');
+			console.log(id);
+			//TODO: Show slide's teacher-notes in modal
+		}
+
+		Reveal.addEventListener('fragmentshown', function(event) {			
+			if (Reveal.remainingFragmentCount() == 0 && $(event.fragment).attr('id')=="737373") {
+				event.preventDefault();
+				$(event.fragment).siblings().each(function(index, value) {
+					$(this).addClass("current-fragment show-all");
+				});
+				$(event.fragment).removeClass("current-fragment");
+			}
+			
+		});
+
 	</script>
 	
 </body>

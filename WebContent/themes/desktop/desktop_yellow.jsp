@@ -1157,7 +1157,6 @@ margin-bottom: 22px;}
 /* ---- grid-item ---- */
 
 .grid-item {
- 
   float: left;
   background: #D26;
   border: 2px solid #333;
@@ -1173,19 +1172,22 @@ margin-bottom: 22px;}
 .grid-item--height3 { height: 260px; }
 .grid-item--height4 { height: 360px; }  
 
-fragment.current-visible.visible:not(.current-fragment) {
+.fragment.current-visible.visible:not(.current-fragment) {
    display: none;
    height:0px;
    line-height: 0px;
    font-size: 0px;
-}   
-.reveal .slides section .fragment.current-visible.current-fragment {
-    position: absolute;
-    top: 100px;
-}  
-.reveal .slides .rrr {
-    position: static !important;
-    
 }
- 
+
+.final {
+	font-size : 100% !important;
+}
+
+.interim {
+	font-size : 150% !important;
+}
+
+.show-all {
+	position: static;
+}
 </style>
