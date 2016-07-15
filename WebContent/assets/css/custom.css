@@ -313,6 +313,11 @@
 	}
 }
 
+h1.warning-large {
+	color: chocolate;
+    font-size: -webkit-xxx-large;
+    text-align: center;
+}
 /*Text Colors*/
 .g-color-white { color: #fff;}
 .g-color-default { color: #4fd2c2;}
@@ -455,4 +460,6 @@
   .g-sm-mb-30 {
     margin-bottom: 30px;
   }
+  
+
 }

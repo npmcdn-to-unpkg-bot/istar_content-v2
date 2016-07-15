@@ -51,51 +51,41 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <body>
 
 	<div class="wrapper">
-	<jsp:include page="../content_creator/includes/header.jsp"></jsp:include>
+	<jsp:include page="/content_creator/includes/header.jsp"></jsp:include>
 
 		<div class="breadcrumbs">
 			<div class="container-fluid">
-				<h1 class="pull-left">Content Creator Dashboard</h1>
+				<h1 class="pull-left">Dashboard</h1>
 			</div>
-			<!--/container-->
 		</div>
 
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<%-- <div class="col-md-4">
+		
+			<%-- 
+			<div class="col-md-4">
 				<% HashMap<String, String> conditions = new  HashMap();
 				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
 				%>
 				<%=(new ReportUtils()).getReport(100, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
-			</div> --%><section id="processes" class="g-bg-dark-blue1">
+			</div> 
+			--%>
+			
+			<section id="processes" class="g-bg-dark-blue1">
 				<div class="container content-md g-text-height-md">
 					
-<h1>Unauthorized access to published lesson.</h1>
+					<h1 class='warning-large'>Unauthorized access to published lesson!</h1>
 					
-				
+					<div class="row g-mb-50"> </div>
 
-					<div class="row g-mb-50">
-						
-						
-						
-					
-					</div>
-
-
-				
-					
-					<div class="row g-mb-50">
-						
-					</div>
-
+					<div class="row g-mb-50"> </div>
 
 				</div>
 			</section>
 		</div>
 
-
-		<jsp:include page="includes/footer.jsp"></jsp:include>
+		<jsp:include page="/content_creator/includes/footer.jsp"></jsp:include>
+		
 	</div>
-
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
