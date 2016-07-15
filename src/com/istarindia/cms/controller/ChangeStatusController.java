@@ -82,14 +82,19 @@ public class ChangeStatusController extends HttpServlet {
 			int task_id = Integer.parseInt(request.getParameter("task_id"));
 			String new_status = request.getParameter("new_status");
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
-			new TaskService().updateStatus(task_id, new_status);
+			
 			Task t = new TaskDAO().findById(task_id);
 			Lesson ll = new LessonDAO().findById(t.getItemId());
 			Cmsession cm = ll.getCmsession();
 			Module mm = cm.getModule();
 			Course cc = mm.getCourse();
-			String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - "+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
+			String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - " 
+			+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
+			
+			
+			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
+			new TaskService().updateStatus(task_id, new_status);
+			
 			HashMap<String, String> recipient= new HashMap<>();
 			//content creator
 			
