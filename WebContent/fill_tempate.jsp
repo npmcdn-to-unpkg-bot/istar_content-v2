@@ -69,6 +69,7 @@
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/headers/header-default.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/footers/footer-v1.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/select2-4.0.3/dist/css/select2.css">
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
@@ -174,7 +175,7 @@
 									<% 	}  } catch (Exception e ) { } %>
 									
 									<section>
-										<label class="label">Select Image Background</label> 
+										<label class="label">Select Slide Background</label> 
 										<label class="select"> 
 											<select name="image_bg" id="image-bg-picker" value="<%=slide.getImage_BG()%>">
 												<option selected="selected" value="none">None</option>
@@ -514,6 +515,7 @@
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/parsley.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/select2-4.0.3/dist/js/select2.full.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
@@ -580,6 +582,10 @@
 		}
 		
 		$(document).ready(function() {
+			$("#image-bg-picker").select2({
+			    placeholder: "Select slide background image",
+			    allowClear: true
+			});
 			initTextArea();
 			initHooks();
 			initColorChange();
