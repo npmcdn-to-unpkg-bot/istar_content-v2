@@ -230,9 +230,8 @@ try {
 		}
 
 		Reveal.addEventListener('fragmentshown', function(event) {			
-			if (Reveal.remainingFragmentCount() == 0 && $(event.fragment).attr('id')=="737373") {
-				event.preventDefault();
-				$(event.fragment).siblings().each(function(index, value) {
+			if ($(event.fragment).attr('id')=="737373") {
+				$('.present').find('.fragment').each(function(index, value) {
 					$(this).addClass("current-fragment show-all");
 				});
 				$(event.fragment).removeClass("current-fragment");

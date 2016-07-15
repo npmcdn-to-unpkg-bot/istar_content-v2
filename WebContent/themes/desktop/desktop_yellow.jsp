@@ -1193,9 +1193,4 @@ margin-bottom: 22px;}
 	font-size : 100% !important;
 }
 
-.interimm {
-    margin-top: -12% !important;
-    line-height: 66vh !important;
-}
-
 </style>
