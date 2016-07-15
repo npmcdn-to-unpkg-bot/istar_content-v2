@@ -1192,4 +1192,10 @@ margin-bottom: 22px;}
 	position: static;
 	font-size : 100% !important;
 }
+
+.interimm {
+    margin-top: -12% !important;
+    line-height: 66vh !important;
+}
+
 </style>

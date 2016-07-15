@@ -178,6 +178,10 @@ try {
 		var orginal_listitem_font_size = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
 		
 		Reveal.addEventListener('slidechanged', function(event) {
+			$('.present').find('.show-all').each(function(index, value) {
+				$(this).removeClass("show-all");
+			});
+			
 			updateSlideBgColor();
 			
 			var currentURL = window.location.href; 
