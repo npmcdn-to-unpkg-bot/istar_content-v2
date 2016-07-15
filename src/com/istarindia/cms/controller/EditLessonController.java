@@ -36,45 +36,50 @@ public class EditLessonController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*	inputs in request
-		 * Integer cmsession_id, Integer duration, String lessonType, String tags, String title, 
-		String[] learningObjectives*/
+		
 		Task task = new Task();
 		task = new TaskDAO().findById(Integer.parseInt(request.getParameter("task_id")));
 		Lesson lesson = (new LessonDAO()).findById(task.getItemId());
 		
-	//	task.setItemId(lesson.getId());
-		//task.setTaskName("CREATE_LESSON");
-		//task = new TaskDAO().findByExample(task).get(0);
-		new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
-		
-		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-		String  tags="";
-		String learningObjectives[];
-		Set<LearningObjective> ite = new HashSet<LearningObjective>();
-		if (request.getParameterMap().containsKey("task_id"))
+		if(task.getStatus().equalsIgnoreCase("PUBLISHED"))
 		{
-			int lesson_id = task.getItemId();
-			String title = request.getParameter("title");
-			if(request.getParameterMap().containsKey("tags"))
-			{
-				 tags =  request.getParameter("tags");
-			}
-			if(request.getParameterMap().containsKey("learningObjectives"))
-			{
-				learningObjectives =  (String[])request.getParameterMap().get("learningObjectives");
-				for(String element : learningObjectives)
-				{
-					ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
-				}
-			}
-		
-			//Lesson lesson= (new LessonDAO()).findById(lesson_id);
-			
-			request.setAttribute("lesson", lesson);
-			request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));
-			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+			request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
+			request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
 		}
+		else
+		{
+			new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
+			
+			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+			String  tags="";
+			String learningObjectives[];
+			Set<LearningObjective> ite = new HashSet<LearningObjective>();
+			if (request.getParameterMap().containsKey("task_id"))
+			{
+				int lesson_id = task.getItemId();
+				String title = request.getParameter("title");
+				if(request.getParameterMap().containsKey("tags"))
+				{
+					 tags =  request.getParameter("tags");
+				}
+				if(request.getParameterMap().containsKey("learningObjectives"))
+				{
+					learningObjectives =  (String[])request.getParameterMap().get("learningObjectives");
+					for(String element : learningObjectives)
+					{
+						ite.add(new LearningObjectiveDAO().findById(Integer.parseInt(element)));
+					}
+				}
+			
+				//Lesson lesson= (new LessonDAO()).findById(lesson_id);
+				
+				request.setAttribute("lesson", lesson);
+				request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));
+				request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+			}
+		}
+		
+		
 		
 	}
 

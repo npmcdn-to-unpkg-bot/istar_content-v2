@@ -2,8 +2,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
-import java.util.Iterator;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -20,6 +23,7 @@ import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.SlideDAO;
 import com.istarindia.apps.services.OptionService;
 import com.istarindia.apps.services.QuestionService;
+import com.istarindia.apps.services.task.EmailSendingUtility;
 
 /**
  * 
@@ -35,30 +39,30 @@ public class MAIN {
 	 * @param args
 	 * @throws IOException
 	 */
-
-	public static void main(String[] args) throws IOException {
-		LessonDAO dao = new LessonDAO();
-		List<Lesson> items = dao.findAll();
+	private static String host;
+	private static String port;
+	private static String user1;
+	private static String pass;
+	public static void main(String[] args) throws IOException, AddressException, MessagingException {
 		
-		for (Lesson lesson : items) {
-			String theme = lesson.getLesson_theme();
-			lesson.setLesson_theme_desktop(theme);
-			
-			Session session = dao.getSession();
-			Transaction tx = null;
-			try {
-				tx = session.beginTransaction();
-				dao.attachDirty(lesson);
-				tx.commit();
-			} catch (HibernateException e) {
-				if (tx != null)
-					tx.rollback();
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
-			
+		Properties properties = new Properties();
+		String propertyFileName = "app.properties";
+		InputStream inputStream = MAIN.class.getClassLoader().getResourceAsStream(propertyFileName);
+		if (inputStream != null) {
+			properties.load(inputStream);
+		} else {
+			throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
 		}
+		
+		
+		
+		host = properties.getProperty("host");
+		port = properties.getProperty("port");
+		user1 = properties.getProperty("emailFrom");
+		pass = properties.getProperty("emailFromPassword");
+		
+		EmailSendingUtility.sendEmail(host, port, user1, pass, "vaibhav@istarindia.com,vaibhav1@istarindia.com", "Kamini", "aaaaaaaaaaaaaaaaaaaa");
+
 
 	}
 

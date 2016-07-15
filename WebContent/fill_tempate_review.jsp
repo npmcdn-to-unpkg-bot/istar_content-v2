@@ -79,6 +79,27 @@
 
 <body ng-app="">
 
+				<%
+				Presentaion ppt1 = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+			
+				
+				Lesson lesson = ppt1.getLesson();
+				Task task1 = new Task();
+				task1.setItemId(lesson.getId());
+				task1.setItemType("LESSON");
+				task1 = new TaskDAO().findByExample(task1).get(0);
+				
+				if(task1.getStatus().equalsIgnoreCase("PUBLISHED"))
+				{
+					request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
+					request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
+				}
+				
+				
+				%>
+
+
+
 	<div class="wrapper">
 		<jsp:include page="content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
