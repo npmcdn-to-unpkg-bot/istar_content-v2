@@ -1185,9 +1185,11 @@ margin-bottom: 22px;}
 
 .interim {
 	font-size : 150% !important;
+	width: 90% !important;
 }
 
 .show-all {
 	position: static;
+	font-size : 100% !important;
 }
 </style>
