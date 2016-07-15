@@ -17,27 +17,51 @@
 	
 %>
 <%
+int slide_id = 0;
+int previous_slide_id = 0 ;
+int next_slide_id = 0;
+String previous_slide_type = "NO_CONTENT"; 
+String next_slide_type = "NO_CONTENT"; 
+String new_media_title="";
 				Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
 				SlideService service = new SlideService();
 				int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
-				int slide_id = 0;
-				int previous_slide_id = 0 ;
-				int next_slide_id = 0;
-				String previous_slide_type = "NO_CONTENT"; 
-				String next_slide_type = "NO_CONTENT"; 
-				try {
-					if (request.getParameterMap().containsKey("slide_id")) {
-						slide_id = Integer.parseInt(request.getParameter("slide_id"));
-						
-						previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
-						next_slide_id = service.getNextSlideId(ppt_id, slide_id);
-						
-						previous_slide_type = service.getPreviousSlideType(ppt_id, slide_id);
-						next_slide_type = service.getNextSlideType(ppt_id, slide_id);
-					}
-				} catch (Exception e ) { }
+			
 				
-				String new_media_title = service.getNewMediaTitle(slide_id, ppt.getLesson().getCmsession().getId());
+				Lesson lesson = ppt.getLesson();
+				Task task1 = new Task();
+				task1.setItemId(lesson.getId());
+				task1.setItemType("LESSON");
+				task1 = new TaskDAO().findByExample(task1).get(0);
+				
+				if(task1.getStatus().equalsIgnoreCase("PUBLISHED"))
+				{
+					request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
+					request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
+				}
+				else 
+				{
+					 slide_id = 0;
+					 previous_slide_id = 0 ;
+					 next_slide_id = 0;
+					 previous_slide_type = "NO_CONTENT"; 
+					 next_slide_type = "NO_CONTENT"; 
+					try {
+						if (request.getParameterMap().containsKey("slide_id")) {
+							slide_id = Integer.parseInt(request.getParameter("slide_id"));
+							
+							previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
+							next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+							
+							previous_slide_type = service.getPreviousSlideType(ppt_id, slide_id);
+							next_slide_type = service.getNextSlideType(ppt_id, slide_id);
+						}
+					} catch (Exception e ) { }
+					
+					 new_media_title = service.getNewMediaTitle(slide_id, ppt.getLesson().getCmsession().getId());
+				}
+				
+				
 				
 			%>
 <!DOCTYPE html>

@@ -132,7 +132,7 @@
 																String reviewers = "label rounded label-sea";
 																String assigned = "label label-purple rounded-2x";
 																String statusLabel = "label rounded label-yellow";
-																if(lesson.getREviewers().equalsIgnoreCase("reviewer not assigned")) {
+																if(lesson.getReviewer().equalsIgnoreCase("reviewer not assigned")) {
 																	reviewers = "label label-default ";
 																}
 																
@@ -148,7 +148,7 @@
 															%>
 															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
 															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
-															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=reviewers %>"> Reviewer - <%=lesson.getREviewers() %></span> 
+															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=reviewers %>"> Reviewer - <%=lesson.getReviewer() %></span> 
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=statusLabel%>"> Status - <%=lesson.getStatus() %></span></li>
 															<%
 												}

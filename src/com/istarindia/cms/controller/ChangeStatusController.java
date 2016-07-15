@@ -1,8 +1,11 @@
 package com.istarindia.cms.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,15 +18,22 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import com.istarindia.apps.StatusTypes;
+import com.istarindia.apps.dao.Cmsession;
+import com.istarindia.apps.dao.CmsessionDAO;
+import com.istarindia.apps.dao.Course;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
+import com.istarindia.apps.dao.Module;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.dao.TaskReviewer;
+import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.auth.CreateSlideController;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
+import com.istarindia.apps.services.task.EmailSendingUtility;
 
 /**
  * Servlet implementation class ChangeStatusController
@@ -32,12 +42,15 @@ import com.istarindia.apps.services.task.CreateLessonTaskManager;
 public class ChangeStatusController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private String host;
+	private String port;
+	private String user1;
+	private String pass;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ChangeStatusController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -46,11 +59,72 @@ public class ChangeStatusController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameterMap().containsKey("new_status") && request.getParameterMap().containsKey("task_id"))
 		{
+			Properties properties = new Properties();
+			String propertyFileName = "app.properties";
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFileName);
+			if (inputStream != null) {
+				properties.load(inputStream);
+			} else {
+				throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
+			}
+			
+			
+			
+			host = properties.getProperty("host");
+			port = properties.getProperty("port");
+			user1 = properties.getProperty("emailFrom");
+			pass = properties.getProperty("emailFromPassword");
+			
+			
+			
+			
+			
 			int task_id = Integer.parseInt(request.getParameter("task_id"));
 			String new_status = request.getParameter("new_status");
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
 			new TaskService().updateStatus(task_id, new_status);
+			Task t = new TaskDAO().findById(task_id);
+			Lesson ll = new LessonDAO().findById(t.getItemId());
+			Cmsession cm = ll.getCmsession();
+			Module mm = cm.getModule();
+			Course cc = mm.getCourse();
+			String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - "+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
+			HashMap<String, String> recipient= new HashMap<>();
+			//content creator
+			
+			String  content_email = (new IstarUserDAO().findById(t.getActorId())).getEmail();
+			if(content_email != null)
+			{
+				recipient.put(content_email, content_email);// recipient+";"+content_email;
+			}
+			
+			//content reviewer
+			List<TaskReviewer> review_list = new TaskReviewerDAO().findByProperty("task", t);
+			if(review_list!=null && review_list.size()>0)
+			{
+				for(TaskReviewer tr : review_list)
+				{
+					String review_email = tr.getContentReviewer().getEmail();
+					recipient.put(review_email, review_email);
+				}
+			}
+			
+			// misc users 
+			//vaibhav@istarindia.com, surga.thilakan@istarindia.com , sreeram@istarindia.com 
+			for (String taskReviewer : properties.get("email_mandatory_list").toString().split(",")) {
+				recipient.put(taskReviewer, taskReviewer);
+			}
+			
+			String subject = "changes in content"; 
+			try {
+				EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage);
+				resultMessage = "The e-mail was sent successfully";
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				resultMessage = "There were an error: " + ex.getMessage();
+			}
+			
 			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
 				request.setAttribute("message_success", "New task has been sent for review successfully!");
 			}
@@ -71,6 +145,9 @@ public class ChangeStatusController extends HttpServlet {
 			}
 			else if(new_status.equalsIgnoreCase(StatusTypes.DELETED)) {
 				request.setAttribute("message_success", "The task has been successfully deleted!");
+			}
+			else if(new_status.equalsIgnoreCase(StatusTypes.UNPUBLISHED)) {
+				request.setAttribute("message_success", "The task has been unpublished!");
 			}
 			
 			String redirectUrl = new String();
