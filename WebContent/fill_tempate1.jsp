@@ -174,7 +174,7 @@
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class=" col-md-12 ">
 			
-				<div class="tab-v2 col-md-5 sky-form">
+				<div class="tab-v2 col-md-5 sky-form" id="tabs1">
 					<ul class="nav nav-tabs">
 						<li><a href="#template" data-toggle="tab">Template</a></li>
 						<li class="active"><a href="#content" data-toggle="tab">Content</a></li>
@@ -257,7 +257,7 @@
 										</fieldset>
 										<footer>
 										
-											<button type='button' class="btn-u" style="float:right">Proceed</button>
+											<button id="changetabbutton" type='button' class="btn-u" style="float:right">Proceed</button>
 											
 											<% if(slide_type.contains("IMAGE")||slide_type.contains("VIDEO")) { %>
 												<button type='button' class="btn-u" style="float:right; margin-right: 2%; "  data-target='#imageModal' data-toggle='modal'>
@@ -527,6 +527,11 @@
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
+		$('#changetabbutton').click(function(e){
+	    	e.preventDefault();
+	        $('#tabs1 a[href="#ui"]').tab('show');
+	    })
+	    
 		function initTextArea() {
 			try {
 				$("#image-picker").imagepicker();

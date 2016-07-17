@@ -328,6 +328,7 @@ String new_media_title="";
 							</div>
 
 							<div class="col-md-5">
+								<button type="button" id="new_page">New version</button>
 								
 								<a href='/content/media/create_task.jsp' class='btn-u' target="_blank">Create New Media Task</a>
 								
@@ -624,7 +625,9 @@ String new_media_title="";
 				window.location.href=url;
 			});
 			
-			
+			$("#new_page").click(function() {
+				window.location.href = window.location.href.replace("tempate", "tempate1");
+			})
 			
 			 $.contextMenu({
 		            selector: '.thumbnail', 
