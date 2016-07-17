@@ -46,7 +46,7 @@ String slide_id = request.getParameter("slide_id");
 	<div class="reveal">
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id)) %>
+			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id, "desktop")) %>
 
 		</div>
 
@@ -62,6 +62,8 @@ String slide_id = request.getParameter("slide_id");
 				progress: true,
 				history: true,
 				center: true,
+				height: 433,
+				width:696,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 

@@ -58,7 +58,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 	<div class="reveal">
 
 		<div class="slides">
-			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id)) %>
+			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id, "mobile")) %>
 
 		</div>
 

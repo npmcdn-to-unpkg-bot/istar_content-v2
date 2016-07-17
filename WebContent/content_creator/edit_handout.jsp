@@ -200,15 +200,9 @@
 			console.log(selectedElmsIds);
 
 		}
-		function initTextArea() {
-			CKEDITOR.config.extraPlugins = 'imagebrowser';
-			CKEDITOR.config.imageBrowser_listUrl = "/content/GalleryJsonController";
-		}
 		
 		jQuery(document).ready(function() {
-			initTextArea();
 			App.init();
-			Validation.lessonValidation();
 			$('#html1').jstree({
 				"core" : {
 					"multiple" : false,
@@ -222,13 +216,16 @@
 				},
 				"plugins" : [ "checkbox" ]
 			});
+			
 			$('#selected_items').val("aaaa");
+			
 			try {
-				CKEDITOR.replace('handouts_text1', { height: 500 , 
-					  filebrowserBrowseUrl: '/content/gallery.jsp',
-					    filebrowserUploadUrl: '/uploader/upload.php'});
+				CKEDITOR.replace('handouts_text1', { 
+					"extraPlugins" : 'imagebrowser',
+					"imageBrowser_listUrl" : "/content/GalleryJsonController"
+				});
 			} catch (err) {
-				// TODO: handle exception
+				console.log("CKEditor faced issue while initializing-" + err);
 			}
 			
 			

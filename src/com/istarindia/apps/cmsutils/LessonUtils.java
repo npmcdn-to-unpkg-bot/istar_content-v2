@@ -1345,5 +1345,27 @@ public class LessonUtils {
             }
         return question_lo_list;
     }
+   	
+   	public List<HashMap<String, String>> getSlideComments(int slide_id) {
+   		List<HashMap<String, String>> logs = new ArrayList<>();
+   		
+   		IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+        String sql = "select * from task_log t where t.item_type='SLIDE' and item_id = "+ slide_id + "order by t.created_at desc";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        List<HashMap<String, Object>> results = query.list();
+        for (HashMap<String, Object> object : results) {
+        	if(!object.get("comments").toString().trim().isEmpty()) {
+	        	HashMap<String, String> log = new HashMap<>();
+	            log.put("comment", object.get("comments").toString());
+	            log.put("actor_name", dao.findById(Integer.parseInt( object.get("actor_id").toString())).getName());
+	            logs.add(log);
+        	}
+        }
+   		
+   		return logs;
+   		
+   	}
 
 }

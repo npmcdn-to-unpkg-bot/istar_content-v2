@@ -460,6 +460,32 @@ h1.warning-large {
   .g-sm-mb-30 {
     margin-bottom: 30px;
   }
-  
+}
 
+
+.custom-control {
+	z-index:99999; 
+	width: 100%; 
+	margin-top: -2%; 
+	height: 70px;
+}
+
+.custom-control-icon {
+	margin-top: -3% !important;
+}
+
+.mobile-preview {
+    width: 400px; 
+    height: 712px;    
+    margin-top: 11%;    
+    margin-left: 24px;   
+    margin-bottom: 20%;
+}
+
+.desktop-preview {
+	height: 437px; 
+	width: 700px;    
+	margin-bottom: 10%;    
+	margin-top: 3%;    
+	margin-left: 11%;
 }
