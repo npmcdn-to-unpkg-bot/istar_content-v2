@@ -37,7 +37,7 @@ String new_media_title="";
 				if(task1.getStatus().equalsIgnoreCase("PUBLISHED"))
 				{
 					request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
-					//request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
+					request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
 				}
 				else 
 				{
@@ -129,15 +129,15 @@ String new_media_title="";
 
 		<form action="/content/create_slide" name="" method="GET" data-parsley-validate="" novalidate="" class="sky-form">
 			<div class='row-fluid'>
-				<%-- <div class="col-md-1" style="min-height: 2000px; vertical-align: middle;">
+				<div class="col-md-1" style="min-height: 2000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
 							<a style="z-index:99999; width: 100%;" class="left carousel-control" 
 							href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>&slide_type=<%=previous_slide_type %>"> 
 								<span  class="glyphicon glyphicon-chevron-left"></span> 
 							</a>
 						<% }%>
-					</div> --%>
-				<div class='col-md-12'>
+					</div>
+				<div class='col-md-10'>
 					<%
 						LessonUtils utils = new LessonUtils();
 						CMSSlide slide = new CMSSlide();
@@ -182,7 +182,7 @@ String new_media_title="";
 								ImageUtils dao1 = new ImageUtils();
 								ArrayList<Image> images = (ArrayList<Image>) dao1.findAllBackgrounds(request);
 							%>
-							<div class="col-md-5">
+							<div class="col-md-7">
 								
 								<%=utils.getEditProfileEdit(slide, ppt, newSlide, request)%>
 								
@@ -327,57 +327,52 @@ String new_media_title="";
 
 							</div>
 
-							<div class="col-md-7">
+							<div class="col-md-5">
 								
 								<a href='/content/media/create_task.jsp' class='btn-u' target="_blank">Create New Media Task</a>
 								
 								<% 
-									try {
-									PresentaionDAO pDAO = new PresentaionDAO();
-									int themeID  = Integer.parseInt(pDAO.findById(ppt_id).getLesson().getLesson_theme_desktop());
+								// If there is a theme assigned 
+								// If there is a slide edit page 
+								try {
+								PresentaionDAO pDAO = new PresentaionDAO();
+								int themeID  = Integer.parseInt(pDAO.findById(ppt_id).getLesson().getLesson_theme_desktop());
+								
+								if(request.getParameterMap().containsKey("slide_id")) {
 									
-									if(request.getParameterMap().containsKey("slide_id")) {
+								
+								
+								
 								%>
 								
 								<a href='/content/creative_admin/edit_theme.jsp?theme_id=<%=themeID %>&slide_id=<%=slide_id %>' class='btn-u' target="_blank">Preview/Edit Theme</a>
 								
 								<% } } catch(Exception e) {} %>
-								
-								<section>
-									<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
-										<%
-											for (String template : CMSRegistry.slideTemplates) {
-												if (template.equalsIgnoreCase(slide.getTemplateName())) {
-										%>
-										<option value='<%=template%>' selected='selected'><%=template%></option>
-										<%
-											} else {
-										%>
-										<option value='<%=template%>'><%=template%></option>
-										<% } } %>
-									</select>
-								</section>
+								<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
+									<%
+										for (String template : CMSRegistry.slideTemplates) {
+											if (template.equalsIgnoreCase(slide.getTemplateName())) {
+									%>
+									<option value='<%=template%>' selected='selected'><%=template%></option>
+									<%
+										} else {
+									%>
+									<option value='<%=template%>'><%=template%></option>
+									<%
+										}
+										}
+									%>
+								</select>
+								<div id="phone_area" style="display: block;">
+									<div id="phone_placeholder" style="display: block; height: 1024px;">
+										<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
+											<div id="frame_htc_one_emulator" class="frame_scroller">
 
-								<div class="tab-v2">
-									<ul class="nav nav-tabs">
-										<li class="active"><a href="#mobile" data-toggle="tab">Mobile</a></li>
-										<li><a href="#desktop" data-toggle="tab">Desktop</a></li>
-									</ul>
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="mobile">
-											<div id="phone_area" style="margin-top: 5%;background-size: 85%;  background-repeat: no-repeat; display: block;background-image: url('/content/assets/img/frames/mobile.png')">
-												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="width: 400px; height: 803px; margin-top: 15%; margin-left: 24px; padding-bottom: 20%;"> </iframe>
-											</div>
-										</div>
-										<div class="tab-pane fade in" id="desktop">
-											<div id="phone_area" style="margin-top: 5%;background-size: 100%;  background-repeat: no-repeat; display: block;background-image: url('/content/assets/img/frames/desktop.png')">
-												<iframe src="/content/desktop_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="width: 400px; height: 355px;  margin-top: 3%; margin-left: 12%; padding-bottom: 20%;"> </iframe>
+												<iframe src="/content/mobile_preview.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&template_name=<%=slide.getTemplateName()%>&slide_id=<%=request.getParameter("slide_id")%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" frameborder="0" id='prv' style="background-color: #fff; width: 365px; height: 636px; margin-top: 176px;"> </iframe>
 											</div>
 										</div>
 									</div>
 								</div>
-								
-								
 								<div class="panel panel-profile profile">
 								<div class="panel-heading overflow-h">
 									<h2 class="panel-title heading-sm pull-left">
@@ -424,29 +419,28 @@ String new_media_title="";
 								</div>
 							</div>
 							</div>
-							</div>
-								
+							
 						</div>
 					</div>
 				</div>
-			<%-- <div class='col-md-1' style= "min-height: 2000px;  vertical-align: middle;">
+			<div class='col-md-1' style= "min-height: 2000px;  vertical-align: middle;">
 				<% if(next_slide_id != 0) { %>
 					<a style="z-index:99999; width: 100%;" class="right carousel-control" 
 					href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>&slide_type=<%=next_slide_type %>"> 
 						<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</a>
 				<% }%>
-			</div> --%>
+			</div>
 		</div>
 		</form>
 	</div>
 
-  <div class='modal fade' id='imageModal' tabindex='-1' sss
+  <div class='modal fade' id='imageModal' tabindex='-1' 
   	role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">ï¿½</button>
 					<h4 class="modal-title" id="myModalLabel4">Upload Media</h4>
 				</div>
 				
