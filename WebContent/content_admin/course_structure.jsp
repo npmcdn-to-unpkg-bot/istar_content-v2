@@ -104,7 +104,11 @@
 				</div>
 				<div class="panel-body">
 	                 <label id="err" style="font-size: 150%; display: block;color:#ee9393"></label>
+					
+					<% if( ((IstarUser)request.getSession().getAttribute("user")).getUserType().equalsIgnoreCase("CONTENT_ADMIN")    ) {%>
 					<button class="btn-u" onclick="myFunction()" data-target="#myModal" style="    position: fixed;right: 108px;">Select Creator and Reviewer</button>
+					<%} %>
+					
 					<div id="html1">
 						<ul>
 							<li id="none" data-jstree='{"opened":true}'>All Courses
