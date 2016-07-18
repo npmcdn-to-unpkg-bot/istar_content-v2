@@ -389,13 +389,13 @@
 						</ul>
 						
 						<div class="tab-content">
-							<div class="tab-pane fade in preview" id="mobile">
+							<div class="tab-pane fade in dynamic-preview" id="mobile">
 								<div id="mobile_area" style="    margin-left: 25%;background-size: 66%;  background-repeat: no-repeat; display: block;background-image: url('/content/assets/img/frames/mobile.png')">
 									<iframe class="mobile-preview" src="/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='m-prv' > </iframe>
 								</div>
 							</div>
 							
-							<div class="tab-pane fade in preview" id="desktop">
+							<div class="tab-pane fade in dynamic-preview active" id="desktop">
 								<div id="desktop_area" style="margin-top: 5%;background-size: 100%;  background-repeat: no-repeat; display: block;background-image: url('/content/assets/img/frames/desktop.png')">
 									<iframe class="desktop-preview" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='d-prv'> </iframe>
 								</div>
@@ -550,13 +550,17 @@
 						var editable = bodyEditor.editable();
 						editable.attachListener(editable, 'input', function() {
 							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
-							var iframeInner = $('.preview.active').contents().find('#slide_paragraph').html(text1);
+							$('.dynamic-preview').find('#slide_paragraph').each(function(index, value) {
+								$(this).html(text1);
+							});
 						});
 					}
 				});
 				bodyEditor.on('change', function() {
 					var text1 = bodyEditor.document.getBody().getHtml()
-					var iframeInner = $('.preview.active').contents().find('#data_slide_paragraph').html(text1);
+					$('.dynamic-preview').find('#data_slide_paragraph').each(function(index, value) {
+						$(this).html(text1);
+					});
 				});
 			} catch (err) {
 				console.log(err);
@@ -568,6 +572,9 @@
 				if ($("#" + id).is("input")) {
 					$('#' + id).keyup( function() {
 						var iframeInner = $('.preview.active').contents().find('#data_' + id).html($('#' + id).val());
+						$('.dynamic-preview').find('#data_' + id).each(function(index, value) {
+							$(this).html($('#' + id).val());
+						});
 					});
 				} else {
 					console.log(id);
@@ -575,17 +582,23 @@
 			});
 			$('#image-picker').on( 'change', function() {
 				var id = $(this).find(":checked").attr('id');
-				$('.preview.active').contents().find('#data_image_url').attr( "src", $('#' + id).data('img-src'));
+				$('.dynamic-preview').find('#data_image_url').each(function(index, value) {
+					$(this).attr( "src", $('#' + id).data('img-src'));
+				});
 			});
 			$('#image-bg-picker').on( 'change', function() {
 				var bgurl = $(this).find(":checked").val();
-				$('.preview.active').contents().find('.slide-backgrund').css( 'background-image', "url(" + bgurl + ")");
-				$('.preview.active').contents().find('.slide-background').css( 'background-size', "cover");
+				$('.dynamic-preview').find('.slide-backgrund').each(function(index, value) {
+					$(this).css( 'background-image', "url(" + bgurl + ")");
+				});
 			});
 		}
 		function initColorChange() {
 			$('#slide_color').on( 'change', function() {
 				$('.preview.active').contents().find('.slide-background').css( 'background-color', $('#slide_color').val());
+				$('.dynamic-preview').find('.slide-background').each(function(index, value) {
+					$(this).css( 'background-color', $('#slide_color').val());
+				});
 			});
 		}
 		

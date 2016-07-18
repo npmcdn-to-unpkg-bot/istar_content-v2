@@ -134,6 +134,27 @@ try {
 	</div>
 	<% } %>
 	
+	<div class='modal fade' id='notes' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+					<h4 class="modal-title" id="myModalLabel4">Teacher notes</h4>
+				</div>
+				
+				<div class="modal-body" id="show-notes" style="font-family: 'Roboto', Arial, sans-serif;"> </div>
+				
+				<div class="modal-footer">
+					<section style="float: right">
+						<button type="button" id="close-notes" data-dismiss="modal" class=" btn-u" >Return</button> 
+					</section>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
@@ -156,7 +177,7 @@ try {
 		Reveal.initialize({
 			center : false,
 			controls : true, 
-			showNotes: true, 
+			showNotes: false,
 			height: window_height,
 			width: window_size,
 			transition: 'slide', 
@@ -223,10 +244,17 @@ try {
 			$('#reviewCommentModal').modal('hide');
 		});
 
-		function view_teacher_notes(){
-			var id =$('.present').attr('id');
-			console.log(id);
-			//TODO: Show slide's teacher-notes in modal
+		function view_teacher_notes() {
+			var notes = "Not Available";
+			
+			try {
+				notes = $('.present').data("notes");
+			} catch (err) {
+				console.log(err);
+			}
+
+			$('#show-notes').html(notes);
+			$('#notes').modal('show');
 		}
 
 		Reveal.addEventListener('fragmentshown', function(event) {			
