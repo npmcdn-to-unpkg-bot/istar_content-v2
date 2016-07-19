@@ -590,8 +590,8 @@
 			$('#image-bg-picker').on( 'change', function() {
 				var bgurl = $(this).find(":checked").val();
 				var bgurl_desktop =  bgurl.replace(".png", "_desktop.png");
-				$('.mobile-preview-frame').contents().find('#data_image_url').css( 'background-image', "url(" + bgurl + ")");
-				$('.desktop-preview-frame').contents().find('#data_image_url').css( 'background-image', "url(" + bgurl_desktop + ")");
+				$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl + ")");
+				$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl_desktop + ")");
 			});
 		}
 		
