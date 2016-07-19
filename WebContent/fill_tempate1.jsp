@@ -568,7 +568,6 @@
 		}
 		
 		function initHooks() {
-
 			$(".updateble").each( function(index, listItem) {
 				var id = $(this).attr('id');
 				if ($("#" + id).is("input")) {
@@ -604,6 +603,18 @@
 			});
 		}
 		
+		function initBgImage() {
+			try {
+				var mobile_bg = "<%=cMSSlide.getImage_BG()%>";
+				var desktop_bg = mobile_bg.replace(".png", "_desktop.png");
+				
+				$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+mobile_bg+')');
+				$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+desktop_bg+')');
+			} catch (err) {
+				console.log(err);
+			}
+		}
+		
 		$(document).ready(function() {
 			$("#image-bg-picker").select2({
 			    placeholder: "Select slide background image",
@@ -612,12 +623,8 @@
 			initTextArea();
 			initHooks();
 			initColorChange();
-			var mobile_bg = "<%=cMSSlide.getImage_BG()%>";
-			var desktop_bg = mobile_bg.replace(".png", "_desktop.png");
+			initBgImage();
 			
-			$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+mobile_bg+')');
-			$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+desktop_bg+')');
-
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
