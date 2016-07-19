@@ -122,8 +122,11 @@ public class ChangeStatusController extends HttpServlet {
 			}
 			
 			String subject = "changes in content"; 
-			 new Runnable() {
+			new Runnable() {
+				
+				@Override
 				public void run() {
+					// TODO Auto-generated method stub
 					try {
 						EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage);
 					} catch (Exception ex) {
@@ -131,6 +134,7 @@ public class ChangeStatusController extends HttpServlet {
 					}
 				}
 			};
+			
 			
 			
 			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
