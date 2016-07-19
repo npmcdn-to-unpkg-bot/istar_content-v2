@@ -378,7 +378,7 @@
 						</div>
 						
 						<div class="tab-pane fade in " id="desktop">
-							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
+							<div id="desktop_area"  class="dynamic-preview" style="margin:2% ;background-image: url('/content/assets/img/frames/desktop.png')">
 								<iframe id="one" class="desktop-preview-frame" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='d-prv'> </iframe>
 							</div>
 						</div>
@@ -389,7 +389,7 @@
 				
 				
 				<div class=" col-md-3 ">
-					<div class="panel panel-sea">
+					<div class="panel panel-sea" style="margin-top: 11%;">
 						<div class="panel-heading">
 							<h3 class="panel-title"> <i class="fa fa-tasks"></i> Mobile Preview </h3>
 						</div>

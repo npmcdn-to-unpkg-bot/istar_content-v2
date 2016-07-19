@@ -483,10 +483,10 @@ h1.warning-large {
 }
 
 .desktop-preview-frame {
-	height: 650px;
-    width: 1152px;
+	height: 689px;
+    width: 1231px;
     margin: 2%;
-    margin-bottom: 6%;
+    margin-bottom: 10%;
 }
 
 .dynamic-preview {
