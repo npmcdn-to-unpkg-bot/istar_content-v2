@@ -41,6 +41,8 @@ public class LogoutController extends IStarBaseServelet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		printParams(request);
+		CMSRegistry.writeAuditLog(request.getSession().getId(),((IstarUser)request.getSession().getAttribute("user")).getId(), "LOGOUT");
+
 		request.getSession().removeAttribute("user");
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);

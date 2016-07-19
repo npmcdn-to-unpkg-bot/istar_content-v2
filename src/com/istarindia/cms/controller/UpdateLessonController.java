@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.istarindia.apps.LessonTypes;
 import com.istarindia.apps.dao.*;
-import com.istarindia.apps.services.CourseService;
 import com.istarindia.apps.services.LessonService;
-import com.istarindia.apps.services.PresentationService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -54,7 +51,6 @@ public class UpdateLessonController extends IStarBaseServelet {
 				System.err.println("LOs: "+lo_ids);
 			}
 			
-			
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
 			Task task = new Task();
 			task.setItemId(lesson_id);
@@ -64,19 +60,16 @@ public class UpdateLessonController extends IStarBaseServelet {
 			if(request.getParameterMap().containsKey("only_learning_objectives")) {
 				lesson = (Lesson) service.updateLesson(lesson_id, lo_ids.toString());
 			} else {
-
 				int duration = Integer.parseInt(request.getParameter("duration"));
 				String lesson_theme = request.getParameter("lesson_theme");
-				
 				String lesson_desktop_theme = request.getParameter("lesson_desktop_theme");
-				
-				
 				String title = request.getParameter("title");
 				String lesson_subject = request.getParameter("lesson_subject");
+				
 				if (request.getParameterMap().containsKey("Tags")) {
 					tags = request.getParameter("Tags");
 				}
-
+				service.pushLessonUpdateNotification(task.getId(), lesson_id, user, lesson_theme, lesson_desktop_theme, title);
 				lesson = (Lesson) service.updateLesson(lesson_id, title, duration, tags, lesson_theme, lesson_subject, lo_ids.toString(), lesson_desktop_theme);
 			}
 			
@@ -84,9 +77,9 @@ public class UpdateLessonController extends IStarBaseServelet {
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", task.getId());
 			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
-		
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

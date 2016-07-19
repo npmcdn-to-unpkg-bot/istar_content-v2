@@ -1,4 +1,4 @@
-<%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
+<%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.istarindia.cms.lessons.*"%>
@@ -8,6 +8,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 String templateName = request.getParameter("template_name");
 String slide_id = request.getParameter("slide_id");
 
+String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
+
+String style_body = "background-size: cover;";
 %><!doctype html>
 <html lang="en">
 <head>
@@ -40,7 +43,19 @@ String slide_id = request.getParameter("slide_id");
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 </head>
-
+<%
+int themeID = 100;
+try {
+		themeID = Integer.parseInt(request.getParameter("lesson_theme"));
+		if ((new UiThemeDAO()).findById(themeID) != null) {
+%>
+	<jsp:include page="/themes/desktop/desktop_yellow.jsp"></jsp:include>
+<%
+	}
+	} catch (Exception e) {
+		//nothing ToDo
+	}
+%>
 <body>
 
 	<div class="reveal">
@@ -61,9 +76,7 @@ String slide_id = request.getParameter("slide_id");
 				controls: true,
 				progress: true,
 				history: true,
-				center: true,
-				height: 433,
-				width:696,
+			
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
