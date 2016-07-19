@@ -78,6 +78,9 @@
 					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
 					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/notes/notes.js', async : true } ]
 				});
+			
+
+			
 	</script>
 
 	<!-- Everything below this point is only used for the reveal.js demo page -->

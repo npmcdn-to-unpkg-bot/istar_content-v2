@@ -286,7 +286,7 @@
 												<section class="col col-md-6">
 													<label class="label">Select Background Image</label> 
 													<label class="select"> 
-														<select name="image_bg" id="image-bg-picker" value="<%=cMSSlide.getImage_BG()%>">
+														<select name="image_bg" id="image-bg-picker" value="<%=bgImage%>">
 															<option selected="selected" value="none">None</option>
 															
 															<% for (Image bg : bgImages) { %>													
@@ -568,6 +568,7 @@
 		}
 		
 		function initHooks() {
+
 			$(".updateble").each( function(index, listItem) {
 				var id = $(this).attr('id');
 				if ($("#" + id).is("input")) {
@@ -611,7 +612,12 @@
 			initTextArea();
 			initHooks();
 			initColorChange();
+			var mobile_bg = "<%=cMSSlide.getImage_BG()%>";
+			var desktop_bg = mobile_bg.replace(".png", "_desktop.png");
 			
+			$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+mobile_bg+')');
+			$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+desktop_bg+')');
+
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
