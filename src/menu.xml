@@ -146,9 +146,26 @@
 			
 			<child_links display_name="List Companies"
 			url="/content/trainer/list_ass.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin" />
-			
-			
 	</parent_links>
+	<parent_links display_name="Report">
+		<child_links display_name="Over All Report"
+			url="/content/logs/over_all_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Course Wise Report"
+			url="/content/logs/course_wise_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Session Wise Report"
+			url="/content/logs/session_wise_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Content Admin Report"
+			url="/content/logs/content_admin_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Content Creator Report"
+			url="/content/logs/content_creator_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Creative Admin Report"
+			url="/content/logs/creative_admin_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Creative Creator Report"
+			url="/content/logs/creative_creator_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+		<child_links display_name="Content Reviewer Report"
+			url="/content/logs/content_reviewer_data.jsp" valid_roles="creative_admin,creative_creator,content_creator,content_admin,content_reviewer" />
+</parent_links>
+	
 
 	<parent_links display_name="user_email">
 		<child_links display_name="Dashboard"

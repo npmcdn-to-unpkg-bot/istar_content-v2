@@ -120,7 +120,6 @@ public class ChangeStatusController extends HttpServlet {
 			for (String taskReviewer : properties.get("email_mandatory_list").toString().split(",")) {
 				recipient.put(taskReviewer, taskReviewer);
 			}
-			
 			String subject = "changes in content"; 
 			new Runnable() {
 				

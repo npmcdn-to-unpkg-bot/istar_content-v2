@@ -1489,4 +1489,330 @@ AND s.organization_id = o.ID
 		</sql>
 		<title>View Doubts by Students</title>
 	</reports>
+	<reports id="161" type_of_report="table">
+		<column columnHandler="NONE" display_name="dates" is_updatetable="false" isVisible="true" name="dates" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+		SELECT
+CAST (task_log.created_at as date) as dates,
+    count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log
+GROUP BY CAST (task_log.created_at as date)
+
+		</sql>
+		<title>Date Wise Data</title>
+	</reports>
+	<reports id="162" type_of_report="table">
+		<column columnHandler="NONE" display_name="ID" is_updatetable="false" isVisible="true" name="id" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+		SELECT
+			C.id , C.course_name,
+count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+GROUP BY C.ID
+
+		</sql>
+		<title>Course Wise Data</title>
+	</reports>
+	<reports id="163" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" is_updatetable="false" isVisible="true" name="id" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Session ID" is_updatetable="false" isVisible="true" name="cm_id" />
+		<column columnHandler="NONE" display_name="SESSION" is_updatetable="false" isVisible="true" name="cmtitle" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+		SELECT
+			C.id , C.course_name, CM.id as cm_id, CM.title as cmtitle,
+count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+GROUP BY C.ID, cm_id
+
+		</sql>
+		<title>Session Wise Data</title>
+	</reports>
+	<reports id="164" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" is_updatetable="false" isVisible="true" name="email" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Session ID" is_updatetable="false" isVisible="true" name="cm_id" />
+		<column columnHandler="NONE" display_name="SESSION" is_updatetable="false" isVisible="true" name="cmtitle" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+	SELECT
+			CA.email, C.course_name, CM.id as cm_id, CM.title as cmtitle,
+    count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C, content_admin CA  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+and CA.id = TL.actor_id
+
+GROUP BY  CA.email, C.course_name ,cm_id
+order by   CA.email, C.course_name ,cm_id
+
+		</sql>
+		<title>content admin Data</title>
+	</reports>
+	<reports id="165" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" is_updatetable="false" isVisible="true" name="email" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Session ID" is_updatetable="false" isVisible="true" name="cm_id" />
+		<column columnHandler="NONE" display_name="SESSION" is_updatetable="false" isVisible="true" name="cmtitle" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+	SELECT
+			CA.email, C.course_name, CM.id as cm_id, CM.title as cmtitle,
+    count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C, content_creator CA  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+and CA.id = TL.actor_id
+
+GROUP BY  CA.email, C.course_name ,cm_id
+order by   CA.email, C.course_name ,cm_id
+
+		</sql>
+		<title>content creator Data</title>
+	</reports>
+	<reports id="166" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" is_updatetable="false" isVisible="true" name="email" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Session ID" is_updatetable="false" isVisible="true" name="cm_id" />
+		<column columnHandler="NONE" display_name="SESSION" is_updatetable="false" isVisible="true" name="cmtitle" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+	SELECT
+			CA.email, C.course_name, CM.id as cm_id, CM.title as cmtitle,
+    count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C, creative_admin CA  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+and CA.id = TL.actor_id
+
+GROUP BY  CA.email, C.course_name ,cm_id
+order by   CA.email, C.course_name ,cm_id
+
+		</sql>
+		<title>creative_admin Data</title>
+	</reports>
+	<reports id="167" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" is_updatetable="false" isVisible="true" name="email" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Session ID" is_updatetable="false" isVisible="true" name="cm_id" />
+		<column columnHandler="NONE" display_name="SESSION" is_updatetable="false" isVisible="true" name="cmtitle" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+	SELECT
+			CA.email, C.course_name, CM.id as cm_id, CM.title as cmtitle,
+    count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C, creative_creator CA  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+and CA.id = TL.actor_id
+
+GROUP BY  CA.email, C.course_name ,cm_id
+order by   CA.email, C.course_name ,cm_id
+
+		</sql>
+		<title>creative_creator Data</title>
+	</reports>
+		<reports id="168" type_of_report="table">
+		<column columnHandler="NONE" display_name="Course ID" is_updatetable="false" isVisible="true" name="email" />
+		<column columnHandler="NONE" display_name="COURSE" is_updatetable="false" isVisible="true" name="course_name" />
+		<column columnHandler="NONE" display_name="Session ID" is_updatetable="false" isVisible="true" name="cm_id" />
+		<column columnHandler="NONE" display_name="SESSION" is_updatetable="false" isVisible="true" name="cmtitle" />
+		<column columnHandler="NONE" display_name="CREATED" is_updatetable="false" isVisible="true" name="created" />
+		<column columnHandler="NONE" display_name="CREATIVE_ASSIGNED" is_updatetable="true" isVisible="true" name="creative_assigned" />
+		<column columnHandler="NONE" display_name="COMPLETED" is_updatetable="true" isVisible="true" name="completed" />
+		<column columnHandler="NONE" display_name="CONTENT_ASSIGNED" is_updatetable="true" isVisible="true" name="content_assigned" />
+		<column columnHandler="NONE" display_name="PUBLISHED" is_updatetable="" isVisible="true" name="published" />
+		<column columnHandler="NONE" display_name="UNPUBLISHED" is_updatetable="false" isVisible="true" name="unpublished" />
+		<column columnHandler="NONE" display_name="DRAFT" is_updatetable="true" isVisible="true" name="draft" />
+		<column columnHandler="NONE" display_name="APPROVED" is_updatetable="true" isVisible="true" name="approved" />
+		<column columnHandler="NONE" display_name="DELETED" is_updatetable="true" isVisible="true" name="deleted" />
+		<column columnHandler="NONE" display_name="DIS_APPROVED" is_updatetable="" isVisible="true" name="dis_approved" />
+		<sql>
+	SELECT
+			CA.email, C.course_name, CM.id as cm_id, CM.title as cmtitle,
+    count(*) filter (where changed_status ='CREATED') as created,
+		count(*) filter (where changed_status ='CREATIVE_ASSIGNED') as creative_assigned,
+		count(*) filter (where changed_status ='COMPLETED') as completed,
+    count(*) filter (where changed_status ='CONTENT_ASSIGNED') as content_assigned,
+    count(*) filter (where changed_status ='PUBLISHED') as published,
+		count(*) filter (where changed_status ='UNPUBLISHED') as unpublished,
+    count(*) filter (where changed_status ='DRAFT') as draft,
+    count(*) filter (where changed_status ='APPROVED') as approved,
+    count(*) filter (where changed_status ='DELETED') as deleted,
+ count(*) filter (where changed_status ='DIS_APPROVED') as dis_approved
+FROM
+   task_log TL, lesson L , cmsession CM, module M , course C, content_reviewer CA  
+ where C.id = M.course_id
+and M.id = CM.module_id
+and CM.id = L.session_id
+and L.id = TL.item_id 
+and TL.item_type='LESSON'
+and CA.id = TL.actor_id
+
+GROUP BY  CA.email, C.course_name ,cm_id
+order by   CA.email, C.course_name ,cm_id
+
+		</sql>
+		<title>Content Reviewer Data</title>
+	</reports>
+	
 </istar_reports>
