@@ -308,45 +308,49 @@ var App = function () {
 				var tableID  = $(this).attr('id');
 			    var containerID = '#'+$(this).data('graph_containter');
 			    var graph_type = $(this).data('graph_type');
-			    console.log("tableID -->" + $(this).attr('id'));
-				console.log("containerID -->" + containerID);
-				 var graph_title = $(this).data('graph_title');
-				
-				 $(containerID).highcharts({
-				        data: {
-				            table: tableID
-				        },
-				        chart: {
-				            type: graph_type, 
-				            options3d: {
-				                enabled: true,
-				                alpha: 45
-				            }
-				        },
-				        title: {
-				            text: graph_title
-				        },
-				        tooltip: {
-				            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				        },
-				        plotOptions: {
-				            pie: {
-				                allowPointSelect: true,
-				                cursor: 'pointer',
-				                dataLabels: {
-				                    enabled: true,
-				                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-				                    style: {
-				                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-				                    }
-				                }
-				            }
-				        }
-				    });
+			    if(graph_type.indexOf('table')<=-1)
+			    	{
+			    	 console.log("tableID -->" + $(this).attr('id'));
+						console.log("containerID -->" + containerID);
+						 var graph_title = $(this).data('graph_title');
+						
+						 $(containerID).highcharts({
+						        data: {
+						            table: tableID
+						        },
+						        chart: {
+						            type: graph_type, 
+						            options3d: {
+						                enabled: true,
+						                alpha: 45
+						            }
+						        },title: {
+						            text: graph_title
+						        },
+						        tooltip: {
+						            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+						        },
+						        plotOptions: {
+						            pie: {
+						                allowPointSelect: true,
+						                cursor: 'pointer',
+						                dataLabels: {
+						                    enabled: true,
+						                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+						                    style: {
+						                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+						                    }
+						                }
+						            }
+						        }
+						    });
+			    	}
+			    
+			   
 			});
 			
 			//Hide Table
-			$('.dataTables_wrapper').hide();
+			//$('.dataTables_wrapper').hide();
 		
 	} catch (err) {
 		console.log(err);

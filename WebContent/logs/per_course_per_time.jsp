@@ -62,11 +62,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="col-md-12">
 				<% HashMap<String, String> conditions = new HashMap();
-				conditions.put("content_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
+				conditions.put("course_id",request.getParameter("course_id"));
 				%>
-				<%=(new ReportUtils()).getReport(199, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				<%=(new ReportUtils()).getReport(170, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 				
-				<%=(new ReportUtils()).getReport(161, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				<%=(new ReportUtils()).getReport(169, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				
+				<%=(new ReportUtils()).getReport(171, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 			
 			
 		

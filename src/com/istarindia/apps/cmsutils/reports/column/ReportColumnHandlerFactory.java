@@ -47,6 +47,10 @@ public class ReportColumnHandlerFactory {
 			return (new ANSWER_DOUBTColumnHandler());		
 		case "LO_LINK_HANDLER":
 			return (new LO_LINK_HANDLERColumnHandler());		
+		case "PerCursePerDateHandler":
+			return (new PerCursePerDateHandler());	
+		case "LogActorHandler":
+			return (new LogActorHandler());
 		default:
 			break;
 		}
