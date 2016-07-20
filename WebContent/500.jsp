@@ -32,7 +32,7 @@ String userUrl= baseURL + user_type ;
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/bootstrap/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="<%=baseURL %>assets/css/505.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/500.css">
 </head>
 
 <body>
