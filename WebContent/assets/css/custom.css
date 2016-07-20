@@ -483,10 +483,9 @@ h1.warning-large {
 }
 
 .desktop-preview-frame {
-	height: 689px;
-    width: 1231px;
-    margin: 2%;
-    margin-bottom: 10%;
+	zoom:357%;
+	margin: 2%;
+	margin-bottom: 30%;
 }
 
 .dynamic-preview {

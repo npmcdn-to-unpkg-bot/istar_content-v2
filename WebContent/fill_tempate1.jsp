@@ -379,7 +379,7 @@
 						
 						<div class="tab-pane fade in " id="desktop">
 							<div id="desktop_area"  class="dynamic-preview" style="margin:2% ;background-image: url('/content/assets/img/frames/desktop.png')">
-								<iframe id="one" class="desktop-preview-frame" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='d-prv'> </iframe>
+								<iframe id="d-preview" class="desktop-preview-frame" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"> </iframe>
 							</div>
 						</div>
 					</div>
@@ -396,7 +396,7 @@
 						<div class="panel-body ">
 							<div class="sky-form  " id="mobile">
 								<div id="mobile_area" class="dynamic-preview" style="background-image: url('/content/assets/img/frames/mobile.png')">
-									<iframe id="two" class="mobile-preview-frame" src="/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='m-prv' > </iframe>
+									<iframe id='m-preview' class="mobile-preview-frame" src="/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"> </iframe>
 								</div>
 							</div>
 						</div>

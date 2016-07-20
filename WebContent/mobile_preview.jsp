@@ -59,8 +59,9 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 
 		<div class="slides">
 			<%=((new CMSerializer()).serializeBlankSlide(templateName, slide_id, "mobile")) %>
-
 		</div>
+
+	</div>
 
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
@@ -74,6 +75,11 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		Reveal.initialize({
 			center : false,
 			controls : false,
+			width:900,
+			height:1600,
+			minScale: 1,
+			maxScale: 1,
+			transition: 'slide',
 		});
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');

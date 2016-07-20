@@ -64,10 +64,11 @@
 				controls: true,
 				progress: false,
 				history: true,
-				width:1231,
-				height:689,
-		
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				width:1024,
+				height:768,
+				minScale: 1,
+				maxScale: 1,
+				transition: 'slide', 
 
 				// Optional reveal.js plugins
 				dependencies: [
