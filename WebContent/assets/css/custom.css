@@ -475,17 +475,20 @@ h1.warning-large {
 }
 
 .mobile-preview-frame {
-    width: 328px;
-    height: 576px;
+    width: 900px;
+    height: 1600px;
+    zoom: 32%;
     margin: 5%;
     margin-top: 17%;
     margin-bottom: 20%;
 }
 
 .desktop-preview-frame {
-	zoom:357%;
-	margin: 2%;
-	margin-bottom: 30%;
+	width: 1024px;
+    height: 768px;
+    zoom: 106%;
+    margin: 2%;
+    margin-bottom: 30%;
 }
 
 .dynamic-preview {

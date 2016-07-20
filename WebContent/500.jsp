@@ -43,7 +43,7 @@ String userUrl= baseURL + user_type ;
 			<div class="page-error">
 				<h1 class="number text-center">500</h1>
 				<h2 class="description text-center">There is a little turbulence!</h2>
-				<h3 class="text-center"> Note: Please go back and reload the page If the issue persists, report below</h3>
+				<h3 class="text-center"> <strong>NOTE</strong>: Please go back and reload the page. If the issue persists, report below</h3>
 			</div>		
 			<div class="text-center copy"> <a target='_blank' href="https://docs.google.com/a/istarindia.com/spreadsheets/d/15RF7M5ysBV7fu77uOeAzd4QgLufJsdN9m6e_fgSRS00/edit?usp=sharing">Report here!</a></div>	
 		</div>
