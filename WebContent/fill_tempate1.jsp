@@ -185,7 +185,7 @@
 						<li><a href="#desktop" data-toggle="tab">Desktop Preview</a></li>
 					</ul>
 					
-					<form  action="/content/create_slide" name="" method="GET">
+					<form  action="/content/create_slide" id="slide-form" method="GET">
 					<input type="hidden" name="template" value="<%=slide_type%>"> 
 					<input type="hidden" name="ppt_id" value="<%=ppt_id%>">
 					<input name="is_edit" value="<%=!newSlide%>" type="hidden"> 
@@ -281,7 +281,7 @@
 								</div>
 								<div class="panel-body">
 									<div class="sky-form" >
-										<fieldset style=" margin-top: 5%;">
+										<fieldset >
 											<div class="row">
 												<section class="col col-md-6">
 													<label class="label">Select Background Image</label> 
@@ -308,29 +308,31 @@
 											
 											<div class="row">
 												<section class="col col-md-6">
-													<label class="label">Select Slide Transition</label> <label class="select"> <select name="slideTransition">
-														<%
-															for (String slideTransitions : SlideTransition.SlideTransitionTypes) {
-														%>
-														
-														<option value="<%=slideTransitions%>"><%=slideTransitions%></option>
-														
-														<% } %>
-														
-													</select> <i></i>
+													<label class="label">Select Slide Transition</label> <label class="select"> 
+														<select name="slideTransition">
+															<%
+																for (String slideTransitions : SlideTransition.SlideTransitionTypes) {
+															%>
+															
+															<option value="<%=slideTransitions%>"><%=slideTransitions%></option>
+															
+															<% } %>
+															
+														</select> <i></i>
 													</label>
 												</section>
 												<section class="col col-md-6">
-													<label class="label">Select Background Transition</label> <label class="select"> <select name="backgroundTransition">
-														<%
-															for (String slideTransitions : SlideTransition.BackgroundTransition) {
-														%>
-														
-														<option value="<%=slideTransitions%>"><%=slideTransitions%></option>
-														
-														<% } %>
-														
-													</select> <i></i>
+													<label class="label">Select Background Transition</label> <label class="select"> 
+														<select name="backgroundTransition">
+															<%
+																for (String slideTransitions : SlideTransition.BackgroundTransition) {
+															%>
+															
+															<option value="<%=slideTransitions%>"><%=slideTransitions%></option>
+															
+															<% } %>
+															
+														</select> <i></i>
 													</label>
 												</section>
 											</div>
@@ -342,7 +344,6 @@
 												<a href='/content/creative_admin/edit_theme.jsp?theme_id=<%=themeID %>&slide_id=<%=slide_id %>' class='btn-u' target="_blank">Preview/Edit Theme</a>												
 											<% } %>
 											
-											<button type="submit" class="btn-u" style="float:right">Update Slide</button>
 										</footer>
 									</div>
 								</div>
@@ -389,7 +390,10 @@
 				
 				
 				<div class=" col-md-3 ">
-					<div class="panel panel-sea" style="margin-top: 11%;">
+					<div style="margin-bottom: 12%;">	
+						<button id="submit-form" type="button" class="btn-u" style="float:right">Update Slide</button>
+					</div>
+					<div class="panel panel-sea" >
 						<div class="panel-heading">
 							<h3 class="panel-title"> <i class="fa fa-tasks"></i> Mobile Preview </h3>
 						</div>
@@ -402,14 +406,7 @@
 						</div>
 					</div>
 				</div>
-			
 			</div>
-			
-			
-			
-		
-		
-		
 		</div>
 		
 	</div>
@@ -528,6 +525,10 @@
 		$('#changetabbutton').click(function(e){
 	    	e.preventDefault();
 	        $('#tabs1 a[href="#ui"]').tab('show');
+	    })
+	    
+	    $('#submit-form').click(function(e){
+	    	$('#slide-form').submit();
 	    })
 	    
 		function initTextArea() {
