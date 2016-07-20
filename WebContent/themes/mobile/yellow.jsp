@@ -46,9 +46,10 @@
 <style>
 body {
 	background-color: <%=theme.get("background_color")%>;
-	//#
-	FDC530
-	!important;
+}
+
+.reveal  .backgrounds  .slide-background {
+	background-size: contain !important;
 }
 
 @font-face {

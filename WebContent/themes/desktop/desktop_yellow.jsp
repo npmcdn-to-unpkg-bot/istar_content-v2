@@ -49,8 +49,8 @@ body {
 	background-color: <%=theme.get("background_color")%>;
 }
 
-.reveal  .backgrounds .NO_CONTENT {
-	background-size: cover !important;
+.reveal  .backgrounds  .slide-background {
+	background-size: contain !important;
 }
 
 @font-face {
