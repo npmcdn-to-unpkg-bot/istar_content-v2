@@ -18,20 +18,12 @@
       <description>Define storage path for image uploads</description>
       <param-name>upload_path</param-name>
       <param-value>C:/Users/ayrus/Pictures/Camera Roll</param-value>
-<!--       
-	  <param-value>C:/Users/ayrus/Pictures/Camera Roll</param-value>
- -->    
-<!--       
-       <param-value>C:/Users/vaibhav/Documents/deployment/8july/Camera Roll</param-value>
- -->    
- 	</init-param>
+    </init-param>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>MediaUploadController</servlet-name>
     <url-pattern>/media_upload</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>BackgroundMediaController</display-name>
@@ -41,19 +33,12 @@
       <description>Define storage path for background image uploads</description>
       <param-name>bg_upload_path</param-name>
       <param-value>C:/Users/ayrus/Pictures/Camera Roll/backgrounds</param-value>
-<!--       
-	  <param-value>C:/Users/ayrus/Pictures/Camera Roll/backgrounds</param-value>
- -->    
-<!--       
-       <param-value>C:/Users/vaibhav/Documents/deployment/8july/Camera Roll/backgrounds</param-value>
- -->    
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>BackgroundMediaController</servlet-name>
     <url-pattern>/bg_controller</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>HandoutMediaController</display-name>
@@ -63,19 +48,12 @@
       <description>Define storage path for background image uploads</description>
       <param-name>handout_media_upload_path</param-name>
       <param-value>C:/Users/ayrus/Pictures/Camera Roll/handout_media</param-value>
-<!--       
-	  <param-value>C:/Users/ayrus/Pictures/Camera Roll/handout_media</param-value>
- -->    
-<!--       
-       <param-value>C:/Users/vaibhav/Documents/deployment/8july/Camera Roll/handout_media</param-value>
- -->    
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>HandoutMediaController</servlet-name>
     <url-pattern>/handout_media_controller</url-pattern>
   </servlet-mapping>
-  
   <filter>
     <filter-name>ImageFilter</filter-name>
     <filter-class>com.istarindia.app.filters.ImageFilter</filter-class>
@@ -88,4 +66,9 @@
     <filter-name>ImageFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <error-page>
+    <!-- Uncaught exception -->
+    <error-code>500</error-code>
+    <location>/exception_handler</location>
+  </error-page>
 </web-app>
