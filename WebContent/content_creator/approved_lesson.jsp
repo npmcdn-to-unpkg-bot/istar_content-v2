@@ -105,6 +105,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
-
+</div>
 </body>
 </html>

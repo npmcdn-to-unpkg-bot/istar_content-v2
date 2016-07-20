@@ -120,15 +120,21 @@ public class ChangeStatusController extends HttpServlet {
 			for (String taskReviewer : properties.get("email_mandatory_list").toString().split(",")) {
 				recipient.put(taskReviewer, taskReviewer);
 			}
-			
 			String subject = "changes in content"; 
-			try {
-				EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage);
-				resultMessage = "The e-mail was sent successfully";
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				resultMessage = "There were an error: " + ex.getMessage();
-			}
+			new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			};
+			
+			
 			
 			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
 				request.setAttribute("message_success", "New task has been sent for review successfully!");

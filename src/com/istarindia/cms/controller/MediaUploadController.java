@@ -86,7 +86,9 @@ public class MediaUploadController extends IStarBaseServelet {
 		String slideType = "";
 		String folders[] = null;
 		String mediaTitle = "";
-		int userId = ((IstarUser)request.getSession().getAttribute("user")).getId();
+		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+		int userId = user.getId();
+		String mediaType = "";
 		
 		MediaService mediaService = new MediaService();
 		
@@ -99,7 +101,7 @@ public class MediaUploadController extends IStarBaseServelet {
 					
 					if (item.getName().toString().endsWith(".mp4")) {
 						Video video = mediaService.saveVideo(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
-						
+						mediaType="VIDEO";
 						// TODO: return status from saveImage to return the same in request
 						request.setAttribute("msg", "Video with title " + video.getTitle() + " and " + video.getUrl() + " created. ");
 
@@ -108,7 +110,7 @@ public class MediaUploadController extends IStarBaseServelet {
 
 					} else {
 						Image image = mediaService.saveImage(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
-						
+						mediaType="Image";
 						//TODO: return status from saveImage to return the same in request
 						request.setAttribute("msg", "Image with title " + image.getTitle() + " and " + image.getUrl() + " created. ");
 						
@@ -157,7 +159,7 @@ public class MediaUploadController extends IStarBaseServelet {
 		} finally {
 
 		}
-		
+
 		if (slideType != "" && pptId != 0 && slideId != 0) {
 			request.setAttribute("message_success", "Media file has been uploaded successfully ");
 			response.sendRedirect("fill_tempate.jsp?ppt_id="+pptId+"&slide_id="+slideId+"&slide_type="+slideType);

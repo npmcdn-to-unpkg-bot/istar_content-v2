@@ -136,6 +136,83 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						
 						<div class="row g-mb-50"> </div>
 					</div>
+					
+					<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>content_creator/assigned_lesson.jsp">View All Assigned Lessons</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all lessons assigned by Content Admin.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>content_creator/draft_lesson.jsp">View All Lessons in Progress</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all lessons which are in progress by Content Creators.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="row g-mb-50">
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>content_creator/disapproved_lesson.jsp">View All Disapproved Lessons</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all lessons which are disapproved by Content Reviewer.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>content_creator/approved_lesson.jsp">View All Approved Lessons</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all tasks which are completed by Content Creators and approved by Content Reviewer and ready to be published.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+
+						
+						
+						
+						<div class="col-md-6 steps-v1--rspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>content_admin/published_lesson.jsp">View All Published Lesson</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all the published lessons.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
+						
+						<div class="col-md-6 g-mb-20 steps-v1--lspace">
+							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
+								<li>
+									<h3 class="heading-sm h3">
+										<a href="<%=baseURL %>content_creator/created_media.jsp">View All Created Media tasks</a>
+									</h3>
+								</li>
+								<li><p>This will let you view all media tasks which are created by Content Creators.</p></li>
+								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
+							</ul>
+						</div>
 				</div>	
 			</section>
 		</div>

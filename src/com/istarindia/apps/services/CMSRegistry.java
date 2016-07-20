@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import com.istarindia.apps.ListTypes;
 import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.cmsutils.CMSFolder;
 import com.istarindia.apps.cmsutils.reports.ReportCollection;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.role.Menu;
@@ -131,8 +133,12 @@ public class CMSRegistry {
 
 	public static CMSFolder root = CMSFolder.init();
 
-	public static void writeAuditLog(String string, Integer id) {
-		// TODO Auto-generated method stub
+	public static void writeAuditLog(String string, Integer id, String action) {
+		String sql = "INSERT INTO login (user_id, created_at, jsession_id, action) VALUES "
+				+ "('"+id+"', now(), '"+string+"', '"+action+"')";
+		
+		DBUTILS db = new DBUTILS();
+		db.executeUpdate(sql);
 
 	}
 
@@ -152,13 +158,16 @@ public class CMSRegistry {
 	public static ArrayList<IstarUser> getCUsers() {
 		IstarUserDAO dao = new IstarUserDAO();
 		ArrayList<IstarUser> items = new ArrayList<>();
-		for (IstarUser user : (ArrayList<IstarUser>) dao.findByProperty("userType", "CONTENT_CREATOR")) {
-			System.out.println("user here is >>" + user.getClass().toString());
-			if (user.getClass().toString().endsWith("ContentCreator")) {
+		List<IstarUser> items2 = (ArrayList<IstarUser>) dao.findByProperty("userType", "CONTENT_CREATOR");
+		List<IstarUser> items1 = (ArrayList<IstarUser>) dao.findByProperty("userType", "CREATIVE_CREATOR");
+		items2.addAll(items1);
+		for (IstarUser user : items2) {
+			System.out.println("user here is >>" + user.getEmail());
+			//if (user.getClass().toString().endsWith("ContentCreator")) {
 				System.out.println("user here is >>" + user.getEmail());
 				items.add(user);
-
-			}
+//
+			//}
 		}
 		return items;
 	}

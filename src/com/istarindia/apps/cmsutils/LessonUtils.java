@@ -55,6 +55,9 @@ import com.istarindia.apps.services.QuestionService;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
 import com.istarindia.cms.lessons.CMSTextItem;
+
+import javassist.compiler.SyntaxError;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -1111,7 +1114,6 @@ public class LessonUtils {
             }
         }
         
-        System.err.println("Count of Items -> "+newList.getItems().size() );
         if (!newSlide) {
             slide.setList(newList);
         }
@@ -1123,6 +1125,25 @@ public class LessonUtils {
         ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         ve.init();
         VelocityContext context = new VelocityContext();
+
+        Image selected_image = null;
+        Video selected_video = null;
+        if(slide.getImage() != null) {
+	        String selected_image_url = slide.getImage().getUrl();
+	        ImageDAO imageDAO = new ImageDAO();
+	        if (!imageDAO.findByUrl(selected_image_url).isEmpty()) {
+	        	selected_image = imageDAO.findByUrl(selected_image_url).get(0);
+	        }
+        }
+        if(slide.getVideo() != null) {
+        	String selected_video_url = slide.getVideo().getUrl();
+            VideoDAO videoDAO = new VideoDAO();
+            if (!videoDAO.findByUrl(selected_video_url).isEmpty()) {
+            	selected_video =  videoDAO.findByUrl(selected_video_url).get(0);
+            };
+        }
+        context.put("selected_image", selected_image);
+        context.put("selected_video", selected_video);
         
         context.put("slide", slide);
         context.put("images", images);

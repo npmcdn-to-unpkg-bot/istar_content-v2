@@ -198,8 +198,13 @@
 										<select name="assign_user" class="form-control input-lg">
 											<%
 												for (IstarUser user : CMSRegistry.getCUsers()) {
+												String tag  = "Content";
+												if(user.getUserType().equalsIgnoreCase("CREATIVE_CREATOR")) {
+													tag = "Artist";
+												}
+											
 											%>
-											<option value="<%=user.getId()%>"><%=user.getEmail()%></option>
+											<option value="<%=user.getId()%>"><%=tag%> - <%=user.getEmail()%></option>
 											<%
 												}
 											%>

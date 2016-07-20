@@ -174,7 +174,7 @@
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class=" col-md-12 ">
 			
-				<div class="tab-v2 col-md-5 sky-form" id="tabs1">
+				<div class="tab-v2 col-md-9 sky-form" id="tabs1">
 					<ul class="nav nav-tabs">
 						<li><a href="#template" data-toggle="tab">Template</a></li>
 						<li class="active"><a href="#content" data-toggle="tab">Content</a></li>
@@ -182,6 +182,7 @@
 						<% if(slide_id != 0) {%>
 						<li><a href="#comments" data-toggle="tab">Review Comments</a></li>
 						<% } %>
+						<li><a href="#desktop" data-toggle="tab">Desktop Preview</a></li>
 					</ul>
 					
 					<form  action="/content/create_slide" name="" method="GET">
@@ -190,7 +191,7 @@
 					<input name="is_edit" value="<%=!newSlide%>" type="hidden"> 
 					<input name="slide_id" value="<%=slide_id%>" type="hidden">
 					<input name="order_id" value="<%=order_id%>" type="hidden">
-						
+					
 					<div class="tab-content">
 						<div id="template" class="tab-pane fade in ">
 							<div class="panel panel-sea">
@@ -285,7 +286,7 @@
 												<section class="col col-md-6">
 													<label class="label">Select Background Image</label> 
 													<label class="select"> 
-														<select name="image_bg" id="image-bg-picker" value="<%=cMSSlide.getImage_BG()%>">
+														<select name="image_bg" id="image-bg-picker" value="<%=bgImage%>">
 															<option selected="selected" value="none">None</option>
 															
 															<% for (Image bg : bgImages) { %>													
@@ -375,33 +376,30 @@
 								
 							</div>
 						</div>
+						
+						<div class="tab-pane fade in " id="desktop">
+							<div id="desktop_area"  class="dynamic-preview" style="margin:2% ;background-image: url('/content/assets/img/frames/desktop.png')">
+								<iframe id="one" class="desktop-preview-frame" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='d-prv'> </iframe>
+							</div>
+						</div>
 					</div>
 					
 					</form>
 				</div>
 				
 				
-				<div class=" col-md-7 ">
-					<div class="tab-v2 ">          
-						<ul class="nav nav-tabs">
-							<li><a href="#mobile" data-toggle="tab">Mobile</a></li>
-							<li class="active"><a href="#desktop" data-toggle="tab">Desktop</a></li>						
-						</ul>
-						
-						<div class="tab-content">
-							<div class="tab-pane fade in dynamic-preview" id="mobile">
-								<div id="mobile_area" style="    margin-left: 25%;background-size: 66%;  background-repeat: no-repeat; display: block;background-image: url('/content/assets/img/frames/mobile.png')">
-									<iframe class="mobile-preview" src="/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='m-prv' > </iframe>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade in dynamic-preview active" id="desktop">
-								<div id="desktop_area" style="margin-top: 5%;background-size: 100%;  background-repeat: no-repeat; display: block;background-image: url('/content/assets/img/frames/desktop.png')">
-									<iframe class="desktop-preview" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='d-prv'> </iframe>
+				<div class=" col-md-3 ">
+					<div class="panel panel-sea" style="margin-top: 11%;">
+						<div class="panel-heading">
+							<h3 class="panel-title"> <i class="fa fa-tasks"></i> Mobile Preview </h3>
+						</div>
+						<div class="panel-body ">
+							<div class="sky-form  " id="mobile">
+								<div id="mobile_area" class="dynamic-preview" style="background-image: url('/content/assets/img/frames/mobile.png')">
+									<iframe id="two" class="mobile-preview-frame" src="/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>" id='m-prv' > </iframe>
 								</div>
 							</div>
 						</div>
-							
 					</div>
 				</div>
 			
@@ -535,12 +533,13 @@
 		function initTextArea() {
 			try {
 				$("#image-picker").imagepicker();
-				CKEDITOR.replace('paragraph', {
-					height : 100
-				});
+				///CKEDITOR.replace('paragraph', {
+				//	height : 100
+				//});
 			} catch (err) {
 				console.log(err);
 			}
+			
 			try {
 				var bodyEditor = CKEDITOR.replace('slide_paragraph', {
 					readOnly : false
@@ -549,57 +548,71 @@
 					if (this.mode == 'source') {
 						var editable = bodyEditor.editable();
 						editable.attachListener(editable, 'input', function() {
-							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml()
-							$('.dynamic-preview').find('#slide_paragraph').each(function(index, value) {
-								$(this).html(text1);
+							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml();
+							$('.dynamic-preview > iframe').each(function(index, value) {
+								$(this).contents().find('#slide_paragraph').html(text1);
 							});
 						});
 					}
 				});
+				
 				bodyEditor.on('change', function() {
 					var text1 = bodyEditor.document.getBody().getHtml()
-					$('.dynamic-preview').find('#data_slide_paragraph').each(function(index, value) {
-						$(this).html(text1);
+					$('.dynamic-preview > iframe').each(function(index, value) {
+						$(this).contents().find('#data_slide_paragraph').html(text1);
 					});
 				});
 			} catch (err) {
 				console.log(err);
 			}
 		}
+		
 		function initHooks() {
 			$(".updateble").each( function(index, listItem) {
 				var id = $(this).attr('id');
 				if ($("#" + id).is("input")) {
 					$('#' + id).keyup( function() {
-						var iframeInner = $('.preview.active').contents().find('#data_' + id).html($('#' + id).val());
-						$('.dynamic-preview').find('#data_' + id).each(function(index, value) {
-							$(this).html($('#' + id).val());
+						$('.dynamic-preview > iframe').each(function(index, value) {
+							$(this).contents().find('#data_' + id).html($('#' + id).val());
 						});
 					});
 				} else {
 					console.log(id);
 				}
 			});
+			
 			$('#image-picker').on( 'change', function() {
 				var id = $(this).find(":checked").attr('id');
-				$('.dynamic-preview').find('#data_image_url').each(function(index, value) {
-					$(this).attr( "src", $('#' + id).data('img-src'));
+				$('.dynamic-preview > iframe').each(function(index, value) {
+					$(this).contents().find('#data_image_url').attr( "src", $('#' + id).data('img-src'));
 				});
 			});
 			$('#image-bg-picker').on( 'change', function() {
 				var bgurl = $(this).find(":checked").val();
-				$('.dynamic-preview').find('.slide-backgrund').each(function(index, value) {
-					$(this).css( 'background-image', "url(" + bgurl + ")");
+				var bgurl_desktop =  bgurl.replace(".png", "_desktop.png");
+				$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl + ")");
+				$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl_desktop + ")");
+			});
+		}
+		
+		function initColorChange() {
+			$('#slide_color').on( 'change', function() {
+				$('.dynamic-preview > iframe').each(function(index, value) {
+					$(this).contents().find('.slide-background').css( 'background-color', $('#slide_color').val());
 				});
 			});
 		}
-		function initColorChange() {
-			$('#slide_color').on( 'change', function() {
-				$('.preview.active').contents().find('.slide-background').css( 'background-color', $('#slide_color').val());
-				$('.dynamic-preview').find('.slide-background').each(function(index, value) {
-					$(this).css( 'background-color', $('#slide_color').val());
-				});
-			});
+		
+		function initBgImage() {
+			try {
+				var mobile_bg = "<%=cMSSlide.getImage_BG()%>";
+				var desktop_bg = mobile_bg.replace(".png", "_desktop.png");
+				
+				$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+mobile_bg+')');
+				$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+desktop_bg+')');
+			} catch (err) {
+				console.log(err);
+			}
 		}
 		
 		$(document).ready(function() {
@@ -610,6 +623,7 @@
 			initTextArea();
 			initHooks();
 			initColorChange();
+			initBgImage();
 			
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
@@ -621,28 +635,22 @@
 				window.location.href=url;
 			});
 			
-			
-			
-			 $.contextMenu({
-		            selector: '.thumbnail', 
-		            callback: function(key, options) {
-		                var mediaUrl = $(this).find('img').first().attr('src');
-		                $.ajax({
-		                	type: "GET",
-		                	url: "/content/media_upload?delfile="+mediaUrl, 
-		                });    
-	                    location.reload(); 
-		            },
-		            
-		            items: {
-		                "delete": {name: "Delete", icon: "delete"}
-		            }
-		        });
+			$.contextMenu({
+	            selector: '.thumbnail', 
+	            callback: function(key, options) {
+	                var mediaUrl = $(this).find('img').first().attr('src');
+	                $.ajax({
+	                	type: "GET",
+	                	url: "/content/media_upload?delfile="+mediaUrl, 
+	                });    
+                    location.reload(); 
+	            },
+	            
+	            items: {
+	                "delete": {name: "Delete", icon: "delete"}
+	            }
+	        });
 
-		        $('.context-menu-one').on('click', function(e){
-		            //console.log('===>clicked', this.attr('id'));
-		        })    
-			  
 		});
 	</script>
 </body>
