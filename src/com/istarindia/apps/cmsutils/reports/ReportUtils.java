@@ -223,7 +223,16 @@ public class ReportUtils {
 						if (column.getColumnHandler().equalsIgnoreCase("NONE")) {
 							out.append("<td style='max-width:100px !important; word-wrap: break-word;'>" + row.get(i)
 									+ "</th>");
-						} else {
+						} 
+						else if (column.getColumnHandler().equalsIgnoreCase("PerCoursePerActorHandler"))
+						{
+							out.append("<td style='max-width:100px !important; word-wrap: break-word;'><a href='/content/logs/per_actor_per_session.jsp?course_id="+Integer.parseInt(ROWID)+"&user_id="+row.get(i)+"'> Sessions</a></th>");
+						}
+						else if (column.getColumnHandler().equalsIgnoreCase("PerSessionPerActorHandler"))
+						{
+							out.append("<td style='max-width:100px !important; word-wrap: break-word;'><a href='/content/logs/per_actor_per_lesson.jsp?session_id="+Integer.parseInt(ROWID)+"&user_id="+row.get(i)+"'> Lessons</a></th>");
+						}
+						else {
 							out.append("<td india style='max-width:100px !important; word-wrap: break-word;'>"
 									+ ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler())
 											.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID)

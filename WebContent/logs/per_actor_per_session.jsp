@@ -63,15 +63,42 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<div class="col-md-12">
 				<% HashMap<String, String> conditions = new HashMap();
 				conditions.put("content_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
-				conditions.put("actor_id",request.getParameter("user_id"));
+				String user_string = request.getParameter("user_id"); 
+				if(user_string.split(";;")[0].equalsIgnoreCase("CONTENT_ADMIN"))
+				{
+					conditions.put("course_id",request.getParameter("course_id"));
+					conditions.put("user_id",user_string.split(";;")[1]);
+					%>
+					
+				<%=(new ReportUtils()).getReport(175, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+
+<%
+				}
+				else if(user_string.split("_")[0].equalsIgnoreCase("CONTENT_CREATOR"))
+				{
+					
+				}
+				else if(user_string.split("_")[0].equalsIgnoreCase("CREATIVE_ADMIN"))
+				{
+					
+				}
+				else if(user_string.split("_")[0].equalsIgnoreCase("CREATIVE_CREATOR"))
+				{
+					
+				}
+				else if(user_string.split("_")[0].equalsIgnoreCase("CONTENT_REVIEWER"))
+				{
+					
+				}
+				
+				//conditions.put("actor_id",);
 
 				%>
-				<%=(new ReportUtils()).getReport(173, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 				
-				<%=(new ReportUtils()).getReport(172, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				<%-- <%=(new ReportUtils()).getReport(172, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 				
 				<%=(new ReportUtils()).getReport(174, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
-			
+			 --%>
 			
 		
 
