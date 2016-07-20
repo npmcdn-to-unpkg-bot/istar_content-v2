@@ -77,10 +77,17 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			controls : false,
 			width:900,
 			height:1600,
-			minScale: 1,
-			maxScale: 1,
+			minScale: 0.29,
+			maxScale: 0.29,
 			transition: 'slide',
 		});
+		
+		$(document).ready(function() {
+			console.log($('.slides').css('top'));
+			$('.slides').css('top','75%');
+			console.log($('.slides').css('top'));
+		})
+		
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
 		if (($('.present').attr("style")).indexOf("background-color") < 0) {

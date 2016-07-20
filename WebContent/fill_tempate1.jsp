@@ -624,7 +624,8 @@
 			initHooks();
 			initColorChange();
 			initBgImage();
-			
+			$('.mobile-preview-frame .slides').css('top','75%');
+
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
