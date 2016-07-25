@@ -630,9 +630,9 @@
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
-					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
 	 			} else {
-					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
 				}
 				window.location.href=url;
 			});

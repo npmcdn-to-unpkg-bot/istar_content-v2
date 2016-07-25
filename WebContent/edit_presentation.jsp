@@ -98,7 +98,7 @@
 						</h3>
 					</div>
 					<div class="panel-body">
-						<form class="form-inline" role="form" action="/content/fill_tempate.jsp">
+						<form class="form-inline" role="form" action="/content/fill_tempate1.jsp">
 							
 							<input name="ppt_id" value="<%=ppt.getId() %>" type="hidden"/>
 							<div class="form-group">

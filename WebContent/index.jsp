@@ -119,7 +119,10 @@ if(request.getSession().getAttribute("user")!=null)
 	<!-- JS Page Level -->
 	<script src="<%=baseURL%>assets/js/app.js"></script>
 	<script>
-		jQuery(document).ready(function() {
+	if (!window.console) window.console = {};
+	if (!window.console.log) window.console.log = function () { };
+	
+	jQuery(document).ready(function() {
 			App.init();
 		});
 	</script>

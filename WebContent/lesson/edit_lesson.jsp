@@ -463,7 +463,7 @@
 										</div>
 									</div>
 									<div style="float: right;">
-										<a class="" target="_blank" href="/content/fill_tempate.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>&slide_type=<%=slideDAO.findById(log.getItem_id()).getTemplate() %>">Edit slide</a>
+										<a class="" target="_blank" href="/content/fill_tempate1.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>&slide_type=<%=slideDAO.findById(log.getItem_id()).getTemplate() %>">Edit slide</a>
 									</div>
 								</div>
 							</div>

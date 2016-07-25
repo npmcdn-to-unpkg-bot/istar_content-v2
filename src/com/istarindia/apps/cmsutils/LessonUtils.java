@@ -425,7 +425,7 @@ public class LessonUtils {
             out.append("<tbody id=''>");
             out.append(" <tr>");
             out.append(" <td>");
-            out.append("<form class='form-inline' role='form' action='/content/fill_tempate.jsp'>");
+            out.append("<form class='form-inline' role='form' action='/content/fill_tempate1.jsp'>");
             out.append("<input name='ppt_id' value='" + ppt.getId() + "' type='hidden'/>");
 
             out.append("<div class='form-group'>");
@@ -502,7 +502,7 @@ public class LessonUtils {
                 out.append("<td id='id'>" + data.get(i).get(0) + "</td>");
                 out.append("<td>" + data.get(i).get(2) + "</td>");
                 out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate.jsp?ppt_id=" + ppt.getId()
+                out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate1.jsp?ppt_id=" + ppt.getId()
                         + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(3) + "'>"
                         + "<i class='fa fa-check'></i>Edit</a>");
 

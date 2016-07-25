@@ -132,7 +132,7 @@ String new_media_title="";
 				<div class="col-md-1" style="min-height: 2000px; vertical-align: middle;">
 						<% if(previous_slide_id != 0) { %>
 							<a style="z-index:99999; width: 100%;" class="left carousel-control" 
-							href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>&slide_type=<%=previous_slide_type %>"> 
+							href="<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>&slide_type=<%=previous_slide_type %>"> 
 								<span  class="glyphicon glyphicon-chevron-left"></span> 
 							</a>
 						<% }%>
@@ -427,7 +427,7 @@ String new_media_title="";
 			<div class='col-md-1' style= "min-height: 2000px;  vertical-align: middle;">
 				<% if(next_slide_id != 0) { %>
 					<a style="z-index:99999; width: 100%;" class="right carousel-control" 
-					href="<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>&slide_type=<%=next_slide_type %>"> 
+					href="<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>&slide_type=<%=next_slide_type %>"> 
 						<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</a>
 				<% }%>
@@ -618,9 +618,9 @@ String new_media_title="";
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
-					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
 	 			} else {
-					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
 				}
 				window.location.href=url;
 			});
