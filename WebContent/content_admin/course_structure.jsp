@@ -1,4 +1,5 @@
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
+<%@page import="com.istarindia.apps.*"%>
 <%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
@@ -44,6 +45,7 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/jstree/themes/default/style.min.css">
 
+    <link href="<%=baseURL%>assets/plugins/jquery-contextmenu/src/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
@@ -150,8 +152,13 @@
 																	assigned = "label label-default ";
 																}
 															%>
-															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
-															<span class="<%=assigned%>"> Assigned to - <%=lesson.getAsignee() %></span> 
+															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" 
+															data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
+															<% if(lesson.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || lesson.getStatus().equalsIgnoreCase(StatusTypes.APPROVED)) { %>
+															<span data-task-id='<%=lesson.getTaskID() %>'  class="<%=assigned%> context-menu"> Assigned to - <%=lesson.getAsignee() %></span> 
+															<% } else { %>
+															<span data-task-id='<%=lesson.getTaskID() %>' class="<%=assigned%> "> Assigned to - <%=lesson.getAsignee() %></span> 
+															<% }  %>
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=reviewers %>"> Reviewer - <%=lesson.getReviewer() %></span> 
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=statusLabel%>"> Status - <%=lesson.getStatus() %></span></li>
 															<%
@@ -268,6 +275,7 @@
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 			<script type="text/javascript" src="<%=baseURL%>assets/plugins/jstree/jstree.js"></script>
+    		<script src="<%=baseURL%>assets/plugins/jquery-contextmenu/src/jquery.contextMenu.js" type="text/javascript"></script>
 
 			<!-- JS Customization -->
 			<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
@@ -288,6 +296,22 @@
 					$('#selected_items').val(selectedElmsIds);
 				}
 				jQuery(document).ready(function() {
+					$.contextMenu({
+	    	            selector: '.context-menu', 
+	    	            callback: function(key, options) {
+	    	                var taskId = $(this).data('task-id');
+	    	                $.ajax({
+	    	                	type: "GET",
+	    	                	url: "/content/change_status?new_status=PUBLISHED&task_id="+taskId, 
+	    	                });    
+	                        location.reload(); 
+	    	            },
+	    	            
+	    	            items: {
+	    	                "paste": {name: "Publish Lesson", icon: "paste"}
+	    	            }
+	    	        });
+					
 					App.init();
 					$('#html1').jstree({
 						"core" : {
@@ -302,12 +326,15 @@
 					});
 					$('#selected_items').val("aaaa");
 	                document.getElementById("formfield").value = "";
+	                
+	                
+	                
 
 				});
 				function DisplayFilePath(){
                     var filepath=$(":file").val();
                     var filename=filepath.substr(filepath.lastIndexOf('\\')+1,filepath.length);
-                document.getElementById("formfield").value = filename;
+                    document.getElementById("formfield").value = filename;
                 }
 			</script>
 			<!--[if lt IE 9]>

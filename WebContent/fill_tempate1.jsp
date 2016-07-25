@@ -379,7 +379,7 @@
 						</div>
 						
 						<div class="tab-pane fade in " id="desktop">
-							<div id="desktop_area"  class="dynamic-preview" style="margin:2% ;background-image: url('/content/assets/img/frames/desktop.png')">
+							<div id="desktop_area"  class="dynamic-preview" style="margin:2% ;">
 								<iframe id="d-preview" class="desktop-preview-frame" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"> </iframe>
 							</div>
 						</div>
@@ -603,7 +603,20 @@
 				});
 			});
 		}
+		function setupFrames() {
+		//	$('#d-preview').width = $('#d-preview').parent().width();
+		//	$('#d-preview').height = $('#d-preview').width() *  768 / 1024;
+		//	$('#m-preview').width = $('#m-preview').parent().width();
+		//	$('#m-preview').height = $('#m-preview').wight * 1600 / 900;
 		
+		var width = $('#d-preview').parent().width();
+
+		var height = width*768/1024;
+		$('#d-preview').css('height',height+'px');
+		
+		console.log(width);
+		console.log(height);
+		}
 		function initBgImage() {
 			try {
 				var mobile_bg = "<%=cMSSlide.getImage_BG()%>";
@@ -625,6 +638,7 @@
 			initHooks();
 			initColorChange();
 			initBgImage();
+			setupFrames();
 			$('.mobile-preview-frame .slides').css('top','75%');
 
 			$("#slidy_type_id").change(function() {
