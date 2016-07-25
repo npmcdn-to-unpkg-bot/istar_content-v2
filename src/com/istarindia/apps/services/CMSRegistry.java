@@ -101,6 +101,8 @@ public class CMSRegistry {
 		slideTemplates.add("ONLY_VIDEO");
 		slideTemplates.add("ONLY_2BOX");
 		
+		slideTemplates.add("ONLY_TITLE_PARAGRAPH_cells_fragemented");
+		
 		/* Not used even once in first 4000 slides*/
 		//slideTemplates.add("ONLY_2TITLE_TREE");
 		//slideTemplates.add("ONLY_2TITLE_TABLE");

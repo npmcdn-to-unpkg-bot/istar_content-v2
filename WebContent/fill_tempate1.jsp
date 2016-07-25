@@ -354,7 +354,7 @@
 							<div class="panel panel-profile profile">
 								
 								<div class="panel-body no-padding" data-mcs-theme="minimal-dark"> 
-									<%  for(HashMap<String, String> log : logs ) { %>
+									<%  try { for(HashMap<String, String> log : logs ) { %>
 									
 									<div class="comment">
 										<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
@@ -364,7 +364,7 @@
 										</div>
 									</div>
 									
-									<% } %>
+									<% } } catch(Exception e) {} %>
 									
 									<footer>
 										<% if(slide_id != 0) {%>
