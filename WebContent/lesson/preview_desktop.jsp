@@ -195,9 +195,7 @@ try {
 				document.body.style.background = $('.present').data("bgcolor");
 			}
 		}
-		
-		var orginal_listitem_font_size = <%=(new UiThemeDAO()).findById(themeID).getListitemFontSize()%> ;
-		
+				
 		Reveal.addEventListener('slidechanged', function(event) {
 			$('.present').find('.show-all').each(function(index, value) {
 				$(this).removeClass("show-all");
@@ -210,16 +208,6 @@ try {
 			currentURL = res[0];
 			history.pushState({}, "URL Rewrite Example", currentURL + "#" + event.currentSlide.id);
 			
-			/* $('.video111').css('height',(window.screen.availHeight)+'px');
-			$('.video111').css('position','absolute');
-			$('.video111').css('top', '-'+(window.screen.availHeight-50)/2+'px');
-			$('.video111').css('margin-left','-18%'); */
-
-			/* var height_slide = $('#'+event.currentSlide.id).css('height');
-			$('#'+event.currentSlide.id).css('display','table');
-			$('#'+event.currentSlide.id+ " .row").css('height',height_slide);
-			$('#'+event.currentSlide.id+ " .row").css('display','table-cell');
-			$('#'+event.currentSlide.id+ " .row").css('vertical-align','middle'); */
 		});
 
 		function add_edit() {

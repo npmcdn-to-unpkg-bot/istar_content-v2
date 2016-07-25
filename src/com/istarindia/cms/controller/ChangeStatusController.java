@@ -41,7 +41,7 @@ import com.istarindia.apps.services.task.EmailSendingUtility;
 @WebServlet("/change_status")
 public class ChangeStatusController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private String deployment_type;
 	private String host;
 	private String port;
 	private String user1;
@@ -69,7 +69,7 @@ public class ChangeStatusController extends HttpServlet {
 			}
 			
 			
-			
+			deployment_type = properties.getProperty("deployment_type");
 			host = properties.getProperty("host");
 			port = properties.getProperty("port");
 			user1 = properties.getProperty("emailFrom");
@@ -127,7 +127,9 @@ public class ChangeStatusController extends HttpServlet {
 				public void run() {
 					// TODO Auto-generated method stub
 					try {
-						EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage);
+						if (deployment_type.trim().equalsIgnoreCase("prod")) {
+							EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage); 
+						}
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
