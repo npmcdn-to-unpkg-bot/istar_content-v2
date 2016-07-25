@@ -186,7 +186,7 @@ body {
 	width: 100%;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  h2 {
+.reveal .ONLY_TITLE_PARAGRAPH  h2  , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  h2  {
     padding-bottom: 3%;
     color: <%=theme.get("title_____font_color")%>;
 	font-weight: <%=theme.get("title_____font_weight")%>;
@@ -355,7 +355,7 @@ body {
     vertical-align: baseline;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  table  {
+.reveal .ONLY_TITLE_PARAGRAPH  table , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  table  {
 	margin: auto;
     border-collapse: collapse;
     vertical-align: baseline;
@@ -369,7 +369,7 @@ body {
     font-weight: 400;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  thead  {
+.reveal .ONLY_TITLE_PARAGRAPH  thead , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  thead  {
 	display: table-header-group;
 	border-collapse: collapse;
     margin: 0;
@@ -379,14 +379,14 @@ body {
     vertical-align: baseline;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH   td  {
+.reveal .ONLY_TITLE_PARAGRAPH   td , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented   td  {
 	text-align: left;
     padding: 8px;
     border: 2px solid rgba(214, 201, 201, 0.3);
     ;font-size: 120%;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  th {
+.reveal .ONLY_TITLE_PARAGRAPH  th , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  th {
 	text-align: left;
     padding: 8px;
     font-weight: bold;
@@ -396,14 +396,14 @@ body {
     font-size: 120%;
     border: 2px solid rgba(0,0,0,0.3);
 }
-.reveal .ONLY_TITLE_PARAGRAPH .paragraph  td p {
+.reveal .ONLY_TITLE_PARAGRAPH .paragraph  td p , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented .paragraph  td p {
      margin-bottom: 0%; 
 }
-.reveal .ONLY_TITLE_PARAGRAPH .paragraph  td {
+.reveal .ONLY_TITLE_PARAGRAPH .paragraph  td, .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented .paragraph  td {
      margin-bottom: 2%; 
      padding: 0.6%;
 }
-.reveal .ONLY_TITLE_PARAGRAPH  tr  {
+.reveal .ONLY_TITLE_PARAGRAPH  tr , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  tr  {
     display: table-row;
     margin: 0;
     padding: 0;
@@ -527,7 +527,7 @@ body {
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
 
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph {
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  .paragraph {
 	margin-top: 2%;
     padding-left: 0%;
     list-style: none;
@@ -538,7 +538,7 @@ body {
 	text-align: <%=theme.get("paragraph_____text_alignment")%>;
 	font-family: '<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>', serif;
 }
-.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p{
+.reveal .ONLY_TITLE_PARAGRAPH  .paragraph p, .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  .paragraph p{
 	margin-bottom: 2%;
 }
 

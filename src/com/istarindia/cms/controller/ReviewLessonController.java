@@ -204,7 +204,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 			if (request.getParameterMap().containsKey("from") && request.getParameter("from").equalsIgnoreCase("review_slide")) {
 				response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide.getId());
 			} else if (request.getParameterMap().containsKey("from") && request.getParameter("from").equalsIgnoreCase("edit_slide")) {
-				response.sendRedirect("/content/fill_tempate.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide.getId()+"&slide_type="+slide.getTemplate());
+				response.sendRedirect("/content/fill_tempate1.jsp?ppt_id="+slide.getPresentaion().getId()+"&slide_id="+slide.getId()+"&slide_type="+slide.getTemplate());
 			} else {
 				response.sendRedirect("/content/index.jsp");
 			}

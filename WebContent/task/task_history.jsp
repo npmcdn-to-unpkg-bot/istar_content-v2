@@ -1,9 +1,12 @@
+<%@page import="org.jsoup.parser.Parser"%>
+<%@page import="org.jsoup.nodes.Document"%>
 <%@page import="com.istarindia.apps.services.TaskService"%>
 <%@page import="com.istarindia.apps.services.MediaService"%>
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 <%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.services.LessonService"%>
+<%@page import="org.jsoup.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
@@ -99,7 +102,17 @@
 						<span><%=row.get(3) %></span> <span><%=row.get(2) %></span>
 					</div> <i class="cbp_tmicon rounded-x hidden-xs"></i>
 					<div class="cbp_tmlabel equal-height-column" style="height: 192px;">
-						<h2>Status Changed to <%=row.get(0).toLowerCase() %></h2>
+							<% if(row.get(1).toString().contains("<slide")) { %>
+								<h2>Slide Edited/created </h2>
+								<% } else { %>
+								
+						<h2>Status Changed to <%=row.get(0).toLowerCase() %></h2>		
+							
+							
+								<% } %>
+						
+						
+						
 						<div class="row">
 							<div class="col-md-4">
 								<img style="    width: 50px;" class="img-responsive" src="http://images.clipartpanda.com/task-clipart-task-md.png"
@@ -107,7 +120,25 @@
 								<div class="md-margin-bottom-20"></div>
 							</div>
 							<div class="col-md-8">
-								<p style="color: black"><%=row.get(1) %></p>
+								<p style="color: black">
+								<% if(!row.get(1).toString().contains("<slide")) {
+									
+									System.out.println("SLide Edit Data ");
+									
+									%>
+								<%=row.get(1) %></p>
+								<% } else {
+									
+									Document doc = Jsoup.parse(row.get(1), "", Parser.xmlParser());
+									
+									
+									%>
+								<pre>
+  <code> <%=doc.text() %> </code>
+</pre>
+								
+								
+								<% } %>
 							</div>
 						</div>
 					</div>

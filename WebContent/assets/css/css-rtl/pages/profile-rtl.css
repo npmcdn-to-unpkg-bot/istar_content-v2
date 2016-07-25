@@ -783,6 +783,7 @@
 
 .profile .timeline-v2 > li .cbp_tmlabel {
 	background: #fff;
+	color: black !important;
 }
 
 .profile .timeline-v2 > li .cbp_tmlabel:after {

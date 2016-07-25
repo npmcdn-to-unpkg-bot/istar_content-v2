@@ -354,7 +354,7 @@
 							<div class="panel panel-profile profile">
 								
 								<div class="panel-body no-padding" data-mcs-theme="minimal-dark"> 
-									<%  for(HashMap<String, String> log : logs ) { %>
+									<%  try { for(HashMap<String, String> log : logs ) { %>
 									
 									<div class="comment">
 										<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
@@ -364,7 +364,7 @@
 										</div>
 									</div>
 									
-									<% } %>
+									<% } } catch(Exception e) {} %>
 									
 									<footer>
 										<% if(slide_id != 0) {%>
@@ -630,9 +630,9 @@
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
-					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
 	 			} else {
-					var url = "	<%=baseURL%>fill_tempate.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
 				}
 				window.location.href=url;
 			});
