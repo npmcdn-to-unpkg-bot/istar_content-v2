@@ -48,8 +48,13 @@ public class EditLessonController extends HttpServlet {
 		}
 		else
 		{
-			new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
+			TaskService service = new TaskService();
+			if(task.getStatus().equalsIgnoreCase(StatusTypes.DIS_APPROVED)){
+				service.updateReviewStatus(task.getId());
+			}
 			
+			service.updateStatus(task.getId(), StatusTypes.DRAFT);
+
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 			String  tags="";
 			String learningObjectives[];

@@ -132,7 +132,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 					<input id='entity_type' name='entity_type' type='hidden' value='lessons'> 
 					<input id='order_holder' name='order_holder' type='hidden'>
 
-					<!-- This is PART#1. Either keep this part or PART#1 in the SCRIPT part below -->
+					<!-- This is PART#1. Either keep this part or PART#2 in the SCRIPT part below -->
 					<!-- <button type="submit" class="btn-u" style="float: right; margin-right: 2%;">Update Order</button> -->
 					<%=(new ReportUtils()).getReport(33, conditions, ((IstarUser) request.getSession().getAttribute("user")), "NONE").toString()%>
 				</form>
@@ -170,6 +170,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		tablet : 1024,
 		phone : 480
 	};
+
+    function openWin(url) {
+        myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
+
+        return false;
+    }
+
 	jQuery(document).ready(function() {
 			App.init();
 	            //table contents are sortable

@@ -53,7 +53,6 @@ public class LoginController extends IStarBaseServelet {
 					CMSRegistry.writeAuditLog(request.getSession().getId(), user.getId(),"LOGIN");
 					request.setAttribute("msg", "Welcome to iStar, " + user.getName());
 					request.getRequestDispatcher("/" + user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
-
 				} else {
 					request.setAttribute("msg", "Wrong Username or password");
 					request.getRequestDispatcher("/index.jsp").forward(request, response);

@@ -21,20 +21,15 @@ public class StatusColumnHandler extends ColumnHandler {
 		
 		TaskDAO dao = new TaskDAO();
 		Task task = dao.findById(taskID);
-		System.err.println("valid stage count : " + getAllVaildStages(status).size());
+		System.err.println("valid stages "+getAllVaildStages(status).size());
 		for(TaskStage stage : getAllVaildStages(status)) {
 			String[] role_array = stage.getValidRole().split(",");
-			System.err.println("valid role count : " + role_array.length + " for stage : " + stage.getName() );
-			for(String roles : role_array) {
-				
-			}
+			System.err.println("valid stage "+stage);
 			for(String roles : role_array)
 			{ 
-				System.err.println("role : " + roles);
+				System.err.println("valid role "+roles);
 				if(user.getUserType().equals(roles))
 				{
-					System.err.println("valid stage : " + stage.getName());
-					System.err.println("task type : " + task.getItemType());
 					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN) && task.getItemType().equalsIgnoreCase("LESSON"))
 					{
 						items.put("<li><a href='/content/review_task?task_id="+taskID+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/review_task?task_id="+taskID+"'>"+stage.getName()+"</a></li> ");
@@ -50,10 +45,14 @@ public class StatusColumnHandler extends ColumnHandler {
 					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && !task.getItemType().equalsIgnoreCase("LESSON")) 
 					{
 						items.put("<li><a href='/content/edit_media?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_media?task_id="+task.getId()+"'>"+stage.getName()+"</a></li>");
-					}
+					} 
 					else if(stage.getName().equalsIgnoreCase(StatusTypes.EDIT) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && task.getItemType().equalsIgnoreCase("LESSON"))
 					{
 						items.put("<li><a href='/content/edit_lesson?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/edit_lesson?task_id="+task.getId()+"'>"+stage.getName()+"</a></li> ");
+					} 
+					else if(stage.getName().equalsIgnoreCase(StatusTypes.APPROVED) && user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR) && task.getItemType().equalsIgnoreCase("LESSON"))
+					{
+						items.put("<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.REQUEST_FOR_PUBLISH+"'>"+stage.getName()+"</a></li> ", "<li><a href='/content/change_status?task_id="+task.getId()+"&new_status="+StatusTypes.CREATED+"'>"+stage.getName()+"</a></li> ");						
 					}		
 					else if(stage.getName().equalsIgnoreCase(StatusTypes.UNPUBLISHED))
 					{	
@@ -65,15 +64,14 @@ public class StatusColumnHandler extends ColumnHandler {
 					}	
 				}
 			}
+		}
 		
-		
-		
-	}
 		out.append("<div class='btn-group'> <button type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='true'> Change Task State <i class='fa fa-angle-down'></i> </button> <ul class='dropdown-menu' role='menu'>");
 
 		for (String iterable_element : items.keySet()) {
 			out.append(iterable_element);
 		}
+		
 		out.append("</ul> </div>");
 		return out;
 	}		
@@ -81,11 +79,11 @@ public class StatusColumnHandler extends ColumnHandler {
 	private List<TaskStage> getAllVaildStages(String status) {
 		
 		ArrayList<TaskStage> items = new ArrayList<TaskStage>();
+		System.err.println(status);
 		for (TaskStage taskStage : CreateLessonTaskManager.taskStages) {
 			if (status.equalsIgnoreCase(taskStage.getName())) {
 				try {
 					for (int tt : taskStage.validNextStages) {
-						
 						items.add(CreateLessonTaskManager.taskStages.get(tt));
 					}
 				} catch (Exception e) {

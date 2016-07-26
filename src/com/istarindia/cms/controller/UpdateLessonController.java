@@ -48,7 +48,6 @@ public class UpdateLessonController extends IStarBaseServelet {
 						lo_ids.append(',');
 					}
 				}
-				System.err.println("LOs: "+lo_ids);
 			}
 			
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));

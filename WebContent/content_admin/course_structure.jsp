@@ -145,7 +145,6 @@
 																	statusLabel = "label label-default ";
 																}
 																String email = ((IstarUser)request.getSession().getAttribute("user")).getEmail();
-																//System.err.println(lesson.getAsignee());
 																if(lesson.getAsignee().equalsIgnoreCase(email)) {
 																	assigned = "label label-default ";
 																}

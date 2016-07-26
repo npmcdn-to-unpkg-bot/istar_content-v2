@@ -105,6 +105,8 @@
 			url="/content/creative_creator/not_reviewed.jsp" valid_roles="creative_creator" />
 		<child_links display_name="Disapproved"
 			url="/content/creative_creator/disapproved.jsp" valid_roles="creative_creator" />
+		<child_links display_name="Approved"
+			url="/content/creative_creator/approved.jsp" valid_roles="creative_creator" />
 
 	</parent_links>
 	<parent_links display_name="Folder">
