@@ -40,8 +40,15 @@
 	Session uiSession = uiDao.getSession();
 	SQLQuery query = uiSession.createSQLQuery(sql);
 	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-	List<HashMap<String, Object>> results = query.list();
-		HashMap<String, String> theme = (HashMap<String, String>)query.list().get(0);
+	DBUTILS util = new DBUTILS();
+	List<HashMap<String, Object>> rr = util.executeQuery(sql);
+	HashMap<String, Object> temp1 = rr.get(0);
+	HashMap<String, String> temp2= new HashMap<String, String>();
+	for(String str: temp1.keySet())
+	{
+		temp2.put(str, (String)temp1.get(str));
+	}
+	HashMap<String, String> theme = temp2;
 	%>
 <style>
 

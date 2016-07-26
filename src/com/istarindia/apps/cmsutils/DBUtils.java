@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
@@ -30,7 +31,8 @@ public class DBUtils {
 		String sql1 = "select * from slide where presentation_id="+integer+" order by order_id";
 		SQLQuery query = session.createSQLQuery(sql1);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		List<HashMap<String, Object>> results = query.list();
+		DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql1);
 		for (HashMap<String, Object> object : results) {
 			try {
 				ArrayList<String> row = new ArrayList<>();
@@ -59,8 +61,8 @@ public class DBUtils {
 		String sql1 = "select * from assessment_question where assessmentid="+id+" order by id";
 		SQLQuery query = session.createSQLQuery(sql1);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		List<HashMap<String, Object>> results = query.list();
-		QuestionDAO questionDao = new QuestionDAO();
+		DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql1);		QuestionDAO questionDao = new QuestionDAO();
 		Question question = new Question();
 		for (HashMap<String, Object> object : results) {
 			try {

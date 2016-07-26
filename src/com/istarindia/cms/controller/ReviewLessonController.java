@@ -153,8 +153,9 @@ public class ReviewLessonController extends IStarBaseServelet {
 			SQLQuery query = session.createSQLQuery(sql1);
 			System.err.println(sql1);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			List<HashMap<String, Object>> results = query.list();
-			for (HashMap<String, Object> object : results) {
+			   DBUTILS util = new DBUTILS();
+				List<HashMap<String, Object>> results = util.executeQuery(sql1);
+				for (HashMap<String, Object> object : results) {
 					for (String string : object.keySet()) {
 						//System.out.println(object.get(string));
 						slideID = Integer.parseInt(object.get(string).toString());

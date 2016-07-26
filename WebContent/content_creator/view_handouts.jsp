@@ -85,7 +85,8 @@
 					                String sql1 ="select * from course";
 					                SQLQuery query = session_hib.createSQLQuery(sql1);
 					            	query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-					                List<HashMap<String, Object>> results = query.list();
+					            	DBUTILS util = new DBUTILS();
+					        		List<HashMap<String, Object>> results = util.executeQuery(sql1);
 									
 									int course_sno = 0;
 										//CourseDAO dao = new CourseDAO();

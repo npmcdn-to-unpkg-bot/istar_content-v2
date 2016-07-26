@@ -19,6 +19,7 @@ import org.hibernate.Transaction;
 
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.LessonDAO;
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
@@ -50,7 +51,8 @@ public class CreateAssessmentController extends HttpServlet {
 		Session session = dao.getSession();
 		SQLQuery query = session.createSQLQuery(sql);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		List<HashMap<String, Integer>> result = query.list();
+		DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> result = util.executeQuery(sql);
 		
 		response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + result.get(0).get("id"));
 	}
