@@ -15,7 +15,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title> Media Tasks in progress | iStar CMS</title>
+<title> Media Disapproved | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -64,7 +64,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<% HashMap<String, String> conditions = new HashMap();
 				conditions.put("creative_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
 				%>
-				<%=(new ReportUtils()).getReport(202, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
+				<%=(new ReportUtils()).getReport(65, conditions, ((IstarUser)request.getSession().getAttribute("user")), "null").toString() %>
 			</div>
 		</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>

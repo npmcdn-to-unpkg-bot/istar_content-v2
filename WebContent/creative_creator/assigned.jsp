@@ -64,7 +64,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<% HashMap<String, String> conditions = new HashMap();
 				conditions.put("creative_creator_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
 				%>
-				<%=(new ReportUtils()).getReport(62, conditions, ((IstarUser)request.getSession().getAttribute("user")), null).toString() %>
+				<%=(new ReportUtils()).getReport(201, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
 			</div>
 		</div>
 	<jsp:include page="includes/footer.jsp"></jsp:include>
