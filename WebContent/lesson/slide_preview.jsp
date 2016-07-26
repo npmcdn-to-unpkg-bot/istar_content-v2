@@ -34,6 +34,7 @@ String style_body = "background-size: cover;";
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="<%=nuetral%>student/css/reveal.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
 
 <!-- Include the yellow.jsp for styling only if everything is good for inclusion.
 lesson may not have theme saved
@@ -76,10 +77,45 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 	<script src="<%=nuetral%>student/js/reveal.js"></script>
 
 	<script>
-		Reveal.initialize({
+	
+	<% if(!request.getParameterMap().containsKey("scale")) { %>
+
+	
+	Reveal.initialize({
 			center : false,
 			controls : false,
+			width:900,
+			height:1600,
+			minScale: 0.29,
+			maxScale: 0.29,
+			transition: 'slide',
 		});
+		
+		
+		<% 
+			} else { 
+				float scale = Float.parseFloat(request.getParameter("scale").toString());
+		%>
+
+		
+		Reveal.initialize({
+				center : false,
+				controls : false,
+				width:900,
+				height:1600,
+				minScale: <%=scale%>,
+				maxScale: <%=scale%>,
+				transition: 'slide',
+			});
+			
+		
+		<%}   %>
+	
+
+		$(document).ready(function() {
+			$('.slides').css('top','75%');
+		})
+		
 		var orgBgColor = $("body").css("background-color");
 		document.body.style.background = $('.present').css('background-color');
 		if (($('.present').attr("style")).indexOf("background-color") < 0) {

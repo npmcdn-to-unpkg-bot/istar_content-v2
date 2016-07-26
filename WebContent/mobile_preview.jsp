@@ -67,10 +67,6 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 
-		<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
-
 	<script>
 
 	<% if(!request.getParameterMap().containsKey("scale")) { %>
@@ -107,9 +103,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		<%}   %>
 	
 		$(document).ready(function() {
-			console.log($('.slides').css('top'));
 			$('.slides').css('top','75%');
-			console.log($('.slides').css('top'));
 		})
 		
 		var orgBgColor = $("body").css("background-color");

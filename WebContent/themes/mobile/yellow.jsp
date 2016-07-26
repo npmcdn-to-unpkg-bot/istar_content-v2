@@ -30,7 +30,6 @@
 	String lesson_theme = "0";
 	try {
 		lesson_theme = ppt.getLesson().getLesson_theme();
-		System.err.println("debuggggggggg "+lesson_theme);
 	} catch(NullPointerException npe) {
 		System.out.println( ppt.getLesson().getId());
 	}

@@ -683,10 +683,10 @@
 
 		function DisplayFilePath() {
 			var filepath = $(":file").val();
-			var filename = filepath.substr(filepath.lastIndexOf('\\') + 1,
-					filepath.length);
+			var filename = filepath.substr(filepath.lastIndexOf('\\') + 1, filepath.length);
 			document.getElementById("formfield").value = filename;
 		}
+		
 		$('input.correctOption').on('change', function() {
 			if ($('#qType').val() == '1') {
 				$('input.correctOption').not(this).prop('checked', false);
