@@ -99,7 +99,7 @@ public class ReportUtils {
 	public ArrayList<ArrayList<String>> getReportData(String sql1, ArrayList<IStarColumn> keys,
 			HashMap<String, String> conditions) {
 		ArrayList<ArrayList<String>> table = new ArrayList<>();
-		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		Session session = new IstarUserDAO().getSession();
 		List<HashMap<String, Object>> results;
 		Transaction tx = null;
 		try {
@@ -112,14 +112,21 @@ public class ReportUtils {
 				try {
 					if (sql1.contains(key)) {
 						System.out.println("key->" + key + "   value-> " + conditions.get(key));
+						
 						query.setParameter(key, Integer.parseInt(conditions.get(key)));
+						System.out.println("query string----"+query.getQueryString());
+
 					}
 				} catch (Exception e) {
+					System.err.println("-------------------here");
+					e.printStackTrace();
 					query.setParameter(key, conditions.get(key));
 				}
 			}
+			
 			DBUTILS util = new DBUTILS();
-			 results = util.executeQuery(sql1);
+			// results = query.list();
+					 results = util.executeFromQueryObject(query);
 			for (HashMap<String, Object> object : results) {
 				ArrayList<String> row = new ArrayList<>();
 				for (IStarColumn string : keys) {
