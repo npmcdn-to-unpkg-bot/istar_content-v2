@@ -6,6 +6,12 @@
 
 var App = function () {
 	// We extend jQuery by method hasAttr
+	
+	function loadScripts() {
+		$.getScript( "https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js", function( data, textStatus, jqxhr ) { });
+		$.getScript( "https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js", function( data, textStatus, jqxhr ) { });
+	}
+	
 	$.fn.hasAttr = function(name) {
 	  return this.attr(name) !== undefined;
 	};
@@ -451,6 +457,7 @@ var App = function () {
 			handleTables();
 			handleGraphs();
 			handleCalendar();
+			loadScripts();
 		},
 
 		// Counters
