@@ -33,6 +33,7 @@ import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
 import com.istarindia.apps.dao.AssessmentOption;
 import com.istarindia.apps.dao.Cmsession;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.Game;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
@@ -956,8 +957,8 @@ public class LessonUtils {
                     + " order by learning_objectiveid";
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            List<HashMap<String, Object>> results = query.list();
-            LearningObjectiveDAO learningObjectiveDao = new LearningObjectiveDAO();
+            DBUTILS util = new DBUTILS();
+    		List<HashMap<String, Object>> results = util.executeQuery(sql);            LearningObjectiveDAO learningObjectiveDao = new LearningObjectiveDAO();
             LearningObjective learningObjective = new LearningObjective();
             for (HashMap<String, Object> object : results) {
                 try {
@@ -1276,8 +1277,8 @@ public class LessonUtils {
             		+ " WHERE lol.learning_objectiveid = lo.id and lol.lessonid = "+lesson_id;
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            List<HashMap<String, Object>> results = query.list();
-            for (HashMap<String, Object> object : results) {
+            DBUTILS util = new DBUTILS();
+    		List<HashMap<String, Object>> results = util.executeQuery(sql);            for (HashMap<String, Object> object : results) {
             	LearningObjective lo = new LearningObjective();
                 lo.setId((Integer)object.get("id"));
                 lo.setTitle(object.get("title").toString());
@@ -1305,8 +1306,8 @@ public class LessonUtils {
             		+ 	  " WHERE lol.lessonid = "+lesson_id+") group by lol.learning_objectiveid, lo.title, lo.subject";
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            List<HashMap<String, Object>> results = query.list();
-            for (HashMap<String, Object> object : results) {
+            DBUTILS util = new DBUTILS();
+    		List<HashMap<String, Object>> results = util.executeQuery(sql);            for (HashMap<String, Object> object : results) {
             	LearningObjective lo = new LearningObjective();
                 lo.setId((Integer)object.get("id"));
                 lo.setTitle(object.get("title").toString());
@@ -1328,8 +1329,8 @@ public class LessonUtils {
             String sql = "select lo.id as id , lo.title as title, lo.subject as subject from learning_objective lo";
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            List<HashMap<String, Object>> results = query.list();
-            for (HashMap<String, Object> object : results) {
+            DBUTILS util = new DBUTILS();
+    		List<HashMap<String, Object>> results = util.executeQuery(sql);            for (HashMap<String, Object> object : results) {
             	LearningObjective lo = new LearningObjective();
                 lo.setId((Integer)object.get("id"));
                 lo.setTitle(object.get("title").toString());
@@ -1352,8 +1353,8 @@ public class LessonUtils {
             			 + "where loq.learning_objectiveid=lo.id and loq.questionid = "+question_id;
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            List<HashMap<String, Object>> results = query.list();
-            for (HashMap<String, Object> object : results) {
+            DBUTILS util = new DBUTILS();
+    		List<HashMap<String, Object>> results = util.executeQuery(sql);            for (HashMap<String, Object> object : results) {
             	LearningObjective lo = new LearningObjective();
                 lo.setId((Integer)object.get("id"));
                 lo.setTitle(object.get("title").toString());
@@ -1375,8 +1376,9 @@ public class LessonUtils {
         String sql = "select * from task_log t where t.item_type='SLIDE' and item_id = "+ slide_id + "order by t.created_at desc";
         SQLQuery query = session.createSQLQuery(sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        List<HashMap<String, Object>> results = query.list();
-        for (HashMap<String, Object> object : results) {
+        DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);
+		for (HashMap<String, Object> object : results) {
         	if(!object.get("comments").toString().trim().isEmpty()) {
 	        	HashMap<String, String> log = new HashMap<>();
 	            log.put("comment", object.get("comments").toString());

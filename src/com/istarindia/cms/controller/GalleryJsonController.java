@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.istarindia.apps.ImageUtils;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.sun.imageio.plugins.common.ImageUtil;
@@ -50,7 +51,8 @@ public class GalleryJsonController extends HttpServlet {
         Session session = dao.getSession();
         SQLQuery query = session.createSQLQuery(sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        List<HashMap<String, Object>> results = query.list();
+        DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);
         JSONObject json = null;
         JSONArray arr = new JSONArray();
 		for (HashMap<String, Object> object : results) {

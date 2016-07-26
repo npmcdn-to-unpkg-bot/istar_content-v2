@@ -13,7 +13,7 @@ import com.istarindia.apps.dao.TaskDAO;
 public class CourseLinkHandler extends ColumnHandler {
 
 	@Override
-	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
+	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID , String itemType) {
 		if (reportID == 30){
 			return new StringBuffer("<a href='/content/content_admin/modify_course.jsp?course_id=" + taskID + "'> Edit</a>  ");
 		} else if (reportID == 31){

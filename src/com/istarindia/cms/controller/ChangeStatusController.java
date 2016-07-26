@@ -21,6 +21,7 @@ import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.Course;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Lesson;
@@ -172,8 +173,10 @@ public class ChangeStatusController extends HttpServlet {
 				
 				SQLQuery query = session.createSQLQuery(sql);
 				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-				
-				HashMap<String, Object> result = (HashMap<String, Object>) query.list().get(0);
+				DBUTILS util = new DBUTILS();
+				List<HashMap<String, Object>> results = util.executeQuery(sql);
+				   
+				HashMap<String, Object> result = (HashMap<String, Object>) results.get(0);
 				int session_id = Integer.parseInt(result.get("session_id").toString());
 				redirectUrl = "content_admin/modify_session.jsp?session_id="+session_id;
 				

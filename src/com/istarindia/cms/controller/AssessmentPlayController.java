@@ -25,6 +25,7 @@ import com.istarindia.apps.dao.AssessmentOption;
 import com.istarindia.apps.dao.AssessmentOptionDAO;
 import com.istarindia.apps.dao.AssessmentQuestion;
 import com.istarindia.apps.dao.AssessmentQuestionDAO;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Question;
@@ -135,8 +136,8 @@ public class AssessmentPlayController extends IStarBaseServelet {
 					String bsql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+z+"";
 					SQLQuery bquery = bsession.createSQLQuery(bsql);
 					bquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-					List<HashMap<String, Object>> bresult = bquery.list();
-					int tempq =0; 
+					DBUTILS util = new DBUTILS();
+					List<HashMap<String, Object>> bresult = util.executeQuery(bsql);					int tempq =0; 
 					Question tq = new Question();
 					QuestionDAO tqd = new QuestionDAO();
 					int prev = report.getProgress();
@@ -176,7 +177,8 @@ public class AssessmentPlayController extends IStarBaseServelet {
 									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> cresult = cquery.list();
+									DBUTILS utilss = new DBUTILS();
+									List<HashMap<String, Object>> cresult = utilss.executeQuery(csql);			
 									for (HashMap<String, Object> hashMap : cresult) {
 										System.err.println((new Throwable()).getStackTrace()[0].getLineNumber());
 										tq = tqd.findById((int)hashMap.get("questionid"));
@@ -201,7 +203,8 @@ public class AssessmentPlayController extends IStarBaseServelet {
 									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> cresult = cquery.list();
+									DBUTILS utilss = new DBUTILS();
+									List<HashMap<String, Object>> cresult = utilss.executeQuery(csql);
 									for (HashMap<String, Object> hashMap : cresult) {
 										tq = tqd.findById((int)hashMap.get("questionid"));
 										if(tq.getDifficultyLevel()==i){ 
@@ -233,7 +236,8 @@ public class AssessmentPlayController extends IStarBaseServelet {
 									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> cresult = cquery.list();
+									DBUTILS utilss = new DBUTILS();
+									List<HashMap<String, Object>> cresult = utilss.executeQuery(csql);
 									for (HashMap<String, Object> hashMap : cresult) {
 										tq = tqd.findById((int)hashMap.get("questionid"));
 										if(tq.getDifficultyLevel()==i){
@@ -256,7 +260,9 @@ public class AssessmentPlayController extends IStarBaseServelet {
 									String csql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id="+1+" order by questionid";
 									SQLQuery cquery = csession.createSQLQuery(csql);
 									cquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-									List<HashMap<String, Object>> cresult = cquery.list();
+									DBUTILS utilss = new DBUTILS();
+									List<HashMap<String, Object>> cresult = utilss.executeQuery(csql);
+									
 									for (HashMap<String, Object> hashMap : cresult) {
 										tq = tqd.findById((int)hashMap.get("questionid"));
 										if(tq.getDifficultyLevel()==i){
@@ -364,7 +370,8 @@ public class AssessmentPlayController extends IStarBaseServelet {
 						String asql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id=1";
 						SQLQuery aquery = asession.createSQLQuery(asql);
 						aquery.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-						List<HashMap<String, Object>> aresult = aquery.list();
+						DBUTILS utilss = new DBUTILS();
+						List<HashMap<String, Object>> aresult = utilss.executeQuery(asql);
 						int temp[] =  new int[100];
 						int i=0;
 						int qid= 0 ;
@@ -419,7 +426,8 @@ public class AssessmentPlayController extends IStarBaseServelet {
 						String sql = "select * from assessment_question where assessmentid="+assessment_id+" and order_id=1";
 						SQLQuery query = session1.createSQLQuery(sql);
 						query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-						List<HashMap<String, Object>> result = query.list();
+						DBUTILS util = new DBUTILS();
+						List<HashMap<String, Object>> result = util.executeQuery(sql);	
 						int init_question_id = (int) result.get(0).get("questionid");
 						report.setProgress(init_question_id);
 						report.setScore(0);

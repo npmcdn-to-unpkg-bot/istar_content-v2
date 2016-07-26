@@ -24,8 +24,10 @@ import org.hibernate.Transaction;
 import org.hibernate.id.IntegralDataTypeHolder;
 
 import com.istarindia.apps.cmsutils.reports.column.ReportColumnHandlerFactory;
+import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.utils.HibernateSessionFactory;
 import com.istarindia.apps.services.CMSRegistry;
 
 /**
@@ -73,8 +75,8 @@ public class ReportUtils {
 		Session session = dao.getSession();
 		SQLQuery query = session.createSQLQuery(sql);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-
-		List<HashMap<String, Object>> results = query.list();
+		DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);
 
 		ArrayList<String> columns = new ArrayList<>();
 		HashMap<String, String> cols = new HashMap<>();
@@ -97,8 +99,7 @@ public class ReportUtils {
 	public ArrayList<ArrayList<String>> getReportData(String sql1, ArrayList<IStarColumn> keys,
 			HashMap<String, String> conditions) {
 		ArrayList<ArrayList<String>> table = new ArrayList<>();
-		IstarUserDAO dao = new IstarUserDAO();
-		Session session = dao.getSession();
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
 		List<HashMap<String, Object>> results;
 		Transaction tx = null;
 		try {
@@ -117,8 +118,8 @@ public class ReportUtils {
 					query.setParameter(key, conditions.get(key));
 				}
 			}
-
-			results = query.list();
+			DBUTILS util = new DBUTILS();
+			 results = util.executeQuery(sql1);
 			for (HashMap<String, Object> object : results) {
 				ArrayList<String> row = new ArrayList<>();
 				for (IStarColumn string : keys) {
@@ -142,6 +143,7 @@ public class ReportUtils {
 
 	public StringBuffer getReport(int reportID, HashMap<String, String> conditions, IstarUser user, String taskType) {
 		// System.err.println("=====================================>>>"+reportID);
+		long seconds = System.currentTimeMillis() % 1000;
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
 		try {
@@ -235,7 +237,7 @@ public class ReportUtils {
 						else {
 							out.append("<td india style='max-width:100px !important; word-wrap: break-word;'>"
 									+ ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler())
-											.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID)
+											.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID, taskType)
 									+ "</th>");
 						}
 						i++;
@@ -253,6 +255,9 @@ public class ReportUtils {
 		out.append("</table>");
 		out.append("<div id='report_container_" + reportID + "'></div>");
 		out.append("</div></div>");
+		
+		System.out.println("end----"+((System.currentTimeMillis() % 1000) - seconds));
+		
 		return out;
 
 	}
@@ -355,7 +360,7 @@ public class ReportUtils {
 					} else {
 						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>"
 								+ ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler())
-										.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID)
+										.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID, taskType)
 								+ "</th>");
 					}
 					i++;
