@@ -462,7 +462,6 @@ h1.warning-large {
   }
 }
 
-
 .custom-control {
 	z-index:99999; 
 	width: 100%; 
@@ -475,30 +474,18 @@ h1.warning-large {
 }
 
 .mobile-preview-frame {
-    /* width: 900px;
-    height: 1600px;
-    zoom: 32%;
     margin: 5%;
     margin-top: 17%;
-    margin-bottom: 20%; */
-    
-    width: 100%;
+    margin-bottom: 20%;
 }
 
 .desktop-preview-frame {
-/* 	width: 1024px; */
-/*     height: 768px; */
-/*     zoom: 106%; */
-/*     margin: 2%; */
-/*     margin-bottom: 5%; */
-
-
-
-    width: 100%;
+	margin: 2%;
+    margin-bottom: 5%;
 }
 
 .dynamic-preview {
-	margin: 5%;
+	margin: 2%;
 	background-size: 100%;  
 	background-repeat: no-repeat; 
 	display: block;

@@ -139,7 +139,7 @@
 
 										<section>
 											<label>Title of Lesson</label> <label class="input">
-												<input value="<%=lesson.getTitle()%>" type="text"
+												<input value="<%=lesson.getTitle()%>" type="text" spellcheck="true"
 												name="title" placeholder="Title of Lesson"> <b
 												class="tooltip tooltip-bottom-right">The title of the
 													lesson</b>
@@ -307,16 +307,36 @@
 								</div>
 							</section>
 							
-							<section><button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button></section>
+							<section>
+								<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button>
+							</section>
 
 							</fieldset>
 
-									<footer>
-										<button type="submit" class="btn-u">Update Lesson</button>
+									<footer >
+										<button type="submit" class="btn-u" style="float:left">Update </button>
+										<button class="btn-u"  id="send-for-review" data-toggle="modal" style="float:right"
+											data-target="#confirm-send-for-review-modal" type="button">Send for Review</button>
 									</footer>
 								</form>
 
 							</div>
+							
+							<div class="modal fade" id="confirm-send-for-review-modal"
+								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">Confirm Submit</div>
+										<div class="modal-body">Are you sure you want to send the lesson for review?</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+											<button id="confirm-send-for-review-btn" type="submit" class="btn btn-success success">Send for review</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 							<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
 								aria-labelledby='myModalLabel' aria-hidden='true'>
 								<div id='lo-modal-dialog' class='modal-dialog'>
@@ -561,15 +581,23 @@
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
 	
 	<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
+			var responsiveHelper_dt_basic = undefined;
+			var responsiveHelper_datatable_fixed_column = undefined;
+			var responsiveHelper_datatable_col_reorder = undefined;
+			var responsiveHelper_datatable_tabletools = undefined;
+			
+			var breakpointDefinition = {
+				tablet : 1024,
+				phone : 480
+			};
+			
+			//On confirm button (in the modal) click; mark the lesson as completed
+			$('#confirm-send-for-review-btn').click(function() {
+				var task_id = <%=request.getParameter("task_id")%> ;
+				var url = "<%=baseURL%>change_status?task_id="+task_id+"&new_status=COMPLETED";
+				window.location.href=url;
+			});
+			
         	//Lesson details validation
             jQuery(document).ready(function () {
                 App.init();
@@ -685,28 +713,7 @@
 
 			return false;
 		}
-		/* jQuery(document)
-		        .ready(
-		                function () {
-		                    App.init();
-		                    try {
-		                        tinymce
-		                                .init({
-		                                    selector: 'textarea',
-		                                    height: 50,
-		                                    plugins: [
-		                                        'advlist autolink lists link image charmap print preview anchor',
-		                                        'searchreplace visualblocks code fullscreen',
-		                                        'insertdatetime media table contextmenu paste code'],
-		                                    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-		                                    content_css: [
-		                                        '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-		                                        '//www.tinymce.com/css/codepen.min.css']
-		                                });
-		                    } catch (err) {
-		                        // TODO: handle exception
-		                    }
-		                }); */
+		
 	</script>
 	<!--[if lt IE 9]>
         <script src="assets/plugins/respond.js"></script>

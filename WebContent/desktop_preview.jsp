@@ -57,9 +57,8 @@
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 
 	<script>
-
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
+	
+		<% if(!request.getParameterMap().containsKey("scale")) { %>
 			Reveal.initialize({
 				controls: true,
 				progress: false,
@@ -70,7 +69,6 @@
 				maxScale: 1,
 				transition: 'slide', 
 
-				// Optional reveal.js plugins
 				dependencies: [
 					{ src: '<%=baseURL%>assets/plugins/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
@@ -80,6 +78,31 @@
 					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/notes/notes.js', async : true } ]
 				});
 			
+			<% 
+				} else { 
+					float scale = Float.parseFloat(request.getParameter("scale").toString());
+			%>
+			
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				history: true,
+				width:1024,
+				height:768,
+				minScale: <%=scale%>,
+				maxScale: <%=scale%>,
+				transition: 'slide', 
+
+				dependencies: [
+					{ src: '<%=baseURL%>assets/plugins/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js', async: true },
+					{ src: '<%=baseURL%>assets/plugins/reveal/plugin/notes/notes.js', async : true } ]
+				});
+			
+			<%}   %>
 
 			
 	</script>

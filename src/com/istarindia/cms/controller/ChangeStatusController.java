@@ -139,7 +139,7 @@ public class ChangeStatusController extends HttpServlet {
 			
 			
 			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
-				request.setAttribute("message_success", "New task has been sent for review successfully!");
+				request.setAttribute("message_success", "The task has been sent for review successfully!");
 			}
 			else if(new_status.equalsIgnoreCase(StatusTypes.DRAFT)) {
 				request.setAttribute("message_success", "The task has been updated as In Progress successfully!");

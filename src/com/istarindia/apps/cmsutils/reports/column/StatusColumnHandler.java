@@ -21,13 +21,10 @@ public class StatusColumnHandler extends ColumnHandler {
 		
 		TaskDAO dao = new TaskDAO();
 		Task task = dao.findById(taskID);
-		System.err.println("valid stages "+getAllVaildStages(status).size());
 		for(TaskStage stage : getAllVaildStages(status)) {
 			String[] role_array = stage.getValidRole().split(",");
-			System.err.println("valid stage "+stage);
 			for(String roles : role_array)
 			{ 
-				System.err.println("valid role "+roles);
 				if(user.getUserType().equals(roles))
 				{
 					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN) && task.getItemType().equalsIgnoreCase("LESSON"))
@@ -79,7 +76,6 @@ public class StatusColumnHandler extends ColumnHandler {
 	private List<TaskStage> getAllVaildStages(String status) {
 		
 		ArrayList<TaskStage> items = new ArrayList<TaskStage>();
-		System.err.println(status);
 		for (TaskStage taskStage : CreateLessonTaskManager.taskStages) {
 			if (status.equalsIgnoreCase(taskStage.getName())) {
 				try {
@@ -87,7 +83,7 @@ public class StatusColumnHandler extends ColumnHandler {
 						items.add(CreateLessonTaskManager.taskStages.get(tt));
 					}
 				} catch (Exception e) {
-					System.out.println("--------"+status);
+					System.out.println("-------- "+status);
 				}
 			}
 		}

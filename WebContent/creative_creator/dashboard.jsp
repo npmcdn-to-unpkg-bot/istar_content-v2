@@ -235,6 +235,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		jQuery(document).ready(function() {
 			App.init();
 		});
+		
 	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>

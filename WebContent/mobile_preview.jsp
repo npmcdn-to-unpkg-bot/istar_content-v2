@@ -72,7 +72,11 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 
 	<script>
-		Reveal.initialize({
+
+	<% if(!request.getParameterMap().containsKey("scale")) { %>
+
+	
+	Reveal.initialize({
 			center : false,
 			controls : false,
 			width:900,
@@ -82,6 +86,26 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			transition: 'slide',
 		});
 		
+		
+		<% 
+			} else { 
+				float scale = Float.parseFloat(request.getParameter("scale").toString());
+		%>
+
+		
+		Reveal.initialize({
+				center : false,
+				controls : false,
+				width:900,
+				height:1600,
+				minScale: <%=scale%>,
+				maxScale: <%=scale%>,
+				transition: 'slide',
+			});
+			
+		
+		<%}   %>
+	
 		$(document).ready(function() {
 			console.log($('.slides').css('top'));
 			$('.slides').css('top','75%');

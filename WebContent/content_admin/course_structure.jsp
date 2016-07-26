@@ -146,18 +146,26 @@
 																if(lesson.getStatus().equalsIgnoreCase("CREATED")) {
 																	statusLabel = "label label-default ";
 																}
+																
 																String email = ((IstarUser)request.getSession().getAttribute("user")).getEmail();
-																if(lesson.getAsignee().equalsIgnoreCase(email)) {
+																
+																boolean is_unassigned_lesson = !(new ContentAdminDAO()).findByEmail(lesson.getAsignee()).isEmpty();
+																boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
+																boolean is_publishable = is_content_admin && (lesson.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || lesson.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
+																
+																if(is_unassigned_lesson) {
 																	assigned = "label label-default ";
 																}
 															%>
+															 
+															<% if(is_publishable) { %>
 															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" 
-															data-jstree='{"opened":true}'><%=lesson.getTitle() %> 
-															<% if(lesson.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || lesson.getStatus().equalsIgnoreCase(StatusTypes.APPROVED)) { %>
-															<span data-task-id='<%=lesson.getTaskID() %>'  class="<%=assigned%> context-menu"> Assigned to - <%=lesson.getAsignee() %></span> 
+															data-jstree='{"opened":true}' class="context-menu"><%=lesson.getTitle() %>
 															<% } else { %>
-															<span data-task-id='<%=lesson.getTaskID() %>' class="<%=assigned%> "> Assigned to - <%=lesson.getAsignee() %></span> 
+															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" 
+															data-jstree='{"opened":true}'><%=lesson.getTitle() %>
 															<% }  %>
+															<span class="<%=assigned%> "> Assigned to - <%=lesson.getAsignee() %></span> 
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=reviewers %>"> Reviewer - <%=lesson.getReviewer() %></span> 
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=statusLabel%>"> Status - <%=lesson.getStatus() %></span></li>
 															<%
@@ -231,24 +239,7 @@
 										</select>
 									</div>
 								</div>
-								<!-- <div class="form-group">
-									<label for="inputEmail1" class="col-lg-2 control-label">Number of Presentations</label>
-									<div class="col-lg-10">
-										<input type="number" class="form-control" id="inputEmail1" name="no_of_ppt" placeholder="Number of Presentations">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail1" class="col-lg-2 control-label">Number of Games</label>
-									<div class="col-lg-10">
-										<input type="number" class="form-control" id="inputEmail1" placeholder="Number of Games" name="no_of_games">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail1" class="col-lg-2 control-label">Number of Assessment</label>
-									<div class="col-lg-10">
-										<input type="number" class="form-control" id="inputEmail1" placeholder="Number of Assessment" name="no_of_assessment">
-									</div>
-								</div> -->
+								
 								<div class="form-group">
 									<div class="col-lg-offset-2 col-lg-10">
 										<button type="submit" class="btn-u btn-u-green">Assign & Create</button>

@@ -97,6 +97,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		phone : 480
 	};
 	jQuery(document).ready(function() {
+		
 			App.init();
 
 		});
