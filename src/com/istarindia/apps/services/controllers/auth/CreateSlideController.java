@@ -712,10 +712,12 @@ public class CreateSlideController extends IStarBaseServelet {
 		default:
 			break;
 		}
-		SlideDAO dao = new SlideDAO();
+
+		String message = new String() ;
 		Slide slide = new Slide();
-		// Set order_id for the slide -- only while creating new slide
+
 		if ((slide_id != 0) && (request.getParameter("is_edit").equalsIgnoreCase("false"))) {
+			SlideDAO dao = new SlideDAO();
 			slide = dao.findById(slide_id);
 			
 			if (request.getParameter("order_id").equalsIgnoreCase("0")) {
@@ -737,20 +739,15 @@ public class CreateSlideController extends IStarBaseServelet {
 			} finally {
 				session.close();
 			}
-		} else {
-			slide_id = Integer.parseInt(request.getParameter("slide_id")) ; 
-			slide = dao.findById(slide_id);
+
+			if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
+				message = "A new Slide added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
+			} else {
+				message = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
+			}
 			
+			CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"), message);
 		}
-		
-		String message = new String() ;
-		if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
-			message = "A new Slide added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
-		} else {
-			message = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
-		}
-		
-		CreateLessonTaskManager.pushTaskNotification(ppt, (IstarUser) request.getSession().getAttribute("user"), message);
 		Task t = new Task();
 		t.setItemId(ppt.getLesson().getId());
 		t.setItemType("LESSON");
