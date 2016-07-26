@@ -15,7 +15,7 @@ public class ANSWER_DOUBTColumnHandler extends ColumnHandler {
 	 * @see com.istarindia.apps.cmsutils.reports.column.ColumnHandler#getHTML(java.lang.String, com.istarindia.apps.dao.IstarUser, java.lang.String, int, int)
 	 */
 	@Override
-	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
+	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID, String itemType) {
 		return new StringBuffer("<a href='/content/content_admin/answer_doubt.jsp?id="+taskID+"'> Answer</a>  ");
 	}
 

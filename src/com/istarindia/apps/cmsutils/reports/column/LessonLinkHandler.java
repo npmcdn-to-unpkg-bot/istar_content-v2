@@ -10,7 +10,7 @@ import com.istarindia.apps.dao.TaskDAO;
 public class LessonLinkHandler extends ColumnHandler {
 
 	@Override
-	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
+	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID , String itemType) {
 		
 		Task t = new TaskDAO().findById(taskID);
 		Lesson l = new LessonDAO().findById(t.getItemId());

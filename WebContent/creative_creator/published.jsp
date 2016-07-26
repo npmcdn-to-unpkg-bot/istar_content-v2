@@ -87,7 +87,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script><script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script>  <script src="https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js"></script> <script src="https://cdn.datatables.net/responsive/2.1.0/js/responsive.bootstrap.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>            
 	<script type="text/javascript">
 	var responsiveHelper_dt_basic = undefined;
 	var responsiveHelper_datatable_fixed_column = undefined;

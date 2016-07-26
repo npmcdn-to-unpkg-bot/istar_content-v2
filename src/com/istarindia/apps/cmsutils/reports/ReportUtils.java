@@ -142,6 +142,7 @@ public class ReportUtils {
 
 	public StringBuffer getReport(int reportID, HashMap<String, String> conditions, IstarUser user, String taskType) {
 		// System.err.println("=====================================>>>"+reportID);
+		long seconds = System.currentTimeMillis() % 1000;
 		ReportCollection reportCollection = new ReportCollection();
 		Report report = new Report();
 		try {
@@ -235,7 +236,7 @@ public class ReportUtils {
 						else {
 							out.append("<td india style='max-width:100px !important; word-wrap: break-word;'>"
 									+ ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler())
-											.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID)
+											.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID, taskType)
 									+ "</th>");
 						}
 						i++;
@@ -253,6 +254,9 @@ public class ReportUtils {
 		out.append("</table>");
 		out.append("<div id='report_container_" + reportID + "'></div>");
 		out.append("</div></div>");
+		
+		System.out.println("end----"+((System.currentTimeMillis() % 1000) - seconds));
+		
 		return out;
 
 	}
@@ -355,7 +359,7 @@ public class ReportUtils {
 					} else {
 						out.append("<td style='max-width:100px !important; word-wrap: break-word;'>"
 								+ ReportColumnHandlerFactory.getInstance().getHandler(column.getColumnHandler())
-										.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID)
+										.getHTML(row.get(i), user, taskType, Integer.parseInt(ROWID), reportID, taskType)
 								+ "</th>");
 					}
 					i++;

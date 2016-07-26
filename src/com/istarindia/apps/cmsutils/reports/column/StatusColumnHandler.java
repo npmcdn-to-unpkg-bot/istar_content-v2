@@ -16,27 +16,15 @@ import com.istarindia.apps.services.task.TaskStage;
 public class StatusColumnHandler extends ColumnHandler {
 
 	@Override
-	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID) {
+	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID , String item_type) {
 		StringBuffer out = new StringBuffer();
 		HashMap<String, String> items = new HashMap<>();
 		
-		//TaskDAO dao = new TaskDAO();
-		//Task task = dao.findById(taskID);
-		String sql="select item_type from task where id="+taskID;
-		DBUTILS util = new DBUTILS();
-		List<HashMap<String, Object>> res = util.executeQuery( sql);
-		String item_type = "";
-		if(res.size()>0)
-		{
-			item_type= (String)res.get(0).get("item_type");
-		}
-		System.err.println("valid stages "+getAllVaildStages(status).size());
+		
 		for(TaskStage stage : getAllVaildStages(status)) {
 			String[] role_array = stage.getValidRole().split(",");
-			System.err.println("valid stage "+stage);
 			for(String roles : role_array)
 			{ 
-				System.err.println("valid role "+roles);
 				if(user.getUserType().equals(roles))
 				{
 					if(stage.getName().equalsIgnoreCase(StatusTypes.REVIEW) && !user.getUserType().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN) && item_type.equalsIgnoreCase("LESSON"))
@@ -88,7 +76,6 @@ public class StatusColumnHandler extends ColumnHandler {
 	private List<TaskStage> getAllVaildStages(String status) {
 		
 		ArrayList<TaskStage> items = new ArrayList<TaskStage>();
-		System.err.println(status);
 		for (TaskStage taskStage : CreateLessonTaskManager.taskStages) {
 			if (status.equalsIgnoreCase(taskStage.getName())) {
 				try {
