@@ -114,11 +114,9 @@ public class ReportUtils {
 						System.out.println("key->" + key + "   value-> " + conditions.get(key));
 						
 						query.setParameter(key, Integer.parseInt(conditions.get(key)));
-						System.out.println("query string----"+query.getQueryString());
 
 					}
 				} catch (Exception e) {
-					System.err.println("-------------------here");
 					e.printStackTrace();
 					query.setParameter(key, conditions.get(key));
 				}

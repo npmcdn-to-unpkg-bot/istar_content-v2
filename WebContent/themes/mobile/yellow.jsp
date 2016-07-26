@@ -46,7 +46,7 @@
 	HashMap<String, String> temp2 = new HashMap<String, String>();
 	for(String str : temp.keySet())
 	{
-		temp2.put(str, (String)temp.get(str));
+		temp2.put(str, temp.get(str).toString());
 	}
 	
 	HashMap<String, String> theme = temp2;
