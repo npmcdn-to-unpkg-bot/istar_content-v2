@@ -423,7 +423,7 @@
 						<form action="<%=baseURL%>media_upload" class="sky-form" method="POST"  novalidate="novalidate"  enctype="multipart/form-data">
 							<input type="hidden" id="item_id" name="item_id" value="0" />
 							<input type="hidden" id="slide_id" name="slide_id" value="<%=slide_id%>" />
-							<input type="hidden" id="slide_type" name="slide_type" value="p" />
+							<input type="hidden" id="slide_type" name="slide_type" value="<%=slide_type %>" />
 							<input type="hidden" id="selected_items" name="selected_items" value="0" />
 							<input type="hidden" id="session_id" name="session_id" value="<%=ppt.getLesson().getCmsession().getId() %>" />
 							<input type="hidden" id="ppt_id" name="ppt_id" value="<%=ppt.getId() %>" />

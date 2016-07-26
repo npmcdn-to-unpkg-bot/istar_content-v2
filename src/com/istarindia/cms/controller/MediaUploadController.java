@@ -87,10 +87,13 @@ public class MediaUploadController extends IStarBaseServelet {
 		String folders[] = null;
 		String mediaTitle = "";
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
+		Task task = new Task();
 		int userId = user.getId();
 		String mediaType = "";
 		
 		MediaService mediaService = new MediaService();
+		Video video = null;
+		Image image = null;
 		
 		try {
 			List<FileItem> items = uploadHandler.parseRequest(request);
@@ -100,22 +103,22 @@ public class MediaUploadController extends IStarBaseServelet {
 					item.write(file);
 					
 					if (item.getName().toString().endsWith(".mp4")) {
-						Video video = mediaService.saveVideo(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
+						video = mediaService.saveVideo(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
 						mediaType="VIDEO";
 						// TODO: return status from saveImage to return the same in request
 						request.setAttribute("msg", "Video with title " + video.getTitle() + " and " + video.getUrl() + " created. ");
 
 						mediaService.saveMediaInFolders(video.getId(), MediaTypes.VIDEO, folders);
-						mediaService.updateMediTask(video.getId(), MediaTypes.VIDEO, userId);
+						task = mediaService.updateMediTask(video.getId(), MediaTypes.VIDEO, userId);
 
 					} else {
-						Image image = mediaService.saveImage(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
+						image = mediaService.saveImage(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
 						mediaType="Image";
 						//TODO: return status from saveImage to return the same in request
 						request.setAttribute("msg", "Image with title " + image.getTitle() + " and " + image.getUrl() + " created. ");
 						
 						mediaService.saveMediaInFolders(image.getId(), MediaTypes.IMAGE, folders);
-						mediaService.updateMediTask(image.getId(), MediaTypes.IMAGE, userId);
+						task = mediaService.updateMediTask(image.getId(), MediaTypes.IMAGE, userId);
 						 						
 					}
 					
@@ -160,6 +163,21 @@ public class MediaUploadController extends IStarBaseServelet {
 
 		}
 
+		if (image!=null) {
+			cmsessionId = image.getSessionid();
+			mediaTitle = image.getTitle();
+		} else if (video!=null) {
+			cmsessionId = video.getSessionId();
+			mediaTitle = video.getTitle();
+		} else {
+			cmsessionId = 0;
+			mediaTitle = "New ";
+		}
+		
+		
+		String comment = mediaTitle + " " + mediaType.toLowerCase() + " is uploaded for task_id = " + task.getId() + " by " + user.getEmail() + " for session-id: " + cmsessionId ; 
+		mediaService.saveTaskLog(user, task.getId(), itemId, mediaType,  StatusTypes.COMPLETED, comment);
+		
 		if (slideType != "" && pptId != 0 && slideId != 0) {
 			request.setAttribute("message_success", "Media file has been uploaded successfully ");
 			response.sendRedirect("fill_tempate1.jsp?ppt_id="+pptId+"&slide_id="+slideId+"&slide_type="+slideType);
