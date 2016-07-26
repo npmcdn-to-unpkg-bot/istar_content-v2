@@ -380,7 +380,7 @@
 						
 						<div class="tab-pane fade in active" id="desktop">
 							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
-								<iframe id="d-preview" class="desktop-preview-frame" src="/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"> </iframe>
+								<iframe id="d-preview" class="desktop-preview-frame" src="#"> </iframe>
 							</div>
 						</div>
 					</div>
@@ -400,7 +400,7 @@
 						<div class="panel-body ">
 							<div class="sky-form  " id="mobile">
 								<div id="mobile_area" class="dynamic-preview" style="background-image: url('/content/assets/img/frames/mobile.png')">
-									<iframe id='m-preview' class="mobile-preview-frame" src="/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>"> </iframe>
+									<iframe id='m-preview' class="mobile-preview-frame" src="#"> </iframe>
 								</div>
 							</div>
 						</div>
@@ -605,17 +605,23 @@
 		}
 		
 		function setupFrames() {
-			var dScale =   $("#desktop_area").width()/1024 *0.96;
-			var dLocation = document.getElementById("d-preview").contentWindow.location.href.split("#")[0] + "&scale="+dScale;
+			var dWidth = $("#desktop_area").width() * 0.96 ;
+			var dHeight = dWidth * 768 / 1024 ;
+			var dScale =  dWidth / 1024 ;
+			var dUrl = "/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>";
+			var dLocation = dUrl + "&scale=" + dScale;
 			$("#d-preview").attr("src", dLocation);
-			$("#d-preview").css("width", $("#desktop_area").width()*0.96);
-			$("#d-preview").css("height", $("#d-preview").width()*768/1024);
+			$("#d-preview").css("width", dWidth);
+			$("#d-preview").css("height", dHeight);
 			
-			var mScale =  $("#mobile_area").width()/900*0.9 ;
-			var mLocation = document.getElementById("m-preview").contentWindow.location.href.split("#")[0] + "&scale="+mScale;
+			var mWidth = $("#mobile_area").width() * 0.91 ;
+			var mHeight = mWidth * 1650 / 900 ;
+			var mScale =  mWidth / 900 ;
+			var mUrl = "/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>";
+			var mLocation = mUrl + "&scale=" + mScale;
 			$("#m-preview").attr("src", mLocation);
-			$("#m-preview").css("width", $("#mobile_area").width()*0.91);
-			$("#m-preview").css("height", $("#m-preview").width()*1650/900);
+			$("#m-preview").css("width", mWidth);
+			$("#m-preview").css("height", mHeight);
 		}
 		
 		function initBgImage() {
