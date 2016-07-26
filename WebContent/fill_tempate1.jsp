@@ -49,7 +49,7 @@
 	if(task.getStatus().equalsIgnoreCase("PUBLISHED"))
 	{
 		request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
-		//request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
+		request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
 	} else {
 		try {
 			if (request.getParameterMap().containsKey("slide_id")) {
