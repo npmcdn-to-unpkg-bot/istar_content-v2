@@ -14,6 +14,35 @@
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
 			+ request.getContextPath() + "/";
 %>
+
+<%
+	int slide_id = Integer.parseInt(request.getParameter("slide_id"));
+	int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
+	
+	SlideService service = new SlideService();
+	LessonUtils lessonUtils = new LessonUtils();
+	SlideDAO slideDao = new SlideDAO();
+	
+	Presentaion ppt = (new PresentaionDAO()).findById(ppt_id);
+
+	String previous_slide_url = service.getPreviousSlideReviewUrl(ppt_id, slide_id);
+	Slide slide = slideDao.findById(slide_id);
+	String next_slide_url = service.getNextSlideReviewUrl(ppt_id, slide_id);
+	String slide_type = slide.getTemplate();
+	List<HashMap<String, String>> logs = lessonUtils.getSlideComments(slide_id);
+
+	Lesson lesson = ppt.getLesson();
+	Task task = new Task();
+	task.setItemId(lesson.getId());
+	task.setItemType("LESSON");
+	task = new TaskDAO().findByExample(task).get(0);
+
+	if (task.getStatus().equalsIgnoreCase("PUBLISHED")) {
+		request.setAttribute("message_failure", "This lesson is already published and cannot be accessed!");
+		request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
+	}
+	
+%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -77,160 +106,146 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
 
-<body ng-app="">
-
-				<%
-				Presentaion ppt1 = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-			
-				
-				Lesson lesson = ppt1.getLesson();
-				Task task1 = new Task();
-				task1.setItemId(lesson.getId());
-				task1.setItemType("LESSON");
-				task1 = new TaskDAO().findByExample(task1).get(0);
-				
-				if(task1.getStatus().equalsIgnoreCase("PUBLISHED"))
-				{
-					request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
-					request.getRequestDispatcher("/invalid_access.jsp").forward(request, response);
-				}
-				
-				
-				%>
-
-
+<body>
 
 	<div class="wrapper">
 		<jsp:include page="content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
-			<div class="container-fluid ">
-				<h1 class="pull-left">Review Slide</h1>
+			<div class="container-fluid row">
+				<div class=" col col-md-4">
+					<% if (!previous_slide_url.equalsIgnoreCase("#")) { %>
+						<a class="left carousel-control custom-control" href="<%=baseURL%><%=previous_slide_url%>"> 
+							<span class="glyphicon glyphicon-chevron-left custom-control-icon"></span>
+						</a>
+					<% } %>
+				</div>
+
+				<h1 class=" col col-md-4" style="text-align: center;">Add/Edit Slide</h1>
+
+				<div class=" col col-md-4">
+					<% if (!next_slide_url.equalsIgnoreCase("#")) { %>
+						<a class="right carousel-control custom-control" href="<%=baseURL%><%=next_slide_url%>"> 
+							<span class="glyphicon glyphicon-chevron-right custom-control-icon"></span>
+						</a>
+					<% } %>
+				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<form action="/content/review_lesson" name="" method="GET"
-				class="sky-form">
-				<%
-					Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
-					SlideService service = new SlideService();
-					int slide_id = Integer.parseInt(request.getParameter("slide_id"));
-					int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
-					int previous_slide_id = service.getPreviousSlideId(ppt_id, slide_id);
-					int next_slide_id = service.getNextSlideId(ppt_id, slide_id);
+		
+		
+		<br/>  <br/>
+		
+		
+		<div class="container-fluid height-1000" style="padding: 0px !important">
+			<div class=" col-md-12 ">
+				<div class="tab-v2 col-md-9 sky-form" id="tabs1">
 					
-				%>
-				<input name="is_edit" value="true" type="hidden"> 
-				<input name="slide_id" value="<%=request.getParameter("slide_id")%>" type="hidden">
-				<input type="hidden" name="ppt_id" value="<%=request.getParameter("ppt_id")%>">
-				<input type="hidden" name="from" value="review_slide">
+					<ul class="nav nav-tabs">
+						<li><a href="#new_comment" data-toggle="tab">Add New Comment</a></li>
+						<% if(logs.size() > 0) {%>
+						<li><a href="#comments" data-toggle="tab">Review Comments</a></li>
+						<% } %>
+						<li class="active"><a href="#desktop" data-toggle="tab">Desktop Preview</a></li>
+					</ul>
+					
+					<form id="review-form" action="/content/review_lesson" name="" method="GET" class="sky-form">
 				
-				<div class="row">
-					<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
-						<% if(previous_slide_id != 0) { %>
-							<a style="z-index:99999; width: 100%;" class="left carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=previous_slide_id%>"> 
-								<span  class="glyphicon glyphicon-chevron-left"></span> 
-							</a>
-						<% }%>
-					</div>
+					<input name="is_edit" value="true" type="hidden"> 
+					<input name="slide_id" value="<%=slide_id%>" type="hidden">
+					<input type="hidden" name="ppt_id" value="<%=ppt_id%>">
+					<input type="hidden" name="from" value="review_slide">
 					
-					<div class="col-md-5">
-						<fieldset>
-							<section>
-								<label class="label">Review Notes</label> 
-								<label class="textarea"> 
-									<textarea rows="3" name="review_notes" placeholder=" Please enter text"></textarea>
-								</label>
-								<div class="note">
-									<strong>Note:</strong> This is where we will put in the Review Notes.
+						<div class="tab-content">
+							<div id="new_comment" class="tab-pane fade in ">
+								<div class="panel panel-sea">
+									
+									<div class="panel-heading">
+										<h3 class="panel-title"> <i class="fa fa-tasks"></i> Add new comment </h3>
+									</div>
+									
+									<div class="panel-body">
+										<fieldset>
+											<section>
+												<label class="label">Comment</label> 
+												<label class="textarea">
+													<textarea rows="5" name="review_notes" placeholder=" Please enter text"></textarea>
+												</label>
+											</section>
+										</fieldset>
+										
+										<footer>
+											<button id="submit-comment" data-target="#confirm-submit-comment-modal" 
+												data-toggle="modal" style="float:right" type="button" class="btn-u">Submit</button>
+										</footer>
+									</div>
+									
 								</div>
-							</section>
-						</fieldset>
-	
-						<footer>
-							<button type="submit" class="btn-u">Submit</button>
-						</footer>
-						
-						<div class="panel panel-profile profile">
-							<div class="panel-heading overflow-h">
-								<h2 class="panel-title heading-sm pull-left">
-									<i class="fa fa-comments-o"></i> Review Comments
-								</h2>
-	
 							</div>
-							<div id="scrollbar4"
-								class="panel-body no-padding mCustomScrollbar"
-								data-mcs-theme="minimal-dark">
-	
-								<% 
+						
+							<div id="comments" class="tab-pane fade in ">
+								<div class="panel panel-profile profile">
+									
+									<div class="panel-body no-padding" data-mcs-theme="minimal-dark"> 
+										<%  try { for(HashMap<String, String> log : logs ) { %>
+										
+										<div class="comment">
+											<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
+											<div class="overflow-h">
+												<strong><%=log.get("actor_name")%></strong>
+												<p><%=log.get("comment")%></p>
+											</div>
+										</div>
+										
+										<% } } catch(Exception e) {} %>
+										
+									</div>
+									
+								</div>
+							</div>
 							
-								try {
-								TaskDAO TDAO = new  TaskDAO();
-								Task task = new Task();
-								task.setItemType("LESSON");
-								task.setItemId(ppt.getLesson().getId());
-								task = TDAO.findByExample(task).get(0);
-								TaskLogDAO dao1 = new TaskLogDAO();
-								TaskLog sample  = new TaskLog();
-								sample.setTaskId(task.getId());
-								sample.setItemType("SLIDE");
-								sample.setItem_id(Integer.parseInt(request.getParameter("slide_id")));
-								
-								List<TaskLog> items = dao1.findByExample(sample);
-								for(TaskLog log : items) {
-									IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-									
-									%>
-								<div class="comment">
-									<img
-										src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
-										alt="">
-									<div class="overflow-h">
-										<strong><%=user.getName() %></strong>
-										<p><%=log.getComments() %></p>
-	
-									</div>
+							<div class="tab-pane fade in active" id="desktop">
+								<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
+									<iframe id="d-preview" class="desktop-preview-frame" src="#"> </iframe>
 								</div>
-								<% } 
-								}
-								catch(Exception e) {
-									
-								}
-								
-								%>
-	
 							</div>
 						</div>
-					</div>
 					
-					<div class="col-md-5" >
-						<div id="phone_area" style="display: block;    margin-top: -7%;">
-							<div id="phone_placeholder" style="display: block; height: 1024px;">
-								<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">
-									<div id="frame_htc_one_emulator" class="frame_scroller">
-										<iframe src="/content/lesson/slide_preview.jsp?ppt_id=<%=ppt.getId() %>&slide_id=<%=request.getParameter("slide_id")%>"
-											frameborder="0" id='prv' style="background-color: #fff; margin-top: 217px; width: 360px; height: 593px;">
-										</iframe>
-									</div>
+					</form>
+				</div>
+				
+				<div class=" col-md-3 ">
+					<div class="panel panel-sea" >
+						<div class="panel-heading">
+							<h3 class="panel-title"> <i class="fa fa-tasks"></i> Mobile Preview </h3>
+						</div>
+						<div class="panel-body ">
+							<div class="sky-form  " id="mobile">
+								<div id="mobile_area" class="dynamic-preview" style="background-image: url('/content/assets/img/frames/mobile.png')">
+									<iframe id='m-preview' class="mobile-preview-frame" src="#"> </iframe>
 								</div>
 							</div>
 						</div>
 					</div>
-						
-					<div class="col-md-1" style="min-height: 1000px; vertical-align: middle;">
-						<% if(next_slide_id != 0) { %>
-							<a style="z-index:99999; width: 100%;" class="right carousel-control" href="<%=baseURL%>fill_tempate_review.jsp?ppt_id=<%=request.getParameter("ppt_id") %>&slide_id=<%=next_slide_id%>"> 
-								<span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							</a>
-						<% }%>
-					</div>
-	
 				</div>
-			</form>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="confirm-submit-comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">Confirm Submit</div>
+				<div class="modal-body">Are you sure you want to proceed?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button id="confirm-submit-comment-btn" type="submit" class="btn btn-success success">Proceed</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	
 	<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
-
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
@@ -295,9 +310,36 @@
 		}
 
 		$(document).ready(function() {
+			setupFrames();
 			initTextArea();
 
 		});
+		
+
+	    $('#confirm-submit-comment-btn').click(function(e){
+	    	$('#review-form').submit();
+	    })
+	    
+		function setupFrames() {
+			var dWidth = $("#desktop_area").width() * 0.96 ;
+			var dHeight = dWidth * 768 / 1024 ;
+			var dScale =  dWidth / 1024 ;
+			var dUrl = "/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>";
+			var dLocation = dUrl + "&scale=" + dScale;
+			$("#d-preview").attr("src", dLocation);
+			$("#d-preview").css("width", dWidth);
+			$("#d-preview").css("height", dHeight);
+			
+			var mWidth = $("#mobile_area").width() * 0.91 ;
+			var mHeight = mWidth * 1650 / 900 ;
+			var mScale =  mWidth / 900 ;
+			var mUrl = "/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>";
+			var mLocation = mUrl + "&scale=" + mScale;
+			$("#m-preview").attr("src", mLocation);
+			$("#m-preview").css("width", mWidth);
+			$("#m-preview").css("height", mHeight);
+		}
+		
 	</script>
 </body>
 </html>
