@@ -97,16 +97,24 @@
 		<child_links display_name="Not reviewed"
 			url="/content/creative_admin/not_reviewed.jsp" valid_roles="creative_admin" />
 
-		<child_links display_name="Assigned"
+		<child_links display_name="Lesson Assigned"
 			url="/content/creative_creator/assigned.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Inprogress"
+			<child_links display_name="Media Assigned"
+			url="/content/creative_creator/assigned_media.jsp" valid_roles="creative_creator" />
+		<child_links display_name="Inprogress Lesson"
 			url="/content/creative_creator/inprogress.jsp" valid_roles="creative_creator" />
+			<child_links display_name="Inprogress Media"
+			url="/content/creative_creator/inprogress_media.jsp" valid_roles="creative_creator" />
 		<child_links display_name="Not reviewed"
 			url="/content/creative_creator/not_reviewed.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Disapproved"
+		<child_links display_name="Disapproved Lesson"
 			url="/content/creative_creator/disapproved.jsp" valid_roles="creative_creator" />
-		<child_links display_name="Approved"
+			<child_links display_name="Disapproved Media"
+			url="/content/creative_creator/disapproved_media.jsp" valid_roles="creative_creator" />
+		<child_links display_name="Approved Lesson"
 			url="/content/creative_creator/approved.jsp" valid_roles="creative_creator" />
+			<child_links display_name="Approved Media"
+			url="/content/creative_creator/approved_media.jsp" valid_roles="creative_creator" />
 
 	</parent_links>
 	<parent_links display_name="Folder">

@@ -20,9 +20,6 @@ public class StatusColumnHandler extends ColumnHandler {
 		StringBuffer out = new StringBuffer();
 		HashMap<String, String> items = new HashMap<>();
 		
-		TaskDAO dao = new TaskDAO();
-		Task task = dao.findById(taskID);
-		
 		for(TaskStage stage : getAllVaildStages(status)) {
 			String[] role_array = stage.getValidRole().split(",");
 			for(String roles : role_array)

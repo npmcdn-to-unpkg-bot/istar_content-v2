@@ -734,7 +734,13 @@ order by order_id
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
 		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
-		<sql>SELECT DISTINCT
+		<sql>
+
+
+
+
+
+SELECT DISTINCT
 	A . ID AS task_id,
 	A .item_type AS item_type,
 	(
@@ -744,7 +750,7 @@ order by order_id
 		WHEN 'VIDEO' THEN
 			V.title
 		WHEN 'LESSON' THEN
-			LL.title
+			'none'
 		END
 	) AS title,
 	CM.title AS session_title,
@@ -756,14 +762,13 @@ order by order_id
 		WHEN 'VIDEO' THEN
 			V.description
 		WHEN 'LESSON' THEN
-			LL.title
+			'none'
 		END
 	) AS description
 FROM
 	PUBLIC .task A
 LEFT JOIN PUBLIC .image I ON (A .item_id = I. ID)
-LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID)
-LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID),
+LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID),
  PUBLIC .cmsession CM
 WHERE
 	A .status LIKE '%ASSIGNED'
@@ -773,11 +778,10 @@ WHEN A .item_type = 'IMAGE' THEN
 	I.session_id
 WHEN A .item_type = 'VIDEO' THEN
 	V.session_id
-WHEN A .item_type = 'LESSON' THEN
-	LL.session_id
+
 END 
 ORDER BY
-	A . ID		</sql>
+	A . ID	</sql>
 		<title> All Media Tasks Assigned</title>
 	</reports>
 
@@ -790,7 +794,9 @@ ORDER BY
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
 		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
 
-		<sql>SELECT DISTINCT
+		<sql>
+		
+		SELECT DISTINCT
 	A . ID AS task_id,
 	A .item_type AS item_type,
 	(
@@ -800,7 +806,7 @@ ORDER BY
 		WHEN 'VIDEO' THEN
 			V.title
 		WHEN 'LESSON' THEN
-			LL.title
+			'none'
 		END
 	) AS title,
 	CM.title AS session_title,
@@ -812,14 +818,13 @@ ORDER BY
 		WHEN 'VIDEO' THEN
 			V.description
 		WHEN 'LESSON' THEN
-			LL.title
+			'none'
 		END
 	) AS description
 FROM
 	PUBLIC .task A
 LEFT JOIN PUBLIC .image I ON (A .item_id = I. ID)
-LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID)
-LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID),
+LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID),
  PUBLIC .cmsession CM
 WHERE
 	A.status='DRAFT'
@@ -829,8 +834,6 @@ WHEN A .item_type = 'IMAGE' THEN
 	I.session_id
 WHEN A .item_type = 'VIDEO' THEN
 	V.session_id
-WHEN A .item_type = 'LESSON' THEN
-	LL.session_id
 END 
 ORDER BY
 	A . ID
@@ -917,7 +920,7 @@ ORDER BY
 		WHEN 'VIDEO' THEN
 			V.title
 		ELSE
-			LL.title
+			'none'
 		END
 	) AS title,
 	A .status AS status11,
@@ -929,7 +932,7 @@ ORDER BY
 		WHEN 'VIDEO' THEN
 			V.description
 		ELSE
-			LL.title
+			'none'
 		END
 	) AS description,
 	D. NAME AS created_by
@@ -940,8 +943,7 @@ LEFT JOIN PUBLIC .content_creator D ON (D. ID = A .owner_id)
 LEFT JOIN PUBLIC .creative_admin AD ON (A .actor_id = AD. ID)
 LEFT JOIN PUBLIC .creative_creator CR ON (CR. ID = A .actor_id)
 LEFT JOIN PUBLIC .image I ON (A .item_id = I. ID)
-LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID)
-LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID),
+LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID),
 PUBLIC .cmsession CM
 WHERE
 	A .status = 'DIS_APPROVED'
@@ -951,8 +953,6 @@ WHEN A .item_type = 'IMAGE' THEN
 	I.session_id
 WHEN A .item_type = 'VIDEO' THEN
 	V.session_id
-WHEN A .item_type = 'LESSON' THEN
-	LL.session_id
 END 
 ORDER BY
 	A . ID
@@ -967,7 +967,8 @@ ORDER BY
 		<column columnHandler="NONE" display_name="Media Type" isVisible="true" name="item_type" />
 		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
 		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
-		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+		<column columnHandler="MEDIA_LINK_HANDLER" display_name="URL" isVisible="true" name="url" />
+		
 
 		<sql>
 		SELECT
@@ -982,7 +983,7 @@ ORDER BY
 		WHEN 'VIDEO' THEN
 			V.title
 		ELSE
-			LL.title
+			'none'
 		END
 	) AS title,
 	A .status AS status11,
@@ -994,9 +995,11 @@ ORDER BY
 		WHEN 'VIDEO' THEN
 			V.description
 		ELSE
-			LL.title
+			'none'
 		END
 	) AS description,
+	(CASE A.item_type WHEN 'IMAGE' THEN I.url WHEN 'VIDEO' THEN V.url
+			ELSE 'None' END) as url,
 	D. NAME AS created_by
 FROM
 	PUBLIC .task A
@@ -1005,19 +1008,17 @@ LEFT JOIN PUBLIC .content_creator D ON (D. ID = A .owner_id)
 LEFT JOIN PUBLIC .creative_admin AD ON (A .actor_id = AD. ID)
 LEFT JOIN PUBLIC .creative_creator CR ON (CR. ID = A .actor_id)
 LEFT JOIN PUBLIC .image I ON (A .item_id = I. ID)
-LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID)
-LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID),
+LEFT JOIN PUBLIC .video V ON (A .item_id = V. ID),
 PUBLIC .cmsession CM
 WHERE
-	A .status = 'APPROVED'
+	A .status = 'COMPLETED'
 AND A .actor_id = :creative_creator_id
  AND CM. ID = CASE
 WHEN A .item_type = 'IMAGE' THEN
 	I.session_id
 WHEN A .item_type = 'VIDEO' THEN
 	V.session_id
-WHEN A .item_type = 'LESSON' THEN
-	LL.session_id
+
 END 
 ORDER BY
 	A . ID
@@ -2381,8 +2382,140 @@ GROUP BY C.course_name
 		<title>Course Wise Data Graph</title>
 	</reports>
 	
+	<reports id="201" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Media Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name=" Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT DISTINCT
+	A . ID AS task_id,
+	A .item_type AS item_type,
+	LL.title AS title,
+	CM.title AS session_title,
+	A .status AS status,
+	LL.title AS description
+FROM
+	task A,
+	lesson LL,
+	cmsession CM
+WHERE
+A .status LIKE '%ASSIGNED'
+AND A .actor_id = :creative_creator_id
+AND CM. ID = LL.session_id
+ and A .item_id = LL. ID
+and A.item_type = 'LESSON'
+ORDER BY
+	A . ID</sql>
+		<title> All Lesson Tasks Assigned</title>
+	</reports>
 	
+	<reports id="202" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+
+		<sql>SELECT DISTINCT
+	A . ID AS task_id,
+	A .item_type AS item_type,
+	LL.title
+	 AS title,
+	CM.title AS session_title,
+	A .status AS status,
+
+			LL.title
+	 AS description
+FROM
+	PUBLIC .task A
+LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID and A.item_type='LESSON'),
+ PUBLIC .cmsession CM
+WHERE
+	A.status='DRAFT'
+AND A .actor_id = :creative_creator_id
+AND CM. ID = 
+	LL.session_id
+ORDER BY
+	A . ID
+		</sql>
+		<title> All Lesson Tasks in Progress</title>
+	</reports>
 	
+	<reports id="203" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="STATUS_HANDLER" display_name="Status" isVisible="true" name="status" />
+
+		<sql>
+		SELECT
+	A . ID AS task_id,
+	A .item_id AS item_id,
+	A .status AS status,
+	A .item_type AS item_type,
+	LL.title AS title,
+	A .status AS status11,
+	CM.title AS session_title,
+	LL.title AS description,
+	D. NAME AS created_by
+FROM
+	PUBLIC .task A
+LEFT JOIN PUBLIC .media_review M ON (M .task_id = A . ID)
+LEFT JOIN PUBLIC .content_creator D ON (D. ID = A .owner_id)
+LEFT JOIN PUBLIC .creative_admin AD ON (A .actor_id = AD. ID)
+LEFT JOIN PUBLIC .creative_creator CR ON (CR. ID = A .actor_id)
+LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID),
+ PUBLIC .cmsession CM
+WHERE
+	A .status = 'DIS_APPROVED'
+AND A .actor_id = :creative_creator_id
+AND CM. ID = LL.session_id
+ORDER BY
+	A . ID
+		</sql>
+		<title> All Lesson Tasks Disapproved</title>
+	</reports>
 	
-	
+	<reports id="204" type_of_report="table">
+		<column columnHandler="NONE" display_name="Task ID" isVisible="true" name="task_id" />
+		<column columnHandler="NONE" display_name="Lesson Title" isVisible="true" name="title" />
+		<column columnHandler="NONE" display_name="Type" isVisible="true" name="item_type" />
+		<column columnHandler="NONE" display_name="Session Title" isVisible="true" name="session_title" />
+		<column columnHandler="NONE" display_name="Description" isVisible="true" name="description" />
+		<column columnHandler="STATUS_HANDLER" display_name="status" isVisible="true" name="status" />
+
+		<sql>
+		SELECT
+	A . ID AS task_id,
+	A .item_id AS item_id,
+	A .status AS status,
+	A .item_type AS item_type,
+	LL.title AS title,
+	A .status AS status11,
+	CM.title AS session_title,
+	LL.title description,
+	D. NAME AS created_by
+FROM
+	PUBLIC .task A
+LEFT JOIN PUBLIC .content_creator D ON (D. ID = A .owner_id)
+LEFT JOIN PUBLIC .creative_admin AD ON (A .actor_id = AD. ID)
+LEFT JOIN PUBLIC .creative_creator CR ON (CR. ID = A .actor_id)
+LEFT JOIN PUBLIC .lesson LL ON (A .item_id = LL. ID),
+ PUBLIC .cmsession CM
+WHERE
+	A .status = 'APPROVED'
+AND A .actor_id = :creative_creator_id
+AND CM. ID = LL.session_id
+
+ORDER BY
+	A . ID
+		</sql>
+		<title> All Lesson Tasks Approved</title>
+	</reports>
 </istar_reports>
