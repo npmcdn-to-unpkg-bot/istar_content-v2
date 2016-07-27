@@ -178,6 +178,7 @@ try {
 			center : false,
 			controls : true, 
 			showNotes: false,
+		    slideNumber: true,
 			height: window_height,
 			width: window_size,
 			transition: 'slide', 
@@ -207,7 +208,8 @@ try {
 			var res = currentURL.split("#");
 			currentURL = res[0];
 			history.pushState({}, "URL Rewrite Example", currentURL + "#" + event.currentSlide.id);
-			
+
+			$('.slide-number-a').text('event.currentSlide.id');
 		});
 
 		function add_edit() {
