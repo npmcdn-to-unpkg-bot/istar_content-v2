@@ -3,6 +3,8 @@ package com.istarindia.cms.controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -42,11 +44,7 @@ import com.istarindia.apps.services.task.EmailSendingUtility;
 @WebServlet("/change_status")
 public class ChangeStatusController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private String deployment_type;
-	private String host;
-	private String port;
-	private String user1;
-	private String pass;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -58,6 +56,12 @@ public class ChangeStatusController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		final    String deployment_type;
+		final  String host;
+		final  String port;
+		final  String user1;
+		final  String pass;
+		
 		if(request.getParameterMap().containsKey("new_status") && request.getParameterMap().containsKey("task_id"))
 		{
 			Properties properties = new Properties();
@@ -89,14 +93,14 @@ public class ChangeStatusController extends HttpServlet {
 			Cmsession cm = ll.getCmsession();
 			Module mm = cm.getModule();
 			Course cc = mm.getCourse();
-			String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - " 
+			final 	String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - " 
 			+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
 			
 			
 			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
 			new TaskService().updateStatus(task_id, new_status);
 			
-			HashMap<String, String> recipient= new HashMap<>();
+		final	HashMap<String, String> recipient= new HashMap<>();
 			//content creator
 			
 			String  content_email = (new IstarUserDAO().findById(t.getActorId())).getEmail();
@@ -121,7 +125,10 @@ public class ChangeStatusController extends HttpServlet {
 			for (String taskReviewer : properties.get("email_mandatory_list").toString().split(",")) {
 				recipient.put(taskReviewer, taskReviewer);
 			}
-			String subject = "changes in content"; 
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
+			Date timeOfIncident = new Date();
+			final	String subject = "Changes in content "+ dateFormat.format(timeOfIncident) + " on server with IP ->"+ request.getServerName(); 
 			
 			Thread t1 = new Thread(new Runnable() {
 			     public void run() {
