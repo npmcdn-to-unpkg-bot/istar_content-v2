@@ -33,15 +33,15 @@ String style_body = "background-size: cover;";
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css" >
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/animate.css" />
+<link rel="stylesheet"   href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet"    href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
+<link rel="stylesheet"    href="<%=baseURL%>assets/css/animate.css" />
 
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
-<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/style.css">
+<link rel="stylesheet"    href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet"   href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet"   href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet"   href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet"    href="<%=baseURL%>assets/css/style.css">
 
 <%
 int themeID = 100;
