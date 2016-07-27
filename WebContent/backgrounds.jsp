@@ -139,7 +139,7 @@
 
 				<div class="col-sm-3 sm-margin-bottom-30" style="margin-top:2%">
 					
-					<a href="<%=image.getUrl()%>" rel="gallery3"
+					<a href="<%=image.getUrl()%>?a=1" rel="gallery3"
 						class="fancybox img-hover-v1" title="Image 1"><span><%=image.getTitle() %></span>
 					</a>
 				</div>

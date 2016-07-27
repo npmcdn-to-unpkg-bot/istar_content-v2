@@ -113,6 +113,7 @@ var Validation = function () {
         				required: true,
         				rangelength: [1, 200]
         			},
+        			
 		        	title2:
 					{
 						required: true,
