@@ -122,20 +122,22 @@ public class ChangeStatusController extends HttpServlet {
 				recipient.put(taskReviewer, taskReviewer);
 			}
 			String subject = "changes in content"; 
-			new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					try {
-						if (deployment_type.trim().equalsIgnoreCase("prod")) {
-							EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage); 
+			
+			Thread t1 = new Thread(new Runnable() {
+			     public void run() {
+			    	 try {
+							if (deployment_type.trim().equalsIgnoreCase("prod")) {
+								System.out.println("sending mail----------------to "+recipient);
+								EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage); 
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
 						}
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				}
-			};
+						}
+			});  
+			
+			t1.start();
+			
 			
 			
 			
