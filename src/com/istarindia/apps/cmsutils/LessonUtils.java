@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -449,7 +450,8 @@ public class LessonUtils {
                     + "\")'  href='#' class='btn-u btn-u-default'style='margin-left: 10px'>Mobile Preview</a>");
             out.append("</div>");
             out.append(" </td><td>");
-            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' class='btn-u btn-u-default'style='margin-left: 10px'>Speaker Preview</a>");
+            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' "
+            		+ " class='btn-u btn-u-default'style='margin-left: 10px'>Speaker Preview</a>");
             out.append("</form>");
             out.append(" </td><td>");
             out.append("<form id='update_order' action='/content/update_course?ppt_id="+ ppt.getId()+"'>"
@@ -465,7 +467,9 @@ public class LessonUtils {
 				
 				String themeID =  lesson.getLesson_theme_desktop();
 				out.append("<div>");
-	            out.append("<a style='float: none; margin-right: 0px;' target='_blank' href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
+	            out.append("<a style='float: none; margin-right: 0px;' target='_blank' "
+	            		+ ""
+	            		+ "href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
 	            		+ " class='btn-u btn-u-default'>Edit Visualize Theme</a>");
 	            out.append("</div>");
 	            out.append(" </td></tr>");
@@ -1145,7 +1149,6 @@ public class LessonUtils {
         }
         context.put("selected_image", selected_image);
         context.put("selected_video", selected_video);
-        
         context.put("slide", slide);
         context.put("images", images);
         context.put("videos", videos);

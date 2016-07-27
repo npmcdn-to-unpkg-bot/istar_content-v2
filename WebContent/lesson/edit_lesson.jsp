@@ -703,7 +703,7 @@
 		});
 
 		function openWin(url) {
-			myWindow = window.open(url, "", "width=412, height=659"); // Opens a new window
+			myWindow = window.open(url, "", "width=400, height=659"); // Opens a new window
 
 			return false;
 		}

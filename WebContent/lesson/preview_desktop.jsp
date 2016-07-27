@@ -33,15 +33,15 @@ String style_body = "background-size: cover;";
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/animate.css" />
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/animate.css" />
 
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet"   integrity="" href="<%=baseURL%>assets/css/style.css">
 
 <%
 int themeID = 100;
@@ -155,14 +155,14 @@ try {
 	</div>
 	
 	
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
 	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
-	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-	<script type="text/javascript" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
+	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
+	<script type="text/javascript"  integrity="" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script type="text/javascript"  integrity="" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 	
 	<script>
 		var window_size = $(window).width();

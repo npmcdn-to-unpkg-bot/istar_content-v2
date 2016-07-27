@@ -80,7 +80,7 @@ public class ExceptionConrtoller extends HttpServlet {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
 			Date timeOfIncident = new Date();
 
-			String subject = "CMS issue at " + dateFormat.format(timeOfIncident);
+			String subject = "CMS issue at " + dateFormat.format(timeOfIncident) + " on server with IP ->"+ request.getServerName();
 
 			StringBuffer message = new StringBuffer();
 			message.append("URL: " + requestUri);
