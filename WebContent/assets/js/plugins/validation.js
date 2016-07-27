@@ -101,6 +101,36 @@ var Validation = function () {
 	                error.insertAfter(element.parent());
 	            }
 	        });
+        }, 
+        
+        slideValidation: function () {
+	        $("#slide-form").validate({                   
+	            // Rules for form validation
+	            rules:
+	            {
+	            	title:
+        			{
+        				required: true,
+        				rangelength: [1, 200]
+        			}
+	            },
+	                                
+	            // Messages for form validation
+	            messages:
+	            {
+	            	title:
+	            	{
+	            		required: 'Note: Please enter title / Use another template without title',
+	            		rangelength: 'Title should be less than 200 characters long'
+	            	}
+	            },                  
+	            
+	            // Do not change code below
+	            errorPlacement: function(error, element)
+	            {
+	                error.insertAfter(element.parent());
+	            }
+	        });
         },
         
         lessonValidation: function () {

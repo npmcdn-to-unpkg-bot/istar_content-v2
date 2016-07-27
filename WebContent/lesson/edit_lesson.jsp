@@ -563,16 +563,14 @@
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"
 		type="text/javascript" charset="utf-8"></script>
 
-	<script
-		src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
 		type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/js/plugins/validation.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 
 	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>

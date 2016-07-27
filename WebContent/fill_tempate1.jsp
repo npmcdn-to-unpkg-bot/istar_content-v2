@@ -515,6 +515,8 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/parsley.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/select2-4.0.3/dist/js/select2.full.js"></script>
+	<script src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
@@ -673,6 +675,9 @@
 	                "delete": {name: "Delete", icon: "delete"}
 	            }
 	        });
+			
+
+            Validation.slideValidation();
 
 		});
 	</script>
