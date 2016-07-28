@@ -260,7 +260,7 @@
 										for (TaskLog log : items) {
 
 											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-											if(slideDAO.findById(log.getItem_id()) != null  && !(log.getComments().trim().isEmpty()) ) {
+											if(!(log.getComments().trim().isEmpty()) ) {
 											
 								%>
 							<div class="comment" style="padding-bottom: 15px;">
@@ -276,7 +276,11 @@
 										</div>
 									</div>
 									<div style="float: right;">
+									<% if(slideDAO.findById(log.getItem_id()) != null ) { %>
 										<a class="" target="_blank" href="/content/fill_tempate_review.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Review slide</a>
+									<% } else { %>
+										Deleted slide
+									<% } %>
 									</div>
 								</div>
 							</div>
