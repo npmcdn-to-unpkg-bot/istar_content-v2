@@ -164,12 +164,7 @@ public class CMSRegistry {
 		List<IstarUser> items1 = (ArrayList<IstarUser>) dao.findByProperty("userType", "CREATIVE_CREATOR");
 		items2.addAll(items1);
 		for (IstarUser user : items2) {
-			System.out.println("user here is >>" + user.getEmail());
-			//if (user.getClass().toString().endsWith("ContentCreator")) {
-				System.out.println("user here is >>" + user.getEmail());
-				items.add(user);
-//
-			//}
+			items.add(user);
 		}
 		return items;
 	}
