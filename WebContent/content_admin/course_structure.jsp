@@ -156,20 +156,24 @@
 																if(is_unassigned_lesson) {
 																	assigned = "label label-default ";
 																}
+																
+																int task_id = lesson.getTaskID();
 															%>
 															 
-															<% if(is_publishable) { %>
-															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" 
-															data-jstree='{"opened":true}' class="context-menu"><%=lesson.getTitle() %>
+															<% if(is_publishable && task_id != 0) { %>
+																<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" data-task-id ="<%=lesson.getTaskID() %>"
+																data-jstree='{"opened":true}' class="context-menu"><%=lesson.getTitle() %>
 															<% } else { %>
-															<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" 
-															data-jstree='{"opened":true}'><%=lesson.getTitle() %>
+																<li style="margin-bottom: 4px" id="lesson_<%=lesson.getId()%>" 
+																data-jstree='{"opened":true}'><%=lesson.getTitle() %>
 															<% }  %>
+															
 															<span class="<%=assigned%> "> Assigned to - <%=lesson.getAsignee() %></span> 
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=reviewers %>"> Reviewer - <%=lesson.getReviewer() %></span> 
 															<span>&nbsp;&nbsp;&nbsp;</span> <span class="<%=statusLabel%>"> Status - <%=lesson.getStatus() %></span></li>
+															
 															<%
-												}
+																}
 																
 																catch(Exception e) {
 																	System.out.println(lesson.getId());
@@ -272,19 +276,7 @@
 			<!-- JS Page Level -->
 			<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 			<script type="text/javascript">
-				function myFunction() {
-					var selectedElmsIds = $('#html1').jstree("get_selected");
-					if (selectedElmsIds == ""){
-						document.getElementById("err").innerHTML = "Please select the lesson";
-						$(window).scrollTop(0);
-						return false; 
-						}
-					else {
-						$('#myModal').modal('show');
-						document.getElementById("err").innerHTML = "";
-					}
-					$('#selected_items').val(selectedElmsIds);
-				}
+				
 				jQuery(document).ready(function() {
 					$.contextMenu({
 	    	            selector: '.context-menu', 
@@ -300,9 +292,11 @@
 	    	            items: {
 	    	                "paste": {name: "Publish Lesson", icon: "paste"}
 	    	            }
+	    	            
 	    	        });
 					
 					App.init();
+					
 					$('#html1').jstree({
 						"core" : {
 							"themes" : {
@@ -314,13 +308,26 @@
 						},
 						"plugins" : [ "checkbox" ]
 					});
+					
 					$('#selected_items').val("aaaa");
 	                document.getElementById("formfield").value = "";
 	                
-	                
-	                
-
 				});
+				
+				function myFunction() {
+					var selectedElmsIds = $('#html1').jstree("get_selected");
+					if (selectedElmsIds == ""){
+						document.getElementById("err").innerHTML = "Please select the lesson";
+						$(window).scrollTop(0);
+						return false; 
+						}
+					else {
+						$('#myModal').modal('show');
+						document.getElementById("err").innerHTML = "";
+					}
+					$('#selected_items').val(selectedElmsIds);
+				}
+				
 				function DisplayFilePath(){
                     var filepath=$(":file").val();
                     var filename=filepath.substr(filepath.lastIndexOf('\\')+1,filepath.length);

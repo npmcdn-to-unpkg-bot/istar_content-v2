@@ -19,7 +19,7 @@ import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.cmsutils.ErrorMessages;
 import com.istarindia.apps.dao.ContentAdmin;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.services.CourseService;
+import com.istarindia.apps.services.BulkUploadService;
 
 /**
  * Servlet implementation class CourseUploadController
@@ -100,7 +100,7 @@ public class CourseUploadController extends HttpServlet {
 
 					}
 				}
-				new CourseService().readFile(storeFile, (ContentAdmin) user);
+				new BulkUploadService().readFile(storeFile, (ContentAdmin) user);
 				//System.out.println(formItems.get(0).getName());
 				request.setAttribute("message_success", "Upload has been done successfully!");
 				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
