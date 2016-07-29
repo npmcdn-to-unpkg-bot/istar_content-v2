@@ -82,37 +82,80 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				%>
 				
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel col-md-6 panel-orange" style="padding: 0px; margin: 10px; border: 3px solid #e67e22;">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="fa fa-tasks"></i> Update Module Details
-					</h3>
-				</div>
-				<div class="panel-body">
-					<form id="update_module" action="/content/update_course" class="sky-form" method="post" >
-						
-						<input id='module_id' name='module_id' type='hidden' value='<%=module_id%>'>
-						<input id='action' name='action' type='hidden' value='update'> 
-						<input id='entity_type' name='entity_type' type='hidden' value='module'> 
-						
-						<fieldset>
-						
-						<div class="row">
-							<section class="col-md-9">
-								<label>Module Name</label> <label class="input"> 
-									<input value="<%=module.getModuleName()%>" type="text" 
-									name="title" placeholder="Title"> 
-								</label>
-							</section>
-
-							<section>
-								<button type="submit" class="btn-u" style="float:right; margin-top: 4%;">Update</button>
-							</section>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-orange" style="padding: 0px; margin: 10px; border: 3px solid #e67e22;">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-tasks"></i> Update Module Details
+							</h3>
 						</div>
-						
-						</fieldset>
-						
-					</form>
+						<div class="panel-body">
+							<form id="update_module" action="/content/update_course" class="sky-form" method="post" >
+								
+								<input id='module_id' name='module_id' type='hidden' value='<%=module_id%>'>
+								<input id='action' name='action' type='hidden' value='update'> 
+								<input id='entity_type' name='entity_type' type='hidden' value='module'> 
+								
+								<fieldset>
+								
+								<div class="row">
+									<section class="col-md-9">
+										<label>Module Name</label> <label class="input"> 
+											<input value="<%=module.getModuleName()%>" type="text" name="title" placeholder="Title"> 
+										</label>
+									</section>
+		
+									<section>
+										<button type="submit" class="btn-u" style="float:right; margin-top: 4%;">Update</button>
+									</section>
+								</div>
+								
+								</fieldset>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+					
+				<div class="col-md-8">
+					<div class="panel panel-orange" style="margin: 10px; border: 3px solid #e67e22;">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-tasks"></i> Add new Session
+							</h3>
+						</div>
+						<div class="panel-body">
+							<form id="update_course" action="/content/update_course" class="sky-form" method="post" >
+								
+								<input id='course_id' name='course_id' type='hidden' value='<%=module_id%>'> 
+								<input id='action' name='action' type='hidden' value='create'> 
+								<input id='entity_type' name='entity_type' type='hidden' value='session'> 
+								
+								<fieldset>
+									<div class="row">
+										<section class="col-md-3">
+											<label>Name</label> <label class="input"> 
+												<input type="text"  name="title" placeholder="Session Name" id="newSessionName"> 
+												<label id="err" style="display: block;color:#ee9393"></label>
+											</label>
+										</section>
+			
+										<section class="col-md-8">
+											<label>Description</label> <label class="input"> 
+												<input  type="text"  name="description" placeholder="Session Description"> 
+											</label>
+										</section>
+										
+										<section class="col-md-1"><label> </label> <label class="input"> 
+											<button type="submit" class="submit-form btn-u" style="float:right;">Create</button></label>
+										</section>
+									</div>
+								</fieldset>
+								
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -151,52 +194,56 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
+	<script src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>            
-		<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
-	jQuery(document).ready(function() {
+	<script type="text/javascript">
+		var responsiveHelper_dt_basic = undefined;
+		var responsiveHelper_datatable_fixed_column = undefined;
+		var responsiveHelper_datatable_col_reorder = undefined;
+		var responsiveHelper_datatable_tabletools = undefined;
+		
+		var breakpointDefinition = {
+			tablet : 1024,
+			phone : 480
+		};
+		
+		jQuery(document).ready(function() {
 			App.init();
-	            //table contents are sortable
-    	        $( "#datatable_report_32_body").sortable();
-        	    $( "#update_order" ).submit(function( event ) {
-            		var idsInOrder = $("#datatable_report_32_body").sortable("toArray");
-            		$('#order_holder').val(idsInOrder);
-            		});
-        	    
-        	    // Show all results in single page. No need for search
-        	    // Retrieve the existing DataTable instance and destroy and then reconfigure
-        	    if ( $.fn.dataTable.isDataTable( "#datatable_report_32" ) ) {
-        	        table = $("#datatable_report_32" ).DataTable({
-        	        	destroy: true,
-        	        	sorting: false,
-        	        	searching: false,
-        	        	paging: false
-        	        } );
-        	    }
-        	    else {
-        	        table = $( "#datatable_report_32" ).DataTable( {
-        	        	sorting: false,
-        	        	searching: false,
-        	            paging: false
-        	        } );
-        	    }
-        	    
-        	    //This is PART#2; Either keep this part or PART#1 which is commented as of now
-        	    var buttonDivString = "<div class='row'><label class='col-md-9' style='margin-top: 1%;'> [Click the button once rearranging is done to save the order] </label><button type='submit' class='btn-u btn-u-yellow' style='float:right;margin-right: 2%;'>Update Order </button></div>";
-        	    var div = document.getElementById('datatable_report_panel_body');
-        	    div.innerHTML = div.innerHTML + buttonDivString;
+			Validation.newCourseEntryValidation();
+	        //table contents are sortable
+	        $( "#datatable_report_32_body").sortable();
+	   	    $( "#update_order" ).submit(function( event ) {
+	       		var idsInOrder = $("#datatable_report_32_body").sortable("toArray");
+	       		$('#order_holder').val(idsInOrder);
+	       		});
+	   	    
+	   	    // Show all results in single page. No need for search
+	   	    // Retrieve the existing DataTable instance and destroy and then reconfigure
+	   	    if ( $.fn.dataTable.isDataTable( "#datatable_report_32" ) ) {
+	   	        table = $("#datatable_report_32" ).DataTable({
+	   	        	destroy: true,
+	   	        	sorting: false,
+	   	        	searching: false,
+	   	        	paging: false
+	   	        } );
+	   	    }
+	   	    else {
+	   	        table = $( "#datatable_report_32" ).DataTable( {
+	   	        	sorting: false,
+	   	        	searching: false,
+	   	            paging: false
+	   	        } );
+	   	    }
+	   	    
+	   	    //This is PART#2; Either keep this part or PART#1 which is commented as of now
+	   	    var buttonDivString = "<div class='row'><label class='col-md-9' style='margin-top: 1%;'> [Click the button once rearranging is done to save the order] </label><button type='submit' class='btn-u btn-u-yellow' style='float:right;margin-right: 2%;'>Update Order </button></div>";
+	   	    var div = document.getElementById('datatable_report_panel_body');
+	   	    div.innerHTML = div.innerHTML + buttonDivString;
 		});
 	</script>
 	<!--[if lt IE 9]>

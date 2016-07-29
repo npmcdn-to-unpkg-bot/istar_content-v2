@@ -99,15 +99,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						<div class="row">
 							<section class="col-md-3">
 								<label>Session Name</label> <label class="input"> 
-									<input value="<%=cmsession.getTitle()%>" type="text" 
-									name="title" placeholder="Title"> 
+									<input value="<%=cmsession.getTitle()%>" type="text" name="title" placeholder="Title"> 
 								</label>
 							</section>
 
 							<section class="col-md-8">
 								<label>Session Description</label> <label class="input"> 
-									<input value="<%=cmsession.getSession_description()%>" type="text" 
-									name="description" placeholder="Description"> 
+									<input value="<%=cmsession.getSession_description()%>" type="text" name="description" placeholder="Description"> 
 								</label>
 							</section>
 							

@@ -45,9 +45,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
+
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
@@ -70,13 +75,49 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<br/>
 			
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-
+			<div class="panel panel-orange" style="margin: 10px; border: 3px solid #e67e22;">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-tasks"></i> Add new Course
+					</h3>
+				</div>
+				<div class="panel-body">
+					<form id="add_new_course" action="/content/update_course" class="sky-form" method="post" >
+						<input id='action' name='action' type='hidden' value='create'> 
+						<input id='entity_type' name='entity_type' type='hidden' value='course'> 
+						
+						<fieldset>
+							<div class="row">
+								<section class="col-md-3">
+									<label>Name</label> <label class="input"> 
+										<input type="text"  name="title" placeholder="Course Name" id="newCourseName"> 
+										<label id="err" style="display: block;color:#ee9393"></label>
+									</label>
+								</section>
+	
+								<section class="col-md-8">
+									<label>Description</label> <label class="input"> 
+										<input  type="text"  name="description" placeholder="Course Description"> 
+									</label>
+								</section>
+								
+								<section class="col-md-1"><label> </label> <label class="input"> 
+									<button type="submit" class="submit-form btn-u" style="float:right;">Confirm</button></label>
+								</section>
+							</div>
+							
+							
+						</fieldset>
+						
+					</form>
+				</div>
+			</div>
+			
+			<br/>
+			
 			<div class="col-md-12">
-				<% HashMap<String, String> conditions = new HashMap();
-				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
-				%>
+				<% HashMap<String, String> conditions = new HashMap(); %>
 				<%=(new ReportUtils()).getReport(30, conditions, ((IstarUser)request.getSession().getAttribute("user")), "NONE").toString() %>
-
 			</div>
 			
 		</div>
@@ -89,6 +130,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
@@ -97,24 +139,43 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
+	<script src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>            
-		<script type="text/javascript">
-	var responsiveHelper_dt_basic = undefined;
-	var responsiveHelper_datatable_fixed_column = undefined;
-	var responsiveHelper_datatable_col_reorder = undefined;
-	var responsiveHelper_datatable_tabletools = undefined;
-	
-	var breakpointDefinition = {
-		tablet : 1024,
-		phone : 480
-	};
-	jQuery(document).ready(function() {
+	<script type="text/javascript">
+		var responsiveHelper_dt_basic = undefined;
+		var responsiveHelper_datatable_fixed_column = undefined;
+		var responsiveHelper_datatable_col_reorder = undefined;
+		var responsiveHelper_datatable_tabletools = undefined;
+		
+		var breakpointDefinition = {
+			tablet : 1024,
+			phone : 480
+		};
+		
+		jQuery(document).ready(function() {
 			App.init();
+			Validation.newCourseEntryValidation();
+			$( ".submit-form" ).bind( "click", function( event ) {
+	  	 		if (isValidCourseName()) {
+	  	 			$("#err").text("");
+	  	 			$("#add_course").submit();
+	  	 		} else {
+	  	 			$("#err").text("Please ensure the course name is unique and try again!");
+	  	 			event.preventDefault() ;
+	  	 		}
+	   	  	});
 		});
+		
+		function isValidCourseName() {
+			var newCourseName = $("#newCourseName").val();
+			return !isDuplicate(newCourseName, "Course Title");		
+		}
+	
 	</script>
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>

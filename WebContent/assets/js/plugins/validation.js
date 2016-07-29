@@ -204,8 +204,56 @@ var Validation = function () {
 	            {
 	                error.insertAfter(element.parent());
 	            }
-	        });
-        });
+	            
+        		});
+        	});
+        },
+        
+        newCourseEntryValidation: function () {
+        	$('.sky-form').each( function(){
+
+        		var form = $(this);
+        		form.validate({               
+        		
+        		// Rules for form validation
+        		rules:
+        		{
+        			title:
+        			{
+        				required: true,
+        				rangelength: [1, 200]
+        			},
+        			description:
+        			{
+        				required: true,
+        				rangelength: [1,200]
+        			}
+        		},
+                                
+        		// Messages for form validation
+	            messages:
+	            {
+	            	title:
+	            	{
+	            		required: 'Please enter a valid title',
+	            		rangelength: 'Title should be shorter than 200 characters long'
+	            	},
+	            	description:
+	                {
+	                    required: 'Please enter a valid description',
+	                    rangelength: 'Description should be shorter than 200 characters long'
+	                }
+	            },                  
+	            
+	            // Do not change code below
+	            errorPlacement: function(error, element)
+	            {
+	                error.insertAfter(element.parent());
+	            }
+	            
+        		});
+        	});
         }
+        
     };
 }();
