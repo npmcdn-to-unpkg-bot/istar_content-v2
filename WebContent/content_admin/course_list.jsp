@@ -68,7 +68,6 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 				<h1 class="pull-left">
 					<a href="<%=baseURL%>content_admin/dashboard.jsp">Dashboard</a>
 				</h1>
-
 			</div>
 		</div>
 		
@@ -170,6 +169,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	  	 		}
 	   	  	});
 		});
+
+		$( "#newCourseName" ).keyup(function() {
+  	 		if (isValidCourseName()) {
+  	 			$("#err").text("");
+  	 		} else {
+  	 			$("#err").text("Please ensure the course name is unique and try again!");
+  	 		}
+  	 	});
 		
 		function isValidCourseName() {
 			var newCourseName = $("#newCourseName").val();

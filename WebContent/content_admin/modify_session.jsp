@@ -62,24 +62,30 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
+		
+		<%
+			HashMap<String, String> conditions = new HashMap();
+			String session_id = (request.getParameter("session_id")).toString();
+			conditions.put("session_id", session_id);
+			Cmsession cmsession = (new CmsessionDAO()).findById(Integer.parseInt(session_id));
 
+		%>
+		
 		<div class="breadcrumbs">
 			<div class="container-fluid">
 				<h1 class="pull-left">
-					<a href="<%=baseURL%>content_admin/course_list.jsp">
-					<img alt="" src="<%=baseURL%>assets/img/icon_back_arrow.png" style=" max-width: 18%; ">
-					Course List</a>
+					<a href="<%=baseURL%>content_admin/dashboard.jsp"> Dashboard</a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<a href="<%=baseURL%>content_admin/course_list.jsp"> Course List</a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<a href="<%=baseURL%>content_admin/modify_course.jsp?course_id=<%=cmsession.getModule().getCourse().getId()%>"> <%=cmsession.getModule().getCourse().getCourseName()%></a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<a href="<%=baseURL%>content_admin/modify_module.jsp?module_id=<%=cmsession.getModule().getId()%>"><%=cmsession.getModule().getModuleName()%></a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<%=cmsession.getTitle()%>
 				</h1>
 			</div>
 		</div>
-		
-				<%
-					HashMap<String, String> conditions = new HashMap();
-					String session_id = (request.getParameter("session_id")).toString();
-					conditions.put("session_id", session_id);
-					Cmsession cmsession = (new CmsessionDAO()).findById(Integer.parseInt(session_id));
-
-				%>
 				
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="panel panel-orange" style="margin: 10px; border: 3px solid #e67e22;">

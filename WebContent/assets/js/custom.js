@@ -9,7 +9,7 @@
 		});
 		
 		$('tbody tr').each(function(i, obj) {
-			if($(this).find("td").get(tableIndex).innerHTML.trim().toUpperCase() == newEntry.trim().toUpperCase() ) {
+			if($(this).find("td").get(tableIndex).innerHTML.trim().replace(/\s+/g,'').toUpperCase() == newEntry.trim().replace(/\s+/g,'').toUpperCase() ) {
 				flag = true;
 			}
 		});

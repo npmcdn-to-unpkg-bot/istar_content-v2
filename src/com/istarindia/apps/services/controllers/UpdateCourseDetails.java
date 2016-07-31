@@ -11,7 +11,12 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import com.istarindia.apps.dao.Cmsession;
+import com.istarindia.apps.dao.ContentAdmin;
+import com.istarindia.apps.dao.Course;
+import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.Module;
 import com.istarindia.apps.services.CourseService;
 
 /**
@@ -34,15 +39,70 @@ public class UpdateCourseDetails extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (request.getParameter("action").equalsIgnoreCase("reorder")){
+		switch (request.getParameter("action").toString()) {
+		case "reorder":
 			reorder(request, response);
-			
-		} else if(request.getParameter("action").equalsIgnoreCase("update")) {
+			break;
+		case "update":
 			update_course(request, response);
+			break;
+		case "create":
+			add_item(request, response);
+			break;	
 		}
 	}
 
-	
+	/*	
+	 * Add new course/module/session 
+ 	 */	
+	private void add_item(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException {
+
+		CourseService service = new CourseService();
+		
+		switch (request.getParameter("entity_type").toString()) {
+		case "course":
+			String course_name = request.getParameter("title").toString();
+			String course_description = request.getParameter("description").toString();
+			Course course = service.createNewCourse(course_name, course_description);
+			
+			if(course == null) {
+				request.setAttribute("message_failure", "Please try again! Duplicate course found!");
+			} else {
+				request.setAttribute("message_success", "New course has been added successfully!");
+			}
+			request.getRequestDispatcher("/content_admin/course_list.jsp").forward(request, response);
+			break;
+			
+		case "module":
+			int course_id = Integer.parseInt(request.getParameter("course_id").toString());
+			String module_name = request.getParameter("title").toString();
+			Module module = service.createNewModule(module_name, course_id);
+
+			if(module == null) {
+				request.setAttribute("message_failure", "Please try again! Duplicate module found!");
+			} else {
+				request.setAttribute("message_success", "New module has been added successfully!");
+			}
+			request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +course_id).forward(request, response);
+			break;
+			
+		case "session":
+			int module_id = Integer.parseInt(request.getParameter("module_id").toString());
+			String cmsession_name = request.getParameter("title").toString();
+			String cmsession_description = request.getParameter("description").toString();
+			Cmsession session = service.createNewCmsession(cmsession_name, cmsession_description, module_id, (ContentAdmin)request.getSession().getAttribute("user"));
+
+			if(session == null) {
+				request.setAttribute("message_failure", "Please try again! Something is wrong!");
+			} else {
+				request.setAttribute("message_success", "New sessioin has been added successfully!");
+			}
+			request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +module_id).forward(request, response);
+			break;
+		}
+		
+	}
+
 	/*	
 	 * Update course/module/session details
  	 */	
@@ -79,7 +139,6 @@ public class UpdateCourseDetails extends HttpServlet {
 			request.setAttribute("message_success", "Session details are updated successfully!");
 			request.getRequestDispatcher("/content_admin/modify_session.jsp?module_id=" +cmsession_id).forward(request, response);
 			break;
-		
 		}
 		
 	}

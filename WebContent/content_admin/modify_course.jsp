@@ -64,22 +64,24 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		
+		<%
+			HashMap<String, String> conditions = new HashMap();
+			String course_id = (request.getParameter("course_id")).toString();
+			conditions.put("course_id", course_id);
+			Course course = (new CourseDAO()).findById(Integer.parseInt(course_id)); 
+		%>
+		
 		<div class="breadcrumbs">
 			<div class="container-fluid">
 				<h1 class="pull-left">
-					<a href="<%=baseURL%>content_admin/course_list.jsp">
-					<img alt="" src="<%=baseURL%>assets/img/icon_back_arrow.png" style=" max-width: 18%; ">
-					Course List</a>
+					<a href="<%=baseURL%>content_admin/dashboard.jsp"> Dashboard</a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<a href="<%=baseURL%>content_admin/course_list.jsp"> Course List</a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<%=course.getCourseName()%>
 				</h1>
 			</div>
 		</div>
-		
-				<%
-					HashMap<String, String> conditions = new HashMap();
-					String course_id = (request.getParameter("course_id")).toString();
-					conditions.put("course_id", course_id);
-					Course course = (new CourseDAO()).findById(Integer.parseInt(course_id)); 
-				%>
 		
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
@@ -140,7 +142,8 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 									<div class="row">
 										<section class="col-md-9">
 											<label>Module Name</label> <label class="input"> 
-												<input type="text" name="title" placeholder="Title"> 
+												<input type="text" name="title" placeholder="Module name" id="newModuleName"> 
+												<label id="err" style="display: block;color:#ee9393; font-size: 11px;"></label>
 											</label>
 										</section>
 			
@@ -211,6 +214,14 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			var newModuleName = $("#newModuleName").val();
 			return !isDuplicate(newModuleName, "Module Title");		
 		}
+		
+		$( "#newModuleName" ).keyup(function() {
+  	 		if (isValidModuleName()) {
+  	 			$("#err").text("");
+  	 		} else {
+  	 			$("#err").text("Please ensure the module name is unique and try again!");
+  	 		}
+  	 	});
 		
 		jQuery(document).ready(function() {
 			App.init();

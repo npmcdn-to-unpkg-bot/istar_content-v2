@@ -552,14 +552,13 @@
 		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
 
 		<sql>select C.id as task_id , C.course_name as course_title, count( DISTINCT M) as module_count, count(DISTINCT S) as session_count, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
-from course C, module M
-	left join cmsession S on S.module_id=M.id 
-	left join lesson L on L.session_id=S.id
-	left join task T on T.item_id=L.id
-where C.id = M.course_id and T.item_type = 'LESSON' and T.status!='DELETED'
-group by course_title, task_id
-order by task_id
-
+			from course C 
+			left join module M on C.id = M.course_id
+			left join cmsession S on S.module_id=M.id 
+			left join lesson L on L.session_id=S.id
+			left join task T on T.item_id=L.id and T.item_type = 'LESSON' and T.status!='DELETED'
+			group by course_title, task_id
+			order by task_id
 		</sql>
 		<title> Course list</title>
 	</reports>
@@ -576,13 +575,13 @@ order by task_id
 		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
 
 		<sql>select M.order_id as order_id, M.id as task_id , M.module_name as module_title, count(DISTINCT S) as session_count, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count,  sum(case when T.status = 'DRAFT' then 1 else 0 end) as draft_lesson_count
-from  module M
-	left join cmsession S on S.module_id=M.id 
-	left join lesson L on L.session_id=S.id
-	left join task T on T.item_id=L.id
-where  T.item_type='LESSON' and T.status!='DELETED' and M.course_id=:course_id
-group by task_id
-order by order_id
+			from  module M
+			left join cmsession S on S.module_id=M.id 
+			left join lesson L on L.session_id=S.id
+			left join task T on T.item_id=L.id and T.item_type='LESSON' and T.status!='DELETED' 
+			where M.course_id=:course_id
+			group by task_id
+			order by order_id
 		</sql>
 		<title> Module list</title>
 	</reports>
@@ -599,12 +598,12 @@ order by order_id
 		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
 
 		<sql>select S.order_id as order_id, S.id as task_id , S.title as session_title, S.description as description, count(L) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count,  sum(case when T.status = 'DRAFT' then 1 else 0 end) as draft_lesson_count
-from  cmsession S
-	left join lesson L on L.session_id=S.id
-	left join task T on T.item_id=L.id
-where  T.item_type='LESSON' and T.status!='DELETED' and S.module_id=:module_id
-group by task_id
-order by order_id
+			from  cmsession S
+			left join lesson L on L.session_id=S.id
+			left join task T on T.item_id=L.id and T.item_type='LESSON' and T.status!='DELETED' 
+			where S.module_id=:module_id
+			group by task_id
+			order by order_id
 		</sql>
 		<title> Session list</title>
 	</reports>

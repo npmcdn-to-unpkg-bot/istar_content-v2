@@ -64,23 +64,27 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		
+		<%
+			HashMap<String, String> conditions = new HashMap();
+			String module_id = (request.getParameter("module_id")).toString();
+			conditions.put("module_id", module_id);
+			Module module = (new ModuleDAO()).findById(Integer.parseInt(module_id));
+		%>
+				
 		<div class="breadcrumbs">
 			<div class="container-fluid">
 				<h1 class="pull-left">
-					<a href="<%=baseURL%>content_admin/course_list.jsp">
-					<img alt="" src="<%=baseURL%>assets/img/icon_back_arrow.png" style=" max-width: 18%; ">
-					Course List</a>
+					<a href="<%=baseURL%>content_admin/dashboard.jsp"> Dashboard</a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<a href="<%=baseURL%>content_admin/course_list.jsp"> Course List</a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<a href="<%=baseURL%>content_admin/modify_course.jsp?course_id=<%=module.getCourse().getId()%>"> <%=module.getCourse().getCourseName()%></a>
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<%=module.getModuleName()%>
 				</h1>
 			</div>
 		</div>
 		
-				<%
-					HashMap<String, String> conditions = new HashMap();
-					String module_id = (request.getParameter("module_id")).toString();
-					conditions.put("module_id", module_id);
-					Module module = (new ModuleDAO()).findById(Integer.parseInt(module_id));
-				%>
-				
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="row">
 				<div class="col-md-4">
@@ -128,7 +132,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 						<div class="panel-body">
 							<form id="update_course" action="/content/update_course" class="sky-form" method="post" >
 								
-								<input id='course_id' name='course_id' type='hidden' value='<%=module_id%>'> 
+								<input id='module_id' name='module_id' type='hidden' value='<%=module_id%>'> 
 								<input id='action' name='action' type='hidden' value='create'> 
 								<input id='entity_type' name='entity_type' type='hidden' value='session'> 
 								
@@ -136,8 +140,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 									<div class="row">
 										<section class="col-md-3">
 											<label>Name</label> <label class="input"> 
-												<input type="text"  name="title" placeholder="Session Name" id="newSessionName"> 
-												<label id="err" style="display: block;color:#ee9393"></label>
+												<input type="text"  name="title" placeholder="Session Name" > 
 											</label>
 										</section>
 			
