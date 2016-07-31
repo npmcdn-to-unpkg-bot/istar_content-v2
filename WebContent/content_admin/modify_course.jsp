@@ -75,9 +75,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<div class="container-fluid">
 				<h1 class="pull-left">
 					<a href="<%=baseURL%>content_admin/dashboard.jsp"> Dashboard</a>
-					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3vh; ">
 					<a href="<%=baseURL%>content_admin/course_list.jsp"> Course List</a>
-					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3vh; ">
 					<%=course.getCourseName()%>
 				</h1>
 			</div>

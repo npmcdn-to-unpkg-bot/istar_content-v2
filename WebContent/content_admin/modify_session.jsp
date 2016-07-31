@@ -75,13 +75,13 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 			<div class="container-fluid">
 				<h1 class="pull-left">
 					<a href="<%=baseURL%>content_admin/dashboard.jsp"> Dashboard</a>
-					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3vh; ">
 					<a href="<%=baseURL%>content_admin/course_list.jsp"> Course List</a>
-					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3vh; ">
 					<a href="<%=baseURL%>content_admin/modify_course.jsp?course_id=<%=cmsession.getModule().getCourse().getId()%>"> <%=cmsession.getModule().getCourse().getCourseName()%></a>
-					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3vh; ">
 					<a href="<%=baseURL%>content_admin/modify_module.jsp?module_id=<%=cmsession.getModule().getId()%>"><%=cmsession.getModule().getModuleName()%></a>
-					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3%; ">
+					<img alt="" src="<%=baseURL%>assets/img/icon_forward_arrow.png" style=" width: 3vh; ">
 					<%=cmsession.getTitle()%>
 				</h1>
 			</div>
