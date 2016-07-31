@@ -22,7 +22,10 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Image;
+import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.services.MediaService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -52,10 +55,9 @@ public class BackgroundMediaController extends IStarBaseServelet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		printParams(request);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		MediaService mediaService = new MediaService();
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException(
 					"Request is not multipart, please 'multipart/form-data' enctype for your form.");
@@ -70,9 +72,17 @@ public class BackgroundMediaController extends IStarBaseServelet {
 				if (!item.isFormField()) {
 					File file = new File(fileUploadPath, item.getName());
 					if(item.getName().matches("^[a-zA-Z0-9\\_\\.]*$") && item.getName().endsWith(".png")){  
-						item.write(file);
-						request.setAttribute("message_success", "Image uploaded successfully!");
+						String comment = "";
+						if(file.exists()) {
+							comment = item.getName() + " is replaced with new image" ;
+							request.setAttribute("message_success", item.getName() + " has been successfully replaced!");
+						} else {
+							comment = "New background image " + item.getName() + " is uploaded";
+							request.setAttribute("message_success", "New background image has been uploaded successfully!");
+						}
 						
+						item.write(file);
+						mediaService.saveTaskLog((IstarUser)request.getSession().getAttribute("user"), 0, 0, "BACKGROUND_IMAGE",  "NONE", comment);
 					}
 					else {
 						request.setAttribute("message_failure", "Please note the NOTE and try again!");
