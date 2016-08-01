@@ -93,11 +93,11 @@ public class ChangeStatusController extends HttpServlet {
 			Cmsession cm = ll.getCmsession();
 			Module mm = cm.getModule();
 			Course cc = mm.getCourse();
-			final 	String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - " 
+			String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - " 
 			+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
 			
-			
-			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status);
+			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status, request.getSession().getId(), "Status changed");
+
 			new TaskService().updateStatus(task_id, new_status);
 			
 		final	HashMap<String, String> recipient= new HashMap<>();

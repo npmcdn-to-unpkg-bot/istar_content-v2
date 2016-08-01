@@ -102,14 +102,7 @@
 						<span><%=row.get(3) %></span> <span><%=row.get(2) %></span>
 					</div> <i class="cbp_tmicon rounded-x hidden-xs"></i>
 					<div class="cbp_tmlabel equal-height-column" style="height: 192px;">
-							<% if(row.get(1).toString().contains("<slide")) { %>
-								<h2>Slide Edited/created </h2>
-								<% } else { %>
-								
-						<h2>Status Changed to <%=row.get(0).toLowerCase() %></h2>		
-							
-							
-								<% } %>
+							<%=row.get(0).toLowerCase() %>
 						
 						
 						

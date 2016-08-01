@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -147,115 +148,151 @@ public class UpdateCourseDetails extends HttpServlet {
 	 * Update module/session/lesson order
  	 */	
 	private void reorder(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException {
-		
 		String order_holder_string = request.getParameter("order_holder");
 		String[] order_holder = order_holder_string.split(",");
+		String entity_type = request.getParameter("entity_type").toString();
 		
-		switch (request.getParameter("entity_type").toString()) {
-		case "modules":
-			updateModuleOrder(order_holder);
-			request.setAttribute("message_success", "Module order is updated successfully!");
-			request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
-			break;
+		if(order_holder.length == 0) {
+		
+			request.setAttribute("message_failure", "No " + entity_type + "s to reorder! Operation is aborted");
+	
+		} else {
 			
-		case "sessions":
-			updateSessionOrder(order_holder);
-			request.setAttribute("message_success", "Session order is updated successfully!");
-			request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
-			break;
-		
-		case "lessons":
-			updateLessonOrder(order_holder);
-			request.setAttribute("message_success", "Lesson order is updated successfully!");
-			request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
-			break;
-		
-		case "slides":
-			updateSlideOrder(order_holder);
-			response.sendRedirect("/content/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id")) );
-			break;
-		
-		default:
-			response.sendRedirect("/content/index.jsp");
-			break;
+			switch (entity_type) {
+			case "modules":
+				updateModuleOrder(request, order_holder);
+				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
+				break;
+				
+			case "sessions":
+				updateSessionOrder(request, order_holder);
+				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
+				break;
 			
-		}	
+			case "lessons":
+				updateLessonOrder(request, order_holder);
+				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
+				break;
+			
+			case "slides":
+				updateSlideOrder(request, order_holder);
+				response.sendRedirect("/content/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id")) );
+				break;
+			
+			default:
+				request.setAttribute("message_failure", "Something went wrong. Please try again!");
+				response.sendRedirect("/content/index.jsp");
+				break;
+			}
+			
+		}
+	}
+
+	private static void updateModuleOrder(HttpServletRequest request, String[] order_holder) {
+		
+		try {
+			StringBuffer sql = new StringBuffer();
+			for (int i=0;i<order_holder.length;i++){
+				sql.append("UPDATE module SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+			}
+			
+			IstarUserDAO dao = new IstarUserDAO();
+			Session session = dao.getSession();
+			SQLQuery query = session.createSQLQuery(sql.toString());
+			
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			
+			session.beginTransaction();
+			query.executeUpdate();
+			session.getTransaction().commit();
+
+			request.setAttribute("message_success", "Modules have been reordered successfully! Please recheck to confirm");
+			
+		} catch (Exception e) {
+			request.setAttribute("message_failure", "Something went wrong. Please try again!");
+			//System.err.println("sql: " + sql);
+		}
 		
 	}
 
-	private static void updateModuleOrder(String[] order_holder) {
+	private static void updateSessionOrder(HttpServletRequest request, String[] order_holder) {
 		
-		StringBuffer sql = new StringBuffer();
-		for (int i=0;i<order_holder.length;i++){
-			sql.append("UPDATE module SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+		try {
+			StringBuffer sql = new StringBuffer();
+			for (int i=0;i<order_holder.length;i++){
+				sql.append("UPDATE cmsession SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+			}
+			
+			IstarUserDAO dao = new IstarUserDAO();
+			Session session = dao.getSession();
+			SQLQuery query = session.createSQLQuery(sql.toString());
+			
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			
+			session.beginTransaction();
+			query.executeUpdate();
+			session.getTransaction().commit();
+
+			request.setAttribute("message_success", "Sessions have been reordered successfully! Please recheck to confirm");
+			
+		} catch (Exception e) {
+			request.setAttribute("message_failure", "Something went wrong. Please try again!");
+			//System.err.println("sql: " + sql);
 		}
-		
-		IstarUserDAO dao = new IstarUserDAO();
-        Session session = dao.getSession();
-		SQLQuery query = session.createSQLQuery(sql.toString());
-		
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		
-		session.beginTransaction();
-		query.executeUpdate();
-		session.getTransaction().commit();
 		
 	}
 
-	private static void updateSessionOrder(String[] order_holder) {
+	private static void updateLessonOrder(HttpServletRequest request, String[] order_holder) {
 		
-		StringBuffer sql = new StringBuffer();
-		for (int i=0;i<order_holder.length;i++){
-			sql.append("UPDATE cmsession SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+		try {
+			StringBuffer sql = new StringBuffer();
+			for (int i=0;i<order_holder.length;i++){
+				sql.append("UPDATE lesson SET order_id = "+(i+1)+" from task WHERE lesson.ID =task.item_id and task.item_type='LESSON' and task.id="+order_holder[i]+"; ");
+			}
+
+			IstarUserDAO dao = new IstarUserDAO();
+			Session session = dao.getSession();
+			SQLQuery query = session.createSQLQuery(sql.toString());
+			
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			
+			session.beginTransaction();
+			query.executeUpdate();
+			session.getTransaction().commit();
+
+			request.setAttribute("message_success", "Lessons have been reordered successfully! Please recheck to confirm");
+			
+		} catch (Exception e) {
+			request.setAttribute("message_failure", "Something went wrong. Please try again!");
+			//System.err.println("sql: " + sql);
 		}
-		
-		IstarUserDAO dao = new IstarUserDAO();
-        Session session = dao.getSession();
-		SQLQuery query = session.createSQLQuery(sql.toString());
-		
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		
-		session.beginTransaction();
-		query.executeUpdate();
-		session.getTransaction().commit();
 		
 	}
 
-	private static void updateLessonOrder(String[] order_holder) {
+	private static void updateSlideOrder(HttpServletRequest request, String[] order_holder) {
 		
-		StringBuffer sql = new StringBuffer();
-		for (int i=0;i<order_holder.length;i++){
-			sql.append("UPDATE lesson SET order_id = "+(i+1)+" from task WHERE lesson.ID =task.item_id and task.item_type='LESSON' and task.id="+order_holder[i]+"; ");
-		}
+		try {
+			StringBuffer sql = new StringBuffer();
+			for (int i=0;i<order_holder.length;i++){
+				sql.append("UPDATE slide SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+			}
+			
+			IstarUserDAO dao = new IstarUserDAO();
+			Session session = dao.getSession();
+			SQLQuery query = session.createSQLQuery(sql.toString());
+			
+			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+			
+			session.beginTransaction();
+			query.executeUpdate();
+			session.getTransaction().commit();
 
-		IstarUserDAO dao = new IstarUserDAO();
-        Session session = dao.getSession();
-		SQLQuery query = session.createSQLQuery(sql.toString());
-		
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		
-		session.beginTransaction();
-		query.executeUpdate();
-		session.getTransaction().commit();
-		
-	}
-
-	private static void updateSlideOrder(String[] order_holder) {
-		
-		StringBuffer sql = new StringBuffer();
-		for (int i=0;i<order_holder.length;i++){
-			sql.append("UPDATE slide SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+			request.setAttribute("message_success", "Slides have been reordered successfully! Please recheck to confirm");
+			
+		} catch (Exception e) {
+			request.setAttribute("message_failure", "Something went wrong. Please try again!");
+			//System.err.println("sql: " + sql);
 		}
-		
-		IstarUserDAO dao = new IstarUserDAO();
-        Session session = dao.getSession();
-		SQLQuery query = session.createSQLQuery(sql.toString());
-		
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		
-		session.beginTransaction();
-		query.executeUpdate();
-		session.getTransaction().commit();
 		
 	}
 
