@@ -746,10 +746,10 @@ public class CreateSlideController extends IStarBaseServelet {
 
 		if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
 			message = "A new Slide added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
-			CreateLessonTaskManager.pushTaskNotification((new TaskDAO()).findById(ppt.getLesson().getTaskID()), (IstarUser) request.getSession().getAttribute("user"), message, request.getSession().getId(), "New slide is created");
+			CreateLessonTaskManager.pushTaskNotification((new TaskDAO()).findById(ppt.getLesson().getTaskID()), (IstarUser) request.getSession().getAttribute("user"), message, request.getSession().getAttribute("jsession_id").toString(), "New slide is created");
 		} else {
 			message = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
-			CreateLessonTaskManager.pushTaskNotification((new TaskDAO()).findById(ppt.getLesson().getTaskID()), (IstarUser) request.getSession().getAttribute("user"), message, request.getSession().getId(), "Slide is edited");
+			CreateLessonTaskManager.pushTaskNotification((new TaskDAO()).findById(ppt.getLesson().getTaskID()), (IstarUser) request.getSession().getAttribute("user"), message, request.getSession().getAttribute("jsession_id").toString(), "Slide is edited");
 		}
 		
 		Task t = new Task();
