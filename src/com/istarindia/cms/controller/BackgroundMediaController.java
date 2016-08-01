@@ -22,11 +22,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Image;
-import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.services.CMSRegistry;
-import com.istarindia.apps.services.MediaService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -58,7 +55,6 @@ public class BackgroundMediaController extends IStarBaseServelet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		MediaService mediaService = new MediaService();
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			throw new IllegalArgumentException(
 					"Request is not multipart, please 'multipart/form-data' enctype for your form.");
