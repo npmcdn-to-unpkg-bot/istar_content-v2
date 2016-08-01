@@ -33,7 +33,7 @@ import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
-import com.istarindia.apps.services.CMSUtils;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.FolderService;
 import com.istarindia.apps.services.MediaService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
@@ -170,7 +170,7 @@ public class MediaUploadController extends IStarBaseServelet {
 		
 		
 		String comment = mediaTitle + " " + mediaType.toLowerCase() + " is uploaded for task_id = " + task.getId() + " by " + user.getEmail() + " for session-id: " + cmsessionId ; 
-		mediaService.saveTaskLog(user, task.getId(), itemId, mediaType,  StatusTypes.COMPLETED, comment);
+		CMSRegistry.addTaskLogEntry(request, StatusTypes.COMPLETED, comment, task.getId(), mediaType.toUpperCase(), itemId, "New " + mediaType + " is uploaded");
 		
 		if (slideType != "" && pptId != 0 && slideId != 0) {
 			request.setAttribute("message_success", "Media file has been uploaded successfully ");
@@ -303,11 +303,6 @@ public class MediaUploadController extends IStarBaseServelet {
 	}
 
 	public String getFolderTree() {
-		// TODO Auto-generated method stub
-		//System.out.println(CMSFolder.init());
-		StringBuffer sb = new StringBuffer();
-		sb = CMSUtils.getAllFolders();
-		
 		FolderService d = new FolderService(); 
 		Folder root = d.getRootFolder();
 		StringBuffer sb1 = new StringBuffer();

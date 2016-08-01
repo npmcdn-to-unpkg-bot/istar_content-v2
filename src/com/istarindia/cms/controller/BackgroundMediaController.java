@@ -25,6 +25,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.MediaService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
@@ -73,16 +74,19 @@ public class BackgroundMediaController extends IStarBaseServelet {
 					File file = new File(fileUploadPath, item.getName());
 					if(item.getName().matches("^[a-zA-Z0-9\\_\\.]*$") && item.getName().endsWith(".png")){  
 						String comment = "";
+						String title = "";
 						if(file.exists()) {
 							comment = item.getName() + " is replaced with new image" ;
+							title = "Background image is replaced";
 							request.setAttribute("message_success", item.getName() + " has been successfully replaced!");
 						} else {
 							comment = "New background image " + item.getName() + " is uploaded";
+							title = "New Background image";
 							request.setAttribute("message_success", "New background image has been uploaded successfully!");
 						}
 						
 						item.write(file);
-						mediaService.saveTaskLog((IstarUser)request.getSession().getAttribute("user"), 0, 0, "BACKGROUND_IMAGE",  "NONE", comment);
+						CMSRegistry.addTaskLogEntry(request, "NONE", comment, 0, "BACKGROUND_IMAGE", 0, title);
 					}
 					else {
 						request.setAttribute("message_failure", "Please note the NOTE and try again!");
