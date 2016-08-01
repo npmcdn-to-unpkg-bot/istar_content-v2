@@ -1,6 +1,7 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,9 @@ import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
-import com.istarindia.apps.services.task.CreateLessonTaskManager;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.services.CMSRegistry;
 
 /**
  * Servlet implementation class CreatePresentationController
@@ -39,8 +42,14 @@ public class CreatePresentationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PresentaionDAO dao= new PresentaionDAO();
 		Presentaion ppt = new Presentaion();
-		ppt.setLesson((new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id"))));
 		
+		int lesson_id = Integer.parseInt(request.getParameter("lesson_id").toString());
+		Lesson lesson = (new LessonDAO()).findById(lesson_id);
+		
+		int task_id =  Integer.parseInt(request.getParameter("task_id").toString());
+		Task task = new TaskDAO().findById(task_id);
+		
+		ppt.setLesson(lesson);
 		Session session = dao.getSession();
 		Transaction tx = null;
 		try {
@@ -54,8 +63,9 @@ public class CreatePresentationController extends HttpServlet {
 		} finally {
 			session.close();
 		}
-		Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
-		CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A presentation for the lesson was created.");
+		
+		String comments = "New presentation(ID " + ppt.getId() + ") " + " for lesson: " + lesson.getTitle() + "(TaskID " + task_id + ") is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail();
+		CMSRegistry.addTaskLogEntry(request, task.getStatus(), comments, task_id, "LESSON", lesson_id, "New presentation is created");
 		
 		request.setAttribute("lesson", lesson);
 		request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));

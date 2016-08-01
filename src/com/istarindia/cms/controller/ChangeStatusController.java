@@ -21,7 +21,6 @@ import org.hibernate.Session;
 
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Cmsession;
-import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.Course;
 import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
@@ -33,9 +32,8 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.TaskService;
-import com.istarindia.apps.services.controllers.auth.CreateSlideController;
-import com.istarindia.apps.services.task.CreateLessonTaskManager;
 import com.istarindia.apps.services.task.EmailSendingUtility;
 
 /**
@@ -73,44 +71,42 @@ public class ChangeStatusController extends HttpServlet {
 				throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
 			}
 			
-			
 			deployment_type = properties.getProperty("deployment_type");
 			host = properties.getProperty("host");
 			port = properties.getProperty("port");
 			user1 = properties.getProperty("emailFrom");
 			pass = properties.getProperty("emailFromPassword");
 			
-			
-			
-			
-			
 			int task_id = Integer.parseInt(request.getParameter("task_id"));
 			String new_status = request.getParameter("new_status");
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 			
-			Task t = new TaskDAO().findById(task_id);
-			Lesson ll = new LessonDAO().findById(t.getItemId());
+			Task task = new TaskDAO().findById(task_id);
+			Lesson ll = new LessonDAO().findById(task.getItemId());
 			Cmsession cm = ll.getCmsession();
 			Module mm = cm.getModule();
 			Course cc = mm.getCourse();
 			String resultMessage = "The status for the LESSON - "+ll.getTitle()+"\nSESSION - "+cm.getTitle()+"\nMODULE - "+mm.getModuleName()+"\nCOURSE - " 
-			+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
+									+cc.getCourseName()+"    \nis changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status+"\nby user "+user.getEmail();
 			
-			CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(task_id), user, "The status for the task is changed from "+new TaskDAO().findById(task_id).getStatus() +" to "+ new_status, request.getSession().getId(), "Status changed");
-
+			
+			String current_status = new TaskDAO().findById(task_id).getStatus();
+			String comments = "The status for the task is changed from "+  current_status + " to "+ new_status;
+			CMSRegistry.addTaskLogEntry(request, current_status, comments, task_id, task.getItemType(), task.getId(), "Task status is updated");
+			
 			new TaskService().updateStatus(task_id, new_status);
 			
-		final	HashMap<String, String> recipient= new HashMap<>();
-			//content creator
+			final HashMap<String, String> recipient= new HashMap<>();
 			
-			String  content_email = (new IstarUserDAO().findById(t.getActorId())).getEmail();
+			//content creator
+			String  content_email = (new IstarUserDAO().findById(task.getActorId())).getEmail();
 			if(content_email != null)
 			{
 				recipient.put(content_email, content_email);// recipient+";"+content_email;
 			}
 			
 			//content reviewer
-			List<TaskReviewer> review_list = new TaskReviewerDAO().findByProperty("task", t);
+			List<TaskReviewer> review_list = new TaskReviewerDAO().findByProperty("task", task);
 			if(review_list!=null && review_list.size()>0)
 			{
 				for(TaskReviewer tr : review_list)
@@ -130,23 +126,19 @@ public class ChangeStatusController extends HttpServlet {
 			Date timeOfIncident = new Date();
 			final	String subject = "Changes in content "+ dateFormat.format(timeOfIncident) + " on server with IP ->"+ request.getServerName(); 
 			
-			Thread t1 = new Thread(new Runnable() {
-			     public void run() {
-			    	 try {
-							if (deployment_type.trim().equalsIgnoreCase("prod")) {
-								System.out.println("sending mail----------------to "+recipient);
-								EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage); 
-							}
-						} catch (Exception ex) {
-							ex.printStackTrace();
+			Thread thread = new Thread(new Runnable() {
+				public void run() {
+					try {
+						if (deployment_type.trim().equalsIgnoreCase("prod")) {
+							EmailSendingUtility.sendEmail(host, port, user1, pass, recipient, subject, resultMessage);
 						}
-						}
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
 			});  
 			
-			t1.start();
-			
-			
-			
+			thread.start();
 			
 			if(new_status.equalsIgnoreCase(StatusTypes.COMPLETED)) {
 				request.setAttribute("message_success", "The task has been sent for review successfully!");
@@ -193,7 +185,6 @@ public class ChangeStatusController extends HttpServlet {
 				redirectUrl=user.getUserType().toLowerCase() + "/dashboard.jsp";
 			}
 			request.getRequestDispatcher(redirectUrl).forward(request, response);
-			//response.sendRedirect(request.getContextPath() + "/" + user.getUserType().toLowerCase() + "/dashboard.jsp");
 		}
 	}
 

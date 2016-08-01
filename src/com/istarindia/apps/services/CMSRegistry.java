@@ -4,22 +4,18 @@
 package com.istarindia.apps.services;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.istarindia.apps.ListTypes;
 import com.istarindia.apps.UserTypes;
@@ -135,8 +131,20 @@ public class CMSRegistry {
 
 	public static CMSFolder root = CMSFolder.init();
 
-	public static void writeAuditLog(String jsession_id, Integer id, String action) {
+	public static void addUserSessionLogEntry(String jsession_id, Integer id, String action) {
 		String sql = "INSERT INTO login (user_id, created_at, jsession_id, action) VALUES " + "('"+id+"', now(), '"+jsession_id+"', '"+action+"')";
+		
+		DBUTILS db = new DBUTILS();
+		db.executeUpdate(sql);
+
+	}
+
+	public static void addTaskLogEntry(HttpServletRequest request,String changed_status, String comments, int task_id, String item_type, int item_id, String title) {
+		int actor_id = ((IstarUser)request.getSession().getAttribute("user")).getId();
+		String jsession_id = request.getSession().getAttribute("jsession_id").toString();
+
+		String sql = "INSERT INTO task_log (id, actor_id, changed_status, comments, created_at, task_id, item_type, item_id, jsession_id, title ) "
+					+ "VALUES ((select max(id)+1 from task_log), "+ actor_id +", '"+ changed_status +"', '"+ comments +"', now(), "+ task_id +", '"+ item_type +"', "+ item_id +", '"+ jsession_id +"', '"+ title +"'); ";
 		
 		DBUTILS db = new DBUTILS();
 		db.executeUpdate(sql);

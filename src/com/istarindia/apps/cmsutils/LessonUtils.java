@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
@@ -14,7 +16,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -45,7 +46,6 @@ import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
-import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
@@ -57,12 +57,6 @@ import com.istarindia.apps.services.QuestionService;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
 import com.istarindia.cms.lessons.CMSTextItem;
-
-import javassist.compiler.SyntaxError;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * @author Vaibhav
@@ -459,6 +453,7 @@ public class LessonUtils {
             		+ "<input id='order_holder' name='order_holder' type='hidden'>"
             		+ "<input id='entity_type' name='entity_type' type='hidden' value='slides'>"
             		+ "<input id='task_id' name='task_id' type='hidden' value="+taskID+">"
+                    + "<input id='lesson_name' name='lesson_name' type='hidden' value="+lesson.getTitle()+">"
             		+ "<button style=' ' type='submit' class='btn-u' id='kammm'>Save Slide Order</button></form>");
             out.append(" </td><td>");
 			

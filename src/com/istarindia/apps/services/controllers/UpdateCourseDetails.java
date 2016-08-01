@@ -1,6 +1,7 @@
 package com.istarindia.apps.services.controllers;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import com.istarindia.apps.dao.Cmsession;
+import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.ContentAdmin;
 import com.istarindia.apps.dao.Course;
+import com.istarindia.apps.dao.CourseDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Module;
+import com.istarindia.apps.dao.ModuleDAO;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.CourseService;
 
 /**
@@ -25,6 +29,7 @@ import com.istarindia.apps.services.CourseService;
  */
 @WebServlet("/update_course")
 public class UpdateCourseDetails extends HttpServlet {
+	CMSRegistry cMSRegistry = new CMSRegistry();
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -70,6 +75,9 @@ public class UpdateCourseDetails extends HttpServlet {
 				request.setAttribute("message_failure", "Please try again! Duplicate course found!");
 			} else {
 				request.setAttribute("message_success", "New course has been added successfully!");
+				
+				String comments = "Course with name " + course_name + " and with ID " + course.getId() + " is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "COURSE", course.getId(), "New course is created");
 			}
 			request.getRequestDispatcher("/content_admin/course_list.jsp").forward(request, response);
 			break;
@@ -83,6 +91,9 @@ public class UpdateCourseDetails extends HttpServlet {
 				request.setAttribute("message_failure", "Please try again! Duplicate module found!");
 			} else {
 				request.setAttribute("message_success", "New module has been added successfully!");
+				
+				String comments = "Module with name " + module_name + " and with ID " + module.getId() + " is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "MODULE", module.getId(), "New module is created");
 			}
 			request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +course_id).forward(request, response);
 			break;
@@ -91,12 +102,15 @@ public class UpdateCourseDetails extends HttpServlet {
 			int module_id = Integer.parseInt(request.getParameter("module_id").toString());
 			String cmsession_name = request.getParameter("title").toString();
 			String cmsession_description = request.getParameter("description").toString();
-			Cmsession session = service.createNewCmsession(cmsession_name, cmsession_description, module_id, (ContentAdmin)request.getSession().getAttribute("user"));
+			Cmsession cmsession = service.createNewCmsession(cmsession_name, cmsession_description, module_id, (ContentAdmin)request.getSession().getAttribute("user"));
 
-			if(session == null) {
+			if(cmsession == null) {
 				request.setAttribute("message_failure", "Please try again! Something is wrong!");
 			} else {
 				request.setAttribute("message_success", "New sessioin has been added successfully!");
+				
+				String comments = "Session with name " + cmsession_name + " and with ID " + cmsession.getId() + " is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "SESSION", cmsession.getId(), "New session is created");
 			}
 			request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +module_id).forward(request, response);
 			break;
@@ -110,38 +124,52 @@ public class UpdateCourseDetails extends HttpServlet {
 	private void update_course(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException {
 
 		CourseService service = new CourseService();
-		
-		switch (request.getParameter("entity_type").toString()) {
+		String comments  = "" ;
+		int id = 0;
+		String item_type = request.getParameter("entity_type").toString(); 
+		switch (item_type) {
 		case "course":
-			int course_id = Integer.parseInt(request.getParameter("course_id").toString());
+			id = Integer.parseInt(request.getParameter("course_id").toString());
 			String course_name = request.getParameter("title").toString();
 			String course_description = request.getParameter("description").toString();
-			service.updateCourse(course_id, course_name, course_description);
+			
+			service.updateCourse(id, course_name, course_description);
+
+			comments = "Course with id " + id + " is updated as Title: " + course_name + " ; Description: " + course_description + " ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+			CMSRegistry.addTaskLogEntry(request, "UPDATED", comments, 0, "COURSE", id, "Course details are updated");
 			
 			request.setAttribute("message_success", "Course details are updated successfully!");
-			request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +course_id).forward(request, response);
+			request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +id).forward(request, response);
 			break;
 			
 		case "module":
-			int module_id = Integer.parseInt(request.getParameter("module_id").toString());
+			id = Integer.parseInt(request.getParameter("module_id").toString());
 			String module_name = request.getParameter("title").toString();
-			service.updateModule(module_id, module_name);
+			
+			service.updateModule(id, module_name);
+
+			comments = "Module with id " + id + " is updated as Title: " + module_name + " ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+			CMSRegistry.addTaskLogEntry(request, "UPDATED", comments, 0, "MODULE", id, "Module name is updated");
 			
 			request.setAttribute("message_success", "Module details are updated successfully!");
-			request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +module_id).forward(request, response);
+			request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +id).forward(request, response);
 			break;
 			
 		case "session":
-			int cmsession_id = Integer.parseInt(request.getParameter("session_id").toString());
+			id = Integer.parseInt(request.getParameter("session_id").toString());
 			String cmsession_name = request.getParameter("title").toString();
 			String cmsession_description = request.getParameter("description").toString();
-			service.updateSession(cmsession_id, cmsession_name, cmsession_description);
+			
+			service.updateSession(id, cmsession_name, cmsession_description);
+			
+			comments = "Session with id " + id + " is updated as Title: " + cmsession_name + " ; Description: " + cmsession_description + " ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+			CMSRegistry.addTaskLogEntry(request, "UPDATED", comments, 0, "CMSESSION", id, "Session details are updated");
 			
 			request.setAttribute("message_success", "Session details are updated successfully!");
-			request.getRequestDispatcher("/content_admin/modify_session.jsp?module_id=" +cmsession_id).forward(request, response);
+			request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +id).forward(request, response);
 			break;
 		}
-		
+			
 	}
 
 	/*	
@@ -151,6 +179,7 @@ public class UpdateCourseDetails extends HttpServlet {
 		String order_holder_string = request.getParameter("order_holder");
 		String[] order_holder = order_holder_string.split(",");
 		String entity_type = request.getParameter("entity_type").toString();
+		String comments = "";
 		
 		if(order_holder.length == 0) {
 		
@@ -161,21 +190,45 @@ public class UpdateCourseDetails extends HttpServlet {
 			switch (entity_type) {
 			case "modules":
 				updateModuleOrder(request, order_holder);
+				
+				int course_id = Integer.parseInt(request.getParameter("course_id"));
+				String course_name = new CourseDAO().findById(course_id).getCourseName();
+				comments = "Modules in course: " + course_name + " (ID "+course_id+") are reordered as : [" + order_holder + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "MODULES", course_id, "Modules are reordered");
+				
 				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
 				break;
 				
 			case "sessions":
 				updateSessionOrder(request, order_holder);
+				
+				int module_id = Integer.parseInt(request.getParameter("module_id"));
+				String module_name = new ModuleDAO().findById(module_id).getModuleName();
+				comments = "Sessions in module: " + module_name + " (ID "+module_id+") are reordered as : [" + order_holder + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "SESSIONS", module_id, "Sessions are reordered");
+
 				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
 				break;
 			
 			case "lessons":
 				updateLessonOrder(request, order_holder);
+				
+				int session_id = Integer.parseInt(request.getParameter("session_id"));
+				String session_name = new CmsessionDAO().findById(session_id).getTitle();
+				comments = "Lessons in session: " + session_name + " (ID "+session_id+") are reordered as : [" + order_holder + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "LESSONS", session_id, "Lessons are reordered");
+
 				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
 				break;
 			
 			case "slides":
 				updateSlideOrder(request, order_holder);
+				
+				int task_id = Integer.parseInt(request.getParameter("task_id").toString());
+				String lesson_name = request.getParameter("lesson_name");
+				comments = "Slides in lesson: " + lesson_name + " (TaskID "+task_id+") are reordered as : [" + order_holder + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "SLIDES", task_id, "Slides are reordered");
+
 				response.sendRedirect("/content/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id")) );
 				break;
 			

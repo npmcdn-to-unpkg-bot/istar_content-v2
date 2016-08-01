@@ -1,14 +1,9 @@
 package com.istarindia.apps.services.controllers.auth;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.services.CMSRegistry;
-import com.istarindia.apps.services.UserService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**
@@ -50,7 +44,7 @@ public class LoginController extends IStarBaseServelet {
 				if (user.getPassword().equalsIgnoreCase(request.getParameter("password"))) {
 					request.getSession().setAttribute("jsession_id", request.getSession().getId()+"-"+System.currentTimeMillis());
 					request.getSession().setAttribute("user", user);
-					CMSRegistry.writeAuditLog(request.getSession().getAttribute("jsession_id").toString(), user.getId(),"LOGIN");
+					CMSRegistry.addUserSessionLogEntry(request.getSession().getAttribute("jsession_id").toString(), user.getId(),"LOGIN");
 					request.setAttribute("msg", "Welcome to iStar, " + user.getName());
 					request.getRequestDispatcher("/" + user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
 				} else {
