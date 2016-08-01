@@ -42,15 +42,15 @@ public class LoginController extends IStarBaseServelet {
 		// TODO Auto-generated method stub
 		printParams(request);
 		request.getSession().removeAttribute("user");
+		request.getSession(true);
 		if (request.getParameterMap().containsKey("email") && request.getParameterMap().containsKey("password")) {
 			try {
 				IstarUserDAO dao = new IstarUserDAO();
 				IstarUser user = dao.findByEmail(request.getParameter("email")).get(0);
 				if (user.getPassword().equalsIgnoreCase(request.getParameter("password"))) {
-					System.out.println("---------->" + request.getParameter("remember"));
-
+					request.getSession().setAttribute("jsession_id", request.getSession().getId()+"-"+System.currentTimeMillis());
 					request.getSession().setAttribute("user", user);
-					CMSRegistry.writeAuditLog(request.getSession().getId(), user.getId(),"LOGIN");
+					CMSRegistry.writeAuditLog(request.getSession().getAttribute("jsession_id").toString(), user.getId(),"LOGIN");
 					request.setAttribute("msg", "Welcome to iStar, " + user.getName());
 					request.getRequestDispatcher("/" + user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
 				} else {

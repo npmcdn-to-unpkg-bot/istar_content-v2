@@ -135,9 +135,8 @@ public class CMSRegistry {
 
 	public static CMSFolder root = CMSFolder.init();
 
-	public static void writeAuditLog(String string, Integer id, String action) {
-		String sql = "INSERT INTO login (user_id, created_at, jsession_id, action) VALUES "
-				+ "('"+id+"', now(), '"+string+"', '"+action+"')";
+	public static void writeAuditLog(String jsession_id, Integer id, String action) {
+		String sql = "INSERT INTO login (user_id, created_at, jsession_id, action) VALUES " + "('"+id+"', now(), '"+jsession_id+"', '"+action+"')";
 		
 		DBUTILS db = new DBUTILS();
 		db.executeUpdate(sql);
