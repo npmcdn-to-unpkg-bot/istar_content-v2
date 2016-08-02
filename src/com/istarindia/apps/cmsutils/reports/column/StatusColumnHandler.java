@@ -69,6 +69,8 @@ public class StatusColumnHandler extends ColumnHandler {
 		}
 		
 		out.append("</ul> </div>");
+		out.append("<br/><br/><a href='/content/task/task_history.jsp?task_id="+taskID+"'><span class='label label-info'>View Task History</span></a>");
+		
 		return out;
 	}		
 

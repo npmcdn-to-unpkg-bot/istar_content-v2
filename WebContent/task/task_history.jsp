@@ -122,12 +122,13 @@
 								<%=row.get(1) %></p>
 								<% } else {
 									
-									Document doc = Jsoup.parse(row.get(1), "", Parser.xmlParser());
-									
+									//Document doc = Jsoup.parse(row.get(1), "", Parser.xmlParser());
+									//<!--?xml version="1.0" encoding="UTF-8" standalone="yes"?-->
+									out.println(row.get(1));
 									
 									%>
 								<pre>
-  <code> <%=doc.text() %> </code>
+  <code> <%=row.get(1).replaceAll("<!--", "<").replaceAll("-->", ">") %> </code>
 </pre>
 								
 								

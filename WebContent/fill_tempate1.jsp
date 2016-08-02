@@ -185,7 +185,7 @@
 						<li class="active"><a href="#desktop" data-toggle="tab">Desktop Preview</a></li>
 					</ul>
 					
-					<form  action="/content/create_slide" id="slide-form" method="GET">
+					<form  action="/content/create_slide" id="slide-form" method="POST">
 					<input type="hidden" name="template" value="<%=slide_type%>"> 
 					<input type="hidden" name="ppt_id" value="<%=ppt_id%>">
 					<input name="is_edit" value="<%=!newSlide%>" type="hidden"> 
