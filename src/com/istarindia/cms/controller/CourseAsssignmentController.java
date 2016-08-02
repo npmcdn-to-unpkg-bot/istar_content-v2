@@ -61,8 +61,6 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 					request.setAttribute("message_success", ErrorMessages.ALL_OK);
 				} catch (NullPointerException e) {
 					request.setAttribute("message_failure", ErrorMessages.MISSING_REVIEWER);
-
-					//e.printStackTrace();
 				}
 			}
 		}
