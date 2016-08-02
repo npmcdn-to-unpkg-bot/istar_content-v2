@@ -714,7 +714,6 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 
 		SlideDAO dao = new SlideDAO();
-		CMSRegistry cmsRegistry = new CMSRegistry();
 		String comments = new String() ;
 		Slide slide = new Slide();
 
@@ -747,9 +746,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 
 		if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
+			request.setAttribute("message_success", "New slide has been created successfully ");
+			
 			comments = "A new Slide is added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "New slide is created");
 		} else {
+			request.setAttribute("message_success", "Slide has been updated successfully ");
+			
 			comments = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}
