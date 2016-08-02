@@ -82,6 +82,8 @@ public class ReviewLessonController extends IStarBaseServelet {
 			Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 			log.setCreatedAt(currentTimestamp);
 			log.setComments(request.getParameter("review_notes"));
+			log.setTitle("Review comment added by " + user.getEmail());
+			log.setSessionID(request.getSession().getAttribute("jsession_id").toString());
 			log.setItemType("QUESTION");
 			log.setItem_id(Integer.parseInt(request.getParameter("question_id")));
 			Session session = lDAO.getSession();
@@ -118,6 +120,8 @@ public class ReviewLessonController extends IStarBaseServelet {
 			Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 			log.setCreatedAt(currentTimestamp);
 			log.setComments(request.getParameter("review_notes"));
+			log.setTitle("Review comment added by " + user.getEmail());
+			log.setSessionID(request.getSession().getAttribute("jsession_id").toString());
 			log.setItemType("LESSON");
 			log.setItem_id(Integer.parseInt(request.getParameter("lesson_id")));
 			Session session = lDAO.getSession();
@@ -184,6 +188,8 @@ public class ReviewLessonController extends IStarBaseServelet {
 		Timestamp currentTimestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 		log.setCreatedAt(currentTimestamp);
 		log.setComments(request.getParameter("review_notes"));
+		log.setTitle("Review comment added by " + user.getEmail());
+		log.setSessionID(request.getSession().getAttribute("jsession_id").toString());
 		log.setItemType("SLIDE");
 		log.setItem_id(slideID);
 		Session session = lDAO.getSession();
