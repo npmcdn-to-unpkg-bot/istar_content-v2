@@ -118,7 +118,7 @@
 									
 									System.out.println("SLide Edit Data ");
 									
-									%>
+								%>
 								<%=row.get(1) %></p>
 								<% } else {
 									
@@ -128,8 +128,8 @@
 									
 									%>
 								<pre>
-  <code> <%=row.get(1).replaceAll("<!--", "<").replaceAll("-->", ">") %> </code>
-</pre>
+  									<code> <%=row.get(1).replaceAll("<!--", "<").replaceAll("-->", ">") %> </code>
+								</pre>
 								
 								
 								<% } %>
