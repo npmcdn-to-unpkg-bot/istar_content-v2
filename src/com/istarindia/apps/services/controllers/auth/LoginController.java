@@ -42,6 +42,7 @@ public class LoginController extends IStarBaseServelet {
 				IstarUserDAO dao = new IstarUserDAO();
 				IstarUser user = dao.findByEmail(request.getParameter("email")).get(0);
 				if (user.getPassword().equalsIgnoreCase(request.getParameter("password"))) {
+					request.getSession().setMaxInactiveInterval(-1);
 					request.getSession().setAttribute("jsession_id", request.getSession().getId()+"-"+System.currentTimeMillis());
 					request.getSession().setAttribute("user", user);
 					CMSRegistry.addUserSessionLogEntry(request.getSession().getAttribute("jsession_id").toString(), user.getId(),"LOGIN");
