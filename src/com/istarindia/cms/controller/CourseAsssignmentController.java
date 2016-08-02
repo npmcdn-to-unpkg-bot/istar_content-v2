@@ -24,6 +24,7 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
 
@@ -94,7 +95,10 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		} finally {
 			session1.close();
 		}
-		CreateLessonTaskManager.pushTaskNotification(new LessonDAO().findById(Integer.parseInt(lessonid)), (IstarUser)request.getSession().getAttribute("user"), "The Lesson was assigned to "+(new IstarUserDAO().findById(Integer.parseInt(content_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail());
+
+		String comments = "The Lesson was assigned to "+(new IstarUserDAO().findById(Integer.parseInt(content_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail();
+		CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", Integer.parseInt(lessonid), "Actor is assigned for the lesson");
+		
 		TaskReviewerDAO dao2 = new TaskReviewerDAO();
 		List<TaskReviewer> rev = dao2.findByProperty("task", task);
 		List<Integer> already_added = new ArrayList<Integer>();
@@ -128,11 +132,13 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 						session2.close();
 					}
 					
-					CreateLessonTaskManager.pushTaskNotification(new LessonDAO().findById(Integer.parseInt(lessonid)), (IstarUser)request.getSession().getAttribute("user"), "The Lesson was assigned reviewer as  "+(new IstarUserDAO().findById(Integer.parseInt(reviewer_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail());
-
-				} else {
-					CreateLessonTaskManager.pushTaskNotification(new LessonDAO().findById(Integer.parseInt(lessonid)), (IstarUser)request.getSession().getAttribute("user"), "The Lesson was assigned reviewer as  "+(new IstarUserDAO().findById(Integer.parseInt(reviewer_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail());
-
+					comments = "The Lesson was assigned reviewer as  "+(new IstarUserDAO().findById(Integer.parseInt(reviewer_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail();
+					CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", Integer.parseInt(lessonid), "Reviewer is assigned for the lesson");
+					
+				} else {					
+					comments = "The Lesson was assigned reviewer as  "+(new IstarUserDAO().findById(Integer.parseInt(reviewer_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail();
+					CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", Integer.parseInt(lessonid), "Reviewer is assigned for the lesson");
+				
 				}
 				
 			}
