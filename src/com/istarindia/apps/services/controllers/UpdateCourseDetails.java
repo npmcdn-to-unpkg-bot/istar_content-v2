@@ -178,17 +178,38 @@ public class UpdateCourseDetails extends HttpServlet {
 	 * Update module/session/lesson order
  	 */	
 	private void reorder(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException {
-		String order_holder_string = request.getParameter("order_holder");
-		String[] order_holder = order_holder_string.split(",");
+		String order_holder_string = request.getParameter("order_holder").toString();
+		
 		String entity_type = request.getParameter("entity_type").toString();
 		String comments = "";
 		
-		if(order_holder.length == 0) {
-		
+		if(order_holder_string.length() == 0) {
 			request.setAttribute("message_failure", "No " + entity_type + "s to reorder! Operation is aborted");
-	
-		} else {
 			
+			switch (entity_type) {
+			case "modules":
+				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
+				break;
+				
+			case "sessions":
+				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
+				break;
+			
+			case "lessons":
+				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
+				break;
+			
+			case "slides":
+				request.getRequestDispatcher("/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id"))).forward(request, response);
+				break;
+			
+			default:
+				request.setAttribute("message_failure", "Something went wrong. Please try again!");
+				response.sendRedirect("/content/index.jsp");
+				break;
+			}
+		} else {
+			String[] order_holder = order_holder_string.split(",");
 			switch (entity_type) {
 			case "modules":
 				updateModuleOrder(request, order_holder);
