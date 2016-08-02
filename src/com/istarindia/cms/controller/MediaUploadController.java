@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.WordUtils;
 import org.imgscalr.Scalr;
 
 import com.istarindia.apps.MediaTypes;
@@ -191,6 +192,7 @@ public class MediaUploadController extends IStarBaseServelet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MediaService mediaService = new MediaService();
+		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		
 		if (request.getParameter("getfile") != null && !request.getParameter("getfile").isEmpty()) {
 			File file = new File(uploadFolder, request.getParameter("getfile"));
@@ -215,15 +217,22 @@ public class MediaUploadController extends IStarBaseServelet {
 			String media_type = new String();
 			int media_id = 0;
 			int task_id = 0;
+			String comment = "";
 			if(!(new ImageDAO()).findByUrl(url).isEmpty()) {
 				media_type = "IMAGE" ;
 				media_id = (new ImageDAO()).findByUrl(url).get(0).getId();
 				mediaService.moveImageToTrash(media_id);
-			
+
+				comment = (new ImageDAO()).findById(media_id).getTitle() + " image is deleted by " + user.getEmail()  ;
+				request.setAttribute("message_success", "Image is deleted successfully");
+				
 			} else if(!(new VideoDAO()).findByUrl(url).isEmpty()) {
 				media_type = "VIDEO" ;
 				media_id = (new VideoDAO()).findByUrl(url).get(0).getId();
 				mediaService.moveVideoToTrash(media_id);
+
+				comment = (new VideoDAO()).findById(media_id).getTitle() + " video is deleted by " + user.getEmail()  ;
+				request.setAttribute("message_success", "Video is deleted successfully");
 				
 			} else {
 				request.setAttribute("message_failure", "Problem deleting the file!");
@@ -231,6 +240,8 @@ public class MediaUploadController extends IStarBaseServelet {
 			}
 			
 			task_id = mediaService.UpdateMediaTaskDeleted(media_id, media_type);
+
+			CMSRegistry.addTaskLogEntry(request, StatusTypes.DELETED, comment, task_id, media_type.toUpperCase(), media_id, WordUtils.capitalize(media_type) + " is deleted");
 			
 			try{
 	    		File sourceFile = new File(uploadFolder, url.split("getfile=")[1]);
@@ -238,8 +249,7 @@ public class MediaUploadController extends IStarBaseServelet {
 		    }catch(Exception e){
 		    	e.printStackTrace();
 		    }
-			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-			mediaService.saveTaskLog(user, task_id, media_id, media_type, "COMPLETED", "Image has been deleted by "+user.getName());
+
 			request.setAttribute("message_success", "Media file has been deleted successfully!");
 			request.getRequestDispatcher("/delete_media.jsp").forward(request, response);
 			
