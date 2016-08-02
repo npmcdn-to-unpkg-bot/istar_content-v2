@@ -264,21 +264,33 @@ public class ReviewLessonController extends IStarBaseServelet {
 					}
 				}
 			}
-			
-			task.setStatus("DIS_APPROVED");
-			Session session = dao.getSession();
-			Transaction tx = null;
-			try {
-				tx = session.beginTransaction();
 
-				dao.attachDirty(task);
-				tx.commit();
-			} catch (HibernateException e) {
-				if (tx != null)
-					tx.rollback();
-				e.printStackTrace();
-			} finally {
-				session.close();
+			boolean finally_disapproved=true;
+			for(TaskReviewer rr :( List<TaskReviewer>)trdao.findByProperty("task", task))
+			{
+				if(!rr.getStatus().equalsIgnoreCase("DIS_APPROVED"))
+				{
+					finally_disapproved=false;
+					break;
+				}
+			}
+
+			if(finally_disapproved) {
+				task.setStatus("DIS_APPROVED");
+				Session session1 = dao.getSession();
+				Transaction tx1 = null;
+				try {
+					tx1 = session1.beginTransaction();
+
+					dao.attachDirty(task);
+					tx1.commit();
+				} catch (HibernateException e) {
+					if (tx1 != null)
+						tx1.rollback();
+					e.printStackTrace();
+				} finally {
+					session1.close();
+				}
 			}
 			
 		} else	{
@@ -316,7 +328,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 				}
 			}	
 			
-			
+
 			boolean finally_approved=true;
 			for(TaskReviewer r :( List<TaskReviewer>)trdao.findByProperty("task", task))
 			{
@@ -326,9 +338,8 @@ public class ReviewLessonController extends IStarBaseServelet {
 					break;
 				}
 			}
-			
-			if(finally_approved)
-			{
+
+			if(finally_approved) {
 				task.setStatus("APPROVED");
 				Session session1 = dao.getSession();
 				Transaction tx1 = null;
@@ -344,7 +355,9 @@ public class ReviewLessonController extends IStarBaseServelet {
 				} finally {
 					session1.close();
 				}
-			}
+				
+			} 
+			
 			
 				
 		}
