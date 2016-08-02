@@ -66,14 +66,16 @@ public class AssignCreativeController extends IStarBaseServelet {
 			dao.save(task);
 			tx1.commit();
 			
-			saveTaskLog(task, creative_id, request);
-			
 		} catch (HibernateException e) {
 			if (tx1 != null)
 				tx1.rollback();
 			e.printStackTrace();
 		} finally {
 			session1.close();
+		}
+		
+		if(!(new TaskDAO()).findByExample(task).isEmpty()) {
+			saveTaskLog(task, creative_id, request);
 		}
 	}
 
@@ -82,7 +84,7 @@ public class AssignCreativeController extends IStarBaseServelet {
 			String creativeEmail = (new CreativeCreatorDAO()).findById(creative_creator_id).getEmail();
 			String comments = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task (TaskID " + task.getId() + ") has been assigned to " + creativeEmail + " by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail();
 			String title = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task has been assigned to artist";
-			CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), "LESSON", task.getItemId(), title);			
+			CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getItemId(), title);			
 		} catch (Exception e) {
 			//e.printStackTrace();
 		}
