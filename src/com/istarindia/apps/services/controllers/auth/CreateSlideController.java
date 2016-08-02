@@ -25,6 +25,7 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
 import com.istarindia.cms.lessons.CMSImage;
@@ -713,7 +714,8 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 
 		SlideDAO dao = new SlideDAO();
-		String message = new String() ;
+		CMSRegistry cmsRegistry = new CMSRegistry();
+		String comments = new String() ;
 		Slide slide = new Slide();
 
 		if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
@@ -745,11 +747,11 @@ public class CreateSlideController extends IStarBaseServelet {
 		}
 
 		if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
-			message = "A new Slide added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
-			CreateLessonTaskManager.pushTaskNotification((new TaskDAO()).findById(ppt.getLesson().getTaskID()), (IstarUser) request.getSession().getAttribute("user"), message, request.getSession().getAttribute("jsession_id").toString(), "New slide is created");
+			comments = "A new Slide is added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
+			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "New slide is created");
 		} else {
-			message = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
-			CreateLessonTaskManager.pushTaskNotification((new TaskDAO()).findById(ppt.getLesson().getTaskID()), (IstarUser) request.getSession().getAttribute("user"), message, request.getSession().getAttribute("jsession_id").toString(), "Slide is edited");
+			comments = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
+			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}
 		
 		Task t = new Task();
