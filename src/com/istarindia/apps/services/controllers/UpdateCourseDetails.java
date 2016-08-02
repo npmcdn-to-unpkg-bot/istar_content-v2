@@ -110,7 +110,7 @@ public class UpdateCourseDetails extends HttpServlet {
 				request.setAttribute("message_success", "New sessioin has been added successfully!");
 				
 				String comments = "Session with name " + cmsession_name + " and with ID " + cmsession.getId() + " is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
-				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "SESSION", cmsession.getId(), "New session is created");
+				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "CMSESSION", cmsession.getId(), "New session is created");
 			}
 			request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +module_id).forward(request, response);
 			break;
@@ -205,7 +205,7 @@ public class UpdateCourseDetails extends HttpServlet {
 				int module_id = Integer.parseInt(request.getParameter("module_id"));
 				String module_name = new ModuleDAO().findById(module_id).getModuleName();
 				comments = "Sessions in module: " + module_name + " (ID "+module_id+") are reordered as : [" + order_holder + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
-				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "SESSIONS", module_id, "Sessions are reordered");
+				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "CMSESSIONS", module_id, "Sessions are reordered");
 
 				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
 				break;
