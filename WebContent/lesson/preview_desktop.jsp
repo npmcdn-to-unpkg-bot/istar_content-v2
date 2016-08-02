@@ -9,6 +9,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 PresentaionDAO dao = new PresentaionDAO();
 int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
 Presentaion ppt =  dao.findById(lessonID);
+int taskID = ppt.getLesson().getTaskID();
+String status = new TaskDAO().findById(taskID).getStatus();
+
 String lesson_theme = ppt.getLesson().getLesson_theme_desktop();
 
 String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
@@ -86,14 +89,18 @@ try {
     SlideDAO sDao = new SlideDAO();
     
     if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
-		<button  data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
-		<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+	    <% if(!status.equalsIgnoreCase("PUBLISHED")) { %>
+			<button  data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+			<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+	    <%  } %>
 		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
 		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
 
 	<% } else { %>
-		<button onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
-		<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+	    <% if(!status.equalsIgnoreCase("PUBLISHED")) { %>
+			<button onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+			<img src="http://i.stack.imgur.com/8BVKM.png"></button>
+	    <%  } %>
 		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
 		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
 	<% } %>
