@@ -28,7 +28,13 @@
 	String previous_slide_url = service.getPreviousSlideReviewUrl(ppt_id, slide_id);
 	Slide slide = slideDao.findById(slide_id);
 	String next_slide_url = service.getNextSlideReviewUrl(ppt_id, slide_id);
-	String slide_type = slide.getTemplate();
+	String slide_type = ""; 
+	if(request.getParameterMap().containsKey("slide_type")) {
+		slide_type = request.getParameter("slide_type").toString();
+	} else {
+		slide_type = slide.getTemplate();
+	}
+	
 	List<HashMap<String, String>> logs = lessonUtils.getSlideComments(slide_id);
 
 	Lesson lesson = ppt.getLesson();
