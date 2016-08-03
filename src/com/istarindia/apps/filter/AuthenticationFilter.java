@@ -91,6 +91,13 @@ public class AuthenticationFilter implements Filter {
 		if(((HttpServletRequest) request).getRequestURL().toString().contains("view_handout.jsp")) {
 			 isStarticrequest = true;
 		}
+		try {
+			if(((HttpServletRequest) request).getQueryString().contains("demo")) {
+				 isStarticrequest = true;
+			}
+		} catch (Exception e) {
+			
+		}
 
 		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		if (!isStarticrequest) {

@@ -752,7 +752,6 @@ public class CreateSlideController extends IStarBaseServelet {
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "New slide is created");
 		} else {
 			request.setAttribute("message_success", "Slide has been updated successfully ");
-			
 			comments = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}

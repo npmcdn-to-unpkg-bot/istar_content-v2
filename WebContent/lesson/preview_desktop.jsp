@@ -84,6 +84,8 @@ try {
 		</div>
 	</div>
 	<% 
+	
+	if(!request.getParameterMap().containsKey("demo")) {
 	IstarUser user = (IstarUser) request.getSession().getAttribute("user");
     String displayName = "Welcome " + user.getName();
     SlideDAO sDao = new SlideDAO();
@@ -103,10 +105,13 @@ try {
 	    <%  } %>
 		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
 		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
-	<% } %>
+	<% } } %>
 
 
-	<% if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
+	<% if(!request.getParameterMap().containsKey("demo")) { 
+		IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+
+		if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
 	<div class='modal fade' id='reviewCommentModal' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -139,7 +144,7 @@ try {
 			</div>
 		</div>
 	</div>
-	<% } %>
+	<% } } %>
 	
 	<div class='modal fade' id='notes' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 		<div class="modal-dialog">
