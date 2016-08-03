@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.mapping.Array;
 
 import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.CmsessionDAO;
@@ -184,19 +183,19 @@ public class UpdateCourseDetails extends HttpServlet {
 		String comments = "";
 		
 		if(order_holder_string.length() == 0) {
-			request.setAttribute("message_failure", "No " + entity_type + "s to reorder! Operation is aborted");
+			request.setAttribute("message_failure", "No " + entity_type + " to reorder! Operation is aborted");
 			
 			switch (entity_type) {
 			case "modules":
-				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
+				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" + Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
 				break;
 				
 			case "sessions":
-				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
+				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" + Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
 				break;
 			
 			case "lessons":
-				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
+				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" + Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
 				break;
 			
 			case "slides":
@@ -216,7 +215,7 @@ public class UpdateCourseDetails extends HttpServlet {
 				
 				int course_id = Integer.parseInt(request.getParameter("course_id"));
 				String course_name = new CourseDAO().findById(course_id).getCourseName();
-				comments = "Modules in course: " + course_name + " (ID "+course_id+") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				comments = "Modules in course: " + course_name + " (ID " + course_id + ") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
 				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "MODULES", course_id, "Modules are reordered");
 				
 				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" +Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
@@ -227,7 +226,7 @@ public class UpdateCourseDetails extends HttpServlet {
 				
 				int module_id = Integer.parseInt(request.getParameter("module_id").toString());
 				String module_name = new ModuleDAO().findById(module_id).getModuleName();
-				comments = "Sessions in module: " + module_name + " (ID "+module_id+") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				comments = "Sessions in module: " + module_name + " (ID " + module_id + ") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
 				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "CMSESSIONS", module_id, "Sessions are reordered");
 
 				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" +Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
@@ -238,7 +237,7 @@ public class UpdateCourseDetails extends HttpServlet {
 				
 				int session_id = Integer.parseInt(request.getParameter("session_id").toString());
 				String session_name = new CmsessionDAO().findById(session_id).getTitle();
-				comments = "Lessons in session: " + session_name + " (ID "+session_id+") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				comments = "Lessons in session: " + session_name + " (ID " + session_id + ") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
 				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "LESSONS", session_id, "Lessons are reordered");
 
 				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" +Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
@@ -249,7 +248,7 @@ public class UpdateCourseDetails extends HttpServlet {
 				
 				int task_id = Integer.parseInt(request.getParameter("task_id").toString());
 				String lesson_name = request.getParameter("lesson_name");
-				comments = "Slides in lesson: " + lesson_name + " (TaskID "+task_id+") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				comments = "Slides in lesson: " + lesson_name + " (TaskID " + task_id + ") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
 				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "SLIDES", task_id, "Slides are reordered");
 
 				response.sendRedirect("/content/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id")) );
@@ -265,11 +264,11 @@ public class UpdateCourseDetails extends HttpServlet {
 	}
 
 	private static void updateModuleOrder(HttpServletRequest request, String[] order_holder) {
-		
+
+		StringBuffer sql = new StringBuffer();		
 		try {
-			StringBuffer sql = new StringBuffer();
 			for (int i=0;i<order_holder.length;i++){
-				sql.append("UPDATE module SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+				sql.append("UPDATE module SET order_id = " + (i+1) + " WHERE ID =" + order_holder[i] + "; ");
 			}
 			
 			IstarUserDAO dao = new IstarUserDAO();
@@ -292,11 +291,11 @@ public class UpdateCourseDetails extends HttpServlet {
 	}
 
 	private static void updateSessionOrder(HttpServletRequest request, String[] order_holder) {
-		
+
+		StringBuffer sql = new StringBuffer();
 		try {
-			StringBuffer sql = new StringBuffer();
 			for (int i=0;i<order_holder.length;i++){
-				sql.append("UPDATE cmsession SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+				sql.append("UPDATE cmsession SET order_id = " + (i+1) + " WHERE ID =" + order_holder[i] + "; ");
 			}
 			
 			IstarUserDAO dao = new IstarUserDAO();
@@ -319,11 +318,11 @@ public class UpdateCourseDetails extends HttpServlet {
 	}
 
 	private static void updateLessonOrder(HttpServletRequest request, String[] order_holder) {
-		
+
+		StringBuffer sql = new StringBuffer();
 		try {
-			StringBuffer sql = new StringBuffer();
 			for (int i=0;i<order_holder.length;i++){
-				sql.append("UPDATE lesson SET order_id = "+(i+1)+" from task WHERE lesson.ID =task.item_id and task.item_type='LESSON' and task.id="+order_holder[i]+"; ");
+				sql.append("UPDATE lesson SET order_id = " + (i+1) + " from task WHERE lesson.ID =task.item_id and task.item_type='LESSON' and task.id=" + order_holder[i] + "; ");
 			}
 
 			IstarUserDAO dao = new IstarUserDAO();
@@ -346,11 +345,11 @@ public class UpdateCourseDetails extends HttpServlet {
 	}
 
 	private static void updateSlideOrder(HttpServletRequest request, String[] order_holder) {
-		
+
+		StringBuffer sql = new StringBuffer();
 		try {
-			StringBuffer sql = new StringBuffer();
-			for (int i=0;i<order_holder.length;i++){
-				sql.append("UPDATE slide SET order_id = "+(i+1)+" WHERE ID ="+order_holder[i]+"; ");
+			for (int i = 0 ; i < order_holder.length ; i++){
+				sql.append("UPDATE slide SET order_id = " + (i+1) + " WHERE ID =" + order_holder[i] + "; ");
 			}
 			
 			IstarUserDAO dao = new IstarUserDAO();
@@ -367,7 +366,8 @@ public class UpdateCourseDetails extends HttpServlet {
 			
 		} catch (Exception e) {
 			request.setAttribute("message_failure", "Something went wrong. Please try again!");
-			//System.err.println("sql: " + sql);
+			e.printStackTrace();
+			System.err.println("sql: " + sql);
 		}
 		
 	}

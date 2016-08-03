@@ -487,11 +487,11 @@ public class LessonUtils {
             out.append( "<table class='table table-striped' id='sortable'>");
             out.append("<thead>");
             out.append("<tr>");
-            out.append("<th>#</th>");
+            out.append("<th>#Id</th>");
             out.append("<th>Slide Title</th>");
-            out.append("<th>Action</th>");
             out.append("<th>Slide Template</th>");
-            out.append("<th>Order Number</th>");
+            out.append("<th colspan='3'>Choose action</th>");
+            out.append("<th>#Order</th>");
             out.append("</tr>");
             out.append("</thead>");
             out.append("<tbody id='slidess_ord'>");
@@ -501,17 +501,20 @@ public class LessonUtils {
                 out.append("<tr class='mammama' id='"+data.get(i).get(0)+"'>");
                 out.append("<td id='id'>" + data.get(i).get(0) + "</td>");
                 out.append("<td>" + data.get(i).get(2) + "</td>");
-                out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate1.jsp?ppt_id=" + ppt.getId()
-                        + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(3) + "'>"
-                        + "<i class='fa fa-check'></i>Edit</a>");
-
-                out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
-                        + "href='#' id='delete-slide-btn' data-toggle='modal' data-target='#confirm-delete-slide-modal' data-slide-id='"+data.get(i).get(0)+"'>"
-                        + "<i class='fa fa-remove'></i>Delete</a>");
-                
-                out.append("</td>");
                 out.append("<td>" + data.get(i).get(3) + "</td>");
+
+                out.append("<td><a class='btn btn-success btn-xs' href='/content/fill_tempate1.jsp?ppt_id=" + ppt.getId()
+                        + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(3) + "'>"
+                        + "<i class='fa fa-pencil-square-o fa-fw'></i>Edit</a></td>");
+                
+                out.append("<td><a class='btn btn-danger btn-xs' "
+                        + "href='#' id='delete-slide-btn' data-toggle='modal' data-target='#confirm-delete-slide-modal' data-slide-id='"+data.get(i).get(0)+"'>"
+                        + "<i class='fa fa-trash-o fa-fw'></i>Delete</a></td>");
+                
+                out.append("<td><a class='btn btn-warning btn-xs' "
+                        + "href='#' id='duplicate-slide-btn' data-toggle='modal' data-target='#confirm-duplicate-slide-modal' data-slide-id='"+data.get(i).get(0)+"'>"
+                        + "<i class='fa fa-copy fa-fw'></i>Duplicate</a></td>");
+                
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("</tr>");
             }
@@ -520,13 +523,20 @@ public class LessonUtils {
             out.append("</table>");
             out.append("</div>");
             out.append("</div>");
-            
-            //form submit confirm modal:
+
+            //confirm delete slide modal:
 			out.append( "  <div class='modal fade' id='confirm-delete-slide-modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>");
 			out.append( "  <div  class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> Confirm! </div>");
 			out.append( " <div class='modal-body'> Are you sure you want to continue?  </div> <div class='modal-footer'>  ");
 			out.append(" <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button> ");
 			out.append( "<a href='/content/delete_slide?ppt_id=" + ppt.getId() + "&slide_id=' id='confirm-delete-slide-btn' class='btn btn-success success'>Delete</a> </div> </div> </div> </div>");
+
+            //confirm duplicate slide modal:
+			out.append( "  <div class='modal fade' id='confirm-duplicate-slide-modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>");
+			out.append( "  <div  class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> Confirm! </div>");
+			out.append( " <div class='modal-body'> Are you sure you want to duplicate the slide?  </div> <div class='modal-footer'>  ");
+			out.append(" <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button> ");
+			out.append( "<a href='/content/duplicate_slide?ppt_id=" + ppt.getId() + "&slide_id=' id='confirm-duplicate-slide-btn' class='btn btn-success success'>Duplicate</a> </div> </div> </div> </div>");
 			
         } else if (lesson.getGame() != null) {
             Game game = lesson.getGame();

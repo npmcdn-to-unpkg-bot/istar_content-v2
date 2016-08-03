@@ -434,7 +434,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="col-md-3">
-												<strong><%=user.getName()%> : </strong> 
+												<strong><%=user.getName()%> </strong> 
 											</div>
 											<div class="col-md-9">
 												<%=log.getComments()%>
@@ -475,7 +475,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="col-md-3">
-												<strong><%=user.getName()%> : </strong> 
+												<strong><%=user.getName()%> </strong> 
 											</div>
 											<div class="col-md-9">
 												<%=log.getComments()%>
@@ -610,7 +610,7 @@
                 $( "#update_order" ).submit(function( event ) {
                 	var idsInOrder = $('#slidess_ord').sortable("toArray");
                 	$('#order_holder').val(idsInOrder);
-                	});
+                });
                 
                 
 				var selected = [];
@@ -626,8 +626,7 @@
                             }
                         }
         	        } );
-        	    }
-        	    else {
+        	    } else {
         	        table = $( "#datatable_report_91" ).DataTable( {
         	        	"processing": true,
                         "rowCallback": function( row, data ) {
@@ -681,6 +680,14 @@
 						var delete_url = $('#confirm-delete-slide-btn').attr("href").split('slide_id=')[0] +"slide_id="+ slide_id;
 						$('#confirm-delete-slide-btn').attr("href", delete_url);
 					});
+
+				$('#confirm-duplicate-slide-modal').on( 'show.bs.modal', function(e) {
+						var $invoker = $(e.relatedTarget);
+						var slide_id = $invoker.data('slide-id');
+	                	var idsInOrder = $('#slidess_ord').sortable("toArray");
+						var duplicate_url = $('#confirm-duplicate-slide-btn').attr("href").split('slide_id=')[0] +"slide_id="+ slide_id+"&order_holder="+idsInOrder;
+						$('#confirm-duplicate-slide-btn').attr("href", duplicate_url);
+					});
 				});
 
 		function DisplayFilePath() {
@@ -699,9 +706,6 @@
 			if ($('#qType').val() == '1') {
 				$('input.correctOption').removeAttr('checked');
 			}
-		});
-
-		$(document).ready(function() {
 		});
 
 		function openWin(url) {

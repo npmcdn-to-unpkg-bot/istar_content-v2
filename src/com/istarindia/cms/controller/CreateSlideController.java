@@ -1,4 +1,4 @@
-package com.istarindia.apps.services.controllers.auth;
+package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,7 +55,6 @@ public class CreateSlideController extends IStarBaseServelet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		printParams(request);
 		int slide_id = 0;
 		boolean is_numbered ;		
 		String template = request.getParameter("template");

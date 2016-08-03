@@ -88,44 +88,47 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		</div>
 				
 		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<div class="panel panel-orange" style="margin: 10px; border: 3px solid #e67e22;">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="fa fa-tasks"></i> Update Session Details
-					</h3>
-				</div>
-				<div class="panel-body">
-					<form id="update_course" action="/content/update_course" class="sky-form" method="post" >
-						
-						<input id='session_id' name='session_id' type='hidden' value='<%=session_id%>'>
-						<input id='action' name='action' type='hidden' value='update'> 
-						<input id='entity_type' name='entity_type' type='hidden' value='session'> 
-						
-						<fieldset>
-						<div class="row">
-							<section class="col-md-3">
-								<label>Session Name</label> <label class="input"> 
-									<input value="<%=cmsession.getTitle()%>" type="text" name="title" placeholder="Title"> 
-								</label>
-							</section>
-
-							<section class="col-md-8">
-								<label>Session Description</label> <label class="input"> 
-									<input value="<%=cmsession.getSession_description()%>" type="text" name="description" placeholder="Description"> 
-								</label>
-							</section>
-							
-							<section>
-								<button type="submit" class="btn-u" style="float:right; margin-top: 2%;">Update</button>
-							</section>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="panel panel-orange" style="margin: 10px; border: 3px solid #e67e22;">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-tasks"></i> Update Session Details
+							</h3>
 						</div>
-						
-						</fieldset>
-						
-					</form>
+						<div class="panel-body">
+							<form id="update_course" action="/content/update_course" class="sky-form" method="post" >
+								
+								<input id='session_id' name='session_id' type='hidden' value='<%=session_id%>'>
+								<input id='action' name='action' type='hidden' value='update'> 
+								<input id='entity_type' name='entity_type' type='hidden' value='session'> 
+								
+								<fieldset>
+								<div class="row">
+									<section class="col-md-3">
+										<label>Session Name</label> <label class="input"> 
+											<input value="<%=cmsession.getTitle()%>" type="text" name="title" placeholder="Title"> 
+										</label>
+									</section>
+		
+									<section class="col-md-8">
+										<label>Session Description</label> <label class="input"> 
+											<input value="<%=cmsession.getSession_description()%>" type="text" name="description" placeholder="Description"> 
+										</label>
+									</section>
+									
+									<section>
+										<button type="submit" class="btn-u" style="float:right; margin-top: 2%;">Update</button>
+									</section>
+								</div>
+								
+								</fieldset>
+								
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
-			
 			<br/>
 			
 			<div class="col-md-12">
