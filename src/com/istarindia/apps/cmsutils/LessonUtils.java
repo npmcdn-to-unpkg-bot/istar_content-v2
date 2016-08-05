@@ -49,11 +49,14 @@ import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
+import com.istarindia.apps.dao.SlideVersion;
+import com.istarindia.apps.dao.SlideVersionDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.AssessmentService;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.QuestionService;
+import com.istarindia.apps.services.SlideService;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSSlide;
 import com.istarindia.cms.lessons.CMSTextItem;
@@ -1159,7 +1162,8 @@ public class LessonUtils {
         context.put("videos", videos);
         context.put("list_types", CMSRegistry.listTypes);
         
-        Template t = ve.getTemplate(slide.getTemplateName() + "_edit.vm");
+        Template t =  ve.getTemplate(slide.getTemplateName() + "_edit.vm");
+        
         StringWriter writer = new StringWriter();
         try {
             t.merge(context, writer);
@@ -1187,9 +1191,37 @@ public class LessonUtils {
             cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
             cMSlide.setTeacherNotes(slide.getTeacherNotes());
             cMSlide.setStudentNotes(slide.getStudentNotes());
+            cMSlide.setTemplateName(slide.getTemplate());
             System.out.println(slide.getSlideText());
         } catch (JAXBException e) {
             System.err.println(slide.getId());
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return cMSlide;
+
+    }
+
+    public CMSSlide convertSlide(int version_id) {
+    	SlideVersion version = new SlideVersionDAO().findById(version_id);
+        CMSSlide cMSlide = new CMSSlide();
+        String slideText = version.getSlideText();
+        String template =  version.getTemplate();
+        String teacherNotes =  version.getTeacherNotes();
+        String studentNotes =  version.getStudentNotes();
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
+            InputStream in = IOUtils.toInputStream(slideText, "UTF-8");
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
+            cMSlide.setTemplateName(template);
+            cMSlide.setTeacherNotes(teacherNotes);
+            cMSlide.setStudentNotes(studentNotes);
+        } catch (JAXBException e) {
+            //System.err.println(version.getId());
             e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block

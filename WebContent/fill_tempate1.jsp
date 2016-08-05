@@ -61,14 +61,19 @@
 				
 				slide = slideDao.findById(slide_id);
 				order_id = slide.getOrder_id();
+
+				if(request.getParameterMap().containsKey("version_id")) {
+					int version_id = Integer.parseInt(request.getParameter("version_id"));
+					cMSSlide = (new LessonUtils()).convertSlide(version_id);
+				} else {
+					cMSSlide = (new LessonUtils()).convertSlide(slide);
+				}
 				
 				if(request.getParameterMap().containsKey("slide_type")) {
 					slide_type = request.getParameter("slide_type");
 				} else {
-					slide_type = slide.getTemplate();
+					slide_type = cMSSlide.getTemplateName();
 				}
-				
-				cMSSlide = (new LessonUtils()).convertSlide(slide);
 				
 				bgImage = cMSSlide.getImage_BG();
 				
@@ -157,7 +162,7 @@
 					<% } %>
 				</div>
 
-				<h1 class=" col col-md-4" style="text-align: center;">Add/Edit Slide</h1>
+				<h1 class=" col col-md-4" style="text-align: center;">Add/Edit Slide </h1>
 
 				<div class=" col col-md-4">
 					<% if (!next_slide_url.equalsIgnoreCase("#")) { %>
@@ -179,7 +184,8 @@
 						<li><a href="#template" data-toggle="tab">Template</a></li>
 						<li><a href="#content" data-toggle="tab">Content</a></li>
 						<li><a href="#ui" data-toggle="tab">Theme</a></li>
-						<% if(slide_id != 0) {%>
+						<% if(slide_id != 0) { %>
+						<li><a href="#versions" data-toggle="tab">Previous versions</a></li>
 						<li><a href="#comments" data-toggle="tab">Review Comments</a></li>
 						<% } %>
 						<li class="active"><a href="#desktop" data-toggle="tab">Desktop Preview</a></li>
@@ -236,7 +242,7 @@
 												<label class="label">Teacher Notes</label> 
 												<label class="textarea"> 
 													<textarea rows="3" name="teacher_notes" data-parsley-required="true" data-parsley-length="[5,9250]" data-parsley-required-message="Please provide teacher notes" data-parsley-length-message="It should be 5-9250 characters long">
-														<%=slide.getTeacherNotes()%> 
+														<%=cMSSlide.getTeacherNotes()%> 
 													</textarea>
 												</label>
 												<div class="note">
@@ -247,7 +253,7 @@
 												<label class="label">Student Notes</label> 
 												<label class="textarea"> 
 													<textarea rows="3" name="student_notes" data-parsley-required="true" data-parsley-length="[5,9250]" data-parsley-required-message="Please provide student notes" data-parsley-length-message="It should be 5-9250 characters long"> 
-														<%=slide.getStudentNotes()%>
+														<%=cMSSlide.getStudentNotes()%>
 													</textarea>
 												</label>
 												<div class="note">
@@ -258,10 +264,8 @@
 										</fieldset>
 										<footer>
 										
-											<button id="changetabbutton" type='button' class="btn-u" style="float:right">Proceed</button>
-											
 											<% if(slide_type.contains("IMAGE")||slide_type.contains("VIDEO")) { %>
-												<button type='button' class="btn-u" style="float:right; margin-right: 2%; "  data-target='#imageModal' data-toggle='modal'>
+												<button type='button' class="btn-u" style="float:right;"  data-target='#imageModal' data-toggle='modal'>
 													Upload new Media
 												</button>
 											<% } %>
@@ -318,6 +322,8 @@
 															
 															<% } %>
 															
+															<option value="Slide" selected="selected">Slide</option>
+															
 														</select> <i></i>
 													</label>
 												</section>
@@ -331,6 +337,8 @@
 															<option value="<%=slideTransitions%>"><%=slideTransitions%></option>
 															
 															<% } %>
+															
+															<option value="Slide" selected="selected">Slide</option>
 															
 														</select> <i></i>
 													</label>
@@ -346,6 +354,34 @@
 											
 										</footer>
 									</div>
+								</div>
+							</div>
+						</div>
+						
+						<% if (slide_id != 0 ) { %>
+						<div id="versions" class="tab-pane fade in ">
+							<div class="panel panel-sea">
+								<div class="panel-heading">
+									<h3 class="panel-title"> <i class="fa fa-tasks"></i> Try previous versions </h3>
+								</div>
+								<div class="panel-body">
+								<fieldset>
+									<section>									
+										<select id="version_id" class="form-control" name="version" style="margin-top: 50px; width: 317px;">
+											
+											<% 
+												int ite = 1;
+												for (SlideVersion version : service.getPreviousRevisions(slide_id) ) { 
+											%>
+											
+											<option value='<%=version.getId()%>'><%=ite++%></option>
+											
+											<% } %>
+											
+										</select>
+									</section>
+									
+								</fieldset>
 								</div>
 							</div>
 						</div>
@@ -377,6 +413,7 @@
 								
 							</div>
 						</div>
+						<% } %>
 						
 						<div class="tab-pane fade in active" id="desktop">
 							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
@@ -524,10 +561,6 @@
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
-		$('#changetabbutton').click(function(e){
-	    	e.preventDefault();
-	        $('#tabs1 a[href="#ui"]').tab('show');
-	    })
 	    
 	    $('#submit-form').click(function(e){
 	    	$('#slide-form').submit();
@@ -657,6 +690,14 @@
 	 			} else {
 					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
 				}
+				window.location.href=url;
+			});
+
+			$("#version_id").change(function() {
+				var slideId = <%=request.getParameter("slide_id")%> ;
+				var version_id = $(this).val();
+				//alert(version_id);
+				var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&version_id="+$(this).val();
 				window.location.href=url;
 			});
 			

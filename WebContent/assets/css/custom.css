@@ -463,7 +463,7 @@ h1.warning-large {
 }
 
 .custom-control {
-	z-index:99999; 
+	z-index:11; 
 	width: 100%; 
 	margin-top: -2%; 
 	height: 70px;

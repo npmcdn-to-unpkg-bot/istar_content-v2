@@ -390,7 +390,7 @@ body {
 	text-align: left;
     padding: 8px;
     border: 2px solid rgba(214, 201, 201, 0.3);
-    ;font-size: 120%;
+    font-size: 120%;
 }
 
 .reveal .ONLY_TITLE_PARAGRAPH  th , .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  th {

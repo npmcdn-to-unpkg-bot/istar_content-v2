@@ -16,18 +16,18 @@ import org.jsoup.Jsoup;
 
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
-import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.SlideDAO;
+import com.istarindia.apps.dao.SlideVersion;
+import com.istarindia.apps.dao.SlideVersionDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
-import com.istarindia.apps.services.task.CreateLessonTaskManager;
 import com.istarindia.cms.lessons.CMSImage;
 import com.istarindia.cms.lessons.CMSList;
 import com.istarindia.cms.lessons.CMSTextItem;
@@ -60,6 +60,11 @@ public class CreateSlideController extends IStarBaseServelet {
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+		
+		if (request.getParameter("is_edit").equalsIgnoreCase("true")) {
+			service.saveCopy(Integer.parseInt(request.getParameter("slide_id").toString()));
+		}
+		
 		switch (template) {
 		case "ONLY_TITLE_PARAGRAPH_IMAGE":
 
@@ -654,7 +659,6 @@ public class CreateSlideController extends IStarBaseServelet {
 			break;
 			
 		case "ONLY_2TITLE":
-			//image_bg=%2Fcontent%2Fbackgrounds%2F6.png&slideTransition=Zoom&background
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				slide_id = service.add2TitleSlideToLesson(request.getParameter("teacher_notes"),
 						request.getParameter("student_notes"), ppt, request.getParameter("title"),
@@ -717,13 +721,9 @@ public class CreateSlideController extends IStarBaseServelet {
 		Slide slide = new Slide();
 
 		if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-			slide = dao.findById(slide_id);
 			
-			if (request.getParameter("order_id").equalsIgnoreCase("0")) {
-				slide.setOrder_id(slide_id);
-			} else {
-				slide.setOrder_id(Integer.parseInt(request.getParameter("order_id")));
-			}
+			slide = dao.findById(slide_id);
+			slide.setOrder_id(slide_id);
 			
 			Session session = dao.getSession();
 			Transaction tx = null;
@@ -747,11 +747,17 @@ public class CreateSlideController extends IStarBaseServelet {
 		if(request.getParameter("is_edit").equalsIgnoreCase("false")) {
 			request.setAttribute("message_success", "New slide has been created successfully ");
 			
-			comments = "A new Slide is added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId() + ". New text -> "+ Jsoup.parse(slide.getSlideText());
+			comments = "A new Slide is added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId();
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "New slide is created");
 		} else {
-			request.setAttribute("message_success", "Slide has been updated successfully ");
-			comments = "Slide with ID ->" + slide_id + " has been updated. New text -> "  + Jsoup.parse(slide.getSlideText());
+			if(request.getParameterMap().containsKey("version_id")){
+				SlideVersion version = (new SlideVersionDAO()).findById(Integer.parseInt(request.getParameter("version_id").toString()));
+				request.setAttribute("message_success", "Slide has been reset and edited from previous revision from " + version.getCreatedAt());
+				comments = "Slide with ID ->" + slide_id + " is reset to previous version from " + version.getCreatedAt() + " and updated";
+			} else {
+				request.setAttribute("message_success", "Slide has been updated successfully ");
+				comments = "Slide with ID ->" + slide_id + " is updated.";
+			}
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}
 		

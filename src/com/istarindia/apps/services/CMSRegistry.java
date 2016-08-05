@@ -146,7 +146,6 @@ public class CMSRegistry {
 		String sql = "INSERT INTO task_log (actor_id, changed_status, comments, created_at, task_id, item_type, item_id, jsession_id, title ) "
 					+ "VALUES ( "+ actor_id +", '"+ changed_status +"', '"+ comments +"', now(), "+ task_id +", '"+ item_type +"', "+ item_id +", '"+ jsession_id +"', '"+ title +"'); ";
 		
-		System.err.println(sql);
 		DBUTILS db = new DBUTILS();
 		db.executeUpdate(sql);
 
