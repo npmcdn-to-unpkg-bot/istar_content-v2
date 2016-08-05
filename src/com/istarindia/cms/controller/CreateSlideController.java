@@ -766,7 +766,6 @@ public class CreateSlideController extends IStarBaseServelet {
 		t.setItemType("LESSON");
 		t = new TaskDAO().findByExample(t).get(0);
 		response.sendRedirect("/content/edit_lesson?task_id=" + t.getId());
-
 	}
 
 	private CMSList getNewTree(HttpServletRequest request) {

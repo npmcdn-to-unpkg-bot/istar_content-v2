@@ -20,6 +20,7 @@ import com.istarindia.apps.dao.Course;
 import com.istarindia.apps.dao.CourseDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.Module;
 import com.istarindia.apps.dao.ModuleDAO;
 import com.istarindia.apps.services.CMSRegistry;
@@ -55,8 +56,37 @@ public class UpdateCourseDetails extends HttpServlet {
 			break;
 		case "create":
 			add_item(request, response);
+		case "replicate":
+			replicate_item(request, response);
+		
 			break;	
 		}
+	}
+
+	private void replicate_item(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		CourseService service = new CourseService();
+		
+		switch (request.getParameter("entity_type").toString()) {
+		case "lesson":
+			int lesson_id = Integer.parseInt(request.getParameter("lesson_id").toString());
+			int dest_session_id = Integer.parseInt(request.getParameter("dest_session_id").toString());
+			Lesson lesson = service.replicateLesson(lesson_id, dest_session_id);
+			
+			if(lesson == null) {
+				//request.setAttribute("message_failure", "Please try again! Duplicate course found!");
+			} else {
+				response.sendRedirect("/content/edit_lesson?task_id=" + lesson.getTaskID());
+
+				//request.setAttribute("message_success", "New course has been added successfully!");
+				
+				//String comments = "Course with name " + course_name + " and with ID " + course.getId() + " is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				//CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "COURSE", course.getId(), "New course is created");
+			}
+			break;
+			
+		}
+				
 	}
 
 	/*	
