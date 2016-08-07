@@ -143,8 +143,8 @@ public class CMSRegistry {
 		int actor_id = ((IstarUser)request.getSession().getAttribute("user")).getId();
 		String jsession_id = request.getSession().getAttribute("jsession_id").toString();
 
-		String sql = "INSERT INTO task_log (actor_id, changed_status, comments, created_at, task_id, item_type, item_id, jsession_id, title ) "
-					+ "VALUES ( "+ actor_id +", '"+ changed_status +"', '"+ comments +"', now(), "+ task_id +", '"+ item_type +"', "+ item_id +", '"+ jsession_id +"', '"+ title +"'); ";
+		String sql = "INSERT INTO task_log (id, actor_id, changed_status, comments, created_at, task_id, item_type, item_id, jsession_id, title ) "
+					+ "VALUES ((select max(id)+1 from task_log), "+ actor_id +", '"+ changed_status +"', '"+ comments +"', now(), "+ task_id +", '"+ item_type +"', "+ item_id +", '"+ jsession_id +"', '"+ title +"'); ";
 		
 		DBUTILS db = new DBUTILS();
 		db.executeUpdate(sql);

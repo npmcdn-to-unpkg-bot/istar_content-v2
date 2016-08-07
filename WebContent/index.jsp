@@ -16,6 +16,7 @@ if(request.getSession().getAttribute("user")!=null) {
 }	
 
 %>
+
 <title>Login/Registration | iStar Skill Development</title>
 
 <!-- Meta -->
@@ -109,8 +110,8 @@ if(request.getSession().getAttribute("user")!=null) {
 	%>
 	
 	<div class="modal fade" id="session-log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-dialog" style="    width: 60%;">
+			<div class=" modal-content">
 				<div class="modal-header">Session log</div>
 				
 				<div class="modal-body">
