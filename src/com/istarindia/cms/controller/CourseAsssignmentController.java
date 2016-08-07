@@ -99,23 +99,37 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		StringBuffer sql = new StringBuffer();
 		List<TaskReviewer> existing_reviewers = new TaskReviewerDAO().findByProperty("task", task);
 		ArrayList<Integer> existing_reviewerIds = new ArrayList<>();
+		String comments = new String();
+		StringBuffer removedReviewersEmailList = new StringBuffer();
+		StringBuffer addedReviewersEmailList = new StringBuffer();
 		
 		for(TaskReviewer tr : existing_reviewers) {
 			existing_reviewerIds.add(tr.getContentReviewer().getId());
 		}
 		
-		for(Integer existing_reviewer : existing_reviewerIds) {
-			if(!new_reviewerIds.contains(existing_reviewer)) {
-				sql.append(" ; delete from task_reviewer where task_id = " + task.getId() + " and reviewer_id = " + existing_reviewer);
+		for(Integer existing_reviewerId : existing_reviewerIds) {
+			if(!new_reviewerIds.contains(existing_reviewerId)) {
+				sql.append(" ; delete from task_reviewer where task_id = " + task.getId() + " and reviewer_id = " + existing_reviewerId);
+				removedReviewersEmailList.append(new IstarUserDAO().findById(existing_reviewerId).getEmail() + " , ");
 			}
 		}
 		
 		for(Integer new_reviewerId : new_reviewerIds) {
 			if(!existing_reviewerIds.contains(new_reviewerId)) {
 				sql.append(" ; insert into  task_reviewer (id, task_id, reviewer_id, status) values ( (select max(id)+1 from task_reviewer), " + task.getId() + " , " + new_reviewerId + " , 'REVIEWER_ASSIGNED')");
+				addedReviewersEmailList.append(new IstarUserDAO().findById(new_reviewerId).getEmail() + " , ");
 			}
 		}
-		System.err.println(sql.toString());
+
+		
+		if(!removedReviewersEmailList.toString().isEmpty()) {
+			comments = removedReviewersEmailList.toString() + " have been removed from reviewer list by " +  ((IstarUser)request.getSession().getAttribute("user")).getEmail() + " ; ";
+		}
+		
+		if (!addedReviewersEmailList.toString().isEmpty()) {
+			comments = comments  + addedReviewersEmailList.toString() + " have been added to reviewer list by " +  ((IstarUser)request.getSession().getAttribute("user")).getEmail() + " ; ";
+		}
+		
 		try {
 			TaskReviewerDAO dao = new TaskReviewerDAO();
 			Session session = dao.getSession();
@@ -128,7 +142,9 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 			e.printStackTrace();
 		}
 		
-		
+		if(!comments.isEmpty()) {
+			CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", task.getItemId(), "Reviewers updated for the lesson");
+		}
 	}
 
 	private void assignActor(Task task, String content_id, HttpServletRequest request) {
