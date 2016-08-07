@@ -191,7 +191,8 @@
 																		boolean is_unassigned_lesson = !(new ContentAdminDAO()).findByEmail(lesson.getAsignee()).isEmpty();
 																		boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
 																		boolean is_publishable = is_content_admin && (lesson.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || lesson.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
-
+																		boolean is_replicable = lesson.getLessonType().equalsIgnoreCase("PRESENTATION");
+																		
 																		if (is_unassigned_lesson) {
 																			assigned = "label label-default ";
 																		}
@@ -206,21 +207,27 @@
 																id="lesson_<%=lesson.getId()%>"
 																data-task-id="<%=lesson.getTaskID()%>"
 																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getTitle()%>
-																<%
-																	} else {
-																%>
+															<%
+																} else if (!is_replicable){
+															%>	
 															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTaskID()%>"
-																id="lesson_<%=lesson.getId()%>" data-lesson-id = "<%=lesson.getId()%>" 
+																id="lesson_<%=lesson.getId()%>"
+																data-jstree='{"opened":true}' class="context-menu-nonreplicable"><%=lesson.getTitle()%>
+															<% 
+																} else {
+															%>
+															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTaskID()%>"
+																id="lesson_<%=lesson.getId()%>"  data-lesson-id = "<%=lesson.getId()%>" 
 																data-jstree='{"opened":true}' class="context-menu"><%=lesson.getTitle()%>
-																<%
-																	}
-																%>  
+															<% 
+																} 
+															%>  
 																<span class="<%=assigned%> "> Assigned to - <%=lesson.getAsignee()%></span>
-																<span>&nbsp;&nbsp;&nbsp;</span> <span
-																class="<%=reviewers%>"> Reviewer - <%=lesson.getReviewer()%></span>
-																<span>&nbsp;&nbsp;&nbsp;</span> <span
-																class="<%=statusLabel%>"> Status - <%=lesson.getStatus()%></span>
-																</li>
+																<span>&nbsp;&nbsp;&nbsp;</span> 
+																<span class="<%=reviewers%>"> Reviewer - <%=lesson.getReviewer()%></span>
+																<span>&nbsp;&nbsp;&nbsp;</span> 
+																<span class="<%=statusLabel%>"> Status - <%=lesson.getStatus()%></span>
+															</li>
 
 															<%
 																}
@@ -333,7 +340,7 @@
 						<input type="hidden" id="action" name="action" value="replicate"/>
 						<input type="hidden" id="entity_type" name="entity_type" value="lesson"/>
 						<div class="form-group">
-							<label for="inputEmail1" class="col-lg-4 control-label">Choose Session</label>
+							<label for="inputEmail1" class="col-lg-4 control-label">Choose Session you want to replicate the lesson into</label>
 							<div class="col-lg-6">
 								<select name="dest_session_id" id="dest-session-select" class="form-control input-lg">
 									<%
@@ -348,8 +355,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<button type="submit" class="btn-u btn-u-green">Assign
-									& Create</button>
+								<button type="submit" class="btn-u btn-u-green">Proceed</button>
 							</div>
 						</div>
 					</form>
@@ -449,6 +455,21 @@
 						}
 					},
 
+					"view" : {
+						name : "View Lesson",
+						icon : "paste",
+						callback : function(key, options) {
+							var url = "<%=baseURL%>/edit_lesson?task_id=" + $(this).data('task-id');
+							window.open(url, '_blank');
+						}
+					}
+				}
+
+			});
+			
+			$.contextMenu({
+				selector : '.context-menu-nonreplicable',
+				items : {
 					"view" : {
 						name : "View Lesson",
 						icon : "paste",
