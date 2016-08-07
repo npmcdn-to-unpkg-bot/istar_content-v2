@@ -369,12 +369,14 @@
 									<section>									
 										<select id="version_id" class="form-control" name="version" style="margin-top: 50px; width: 317px;">
 											
+											<option value='NONE' selected='selected'>None</option>
+											
 											<% 
 												int ite = 1;
 												for (SlideVersion version : service.getPreviousRevisions(slide_id) ) { 
 											%>
 											
-											<option value='<%=version.getId()%>'><%=ite++%></option>
+											<option value='<%=version.getId()%>'><%=version.getCreatedAt()%></option>
 											
 											<% } %>
 											
@@ -696,9 +698,10 @@
 			$("#version_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				var version_id = $(this).val();
-				//alert(version_id);
-				var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&version_id="+$(this).val();
-				window.location.href=url;
+				if(version_id != "NONE") {
+					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&version_id="+$(this).val();
+					window.location.href=url;
+				}
 			});
 			
 			$.contextMenu({
