@@ -21,6 +21,7 @@ import com.istarindia.apps.dao.CourseDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Lesson;
+import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Module;
 import com.istarindia.apps.dao.ModuleDAO;
 import com.istarindia.apps.services.CMSRegistry;
@@ -71,17 +72,19 @@ public class UpdateCourseDetails extends HttpServlet {
 		case "lesson":
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id").toString());
 			int dest_session_id = Integer.parseInt(request.getParameter("dest_session_id").toString());
-			Lesson lesson = service.replicateLesson(lesson_id, dest_session_id);
+			Lesson oldLesson = new LessonDAO().findById(lesson_id);
+			Lesson newLesson = service.replicateLesson(lesson_id, dest_session_id);
 			
-			if(lesson == null) {
-				//request.setAttribute("message_failure", "Please try again! Duplicate course found!");
+			if(newLesson == null) {
+				request.setAttribute("message_failure", "Please try again! There was a problem!");
+				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 			} else {
-				response.sendRedirect("/content/edit_lesson?task_id=" + lesson.getTaskID());
+				request.setAttribute("message_success", "Lesson has been successfully replicated. This is the new lesson");
+				request.getRequestDispatcher("/edit_lesson?task_id="+ newLesson.getTaskID()).forward(request, response);
 
-				//request.setAttribute("message_success", "New course has been added successfully!");
-				
-				//String comments = "Course with name " + course_name + " and with ID " + course.getId() + " is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
-				//CMSRegistry.addTaskLogEntry(request, "CREATED", comments, 0, "COURSE", course.getId(), "New course is created");
+				String comments = "Lesson with name " + oldLesson.getTitle() + " (ID " + oldLesson.getId() + ") is replicated to new lesson with ID: " + newLesson.getId() + "by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
+				CMSRegistry.addTaskLogEntry(request, "REPLICATED", comments, oldLesson.getTaskID(), "LESSON", oldLesson.getId(), "Lesson is replicated");
+				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, newLesson.getTaskID(), "LESSON", newLesson.getId(), "Lesson is replicated");
 			}
 			break;
 			
