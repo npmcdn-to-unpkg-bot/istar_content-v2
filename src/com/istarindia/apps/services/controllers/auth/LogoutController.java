@@ -42,10 +42,10 @@ public class LogoutController extends IStarBaseServelet {
 		// TODO Auto-generated method stub
 		printParams(request);
 		CMSRegistry.addUserSessionLogEntry(request.getSession().getAttribute("jsession_id").toString(),((IstarUser)request.getSession().getAttribute("user")).getId(), "LOGOUT");
-
+		String jsession_id = request.getSession().getAttribute("jsession_id").toString();
 		request.getSession().removeAttribute("jsession_id");
 		request.getSession().removeAttribute("user");
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?jsession_id="+jsession_id);
 		rd.forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

@@ -1,5 +1,8 @@
 <%@page import="com.istarindia.apps.dao.*"%>
-<%@page import="com.istarindia.apps.services.UserService"%><%@page import="com.istarindia.apps.dao.IstarUser"%><%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="com.istarindia.apps.services.UserService"%>
+<%@page import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <!--[if !IE]><!-->
 <html lang="en">
@@ -7,14 +10,9 @@
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
-if(request.getSession().getAttribute("user")!=null)
-{
-	System.out.println("i am in idnex");
+if(request.getSession().getAttribute("user")!=null) {
 	String url1 = "/content/"+ ((IstarUser)session.getAttribute("user")).getUserType().toLowerCase()+"/dashboard.jsp";
 	response.sendRedirect(url1);
-}else
-{System.out.println("i am in else in index");
-
 }	
 
 %>
@@ -65,20 +63,24 @@ if(request.getSession().getAttribute("user")!=null)
 				<h2>Sign In</h2>
 				<p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a> to registration.</p>
 			</div>
-<form action="<%=baseURL %>auth/login" name="login_form">
+			<form action="<%=baseURL %>auth/login" name="login_form">
+			
 			<% if(null != request.getAttribute("msg")) { %>
 			<div class="alert alert-danger fade in">
-									<strong>Oh snap!</strong> <%=request.getAttribute("msg") %>
-								</div>
-								<% } %>
+				<strong>Oh snap!</strong> <%=request.getAttribute("msg") %>
+			</div>
+			<% } %>
+			
 			<div class="input-group margin-bottom-20">
 				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 				<input type="text" class="form-control" placeholder="Email" name="email">
 			</div>
+			
 			<div class="input-group margin-bottom-20">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 				<input type="password" class="form-control" placeholder="Password"  name="password">
 			</div>
+			
 			<hr>
 
 			<!-- <div class="checkbox">
@@ -96,14 +98,44 @@ if(request.getSession().getAttribute("user")!=null)
 			
 			</form>
 		</div>
-		<!--End Reg Block-->
+		
 	</div>
-	<!--=== End Content Part ===-->
-
-	<!--=== Footer v1 ===-->
-
-	<!--=== End Footer v1 ===-->
-
+	
+	<% if(request.getParameterMap().containsKey("jsession_id")) { 
+		String jsession_id = request.getParameter("jsession_id").toString();
+		TaskLog example = new TaskLog();
+		example.setSessionID(jsession_id);
+		List<TaskLog> logs = new TaskLogDAO().findByExample(example);
+	%>
+	
+	<div class="modal fade" id="session-log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">Session log</div>
+				
+				<div class="modal-body">
+					<ol>
+					<% for (TaskLog log : logs) { %>
+					<li>
+					<strong><%=log.getTitle() %></strong> - <%=log.getComments() %>
+					</li>
+					
+					<% } %>
+					</ol>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<% } %>
+	
+	
+	
+	
 	<!-- JS Global Compulsory -->
 	<script src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
@@ -124,6 +156,9 @@ if(request.getSession().getAttribute("user")!=null)
 	
 	jQuery(document).ready(function() {
 			App.init();
+			<% if(request.getParameterMap().containsKey("jsession_id")) { %>
+			$("#session-log-modal").modal('show');
+			<% } %>
 		});
 	</script>
 	<script>
