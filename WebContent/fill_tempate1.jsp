@@ -32,9 +32,7 @@
 	int themeID  = Integer.parseInt(lesson.getLesson_theme_desktop());
 	
 	Task task = new Task();
-	task.setItemId(lesson.getId());
-	task.setItemType("LESSON");
-	task = new TaskDAO().findByExample(task).get(0);
+	task = lesson.getTask();
 
 	SlideService service = new SlideService();
 	LessonUtils lessonUtils = new LessonUtils();
@@ -45,7 +43,7 @@
 	
 	ArrayList<Image> bgImages = (ArrayList<Image>) imageUtils.findAllBackgrounds(request);
 	List<HashMap<String, String>> logs = null;  
-	
+
 	if(task.getStatus().equalsIgnoreCase("PUBLISHED"))
 	{
 		request.setAttribute("message_failure", "This lesson is already published and cannot be edited!");
@@ -63,15 +61,19 @@
 				order_id = slide.getOrder_id();
 
 				if(request.getParameterMap().containsKey("version_id")) {
+					System.out.println("slide_type->67 "+slide_type);
 					int version_id = Integer.parseInt(request.getParameter("version_id"));
 					cMSSlide = (new LessonUtils()).convertSlide(version_id);
 				} else {
+					System.out.println("slide_type->71 "+slide_type);
 					cMSSlide = (new LessonUtils()).convertSlide(slide);
 				}
 				
 				if(request.getParameterMap().containsKey("slide_type")) {
+					System.out.println("slide_type->76 "+slide_type);
 					slide_type = request.getParameter("slide_type");
 				} else {
+					System.out.println("slide_type->79 "+slide_type);
 					slide_type = cMSSlide.getTemplateName();
 				}
 				
@@ -80,17 +82,23 @@
 				logs = lessonUtils.getSlideComments(slide_id);
 				
 			} else {
+				System.out.println("slide_type->88 "+slide_type);
 				newSlide = true;
 				if(request.getParameterMap().containsKey("slide_type")) {
 					slide_type = request.getParameter("slide_type");
 				}
 			}
 			cMSSlide.setTemplateName(slide_type);
-		} catch (Exception e ) { }
+		} catch (Exception e ) { 
+			System.out.println("slide_type->96 "+slide_type);
+
+			e.printStackTrace();
+			
+		}
 		
 		new_media_title = service.getNewMediaTitle(slide_id, ppt.getLesson().getCmsession().getId());
 	}
-	
+	System.out.println("slide_type->"+slide_type);
 	
 %>
 
