@@ -9,8 +9,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 PresentaionDAO dao = new PresentaionDAO();
 int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
 Presentaion ppt =  dao.findById(lessonID);
-int taskID = ppt.getLesson().getTaskID();
-String status = new TaskDAO().findById(taskID).getStatus();
+String status = ppt.getLesson().getTask().getStatus();
 
 String lesson_theme = ppt.getLesson().getLesson_theme_desktop();
 

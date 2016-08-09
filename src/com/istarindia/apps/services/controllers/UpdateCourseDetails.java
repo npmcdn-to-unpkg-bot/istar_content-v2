@@ -317,6 +317,7 @@ public class UpdateCourseDetails extends HttpServlet {
 			request.setAttribute("message_success", "Modules have been reordered successfully! Please recheck to confirm");
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			request.setAttribute("message_failure", "Something went wrong. Please try again!");
 			//System.err.println("sql: " + sql);
 		}

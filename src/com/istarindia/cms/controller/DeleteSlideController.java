@@ -41,9 +41,11 @@ public class DeleteSlideController extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id").toString()));
 		SlideDAO dao = new SlideDAO();
-		Slide slide= dao.findById(Integer.parseInt(request.getParameter("slide_id")));
+		Slide slide= dao.findById(Integer.parseInt(request.getParameter("slide_id").toString()));
+		
+		System.err.println(slide);
 		String comments = "Slide with ID ->" + slide.getId() + " has been deleted";
 
 		Session session = dao.getSession();
@@ -61,11 +63,11 @@ public class DeleteSlideController extends HttpServlet {
 			session.close();
 		}
 		
-		Task task = new TaskDAO().findByItemId(ppt.getLesson().getId()).get(0);
+		Task task = ppt.getLesson().getTask();
 
 		request.setAttribute("message_success", "Slide has been deleted successfully ");
 		
-		CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is deleted");
+		CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, task.getId(), "LESSON", ppt.getLesson().getId(), "Slide is deleted");
 	
 		response.sendRedirect("/content/edit_lesson?task_id=" + task.getId());
 

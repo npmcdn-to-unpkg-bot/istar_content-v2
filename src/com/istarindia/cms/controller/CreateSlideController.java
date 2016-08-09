@@ -761,11 +761,8 @@ public class CreateSlideController extends IStarBaseServelet {
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}
 		
-		Task t = new Task();
-		t.setItemId(ppt.getLesson().getId());
-		t.setItemType("LESSON");
-		t = new TaskDAO().findByExample(t).get(0);
-		response.sendRedirect("/content/edit_lesson?task_id=" + t.getId());
+	
+		response.sendRedirect("/content/edit_lesson?task_id=" + slide.getPresentaion().getLesson().getTask().getId());
 	}
 
 	private CMSList getNewTree(HttpServletRequest request) {

@@ -2,7 +2,9 @@ package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,7 @@ import org.hibernate.Transaction;
 
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.cmsutils.ErrorMessages;
+import com.istarindia.apps.dao.ContentReviewer;
 import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
@@ -59,6 +62,8 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		 * : value ->6 key-> review_user : value ->1
 		 */
 		for (String assign : request.getParameter("selected_items").split(",")) {
+			System.err.println("selected_items--"+ request.getParameter("selected_items"));
+			System.err.println("assign->"+ assign);
 			if(assign.startsWith("lesson")) {
 				String[] review_user = request.getParameterValues("review_user");
 				ArrayList<Integer> new_reviewerIds = new ArrayList<>(); 
@@ -69,25 +74,45 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 							new_reviewerIds.add(Integer.parseInt(r));
 						} catch (Exception e) {
 							//System.err.println(review_user);
+							System.err.println("73");
 						}
 					}
 				} else {
+					System.err.println("7666");
 					// Remove all previous reviewers. No need to add new reviewers
 				}
 				
 				try {
+					
 					int lesson_id = Integer.parseInt(assign.replace("lesson_", ""));
-					TaskDAO dao = new  TaskDAO();
+					LessonDAO dao = new  LessonDAO();
+					Task task = dao.findById(lesson_id).getTask();
+					System.err.println("Old Actor ID ---"+task.getActorId());
+					task.setActorId(Integer.parseInt(request.getParameter("assign_user")));
+					System.err.println("91111->"+ task.getId() );
+					System.err.println("New Actor ID ---"+task.getActorId());
 					
-					Task example = new Task();
-					example.setItemId(lesson_id);
-					example.setItemType("LESSON");
-					Task task = dao.findByExample(example).get(0);
-					
+					{
+						System.out.println( "Number os New Reqviers "+ request.getParameterMap().get("review_user").length );
+
+						Set<TaskReviewer> taskReviewers = new HashSet<>();
+						
+						for (String reviewerID : request.getParameterMap().get("review_user")) {
+							TaskReviewer t = new TaskReviewer();
+							t.setContentReviewer((ContentReviewer)(new IstarUserDAO()).findById(Integer.parseInt(reviewerID)));
+							t.setStatus("REVIEWER_ASSIGNED");
+							t.setTask(task);
+							taskReviewers.add(t);
+						}
+						
+						task.setTaskReviewers(taskReviewers);
+					}
+					//cleanTaskForReviewers();
 					assignActor(task, request.getParameter("assign_user"), request );
 					assignReviewer(task, new_reviewerIds, request );
 					request.setAttribute("message_success", ErrorMessages.ALL_OK);
 				} catch (NullPointerException e) {
+					System.err.println("9444");
 					request.setAttribute("message_failure", ErrorMessages.MISSING_REVIEWER);
 				}
 			}
@@ -96,50 +121,96 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 	}
 
 	private void assignReviewer(Task task, ArrayList<Integer> new_reviewerIds, HttpServletRequest request) {
-		StringBuffer sql = new StringBuffer();
+		System.out.println( "Number os New Reqviers "+ request.getParameterMap().get("review_user").length );
+		Set<TaskReviewer> taskReviewers = new HashSet<>();
+		
+		for (String reviewerID : request.getParameterMap().get("review_user")) {
+			TaskReviewer t = new TaskReviewer();
+			t.setContentReviewer((ContentReviewer)(new IstarUserDAO()).findById(Integer.parseInt(reviewerID)));
+			t.setStatus("REVIEWER_ASSIGNED");
+			t.setTask(task);
+			
+			taskReviewers.add(t);
+		}
+		
+		task.setTaskReviewers(taskReviewers);
+		
 		List<TaskReviewer> existing_reviewers = new TaskReviewerDAO().findByProperty("task", task);
 		ArrayList<Integer> existing_reviewerIds = new ArrayList<>();
 		String comments = new String();
 		StringBuffer removedReviewersEmailList = new StringBuffer();
 		StringBuffer addedReviewersEmailList = new StringBuffer();
-		
+		System.err.println(" existing revieeers ->" + existing_reviewers.size());
 		for(TaskReviewer tr : existing_reviewers) {
 			existing_reviewerIds.add(tr.getContentReviewer().getId());
 		}
 		
-		for(Integer existing_reviewerId : existing_reviewerIds) {
-			if(!new_reviewerIds.contains(existing_reviewerId)) {
-				sql.append(" ; delete from task_reviewer where task_id = " + task.getId() + " and reviewer_id = " + existing_reviewerId);
-				removedReviewersEmailList.append(new IstarUserDAO().findById(existing_reviewerId).getEmail() + " , ");
-			}
-		}
-		
+		TaskReviewerDAO taskReviewerDAO = new TaskReviewerDAO();
+
 		for(Integer new_reviewerId : new_reviewerIds) {
 			if(!existing_reviewerIds.contains(new_reviewerId)) {
-				sql.append(" ; insert into  task_reviewer (id, task_id, reviewer_id, status) values ( (select max(id)+1 from task_reviewer), " + task.getId() + " , " + new_reviewerId + " , 'REVIEWER_ASSIGNED')");
-				addedReviewersEmailList.append(new IstarUserDAO().findById(new_reviewerId).getEmail() + " , ");
+				TaskReviewer taskReviewer = new TaskReviewer();
+				taskReviewer.setContentReviewer(new ContentReviewerDAO().findById(new_reviewerId));
+				taskReviewer.setStatus("REVIEWER_ASSIGNED");
+				taskReviewer.setTask(task);
+				/*Session session = taskReviewerDAO.getSession();
+				Transaction tx = null;
+				try {
+					tx = session.beginTransaction();
+					taskReviewerDAO.save(taskReviewer);
+					tx.commit();
+				} catch (Exception e) {
+					if (tx != null) {
+						tx.rollback();
+					}
+					e.printStackTrace();
+				} finally {
+					session.close();
+				}*/
 			}
 		}
 
+		for(TaskReviewer existing_reviewer : existing_reviewers) {
+			if(!new_reviewerIds.contains(existing_reviewer.getId())) {
+				/*Session session = taskReviewerDAO.getSession();
+				Transaction tx = null;
+				try {
+					tx = session.beginTransaction();
+					taskReviewerDAO.delete(existing_reviewer);
+					tx.commit();
+				} catch (Exception e) {
+					if (tx != null) {
+						tx.rollback();
+					}
+					e.printStackTrace();
+				} finally {
+					session.close();
+				}*/
+				
+			}
+		}
 		
+		/*TaskDAO dao = new TaskDAO();
+		Session session = dao.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			dao.attachDirty(task);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}*/
 		if(!removedReviewersEmailList.toString().isEmpty()) {
 			comments = removedReviewersEmailList.toString() + " have been removed from reviewer list by " +  ((IstarUser)request.getSession().getAttribute("user")).getEmail() + " ; ";
 		}
 		
 		if (!addedReviewersEmailList.toString().isEmpty()) {
 			comments = comments  + addedReviewersEmailList.toString() + " have been added to reviewer list by " +  ((IstarUser)request.getSession().getAttribute("user")).getEmail() + " ; ";
-		}
-		
-		try {
-			TaskReviewerDAO dao = new TaskReviewerDAO();
-			Session session = dao.getSession();
-			SQLQuery query = session.createSQLQuery(sql.toString());
-			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-			int result = query.executeUpdate();
-			session.beginTransaction().commit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		if(!comments.isEmpty()) {
@@ -157,9 +228,10 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		try {
 			tx1 = session1.beginTransaction();
 			
-			dao.save(task);
+			dao.attachDirty(task);
 			tx1.commit();
 		} catch (HibernateException e) {
+			e.printStackTrace();
 			if (tx1 != null)
 				tx1.rollback();
 			e.printStackTrace();

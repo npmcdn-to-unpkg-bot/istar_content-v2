@@ -8,6 +8,8 @@
 	String url = request.getRequestURL().toString();
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
 			+ request.getContextPath() + "/";
+	
+	long now = System.currentTimeMillis();
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -160,25 +162,28 @@
 										<ul>
 											<%
 												int cmsession_sno = 0;
-													for (Module module : course.getAllModules(course.getId())) {
+													for (Module module : course.getModules()) {
 											%>
 											<li id="module_<%=module.getId()%>"
 												data-jstree='{"opened":true}'><%=module.getModuleName()%>
 												<ul>
 													<%
-														for (Cmsession session1 : module.getAllSession(module.getId())) {
+														for (Cmsession session1 : module.getCmsessions()) {
 																	cmsession_sno++;
 													%>
 													<li id="session_<%=session1.getId()%>"
 														data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
 														<ul>
 															<%
-																for (Lesson lesson : session1.getAllLessons(session1.getId())) {
+																for (Lesson lesson : session1.getLessons()) {
+																	
 																	try {
-																		String reviewers = "label rounded label-sea";
+																		if(!lesson.getTask().getStatus().equalsIgnoreCase("DELETED")) {
+																			String reviewers = "label rounded label-sea";
+																		
 																		String assigned = "label label-purple rounded-2x";
 																		String statusLabel = "label rounded label-yellow";
-																		if (lesson.getReviewer().equalsIgnoreCase("reviewer not assigned")) {
+																		if (lesson.getTask().fetchReviewersAsString().equalsIgnoreCase("reviewer not assigned")) {
 																			reviewers = "label label-default ";
 																		}
 
@@ -188,16 +193,17 @@
 
 																		String email = ((IstarUser) request.getSession().getAttribute("user")).getEmail();
 
-																		boolean is_unassigned_lesson = !(new ContentAdminDAO()).findByEmail(lesson.getAsignee()).isEmpty();
+																		//boolean is_unassigned_lesson = (new ContentAdminDAO()).findById(lesson.getTask().getActorId());
 																		boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
-																		boolean is_publishable = is_content_admin && (lesson.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || lesson.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
+																		boolean is_publishable = is_content_admin && (lesson.getTask().getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || 
+																				lesson.getTask().getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
 																		boolean is_replicable = lesson.getLessonType().equalsIgnoreCase("PRESENTATION");
 																		
-																		if (is_unassigned_lesson) {
-																			assigned = "label label-default ";
-																		}
+																		//if (is_unassigned_lesson) {
+																		//	assigned = "label label-default ";
+																		//}
 
-																		int task_id = lesson.getTaskID();
+																		int task_id = lesson.getTask().getId();
 															%>
 
 															<%
@@ -205,36 +211,38 @@
 															%>
 															<li style="margin-bottom: 4px"
 																id="lesson_<%=lesson.getId()%>"
-																data-task-id="<%=lesson.getTaskID()%>"
-																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getTitle()%>
+																data-task-id="<%=lesson.getTask().getId()%>"
+																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getId()%> -- <%=lesson.getTitle()%>
 															<%
 																} else if (!is_replicable){
 															%>	
-															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTaskID()%>"
+															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTask().getId()%>"
 																id="lesson_<%=lesson.getId()%>"
-																data-jstree='{"opened":true}' class="context-menu-nonreplicable"><%=lesson.getTitle()%>
+																data-jstree='{"opened":true}' class="context-menu-nonreplicable"><%=lesson.getId()%> -- <%=lesson.getTitle()%>
 															<% 
 																} else {
 															%>
-															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTaskID()%>"
+															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTask().getId()%>"
 																id="lesson_<%=lesson.getId()%>"  data-lesson-id = "<%=lesson.getId()%>" 
-																data-jstree='{"opened":true}' class="context-menu"><%=lesson.getTitle()%>
+																data-jstree='{"opened":true}' class="context-menu"><%=lesson.getId()%> -- <%=lesson.getTitle()%>
 															<% 
 																} 
 															%>  
-																<span class="<%=assigned%> "> Assigned to - <%=lesson.getAsignee()%></span>
+																<span class="<%=assigned%> "> Assigned to - <%=(new IstarUserDAO()).findById(lesson.getTask().getActorId()).getEmail()%></span>
 																<span>&nbsp;&nbsp;&nbsp;</span> 
-																<span class="<%=reviewers%>"> Reviewer - <%=lesson.getReviewer()%></span>
+																<span class="<%=reviewers%>"> Reviewer - <%=lesson.getTask().fetchReviewersAsString()%></span>
 																<span>&nbsp;&nbsp;&nbsp;</span> 
-																<span class="<%=statusLabel%>"> Status - <%=lesson.getStatus()%></span>
+																<span class="<%=statusLabel%>"> Status - <%=lesson.getTask().getStatus()%></span>
 															</li>
 
 															<%
-																}
-
+																		}
+																		}
 																catch (Exception e) {
-																	System.out.println(lesson.getId());
+																	//e.printStackTrace();
+																	//System.out.println("Exeptionssssssssss"+ lesson.getId());
 																}
+																	
 															}
 															%>
 														</ul></li>
@@ -249,6 +257,9 @@
 										</ul></li>
 									<%
 										}
+									
+									long now1 = System.currentTimeMillis();
+										System.out.println("Time tlo load this page "+(now1-now)) ;
 									%>
 								</ul>
 							</li>

@@ -26,6 +26,8 @@ import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.Lesson;
+import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Slide;
@@ -138,6 +140,13 @@ public class ReviewLessonController extends IStarBaseServelet {
 			} finally {
 				session.close();
 			}
+			
+			
+			
+			 
+			 
+			
+			 
 			// content/content_reviewer/dashboard.jsp
 			markLessonAsReviewed(request);
 			
