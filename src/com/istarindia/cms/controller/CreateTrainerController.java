@@ -45,7 +45,6 @@ import com.istarindia.apps.dao.VacancyWorkflow;
 import com.istarindia.apps.dao.VacancyWorkflowDAO;
 import com.istarindia.apps.dao.VacanyStatus;
 import com.istarindia.apps.dao.VacanyStatusDAO;
-import com.istarindia.apps.service.ComplexObjectPublisher;
 import com.istarindia.apps.services.TrainerService;
 
 /**
@@ -189,8 +188,7 @@ public class CreateTrainerController extends HttpServlet {
 		       
 	}
 		
-		ComplexObjectPublisher p = new ComplexObjectPublisher();
-		p.publish(trainerID);
+		
 		
 		if (true) {
 			request.setAttribute("message_success", "User created successfully!");

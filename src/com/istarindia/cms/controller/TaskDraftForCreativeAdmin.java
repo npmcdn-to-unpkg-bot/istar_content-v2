@@ -58,7 +58,7 @@ public class TaskDraftForCreativeAdmin extends HttpServlet {
 			
 			if(task.getItemType().equals("IMAGE"))
 			{
-				Image img = new ImageDAO().findById(task.getItemId());
+				Image img = task.getImage();
 				
 				embed_list.add("IMAGE");
 				embed_list.add(img.getTitle());
@@ -67,7 +67,7 @@ public class TaskDraftForCreativeAdmin extends HttpServlet {
 			}
 			else if (task.getItemType().equals("VIDEO"))
 			{
-				Video vid = new VideoDAO().findById(task.getItemId());
+				Video vid = task.getVideo();
 				embed_list.add("VIDEO");
 				embed_list.add(vid.getTitle());
 				embed_list.add(vid.getDescription());//3

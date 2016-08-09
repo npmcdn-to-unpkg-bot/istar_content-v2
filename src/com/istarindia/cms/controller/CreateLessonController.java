@@ -16,6 +16,7 @@ import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
+import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.CourseService;
 import com.istarindia.apps.services.LessonService;
@@ -99,8 +100,10 @@ public class CreateLessonController  extends IStarBaseServelet {
 		String lessonDesktopTheme = "43";
 		Lesson lesson = new LessonService().createLessonForBulk(cmsession_id, duration, LessonTypes.LESSON, tags, lessonTheme, lessonDesktopTheme, title, ite, user_id);
 		(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
-
-		CreateLessonTaskManager.pushTaskNotification(new TaskDAO().findById(lesson.getTaskID()), user_id, "New lesson has been created with task id -> " +lesson.getTaskID(), user_session_id, "New Lesson is created", user_session_id);
+		lesson = (new LessonDAO()).findById(lesson.getId());
+		System.err.println("lesson.getTask()->"+ lesson.getTask());
+		System.err.println("user_session_id->"+ user_session_id);
+		CreateLessonTaskManager.pushTaskNotification(lesson.getTask(), user_id, "New lesson has been created with task id -> " +lesson.getTask().getId(), user_session_id, "New Lesson is created", user_session_id);
 		
 	}
 

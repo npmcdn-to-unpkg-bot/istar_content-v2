@@ -39,7 +39,7 @@ public class EditLessonController extends HttpServlet {
 		
 		Task task = new Task();
 		task = new TaskDAO().findById(Integer.parseInt(request.getParameter("task_id")));
-		Lesson lesson = (new LessonDAO()).findById(task.getItemId());
+		Lesson lesson = task.getLesson();
 		
 		if(task.getStatus().equalsIgnoreCase("PUBLISHED"))
 		{
@@ -61,7 +61,7 @@ public class EditLessonController extends HttpServlet {
 			Set<LearningObjective> ite = new HashSet<LearningObjective>();
 			if (request.getParameterMap().containsKey("task_id"))
 			{
-				int lesson_id = task.getItemId();
+				int lesson_id = task.getLesson().getId();
 				String title = request.getParameter("title");
 				if(request.getParameterMap().containsKey("tags"))
 				{

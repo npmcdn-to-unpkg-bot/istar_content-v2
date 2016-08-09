@@ -143,7 +143,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		}
 		
 		if(!comments.isEmpty()) {
-			CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", task.getItemId(), "Reviewers updated for the lesson");
+			CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", task.getLesson().getId(), "Reviewers updated for the lesson");
 		}
 	}
 
@@ -168,7 +168,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 		}
 
 		String comments = "The Lesson was assigned to "+(new IstarUserDAO().findById(Integer.parseInt(content_id))).getEmail()+" by "+ ((IstarUser)request.getSession().getAttribute("user")).getEmail();
-		CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", task.getItemId(), "Actor is assigned for the lesson");
+		CMSRegistry.addTaskLogEntry(request, "CONTENT_ASSIGNED", comments, task.getId(), "LESSON", task.getLesson().getId(), "Actor is assigned for the lesson");
 		
 	}
 

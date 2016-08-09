@@ -54,7 +54,7 @@ public class TaskReviewController extends IStarBaseServelet {
 		Set<LearningObjective> ite = new HashSet<LearningObjective>();
 		if (request.getParameterMap().containsKey("task_id"))
 		{
-			int lesson_id = task.getItemId();
+			int lesson_id = task.getLesson().getId();
 			String title = request.getParameter("title");
 			if(request.getParameterMap().containsKey("tags"))
 			{

@@ -56,15 +56,15 @@ public class TaskCreatedByContentCreatorController extends HttpServlet {
 				embed_list.add(task.getId().toString());//0
 				if(task.getItemType().equalsIgnoreCase("IMAGE"))
 				{System.out.println("task id here is "+ task.getId());
-					embed_list.add(new ImageDAO().findById(task.getItemId()).getTitle());//1
-					embed_list.add(new CmsessionDAO().findById(new ImageDAO().findById(task.getItemId()).getSessionid()).getTitle());//2
-					embed_list.add("<a href="+new ImageDAO().findById(task.getItemId()).getUrl()+" target='_new'>Get Media</a>");//3
+					embed_list.add(task.getImage().getTitle());//1
+					embed_list.add(new CmsessionDAO().findById(task.getImage().getSessionid()).getTitle());//2
+					embed_list.add("<a href="+task.getImage().getUrl()+" target='_new'>Get Media</a>");//3
 				}	
 				else if(task.getItemType().equalsIgnoreCase("VIDEO"))
 				{
-					embed_list.add(new VideoDAO().findById(task.getItemId()).getTitle());//1
-					embed_list.add(new CmsessionDAO().findById(new VideoDAO().findById(task.getItemId()).getSessionId()).getTitle());//2
-					embed_list.add("<a href="+new VideoDAO().findById(task.getItemId()).getUrl()+" target='_new'>Get Media</a>");//3
+					embed_list.add(task.getVideo().getTitle());//1
+					embed_list.add(new CmsessionDAO().findById(task.getVideo().getSessionId()).getTitle());//2
+					embed_list.add("<a href="+task.getVideo().getUrl()+" target='_new'>Get Media</a>");//3
 				}	
 				embed_list.add(task.getTaskName());//4
 				

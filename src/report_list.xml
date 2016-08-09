@@ -551,14 +551,33 @@
 		<column columnHandler="NONE" display_name="Published Lessons" isVisible="true" name="published_lesson_count" />
 		<column columnHandler="COURSE_HANDLER" display_name="Action" isVisible="true" name="status" />
 
-		<sql>select C.id as task_id , C.course_name as course_title, count( DISTINCT M) as module_count, count(DISTINCT S) as session_count, count(T) as lesson_count,  sum(case when T.status = 'PUBLISHED' then 1 else 0 end) as published_lesson_count
-			from course C 
-			left join module M on C.id = M.course_id
-			left join cmsession S on S.module_id=M.id 
-			left join lesson L on  L.session_id=S.id 
-			left join task T on T.item_id=L.id and T.item_type = 'LESSON' and T.status!='DELETED'
-			group by course_title, task_id
-			order by task_id
+		<sql>SELECT
+	C . ID AS task_id,
+	C .course_name AS course_title,
+	COUNT (DISTINCT M) AS module_count,
+	COUNT (DISTINCT S) AS session_count,
+	COUNT (T) AS lesson_count,
+	SUM (
+		CASE
+		WHEN T .status = 'PUBLISHED' THEN
+			1
+		ELSE
+			0
+		END
+	) AS published_lesson_count
+FROM
+	course C
+LEFT JOIN MODULE M ON C . ID = M .course_id
+LEFT JOIN cmsession S ON S.module_id = M . ID
+LEFT JOIN lesson L ON L.session_id = S. ID
+LEFT JOIN task T ON T .item_id = L. ID
+AND T .item_type = 'LESSON'
+AND T .status != 'DELETED'
+GROUP BY
+	C . ID,
+	course_title
+ORDER BY
+	task_id
 		</sql>
 		<title> Course list</title>
 	</reports>
@@ -580,7 +599,8 @@
 			left join lesson L on L.session_id=S.id
 			left join task T on T.item_id=L.id and T.item_type='LESSON' and T.status!='DELETED' 
 			where M.course_id=:course_id
-			group by task_id
+			GROUP BY
+	m.id
 			order by order_id
 		</sql>
 		<title> Module list</title>
@@ -602,7 +622,7 @@
 			left join lesson L on L.session_id=S.id
 			left join task T on T.item_id=L.id and T.item_type='LESSON' and T.status!='DELETED' 
 			where S.module_id=:module_id
-			group by task_id
+			group by S.order_id, s.id
 			order by order_id
 		</sql>
 		<title> Session list</title>

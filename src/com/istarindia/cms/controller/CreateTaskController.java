@@ -18,10 +18,12 @@ import com.istarindia.apps.dao.CreativeAdmin;
 import com.istarindia.apps.dao.CreativeAdminDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.ImageTask;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
+import com.istarindia.apps.dao.VideoTask;
 import com.istarindia.apps.services.TaskService;
 
 /**
@@ -53,6 +55,12 @@ public class CreateTaskController extends HttpServlet {
 				System.out.println("session is " + cmsession);
 
 				IstarUser user = ((IstarUser) request.getSession().getAttribute("user"));
+
+				CreativeAdmin cretaive_admin = (CreativeAdmin) new CreativeAdminDAO().findAll().get(0);
+				TaskService service = new TaskService();
+				
+				String comment =new String();
+				
 				int item_id = 0;
 				String desc = request.getParameter("description");
 				String media_type = request.getParameter("media_type");
@@ -78,6 +86,11 @@ public class CreateTaskController extends HttpServlet {
 					}
 
 					item_id = img.getId();
+					ImageTask task = service.createNewImageTask(item_id, media_type, "ALL", StatusTypes.CREATED, "CREATE_" + media_type, cretaive_admin.getId(), user.getId());
+
+					comment = "New " + media_type.toLowerCase() + " task with task_id = " + task.getId() + " is created by " + user.getEmail() + " for session-id: " + cmsession_id ; 
+					service.saveTaskLog(user, task.getId(), item_id, media_type,  StatusTypes.CREATED, comment);
+					
 				} else if (media_type.equalsIgnoreCase("VIDEO")) {
 					VideoDAO dao = new VideoDAO();
 					Video vid = new Video();
@@ -98,16 +111,13 @@ public class CreateTaskController extends HttpServlet {
 						session1.close();
 					}
 					item_id = vid.getId();
+					VideoTask task = service.createNewVideoTask(vid, media_type, "ALL", StatusTypes.CREATED, "CREATE_" + media_type, cretaive_admin.getId(), user.getId());
+
+					comment = "New " + media_type.toLowerCase() + " task with task_id = " + task.getId() + " is created by " + user.getEmail() + " for session-id: " + cmsession_id ; 
+					service.saveTaskLog(user, task.getId(), item_id, media_type,  StatusTypes.CREATED, comment);
+					
 				}
 
-				CreativeAdmin cretaive_admin = (CreativeAdmin) new CreativeAdminDAO().findAll().get(0);
-				TaskService service = new TaskService();
-				
-				Task task = service.createNewTask(item_id, media_type, "ALL", StatusTypes.CREATED, "CREATE_" + media_type, cretaive_admin.getId(), user.getId());
-				
-				String comment = "New " + media_type.toLowerCase() + " task with task_id = " + task.getId() + " is created by " + user.getEmail() + " for session-id: " + cmsession_id ; 
-				service.saveTaskLog(user, task.getId(), item_id, media_type,  StatusTypes.CREATED, comment);
-				
 				request.setAttribute("message_success", "Media task has been created successfully!");
 				request.getRequestDispatcher("/media/create_task.jsp").forward(request, response);
 			}

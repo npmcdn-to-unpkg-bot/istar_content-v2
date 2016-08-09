@@ -84,7 +84,22 @@ public class AssignCreativeController extends IStarBaseServelet {
 			String creativeEmail = (new CreativeCreatorDAO()).findById(creative_creator_id).getEmail();
 			String comments = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task (TaskID " + task.getId() + ") has been assigned to " + creativeEmail + " by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail();
 			String title = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task has been assigned to artist";
-			CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getItemId(), title);			
+			if(task.getItemType().equalsIgnoreCase("LESSON"))
+			{
+				CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getLesson().getId(), title);			
+
+			}
+			else if (task.getItemType().equalsIgnoreCase("IMAGE"))
+			{
+				CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getImage().getId(), title);			
+
+			}
+			else if(task.getItemType().equalsIgnoreCase("VIDEO"))
+			{
+				CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getVideo().getId(), title);			
+
+			}
+				
 		} catch (Exception e) {
 			//e.printStackTrace();
 		}

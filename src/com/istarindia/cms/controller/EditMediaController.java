@@ -36,8 +36,15 @@ public class EditMediaController extends HttpServlet {
 		Task task = dao.findById(Integer.parseInt(request.getParameter("task_id")));
 		
 		new TaskService().updateStatus(task.getId(), StatusTypes.DRAFT);
+		if(task.getItemType().equalsIgnoreCase("IMAGE"))
+		{
+			request.setAttribute("item_id", task.getImage().getId());
+		}
+		else  if(task.getItemType().equalsIgnoreCase("VIDEO"))
+		{
+			request.setAttribute("item_id", task.getVideo().getId());
+		}
 		
-		request.setAttribute("item_id", task.getItemId());
 		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
 	}
 

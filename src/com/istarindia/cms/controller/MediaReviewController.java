@@ -45,7 +45,7 @@ public class MediaReviewController extends HttpServlet {
 		ArrayList<String> details = new ArrayList<String>();
 		if(task.getItemType().equalsIgnoreCase(MediaTypes.IMAGE))
 		{
-			Image image = new ImageDAO().findById(task.getItemId());
+			Image image = task.getImage();
 			
 			details.add(image.getTitle());
 			details.add(image.getDescription());
@@ -66,7 +66,7 @@ public class MediaReviewController extends HttpServlet {
 		}
 		else if(task.getItemType().equalsIgnoreCase(MediaTypes.VIDEO))
 		{
-			Video video = new VideoDAO().findById(task.getItemId());
+			Video video = task.getVideo();
 			details.add(video.getTitle());
 			details.add(video.getDescription());
 			details.add(video.getTags());

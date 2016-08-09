@@ -13,7 +13,7 @@ public class LessonLinkHandler extends ColumnHandler {
 	public StringBuffer getHTML(String status, IstarUser user, String taskType, int taskID, int reportID , String itemType) {
 		
 		Task t = new TaskDAO().findById(taskID);
-		Lesson l = new LessonDAO().findById(t.getItemId());
+		Lesson l = t.getLesson();
 		System.out.println("======="+l.getId());
 		if(new PresentaionDAO().findByProperty("lesson", l).size()>0)
 		{

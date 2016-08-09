@@ -82,7 +82,7 @@ public class ChangeStatusController extends HttpServlet {
 			IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 			
 			Task task = new TaskDAO().findById(task_id);
-			Lesson ll = new LessonDAO().findById(task.getItemId());
+			Lesson ll = task.getLesson();
 			Cmsession cm = ll.getCmsession();
 			Module mm = cm.getModule();
 			Course cc = mm.getCourse();

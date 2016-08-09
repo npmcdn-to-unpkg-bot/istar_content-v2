@@ -22,7 +22,7 @@ public class CourseLinkHandler extends ColumnHandler {
 			return new StringBuffer("<a href='/content/content_admin/modify_session.jsp?session_id=" + taskID + "'> Edit</a>  ");
 		} else if (reportID == 33){
 			Task task = (new TaskDAO()).findById(taskID);
-			Lesson lesson = new LessonDAO().findById(task.getItemId());
+			Lesson lesson = task.getLesson();
 			List<Presentaion> list = new PresentaionDAO().findByProperty("lesson", lesson);
 			StringBuffer element = new StringBuffer();
 			

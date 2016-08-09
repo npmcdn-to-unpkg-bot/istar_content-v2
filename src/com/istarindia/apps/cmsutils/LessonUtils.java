@@ -1086,7 +1086,7 @@ public class LessonUtils {
         return out;
     }
 
-    public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide,HttpServletRequest request) throws IOException {
+    public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide, HttpServletRequest request) throws IOException {
         ImageDAO dao = new ImageDAO();
         ImageUtils imageUtils = new ImageUtils();
         ArrayList<Image> images = imageUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
