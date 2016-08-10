@@ -80,11 +80,11 @@ public class UpdateCourseDetails extends HttpServlet {
 				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 			} else {
 				request.setAttribute("message_success", "Lesson has been successfully replicated. This is the new lesson");
-				request.getRequestDispatcher("/edit_lesson?task_id="+ newLesson.getTaskID()).forward(request, response);
+				request.getRequestDispatcher("/edit_lesson?task_id="+ newLesson.getTask().getId()).forward(request, response);
 
 				String comments = "Lesson with name " + oldLesson.getTitle() + " (ID " + oldLesson.getId() + ") is replicated to new lesson with ID: " + newLesson.getId() + "by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
-				CMSRegistry.addTaskLogEntry(request, "REPLICATED", comments, oldLesson.getTaskID(), "LESSON", oldLesson.getId(), "Lesson is replicated");
-				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, newLesson.getTaskID(), "LESSON", newLesson.getId(), "Lesson is replicated");
+				CMSRegistry.addTaskLogEntry(request, "REPLICATED", comments, oldLesson.getTask().getId(), "LESSON", oldLesson.getId(), "Lesson is replicated");
+				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, newLesson.getTask().getId(), "LESSON", newLesson.getId(), "Lesson is replicated");
 			}
 			break;
 			
