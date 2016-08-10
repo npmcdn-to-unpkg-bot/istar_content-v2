@@ -748,7 +748,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			request.setAttribute("message_success", "New slide has been created successfully ");
 			
 			comments = "A new Slide is added with the template => " + template + " created in the presentation wih ID ->" + ppt.getId();
-			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "New slide is created");
+			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTask().getId(), "LESSON", ppt.getLesson().getId(), "New slide is created");
 		} else {
 			if(request.getParameterMap().containsKey("version_id")){
 				SlideVersion version = (new SlideVersionDAO()).findById(Integer.parseInt(request.getParameter("version_id").toString()));
@@ -758,7 +758,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				request.setAttribute("message_success", "Slide has been updated successfully ");
 				comments = "Slide with ID ->" + slide_id + " is updated.";
 			}
-			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
+			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTask().getId(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}
 		
 	

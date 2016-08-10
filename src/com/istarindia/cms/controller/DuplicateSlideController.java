@@ -46,7 +46,7 @@ public class DuplicateSlideController extends HttpServlet {
 		Presentaion ppt = (new PresentaionDAO()).findById(presentation_id);
 		SlideDAO dao = new SlideDAO();
 		Slide slide= dao.findById(slide_id);
-		Task task = new TaskDAO().findById(ppt.getLesson().getTaskID());
+		Task task = new TaskDAO().findById(ppt.getLesson().getTask().getId());
 		
 		String comments = "";
 		
@@ -55,7 +55,7 @@ public class DuplicateSlideController extends HttpServlet {
 		request.setAttribute("message_success", "Slide has been duplicate successfully ");
 			
 		comments = "Slide with ID ->" + slide.getId() + " has been duplicated";
-		CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTaskID(), "LESSON", ppt.getLesson().getId(), "Slide is duplicated");
+		CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTask().getId(), "LESSON", ppt.getLesson().getId(), "Slide is duplicated");
 
 		String slidesOrder[] = order_holder_string.split(",");
 		service.updateSlideOrder(slide_id, slidesOrder);
