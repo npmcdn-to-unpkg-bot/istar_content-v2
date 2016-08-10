@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.LessonTypes;
+import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.LearningObjective;
@@ -98,7 +99,10 @@ public class CreateLessonController  extends IStarBaseServelet {
 		System.out.println(ite.size());
 		String lessonTheme = "43";
 		String lessonDesktopTheme = "43";
-		Lesson lesson = new LessonService().createLessonForBulk(cmsession_id, duration, LessonTypes.LESSON, tags, lessonTheme, lessonDesktopTheme, title, ite, user_id);
+		Cmsession cms =  (new CmsessionDAO()).findById(cmsession_id);
+		//Lesson lesson = new LessonService().createLessonForBulk(cms, duration, LessonTypes.LESSON, tags, lessonTheme, lessonDesktopTheme, title, ite, user_id);
+		
+		Lesson lesson = new LessonService().createLessonForBulk(cms, duration, LessonTypes.LESSON, tags, lessonTheme, lessonDesktopTheme, title, user_id);
 		(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
 		lesson = (new LessonDAO()).findById(lesson.getId());
 		System.err.println("lesson.getTask()->"+ lesson.getTask());

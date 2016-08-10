@@ -459,7 +459,7 @@
 									try {
 										task.setItemType("LESSON");
 										task.setItemId(lesson.getId());
-										task = TDAO.findByExample(task).get(0);
+										task = lesson.getTask();
 										TaskLog sample = new TaskLog();
 										sample.setTaskId(task.getId());
 										sample.setItemType("SLIDE");
@@ -484,7 +484,7 @@
 									</div>
 									<div style="float: right;">
 									<% if(slideDAO.findById(log.getItem_id()) != null ) { %>
-										<a class="" target="_blank" href="/content/fill_tempate_review.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Review slide</a>
+										<a class="" target="_blank" href="/content/fill_tempate1.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Edit slide</a>
 									<% } else { %>
 										Deleted slide
 									<% } %>

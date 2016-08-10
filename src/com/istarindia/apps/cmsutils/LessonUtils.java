@@ -1183,18 +1183,31 @@ public class LessonUtils {
     }
 
     public CMSSlide convertSlide(Slide slide) {
-        CMSSlide cMSlide = new CMSSlide();
+		CMSSlide cMSlide = new CMSSlide();
+		
+    	IstarUserDAO dao = new IstarUserDAO();
+		Session session = dao.getSession();
+		String sql = "select * from slide where id=" + slide.getId() ;
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		DBUTILS util = new DBUTILS();
+		HashMap<String, Object> slide_version = util.executeQuery(sql).get(0);	
+        
+		String slideText = slide_version.get("slide_text").toString();
+        String template =  slide_version.get("template").toString();
+        String teacherNotes = slide_version.get("teacher_notes").toString();
+        String studentNotes = slide_version.get("student_notes").toString();
+        
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
-            InputStream in = IOUtils.toInputStream(slide.getSlideText(), "UTF-8");
+            InputStream in = IOUtils.toInputStream(slideText, "UTF-8");
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             cMSlide = (CMSSlide) jaxbUnmarshaller.unmarshal(in);
-            cMSlide.setTeacherNotes(slide.getTeacherNotes());
-            cMSlide.setStudentNotes(slide.getStudentNotes());
-            cMSlide.setTemplateName(slide.getTemplate());
-            System.out.println(slide.getSlideText());
+            cMSlide.setTemplateName(template);
+            cMSlide.setTeacherNotes(teacherNotes);
+            cMSlide.setStudentNotes(studentNotes);
         } catch (JAXBException e) {
-            System.err.println(slide.getId());
+            //System.err.println(version.getId());
             e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -1206,12 +1219,21 @@ public class LessonUtils {
     }
 
     public CMSSlide convertSlide(int version_id) {
-    	SlideVersion version = new SlideVersionDAO().findById(version_id);
-        CMSSlide cMSlide = new CMSSlide();
-        String slideText = version.getSlideText();
-        String template =  version.getTemplate();
-        String teacherNotes =  version.getTeacherNotes();
-        String studentNotes =  version.getStudentNotes();
+		CMSSlide cMSlide = new CMSSlide();
+		
+    	IstarUserDAO dao = new IstarUserDAO();
+		Session session = dao.getSession();
+		String sql = "select * from slide_version where id=" + version_id ;
+		SQLQuery query = session.createSQLQuery(sql);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		DBUTILS util = new DBUTILS();
+		HashMap<String, Object> slide_version = util.executeQuery(sql).get(0);	
+        
+		String slideText = slide_version.get("slide_text").toString();
+        String template =  slide_version.get("template").toString();
+        String teacherNotes = slide_version.get("teacher_notes").toString();
+        String studentNotes = slide_version.get("student_notes").toString();
+        
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(CMSSlide.class);
             InputStream in = IOUtils.toInputStream(slideText, "UTF-8");

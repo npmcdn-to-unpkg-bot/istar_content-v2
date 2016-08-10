@@ -689,7 +689,7 @@ ORDER BY
 			INNER JOIN public.module M ON (M.id=CM.module_id)
 			INNER JOIN public.course CC ON (CC.id=M.course_id)
 			WHERE
-			A.status LIKE 'COMPLETED' AND (B.status LIKE 'REVIEWER_ASSIGNED' OR B.status LIKE 'DIS_APPROVED') AND A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
+			A.status LIKE 'COMPLETED' AND B.status LIKE 'REVIEWER_ASSIGNED' AND A.item_type ='LESSON' AND B.reviewer_id=:content_reviewer_id
 			GROUP BY A.ID, L.id,d.email,dd.email,
 			L.title, CM.title, M.module_name, CC.course_name
 			ORDER BY a.id

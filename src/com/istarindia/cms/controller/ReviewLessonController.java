@@ -178,14 +178,11 @@ public class ReviewLessonController extends IStarBaseServelet {
 		} else {
 			
 			slideID = Integer.parseInt(request.getParameter("slide_id"));
-			slide = dao1.findById(Integer.parseInt(request.getParameter("slide_id")));
+			slide = dao1.findById(slideID);
 		}
 		
 		TaskDAO dao = new TaskDAO();
-		Task task = new Task();
-		task.setItemId(slide.getPresentaion().getLesson().getId());
-		task.setItemType("LESSON");
-		task = dao.findByExample(task).get(0);
+		Task task = dao.findById(slide.getPresentaion().getLesson().getTask().getId());
 
 		TaskLogDAO lDAO = new TaskLogDAO();
 		TaskLog log = new TaskLog();
@@ -235,38 +232,35 @@ public class ReviewLessonController extends IStarBaseServelet {
 	}
 
 	private void markLessonAsReviewed(HttpServletRequest request) {
-		//System.err.println("i m in review lesson controller");;
+
+		int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
+		LessonDAO  lessonDAO = new LessonDAO();
+		Lesson lesson = lessonDAO.findById(lesson_id);
+		
+		TaskDAO taskDAO = new TaskDAO();
+		Task task  = lesson.getTask();
+		
+		TaskReviewerDAO trdao = new   TaskReviewerDAO();
+
+		List<TaskReviewer> reviewers  = trdao.findByProperty("task", task);
+		IstarUser u = ((IstarUser) request.getSession().getAttribute("user"));
+		ContentReviewer cr = new ContentReviewerDAO().findById(u.getId());
+		
 		if(request.getParameter("review").equalsIgnoreCase("DIS_APPROVED"))
-		{
-			TaskDAO dao = new TaskDAO();
-			Task task = new Task();
-			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
-			task.setItemType("LESSON");
-			task = dao.findByExample(task).get(0);
-			
-			
-			TaskReviewerDAO trdao = new   TaskReviewerDAO();
-			List<TaskReviewer> reviewers  = trdao.findByProperty("task", task);
-			IstarUser u = ((IstarUser) request.getSession().getAttribute("user"));
-			ContentReviewer cr = new ContentReviewerDAO().findById(u.getId());
-			for(TaskReviewer r : reviewers)
+		{for(TaskReviewer r : reviewers)
 			{
 				if(r.getContentReviewer().getId().equals(u.getId()))
 				{
-					//System.err.println("-----"+task.getId());
-					//System.err.println("taskreviewerid is ===="+r.getId());
 					r.setStatus("DIS_APPROVED");
 					Session session1 = trdao.getSession();
 					Transaction tx1 = null;
 					try {
 						tx1 = session1.beginTransaction();
-
 						trdao.attachDirty(r);
 						tx1.commit();
 					} catch (HibernateException e) {
 						if (tx1 != null)
 							tx1.rollback();
-						//System.err.println(e.getMessage());
 						e.printStackTrace();
 					} finally {
 						session1.close();
@@ -279,19 +273,18 @@ public class ReviewLessonController extends IStarBaseServelet {
 			{
 				if(!rr.getStatus().equalsIgnoreCase("DIS_APPROVED"))
 				{
-					finally_disapproved=false;
+					finally_disapproved = false;
 					break;
 				}
 			}
 
 			if(finally_disapproved) {
 				task.setStatus("DIS_APPROVED");
-				Session session1 = dao.getSession();
+				Session session1 = taskDAO.getSession();
 				Transaction tx1 = null;
 				try {
 					tx1 = session1.beginTransaction();
-
-					dao.attachDirty(task);
+					taskDAO.attachDirty(task);
 					tx1.commit();
 				} catch (HibernateException e) {
 					if (tx1 != null)
@@ -303,18 +296,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 			}
 			
 		} else	{
-			TaskDAO dao = new TaskDAO();
-			Task task = new Task();
-			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
-			task.setItemType("LESSON");
-			task = dao.findByExample(task).get(0);
-			TaskReviewerDAO trdao = new   TaskReviewerDAO();
-			//TaskReviewer tr = new TaskReviewer();
-			List<TaskReviewer> reviewers  = trdao.findByProperty("task", task);
-			IstarUser u = ((IstarUser) request.getSession().getAttribute("user"));
-		//	tr.setContentReviewer((ContentReviewer) request.getSession().getAttribute("user"));
-			//tr.setTask(task);
-			//tr = trdao.findByExample(tr).get(0);
+			
 			for(TaskReviewer r : reviewers)
 			{
 				if(r.getContentReviewer().getId().equals(u.getId()))
@@ -324,7 +306,6 @@ public class ReviewLessonController extends IStarBaseServelet {
 					Transaction tx = null;
 					try {
 						tx = session.beginTransaction();
-
 						trdao.attachDirty(r);
 						tx.commit();
 					} catch (HibernateException e) {
@@ -350,12 +331,11 @@ public class ReviewLessonController extends IStarBaseServelet {
 
 			if(finally_approved) {
 				task.setStatus("APPROVED");
-				Session session1 = dao.getSession();
+				Session session1 = taskDAO.getSession();
 				Transaction tx1 = null;
 				try {
 					tx1 = session1.beginTransaction();
-
-					dao.attachDirty(task);
+					taskDAO.attachDirty(task);
 					tx1.commit();
 				} catch (HibernateException e) {
 					if (tx1 != null)
@@ -364,7 +344,6 @@ public class ReviewLessonController extends IStarBaseServelet {
 				} finally {
 					session1.close();
 				}
-				
 			} 
 			
 			

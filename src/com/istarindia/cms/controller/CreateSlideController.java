@@ -26,6 +26,7 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
+import com.istarindia.apps.dao.utils.HibernateSessionFactory;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 import com.istarindia.cms.lessons.CMSImage;
@@ -721,11 +722,11 @@ public class CreateSlideController extends IStarBaseServelet {
 		Slide slide = new Slide();
 
 		if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-			
+			System.err.println("create><><<><><><<<><><>><><><><><><><>><><><><><><><>><><><><><><><><><><><><>< slide_id -> " + slide_id);
 			slide = dao.findById(slide_id);
 			slide.setOrder_id(slide_id);
 			
-			Session session = dao.getSession();
+			Session session = HibernateSessionFactory.getSessionFactory().openSession();// dao.getSession();
 			Transaction tx = null;
 			try {
 				tx = session.beginTransaction();
@@ -740,6 +741,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 		} else {
+			System.err.println("edit><><<><><><<<><><>><><><><><><><>><><><><><><><>><><><><><><><><><><><><>< slide_id -> " + slide_id);
 			slide_id = Integer.parseInt(request.getParameter("slide_id").toString());
 			slide = dao.findById(slide_id);
 		}

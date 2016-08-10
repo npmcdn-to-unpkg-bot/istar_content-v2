@@ -46,7 +46,7 @@ public class DuplicateSlideController extends HttpServlet {
 		Presentaion ppt = (new PresentaionDAO()).findById(presentation_id);
 		SlideDAO dao = new SlideDAO();
 		Slide slide= dao.findById(slide_id);
-		Task task = new TaskDAO().findById(ppt.getLesson().getTaskID());
+		Task task =ppt.getLesson().getTask();
 		
 		String comments = "";
 		
