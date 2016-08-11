@@ -158,7 +158,7 @@
 											course_sno++;
 									%>
 									<li id="course_<%=course.getId()%>"
-										data-jstree='{"opened":false'><%=course_sno%>. <%=course.getCourseName()%>
+										data-jstree='{"opened":true}'><%=course_sno%>. <%=course.getCourseName()%>
 										<ul>
 											<%
 												int cmsession_sno = 0;

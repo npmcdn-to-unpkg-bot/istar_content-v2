@@ -47,7 +47,7 @@ public class CreatePresentationController extends HttpServlet {
 		Lesson lesson = (new LessonDAO()).findById(lesson_id);
 		
 		int task_id =  Integer.parseInt(request.getParameter("task_id").toString());
-		Task task = new TaskDAO().findById(task_id);
+		Task task = lesson.getTask();
 		
 		ppt.setLesson(lesson);
 		Session session = dao.getSession();
@@ -68,9 +68,9 @@ public class CreatePresentationController extends HttpServlet {
 		CMSRegistry.addTaskLogEntry(request, task.getStatus(), comments, task_id, "LESSON", lesson_id, "New presentation is created");
 		
 		request.setAttribute("lesson", lesson);
-		request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));
-
-		request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);;
+		request.setAttribute("task_id", lesson.getTask().getId());
+		response.sendRedirect("/content/edit_lesson?task_id="+task.getId());
+		//request.send getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);;
 
 		
 	}

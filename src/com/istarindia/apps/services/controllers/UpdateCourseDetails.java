@@ -16,6 +16,7 @@ import org.hibernate.Session;
 import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.ContentAdmin;
+import com.istarindia.apps.dao.ContentAdminDAO;
 import com.istarindia.apps.dao.Course;
 import com.istarindia.apps.dao.CourseDAO;
 import com.istarindia.apps.dao.IstarUser;
@@ -136,7 +137,14 @@ public class UpdateCourseDetails extends HttpServlet {
 			int module_id = Integer.parseInt(request.getParameter("module_id").toString());
 			String cmsession_name = request.getParameter("title").toString();
 			String cmsession_description = request.getParameter("description").toString();
-			Cmsession cmsession = service.createNewCmsession(cmsession_name, cmsession_description, module_id, (ContentAdmin)request.getSession().getAttribute("user"));
+			ContentAdmin ca = new ContentAdmin(); 
+			System.err.println("141 ->"+ request.getSession().getAttribute("user").getClass().toString());
+			if(request.getSession().getAttribute("user").getClass().toString().equalsIgnoreCase("ContentAdmin")) {
+				 ca = (ContentAdmin)request.getSession().getAttribute("user");
+			} else {
+				 ca = (ContentAdmin)(new ContentAdminDAO()).findAll().get(0);
+			}
+			Cmsession cmsession = service.createNewCmsession(cmsession_name, cmsession_description, module_id, ca);
 
 			if(cmsession == null) {
 				request.setAttribute("message_failure", "Please try again! Something is wrong!");

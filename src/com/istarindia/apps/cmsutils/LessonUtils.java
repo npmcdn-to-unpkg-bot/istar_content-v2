@@ -599,7 +599,7 @@ public class LessonUtils {
                 AssessmentService assessmentService = new AssessmentService();
                 number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
                 if (number_of_questions < assessment.getNumber_of_questions()) {
-                    out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
+                    /*out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
                     		+ "<div class='panel-heading'> <h3 class='panel-title'> "
                     		+ "<i class='fa fa-tasks'></i>Upload Questions </h3> </div>  <div class='panel-body'>"
                     		+ "<form action='assessment_upload' class='sky-form' method='post' enctype='multipart/form-data'>  "
@@ -609,7 +609,7 @@ public class LessonUtils {
                     		+ "<input type='file' id='file' name='file' onchange='DisplayFilePath()'>Browse</div> "
                     		+ "<input type='text' id='formfield' readonly> </label> </section> </fieldset> <footer> "
                     		+ "<button type='submit' class='btn-u'>Submit</button> </footer> </form> </div> </div></div>");
-                	
+                	*/
                     out.append("<div class=' col-md-12 '>"
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"

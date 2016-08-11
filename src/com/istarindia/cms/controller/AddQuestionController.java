@@ -87,7 +87,7 @@ public class AddQuestionController extends IStarBaseServelet {
 		t.setItemType("LESSON");
 		t.setItemId(assessment.getLesson().getId());
 		
-		response.sendRedirect("/content/edit_lesson?lesson_id=" + assessment.getLesson().getId()+"&task_id="+dao1.findByExample(t).get(0).getId());
+		response.sendRedirect("/content/edit_lesson?lesson_id=" + assessment.getLesson().getId()+"&task_id="+assessment.getLesson().getTask().getId());
 
 	}
 
