@@ -1,3 +1,4 @@
+<%@page import="org.ocpsoft.prettytime.PrettyTime"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%><%@page
@@ -85,80 +86,95 @@
 				</div>
 
 				<div class="col-md-6 md-margin-bottom-40">
-						<div class="panel panel-profile">
-							<div class="panel-heading overflow-h">
-								<h2 class="panel-title heading-sm pull-left">
-									<i class="fa fa-send"></i> User Activity for the day
-								</h2></div>
-							<div id="scrollbar3"
-								class="panel-body no-padding mCustomScrollbar _mCS_4 mCS-autoHide"
-								data-mcs-theme="minimal-dark"
-								style="position: relative; overflow: visible;">
-								<div id="mCSB_4"
-									class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"
-									tabindex="0">
-									<div id="mCSB_4_container" class="mCSB_container" >
-										<div
-											class="alert-blocks alert-blocks-pending alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close"
-												type="button">×</button>
-											<img class="rounded-x mCS_img_loaded"
-												src="assets/img/testimonials/img3.jpg" alt="">
-											<div class="overflow-h">
-												<strong class="color-yellow">Pending... <small
-													class="pull-right"><em>Just now</em></small></strong>
-												<p>Your friend request has been sent.</p>
-											</div>
+					<div class="panel panel-profile">
+						<div class="panel-heading overflow-h">
+							<h2 class="panel-title heading-sm pull-left">
+								<i class="fa fa-send"></i> User Activity for the day
+							</h2>
+						</div>
+						<div id="scrollbar3"
+							class="panel-body no-padding mCustomScrollbar _mCS_4 mCS-autoHide"
+							data-mcs-theme="minimal-dark"
+							style="position: relative; overflow: visible;">
+							<div id="mCSB_4"
+								class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"
+								tabindex="0">
+								<div id="mCSB_4_container" class="mCSB_container">
+									<% DBUTILS db  = new DBUTILS();
+									String sql = "select * from task_log where created_at > current_date  + interval '0 hour' and  created_at <= current_date  + interval '23 hour' ORDER BY created_at desc";
+									List<HashMap<String, Object>> items = db.executeQuery(sql);
+									
+									for(HashMap<String, Object> row : items ) {
+										PrettyTime p = new PrettyTime();
+										//System.out.println(row.get("created_at").toString());
+										//p.format(then);
+									%>
+									
+									<div
+										class="alert-blocks alert-blocks-pending alert-dismissable">
+										<button aria-hidden="true" data-dismiss="alert" class="close"
+											type="button">×</button>
+										<img class="rounded-x mCS_img_loaded"
+											src="assets/img/testimonials/img3.jpg" alt="">
+										<div class="overflow-h">
+											<strong class="color-yellow">Pending... <small
+												class="pull-right"><em>Just now</em></small></strong>
+											<p>Your friend request has been sent.</p>
 										</div>
-										</div></div></div></div></div>
+									</div>
+									<% } %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<jsp:include page="includes/footer.jsp"></jsp:include>
 		</div>
-		<jsp:include page="includes/footer.jsp"></jsp:include>
-	</div>
 
 
-	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- JS Implementing Plugins -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
-	<!-- JS Customization -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
-	<script
-		src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script
-		src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
-	<script
-		src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
-	<script
-		src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script
-		src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+		<!-- JS Global Compulsory -->
+		<script type="text/javascript"
+			src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+		<script type="text/javascript"
+			src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+		<script type="text/javascript"
+			src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<!-- JS Implementing Plugins -->
+		<script type="text/javascript"
+			src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+		<script type="text/javascript"
+			src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+		<!-- JS Customization -->
+		<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
+		<!-- JS Page Level -->
+		<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+		<script type="text/javascript"
+			src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
+		<script
+			src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+		<script
+			src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
+		<script
+			src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
+		<script
+			src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+		<script
+			src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
 
 
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/data.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			App.init();
-		});
-	</script>
-	<!--[if lt IE 9]>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				App.init();
+			});
+		</script>
+		<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
-
 </body>
 </html>

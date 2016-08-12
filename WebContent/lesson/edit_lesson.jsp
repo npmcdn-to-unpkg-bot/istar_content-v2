@@ -437,6 +437,7 @@
 
 													<%
 														for (String type : types) {
+															try {
 															if (assessment.getAssessmentType().equalsIgnoreCase(type)) {
 													%>
 
@@ -449,7 +450,7 @@
 
 													<%
 														}
-
+															} catch(Exception e){}
 														}
 													%>
 
