@@ -1,6 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@page import="com.istarindia.apps.cmsutils.TableUtils"%><%@page
+	import="com.istarindia.apps.dao.*"%><%@page
+	import="com.istarindia.apps.dao.IstarUser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.istarindia.apps.cmsutils.reports.*"%>
+<%
+	String url = request.getRequestURL().toString();
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
+			+ request.getContextPath() + "/";
+%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -20,162 +30,125 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <link rel="shortcut icon" href="favicon.ico">
 
 <!-- Web Fonts -->
-<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+<link rel='stylesheet' type='text/css'
+	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/headers/header-default.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/footers/footer-v1.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/headers/header-default.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/animate.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/business.style.css">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/global.css">
-
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
+<link rel="stylesheet"
+	href="http://htmlstream.com/preview/unify-v1.9.5/assets/css/pages/profile.css">
 <!-- CSS Theme -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="<%=baseURL %>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet"
+	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="<%=baseURL %>assets/css/custom.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
 
 <body>
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
-		<div class="breadcrumbs">
-			<div class="container-fluid">
-				<h1 class="pull-left"><a href="<%=baseURL %>content_admin/dashboard.jsp">Content Admin Dashboard</a></h1>
-			</div>
-			<!--/container-->
-		</div>
-		<div class="container-fluid height-1000" style="padding: 0px !important">
-			<section id="processes" class="g-bg-dark-blue1">
-				<div class="container content-md g-text-height-md">
-					<div class="row g-mb-60 text-center g-heading-v7">
-						<div class="col-sm-8 col-sm-offset-2">
-							<h2 class="h2 color-light">
-								<span class="block-name">Work Process</span> 
-							</h2>
-						</div>
-					</div>
-					<div class="row g-mb-20">
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/created_lesson.jsp">View All Created Lessons</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all lessons created by Content Admin and not assigned to Content Creator.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/draft_lesson.jsp">View All Lessons in Progress</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all lessons which are in progress by Content Creator.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>	
-					</div>
+		<div class="container-fluid content profile">
+			<div class="row">
+				<!--Left Sidebar-->
+				<div class="col-md-6 md-margin-bottom-40">
+					<%
+						HashMap<String, String> conditions = new HashMap();
+						conditions.put("content_creator_id",
+								((IstarUser) request.getSession().getAttribute("user")).getId().toString());
+					%>
+					<%=(new ReportUtils())
+					.getReport(199, conditions, ((IstarUser) request.getSession().getAttribute("user")), "LESSON")
+					.toString()%>
 
-					<div class="row g-mb-50">
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/completed_lesson.jsp">View All Completed Lessons</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all tasks which are completed by Content Creators.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-						
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/review_pending.jsp">View All Lessons with Pending Review</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all tasks which are completed by Content Creators and review by Content Reviewer is pending.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-					</div>
 
-					<div class="row g-mb-50">
-						<div class="col-md-6 g-mb-20 steps-v1--lspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/not_published.jsp">View All Lessons to be Published</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all lessons which are ready to be published by Content Admin.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-fire"></i> <img class="steps-v1__img g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-						
-						<div class="col-md-6 steps-v1--rspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/published_lesson.jsp">View All Published Lesson</a>
-									</h3>
-								</li>
-								<li><p>This will let you view all lessons which are published by Content Admin.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> <img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-						
-						<div class="col-md-6 steps-v1--rspace">
-							<ul class="list-unstyled steps-v1 g-bg-dark-blue2 g-no-mb">
-								<li>
-									<h3 class="heading-sm h3">
-										<a href="<%=baseURL %>content_admin/published_lesson.jsp">Resource Reports</a>
-									</h3>
-								</li>
-								<li><p>This will let Content Admin Review What the team is upto.</p></li>
-								<li class="steps-v1__block g-rounded-50x"><i class="steps-v1__icon icon-energy"></i> 
-								<img class="steps-v1__img img-responsive g-rounded-50x" src="http://htmlstream.com/preview/unify-v1.9.1/One-Pages/Business/assets/img-temp/testimonials/img1.jpg" alt=""></li>
-							</ul>
-						</div>
-					</div>
-					
-					<div class="row g-mb-50">
-					</div>
 				</div>
-			</section>
+
+				<div class="col-md-6 md-margin-bottom-40">
+						<div class="panel panel-profile">
+							<div class="panel-heading overflow-h">
+								<h2 class="panel-title heading-sm pull-left">
+									<i class="fa fa-send"></i> User Activity for the day
+								</h2></div>
+							<div id="scrollbar3"
+								class="panel-body no-padding mCustomScrollbar _mCS_4 mCS-autoHide"
+								data-mcs-theme="minimal-dark"
+								style="position: relative; overflow: visible;">
+								<div id="mCSB_4"
+									class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"
+									tabindex="0">
+									<div id="mCSB_4_container" class="mCSB_container" >
+										<div
+											class="alert-blocks alert-blocks-pending alert-dismissable">
+											<button aria-hidden="true" data-dismiss="alert" class="close"
+												type="button">×</button>
+											<img class="rounded-x mCS_img_loaded"
+												src="assets/img/testimonials/img3.jpg" alt="">
+											<div class="overflow-h">
+												<strong class="color-yellow">Pending... <small
+													class="pull-right"><em>Just now</em></small></strong>
+												<p>Your friend request has been sent.</p>
+											</div>
+										</div>
+										</div></div></div></div></div>
 		</div>
 		<jsp:include page="includes/footer.jsp"></jsp:include>
 	</div>
 
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
-	<script type="text/javascript" src="<%=baseURL %>assets/js/custom.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL %>assets/js/app.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
+	<script
+		src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script
+		src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
+	<script
+		src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
+	<script
+		src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script
+		src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();

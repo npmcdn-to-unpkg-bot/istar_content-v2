@@ -67,7 +67,8 @@ public class UpdateAssesmentController extends HttpServlet {
 					assessment_type, number_of_questions);
 
 			request.setAttribute("message_success", "Assessment updated successfully!");
-			response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + assessment_id);
+			//response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + assessment_id);
+			response.sendRedirect("/content/edit_lesson?task_id="+assessment.getLesson().getTask().getId());
 
 		} else if (request.getParameterMap().containsKey("assessment_id")
 				&& request.getParameterMap().containsKey("assessment_type")
@@ -87,12 +88,11 @@ public class UpdateAssesmentController extends HttpServlet {
 			// LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
 			request.setAttribute("lesson", lesson);
 			TaskDAO dao = new TaskDAO();
-			Task t = new Task();
-			t.setItemType("LESSON");
-			t.setItemId(lesson.getId());
+			Task t = lesson.getTask();
 
-			request.setAttribute("task_id", dao.findByExample(t).get(0).getId());
-			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+			request.setAttribute("task_id", t.getId());
+			response.sendRedirect("/content/edit_lesson?task_id="+t.getId());
+			//request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
 
 		} else {
 			System.out.println("Something missing .... ");

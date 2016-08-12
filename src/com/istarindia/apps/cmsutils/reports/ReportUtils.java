@@ -189,7 +189,7 @@ public class ReportUtils {
 			tableStyle = "style='display:none'";
 		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
-		out.append("<div class='panel panel-yellow margin-bottom-40' " + style
+		out.append("<div class='panel panel-sea margin-bottom-40' " + style
 				+ "> <div class='panel-heading'> <h3 class='panel-title'><i class='fa fa-tasks'></i> "
 				+ report.getTitle() + " </h3> </div><div id='datatable_report_panel_body' class='panel-body'></div>"
 				+ "<table " + tableStyle

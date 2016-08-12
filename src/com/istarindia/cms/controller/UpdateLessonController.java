@@ -51,11 +51,8 @@ public class UpdateLessonController extends IStarBaseServelet {
 			}
 			
 			int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
-			Task task = new Task();
-			task.setItemId(lesson_id);
-			task.setItemType("LESSON");
-			task = (new TaskDAO()).findByExample(task).get(0);
-			
+			Task task = new LessonDAO().findById(lesson_id).getTask();  
+		
 			if(request.getParameterMap().containsKey("only_learning_objectives")) {
 				lesson = (Lesson) service.updateLesson(lesson_id, lo_ids.toString());
 			} else {
@@ -75,7 +72,7 @@ public class UpdateLessonController extends IStarBaseServelet {
 			request.setAttribute("message_success", "Lesson updated successfully!");
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", task.getId());
-			request.getRequestDispatcher("/lesson/edit_lesson.jsp").forward(request, response);
+			response.sendRedirect("/content/edit_lesson?task_id="+task.getId());
 	}
 
 	
