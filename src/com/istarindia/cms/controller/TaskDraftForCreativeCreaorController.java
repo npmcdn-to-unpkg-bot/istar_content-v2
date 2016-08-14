@@ -15,8 +15,8 @@ import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Lesson;
-import com.istarindia.apps.dao.MediaReview;
-import com.istarindia.apps.dao.MediaReviewDAO;
+import com.istarindia.apps.dao.ImageReview;
+import com.istarindia.apps.dao.ImageReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
@@ -32,20 +32,20 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
  * Servlet implementation class ApprovedLessonForCreatorController
  */
 @WebServlet("/draft_media")
-public class TaskDraftForCreativeCreaorController extends HttpServlet {
+public class TaskDraftForCreativeCreaorController extends HttpServlet {/*
 	private static final long serialVersionUID = 1L;
        
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public TaskDraftForCreativeCreaorController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
@@ -55,9 +55,9 @@ public class TaskDraftForCreativeCreaorController extends HttpServlet {
 		for(Task task : tasks)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
-		/*
+		
 		 * id, title, task name, and action
-		 * */
+		 * 
 			embed_list.add(task.getId().toString());
 			
 			
@@ -94,12 +94,12 @@ public class TaskDraftForCreativeCreaorController extends HttpServlet {
 	
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
-}
+*/}

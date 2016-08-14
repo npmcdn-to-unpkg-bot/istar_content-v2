@@ -14,8 +14,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.StatusTypes;
-import com.istarindia.apps.dao.MediaReview;
-import com.istarindia.apps.dao.MediaReviewDAO;
+import com.istarindia.apps.dao.ImageReview;
+import com.istarindia.apps.dao.ImageReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.TaskService;
@@ -25,20 +25,20 @@ import com.istarindia.apps.services.controllers.IStarBaseServelet;
  * Servlet implementation class MediaReviewByAdmin
  */
 @WebServlet("/media_review_by_admin")
-public class MediaReviewByAdmin extends IStarBaseServelet {
+public class MediaReviewByAdmin extends IStarBaseServelet {/*
 	private static final long serialVersionUID = 1L;
        
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public MediaReviewByAdmin() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		printParams(request);
@@ -49,10 +49,10 @@ public class MediaReviewByAdmin extends IStarBaseServelet {
 			{
 				comment = request.getParameter("comment");
 			}
-			MediaReviewDAO dao = new MediaReviewDAO();
-			MediaReview review;
+			ImageReviewDAO dao = new ImageReviewDAO();
+			ImageReview review;
 			Task task = new TaskDAO().findById(Integer.parseInt(request.getParameter("task_id")));
-			List<MediaReview> reviews = dao.findByProperty("task",task);
+			List<ImageReview> reviews = dao.findByProperty("task",task);
 			if(reviews.size()>0 )
 			{
 				review = reviews.get(0);
@@ -61,7 +61,7 @@ public class MediaReviewByAdmin extends IStarBaseServelet {
 			}
 			else
 			{
-				review = new MediaReview();
+				review = new ImageReview();
 				review.setTask(task);
 				review.setComment(comment);
 			}	
@@ -96,12 +96,12 @@ public class MediaReviewByAdmin extends IStarBaseServelet {
 		request.getRequestDispatcher("completed_media_creative_admin").forward(request, response);
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
-}
+*/}

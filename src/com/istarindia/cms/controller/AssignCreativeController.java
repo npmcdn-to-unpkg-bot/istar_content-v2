@@ -15,9 +15,13 @@ import org.hibernate.Transaction;
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.CreativeCreator;
 import com.istarindia.apps.dao.CreativeCreatorDAO;
+import com.istarindia.apps.dao.ImageTask;
+import com.istarindia.apps.dao.ImageTaskDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
+import com.istarindia.apps.dao.VideoTask;
+import com.istarindia.apps.dao.VideoTaskDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
@@ -39,9 +43,13 @@ public class AssignCreativeController extends IStarBaseServelet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		for (String assign : request.getParameter("selected_items").split(",")) {
-			if(assign.startsWith("task")) {
+			if(assign.startsWith("image")) {
 				
-				assignTask(assign, request);
+				assignImageTask(assign, request);
+				
+			} else if(assign.startsWith("video")) {
+				
+				assignVideoTask(assign, request);
 				
 			}
 		}
@@ -51,12 +59,12 @@ public class AssignCreativeController extends IStarBaseServelet {
 
 	//	response.sendRedirect(request.getContextPath() + "/creative_admin/assign_creative.jsp");
 	}
-	
-	private void assignTask(String assign, HttpServletRequest request) {
+
+	private void assignImageTask(String assign, HttpServletRequest request) {
 		int creative_id = Integer.parseInt( request.getParameter("assign_user").toString() );
-		String taskid= assign.replace("task_", "");
-		TaskDAO dao = new  TaskDAO();
-		Task task  = dao.findById(Integer.parseInt(taskid));
+		String taskid= assign.replace("image_task_", "");
+		ImageTaskDAO dao = new  ImageTaskDAO();
+		ImageTask task  = dao.findById(Integer.parseInt(taskid));
 		task.setActorId(creative_id);
 		task.setStatus(StatusTypes.CREATIVE_ASSIGNED);
 		Session session1 = dao.getSession();
@@ -74,36 +82,58 @@ public class AssignCreativeController extends IStarBaseServelet {
 			session1.close();
 		}
 		
-		if(!(new TaskDAO()).findByExample(task).isEmpty()) {
-			saveTaskLog(task, creative_id, request);
+		if(!(new ImageTaskDAO()).findByExample(task).isEmpty()) {
+			saveImageTaskLog(task, creative_id, request);
 		}
 	}
 
-	private void saveTaskLog(Task task, int creative_creator_id, HttpServletRequest request ) {
+	private void saveImageTaskLog(ImageTask task, int creative_creator_id, HttpServletRequest request ) {
 		try {
 			String creativeEmail = (new CreativeCreatorDAO()).findById(creative_creator_id).getEmail();
 			String comments = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task (TaskID " + task.getId() + ") has been assigned to " + creativeEmail + " by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail();
 			String title = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task has been assigned to artist";
-			if(task.getItemType().equalsIgnoreCase("LESSON"))
-			{
-				CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getLesson().getId(), title);			
-
-			}
-			else if (task.getItemType().equalsIgnoreCase("IMAGE"))
-			{
-				CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getImage().getId(), title);			
-
-			}
-			else if(task.getItemType().equalsIgnoreCase("VIDEO"))
-			{
-				CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getVideo().getId(), title);			
-
-			}
-				
+			CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getImage().getId(), title);			
 		} catch (Exception e) {
 			//e.printStackTrace();
 		}
+	}
+
+	private void assignVideoTask(String assign, HttpServletRequest request) {
+		int creative_id = Integer.parseInt( request.getParameter("assign_user").toString() );
+		String taskid= assign.replace("video_task_", "");
+		VideoTaskDAO dao = new  VideoTaskDAO();
+		VideoTask task  = dao.findById(Integer.parseInt(taskid));
+		task.setActorId(creative_id);
+		task.setStatus(StatusTypes.CREATIVE_ASSIGNED);
+		Session session1 = dao.getSession();
+		Transaction tx1 = null;
+		try {
+			tx1 = session1.beginTransaction();
+			dao.save(task);
+			tx1.commit();
+			
+		} catch (HibernateException e) {
+			if (tx1 != null)
+				tx1.rollback();
+			e.printStackTrace();
+		} finally {
+			session1.close();
+		}
 		
+		if(!(new VideoTaskDAO()).findByExample(task).isEmpty()) {
+			saveVideoTaskLog(task, creative_id, request);
+		}
+	}
+
+	private void saveVideoTaskLog(VideoTask task, int creative_creator_id, HttpServletRequest request ) {
+		try {
+			String creativeEmail = (new CreativeCreatorDAO()).findById(creative_creator_id).getEmail();
+			String comments = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task (TaskID " + task.getId() + ") has been assigned to " + creativeEmail + " by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail();
+			String title = WordUtils.capitalize(task.getItemType().toLowerCase()) + " task has been assigned to artist";
+			CMSRegistry.addTaskLogEntry(request, "ASSIGNED", comments, task.getId(), task.getItemType(), task.getVideo().getId(), title);			
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
 	}
 	
 	/**

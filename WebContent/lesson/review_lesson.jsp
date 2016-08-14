@@ -252,7 +252,7 @@
 									try {
 										task.setItemType("LESSON");
 										task.setItemId(lesson.getId());
-										task = TDAO.findByExample(task).get(0);
+										task = lesson.getTask();
 										TaskLog sample = new TaskLog();
 										sample.setTaskId(task.getId());
 										sample.setItemType("SLIDE");

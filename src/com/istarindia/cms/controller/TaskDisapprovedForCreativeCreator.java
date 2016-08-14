@@ -14,8 +14,8 @@ import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.MediaReview;
-import com.istarindia.apps.dao.MediaReviewDAO;
+import com.istarindia.apps.dao.ImageReview;
+import com.istarindia.apps.dao.ImageReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
@@ -27,20 +27,20 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
  * Servlet implementation class TaskDisapprovedForCreativeCreator
  */
 @WebServlet("/disapproved")
-public class TaskDisapprovedForCreativeCreator extends HttpServlet {
+public class TaskDisapprovedForCreativeCreator extends HttpServlet {/*
 	private static final long serialVersionUID = 1L;
        
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public TaskDisapprovedForCreativeCreator() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
 		ArrayList<ArrayList<String>> list_to_be_displayed = new ArrayList<ArrayList<String>>(); 
@@ -52,9 +52,9 @@ public class TaskDisapprovedForCreativeCreator extends HttpServlet {
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
 			
-		/*
+		
 		 * id, title, task name, review comments and action
-		 * */
+		 * 
 			embed_list.add(task.getId().toString());
 			
 			
@@ -77,11 +77,11 @@ public class TaskDisapprovedForCreativeCreator extends HttpServlet {
 			
 			
 			TaskManager manager = (new TaskManagerFactory()).getManager(task.getItemType());
-			List <MediaReview> media_review= new MediaReviewDAO().findByProperty("task",task);
+			List <ImageReview> media_review= new ImageReviewDAO().findByProperty("task",task);
 			StringBuffer sb = new StringBuffer();
 			if(media_review.size()>0)
 			{
-				for(MediaReview review: media_review)
+				for(ImageReview review: media_review)
 				{
 					sb.append(review.getComment()+",");
 				}
@@ -100,12 +100,12 @@ public class TaskDisapprovedForCreativeCreator extends HttpServlet {
 		
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
-}
+*/}

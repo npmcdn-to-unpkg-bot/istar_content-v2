@@ -32,10 +32,7 @@
 	List<HashMap<String, String>> logs = lessonUtils.getSlideComments(slide_id);
 
 	Lesson lesson = ppt.getLesson();
-	Task task = new Task();
-	task.setItemId(lesson.getId());
-	task.setItemType("LESSON");
-	task = new TaskDAO().findByExample(task).get(0);
+	Task task = lesson.getTask();
 
 	if (task.getStatus().equalsIgnoreCase("PUBLISHED")) {
 		request.setAttribute("message_failure", "This lesson is already published and cannot be accessed!");

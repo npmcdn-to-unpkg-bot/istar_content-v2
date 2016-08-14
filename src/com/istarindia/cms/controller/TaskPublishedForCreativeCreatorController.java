@@ -31,20 +31,20 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
  * Servlet implementation class ApprovedLessonForCreatorController
  */
 @WebServlet("/published_media_creative_creator")
-public class TaskPublishedForCreativeCreatorController extends HttpServlet {
+public class TaskPublishedForCreativeCreatorController extends HttpServlet {/*
 	private static final long serialVersionUID = 1L;
        
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public TaskPublishedForCreativeCreatorController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
@@ -55,9 +55,9 @@ public class TaskPublishedForCreativeCreatorController extends HttpServlet {
 		for(Task task : tasks)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
-		/*
+		
 		 * id, title, task name, and action
-		 * */
+		 * 
 			embed_list.add(task.getId().toString());
 			
 			
@@ -94,12 +94,12 @@ public class TaskPublishedForCreativeCreatorController extends HttpServlet {
 	
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
-}
+*/}

@@ -28,20 +28,20 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
  * Servlet implementation class MediaUploadController
  */
 @WebServlet("/tasks_completed")
-public class TaskCompletedForCreativeCreatorController extends HttpServlet {
+public class TaskCompletedForCreativeCreatorController extends HttpServlet {/*
 	private static final long serialVersionUID = 1L;
 	public static File fileUploadPath;
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public TaskCompletedForCreativeCreatorController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
@@ -52,9 +52,9 @@ public class TaskCompletedForCreativeCreatorController extends HttpServlet {
 		for(Task task : tasks)
 		{
 			ArrayList<String> embed_list = new ArrayList<String>();
-		/*
+		
 		 * id, title, task name, and action
-		 * */
+		 * 
 			embed_list.add(task.getId().toString());
 			
 			
@@ -89,12 +89,12 @@ public class TaskCompletedForCreativeCreatorController extends HttpServlet {
 		request.getRequestDispatcher("/content_reviewer/completed_lesson.jsp").forward(request, response);
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-}
+*/}

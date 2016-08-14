@@ -30,20 +30,20 @@ import com.istarindia.apps.services.task.TaskManagerFactory;
  * Servlet implementation class MediaUploadController
  */
 @WebServlet("/created_media_content_creator")
-public class TaskCreatedByContentCreatorController extends HttpServlet {
+public class TaskCreatedByContentCreatorController extends HttpServlet {/*
 	private static final long serialVersionUID = 1L;
 	public static File fileUploadPath;
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public TaskCreatedByContentCreatorController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
@@ -82,12 +82,12 @@ public class TaskCreatedByContentCreatorController extends HttpServlet {
 		request.getRequestDispatcher("/content_creator/media_list.jsp").forward(request, response);
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-}
+*/}

@@ -158,7 +158,7 @@
 											course_sno++;
 									%>
 									<li id="course_<%=course.getId()%>"
-										data-jstree='{"opened":true}'><%=course_sno%>. <%=course.getCourseName()%>
+										data-jstree='{"opened":false}'><%=course_sno%>. <%=course.getCourseName()%>
 										<ul>
 											<%
 												int cmsession_sno = 0;
@@ -176,14 +176,14 @@
 														<ul>
 															<%
 																for (Lesson lesson : session1.getLessons()) {
-																	
+																	Task task = lesson.getTask();
 																	try {
-																		if(!lesson.getTask().getStatus().equalsIgnoreCase("DELETED")) {
+																		if(!task.getStatus().equalsIgnoreCase("DELETED")) {
 																			String reviewers = "label rounded label-sea";
 																		
 																		String assigned = "label label-purple rounded-2x";
 																		String statusLabel = "label rounded label-yellow";
-																		if (lesson.getTask().fetchReviewersAsString().equalsIgnoreCase("reviewer not assigned")) {
+																		if (task.fetchReviewersAsString().equalsIgnoreCase("reviewer not assigned")) {
 																			reviewers = "label label-default ";
 																		}
 
@@ -195,15 +195,15 @@
 
 																		//boolean is_unassigned_lesson = (new ContentAdminDAO()).findById(lesson.getTask().getActorId());
 																		boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
-																		boolean is_publishable = is_content_admin && (lesson.getTask().getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || 
-																				lesson.getTask().getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
+																		boolean is_publishable = is_content_admin && (task.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || 
+																				task.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
 																		boolean is_replicable = lesson.getLessonType().equalsIgnoreCase("PRESENTATION");
 																		
 																		//if (is_unassigned_lesson) {
 																		//	assigned = "label label-default ";
 																		//}
 
-																		int task_id = lesson.getTask().getId();
+																		int task_id = task.getId();
 															%>
 
 															<%
@@ -211,36 +211,35 @@
 															%>
 															<li style="margin-bottom: 4px"
 																id="lesson_<%=lesson.getId()%>"
-																data-task-id="<%=lesson.getTask().getId()%>"
-																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getId()%> -- <%=lesson.getTitle()%>
+																data-task-id="<%=task_id%>"
+																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getId()%>-> <%=lesson.getTitle()%>
 															<%
 																} else if (!is_replicable){
 															%>	
-															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTask().getId()%>"
+															<li style="margin-bottom: 4px" data-task-id="<%=task.getId()%>"
 																id="lesson_<%=lesson.getId()%>"
-																data-jstree='{"opened":true}' class="context-menu-nonreplicable"><%=lesson.getId()%> -- <%=lesson.getTitle()%>
+																data-jstree='{"opened":true}' class="context-menu-nonreplicable"> <%=lesson.getId()%>-> <%=lesson.getTitle()%>
 															<% 
 																} else {
 															%>
-															<li style="margin-bottom: 4px" data-task-id="<%=lesson.getTask().getId()%>"
+															<li style="margin-bottom: 4px" data-task-id="<%=task.getId()%>"
 																id="lesson_<%=lesson.getId()%>"  data-lesson-id = "<%=lesson.getId()%>" 
-																data-jstree='{"opened":true}' class="context-menu"><%=lesson.getId()%> -- <%=lesson.getTitle()%>
+																data-jstree='{"opened":true}' class="context-menu"> <%=lesson.getId()%>-> <%=lesson.getTitle()%>
 															<% 
 																} 
 															%>  
-																<span class="<%=assigned%> "> Assigned to - <%=(new IstarUserDAO()).findById(lesson.getTask().getActorId()).getEmail()%></span>
+																<span class="<%=assigned%> "> Assigned to - <%=(new IstarUserDAO()).findById(task.getActorId()).getEmail()%></span>
 																<span>&nbsp;&nbsp;&nbsp;</span> 
-																<span class="<%=reviewers%>"> Reviewer - <%=lesson.getTask().fetchReviewersAsString()%></span>
+																<span class="<%=reviewers%>"> Reviewer - <%=task.fetchReviewersAsString()%></span>
 																<span>&nbsp;&nbsp;&nbsp;</span> 
-																<span class="<%=statusLabel%>"> Status - <%=lesson.getTask().getStatus()%></span>
+																<span class="<%=statusLabel%>"> Status - <%=task.getStatus()%></span>
 															</li>
 
 															<%
 																		}
 																		}
 																catch (Exception e) {
-																	//e.printStackTrace();
-																	//System.out.println("Exeptionssssssssss"+ lesson.getId());
+																		//
 																}
 																	
 															}
@@ -257,9 +256,6 @@
 										</ul></li>
 									<%
 										}
-									
-									long now1 = System.currentTimeMillis();
-										System.out.println("Time tlo load this page "+(now1-now)) ;
 									%>
 								</ul>
 							</li>

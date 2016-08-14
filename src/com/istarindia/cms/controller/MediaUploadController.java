@@ -30,10 +30,12 @@ import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.Folder;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
+import com.istarindia.apps.dao.ImageTask;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
+import com.istarindia.apps.dao.VideoTask;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.FolderService;
 import com.istarindia.apps.services.MediaService;
@@ -77,12 +79,14 @@ public class MediaUploadController extends IStarBaseServelet {
 		int slideId = 0;
 		int pptId = 0;
 		int itemId=0;
+		int taskId=0;
 		int cmsessionId = 0;
 		String slideType = "";
 		String folders[] = null;
 		String mediaTitle = "";
 		IstarUser user = (IstarUser)request.getSession().getAttribute("user");
-		Task task = new Task();
+		ImageTask imageTask = new ImageTask();
+		VideoTask videoTask = new VideoTask();
 		int userId = user.getId();
 		String mediaType = "";
 		
@@ -104,8 +108,7 @@ public class MediaUploadController extends IStarBaseServelet {
 						request.setAttribute("msg", "Video with title " + video.getTitle() + " and " + video.getUrl() + " created. ");
 
 						mediaService.saveMediaInFolders(video.getId(), MediaTypes.VIDEO, folders);
-						task = mediaService.updateMediTask(video.getId(), MediaTypes.VIDEO, userId);
-
+						taskId = mediaService.updateVideoTask(video.getId(), userId);
 					} else {
 						image = mediaService.saveImage(itemId, item.getName(), tags, cmsessionId, slideId, mediaTitle);
 						mediaType="Image";
@@ -113,8 +116,7 @@ public class MediaUploadController extends IStarBaseServelet {
 						request.setAttribute("msg", "Image with title " + image.getTitle() + " and " + image.getUrl() + " created. ");
 						
 						mediaService.saveMediaInFolders(image.getId(), MediaTypes.IMAGE, folders);
-						task = mediaService.updateMediTask(image.getId(), MediaTypes.IMAGE, userId);
-						 						
+						taskId = mediaService.updateImageTask(image.getId(), userId);
 					}
 					
 				} else {
@@ -169,9 +171,8 @@ public class MediaUploadController extends IStarBaseServelet {
 			mediaTitle = "New ";
 		}
 		
-		
-		String comment = mediaTitle + " " + mediaType.toLowerCase() + " is uploaded for task_id = " + task.getId() + " by " + user.getEmail() + " for session-id: " + cmsessionId ; 
-		CMSRegistry.addTaskLogEntry(request, StatusTypes.COMPLETED, comment, task.getId(), mediaType.toUpperCase(), itemId, "New " + mediaType + " is uploaded");
+		String comment = mediaTitle + " " + mediaType.toLowerCase() + " is uploaded for taskID = " + taskId + " by " + user.getEmail() + " for session-id: " + cmsessionId ; 
+		CMSRegistry.addTaskLogEntry(request, StatusTypes.COMPLETED, comment, taskId, mediaType.toUpperCase(), itemId, "New " + mediaType + " is uploaded");
 		
 		if (slideType != "" && pptId != 0 && slideId != 0) {
 			request.setAttribute("message_success", "Media file has been uploaded successfully ");
@@ -183,8 +184,6 @@ public class MediaUploadController extends IStarBaseServelet {
 			request.setAttribute("message_success", "Media file has been uploaded successfully and sent for review!");
 			request.getRequestDispatcher("/creative_creator/dashboard.jsp").forward(request, response);
 		}
-
-
 	}
 
 	/**
@@ -222,6 +221,7 @@ public class MediaUploadController extends IStarBaseServelet {
 				media_type = "IMAGE" ;
 				media_id = (new ImageDAO()).findByUrl(url).get(0).getId();
 				mediaService.moveImageToTrash(media_id);
+				task_id = mediaService.UpdateImageTaskDeleted(media_id);
 
 				comment = (new ImageDAO()).findById(media_id).getTitle() + " image is deleted by " + user.getEmail()  ;
 				request.setAttribute("message_success", "Image is deleted successfully");
@@ -230,6 +230,7 @@ public class MediaUploadController extends IStarBaseServelet {
 				media_type = "VIDEO" ;
 				media_id = (new VideoDAO()).findByUrl(url).get(0).getId();
 				mediaService.moveVideoToTrash(media_id);
+				task_id = mediaService.UpdateVideoTaskDeleted(media_id);
 
 				comment = (new VideoDAO()).findById(media_id).getTitle() + " video is deleted by " + user.getEmail()  ;
 				request.setAttribute("message_success", "Video is deleted successfully");
@@ -239,14 +240,12 @@ public class MediaUploadController extends IStarBaseServelet {
 				request.getRequestDispatcher("/delete_media.jsp").forward(request, response);
 			}
 			
-			task_id = mediaService.UpdateMediaTaskDeleted(media_id, media_type);
-
 			CMSRegistry.addTaskLogEntry(request, StatusTypes.DELETED, comment, task_id, media_type.toUpperCase(), media_id, WordUtils.capitalize(media_type) + " is deleted");
 			
 			try{
 	    		File sourceFile = new File(uploadFolder, url.split("getfile=")[1]);
 		   		FileUtils.moveFileToDirectory(sourceFile, trashFolder, true);
-		    }catch(Exception e){
+		    } catch (Exception e) {
 		    	e.printStackTrace();
 		    }
 

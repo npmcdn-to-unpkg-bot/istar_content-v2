@@ -114,7 +114,7 @@
 			</div>
 			<%
                     Lesson lesson = (Lesson) request.getAttribute("lesson");
-                    int task_id = Integer.parseInt(request.getAttribute("task_id").toString());
+                    int task_id = lesson.getTask().getId();//Integer.parseInt(request.getAttribute("task_id").toString());
                 %>
 		</div>
 		<BR />
@@ -669,14 +669,14 @@
 		type="text/javascript" charset="utf-8"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
-
 	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+	
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 	
 	<script type="text/javascript">
 			var responsiveHelper_dt_basic = undefined;

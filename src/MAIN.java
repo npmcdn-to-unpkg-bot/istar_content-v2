@@ -51,7 +51,9 @@ public class MAIN {
 	private static String pass;
 	public static void main(String[] args) throws IOException, AddressException, MessagingException {
 		
-		Properties properties = new Properties();
+		
+		
+		/*Properties properties = new Properties();
 		String propertyFileName = "app.properties";
 		InputStream inputStream = TT.class.getClassLoader().getResourceAsStream(propertyFileName);
 		if (inputStream != null) {
@@ -103,7 +105,7 @@ public class MAIN {
 				System.out.println("update "+u.getUserType().toLowerCase()+" set password='" +pwd+"' where id="+u.getId()+";");
 			}
 		}
-		System.out.println("done");
+		System.out.println("done");*/
 
 	}
 

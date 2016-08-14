@@ -123,7 +123,7 @@ height:    auto   !important;
 						<input type="checkbox" name="delfile" 	value="<%=image.getUrl()%>" class="imageToDelete">  <i></i>
 						
 						<a href="<%=image.getUrl()%>" rel="gallery3" class="fancybox img-hover-v1" title="Image <%=image.getId()%>">
-							<span> <%=image.getTitle().replaceAll("_", " ")%> </span>
+							<span> <%=image.getTitle()%> </span>
 						</a>
 						
 					</label>
