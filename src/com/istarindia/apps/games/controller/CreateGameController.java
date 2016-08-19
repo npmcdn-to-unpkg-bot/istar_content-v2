@@ -1,6 +1,7 @@
 package com.istarindia.apps.games.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +17,6 @@ import com.istarindia.apps.dao.GameDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
-import com.istarindia.apps.dao.Presentaion;
-import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
 
 /**

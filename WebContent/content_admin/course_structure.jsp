@@ -175,9 +175,9 @@
 														data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
 														<ul>
 															<%
-																for (Lesson lesson : session1.getLessons()) {
+															try {	for (Lesson lesson : session1.getLessons()) {
 																	Task task = lesson.getTask();
-																	try {
+																	
 																		if(!task.getStatus().equalsIgnoreCase("DELETED")) {
 																			String reviewers = "label rounded label-sea";
 																		
@@ -237,12 +237,13 @@
 
 															<%
 																		}
+															}
 																		}
 																catch (Exception e) {
 																		//
 																}
 																	
-															}
+															
 															%>
 														</ul></li>
 

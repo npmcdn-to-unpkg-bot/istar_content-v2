@@ -23,7 +23,6 @@ import com.istarindia.apps.ImageUtils;
 import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.IstarUserDAO;
-import com.sun.imageio.plugins.common.ImageUtil;
 
 /**
  * Servlet implementation class GalleryJsonController

@@ -10,15 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.istarindia.apps.StatusTypes;
-import com.istarindia.apps.dao.ContentCreator;
 import com.istarindia.apps.dao.ContentCreatorDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
-import com.istarindia.apps.dao.TaskReviewer;
-import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.LessonService;
 import com.istarindia.apps.services.task.TaskManager;
 import com.istarindia.apps.services.task.TaskManagerFactory;

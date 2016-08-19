@@ -9,9 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import javax.crypto.interfaces.PBEKey;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -21,13 +20,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.id.IntegralDataTypeHolder;
 
 import com.istarindia.apps.cmsutils.reports.column.ReportColumnHandlerFactory;
 import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
-import com.istarindia.apps.dao.utils.HibernateSessionFactory;
 import com.istarindia.apps.services.CMSRegistry;
 
 /**

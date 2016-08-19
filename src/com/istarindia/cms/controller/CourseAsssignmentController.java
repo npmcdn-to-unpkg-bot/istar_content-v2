@@ -2,8 +2,6 @@ package com.istarindia.cms.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -12,15 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.cmsutils.ErrorMessages;
-import com.istarindia.apps.dao.ContentReviewer;
 import com.istarindia.apps.dao.ContentReviewerDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
@@ -31,9 +26,6 @@ import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
-import com.istarindia.apps.services.task.CreateLessonTaskManager;
-
-import javassist.compiler.SyntaxError;
 
 /**
  * Servlet implementation class CourseAsssignmentController

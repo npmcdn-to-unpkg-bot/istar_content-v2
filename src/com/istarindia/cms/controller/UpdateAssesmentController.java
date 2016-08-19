@@ -1,10 +1,6 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,24 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import com.istarindia.apps.dao.Assessment;
-import com.istarindia.apps.dao.AssessmentDAO;
-import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.LearningObjective;
-import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
-import com.istarindia.apps.dao.LessonDAO;
-import com.istarindia.apps.dao.Presentaion;
-import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.AssessmentService;
-import com.istarindia.apps.services.LessonService;
-import com.istarindia.apps.services.task.CreateLessonTaskManager;
 
 /**
  * Servlet implementation class CreateAssesment

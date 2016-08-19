@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.task.EmailSendingUtility;
 
 /**

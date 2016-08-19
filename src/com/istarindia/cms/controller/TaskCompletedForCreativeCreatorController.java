@@ -1,28 +1,7 @@
 package com.istarindia.cms.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.istarindia.apps.StatusTypes;
-import com.istarindia.apps.dao.Image;
-import com.istarindia.apps.dao.ImageDAO;
-import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.IstarUserDAO;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
-import com.istarindia.apps.dao.Video;
-import com.istarindia.apps.dao.VideoDAO;
-import com.istarindia.apps.services.MediaService;
-import com.istarindia.apps.services.task.TaskManager;
-import com.istarindia.apps.services.task.TaskManagerFactory;
 
 /**
  * Servlet implementation class MediaUploadController

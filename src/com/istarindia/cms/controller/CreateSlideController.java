@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.jsoup.Jsoup;
 
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
@@ -22,8 +21,6 @@ import com.istarindia.apps.dao.Slide;
 import com.istarindia.apps.dao.SlideDAO;
 import com.istarindia.apps.dao.SlideVersion;
 import com.istarindia.apps.dao.SlideVersionDAO;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.dao.utils.HibernateSessionFactory;

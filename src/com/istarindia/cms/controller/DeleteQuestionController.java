@@ -1,9 +1,6 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,23 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.dao.Assessment;
 import com.istarindia.apps.dao.AssessmentDAO;
-import com.istarindia.apps.dao.AssessmentQuestion;
-import com.istarindia.apps.dao.AssessmentQuestionDAO;
-import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
-import com.istarindia.apps.dao.Question;
-import com.istarindia.apps.dao.QuestionDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.AssessmentQuestionService;
-import com.istarindia.apps.services.QuestionService;
-
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  * Servlet implementation class DeleteQuestionController

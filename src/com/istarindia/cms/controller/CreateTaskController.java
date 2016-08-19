@@ -1,6 +1,7 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +13,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.StatusTypes;
-import com.istarindia.apps.dao.Cmsession;
-import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.CreativeAdmin;
 import com.istarindia.apps.dao.CreativeAdminDAO;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.ImageTask;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.dao.VideoTask;

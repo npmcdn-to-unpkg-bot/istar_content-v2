@@ -1,6 +1,7 @@
 package com.istarindia.apps.services.controllers.auth;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,6 @@ import org.hibernate.Transaction;
 import com.istarindia.apps.dao.Doubt;
 import com.istarindia.apps.dao.DoubtDAO;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.StudentNoteDAO;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**

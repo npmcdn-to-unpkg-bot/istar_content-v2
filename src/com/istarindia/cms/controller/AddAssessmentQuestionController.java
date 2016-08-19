@@ -1,12 +1,7 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -20,13 +15,9 @@ import com.istarindia.apps.dao.AssessmentDAO;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Question;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.OptionService;
 import com.istarindia.apps.services.QuestionService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
-import com.istarindia.cms.lessons.CMSList;
-import com.istarindia.cms.lessons.CMSTextItem;
 
 /**
  * Servlet implementation class CreateSlideController

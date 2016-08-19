@@ -73,20 +73,20 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 								<thead>
 									<tr>
 										<th>#</th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Question Text</th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Option 1 </th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Option 2 </th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Option 3 </th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Option 4 </th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Option 5 </th>
-										<th style="max-width: 100px !important; word-wrap:break-word;">Action</th>
+										<th style="max-width: 100px !important; word-break: break-all;">Question Text</th>
+										<th style="max-width: 100px !important; word-break: break-all;">Option 1 </th>
+										<th style="max-width: 100px !important; word-break: break-all;">Option 2 </th>
+										<th style="max-width: 100px !important; word-break: break-all;">Option 3 </th>
+										<th style="max-width: 100px !important; word-break: break-all;">Option 4 </th>
+										<th style="max-width: 100px !important; word-break: break-all;">Option 5 </th>
+										<th style="max-width: 100px !important; word-break: break-all;">Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<%=(new TrainerReportUtils()).getAllQuestions() %>
 								</tbody>
 							</table>
-						</div>
+						</div>`
 					</div>
 			</div>
 		</div>

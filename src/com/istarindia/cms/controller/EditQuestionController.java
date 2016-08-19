@@ -5,28 +5,8 @@
  */
 package com.istarindia.cms.controller;
 
-import com.istarindia.apps.dao.Assessment;
-import com.istarindia.apps.dao.AssessmentDAO;
-import com.istarindia.apps.dao.AssessmentOption;
-import com.istarindia.apps.dao.AssessmentOptionDAO;
-import com.istarindia.apps.dao.IstarUserDAO;
-import com.istarindia.apps.dao.LearningObjective;
-import com.istarindia.apps.dao.LearningObjectiveDAO;
-import com.istarindia.apps.dao.Question;
-import com.istarindia.apps.dao.QuestionDAO;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
-import com.istarindia.apps.services.AssessmentOptionService;
-import com.istarindia.apps.services.OptionService;
-import com.istarindia.apps.services.QuestionService;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+
+import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.Question;
+import com.istarindia.apps.dao.QuestionDAO;
+import com.istarindia.apps.services.OptionService;
+import com.istarindia.apps.services.QuestionService;
 
 @WebServlet("/edit_question")
 public class EditQuestionController extends HttpServlet {

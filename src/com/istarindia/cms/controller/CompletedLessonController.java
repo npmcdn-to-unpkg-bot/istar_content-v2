@@ -18,7 +18,6 @@ import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.TaskReviewer;
 import com.istarindia.apps.dao.TaskReviewerDAO;
-import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.LessonService;
 import com.istarindia.apps.services.task.TaskManager;
 import com.istarindia.apps.services.task.TaskManagerFactory;

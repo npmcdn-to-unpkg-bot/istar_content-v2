@@ -6,10 +6,7 @@ import java.util.List;
 
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.UserTypes;
-import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.task.CreateLessonTaskManager;
 import com.istarindia.apps.services.task.TaskStage;
 

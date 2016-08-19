@@ -1,24 +1,7 @@
 package com.istarindia.cms.controller;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.istarindia.apps.StatusTypes;
-import com.istarindia.apps.dao.ImageReview;
-import com.istarindia.apps.dao.ImageReviewDAO;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
-import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
 
 /**

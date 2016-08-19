@@ -18,7 +18,6 @@ import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.services.CMSRegistry;
 
 /**

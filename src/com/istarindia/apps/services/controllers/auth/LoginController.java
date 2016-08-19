@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.istarindia.apps.UserTypes;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.services.CMSRegistry;
@@ -42,12 +43,27 @@ public class LoginController extends IStarBaseServelet {
 				IstarUserDAO dao = new IstarUserDAO();
 				IstarUser user = dao.findByEmail(request.getParameter("email")).get(0);
 				if (user.getPassword().equalsIgnoreCase(request.getParameter("password"))) {
-					request.getSession().setMaxInactiveInterval(-1);
-					request.getSession().setAttribute("jsession_id", request.getSession().getId()+"-"+System.currentTimeMillis());
-					request.getSession().setAttribute("user", user);
-					CMSRegistry.addUserSessionLogEntry(request.getSession().getAttribute("jsession_id").toString(), user.getId(),"LOGIN");
-					request.setAttribute("msg", "Welcome to iStar, " + user.getName());
-					request.getRequestDispatcher("/" + user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
+					
+					if(user.getUserType().toLowerCase().equalsIgnoreCase(UserTypes.CONTENT_ADMIN) ||
+							user.getUserType().toLowerCase().equalsIgnoreCase(UserTypes.CONTENT_CREATOR) ||
+							user.getUserType().toLowerCase().equalsIgnoreCase(UserTypes.CONTENT_REVIEWER) ||
+							user.getUserType().toLowerCase().equalsIgnoreCase(UserTypes.CREATIVE_ADMIN) ||
+							user.getUserType().toLowerCase().equalsIgnoreCase(UserTypes.CREATIVE_CREATOR)  
+							
+							
+					) {
+						request.getSession().setMaxInactiveInterval(-1);
+						request.getSession().setAttribute("jsession_id", request.getSession().getId()+"-"+System.currentTimeMillis());
+						request.getSession().setAttribute("user", user);
+						CMSRegistry.addUserSessionLogEntry(request.getSession().getAttribute("jsession_id").toString(), user.getId(),"LOGIN");
+						request.setAttribute("msg", "Welcome to iStar, " + user.getName());
+						request.getRequestDispatcher("/" + user.getUserType().toLowerCase() + "/dashboard.jsp").forward(request, response);
+					} else {
+						request.setAttribute("msg", "You are not authorized to enter the content creation area.");
+						request.getRequestDispatcher("/index.jsp").forward(request, response);
+					}
+					
+					
 				} else {
 					request.setAttribute("msg", "Wrong Username or password");
 					request.getRequestDispatcher("/index.jsp").forward(request, response);

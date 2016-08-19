@@ -10,7 +10,21 @@ import java.util.Set;
 
 import com.istarindia.apps.cmsutils.reports.IStarColumn;
 import com.istarindia.apps.cmsutils.reports.ReportUtils;
-import com.istarindia.apps.dao.*;
+import com.istarindia.apps.dao.AssessmentOption;
+import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.IstarUserDAO;
+import com.istarindia.apps.dao.LearningObjective;
+import com.istarindia.apps.dao.LearningObjectiveDAO;
+import com.istarindia.apps.dao.Question;
+import com.istarindia.apps.dao.QuestionDAO;
+import com.istarindia.apps.dao.RecruiterCompany;
+import com.istarindia.apps.dao.RecruiterCompanyDAO;
+import com.istarindia.apps.dao.Vacancy;
+import com.istarindia.apps.dao.VacancyDAO;
+import com.istarindia.apps.dao.VacancyWorkflow;
+import com.istarindia.apps.dao.VacancyWorkflowDAO;
+import com.istarindia.apps.dao.VacanyStatus;
+import com.istarindia.apps.dao.VacanyStatusDAO;
 
 /**
  * @author vaibhav
@@ -244,16 +258,16 @@ public class TrainerReportUtils {
 		
 		for (Question q : items) {
 			out.append("<tr><td><a href='edit_question.jsp?id=" + q.getId() + "'> " + q.getId() + "</a></td>");
-			out.append("<td style='max-width: 100px !important; word-wrap:break-word;'>" + q.getQuestionText() + "</td>");
+			out.append("<td style='max-width: 100px !important; word-break: break-all;'>" + q.getQuestionText() + "</td>");
 			
 			Set<AssessmentOption> opts = q.getAssessmentOptions();
 			
 			for (AssessmentOption assessmentOption : opts) {
 				try {
 					if(assessmentOption.getMarkingScheme() ==1) {
-						out.append("<td style='max-width: 100px !important; word-wrap:break-word;background: green;color: white;'>" + assessmentOption.getText() + "</td>");
+						out.append("<td style='max-width: 100px !important; word-break: break-all;background: green;color: white;'>" + assessmentOption.getText() + "</td>");
 					} else {
-						out.append("<td style='max-width: 100px !important; word-wrap:break-word;'>" + assessmentOption.getText() + "</td>");
+						out.append("<td style='max-width: 100px !important; word-break: break-all;'>" + assessmentOption.getText() + "</td>");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.StatusTypes;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;

@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.IstarUserDAO;
-//import com.istarindia.apps.games.services.GameSerializer;
-
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
-import com.istarindia.cms.game.*;
-
-import antlr.collections.List; 
+import com.istarindia.cms.game.Asset;
+import com.istarindia.cms.game.GameXML;
+import com.istarindia.cms.game.Option;
+import com.istarindia.cms.game.Stage; 
 /**
  * Servlet implementation class PlayGameController
  */

@@ -1,6 +1,7 @@
 package com.istarindia.cms.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,20 +14,14 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.StatusTypes;
-import com.istarindia.apps.dao.CreativeCreator;
 import com.istarindia.apps.dao.CreativeCreatorDAO;
 import com.istarindia.apps.dao.ImageTask;
 import com.istarindia.apps.dao.ImageTaskDAO;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.Task;
-import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.VideoTask;
 import com.istarindia.apps.dao.VideoTaskDAO;
 import com.istarindia.apps.services.CMSRegistry;
-import com.istarindia.apps.services.TaskService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 @WebServlet("/assign_creator")
 public class AssignCreativeController extends IStarBaseServelet {

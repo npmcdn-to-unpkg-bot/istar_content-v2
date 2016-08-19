@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.Lesson;
-import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Presentaion;
 import com.istarindia.apps.dao.PresentaionDAO;
 import com.istarindia.apps.dao.Task;

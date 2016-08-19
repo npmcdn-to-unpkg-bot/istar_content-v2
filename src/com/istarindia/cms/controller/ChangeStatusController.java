@@ -26,7 +26,6 @@ import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Lesson;
-import com.istarindia.apps.dao.LessonDAO;
 import com.istarindia.apps.dao.Module;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;

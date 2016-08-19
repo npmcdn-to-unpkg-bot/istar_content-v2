@@ -1,7 +1,7 @@
 
 package com.istarindia.apps.cmsutils.reports.column;
 
-import com.istarindia.apps.dao.*;
+import com.istarindia.apps.dao.IstarUser;
 
 public class AssessmentHandler extends ColumnHandler {
 

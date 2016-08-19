@@ -32,7 +32,6 @@ import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.ImageTask;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.Video;
 import com.istarindia.apps.dao.VideoDAO;
 import com.istarindia.apps.dao.VideoTask;

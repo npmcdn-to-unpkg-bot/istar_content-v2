@@ -1,35 +1,10 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.istarindia.apps.UserTypes;
-import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.IstarUserDAO;
-import com.istarindia.apps.dao.LearningObjective;
-import com.istarindia.apps.dao.LearningObjectiveDAO;
-import com.istarindia.apps.dao.Lesson;
-import com.istarindia.apps.dao.LessonDAO;
-import com.istarindia.apps.dao.Question;
-import com.istarindia.apps.dao.SlideDAO;
-import com.istarindia.apps.services.OptionService;
-import com.istarindia.apps.services.QuestionService;
-import com.istarindia.apps.services.task.EmailSendingUtility;
-
-import istar.TT;
+import com.istarindia.apps.dao.CompanyDAO;
+import com.istarindia.apps.dao.OrgAdminDAO;
 
 /**
  * 
@@ -50,6 +25,9 @@ public class MAIN {
 	private static String user1;
 	private static String pass;
 	public static void main(String[] args) throws IOException, AddressException, MessagingException {
+		String kk = (new CompanyDAO().findById(Integer.parseInt("2")).getId())+"";
+		
+		System.err.println(kk);
 		
 		
 		

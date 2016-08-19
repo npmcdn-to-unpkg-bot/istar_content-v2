@@ -1,8 +1,6 @@
 package com.istarindia.apps.cmsutils.reports.column;
 
-import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.IstarUser;
-import com.istarindia.apps.dao.TaskDAO;
 
 public class MediaLinkHandler extends ColumnHandler {
 

@@ -13,13 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.istarindia.apps.MediaTypes;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.Image;
-import com.istarindia.apps.dao.ImageDAO;
 import com.istarindia.apps.dao.ImageReview;
 import com.istarindia.apps.dao.ImageReviewDAO;
 import com.istarindia.apps.dao.Task;
 import com.istarindia.apps.dao.TaskDAO;
 import com.istarindia.apps.dao.Video;
-import com.istarindia.apps.dao.VideoDAO;
 
 /**
  * Servlet implementation class MediaReviewController
