@@ -1,8 +1,8 @@
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><!doctype html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%><!doctype html>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
@@ -63,7 +63,7 @@ try {
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=nuetral%>student/css/print/pdf.css' : '<%=nuetral%>student/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL%>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL%>assets/plugins/reveal/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
@@ -168,7 +168,7 @@ try {
 	
 	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.js"></script>
-	<script src="<%=nuetral%>student/lib/js/head.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/lib/js/head.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>

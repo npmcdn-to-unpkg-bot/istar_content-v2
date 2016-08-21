@@ -2,8 +2,10 @@
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.*"%>
 <%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="org.hibernate.Query"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%
 	String url = request.getRequestURL().toString();
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
@@ -162,47 +164,62 @@
 										<ul>
 											<%
 												int cmsession_sno = 0;
-													for (Module module : course.getModules()) {
+												
+												String hql = "from Module as model where model.course=:sid order by order_id";
+												Query q = (new IstarUserDAO()).getSession().createQuery(hql);
+												q.setInteger("sid", course.getId());
+												List<Module> moduleList = q.list();
+
+												for (Module module : moduleList) {
 											%>
 											<li id="module_<%=module.getId()%>"
 												data-jstree='{"opened":true}'><%=module.getModuleName()%>
 												<ul>
 													<%
-														for (Cmsession session1 : module.getCmsessions()) {
-																	cmsession_sno++;
+														hql = "from Cmsession as model where model.module=:sid  order by order_id";
+														q = (new IstarUserDAO()).getSession().createQuery(hql);
+														q.setInteger("sid", module.getId());
+														List<Cmsession> sessionList = q.list();	
+														
+														for (Cmsession session1 : sessionList) {
+															cmsession_sno++;
 													%>
 													<li id="session_<%=session1.getId()%>"
 														data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
 														<ul>
-															<%
-															try {	for (Lesson lesson : session1.getLessons()) {
+														<%
+															try {	
+
+																hql = "from Lesson as model where model.module=:sid  order by order_id";
+																q = (new IstarUserDAO()).getSession().createQuery(hql);
+																q.setInteger("sid", session1.getId());
+																List<Lesson> lessonList = q.list();	
+																
+																for (Lesson lesson : lessonList) {
 																	Task task = lesson.getTask();
-																	
-																		if(!task.getStatus().equalsIgnoreCase("DELETED")) {
-																			String reviewers = "label rounded label-sea";
-																		
+																
+																	if(!task.getStatus().equalsIgnoreCase("DELETED")) {
+																		String reviewers = "label rounded label-sea";
 																		String assigned = "label label-purple rounded-2x";
 																		String statusLabel = "label rounded label-yellow";
+																		
 																		if (task.fetchReviewersAsString().equalsIgnoreCase("reviewer not assigned")) {
 																			reviewers = "label label-default ";
 																		}
-
+	
 																		if (lesson.getStatus().equalsIgnoreCase("CREATED")) {
 																			statusLabel = "label label-default ";
 																		}
-
+	
 																		String email = ((IstarUser) request.getSession().getAttribute("user")).getEmail();
-
+	
 																		//boolean is_unassigned_lesson = (new ContentAdminDAO()).findById(lesson.getTask().getActorId());
 																		boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
-																		boolean is_publishable = is_content_admin && (task.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || 
-																				task.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
+																		boolean is_publishable = is_content_admin
+																				 && (task.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH)
+																				 || task.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
 																		boolean is_replicable = lesson.getLessonType().equalsIgnoreCase("PRESENTATION");
 																		
-																		//if (is_unassigned_lesson) {
-																		//	assigned = "label label-default ";
-																		//}
-
 																		int task_id = task.getId();
 															%>
 
@@ -274,7 +291,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">Ã—</button>
+						type="button">×</button>
 					<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 				</div>
 				<div class="modal-body">
