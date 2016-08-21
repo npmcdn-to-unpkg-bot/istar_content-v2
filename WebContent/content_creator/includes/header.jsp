@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.istarindia.apps.role.ParentLink"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%><%@page import="com.istarindia.apps.role.ChildLink"%>
 <%@page import="javafx.scene.Parent"%>

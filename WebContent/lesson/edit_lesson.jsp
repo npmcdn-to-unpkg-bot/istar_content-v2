@@ -4,8 +4,8 @@
 <%@page import="com.istarindia.apps.cmsutils.reports.ReportUtils"%>
 
 <%@page import="com.istarindia.apps.services.LessonService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
 <%
@@ -343,7 +343,7 @@
 									<div id='lo-modal-content' class='modal-content'>
 										<div class='modal-header'>
 											<button aria-hidden='true' data-dismiss='modal' class='close'
-												type='button'>×</button>
+												type='button'>Ã—</button>
 											<h4 id='myModalLabel1' class='modal-title'>Choose
 												Learning Objectives</h4>
 										</div>

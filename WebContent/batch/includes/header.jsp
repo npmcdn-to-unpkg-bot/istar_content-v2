@@ -3,7 +3,7 @@
 <%@page import="com.istarindia.apps.role.ParentLink"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.dao.IstarUser"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     try {
         if (request.getSession().getAttribute("user") == null) {
@@ -90,7 +90,7 @@
 
 
 <div class="alert alert-success fade in margin-bottom-40">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">Ã—</button>
     <h4>Well done!</h4>
     <p><%=request.getAttribute("message_success")%></p>
 </div>
@@ -99,7 +99,7 @@
     System.out.println(attributeName);
 
 %><div class="alert alert-danger fade in">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">Ã—</button>
     <h4>Oh snap! You got an error!</h4>
     <p><%=request.getAttribute("message_failure")%></p>
 

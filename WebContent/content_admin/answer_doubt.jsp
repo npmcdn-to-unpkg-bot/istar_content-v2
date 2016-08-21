@@ -1,7 +1,7 @@
 <%@page import="com.istarindia.apps.dao.DoubtDAO"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%>
 <%@page import="javax.swing.plaf.TableUI"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>

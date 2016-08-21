@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="phone_area" style="display: block;    margin-top: -100px;">
 	<div id="phone_placeholder" style="display: block; height: 1024px;">
 		<div id="htc_one_emulator" style="transform: scale(1); transform-origin: 0px 0px 0px;">

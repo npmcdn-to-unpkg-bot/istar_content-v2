@@ -1,6 +1,6 @@
 <%@page import="org.ocpsoft.prettytime.PrettyTime"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
 <%@page import="com.istarindia.apps.cmsutils.TableUtils"%><%@page
 	import="com.istarindia.apps.dao.*"%><%@page
 	import="com.istarindia.apps.dao.IstarUser"%>
@@ -113,7 +113,7 @@
 									<div
 										class="alert-blocks alert-blocks-pending alert-dismissable">
 										<button aria-hidden="true" data-dismiss="alert" class="close"
-											type="button">×</button>
+											type="button">Ã—</button>
 										<img class="rounded-x mCS_img_loaded"
 											src="assets/img/testimonials/img3.jpg" alt="">
 										<div class="overflow-h">

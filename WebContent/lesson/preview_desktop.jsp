@@ -1,8 +1,8 @@
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%><!doctype html>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 

@@ -9,7 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.istarindia.apps.cmsutils.reports.*"%>
 <%@page import="org.omg.CosNaming.IstringHelper"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
 
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";

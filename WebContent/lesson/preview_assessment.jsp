@@ -4,7 +4,7 @@
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@page import="com.istarindia.apps.dao.UiThemeDAO"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.istarindia.cms.lessons.*"%>
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <% String url = request.getRequestURL().toString();

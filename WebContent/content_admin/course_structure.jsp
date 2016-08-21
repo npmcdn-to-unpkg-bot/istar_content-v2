@@ -2,8 +2,8 @@
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.*"%>
 <%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	String url = request.getRequestURL().toString();
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
@@ -274,7 +274,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
+						type="button">Ã—</button>
 					<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 				</div>
 				<div class="modal-body">

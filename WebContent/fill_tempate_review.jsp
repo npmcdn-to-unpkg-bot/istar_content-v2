@@ -5,8 +5,8 @@
 <%@page import="com.istarindia.apps.services.LessonService"%><%@page
 	import="com.istarindia.apps.*"%><%@page
 	import="com.istarindia.apps.SlideTransition"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><%@ page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
 <%

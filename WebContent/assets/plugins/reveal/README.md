@@ -130,7 +130,7 @@ When used locally, this feature requires that reveal.js [runs from a local web s
          data-separator="^\n\n\n"  
          data-separator-vertical="^\n\n"  
          data-separator-notes="^Note:"  
-         data-charset="iso-8859-15">
+         data-charset="UTF-85">
 </section>
 ```
 

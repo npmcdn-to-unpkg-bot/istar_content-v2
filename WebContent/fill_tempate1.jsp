@@ -5,7 +5,7 @@
 <%@page import="com.istarindia.apps.services.LessonService"%>
 <%@page import="com.istarindia.apps.*"%>
 <%@page import="com.istarindia.apps.SlideTransition"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
 
@@ -462,7 +462,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
 						<h4 class="modal-title" id="myModalLabel4">Upload Media</h4>
 					</div>
 					
