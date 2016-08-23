@@ -16,13 +16,13 @@
 <%
 	int slide_id = 0;
 	int order_id = 0;
+	int version_id = 0;
 	Boolean newSlide = true;
 	String new_media_title="";
 	String previous_slide_url ="#";
 	String next_slide_url ="#";
 	String slide_type = "";
 	String bgImage = "none";
-
 	int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
 	Presentaion ppt = (new PresentaionDAO()).findById(ppt_id);
 	Lesson lesson = ppt.getLesson();
@@ -31,14 +31,17 @@
 	
 	Task task = new Task();
 	task = lesson.getTask();
-
+	
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	PrettyTime prettyTime = new PrettyTime();
 	SlideService service = new SlideService();
 	LessonUtils lessonUtils = new LessonUtils();
 	CMSSlide cMSSlide = new CMSSlide();
 	SlideDAO slideDao = new SlideDAO();
-	Slide slide = new Slide();
 	MediaUtils mediaUtils = new MediaUtils();
 	
+	Slide slide = new Slide();
+	ArrayList<SlideVersion> versions = new ArrayList<SlideVersion>();
 	ArrayList<Image> bgImages = (ArrayList<Image>) mediaUtils.findAllBackgrounds(request);
 	List<HashMap<String, String>> logs = null;  
 
@@ -52,6 +55,7 @@
 				slide_id = Integer.parseInt(request.getParameter("slide_id"));
 				previous_slide_url = service.getPreviousSlideEditUrl(ppt_id, slide_id);
 				next_slide_url = service.getNextSlideEditUrl(ppt_id, slide_id);
+				versions = service.getPreviousRevisions(slide_id);
 				
 				newSlide = false;
 				
@@ -59,19 +63,15 @@
 				order_id = slide.getOrder_id();
 
 				if(request.getParameterMap().containsKey("version_id")) {
-					System.out.println("slide_type->67 "+slide_type);
-					int version_id = Integer.parseInt(request.getParameter("version_id"));
+					version_id = Integer.parseInt(request.getParameter("version_id"));
 					cMSSlide = (new LessonUtils()).convertSlide(version_id);
 				} else {
-					System.out.println("slide_type->71 "+slide_type);
 					cMSSlide = (new LessonUtils()).convertSlide(slide);
 				}
 				
 				if(request.getParameterMap().containsKey("slide_type")) {
-					System.out.println("slide_type->76 "+slide_type);
 					slide_type = request.getParameter("slide_type");
 				} else {
-					System.out.println("slide_type->79 "+slide_type);
 					slide_type = cMSSlide.getTemplateName();
 				}
 				
@@ -80,7 +80,6 @@
 				logs = lessonUtils.getSlideComments(slide_id);
 				
 			} else {
-				System.out.println("slide_type->88 "+slide_type);
 				newSlide = true;
 				if(request.getParameterMap().containsKey("slide_type")) {
 					slide_type = request.getParameter("slide_type");
@@ -88,15 +87,12 @@
 			}
 			cMSSlide.setTemplateName(slide_type);
 		} catch (Exception e ) { 
-			System.out.println("slide_type->96 "+slide_type);
-
 			e.printStackTrace();
 			
 		}
 		
 		new_media_title = service.getNewMediaTitle(slide_id, ppt.getLesson().getCmsession().getId());
 	}
-	System.out.println("slide_type->"+slide_type);
 	
 %>
 
@@ -190,8 +186,10 @@
 						<li><a href="#template" data-toggle="tab">Template</a></li>
 						<li><a href="#content" data-toggle="tab">Content</a></li>
 						<li><a href="#ui" data-toggle="tab">Theme</a></li>
-						<% if(slide_id != 0) { %>
+						<% if(slide_id != 0 && versions.size() > 0) { %>
 						<li><a href="#versions" data-toggle="tab">Previous versions</a></li>
+						<% } %>
+						<% if(slide_id != 0) { %>
 						<li><a href="#comments" data-toggle="tab">Review Comments</a></li>
 						<% } %>
 						<li class="active"><a href="#desktop" data-toggle="tab">Desktop Preview</a></li>
@@ -364,34 +362,29 @@
 							</div>
 						</div>
 						
-						<% if (slide_id != 0 ) { %>
+						<% if (versions.size() > 0 ) { %>
 						<div id="versions" class="tab-pane fade in ">
-							<div class="panel panel-sea">
-								<div class="panel-heading">
-									<h3 class="panel-title"> <i class="fa fa-tasks"></i> Try previous versions </h3>
-								</div>
-								<div class="panel-body">
-								<fieldset>
-									<section>									
-										<select id="version_id" class="form-control" name="version" style=" width: 317px;">
-											
-											<option value='NONE' selected='selected'>None</option>
-											
-											<% 
-												int ite = 1;
-												for (SlideVersion version : service.getPreviousRevisions(slide_id) ) { 
-											%>
-											
-											<option value='<%=version.getId()%>'><%=version.getCreatedAt()%></option>
-											
-											<% } %>
-											
-										</select>
-									</section>
+							<section>
+								<table class="table table-striped table-teal">
+								<tr>
+									<th>Version ID </th>
+									<th>Template </th>
+									<th>Last updated at </th>
+									<th>Action </th>
+								</tr>
+								
+								<% for (SlideVersion version : versions ) { %>
+									<tr>
+										<td><%=version.getId() %> </td>
+										<td><%=version.getTemplate() %> </td>
+										<td><%=prettyTime.format(simpleDateFormat.parse(version.getCreatedAt().toString()))%> </td>
+										<td> <a target='_blank' class="btn-u btn-custom" href="/content/fill_template.jsp?ppt_id=<%=ppt_id%>&slide_id=<%=slide_id %>&version_id=<%=version.getId()%>">Restore</a> </td>
+									</tr>
+								<% } %>
+								
+								</table>									
 									
-								</fieldset>
-								</div>
-							</div>
+							</section>
 						</div>
 						
 						<div id="comments" class="tab-pane fade in ">
@@ -403,8 +396,6 @@
 									<%
 										for(HashMap<String, String> log : logs){
 											try {
-												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-												PrettyTime p = new PrettyTime();
 												String typeStatus = log.get("changed_status").toString();
 												String desc = log.get("comment").toString();
 												if (desc.length() > 100) {
@@ -417,7 +408,7 @@
 										<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
 										<div>
 											<strong class="color-yellow"><%=name %>
-											<small class="pull-right"><em><%=p.format(ft.parse(log.get("created_at").toString()))%></em></small></strong>
+											<small class="pull-right"><em><%=prettyTime.format(simpleDateFormat.parse(log.get("created_at").toString()))%></em></small></strong>
 											<p><%=desc%></p>
 										</div>
 									</div>

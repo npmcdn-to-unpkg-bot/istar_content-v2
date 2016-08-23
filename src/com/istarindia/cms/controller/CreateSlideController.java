@@ -719,7 +719,6 @@ public class CreateSlideController extends IStarBaseServelet {
 		Slide slide = new Slide();
 
 		if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-			System.err.println("create><><<><><><<<><><>><><><><><><><>><><><><><><><>><><><><><><><><><><><><>< slide_id -> " + slide_id);
 			slide = dao.findById(slide_id);
 			slide.setOrder_id(slide_id);
 			
@@ -738,7 +737,6 @@ public class CreateSlideController extends IStarBaseServelet {
 			}
 
 		} else {
-			System.err.println("edit><><<><><><<<><><>><><><><><><><>><><><><><><><>><><><><><><><><><><><><>< slide_id -> " + slide_id);
 			slide_id = Integer.parseInt(request.getParameter("slide_id").toString());
 			slide = dao.findById(slide_id);
 		}

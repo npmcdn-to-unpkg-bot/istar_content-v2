@@ -258,6 +258,10 @@
 	display: none;
 }
 
+
+.btn-custom {
+	background-color: #f57f17 !important;
+}
 /*Global Classes
 ------------------------------------*/
 /*Typography*/
@@ -507,4 +511,14 @@ h2.warning-medium {
 .alert-blocks.alert-blocks-pending.alert-dismissable {        
 	min-height: 6.5vh;
 }
-    
+
+.table-teal {
+    border-radius: 1px;
+    border-color: #1abc9c;
+    border-style: solid;
+}
+
+.table-teal tr th{
+    background-color: #1abc9c;
+    color: white;
+}
