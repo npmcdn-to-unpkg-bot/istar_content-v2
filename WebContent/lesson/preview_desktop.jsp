@@ -226,7 +226,7 @@ try {
 		function add_edit() {
 			var currentURL = window.location.href;
 			var slideID = $('.present').attr('id');
-			var url = '/content/fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id='+slideID;
+			var url = '/content/fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id='+slideID;
 			var win = window.open(url, '_blank');
 			win.focus();
 		}

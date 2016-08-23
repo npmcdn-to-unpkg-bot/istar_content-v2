@@ -1,13 +1,11 @@
-<%@page import="org.apache.poi.util.SystemOutLogger"%>
-<%@page import="com.istarindia.cms.lessons.CMSSlide"%>
-<%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
-<%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.*"%><%@page
-	import="com.istarindia.apps.*"%><%@page
-	import="com.istarindia.apps.SlideTransition"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
-<%@ page import="com.istarindia.apps.dao.*"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="org.ocpsoft.prettytime.PrettyTime"%>
+<%@page import="java.util.*"%> 
+<%@page import="java.text.*"%>
+<%@page import="com.istarindia.apps.*"%>
+<%@page import="com.istarindia.apps.services.*"%>
+<%@page import="com.istarindia.apps.cmsutils.*"%>
+<%@page import="com.istarindia.apps.dao.*"%>
 
 <%
 	String url = request.getRequestURL().toString();
@@ -93,7 +91,11 @@
 				int lesson_id = Integer.parseInt(request.getParameter("lesson_id"));
 				int question_id = Integer.parseInt(request.getParameter("question_id"));
 				Lesson lesson = new LessonDAO().findById(lesson_id);
+				LessonUtils lessonUtils = new LessonUtils();
 				Assessment assessment = lesson.getAssessment();
+
+				List<HashMap<String, String>> logs = lessonUtils.getQuestionComments(question_id);
+
 			%>
 			<br />
 			<div class="col-md-4">
@@ -124,55 +126,43 @@
 						</form>
 					</div>
 				</div>
+				
+				<% if(!logs.isEmpty()) { %>
 				<div class="panel panel-sea">
-
 					<div class="panel-heading">
-						<h3 class="panel-title"> <i class="fa fa-comments-o"></i> Review Comments </h3>
+						<h3 class="panel-title"> <i class="fa fa-tasks"></i> View/add review comments for the slide </h3>
 					</div>
-
-					<div class="panel-body">
-
-						<div class="panel panel-profile profile">
-
-							<%
+					<div class="panel-body " data-mcs-theme="minimal-dark" >
+						<%
+							for(HashMap<String, String> log : logs){
 								try {
-									TaskDAO TDAO = new TaskDAO();
-									Task task = new Task();
-									task.setItemType("LESSON");
-									task.setItemId(assessment.getLesson().getId());
-									task = TDAO.findByExample(task).get(0);
-									TaskLogDAO dao = new TaskLogDAO();
-									TaskLog sample = new TaskLog();
-									sample.setTaskId(task.getId());
-									sample.setItemType("QUESTION");
-									sample.setItem_id(Integer.parseInt(request.getParameter("question_id")));
+									SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+									PrettyTime p = new PrettyTime();
+									String typeStatus = log.get("changed_status").toString();
+									String desc = log.get("comment").toString();
+									if (desc.length() > 100) {
+										desc = desc.substring(0, 250);
+									}
+									String name = log.get("actor_name").toString();
+						%>
 
-									List<TaskLog> items = dao.findByExample(sample);
-									for (TaskLog log : items) {
-
-										IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-							%>
-							<div class="comment">
-								<img
-									src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png"
-									alt="">
-								<div class="overflow-h">
-									<strong><%=user.getName()%></strong>
-									<p><%=log.getComments()%></p>
-
-								</div>
+						<div class="alert-blocks alert-blocks-pending alert-dismissable">
+							<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
+							<div>
+								<strong class="color-yellow"><%=name %>
+								<small class="pull-right"><em><%=p.format(ft.parse(log.get("created_at").toString()))%></em></small></strong>
+								<p><%=desc%></p>
 							</div>
-							<%
-								}
-								} catch (Exception e) {
-
-								}
-							%>
-
 						</div>
+						
+						<%
+								} catch (Exception e) {
+								}
+							}
+						%>
 					</div>
 				</div>
-
+				<% } %>
 			</div>
 			<%
 				LessonUtils utils = new LessonUtils();

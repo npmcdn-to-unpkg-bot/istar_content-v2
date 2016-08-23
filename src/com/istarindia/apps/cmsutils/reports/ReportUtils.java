@@ -177,12 +177,12 @@ public class ReportUtils {
 			System.err.println("reportID===============>>>" + reportID);
 		}
 
-		String style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
+		String style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
 		String tableStyle = "style='width: 98%;margin-left: 1%;margin-right: 1%;'";
 		if (report.getType_of_report().equalsIgnoreCase("table")) {
-			style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
+			style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
 		} else {
-			style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
+			style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
 			tableStyle = "style='display:none'";
 		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");
@@ -291,12 +291,12 @@ public class ReportUtils {
 
 		StringBuffer out = new StringBuffer();
 
-		String style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
+		String style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
 		String tableStyle = "style='width: 98%;margin-left: 1%;margin-right: 1%;'";
 		if (report.getType_of_report().equalsIgnoreCase("table")) {
-			style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
+			style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
 		} else {
-			style = "style='margin: 10px;    margin: 10px;border: 3px solid #FFC107;'";
+			style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
 			tableStyle = "style='display:none'";
 		}
 		out.append("<div class='row pie-progress-charts margin-bottom-60'>");

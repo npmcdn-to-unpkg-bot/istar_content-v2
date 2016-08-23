@@ -40,13 +40,14 @@
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
-<link rel="stylesheet" href="http://htmlstream.com/preview/unify-v1.9.5/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
 
-<link rel="stylesheet" href="http://htmlstream.com/preview/unify-v1.9.5/assets/css/pages/profile.css">
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
@@ -59,32 +60,29 @@
 
 	<div class="wrapper">
 		<jsp:include page="includes/header.jsp"></jsp:include>
-		<div class="container-fluid content profile">
+		<div class="breadcrumbs">
+			<div class="container-fluid">
+				<h1 class="pull-left">Content Admin Dashboard</h1>
+			</div>
+		</div>
+		<div class="container-fluid content " style=" padding-top: 20px;">
 			<div class="row">
-				<!--Left Sidebar-->
 				<div class="col-md-6 md-margin-bottom-40">
 					<%
 						HashMap<String, String> conditions = new HashMap();
-						conditions.put("content_creator_id",
-								((IstarUser) request.getSession().getAttribute("user")).getId().toString());
+						conditions.put("content_creator_id", ((IstarUser) request.getSession().getAttribute("user")).getId().toString());
 					%>
-					<%=(new ReportUtils())
-					.getReport(199, conditions, ((IstarUser) request.getSession().getAttribute("user")), "LESSON")
-					.toString()%>
-
-
+					<%=(new ReportUtils()).getReport(199, conditions, ((IstarUser) request.getSession().getAttribute("user")), "LESSON").toString()%>
 				</div>
 
 				<div class="col-md-6 md-margin-bottom-40">
-					<div class="panel panel-profile">
+					<div class="panel panel-sea" style="margin: 10px; border: 1px solid #1ABC9C;">
 						<div class="panel-heading overflow-h">
 							<h2 class="panel-title heading-sm pull-left">
 								<i class="fa fa-send"></i> Task Notifications
 							</h2>
-							<a href="#"><i class="fa fa-cog pull-right"></i></a>
 						</div>
-						<div id="scrollbar3" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark" style="height: 800px">
-
+						<div id="scrollbar3" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark" style="height: 64vh;">
 							<%
 								DBUTILS db = new DBUTILS();
 								String sql = "select * from task_log  ORDER BY created_at desc LIMIT 100";
@@ -92,11 +90,11 @@
 
 								for (HashMap<String, Object> row : items) {
 									try {
-										//2016-08-19 11:13:30.320678
 										SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 										PrettyTime p = new PrettyTime();
 										String typeStatus = row.get("changed_status").toString();
 										String desc = row.get("comments").toString();
+										String title = row.get("title").toString();
 										if (desc.length() > 100) {
 											desc = desc.substring(0, 250);
 										}
@@ -105,7 +103,7 @@
 							%>
 
 							<div class="alert-blocks alert-blocks-pending alert-dismissable">
-								<img class="rounded-x" src="http://htmlstream.com/preview/unify-v1.9.5/assets/img/testimonials/img3.jpg" alt="">
+								<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
 								<div class="overflow-h">
 									<strong class="color-yellow"><%=name %> &nbsp;&nbsp;&nbsp;&nbsp;<%=typeStatus%>
 									<small class="pull-right"><em><%=p.format(ft.parse(row.get("created_at").toString()))%></em></small></strong>
@@ -113,7 +111,7 @@
 								</div>
 							</div>
 							<%
-								} catch (Exception e) {
+									} catch (Exception e) {
 									}
 								}
 							%>
@@ -121,44 +119,41 @@
 					</div>
 				</div>
 			</div>
-			<jsp:include page="includes/footer.jsp"></jsp:include>
 		</div>
+		<jsp:include page="includes/footer.jsp"></jsp:include>
+	</div>
 
+	<!-- JS Global Compulsory -->
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
 
-		<!-- JS Global Compulsory -->
-		<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
-		<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<!-- JS Implementing Plugins -->
-		<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
-		<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
-		<!-- JS Customization -->
-		<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-		<!-- JS Page Level -->
-		<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-		<script type="text/javascript" src="<%=baseURL%>assets/js/plugins/style-switcher.js"></script>
-		<script src="<%=baseURL%>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-		<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
-		<script src="<%=baseURL%>assets/plugins/datatables/dataTables.tableTools.min.js"></script>
-		<script src="<%=baseURL%>assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-		<script src="<%=baseURL%>assets/plugins/datatable-responsive/datatables.responsive.min.js"></script>
-		<script src="http://htmlstream.com/preview/unify-v1.9.5/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-
-		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/modules/data.js"></script>
-		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="<%=baseURL%>assets/plugins/highcharts/highcharts.js"></script>
+	<script src="<%=baseURL%>assets/plugins/highcharts/data.js"></script>
+	<script src="<%=baseURL%>assets/plugins/highcharts/exporting.js"></script>
+		
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				App.init();
 				App.initScrollBar();
-
 			});
+			
 		</script>
-		<!--[if lt IE 9]>
-	<script src="assets/plugins/respond.js"></script>
-	<script src="assets/plugins/html5shiv.js"></script>
-	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
-	<![endif]-->
+		
 </body>
 </html>

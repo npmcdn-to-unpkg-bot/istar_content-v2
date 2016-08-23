@@ -28,6 +28,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet" href="<%=baseURL %>assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=baseURL %>assets/css/style.css">
+<link rel="stylesheet" href="<%=baseURL %>assets/css/app.css">
 
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="<%=baseURL %>assets/css/headers/header-default.css">
@@ -61,19 +62,12 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 		
-			<%-- 
-			<div class="col-md-4">
-				<% HashMap<String, String> conditions = new  HashMap();
-				//conditions.put("actor_id",((IstarUser)request.getSession().getAttribute("user")).getId().toString());
-				%>
-				<%=(new ReportUtils()).getReport(100, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString() %>
-			</div> 
-			--%>
-			
 			<section id="processes" class="g-bg-dark-blue1">
-				<div class="container content-md g-text-height-md">
+				<div class="container-fluid  content-md g-text-height-md">
 					
 					<h1 class='warning-large'>Unauthorized access to published lesson!</h1>
+					<br>
+					<h2 class='warning-medium'>[Note: Contact content Admin for permission]</h2>
 					
 					<div class="row g-mb-50"> </div>
 

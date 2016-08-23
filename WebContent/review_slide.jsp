@@ -1,13 +1,12 @@
-<%@page import="com.istarindia.apps.services.SlideService"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="org.ocpsoft.prettytime.PrettyTime"%>
+<%@page import="java.util.*"%> 
+<%@page import="java.text.*"%>
+<%@page import="com.istarindia.apps.*"%>
+<%@page import="com.istarindia.apps.services.*"%>
+<%@page import="com.istarindia.apps.cmsutils.*"%>
+<%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.cms.lessons.CMSSlide"%>
-<%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
-<%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.LessonService"%><%@page
-	import="com.istarindia.apps.*"%><%@page
-	import="com.istarindia.apps.SlideTransition"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
-<%@ page import="com.istarindia.apps.dao.*"%>
 
 <%
 	String url = request.getRequestURL().toString();
@@ -29,6 +28,7 @@
 	Slide slide = slideDao.findById(slide_id);
 	String next_slide_url = service.getNextSlideReviewUrl(ppt_id, slide_id);
 	String slide_type = ""; 
+	
 	if(request.getParameterMap().containsKey("slide_type")) {
 		slide_type = request.getParameter("slide_type").toString();
 	} else {
@@ -79,34 +79,25 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/css/headers/header-default.css">
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/css/footers/footer-v1.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/headers/header-default.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/footers/footer-v1.css">
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/animate.css">
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet"
-	href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
@@ -161,61 +152,75 @@
 					<input type="hidden" name="ppt_id" value="<%=ppt_id%>">
 					<input type="hidden" name="from" value="review_slide">
 					
-						<div class="tab-content">
-							<div id="new_comment" class="tab-pane fade in ">
-								<div class="panel panel-sea">
-									
-									<div class="panel-heading">
-										<h3 class="panel-title"> <i class="fa fa-tasks"></i> Add new comment </h3>
-									</div>
-									
-									<div class="panel-body">
-										<fieldset>
-											<section>
-												<label class="label">Comment</label> 
-												<label class="textarea">
-													<textarea rows="5" name="review_notes" placeholder=" Please enter text"></textarea>
-												</label>
-											</section>
-										</fieldset>
-										
-										<footer>
-											<button id="submit-comment" data-target="#confirm-submit-comment-modal" 
-												data-toggle="modal" style="float:right" type="button" class="btn-u">Submit</button>
-										</footer>
-									</div>
-									
+					<div class="tab-content">
+						<div id="new_comment" class="tab-pane fade in ">
+							<div class="panel panel-sea">
+								
+								<div class="panel-heading">
+									<h3 class="panel-title"> <i class="fa fa-tasks"></i> Add new comment </h3>
 								</div>
+								
+								<div class="panel-body">
+									<fieldset>
+										<section>
+											<label class="label">Comment</label> 
+											<label class="textarea">
+												<textarea rows="5" name="review_notes" placeholder=" Please enter text"></textarea>
+											</label>
+										</section>
+									</fieldset>
+									
+									<footer>
+										<button id="submit-comment" data-target="#confirm-submit-comment-modal" 
+											data-toggle="modal" style="float:right" type="button" class="btn-u">Submit</button>
+									</footer>
+								</div>
+								
 							</div>
+						</div>
 						
-							<div id="comments" class="tab-pane fade in ">
-								<div class="panel panel-profile profile">
-									
-									<div class="panel-body no-padding" data-mcs-theme="minimal-dark"> 
-										<%  try { for(HashMap<String, String> log : logs ) { %>
-										
-										<div class="comment">
-											<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
-											<div class="overflow-h">
-												<strong><%=log.get("actor_name")%></strong>
-												<p><%=log.get("comment")%></p>
-											</div>
+						<div id="comments" class="tab-pane fade in ">
+							<div class="panel panel-sea">
+								<div class="panel-heading">
+									<h3 class="panel-title"> <i class="fa fa-tasks"></i> View/add review comments for the slide </h3>
+								</div>
+								<div class="panel-body " data-mcs-theme="minimal-dark" >
+									<%
+										for(HashMap<String, String> log : logs){
+											try {
+												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+												PrettyTime p = new PrettyTime();
+												String typeStatus = log.get("changed_status").toString();
+												String desc = log.get("comment").toString();
+												if (desc.length() > 100) {
+													desc = desc.substring(0, 250);
+												}
+												String name = log.get("actor_name").toString();
+									%>
+		
+									<div class="alert-blocks alert-blocks-pending alert-dismissable">
+										<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
+										<div>
+											<strong class="color-yellow"><%=name %>
+											<small class="pull-right"><em><%=p.format(ft.parse(log.get("created_at").toString()))%></em></small></strong>
+											<p><%=desc%></p>
 										</div>
-										
-										<% } } catch(Exception e) {} %>
-										
 									</div>
 									
-								</div>
-							</div>
-							
-							<div class="tab-pane fade in active" id="desktop">
-								<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
-									<iframe id="d-preview" class="desktop-preview-frame" src="#"> </iframe>
+									<%
+											} catch (Exception e) {
+											}
+										}
+									%>
 								</div>
 							</div>
 						</div>
-					
+						<div class="tab-pane fade in active" id="desktop">
+							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
+								<iframe id="d-preview" class="desktop-preview-frame" src=""> </iframe>
+							</div>
+						</div>
+					</div>
 					</form>
 				</div>
 				
@@ -227,7 +232,7 @@
 						<div class="panel-body ">
 							<div class="sky-form  " id="mobile">
 								<div id="mobile_area" class="dynamic-preview" style="background-image: url('/content/assets/img/frames/mobile.png')">
-									<iframe id='m-preview' class="mobile-preview-frame" src="#"> </iframe>
+									<iframe id='m-preview' class="mobile-preview-frame" src=""> </iframe>
 								</div>
 							</div>
 						</div>
@@ -254,38 +259,23 @@
 	<jsp:include page="content_admin/includes/footer.jsp"></jsp:include>
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript"
-		src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 	<!-- JS Customization -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
-		type="text/javascript" charset="utf-8"></script>
-	<script
-		src="http://rvera.github.io/image-picker/image-picker/image-picker.js"
-		type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://rvera.github.io/image-picker/image-picker/image-picker.js" type="text/javascript"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
-	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
-		type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="<%=baseURL%>tinymce/4/tinymce.min.js"></script>
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
 
-	<!--[if lt IE 9]>
-	<script src="assets/plugins/respond.js"></script>
-	<script src="assets/plugins/html5shiv.js"></script>
-	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
-	<![endif]-->
 	<script type="text/javascript">
 		function initTextArea() {
 			tinymce
@@ -301,14 +291,9 @@
 								'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
 								'//www.tinymce.com/css/codepen.min.css' ],
 						setup : function(editor) {
-							editor.on('change', function() {
-								console
-										.debug(tinyMCE.activeEditor
-												.getContent());
-
-								var iframeInner = $('#prv').contents().find(
-										'#data_slide_paragraph').html(
-										tinyMCE.activeEditor.getContent());
+							editor.on('change', function() { 
+								console.debug(tinyMCE.activeEditor.getContent());
+								var iframeInner = $('#prv').contents().find('#data_slide_paragraph').html(tinyMCE.activeEditor.getContent());
 								tinyMCE.triggerSave();
 							});
 						}
@@ -318,7 +303,6 @@
 		$(document).ready(function() {
 			setupFrames();
 			initTextArea();
-
 		});
 		
 

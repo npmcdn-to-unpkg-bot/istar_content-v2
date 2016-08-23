@@ -10,8 +10,7 @@
 
 <%
     String url = request.getRequestURL().toString();
-    String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
-            + request.getContextPath() + "/";
+    String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -390,102 +389,6 @@
 					</div>
 
 				</div>
-				<% if(lesson.getAssessment() != null) { 
-					Assessment assessment = lesson.getAssessment();
-					int assessment_id = assessment.getId();
-
-				
-				%>
-				<div class="col-md-12">
-					<div class=" col-md-12 ">
-						<div class="panel panel-sea">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<i class="fa fa-tasks"></i>Assessment Details
-								</h3>
-							</div>
-							<div class="panel-body">
-								<form action="/content/update_assessment" id="sky-form4"
-									class="sky-form">
-									<input type="hidden" name="assessment_id" value="<%=assessment_id%>" /> 
-									<input type="hidden" name="update_assessment" value="true" /> 
-									<fieldset>
-									
-										<section>
-											<label>Assessment Title</label> <label class="input">
-												<input value="<%=assessment.getAssessmenttitle()%>" type="text"
-												name="title" placeholder="Assessment Title"> <b
-												class="tooltip tooltip-bottom-right">Assessment Title</b>
-											</label>
-										</section>
-										
-										<%
-											ArrayList<String> types = new ArrayList();
-											types.add("STATIC");
-											types.add("ADAPTIVE");
-											types.add("TREE");
-											types.add("RANDOM");
-											
-											String selected = "";
-											
-										%>
-
-
-										<section>
-											<label>Assessment Type</label> <label class='input'>
-												<select class='form-control valid' name='assessment_type'>
-
-													<%
-														for (String type : types) {
-															try {
-															if (assessment.getAssessmentType().equalsIgnoreCase(type)) {
-													%>
-
-													<option value='<%=type%>' selected='selected'><%=type%></option>
-
-													<%
-														} else {
-													%>
-													<option value='<%=type%>'><%=type%></option>
-
-													<%
-														}
-															} catch(Exception e){}
-														}
-													%>
-
-											</select>
-											</label>
-										</section>
-
-										<section>
-											<label>Duration</label> <label class="input">
-												<input value="<%=assessment.getAssessmentdurationminutes()%>" type="number"
-												name="duration" placeholder="Duration of Lesson"> <b
-												class="tooltip tooltip-bottom-right">The duration of the Assessment</b>
-											</label>
-										</section>
-										
-										<section>
-											<label>Number of Questions</label> <label class="input">
-												<input value="<%=assessment.getNumber_of_questions()%>" type="number"
-												name="number_of_questions" placeholder="Number of Questions"> <b
-												class="tooltip tooltip-bottom-right">Number of Questions</b>
-											</label>
-										</section>
-									</fieldset>
-									
-									<footer>
-										<button type="submit" class="btn-u" style="float:right;" >Update</button>
-									</footer>
-								</form>
-
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<% } %>
 				
 				<% if(lesson.getPresentaion() != null) { %>
 				
@@ -551,21 +454,17 @@
 									<label>Slide comments:</label>
 								</div>
 							<%
-									//SLide comments-
-									try {
-										task.setItemType("LESSON");
-										task.setItemId(lesson.getId());
-										task = lesson.getTask();
-										TaskLog sample = new TaskLog();
-										sample.setTaskId(task.getId());
-										sample.setItemType("SLIDE");
-										List<TaskLog> items = dao.findByExample(sample);
-										for (TaskLog log : items) {
-
-											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-											if(!(log.getComments().trim().isEmpty()) ) {
-											
-								%>
+								//SLide comments-
+								try {
+									task = lesson.getTask();
+									TaskLog sample = new TaskLog();
+									sample.setTaskId(task.getId());
+									sample.setItemType("SLIDE");
+									List<TaskLog> items = dao.findByExample(sample);
+									for (TaskLog log : items) {
+										IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+										if(!(log.getComments().trim().isEmpty()) ) {
+							%>
 							<div class="comment" style="padding-bottom: 15px;">
 								<div class="overflow-h">
 									<div class="row">
@@ -580,7 +479,7 @@
 									</div>
 									<div style="float: right;">
 									<% if(slideDAO.findById(log.getItem_id()) != null ) { %>
-										<a class="" target="_blank" href="/content/fill_tempate1.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Edit slide</a>
+										<a class="" target="_blank" href="/content/fill_template.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Edit slide</a>
 									<% } else { %>
 										Deleted slide
 									<% } %>
@@ -620,20 +519,16 @@
 					</p>
 				</div>
 				<%
-                            } else {
-                                //Edited By Kunal on 24/03/2016 for editing question
-                                if (request.getAttribute("__EDIT_QUESTION") != null) {
-                                    String questionId = request.getAttribute("__QUESTION_ID").toString();
-                                    out.println(lessonUtils.getFormForQuestionEdit(lesson, questionId));
-                                } else {
-                                    out.println(lessonUtils.getEditForm(lesson, task_id));
-                                }
-
-                                // Create Two block 
-                                // Top one has to be add new SLide  
-                                //Botton one is list of slides
-                            }
-                        %>
+                      } else {
+                          if (request.getParameterMap().containsKey("question_id")) {
+                              int questionId = Integer.parseInt(request.getParameter("question_id").toString());
+                              int assessmentId = Integer.parseInt(request.getParameter("assessment_id").toString());
+                              out.println(lessonUtils.getFormForAssessmentQuestionEdit(assessmentId, questionId, request));
+                          } else {
+                              out.println(lessonUtils.getEditForm(lesson, task_id));
+                          }
+                      }
+                %>
 			</div>
 		</div>
 		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
@@ -817,11 +712,6 @@
 		}
 		
 	</script>
-	<!--[if lt IE 9]>
-        <script src="assets/plugins/respond.js"></script>
-        <script src="assets/plugins/html5shiv.js"></script>
-        <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-        <![endif]-->
 
 </body>
 </html>

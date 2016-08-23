@@ -80,13 +80,13 @@ public class UpdateCourseDetails extends HttpServlet {
 				request.setAttribute("message_failure", "Please try again! There was a problem!");
 				request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 			} else {
-				request.setAttribute("message_success", "Lesson has been successfully replicated. This is the new lesson");
-				request.getRequestDispatcher("/edit_lesson?task_id="+ newLesson.getTask().getId()).forward(request, response);
-
 				String comments = "Lesson with name " + oldLesson.getTitle() + " (ID " + oldLesson.getId() + ") is replicated to new lesson with ID: " + newLesson.getId() + "by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
 				CMSRegistry.addTaskLogEntry(request, "REPLICATED", comments, oldLesson.getTask().getId(), "LESSON", oldLesson.getId(), "Lesson is replicated");
 				CMSRegistry.addTaskLogEntry(request, "CREATED", comments, newLesson.getTask().getId(), "LESSON", newLesson.getId(), "Lesson is replicated");
+				request.setAttribute("message_success", "Lesson has been successfully replicated. This is the new lesson!");
+				request.getRequestDispatcher("/edit_lesson?task_id="+ newLesson.getTask().getId()).forward(request, response);
 			}
+			
 			break;
 			
 		}
@@ -228,19 +228,19 @@ public class UpdateCourseDetails extends HttpServlet {
 			
 			switch (entity_type) {
 			case "modules":
-				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" + Integer.parseInt(request.getParameter("course_id"))).forward(request, response);
+				request.getRequestDispatcher("/content_admin/modify_course.jsp?course_id=" + Integer.parseInt(request.getParameter("course_id").toString())).forward(request, response);
 				break;
 				
 			case "sessions":
-				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" + Integer.parseInt(request.getParameter("module_id"))).forward(request, response);
+				request.getRequestDispatcher("/content_admin/modify_module.jsp?module_id=" + Integer.parseInt(request.getParameter("module_id").toString())).forward(request, response);
 				break;
 			
 			case "lessons":
-				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" + Integer.parseInt(request.getParameter("session_id"))).forward(request, response);
+				request.getRequestDispatcher("/content_admin/modify_session.jsp?session_id=" + Integer.parseInt(request.getParameter("session_id").toString())).forward(request, response);
 				break;
 			
 			case "slides":
-				request.getRequestDispatcher("/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id"))).forward(request, response);
+				request.getRequestDispatcher("/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id").toString())).forward(request, response);
 				break;
 			
 			default:
@@ -254,7 +254,7 @@ public class UpdateCourseDetails extends HttpServlet {
 			case "modules":
 				updateModuleOrder(request, order_holder);
 				
-				int course_id = Integer.parseInt(request.getParameter("course_id"));
+				int course_id = Integer.parseInt(request.getParameter("course_id").toString());
 				String course_name = new CourseDAO().findById(course_id).getCourseName();
 				comments = "Modules in course: " + course_name + " (ID " + course_id + ") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
 				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "MODULES", course_id, "Modules are reordered");
@@ -288,9 +288,9 @@ public class UpdateCourseDetails extends HttpServlet {
 				updateSlideOrder(request, order_holder);
 				
 				int task_id = Integer.parseInt(request.getParameter("task_id").toString());
-				String lesson_name = request.getParameter("lesson_name");
+				String lesson_name = request.getParameter("lesson_name").toString();
 				comments = "Slides in lesson: " + lesson_name + " (TaskID " + task_id + ") are reordered as : [" + Arrays.toString(order_holder) + "] ; by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail(); 
-				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, 0, "SLIDES", task_id, "Slides are reordered");
+				CMSRegistry.addTaskLogEntry(request, "REORDER", comments, task_id, "SLIDES", 0, "Slides are reordered");
 
 				response.sendRedirect("/content/edit_lesson?task_id=" +Integer.parseInt(request.getParameter("task_id")) );
 				break;

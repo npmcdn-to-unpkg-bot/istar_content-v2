@@ -1,21 +1,19 @@
-<%@page import="com.istarindia.cms.lessons.CMSSlide"%><%@page import="com.istarindia.apps.services.SlideService"%>
-
-<%@page import="com.istarindia.apps.cmsutils.LessonUtils"%>
-<%@page import="com.istarindia.apps.services.CMSRegistry"%>
-<%@page import="com.istarindia.apps.services.LessonService"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="org.ocpsoft.prettytime.PrettyTime"%>
+<%@page import="java.util.*"%> 
+<%@page import="java.text.*"%>
 <%@page import="com.istarindia.apps.*"%>
-<%@page import="com.istarindia.apps.SlideTransition"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.istarindia.apps.dao.*"%>
+<%@page import="com.istarindia.apps.services.*"%>
+<%@page import="com.istarindia.apps.cmsutils.*"%>
+<%@page import="com.istarindia.apps.dao.*"%>
+<%@page import="com.istarindia.cms.lessons.CMSSlide"%>
 
 <%
 	String url = request.getRequestURL().toString();
-	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
-			+ request.getContextPath() + "/";
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
+
 <%
-	
 	int slide_id = 0;
 	int order_id = 0;
 	Boolean newSlide = true;
@@ -39,9 +37,9 @@
 	CMSSlide cMSSlide = new CMSSlide();
 	SlideDAO slideDao = new SlideDAO();
 	Slide slide = new Slide();
-	ImageUtils imageUtils = new ImageUtils();
+	MediaUtils mediaUtils = new MediaUtils();
 	
-	ArrayList<Image> bgImages = (ArrayList<Image>) imageUtils.findAllBackgrounds(request);
+	ArrayList<Image> bgImages = (ArrayList<Image>) mediaUtils.findAllBackgrounds(request);
 	List<HashMap<String, String>> logs = null;  
 
 	if(task.getStatus().equalsIgnoreCase("PUBLISHED"))
@@ -145,7 +143,7 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.css">
-    <link href="<%=baseURL%>assets/plugins/jquery-contextmenu/src/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+<link href="<%=baseURL%>assets/plugins/jquery-contextmenu/src/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
@@ -215,7 +213,7 @@
 								<div class="panel-body">
 								<fieldset>
 									<section>									
-										<select id="slidy_type_id" class="form-control" name="slide_type" style="margin-top: 50px; width: 317px;">
+										<select id="slidy_type_id" class="form-control" name="slide_type" style="width: 317px;">
 											<%
 												for (String template : CMSRegistry.slideTemplates) {
 											%>
@@ -375,7 +373,7 @@
 								<div class="panel-body">
 								<fieldset>
 									<section>									
-										<select id="version_id" class="form-control" name="version" style="margin-top: 50px; width: 317px;">
+										<select id="version_id" class="form-control" name="version" style=" width: 317px;">
 											
 											<option value='NONE' selected='selected'>None</option>
 											
@@ -397,37 +395,51 @@
 						</div>
 						
 						<div id="comments" class="tab-pane fade in ">
-							<div class="panel panel-profile profile">
-								
-								<div class="panel-body no-padding" data-mcs-theme="minimal-dark"> 
-									<%  try { for(HashMap<String, String> log : logs ) { %>
-									
-									<div class="comment">
-										<img src="https://cdn2.iconfinder.com/data/icons/lil-faces/233/lil-face-4-512.png" alt="">
-										<div class="overflow-h">
-											<strong><%=log.get("actor_name")%></strong>
-											<p><%=log.get("comment")%></p>
+							<div class="panel panel-sea">
+								<div class="panel-heading">
+									<h3 class="panel-title"> <i class="fa fa-tasks"></i> View/add review comments for the slide </h3>
+								</div>
+								<div class="panel-body " data-mcs-theme="minimal-dark" >
+									<%
+										for(HashMap<String, String> log : logs){
+											try {
+												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+												PrettyTime p = new PrettyTime();
+												String typeStatus = log.get("changed_status").toString();
+												String desc = log.get("comment").toString();
+												if (desc.length() > 100) {
+													desc = desc.substring(0, 250);
+												}
+												String name = log.get("actor_name").toString();
+									%>
+		
+									<div class="alert-blocks alert-blocks-pending alert-dismissable">
+										<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
+										<div>
+											<strong class="color-yellow"><%=name %>
+											<small class="pull-right"><em><%=p.format(ft.parse(log.get("created_at").toString()))%></em></small></strong>
+											<p><%=desc%></p>
 										</div>
 									</div>
-									
-									<% } } catch(Exception e) {} %>
-									
-									<footer>
-										<% if(slide_id != 0) {%>
-										<section style=" float: right;">
-											<button type='button' class='btn-u' data-target='#reviewCommentModal' data-toggle='modal'>Add new comment</button>
-										</section>
-										<% } %>
-									</footer>
+									<%
+											} catch (Exception e) {
+											}
+										}
+									%>
 								</div>
-								
+								<footer>
+									<section style=" float: right; margin: 0;">
+										<button type='button' class='btn-u' data-target='#reviewCommentModal' data-toggle='modal'>Add new comment</button>
+									</section>
+								</footer>
 							</div>
 						</div>
+						
 						<% } %>
 						
 						<div class="tab-pane fade in active" id="desktop">
 							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
-								<iframe id="d-preview" class="desktop-preview-frame" src="#"> </iframe>
+								<iframe id="d-preview" class="desktop-preview-frame" src=""> </iframe>
 							</div>
 						</div>
 					</div>
@@ -438,7 +450,7 @@
 				
 				<div class=" col-md-3 ">
 					<div style="margin-bottom: 12%;">	
-						<button id="submit-form" type="button" class="btn-u" style="float:right">Update Slide</button>
+						<button id="submit-form" type="button" class="btn-u submit-slide-button" style="float:right">Update Slide</button>
 					</div>
 					<div class="panel panel-sea" >
 						<div class="panel-heading">
@@ -447,7 +459,7 @@
 						<div class="panel-body ">
 							<div class="sky-form  " id="mobile">
 								<div id="mobile_area" class="dynamic-preview" style="background-image: url('/content/assets/img/frames/mobile.png')">
-									<iframe id='m-preview' class="mobile-preview-frame" src="#"> </iframe>
+									<iframe id='m-preview' class="mobile-preview-frame" src=""> </iframe>
 								</div>
 							</div>
 						</div>
@@ -549,7 +561,7 @@
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
-	<!-- JS Customization -->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="http://rvera.github.io/image-picker/image-picker/image-picker.js" type="text/javascript"></script>
     <script src="<%=baseURL%>assets/plugins/jquery-contextmenu/src/jquery.contextMenu.js" type="text/javascript"></script>
@@ -571,7 +583,7 @@
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
-	    
+
 	    $('#submit-form').click(function(e){
 	    	$('#slide-form').submit();
 	    })
@@ -696,9 +708,9 @@
 			$("#slidy_type_id").change(function() {
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				if(slideId != null) {
-					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
 	 			} else {
-					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
+					var url = "	<%=baseURL%>fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
 				}
 				window.location.href=url;
 			});
@@ -707,7 +719,7 @@
 				var slideId = <%=request.getParameter("slide_id")%> ;
 				var version_id = $(this).val();
 				if(version_id != "NONE") {
-					var url = "	<%=baseURL%>fill_tempate1.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&version_id="+$(this).val();
+					var url = "	<%=baseURL%>fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&version_id="+$(this).val();
 					window.location.href=url;
 				}
 			});

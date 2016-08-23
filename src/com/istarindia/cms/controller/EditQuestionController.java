@@ -17,6 +17,8 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import com.istarindia.apps.dao.Assessment;
+import com.istarindia.apps.dao.AssessmentDAO;
 import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.Question;
 import com.istarindia.apps.dao.QuestionDAO;
@@ -35,15 +37,16 @@ public class EditQuestionController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
- throws ServletException, IOException {
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	AssessmentDAO assessmentDAO = new AssessmentDAO();
 		int assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
 		int question_id = Integer.parseInt(request.getParameter("question_id"));
 		String[] learningObjectives = null;
 		StringBuffer lo_ids = new StringBuffer();
 		StringBuffer sql = new StringBuffer();
 
+		Assessment assessment = assessmentDAO.findById(assessment_id);
+		
 		learningObjectives = (String[]) request.getParameterMap().get("selected_items");
 		for (int i = 0; learningObjectives != null && i < learningObjectives.length; i++) {
 			lo_ids.append(learningObjectives[i]);
@@ -54,9 +57,11 @@ public class EditQuestionController extends HttpServlet {
 
 		if (!request.getParameterMap().containsKey("only_learning_objevtives")) {
 			sql.append(" delete from learning_objective_question where questionid = " + question_id);
-
-			sql.append("; INSERT INTO learning_objective_question (learning_objectiveid, questionid) " + "SELECT lo. ID, " + question_id + " FROM learning_objective lo WHERE	lo.id IN (" + lo_ids + ")");
-
+			
+			if(lo_ids.length()>0) {
+				sql.append("; INSERT INTO learning_objective_question (learning_objectiveid, questionid) " + "SELECT lo. ID, " + question_id + " FROM learning_objective lo WHERE	lo.id IN (" + lo_ids + ")");
+			}
+			
 			Question question = (new QuestionDAO()).findById(question_id);
 			String question_text = request.getParameter("question_text");
 			String question_type = request.getParameter("question_type");
@@ -90,8 +95,6 @@ public class EditQuestionController extends HttpServlet {
 			sql.append("INSERT INTO learning_objective_question (learning_objectiveid, questionid) " + "SELECT lo. ID, " + question_id + " FROM learning_objective lo WHERE	lo.id IN (" + lo_ids + ")");
 		}
 		
-		System.err.println(sql.toString());
-
 		try {
 			IstarUserDAO dao = new IstarUserDAO();
 
@@ -104,7 +107,7 @@ public class EditQuestionController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + assessment_id + "&question_id=" + question_id);
+		response.sendRedirect("/content/edit_lesson?task_id=" + assessment.getLesson().getTask().getId() +"&assessment_id="+assessment_id+"&question_id="+question_id);
 	}
 
     /**

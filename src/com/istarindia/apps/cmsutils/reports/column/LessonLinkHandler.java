@@ -16,7 +16,6 @@ public class LessonLinkHandler extends ColumnHandler {
 		
 		Task t = new TaskDAO().findById(taskID);
 		Lesson l = t.getLesson();
-		System.out.println("======="+l.getId());
 		if(new PresentaionDAO().findByProperty("lesson", l).size()>0)
 		{
 			Presentaion ppt = (Presentaion)new PresentaionDAO().findByProperty("lesson", l).get(0);

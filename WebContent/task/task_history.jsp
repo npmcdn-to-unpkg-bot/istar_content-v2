@@ -23,7 +23,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Media Gallery | iStar CMS</title>
+<title>Task history | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">

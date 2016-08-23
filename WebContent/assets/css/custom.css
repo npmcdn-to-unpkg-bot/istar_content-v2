@@ -318,6 +318,10 @@ h1.warning-large {
     font-size: -webkit-xxx-large;
     text-align: center;
 }
+h2.warning-medium {
+    font-size: -webkit-x-large;
+    text-align: center;
+}
 /*Text Colors*/
 .g-color-white { color: #fff;}
 .g-color-default { color: #4fd2c2;}
@@ -491,3 +495,16 @@ h1.warning-large {
 	display: block;
 }
 
+.submit-slide-button {
+    width: 100%;
+    float: right;
+    line-height: 1.5;
+    background: #f44336;
+    font-size: 180%;
+    font-weight: bold;
+}
+
+.alert-blocks.alert-blocks-pending.alert-dismissable {        
+	min-height: 6.5vh;
+}
+    

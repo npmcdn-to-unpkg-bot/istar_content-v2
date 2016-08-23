@@ -5,8 +5,7 @@
 <%@ page import="javax.xml.bind.*"%><%@ page import="java.io.*"%>
 <%
 	String url = request.getRequestURL().toString();
-	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
-			+ request.getContextPath() + "/";
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 	String templateName = request.getParameter("template_name");
 	String slide_id = request.getParameter("slide_id");
 
@@ -32,20 +31,22 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/reveal/css/reveal.css">
 
 </head>
+
 <%
-	int themeID = 100;
+	int themeID = 43;
 	try {
 		themeID = Integer.parseInt(request.getParameter("lesson_theme"));
 		if ((new UiThemeDAO()).findById(themeID) != null) {
 %>
-<jsp:include page="/themes/desktop/desktop_yellow.jsp"></jsp:include>
+	<jsp:include page="/themes/desktop/desktop_yellow.jsp"></jsp:include>
 <%
-	}
+		}
 	} catch (Exception e) {
 		//nothing ToDo
 	}
 %>
-<body>
+
+<body style="background-size: cover;">
 
 	<div class="reveal">
 		<div class="slides">

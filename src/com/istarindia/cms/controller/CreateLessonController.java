@@ -66,7 +66,6 @@ public class CreateLessonController  extends IStarBaseServelet {
 				if(assign.startsWith("session_")) {
 					createLesson(assign,title, duration,tags,ite,user.getId(), request.getSession().getId());
 				}
-				System.out.println(assign);
 			}
 			//request.setAttribute("lesson", lesson);
 			request.setAttribute("message_success", "New lesson has been created successfully!");
@@ -74,7 +73,6 @@ public class CreateLessonController  extends IStarBaseServelet {
 		}
 		else
 		{
-			System.err.println("Recieved parameters:");
 			printParams(request);
 			request.setAttribute("message_failure", "Something was missing!");
 			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);

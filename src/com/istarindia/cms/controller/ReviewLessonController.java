@@ -66,12 +66,10 @@ public class ReviewLessonController extends IStarBaseServelet {
 
 			QuestionDAO questiondao = new QuestionDAO();
 			Question question = questiondao.findById(Integer.parseInt(request.getParameter("question_id")));
-
-			TaskDAO dao = new TaskDAO();
-			Task task = new Task();
-			task.setItemId(Integer.parseInt(request.getParameter("lesson_id")));
-			task.setItemType("LESSON");
-			task = dao.findByExample(task).get(0);
+			LessonDAO lessonDAO = new  LessonDAO();
+			int lessonId = Integer.parseInt(request.getParameter("lesson_id"));
+			Lesson lesson = lessonDAO.findById(lessonId);
+			Task task = lesson.getTask();
 
 			TaskLogDAO lDAO = new TaskLogDAO();
 			TaskLog log = new TaskLog();
@@ -91,7 +89,6 @@ public class ReviewLessonController extends IStarBaseServelet {
 			Transaction tx = null;
 			try {
 				tx = session.beginTransaction();
-
 				lDAO.attachDirty(log);
 				tx.commit();
 			} catch (HibernateException e) {
@@ -142,10 +139,13 @@ public class ReviewLessonController extends IStarBaseServelet {
 			}
 
 			// content/content_reviewer/dashboard.jsp
-			markLessonAsReviewed(request);
+			try {
+				markLessonAsReviewed(request);
+			} catch (Exception e) {
+				System.err.println("Probably no reviewers were alloted");
+			}
 
 			response.sendRedirect("/content/content_reviewer/dashboard.jsp");
-			response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		} else {
 
@@ -153,25 +153,16 @@ public class ReviewLessonController extends IStarBaseServelet {
 			Slide slide = new Slide();
 			int slideID = 0;
 			if (request.getParameter("slide_id").equalsIgnoreCase("null")) {
-
-				String sql1 = "SELECT s.id FROM 	slide s WHERE 	s.presentation_id = "
-						+ request.getParameter("ppt_id") + "  ORDER BY 	s.order_id ASC";
-				IstarUserDAO dao = new IstarUserDAO();
-				Session session = dao.getSession();
-				SQLQuery query = session.createSQLQuery(sql1);
-				System.err.println(sql1);
-				query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+				String sql1 = "SELECT s.id FROM 	slide s WHERE 	s.presentation_id = " + request.getParameter("ppt_id") + "  ORDER BY 	s.order_id ASC";
 				DBUTILS util = new DBUTILS();
 				List<HashMap<String, Object>> results = util.executeQuery(sql1);
 				for (HashMap<String, Object> object : results) {
 					for (String string : object.keySet()) {
-						// System.out.println(object.get(string));
 						slideID = Integer.parseInt(object.get(string).toString());
 					}
 				}
 				slide = dao1.findById(slideID);
 			} else {
-
 				slideID = Integer.parseInt(request.getParameter("slide_id"));
 				slide = dao1.findById(slideID);
 			}
@@ -198,7 +189,7 @@ public class ReviewLessonController extends IStarBaseServelet {
 
 			try {
 				tx = session.beginTransaction();
-				lDAO.attachDirty(log);
+				lDAO.save(log);
 				tx.commit();
 			} catch (HibernateException e) {
 				if (tx != null)
@@ -210,17 +201,16 @@ public class ReviewLessonController extends IStarBaseServelet {
 
 			try {
 				if (request.getParameterMap().containsKey("from") && request.getParameter("from").equalsIgnoreCase("review_slide")) {
-					response.sendRedirect("/content/fill_tempate_review.jsp?ppt_id=" + slide.getPresentaion().getId()
+					response.sendRedirect("/content/review_slide.jsp?ppt_id=" + slide.getPresentaion().getId()
 							+ "&slide_id=" + slide.getId());
 				} else if (request.getParameterMap().containsKey("from") && request.getParameter("from").equalsIgnoreCase("edit_slide")) {
-					response.sendRedirect("/content/fill_tempate1.jsp?ppt_id=" + slide.getPresentaion().getId()
+					response.sendRedirect("/content/fill_template.jsp?ppt_id=" + slide.getPresentaion().getId()
 							+ "&slide_id=" + slide.getId() + "&slide_type=" + slide.getTemplate());
 				} else {
 					response.sendRedirect("/content/index.jsp");
 				}
 			} catch (Exception e) {
 				response.sendRedirect("/content/review_task?task_id=" + task.getId());
-				System.err.println("oops");
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			}
 

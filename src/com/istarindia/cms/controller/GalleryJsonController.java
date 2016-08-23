@@ -19,7 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.istarindia.apps.ImageUtils;
+import com.istarindia.apps.MediaUtils;
 import com.istarindia.apps.dao.DBUTILS;
 import com.istarindia.apps.dao.Image;
 import com.istarindia.apps.dao.IstarUserDAO;
@@ -67,8 +67,8 @@ public class GalleryJsonController extends HttpServlet {
 			arr.put(json);
 		}
 
-		ImageUtils imageUtils = new ImageUtils();
-		ArrayList<Image> list = imageUtils.findAllHandoutMedia();
+		MediaUtils mediaUtils = new MediaUtils();
+		ArrayList<Image> list = mediaUtils.findAllHandoutMedia();
 		System.err.println("wqrwqrqwr "+list.size());
 		for (Image image : list) {
 			json = new JSONObject();

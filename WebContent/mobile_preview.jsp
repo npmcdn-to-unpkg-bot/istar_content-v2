@@ -39,22 +39,22 @@ String nuetral = url.substring(0, url.length() - request.getRequestURI().length(
 
 </head>
 
-<body>
 <%
-
-String lesson_theme = request.getParameter("lesson_theme");
-
-try {
-int themeID = Integer.parseInt(lesson_theme);
-if ((new UiThemeDAO()).findById(themeID) != null) {
+	int themeID = 43;
+	try {
+		themeID = Integer.parseInt(request.getParameter("lesson_theme"));
+		if ((new UiThemeDAO()).findById(themeID) != null) {
 %>
 	<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
-<% 
-	} 
-} catch (Exception e){
-	//nothing ToDo
-}
+<%
+		}
+	} catch (Exception e) {
+		//nothing ToDo
+	}
 %>
+
+<body style="background-size: cover;">
+
 	<div class="reveal">
 
 		<div class="slides">

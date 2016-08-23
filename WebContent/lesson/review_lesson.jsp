@@ -6,8 +6,7 @@
 
 <%
 	String url = request.getRequestURL().toString();
-	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
-			+ request.getContextPath() + "/";
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -77,11 +76,6 @@
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">Review Lesson</h1>
-				<!-- <ul class="pull-right breadcrumb">
-					<li><a href="/">Home</a></li>
-					<li><a href="">Content Admin </a></li>
-					<li class="active">Edit Lesson</li>
-				</ul> -->
 			</div>
 			<%
 				Lesson lesson = (Lesson) request.getAttribute("lesson");
@@ -101,71 +95,57 @@
 									<i class="fa fa-tasks"></i>Lesson Details
 								</h3>
 							</div>
+							
 							<div class="panel-body">
-
 								<form action="/content/review_lesson" id="review-lesson-form"
 									class="sky-form">
 									<input type="hidden" name="lesson_id" value="<%=lesson.getId()%>" /> 
 									<input type="hidden" name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
 									<input type="hidden" id="status" name="review" value="none" />
 									<fieldset>
-
 										<section>
 											<label>Title of Lesson</label> <label class="input">
 												<input readonly="readonly" value="<%=lesson.getTitle()%>"
 												type="text" name="title" placeholder="Title of Lesson">
-												<b class="tooltip tooltip-bottom-right">The title of the
-													lesson</b>
+												<b class="tooltip tooltip-bottom-right">The title of the lesson</b>
 											</label>
 										</section>
 
 										<section>
-											<label>Duration of Lesson</label> <label class="input">
-												<input readonly="readonly" value="<%=lesson.getDuration()%>"
-												type="number" name="duration"
-												placeholder="Duration of Lesson"> <b
-												class="tooltip tooltip-bottom-right">The duration of the
-													lesson</b>
+											<label>Duration of Lesson</label> 
+											<label class="input">
+												<input readonly="readonly" value="<%=lesson.getDuration()%>" type="number" name="duration" placeholder="Duration of Lesson"> 
+												<b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
 											</label>
 										</section>
 										<section>
-											<label> Tags</label> <label class="input"> <input
-												readonly="readonly" data-role="tagsinput"
-												value="<%=lesson.getTags()%>" type="text" name="Tags"
-												class="tagcontainer" placeholder="Tags of Lesson"> <b
-												class="tooltip tooltip-bottom-right">The tags of the
-													lesson</b>
+											<label> Tags</label> 
+											<label class="input"> 
+												<input readonly="readonly" data-role="tagsinput" value="<%=lesson.getTags()%>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> 
+												<b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 											</label>
 										</section>
 
 										<section>
 											<label> Review Comments</label> <label class="input">
-												<textarea rows="3" name="review_notes"
-													placeholder=" Please enter text" id="teacher_notes"></textarea>
+												<textarea rows="3" name="review_notes" placeholder=" Please enter text" id="teacher_notes"></textarea>
 											</label>
 										</section>
 									</fieldset>
 
 									<footer>
-										<a class="btn-u" id="approved-slide-btn" data-toggle="modal" data-value="APPROVED"
-											data-target="#confirm-lesson-review-modal">Approved</a>
-
-										<a class="btn-u"  id="disapprove-slide-btn" data-toggle="modal"  data-value="DIS_APPROVED"
-											data-target="#confirm-lesson-review-modal">Dis Approve</a>
-											
+										<a class="btn-u" id="approved-slide-btn" data-toggle="modal" data-value="APPROVED" data-target="#confirm-lesson-review-modal">Approved</a>
+										<a class="btn-u"  id="disapprove-slide-btn" data-toggle="modal"  data-value="DIS_APPROVED" data-target="#confirm-lesson-review-modal">Dis Approve</a>
 									</footer>
+									
 									<%if(lesson.getPresentaion() != null) { %>
-									<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=<%= lesson.getPresentaion().getId()%> '
-										class='btn-u btn-u-default'>Speaker Preview</a> 
-									<a onclick="openWin('/content/lesson/preview.jsp?ppt_id=<%= lesson.getPresentaion().getId()%>')"
-										href="#" class="btn-u btn-u-default">Mobile Preview</a>
-										<% } %>
+										<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=<%= lesson.getPresentaion().getId()%> ' class='btn-u btn-u-default'>Speaker Preview</a> 
+										<a onclick="openWin('/content/lesson/preview.jsp?ppt_id=<%= lesson.getPresentaion().getId()%>')" href="#" class="btn-u btn-u-default">Mobile Preview</a>
+									<% } %>
 								</form>
 							</div>
 							
-							<div class="modal fade" id="confirm-lesson-review-modal"
-								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-								aria-hidden="true">
+							<div class="modal fade" id="confirm-lesson-review-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">Confirm Submit</div>
@@ -183,31 +163,27 @@
 					</div>
 				</div>
 
-				<% 
-				if(lesson.getPresentaion() != null) { %>
+				<% if(lesson.getPresentaion() != null) { %>
 				
 				 <div class="col-sm-12">
-
 					<div class=" col-md-12 ">
 						<div class="panel panel-sea profile">
-
 							<div class="panel-heading overflow-h">
-								<h3 >
+								<h3>
 									<i class="fa fa-comments-o">Review Comments</i>
 								</h3>
 							</div>
 
-							<div id="scrollbar4 " style="height: auto !important" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-								
+							<div id="scrollbar4" style="height: auto !important" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
 								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
 									<label>Lesson comments:</label>
 								</div>		
 								<%
-								//lesson comments-
-								SlideDAO slideDAO = new SlideDAO();
-								TaskDAO TDAO = new TaskDAO();
-								Task task = new Task();
-								TaskLogDAO dao = new TaskLogDAO();
+									//lesson comments-
+									SlideDAO slideDAO = new SlideDAO();
+									TaskDAO TDAO = new TaskDAO();
+									Task task = new Task();
+									TaskLogDAO dao = new TaskLogDAO();
 									try {
 										TaskLog sample1 = new TaskLog();
 										sample1.setTaskId(task.getId());
@@ -216,10 +192,8 @@
 										sample1.setChangedStatus("COMPLETED");
 										List<TaskLog> items = dao.findByExample(sample1);
 										for (TaskLog log : items) {
-
 											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
 											if( !(log.getComments().trim().isEmpty()) ) {
-											
 								%>
 					
 								<div class="comment" style="padding-bottom: 15px;">
@@ -238,31 +212,26 @@
 							</div>
 							
 							<%
+										}
 									}
-									}
-									} catch (Exception e) {
-									}
-								%>
-
+								} catch (Exception e) {
+								}
+							%>
 								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
 									<label>Slide comments:</label>
 								</div>
 							<%
-									//SLide comments-
-									try {
-										task.setItemType("LESSON");
-										task.setItemId(lesson.getId());
-										task = lesson.getTask();
-										TaskLog sample = new TaskLog();
-										sample.setTaskId(task.getId());
-										sample.setItemType("SLIDE");
-										List<TaskLog> items = dao.findByExample(sample);
-										for (TaskLog log : items) {
-
-											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
-											if(!(log.getComments().trim().isEmpty()) ) {
-											
-								%>
+								//SLide comments-
+								try {
+									task = lesson.getTask();
+									TaskLog sample = new TaskLog();
+									sample.setTaskId(task.getId());
+									sample.setItemType("SLIDE");
+									List<TaskLog> items = dao.findByExample(sample);
+									for (TaskLog log : items) {
+										IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+										if(!(log.getComments().trim().isEmpty()) ) {
+							%>
 							<div class="comment" style="padding-bottom: 15px;">
 								<div class="overflow-h">
 									<div class="row">
@@ -277,19 +246,123 @@
 									</div>
 									<div style="float: right;">
 									<% if(slideDAO.findById(log.getItem_id()) != null ) { %>
-										<a class="" target="_blank" href="/content/fill_tempate_review.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Review slide</a>
+										<a class="" target="_blank" href="/content/review_slide.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&slide_id=<%=log.getItem_id() %>">Review slide</a>
 									<% } else { %>
 										Deleted slide
 									<% } %>
 									</div>
 								</div>
 							</div>
+							
 							<%
+										}
 									}
-									}
-									} catch (Exception e) {
-									}
+								} catch (Exception e) {
+								}
+							%>
+
+						</div>
+
+						</div>
+					</div>
+				</div> 
+				
+				<% } else if(lesson.getAssessment() != null) { %>
+				
+				 <div class="col-sm-12">
+					<div class=" col-md-12 ">
+						<div class="panel panel-sea profile">
+							<div class="panel-heading overflow-h">
+								<h3>
+									<i class="fa fa-comments-o">Review Comments</i>
+								</h3>
+							</div>
+
+							<div id="scrollbar4" style="height: auto !important" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
+								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
+									<label>Lesson comments:</label>
+								</div>		
+								<%
+									TaskDAO TDAO = new TaskDAO();
+									Task task = new Task();
+									TaskLogDAO dao = new TaskLogDAO();
+									try {
+										TaskLog sample1 = new TaskLog();
+										sample1.setTaskId(task.getId());
+										sample1.setItemType("LESSON");
+										sample1.setItem_id(lesson.getId());
+										sample1.setChangedStatus("COMPLETED");
+										List<TaskLog> items = dao.findByExample(sample1);
+										for (TaskLog log : items) {
+											IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+											if( !(log.getComments().trim().isEmpty()) ) {
 								%>
+					
+								<div class="comment" style="padding-bottom: 15px;">
+								<div class="overflow-h">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-md-3">
+												<strong><%=user.getName()%> : </strong> 
+											</div>
+											<div class="col-md-9">
+												<%=log.getComments()%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<%
+										}
+									}
+								} catch (Exception e) {
+								}
+							%>
+								<div class="comment" style="    font-size: larger; padding: 5px;  padding-left: 29px;  color: cadetblue;  background-color: beige;">
+									<label>Slide comments:</label>
+								</div>
+							<%
+								//Question comments-
+								try {
+									task = lesson.getTask();
+									TaskLog sample = new TaskLog();
+									QuestionDAO questionDAO = new QuestionDAO();
+									sample.setTaskId(task.getId());
+									sample.setItemType("QUESTION");
+									List<TaskLog> items = dao.findByExample(sample);
+									for (TaskLog log : items) {
+										IstarUser user = (new IstarUserDAO()).findById(log.getActorId());
+										if(!(log.getComments().trim().isEmpty()) ) {
+							%>
+							<div class="comment" style="padding-bottom: 15px;">
+								<div class="overflow-h">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-md-3">
+												<strong><%=user.getName()%> : </strong> 
+											</div>
+											<div class="col-md-9">
+												<%=log.getComments()%>
+											</div>
+										</div>
+									</div>
+									<div style="float: right;">
+									<% if(questionDAO.findById(log.getItem_id()) != null ) { %>
+										<a class="" target="_blank"href="/content/lesson/review_question.jsp?lesson_id=<%=lesson.getId() %>&question_id=<%=log.getItem_id() %>">Review question</a>
+									<% } else { %>
+										Deleted slide
+									<% } %>
+									</div>
+								</div>
+							</div>
+							
+							<%
+										}
+									}
+								} catch (Exception e) {
+								}
+							%>
 
 						</div>
 
@@ -297,29 +370,22 @@
 					</div>
 				</div> 
 				<% } %>
-				
 			</div>
-				
 
 			<div class="col-md-8">
-				<%
-					if (LessonService.isEmptyLesson(lesson)) {
-				%>
-				<div class="alert alert-warning fade in text-center">
-					<h4>Lesson is empty!!</h4>
-				</div>
+				
+				<% if (LessonService.isEmptyLesson(lesson)) { %>
+				
+					<div class="alert alert-warning fade in text-center">
+						<h4>Lesson is empty!!</h4>
+					</div>
+					
 				<%
 					} else {
 						LessonUtils utils = new LessonUtils();
 						out.println(utils.getReviewForm(lesson));
-
-						// Create Two block 
-						// Top one has to be add new SLide  
-						//Botton one is list of slides
 					}
 				%>
-
-				
 			</div>
 		</div>
 		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
@@ -334,7 +400,7 @@
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+	<script type="text/javascript" src="<%=baseURL%>tinymce/4/tinymce.min.js"></script>
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript"

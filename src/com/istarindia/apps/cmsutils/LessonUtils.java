@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
-import com.istarindia.apps.ImageUtils;
+import com.istarindia.apps.MediaUtils;
 import com.istarindia.apps.SlideTransition;
 import com.istarindia.apps.cmsutils.reports.ReportUtils;
 import com.istarindia.apps.dao.Assessment;
@@ -90,12 +91,14 @@ public class LessonUtils {
         	z++;
 		}
         
-        //TODO: get learning objectives of  the assessment
-        ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getSelectedLOsForQuestion(question_id));
+        ArrayList<LearningObjective> selectedItems = new ArrayList<LearningObjective>(getSelectedLOsForQuestion(question_id));
+        ArrayList<LearningObjective> selectableItems = new ArrayList<LearningObjective>(getRemainingLOsInLesson(assessment.getLesson().getId(), question_id));
 
             Integer number_of_questions = new Integer(0);
             AssessmentService assessmentService = new AssessmentService();
             number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
+        	out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> <div class='panel-heading'> <h3 class='panel-title'> <i class='fa fa-tasks'></i>Assessment Details </h3> </div> <div class='panel-body'> <form action='/content/update_assessment' id='sky-form4' class='sky-form' novalidate='novalidate'> <input type='hidden' name='assessment_id' value='"+assessment.getId()+"'><input type='hidden' name='title' value='"+assessment.getAssessmenttitle()+"'><input type='hidden' name='duration' value='"+assessment.getAssessmentdurationminutes()+"'> <input type='hidden' name='update_assessment' value='true'> <fieldset class='row'> <section class='col-md-4'> <label>Assessment Type</label> <label class='input'> <select class='form-control valid' name='assessment_type'> <option value='STATIC'>STATIC</option> <option value='ADAPTIVE'>ADAPTIVE</option> <option value='TREE'>TREE</option> <option value='RANDOM'>RANDOM</option> <option value='"+assessment.getAssessmentType()+"' selected='selected'>"+assessment.getAssessmentType()+"</option> </select> </label> </section> <section class='col-md-3'> <label>Maximum number of Questions</label> <label class='input'> <input value='"+assessment.getNumber_of_questions()+"' type='number' name='number_of_questions' placeholder='Number of Questions'> <b class='tooltip tooltip-bottom-right'>Number of Questions</b> </label> </section> <section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> <section class='col-md-3'><a type='button' href='/content/edit_lesson?task_id="+assessment.getLesson().getTask().getId()+"' style='margin-top: 7%; float:right' class='btn-u'>Add new question</a></section> </fieldset>  </form> </div> </div> </div>");
+
             //if (number_of_questions < assessment.getNumber_of_questions()) {
             	
                 //Fix upload-assessment part anad  uncomment the below part
@@ -115,22 +118,34 @@ public class LessonUtils {
                         + "<div class='panel panel-sea'>"
                         + "<div class='panel-heading'>"
                         + "<h3 class='panel-title'><i class='fa fa-tasks'>"
-                        + "</i>Question Details</h3></div>"
+                        + "</i>Edit/Update Question details</h3></div>"
                         + "<div class='panel-body'> "
                         + "<form action='/content/edit_question' id='sky-form4' class='sky-form' method='POST'> "
                         + "<input type='hidden' name='assessment_id' value=" + assessment_id + "> "
                         + "<input type='hidden' name='question_id' value=" + question_id + "> "
                         + "<fieldset>");
-                
-                //enable below block after learning objectives are added
-                out.append("<section><label>Learning Objectives selected</label>"
-                		+ "<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' style='float: right;'>Choose others</button> <div class='row'>");
-                
-                for (LearningObjective obj : items) {
 
-                    out.append("<div class='col col-12'><label class='checkbox'>"
-                            + "<input type='checkbox' name='selected_items' checked='checked' value="
-                            + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
+                out.append("<section><label>Learning Objectives selected for the question</label><div class='row'>");
+                if(selectedItems.size() > 0) {
+        	        for (LearningObjective obj : selectedItems) {
+	                    out.append("<div class='col col-12'><label class='checkbox'>"
+	                            + "<input type='checkbox' name='selected_items' checked='checked' value="
+	                            + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
+	                }
+                } else {
+                	out.append("<div class='col col-12'><label>NONE</label></div>");
+                }
+                out.append("</div></section></br>");
+                
+                out.append("<section><label>Remaining learning Objectives in the lesson [which are not selected for the question]</label><div class='row'>");
+                if(selectableItems.size() > 0) {
+        	        for (LearningObjective obj : selectableItems) {
+	                    out.append("<div class='col col-12'><label class='checkbox'>"
+	                            + "<input type='checkbox' name='selected_items'  value="
+	                            + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
+	                } 
+                } else {
+                	out.append("<div class='col col-12'><label>NONE</label></div>");
                 }
                 out.append("</div></section></br>");
                 
@@ -168,6 +183,7 @@ public class LessonUtils {
                         + "<input type='number' value='"+question.getDurationInSec()+"' name='duration_in_sec' placeholder='Duration for Question'> <b class='tooltip tooltip-bottom-right'>"
                         + "Duration to Attempt Question</b>"
                         + "</label> </section>"
+                        
                         /*  + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
                          + "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
                          + "<option value='1'>1</option><option value='2'>2</option></select></label></section>"*/ //Add this later for tree type assessment
@@ -192,8 +208,8 @@ public class LessonUtils {
                         + "<input type='hidden' name='option5_id' value=" + options.get(4).getId() + "> "
                         + "</fieldset> "
                         + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label id='err' style='color:red'></label></footer></form></div></div></div>");
-            //}
-
+                //}
+                /*
                 out.append("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'> "
                 		+ "<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> "
                 		+ "<button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button> "
@@ -212,10 +228,10 @@ public class LessonUtils {
 				conditions.put("question_id", ((Integer)question_id).toString());
 			
 				out.append((new ReportUtils()).getReport(92, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString()); 
-                	out.append(" </div>  </div></form> </div> "
+                out.append(" </div>  </div></form> </div> "
                 		+ "<div class='modal-footer'> <button data-dismiss='modal' class='btn-u btn-u-default' type='button'>Close"
                 		+ "</button> </div> </div> </div> </div>");
-                
+                */
             out.append("<div class=' col-md-12 '>");
             out.append("<div class='panel panel-sea margin-bottom-40'>");
             out.append("<div class='panel-heading'>");
@@ -237,7 +253,7 @@ public class LessonUtils {
                 out.append("<td>" + data.get(i).get(0) + "</td>");
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/lesson/edit_assessment.jsp?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-check'></i>Edit</a>");
+                out.append("<a class='btn btn-success btn-xs' href='/content/edit_lesson?task_id="+assessment.getLesson().getTask().getId()+"&assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-check'></i>Edit</a>");
 
                 out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
                         + "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
@@ -256,14 +272,33 @@ public class LessonUtils {
     
 
 
+	private Collection<? extends LearningObjective> getRemainingLOsInLesson(int lesson_id, int question_id) {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> question_lo_list = new ArrayList<>();
+        String sql = "SELECT lo. ID, lo.title, lo.subject FROM learning_objective lo, learning_objective_lesson lol WHERE lol.lessonid = " + lesson_id + " AND lol.learning_objectiveid = lo. ID AND lo. ID NOT IN ( SELECT lo. ID FROM learning_objective lo, learning_objective_question loq WHERE loq.learning_objectiveid = lo. ID AND loq.questionid = " + question_id + " )";
+        DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);            
+		for (HashMap<String, Object> object : results) {
+        	LearningObjective lo = new LearningObjective();
+            lo.setId((Integer)object.get("id"));
+            lo.setTitle(object.get("title").toString());
+            try {
+				lo.setSubject(object.get("subject").toString());
+			} catch (Exception e) {
+				lo.setSubject("NONE");
+			}
+            question_lo_list.add(lo);
+        }
+        return question_lo_list;
+    }
+
+
+
 	public StringBuffer getAssessmentEditForm(int assessment_id) {
         StringBuffer out = new StringBuffer();
         
             Assessment assessment = (new AssessmentDAO()).findById(assessment_id);
            
-            //TODO: get learning objectives of  the assessment
-            //ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
-
             if (assessment.getAssessmentType() == null) {
 
                 out.append("<div class=' col-md-12 '>"
@@ -421,7 +456,7 @@ public class LessonUtils {
             out.append("<tbody id=''>");
             out.append(" <tr>");
             out.append(" <td>");
-            out.append("<form class='form-inline' role='form' action='/content/fill_tempate1.jsp'>");
+            out.append("<form class='form-inline' role='form' action='/content/fill_template.jsp'>");
             out.append("<input name='ppt_id' value='" + ppt.getId() + "' type='hidden'/>");
 
             out.append("<div class='form-group'>");
@@ -503,7 +538,7 @@ public class LessonUtils {
                 out.append("<td>" + data.get(i).get(2) + "</td>");
                 out.append("<td>" + data.get(i).get(3) + "</td>");
 
-                out.append("<td><a class='btn btn-success btn-xs' href='/content/fill_tempate1.jsp?ppt_id=" + ppt.getId()
+                out.append("<td><a class='btn btn-success btn-xs' href='/content/fill_template.jsp?ppt_id=" + ppt.getId()
                         + "&slide_id=" + data.get(i).get(0) + "&slide_type=" + data.get(i).get(3) + "'>"
                         + "<i class='fa fa-pencil-square-o fa-fw'></i>Edit</a></td>");
                 
@@ -564,10 +599,9 @@ public class LessonUtils {
                     + "<footer> <button type='submit' style='float: right' class='btn-u'>Proceed</button> </footer></form></div></div></div>");
 
         } else if (lesson.getAssessment() != null) {
-            //out.append("This is where we wil have a form to generate a Asssesment Screen Input....");
-
+        	
             Assessment assessment = lesson.getAssessment();
-            ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfAllSiblings(lesson.getId()));
+            ArrayList<LearningObjective> items = new ArrayList<LearningObjective>(getLearningObjectivesOfLesson(lesson.getId()));
 
             if (assessment.getAssessmentType() == null) {
 
@@ -575,7 +609,7 @@ public class LessonUtils {
                         + "<div class='panel panel-sea'>"
                         + "<div class='panel-heading'>"
                         + "<h3 class='panel-title'><i class='fa fa-tasks'>"
-                        + "</i>Assessment Details</h3></div>"
+                        + "</i>Add new Question</h3></div>"
                         + "<div class='panel-body'> "
                         + "<form action='/content/update_assessment' id='sky-form4' class='sky-form' method='POST'> "
                         + "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
@@ -595,7 +629,8 @@ public class LessonUtils {
                 Integer number_of_questions = new Integer(0);
                 AssessmentService assessmentService = new AssessmentService();
                 number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-                if (number_of_questions < assessment.getNumber_of_questions()) {
+            	out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> <div class='panel-heading'> <h3 class='panel-title'> <i class='fa fa-tasks'></i>Assessment Details </h3> </div> <div class='panel-body'> <form action='/content/update_assessment' id='sky-form4' class='sky-form' novalidate='novalidate'> <input type='hidden' name='assessment_id' value='"+assessment.getId()+"'><input type='hidden' name='title' value='"+assessment.getAssessmenttitle()+"'><input type='hidden' name='duration' value='"+assessment.getAssessmentdurationminutes()+"'> <input type='hidden' name='update_assessment' value='true'> <fieldset class='row'> <section class='col-md-5'> <label>Assessment Type</label> <label class='input'> <select class='form-control valid' name='assessment_type'> <option value='STATIC'>STATIC</option> <option value='ADAPTIVE'>ADAPTIVE</option> <option value='TREE'>TREE</option> <option value='RANDOM'>RANDOM</option> <option value='"+assessment.getAssessmentType()+"' selected='selected'>"+assessment.getAssessmentType()+"</option> </select> </label> </section> <section class='col-md-3'> <label>Maximum number of Questions</label> <label class='input'> <input value='"+assessment.getNumber_of_questions()+"' type='number' name='number_of_questions' placeholder='Number of Questions'> <b class='tooltip tooltip-bottom-right'>Number of Questions</b> </label> </section> <section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> </fieldset>  </form> </div> </div> </div>");
+            	if (number_of_questions < assessment.getNumber_of_questions()) {
                     /*out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
                     		+ "<div class='panel-heading'> <h3 class='panel-title'> "
                     		+ "<i class='fa fa-tasks'></i>Upload Questions </h3> </div>  <div class='panel-body'>"
@@ -611,18 +646,17 @@ public class LessonUtils {
                             + "<div class='panel panel-sea'>"
                             + "<div class='panel-heading'>"
                             + "<h3 class='panel-title'><i class='fa fa-tasks'>"
-                            + "</i>Question Details</h3></div>"
+                            + "</i>Add new Question</h3></div>"
                             + "<div class='panel-body'> "
                             + "<form action='/content/add_question' id='sky-form4' class='sky-form' method='POST'> "
                             + "<input type='hidden' name='assessment_id' value=" + assessment.getId() + "> "
                             + "<fieldset>");
 
-                    out.append("<section><label>List of Learning Objectives in this Session</label> <div class='row'>");
+                    out.append("<section><label>List of Learning Objectives in this lesson [Note: Select more in the lesson and update; to access more Learning Objectives here]</label> <div class='row'>");
 
                     for (LearningObjective obj : items) {
-
                         out.append("<div class='col col-12'><label class='checkbox'>"
-                                + "<input type='checkbox' name='learningObjectives' checked='checked' value="
+                                + "<input type='checkbox' name='learningObjectives' value="
                                 + obj.getId() + "><i></i>" + obj.getTitle() + "</label></div>");
                     }
                     out.append("</div></section></br>"
@@ -683,7 +717,7 @@ public class LessonUtils {
                     out.append("<td>" + data.get(i).get(0) + "</td>");
                     out.append("<td>" + data.get(i).get(1) + "</td>");
                     out.append("<td>");
-                    out.append("<a class='btn btn-success btn-xs' href='/content/edit_assessment_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "&_action=edit" + "'>" + "<i class='fa fa-check'></i>Edit</a>");
+                    out.append("<a  class='btn btn-success btn-xs' href='/content/edit_lesson?task_id="+lesson.getTask().getId()+"&assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-check'></i>Edit</a>");
 
                     out.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn btn-danger btn-xs' "
                             + "href='/content/delete_question?assessment_id=" + assessment.getId() + "&question_id=" + data.get(i).get(0) + "'>" + "<i class='fa fa-remove'></i>Delete</a>");
@@ -697,13 +731,41 @@ public class LessonUtils {
                 out.append("</div>");
                 out.append("</div>");
             }
-
         }
 
         return out;
     }
 
-    //Added by Kunal on 24/03/2016 for editing assessment question
+    private Collection<? extends LearningObjective> getLearningObjectivesOfLesson(Integer id) {
+        // TODO Auto-generated method stub
+        ArrayList<LearningObjective> list = new ArrayList<>();
+        IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+        Lesson lesson = new LessonDAO().findById(id);
+        Cmsession cmsession = lesson.getCmsession();
+        
+        String sql = "select * from learning_objective_lesson where lessonid=" + lesson.getId() + " order by learning_objectiveid";
+        DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);            
+		LearningObjectiveDAO learningObjectiveDao = new LearningObjectiveDAO();
+        LearningObjective learningObjective = new LearningObjective();
+        for (HashMap<String, Object> object : results) {
+            try {
+                learningObjective = learningObjectiveDao.findById((Integer) object.get("learning_objectiveid"));
+                if (!list.contains(learningObjective)) {
+                    list.add(learningObjective);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return list;
+    }
+
+
+
+	//Added by Kunal on 24/03/2016 for editing assessment question
     /**
      *
      * @param lesson
@@ -962,7 +1024,7 @@ public class LessonUtils {
         List<Lesson> siblings = cmsession.getAllLessons(cmsession.getId());
 
         for (Lesson lessonItem : siblings) {
-            String sql = "select * from learning_objective_lesson where lessonid=" + lessonItem.getId()
+            String sql = "select * from learning_objective_lesson where lessonid=" + lesson.getId()
                     + " order by learning_objectiveid";
             SQLQuery query = session.createSQLQuery(sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
@@ -999,6 +1061,7 @@ public class LessonUtils {
             out.append("<tr>");
             out.append("<th>#</th>");
             out.append("<th>Slide Title</th>");
+            out.append("<th>Template</th>");
             out.append("<th>Action</th>");
             out.append("</tr>");
             out.append("</thead>");
@@ -1008,9 +1071,10 @@ public class LessonUtils {
             for (int i = 0; i < data.size(); i++) {
                 out.append("<tr>");
                 out.append("<td>" + data.get(i).get(0) + "</td>");
-                out.append("<td>" + data.get(i).get(1) + "</td>");
+                out.append("<td>" + data.get(i).get(2) + "</td>");
+                out.append("<td>" + data.get(i).get(3) + "</td>");
                 out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/fill_tempate_review.jsp?ppt_id="
+                out.append("<a  target='_blank' class='btn btn-success btn-xs' href='/content/review_slide.jsp?ppt_id="
                         + ppt.getId() + "&slide_id=" + data.get(i).get(0) + "'>"
                         + "<i class='fa fa-check'></i>View Slide</a>");
 
@@ -1039,8 +1103,9 @@ public class LessonUtils {
                     + "<label class='input'><input readonly='readonly' value=" + assessment.getAssessmentType() + ">"
                     + "</label> </section> "
                     + "<section class='col col-5'> <label>Number of Questions</label> "
-                    + "<label class='input'><input readonly='readonly' value=" + assessment.getNumber_of_questions() + "> </label> </section> "
-                    + "<section class='col col-2' style='margin-top: 2.6%'> <a href=# onclick='openWin(\"/content/lesson/preview_assessment.jsp?assessment_id=" + assessment.getId() + "\")' rel='float-shadow' class='btn-u btn-u-default float-shadow'>Preview</a> </section>");
+                    + "<label class='input'><input readonly='readonly' value=" + assessment.getNumber_of_questions() + "> </label> </section> ");
+            
+            //out.append( "<section class='col col-2' style='margin-top: 2.6%'> <a href=# onclick='openWin(\"/content/lesson/preview_assessment.jsp?assessment_id=" + assessment.getId() + "\")' rel='float-shadow' class='btn-u btn-u-default float-shadow'>Preview</a> </section>");
 
             out.append(" </div>");
             out.append("</fieldset> "
@@ -1067,7 +1132,7 @@ public class LessonUtils {
                 out.append("<td>" + data.get(i).get(0) + "</td>");
                 out.append("<td>" + data.get(i).get(1) + "</td>");
                 out.append("<td>");
-                out.append("<a class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id=" + data.get(i).get(0) + "&lesson_id=" + lesson.getId() + "'>"
+                out.append("<a target='_blank'  class='btn btn-success btn-xs' href='/content/lesson/review_question.jsp?question_id=" + data.get(i).get(0) + "&lesson_id=" + lesson.getId() + "'>"
                         + "<i class='fa fa-check'></i>View question</a>");
                 out.append("</td>");
                 out.append("</tr>");
@@ -1085,9 +1150,9 @@ public class LessonUtils {
 
     public StringBuffer getEditProfileEdit(CMSSlide slide, Presentaion ppt, Boolean newSlide, HttpServletRequest request) throws IOException {
         ImageDAO dao = new ImageDAO();
-        ImageUtils imageUtils = new ImageUtils();
-        ArrayList<Image> images = imageUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
-        ArrayList<Video> videos = (ArrayList<Video>) (new VideoDAO()).findByProperty("sessionId", ppt.getLesson().getCmsession().getId());
+        MediaUtils mediaUtils = new MediaUtils();
+        ArrayList<Image> images = mediaUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
+        ArrayList<Video> videos = mediaUtils.findAllPublishedVideosInSessin(ppt.getLesson().getCmsession().getId());
 
         CMSList newList = new CMSList();
         newList.setList_type(slide.getList().getList_type());
@@ -1406,27 +1471,24 @@ public class LessonUtils {
    	private ArrayList<LearningObjective> getSelectedLOsForQuestion(int question_id) {
         // TODO Auto-generated method stub
         ArrayList<LearningObjective> question_lo_list = new ArrayList<>();
-        IstarUserDAO dao = new IstarUserDAO();
-        Session session = dao.getSession();
-            String sql = "select lo.id, lo.title, lo.subject from learning_objective lo, learning_objective_question loq "
-            			 + "where loq.learning_objectiveid=lo.id and loq.questionid = "+question_id;
-            SQLQuery query = session.createSQLQuery(sql);
-            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            DBUTILS util = new DBUTILS();
-    		List<HashMap<String, Object>> results = util.executeQuery(sql);            for (HashMap<String, Object> object : results) {
-            	LearningObjective lo = new LearningObjective();
-                lo.setId((Integer)object.get("id"));
-                lo.setTitle(object.get("title").toString());
-                try {
-					lo.setSubject(object.get("subject").toString());
-				} catch (Exception e) {
-					lo.setSubject("NONE");
-				}
-                question_lo_list.add(lo);
-            }
+        String sql = "select lo.id, lo.title, lo.subject from learning_objective lo, learning_objective_question loq "
+        			 + "where loq.learning_objectiveid=lo.id and loq.questionid = "+question_id;
+        DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);            
+		for (HashMap<String, Object> object : results) {
+        	LearningObjective lo = new LearningObjective();
+            lo.setId((Integer)object.get("id"));
+            lo.setTitle(object.get("title").toString());
+            try {
+				lo.setSubject(object.get("subject").toString());
+			} catch (Exception e) {
+				lo.setSubject("NONE");
+			}
+            question_lo_list.add(lo);
+        }
         return question_lo_list;
     }
-   	
+
    	public List<HashMap<String, String>> getSlideComments(int slide_id) {
    		List<HashMap<String, String>> logs = new ArrayList<>();
    		
@@ -1441,6 +1503,33 @@ public class LessonUtils {
         	if(!object.get("comments").toString().trim().isEmpty()) {
 	        	HashMap<String, String> log = new HashMap<>();
 	            log.put("comment", object.get("comments").toString());
+	            log.put("changed_status", object.get("changed_status").toString());
+	            log.put("created_at", object.get("created_at").toString());
+	            log.put("actor_name", dao.findById(Integer.parseInt( object.get("actor_id").toString())).getName());
+	            logs.add(log);
+        	}
+        }
+   		
+   		return logs;
+   		
+   	}
+
+   	public List<HashMap<String, String>> getQuestionComments(int question_id) {
+   		List<HashMap<String, String>> logs = new ArrayList<>();
+   		
+   		IstarUserDAO dao = new IstarUserDAO();
+        Session session = dao.getSession();
+        String sql = "select * from task_log t where t.item_type='QUESTION' and item_id = "+ question_id + "order by t.created_at desc";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);
+		for (HashMap<String, Object> object : results) {
+        	if(!object.get("comments").toString().trim().isEmpty()) {
+	        	HashMap<String, String> log = new HashMap<>();
+	            log.put("comment", object.get("comments").toString());
+	            log.put("changed_status", object.get("changed_status").toString());
+	            log.put("created_at", object.get("created_at").toString());
 	            log.put("actor_name", dao.findById(Integer.parseInt( object.get("actor_id").toString())).getName());
 	            logs.add(log);
         	}

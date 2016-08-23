@@ -36,37 +36,16 @@ public class DeleteQuestionController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		if (request.getParameterMap().containsKey("task_id")) {
-			Integer question_id = Integer.parseInt(request.getParameter("question_id"));
-			Integer assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
-			Assessment assessment1 = new AssessmentDAO().findById(assessment_id);
-			Lesson lesson = new LessonDAO().findById(assessment1.getLesson().getId());
-			TaskDAO taskdao = new TaskDAO();
-			List<Task> taskItems = taskdao.findByItemId(lesson.getId());
-			Integer task_id = new Integer(0);
-			for (Task item : taskItems) {
-				task_id = item.getId();
-			}
-
-			AssessmentQuestionService service = new AssessmentQuestionService();
-			service.deleteQuestionFromAssessment(assessment_id, question_id);
-
-			request.setAttribute("task_id", task_id);
-			// request.setAttribute("lesson", lesson);
-			response.sendRedirect("/content/edit_lesson?lesson_id=" + lesson.getId() + "&task_id=" + task_id);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer question_id = Integer.parseInt(request.getParameter("question_id"));
+		Integer assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
+		AssessmentDAO assessmentDAO = new AssessmentDAO();
+		Assessment assessment = assessmentDAO.findById(assessment_id);
+		AssessmentQuestionService service = new AssessmentQuestionService();
 		
-		} else {
-			Integer question_id = Integer.parseInt(request.getParameter("question_id"));
-			Integer assessment_id = Integer.parseInt(request.getParameter("assessment_id"));
-			
-			AssessmentQuestionService service = new AssessmentQuestionService();
-			service.deleteQuestionFromAssessment(assessment_id, question_id);
-			
-			response.sendRedirect("/content/lesson/edit_assessment.jsp?assessment_id=" + assessment_id);
+		service.deleteQuestionFromAssessment(assessment_id, question_id);
 
-		}
+		response.sendRedirect("/content/edit_lesson?task_id=" + assessment.getLesson().getTask().getId());
 	}
 
 	/**

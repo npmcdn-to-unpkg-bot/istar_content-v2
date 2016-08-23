@@ -190,7 +190,7 @@
 														<%
 															try {	
 
-																hql = "from Lesson as model where model.module=:sid  order by order_id";
+																hql = "from Lesson as model where model.cmsession=:sid  order by order_id";
 																q = (new IstarUserDAO()).getSession().createQuery(hql);
 																q.setInteger("sid", session1.getId());
 																List<Lesson> lessonList = q.list();	
@@ -215,10 +215,9 @@
 	
 																		//boolean is_unassigned_lesson = (new ContentAdminDAO()).findById(lesson.getTask().getActorId());
 																		boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
-																		boolean is_publishable = is_content_admin
-																				 && (task.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH)
-																				 || task.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
-																		boolean is_replicable = lesson.getLessonType().equalsIgnoreCase("PRESENTATION");
+																		boolean is_publishable = is_content_admin && 
+																								 (task.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || task.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
+																		boolean is_nonreplicable = (lesson.getPresentaion()==null);
 																		
 																		int task_id = task.getId();
 															%>
@@ -231,7 +230,7 @@
 																data-task-id="<%=task_id%>"
 																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getId()%>-> <%=lesson.getTitle()%>
 															<%
-																} else if (!is_replicable){
+																} else if (is_nonreplicable){
 															%>	
 															<li style="margin-bottom: 4px" data-task-id="<%=task.getId()%>"
 																id="lesson_<%=lesson.getId()%>"
@@ -257,7 +256,7 @@
 															}
 																		}
 																catch (Exception e) {
-																		//
+																	System.out.println(session1.getId());
 																}
 																	
 															
@@ -470,6 +469,15 @@
 			$.contextMenu({
 				selector : '.context-menu',
 				items : {
+					"view" : {
+						name : "View Lesson",
+						icon : "paste",
+						callback : function(key, options) {
+							var url = "<%=baseURL%>/edit_lesson?task_id=" + $(this).data('task-id');
+							window.open(url, '_blank');
+						}
+					},
+
 					"replicate" : {
 						name : "Replicate Lesson",
 						icon : "paste",
@@ -477,15 +485,6 @@
 							var lesson_id = $(this).data('lesson-id');
 							$('#source-lesson-id').val(lesson_id);
 							$('#replicate-lesson-modal').modal('show');
-						}
-					},
-
-					"view" : {
-						name : "View Lesson",
-						icon : "paste",
-						callback : function(key, options) {
-							var url = "<%=baseURL%>/edit_lesson?task_id=" + $(this).data('task-id');
-							window.open(url, '_blank');
 						}
 					}
 				}
@@ -499,7 +498,7 @@
 						name : "View Lesson",
 						icon : "paste",
 						callback : function(key, options) {
-							var url = "<%=baseURL%>/edit_lesson?task_id=" + $(this).data('task-id');
+							var url = "<%=baseURL%>edit_lesson?task_id=" + $(this).data('task-id');
 							window.open(url, '_blank');
 						}
 					}
