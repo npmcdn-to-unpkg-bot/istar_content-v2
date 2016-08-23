@@ -97,7 +97,24 @@ public class LessonUtils {
             Integer number_of_questions = new Integer(0);
             AssessmentService assessmentService = new AssessmentService();
             number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-        	out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> <div class='panel-heading'> <h3 class='panel-title'> <i class='fa fa-tasks'></i>Assessment Details </h3> </div> <div class='panel-body'> <form action='/content/update_assessment' id='sky-form4' class='sky-form' novalidate='novalidate'> <input type='hidden' name='assessment_id' value='"+assessment.getId()+"'><input type='hidden' name='title' value='"+assessment.getAssessmenttitle()+"'><input type='hidden' name='duration' value='"+assessment.getAssessmentdurationminutes()+"'> <input type='hidden' name='update_assessment' value='true'> <fieldset class='row'> <section class='col-md-4'> <label>Assessment Type</label> <label class='input'> <select class='form-control valid' name='assessment_type'> <option value='STATIC'>STATIC</option> <option value='ADAPTIVE'>ADAPTIVE</option> <option value='TREE'>TREE</option> <option value='RANDOM'>RANDOM</option> <option value='"+assessment.getAssessmentType()+"' selected='selected'>"+assessment.getAssessmentType()+"</option> </select> </label> </section> <section class='col-md-3'> <label>Maximum number of Questions</label> <label class='input'> <input value='"+assessment.getNumber_of_questions()+"' type='number' name='number_of_questions' placeholder='Number of Questions'> <b class='tooltip tooltip-bottom-right'>Number of Questions</b> </label> </section> <section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> <section class='col-md-3'><a type='button' href='/content/edit_lesson?task_id="+assessment.getLesson().getTask().getId()+"' style='margin-top: 7%; float:right' class='btn-u'>Add new question</a></section> </fieldset>  </form> </div> </div> </div>");
+        	out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> <div class='panel-heading'> "
+        			+ "<h3 class='panel-title'> <i class='fa fa-tasks'></i>Assessment Details </h3> </div> "
+        			+ "<div class='panel-body'> "
+        			+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' novalidate='novalidate'> "
+        			+ "<input type='hidden' name='assessment_id' value='"+assessment.getId()+"'>"
+        			+ "<input type='hidden' name='title' value='"+assessment.getAssessmenttitle()+"'>"
+        			+ "<input type='hidden' name='duration' value='"+assessment.getAssessmentdurationminutes()+"'> "
+        			+ "<input type='hidden' name='update_assessment' value='true'> "
+        			+ "<fieldset class='row'> <section class='col-md-4'> "
+        			+ "<label>Assessment Type</label> <label class='input'> "
+        			+ "<select class='form-control valid' name='assessment_type'> "
+        			+ "<option value='STATIC'>STATIC</option> <option value='ADAPTIVE'>ADAPTIVE</option> "
+        			+ "<option value='TREE'>TREE</option> <option value='RANDOM'>RANDOM</option> "
+        			+ "<option value='"+assessment.getAssessmentType()+"' selected='selected'>"+assessment.getAssessmentType()+"</option> </select> </label> </section> "
+        			+ "<section class='col-md-3'> <label>Maximum number of Questions</label> <label class='input'> "
+        			+ "<input value='"+assessment.getNumber_of_questions()+"' type='number' name='number_of_questions' placeholder='Number of Questions'> <b class='tooltip tooltip-bottom-right'>Number of Questions</b> </label> </section> "
+        			+ "<section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> "
+        			+ "<section class='col-md-3'><a type='button' href='/content/edit_lesson?task_id="+assessment.getLesson().getTask().getId()+"' style='margin-top: 7%; float:right' class='btn-u'>Add new question</a></section> </fieldset>  </form> </div> </div> </div>");
 
             //if (number_of_questions < assessment.getNumber_of_questions()) {
             	
@@ -629,7 +646,22 @@ public class LessonUtils {
                 Integer number_of_questions = new Integer(0);
                 AssessmentService assessmentService = new AssessmentService();
                 number_of_questions = assessmentService.getNumberOfQuestionsInAssessment(assessment.getId());
-            	out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> <div class='panel-heading'> <h3 class='panel-title'> <i class='fa fa-tasks'></i>Assessment Details </h3> </div> <div class='panel-body'> <form action='/content/update_assessment' id='sky-form4' class='sky-form' novalidate='novalidate'> <input type='hidden' name='assessment_id' value='"+assessment.getId()+"'><input type='hidden' name='title' value='"+assessment.getAssessmenttitle()+"'><input type='hidden' name='duration' value='"+assessment.getAssessmentdurationminutes()+"'> <input type='hidden' name='update_assessment' value='true'> <fieldset class='row'> <section class='col-md-5'> <label>Assessment Type</label> <label class='input'> <select class='form-control valid' name='assessment_type'> <option value='STATIC'>STATIC</option> <option value='ADAPTIVE'>ADAPTIVE</option> <option value='TREE'>TREE</option> <option value='RANDOM'>RANDOM</option> <option value='"+assessment.getAssessmentType()+"' selected='selected'>"+assessment.getAssessmentType()+"</option> </select> </label> </section> <section class='col-md-3'> <label>Maximum number of Questions</label> <label class='input'> <input value='"+assessment.getNumber_of_questions()+"' type='number' name='number_of_questions' placeholder='Number of Questions'> <b class='tooltip tooltip-bottom-right'>Number of Questions</b> </label> </section> <section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> </fieldset>  </form> </div> </div> </div>");
+            	out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> <div class='panel-heading'> "
+            			+ "<h3 class='panel-title'> <i class='fa fa-tasks'></i>Assessment Details </h3> </div> <div class='panel-body'> "
+            			+ "<form action='/content/update_assessment' id='sky-form4' class='sky-form' novalidate='novalidate'> "
+            			+ "<input type='hidden' name='assessment_id' value='"+assessment.getId()+"'>"
+            			+ "<input type='hidden' name='title' value='"+assessment.getAssessmenttitle()+"'>"
+            			+ "<input type='hidden' name='duration' value='"+assessment.getAssessmentdurationminutes()+"'> "
+            			+ "<input type='hidden' name='update_assessment' value='true'> <fieldset class='row'> "
+            			+ "<section class='col-md-5'> <label>Assessment Type</label> <label class='input'> "
+            			+ "<select class='form-control valid' name='assessment_type'> <option value='STATIC'>STATIC</option> "
+            			+ "<option value='ADAPTIVE'>ADAPTIVE</option> <option value='TREE'>TREE</option> "
+            			+ "<option value='RANDOM'>RANDOM</option> "
+            			+ "<option value='"+assessment.getAssessmentType()+"' selected='selected'>"+assessment.getAssessmentType()+"</option> </select> </label> </section> "
+            			+ "<section class='col-md-3'> <label>Maximum number of Questions</label> <label class='input'> "
+            			+ "<input value='"+assessment.getNumber_of_questions()+"' type='number' name='number_of_questions' placeholder='Number of Questions'> <b class='tooltip tooltip-bottom-right'>Number of Questions</b> </label> </section> "
+            			+ "<section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> </fieldset>  </form> </div> </div> </div>");
+            	
             	if (number_of_questions < assessment.getNumber_of_questions()) {
                     /*out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
                     		+ "<div class='panel-heading'> <h3 class='panel-title'> "
