@@ -387,6 +387,8 @@
 							</section>
 						</div>
 						
+						<% } %>
+						
 						<div id="comments" class="tab-pane fade in ">
 							<div class="panel panel-sea">
 								<div class="panel-heading">
@@ -426,7 +428,6 @@
 							</div>
 						</div>
 						
-						<% } %>
 						
 						<div class="tab-pane fade in active" id="desktop">
 							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
