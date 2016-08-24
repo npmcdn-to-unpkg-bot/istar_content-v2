@@ -389,6 +389,7 @@
 						
 						<% } %>
 						
+						<% if (slide_id > 0 ) { %>
 						<div id="comments" class="tab-pane fade in ">
 							<div class="panel panel-sea">
 								<div class="panel-heading">
@@ -429,6 +430,7 @@
 						</div>
 						
 						
+						<% } %>
 						<div class="tab-pane fade in active" id="desktop">
 							<div id="desktop_area"  class="dynamic-preview" style="background-image: url('/content/assets/img/frames/desktop.png')">
 								<iframe id="d-preview" class="desktop-preview-frame" src=""> </iframe>
