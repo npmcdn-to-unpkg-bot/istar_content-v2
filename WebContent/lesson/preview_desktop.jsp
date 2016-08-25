@@ -183,6 +183,11 @@ try {
 		$(document).ready(function(){
 			orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';
 			updateSlideBgColor();
+			
+			document.querySelector( '.slides' ).addEventListener( 'click', function( event ) {
+				event.preventDefault();
+				zoom.to({ element: event.target });
+			} );
 		});
 
 		Reveal.initialize({
@@ -196,8 +201,6 @@ try {
 			minScale: (0.97), 
 			maxScale: (0.97), 
 			
-			dependencies: [ { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true },
-							{ src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true } ]
 		});
 
 		function updateSlideBgColor() {

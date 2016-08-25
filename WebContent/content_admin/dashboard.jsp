@@ -85,7 +85,7 @@
 						<div id="scrollbar3" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark" style="height: 64vh;">
 							<%
 								DBUTILS db = new DBUTILS();
-								String sql = "select * from task_log  ORDER BY created_at desc LIMIT 100";
+								String sql = "select * from task_log  ORDER BY created_at desc LIMIT 700";
 								List<HashMap<String, Object>> items = db.executeQuery(sql);
 
 								for (HashMap<String, Object> row : items) {
@@ -95,15 +95,22 @@
 										String typeStatus = row.get("changed_status").toString();
 										String desc = row.get("comments").toString();
 										String title = row.get("title").toString();
+										
 										if (desc.length() > 100) {
 											desc = desc.substring(0, 250);
 										}
+										
 										int userID = Integer.parseInt(row.get("actor_id").toString());
-										String name = new IstarUserDAO().findById(userID).getName();
+										IstarUser istarUser = new IstarUserDAO().findById(userID);
+										String name = istarUser.getName();
+										String imageURL = istarUser.getImageUrl();
+										if(imageURL == null) {
+											imageURL = istarUser.getUserType().toLowerCase() + ".png" ; 
+										}
 							%>
 
 							<div class="alert-blocks alert-blocks-pending alert-dismissable">
-								<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
+								<img  src="<%=baseURL%>img/user_images/<%=imageURL %>" alt="<%=name %>">
 								<div class="overflow-h">
 									<strong class="color-yellow"><%=name %> &nbsp;&nbsp;&nbsp;&nbsp;<%=typeStatus%>
 									<small class="pull-right"><em><%=p.format(ft.parse(row.get("created_at").toString()))%></em></small></strong>
