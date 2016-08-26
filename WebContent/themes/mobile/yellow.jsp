@@ -558,7 +558,13 @@ body {
 	font-weight: 400;
 }
  
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented thead tr th span {
+	font-size: 40px;
+}
 
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented tbody tr th span {
+	font-size: 35px;
+}
 
 .reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  thead {
 	display: table-header-group;
