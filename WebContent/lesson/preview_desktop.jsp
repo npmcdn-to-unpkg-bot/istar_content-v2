@@ -271,6 +271,34 @@ try {
 			
 		});
 
+		Reveal.addEventListener( 'ready', function( event ) {
+		    try{
+		    	var slide_id = window.location.href.split("#")[1];
+				if(slide_id > 0) {
+				    var slide_number = 0;
+					var temp = -1;
+				    
+					$( ".slide" ).each(function( index ) {
+						if($( this ).attr("id") == slide_id) {
+							slide_number = temp;
+						  } else {
+							  temp = temp + 1;
+						  }
+					});
+					
+					if(slide_number >= 0) {
+						Reveal.slide(slide_number,0, 0);
+						updateSlideBgColor();
+					}
+				} else {
+					Reveal.slide(0);
+					updateSlideBgColor();
+				}
+		    } catch(err) {
+		    	console.log(err);
+		    }
+			
+		} );
 	</script>
 	
 </body>

@@ -73,6 +73,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
+	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 
 	<script>
 		Reveal.initialize({
@@ -88,6 +89,10 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';
 			updateSlideBgColor();
 			
+			document.querySelector( '.slides' ).addEventListener( 'click', function( event ) {
+				event.preventDefault();
+				zoom.to({ element: event.target });
+			} );
 		});
 
 
@@ -116,6 +121,37 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			$('.slide-number-a').text('event.currentSlide.id');
 
 		});
+		
+
+		Reveal.addEventListener( 'ready', function( event ) {
+		    try{
+		    	var slide_id = window.location.href.split("#")[1];
+				if(slide_id > 0) {
+				    var slide_number = 0;
+					var temp = -1;
+				    
+					$( ".slide" ).each(function( index ) {
+						if($( this ).attr("id") == slide_id) {
+							slide_number = temp;
+						  } else {
+							  temp = temp + 1;
+						  }
+					});
+					
+					if(slide_number >= 0) {
+						Reveal.slide(slide_number,0, 0);
+						updateSlideBgColor();
+					}
+				} else {
+					Reveal.slide(0);
+					updateSlideBgColor();
+				}
+		    } catch(err) {
+		    	console.log(err);
+		    }
+			
+		} );
+		
 	</script>
 
 </body>
