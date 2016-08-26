@@ -80,7 +80,7 @@ String imageURL = user.getImageUrl();
 			<div class="row">
 				<!--Left Sidebar-->
 				<div class="col-md-3 md-margin-bottom-40">
-					<img style="width: 100%" class="img-responsive profile-img margin-bottom-20" src="<%=baseURL%>img/user_images/<%=imageURL %>" alt="<%=user.getName() %>">
+					<img style="width: 100%" class="img-responsive profile-img margin-bottom-20" src="/video/img/user_images/<%=imageURL %>" alt="<%=user.getName() %>">
 
 					
 
@@ -125,28 +125,54 @@ String imageURL = user.getImageUrl();
 
 				<!-- Profile Content -->
 				<div class="col-md-9">
-					<div class="profile-body">
-						<!--Timeline-->
-						<ul class="timeline-v2">
-							<li>
-								<time class="cbp_tmtime" datetime=""><span>4/1/08</span> <span>January</span></time>
-								<i class="cbp_tmicon rounded-x hidden-xs"></i>
-								<div class="cbp_tmlabel">
-									<h2>Our first step</h2>
-									<div class="row">
-										<div class="col-md-4">
-											<img class="img-responsive" src="assets/img/main/img18.jpg" alt="">
-											<div class="md-margin-bottom-20"></div>
-										</div>
-										<div class="col-md-8">
-											<p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape.</p>
-											<p>Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok choy squash cress potato.</p>
-										</div>
-									</div>
+					<div class="panel panel-sea" style="margin: 10px; border: 1px solid #1ABC9C;">
+						<div class="panel-heading overflow-h">
+							<h2 class="panel-title heading-sm pull-left">
+								<i class="fa fa-send"></i> Task Notifications
+							</h2>
+						</div>
+						<div id="scrollbar3" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark" style="height: 64vh;">
+							<%
+								String sql1 = "select * from task_log where actor_id="+user.getId()+" ORDER BY created_at desc LIMIT 700";
+								List<HashMap<String, Object>> items = db.executeQuery(sql1);
+
+								for (HashMap<String, Object> row : items) {
+									try {
+										SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+										PrettyTime p = new PrettyTime();
+										String typeStatus = row.get("changed_status").toString();
+										String desc = row.get("comments").toString();
+										String title = row.get("title").toString();
+										
+										if (desc.length() > 100) {
+											desc = desc.substring(0, 250);
+										}
+										
+										int userID = Integer.parseInt(row.get("actor_id").toString());
+										IstarUser istarUser = new IstarUserDAO().findById(userID);
+										String name = istarUser.getName();
+										String imageURL1 = istarUser.getImageUrl();
+										if(imageURL1 == null) {
+											imageURL1 = istarUser.getUserType().toLowerCase() + ".png" ; 
+										}
+							%>
+
+							<div class="alert-blocks alert-blocks-pending alert-dismissable">
+								<img  src="/video/img/user_images/<%=imageURL %>" alt="<%=name %>">
+								<div class="overflow-h">
+									
+									<strong class="color-yellow"><a href='<%=baseURL%>task/profile.jsp?id=<%=userID %>'><%=name %></a> &nbsp;&nbsp;&nbsp;&nbsp;<%=typeStatus%>
+									
+									<small class="pull-right"><em><%=p.format(ft.parse(row.get("created_at").toString()))%></em></small></strong>
+									<p><%=desc%></p>
 								</div>
-							</li>
-						</ul>
-						<!--End Timeline-->
+							</div>
+							<%
+									} catch (Exception e) {
+									}
+								}
+							%>
+						</div>
 					</div>
 				</div>
 				<!-- End Profile Content -->
