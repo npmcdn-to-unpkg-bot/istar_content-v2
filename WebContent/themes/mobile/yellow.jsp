@@ -528,6 +528,78 @@ body {
 	list-style-type: none !important;
 }
 
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented   h2 {
+	margin-top: -37%;
+	margin-left: 2%;
+	color: <%=theme.get("title_____font_color")%>;
+	font-weight: <%=theme.get("title_____font_weight")%>;
+	font-size: <%=theme.get("title_____font_size")%>px;
+	line-height: <%=theme.get("title_____line_height")%>;
+	text-align: <%=theme.get("title_____text_alignment")%>;
+	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
+		".ttf", "") .replaceAll ( "-Regular", "") %>;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented   table {
+	list-style: none !important;
+	margin: auto;
+	border-collapse: collapse;
+	vertical-align: baseline;
+	display: table;
+	margin-top: 5%;
+	font-size: 4vh;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family:
+		'<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
+		serif;
+	width: 100%;
+	font-weight: 400;
+}
+ 
+
+
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  thead {
+	display: table-header-group;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	border: 3px solid black;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	color: #333333;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented   td {
+	text-align: left;
+	padding: 8px;
+	border: 3px solid black;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  th {
+	text-align: left;
+	padding: 8px;
+	border: 3px solid black;
+	font-weight: bold;
+	background: #e0e0e0;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented  tr {
+	display: table-row;
+	margin: 0;
+	padding: 0;
+	border: 3px solid black;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+
+.reveal .ONLY_TITLE_PARAGRAPH_cells_fragemented   table ul{
+	list-style-type: none !important;
+}
 .reveal .SIMPLE_LIST___ONLY_TITLE_LIST ul li {
 	list-style-type: square;
 	padding-bottom: 48px;
