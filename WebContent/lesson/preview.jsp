@@ -17,7 +17,6 @@ String style_body = "background-size: cover;";
 
 %>
 
-
 <html lang="en">
 <head>
 
@@ -41,8 +40,9 @@ lesson_theme may have a string in place
 lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
  -->
 <%
+int themeID =43;
 try {
-int themeID = Integer.parseInt(lesson_theme);
+themeID = Integer.parseInt(lesson_theme);
 if ((new UiThemeDAO()).findById(themeID) != null) {
 %>
 	<jsp:include page="/themes/mobile/yellow.jsp"></jsp:include>
@@ -78,23 +78,33 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		Reveal.initialize({
 			center : false,
 			controls : false,
-		    slideNumber: true
+		    slideNumber:  'c/t'
 
 		});
-		var orgBgColor = $("body").css("background-color");
-		document.body.style.background = $('.present').css('background-color');
-		if (($('.present').attr("style")).indexOf("background-color") < 0) {
-			document.body.style.background = orgBgColor;
+
+		var orgBgColor = '#ffffff';			
+		
+		$(document).ready(function(){
+			orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';
+			updateSlideBgColor();
+			
+		});
+
+
+		function updateSlideBgColor() {
+			if ($('.present').data("bgcolor") == "none") {
+				document.body.style.background = orgBgColor;
+			} else {
+				document.body.style.background = $('.present').data("bgcolor");
+			}
 		}
+				
+
+
 		(document.getElementsByClassName('controls')[0]).style.display = 'none';
 
 		Reveal.addEventListener('slidechanged', function(event) {
-			
-			document.body.style.background = $('.present').css(
-					'background-color');
-			if (($('.present').attr("style")).indexOf("background-color") < 0) {
-				document.body.style.background = orgBgColor;
-			}
+			updateSlideBgColor();
 			var currentURL = window.location.href; //currentURL+"#/"+ 
 			var res = currentURL.split("#");
 			currentURL = res[0] ///#1001
