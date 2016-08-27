@@ -225,19 +225,6 @@ body {
 		".ttf", "") .replaceAll ( "-Regular", "") %>;
 }
 
-.reveal .ONLY_TITLE_VIDEO h2 {
-	position: absolute;
-	margin-top: -50%;
-	margin-left: 2%;
-	color: <%=theme.get("title_____font_color")%>;
-	font-weight: <%=theme.get("title_____font_weight")%>;
-	font-size: <%=theme.get("title_____font_size")%>px;
-	line-height: <%=theme.get("title_____line_height")%>;
-	text-align: <%=theme.get("title_____text_alignment")%>;
-	font-family: <%= theme.get ( "title_____font_family") .replaceAll ( 
-		".ttf", "") .replaceAll ( "-Regular", "") %>;
-}
-
 .reveal .ONLY_PARAGRAPH_TITLE h2 {
 	margin-top: 5%;
 	margin-left: 2%;
@@ -870,7 +857,7 @@ body {
 	color: <%=theme.get("title_____font_color")%>;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
-	font-size: <%=theme.get("listitem_____font_size")%>px;
+	font-size: 45px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
 	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
@@ -882,7 +869,7 @@ body {
 	color: <%=theme.get("title_____font_color")%>;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
-	font-size: <%=theme.get("listitem_____font_size")%>px;
+	font-size: 45px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
 	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
@@ -893,7 +880,8 @@ body {
 	list-style: none;
 }
 
-.reveal .IN_OUT_1___ONLY_TITLE_LIST  ul li.parent {zoom: 120%;
+.reveal .IN_OUT_1___ONLY_TITLE_LIST  ul li.parent {
+zoom: 120%;
 	background: url("/content/assets/img/coin.png") no-repeat top left
 		!important;
 	padding: 5%;
@@ -958,7 +946,7 @@ list-style-image: url("/content/assets/img/box.png") !important;
     margin-bottom: 5%;
     color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
-	font-size: <%=theme.get("listitem_____font_size")%>px;
+	font-size: 45px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
 	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;
@@ -970,7 +958,7 @@ list-style-image: url("/content/assets/img/box.png") !important;
 	color: <%=theme.get("title_____font_color")%>;
 	color: <%=theme.get("listitem_____font_color")%>;
 	font-weight: <%=theme.get("listitem_____font_weight")%>;
-	font-size: <%=theme.get("listitem_____font_size")%>px;
+	font-size: 45px;
 	line-height: <%=theme.get("listitem_____line_height")%>;
 	text-align: <%=theme.get("listitem_____text_alignment")%>;
 	font-family: <%=theme.get("listitem_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>;

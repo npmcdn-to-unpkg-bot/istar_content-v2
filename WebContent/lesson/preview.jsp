@@ -2,7 +2,14 @@
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%><!doctype html>
+	pageEncoding="UTF-8"%>
+
+	<!doctype html>
+<%
+response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+response.setHeader("Pragma","no-cache"); //HTTP 1.0
+response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 <% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
@@ -80,7 +87,6 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			center : false,
 			controls : false,
 		    slideNumber:  'c/t'
-
 		});
 
 		var orgBgColor = '#ffffff';			
@@ -89,10 +95,6 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';
 			updateSlideBgColor();
 			
-			document.querySelector( '.slides' ).addEventListener( 'click', function( event ) {
-				event.preventDefault();
-				zoom.to({ element: event.target });
-			} );
 		});
 
 
