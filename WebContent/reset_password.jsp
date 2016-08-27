@@ -52,31 +52,32 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="reg-block">
 			<div class="reg-block-header">
 				<h2>Sign In</h2>
-				<p>Problem Signing In? Click <a class="color-green" href="forgot_password.html">here</a> to reset password.</p>
+				<p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a> to registration.</p>
 			</div>
-			<form action="<%=baseURL %>auth/login" name="login_form">
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-					<input type="text" class="form-control" placeholder="Email" name="email">
+<form action="<%=baseURL %>reset_password" name="login_form">
+			<div class="input-group margin-bottom-20">
+				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+				<input type="text" class="form-control" placeholder="Email" name="email">
+			</div>
+			<div class="input-group margin-bottom-20">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input type="password" class="form-control" placeholder="Password"  name="old_password">
+			</div>
+			<div class="input-group margin-bottom-20">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input type="password" class="form-control" placeholder="Password"  name="new_password">
+			</div>
+			<div class="input-group margin-bottom-20">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input type="password" class="form-control" placeholder="Password"  name="confirm_password">
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<button type="submit" class="btn-u btn-block">Log In</button>
 				</div>
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input type="password" class="form-control" placeholder="Password"  name="password">
-				</div>
-				<hr>
-	
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="remember">
-						<p>Always stay signed in</p>
-					</label>
-				</div>
-	
-				<div class="row">
-					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block">Log In</button>
-					</div>
-				</div>
+			</div>
 			
 			</form>
 		</div>

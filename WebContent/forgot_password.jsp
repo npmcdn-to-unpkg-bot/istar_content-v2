@@ -7,7 +7,7 @@
 <head><% String url = request.getRequestURL().toString();
 String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
-				%><title>Login/Registration | iStar Skill Development</title>
+				%><title>Forgot Password | iStar Skill Development</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -51,26 +51,15 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<!--Reg Block-->
 		<div class="reg-block">
 			<div class="reg-block-header">
-				<h2>Sign In</h2>
-				<p>Problem Signing In? Click <a class="color-green" href="forgot_password.html">here</a> to reset password.</p>
+				<h2>Forgot Password?</h2>
+				<p>Please mention your registered email address here. New password would be sent to your email address</p>
 			</div>
-			<form action="<%=baseURL %>auth/login" name="login_form">
+			<form action="<%=baseURL %>forgot_password" name="login_form">
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 					<input type="text" class="form-control" placeholder="Email" name="email">
 				</div>
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input type="password" class="form-control" placeholder="Password"  name="password">
-				</div>
 				<hr>
-	
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="remember">
-						<p>Always stay signed in</p>
-					</label>
-				</div>
 	
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">

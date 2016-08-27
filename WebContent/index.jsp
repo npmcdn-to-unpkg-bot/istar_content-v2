@@ -62,7 +62,7 @@ if(request.getSession().getAttribute("user")!=null) {
 		<div class="reg-block">
 			<div class="reg-block-header">
 				<h2>Sign In</h2>
-				<p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a> to registration.</p>
+				<p>Problem Signing In? Click <a class="color-green" href="<%=baseURL%>forgot_password.jsp">here</a> to reset password.</p>
 			</div>
 			<form action="<%=baseURL %>auth/login" name="login_form">
 			

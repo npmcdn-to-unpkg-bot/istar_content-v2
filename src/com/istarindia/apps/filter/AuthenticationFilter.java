@@ -91,6 +91,10 @@ public class AuthenticationFilter implements Filter {
 		if(((HttpServletRequest) request).getRequestURL().toString().contains("view_handout.jsp")) {
 			 isStarticrequest = true;
 		}
+		
+		if(((HttpServletRequest) request).getRequestURL().toString().contains("password")) {
+			 isStarticrequest = true;
+		}
 		try {
 			if(((HttpServletRequest) request).getQueryString().contains("demo")) {
 				 isStarticrequest = true;
@@ -102,7 +106,7 @@ public class AuthenticationFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		if (!isStarticrequest) {
 
-			if (session == null || session.getAttribute("user") == null) {
+			if ((session == null || session.getAttribute("user") == null ) ) {
 				System.out.println("The user is not logged in..."+ ((HttpServletRequest) request).getRequestURL().toString());
 				((HttpServletResponse) response).sendRedirect("/content/index.jsp"); 
 			} else {
