@@ -8,14 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.dao.IstarUserDAO;
 
+import com.istarindia.apps.cmsutils.EmailUtils;
+
 /**
- * Servlet implementation class ResetPasswordController
+ * Servlet implementation class ForgotPasswordController
  */
 @WebServlet("/reset_password")
 public class ResetPasswordController extends HttpServlet {
@@ -33,43 +36,47 @@ public class ResetPasswordController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameterMap().containsKey("email") && request.getParameterMap().containsKey("old_password") && request.getParameterMap().containsKey("new_password")) {
+
+        if (request.getParameterMap().containsKey("email")) {
+        	String userEmail = request.getParameter("email").toString();
+            String new_password = RandomStringUtils.randomAlphanumeric(8); 
             try {
                 IstarUserDAO dao = new IstarUserDAO();
-                IstarUser user = dao.findByEmail(request.getParameter("email")).get(0);
-                if (user.getPassword().equalsIgnoreCase(request.getParameter("old_password"))) {
-                    String new_password = request.getParameter("new_password").toString(); 
-                	Session session = dao.getSession();
-            		Transaction tx = null;
-            		try {
-            			user.setPassword(new_password);
-                		tx = session.beginTransaction();
-            			dao.attachDirty(user);
-            			tx.commit();
-            		} catch (Exception e) {
-            			if (tx != null)
-            				tx.rollback();
-            			e.printStackTrace();
-            		} finally {
-            			session.close();
-            		}
-            		
-                	request.getSession().removeAttribute("user");
-                    request.getRequestDispatcher("/").forward(request, response);
-                } else {
-                    request.setAttribute("msg", "Old password doesn't match!");
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                }
+                IstarUser user = dao.findByEmail(userEmail).get(0);
+            	Session session = dao.getSession();
+        		Transaction tx = null;
+        		
+        		try {
+                    user.setPassword(new_password);
+        			tx = session.beginTransaction();
+        			dao.attachDirty(user);
+        			tx.commit();
+        		} catch (Exception e) {
+        			if (tx != null)
+        				tx.rollback();
+        			e.printStackTrace();
+        		} finally {
+        			session.close();
+        		}
+        		
+        		if(userEmail.contains("_")) {
+        			userEmail = userEmail.split("_")[0] + "@istarindia.com" ;
+        		}
+        		
+        		EmailUtils.sendEmail(request, userEmail, "Talentify authentication assistance", new_password);
+                request.getRequestDispatcher("/change_password.jsp").forward(request, response);
+            
             } catch (Exception e) {
                 e.printStackTrace();
                 request.setAttribute("msg", "Missing Username or password");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } else {
-            request.setAttribute("msg", "Missing essential details. Please try again");
+            request.setAttribute("msg", "Missing Username or password");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
-    }
+    
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

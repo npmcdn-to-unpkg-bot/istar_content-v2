@@ -52,9 +52,9 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 		<div class="reg-block">
 			<div class="reg-block-header">
 				<h2>Forgot Password?</h2>
-				<p>Please mention your registered email address here. New password would be sent to your email address</p>
+				<p>Please mention your login id here. New password would be sent to your corresponding Email address</p>
 			</div>
-			<form action="<%=baseURL %>forgot_password" name="login_form">
+			<form action="<%=baseURL %>reset_password" name="forgot_password_form" method="get">
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 					<input type="text" class="form-control" placeholder="Email" name="email">
@@ -63,7 +63,7 @@ String baseURL = url.substring(0, url.length() - request.getRequestURI().length(
 	
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<button type="submit" class="btn-u btn-block">Log In</button>
+						<button type="submit" class="btn-u btn-block">Submit</button>
 					</div>
 				</div>
 			

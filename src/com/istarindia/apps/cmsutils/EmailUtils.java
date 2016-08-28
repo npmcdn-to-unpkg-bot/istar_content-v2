@@ -20,6 +20,7 @@ public class EmailUtils {
 	
 	  public static void sendEmail(HttpServletRequest request, String emailTo,  String subject, String message) throws AddressException, MessagingException {
 
+		  
 	        String senderEmail = "vaibhav@istarindia.com";
 	        String senderPassword = "U6Zt0CrZBDnKvnHTNl2EKA";
 	        
@@ -53,6 +54,7 @@ public class EmailUtils {
 	        try {
 	        	Transport.send(msg); 
 	        } catch (Exception e) {
+	        	e.printStackTrace();
 
 				StringBuffer messageNew = new StringBuffer();
 				messageNew.append("To: " + emailTo);
@@ -65,7 +67,7 @@ public class EmailUtils {
 				messageNew.append("\nException message: " + ((Throwable) request.getAttribute("javax.servlet.error.exception")).getMessage());
 				messageNew.append("\n\n\nFull Stacktrace: " +  ExceptionUtils.getFullStackTrace(((Throwable) request.getAttribute("javax.servlet.error.exception"))));
 
-	        	sendEmail(request, "senderEmail" , "Error sending Email! Find the details attached within" , messageNew.toString());
+	        	sendEmail(request, senderEmail , "Error sending Email! Find the details attached within" , messageNew.toString());
 	        }
 	        
 	 
