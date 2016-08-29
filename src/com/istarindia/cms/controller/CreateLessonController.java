@@ -14,10 +14,13 @@ import com.istarindia.apps.LessonTypes;
 import com.istarindia.apps.dao.Cmsession;
 import com.istarindia.apps.dao.CmsessionDAO;
 import com.istarindia.apps.dao.IstarUser;
+import com.istarindia.apps.dao.IstarUserDAO;
 import com.istarindia.apps.dao.LearningObjective;
 import com.istarindia.apps.dao.LearningObjectiveDAO;
 import com.istarindia.apps.dao.Lesson;
 import com.istarindia.apps.dao.LessonDAO;
+import com.istarindia.apps.dao.Task;
+import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.CourseService;
 import com.istarindia.apps.services.LessonService;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
@@ -61,51 +64,40 @@ public class CreateLessonController  extends IStarBaseServelet {
 				}
 			}
 			
-			
 			for (String assign : request.getParameter("selected_items").split(",")) {
 				if(assign.startsWith("session_")) {
-					createLesson(assign,title, duration,tags,ite,user.getId(), request.getSession().getId());
+					createLesson(request, assign,title, duration,tags,ite,user.getId(), request.getSession().getId());
 				}
 			}
-			//request.setAttribute("lesson", lesson);
 			request.setAttribute("message_success", "New lesson has been created successfully!");
 			request.getRequestDispatcher("/lesson/new_lesson.jsp").forward(request, response);
-		}
-		else
-		{
-			printParams(request);
+		} else {
 			request.setAttribute("message_failure", "Something was missing!");
-			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);
-			
+			request.getRequestDispatcher(user.getUserType().toLowerCase()+"/dashboard.jsp").forward(request, response);	
 		}	
-		
-		
 	}
 
 	
 	
-	private void createLesson(String session_id, String title, int duration, String tags, Set<LearningObjective> ite, int user_id, String user_session_id) {
+	private void createLesson(HttpServletRequest request, String session_id, String title, int duration, String tags, Set<LearningObjective> ite, int user_id, String user_session_id) {
 		int cmsession_id = Integer.parseInt(session_id.replace("session_", ""));
-		//ite = new HashSet<>();
 		CmsessionDAO dao = new CmsessionDAO();
 		
 		for (Lesson lesss : dao.findById(cmsession_id).getLessons()) {
-			System.err.println("Learning Objective Count for Lesson ->"+ lesss.getLearningObjectives().size());
 			ite.addAll(lesss.getLearningObjectives());
 		}
-		System.out.println(ite.size());
 		String lessonTheme = "43";
 		String lessonDesktopTheme = "43";
 		Cmsession cms =  (new CmsessionDAO()).findById(cmsession_id);
-		//Lesson lesson = new LessonService().createLessonForBulk(cms, duration, LessonTypes.LESSON, tags, lessonTheme, lessonDesktopTheme, title, ite, user_id);
 		
 		Lesson lesson = new LessonService().createLessonForBulk(cms, duration, LessonTypes.LESSON, tags, lessonTheme, lessonDesktopTheme, title, user_id);
-		(new CourseService()).updateLearningObjectiveWithLesson(lesson, ite);
-		lesson = (new LessonDAO()).findById(lesson.getId());
-		System.err.println("lesson.getTask()->"+ lesson.getTask());
-		System.err.println("user_session_id->"+ user_session_id);
-		CreateLessonTaskManager.pushTaskNotification(lesson.getTask(), user_id, "New lesson has been created with task id -> " +lesson.getTask().getId(), user_session_id, "New Lesson is created", user_session_id);
 		
+		CourseService.updateLearningObjectiveWithLesson(lesson, ite);
+		lesson = (new LessonDAO()).findById(lesson.getId());
+		Task task = lesson.getTask();
+
+		String comments = "New Lesson with title: " + lesson.getTitle()+ "(ID " + lesson.getId() + ") " + " for TaskID " + lesson.getTask().getId() + ") is created by " + (new IstarUserDAO().findById(user_id)).getEmail();
+		CMSRegistry.addTaskLogEntry(request, task.getStatus(), comments, task.getId(), "LESSON", lesson.getId(), "New Lesson is created");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -76,129 +76,138 @@
 </head>
 
 <body>
-
 	<div class="wrapper">
 		<jsp:include page="../content_admin/includes/header.jsp"></jsp:include>
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">Create Lesson</h1>
+				<h1 class="pull-left">Create new lesson</h1>
 			</div>
 		</div>
 		<br>
-		<div class="container-fluid height-1000"
-			style="padding: 0px !important">
+		<div class="container-fluid height-1000"cstyle="padding: 0px !important">
 			<div class="row">
-				<form action="/content/create_lesson" id="sky-form4" class="sky-form" onsubmit="myFunction()">
-					<input type="hidden" id="selected_items" name="selected_items" />
-					<div class="col-md-6">
+				<div class="col-md-6">
 					<div class="col-md-12">
-					<div class="panel panel-sea">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<i class="fa fa-tasks"></i>Lesson Details
-							</h3>
+						<div class="panel panel-sea">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-tasks"></i>Lesson Details
+								</h3>
+							</div>
+							<div class="panel-body">
+								<form action="/content/create_lesson" id="new_lesson_form"
+									class="sky-form">
+									<input type="hidden" id="selected_items" name="selected_items" />
+									<fieldset>
+										<section class="col col-md-6">
+											<label>Title of Lesson*</label> <label class="input">
+												<input value="" type="text" name="title"
+												placeholder="Title of Lesson"> <b
+												class="tooltip tooltip-bottom-right">The title of the
+													lesson*</b>
+											</label>
+										</section>
+										<section class="col col-md-6">
+											<label>Duration of Lesson*</label> <label class="input">
+												<input value="" type="number" name="duration"
+												placeholder="Duration of Lesson"> <b
+												class="tooltip tooltip-bottom-right">The duration of the
+													lesson</b>
+											</label>
+										</section>
+										<section class="col col-md-6">
+											<label> Tags</label> <label class="input"> <input
+												data-role="tagsinput" value="" type="text" name="Tags"
+												class="tagcontainer" placeholder="Tags of Lesson"> <b
+												class="tooltip tooltip-bottom-right">The tags of the
+													lesson</b>
+											</label>
+										</section>
+									</fieldset>
+									<footer>
+										<button onClick="myFunction()" type="button" class="btn-u btn"
+											style="float: right">Create Lesson</button>
+										<label id="err" style="color: #ee9393; font-size: large;"></label>
+									</footer>
+								</form>
+							</div>
 						</div>
-						<div class="panel-body row">
-							<fieldset>
-								<section class="col col-md-6">
-									<label>Title of Lesson*</label> <label class="input" > <input
-										value="" type="text" name="title" placeholder="Title of Lesson">
-										<b class="tooltip tooltip-bottom-right">The title of the
-											lesson*</b>
-									</label>
-								</section>
-								<section class="col col-md-6">
-									<label>Duration of Lesson*</label> <label class="input">
-										<input value="" type="number" name="duration"
-										placeholder="Duration of Lesson"> <b
-										class="tooltip tooltip-bottom-right">The duration of the
-											lesson</b>
-									</label>
-								</section>
-								<section class="col col-md-6">
-									<label> Tags</label> <label class="input"> <input
-										data-role="tagsinput" value="" type="text" name="Tags"
-										class="tagcontainer" placeholder="Tags of Lesson"> <b
-										class="tooltip tooltip-bottom-right">The tags of the lesson</b>
-									</label>
-								</section>
-							</fieldset>
-						</div>
-						<footer>
-							<button type="submit" class="btn-u"  style="float:right">Create Lesson</button>
-							<label id="err" style="display: block; color:#ee9393; float:right"></label>
-						</footer>
-					
-
-					</div>
 					</div>
 				</div>
-					<div class="col-md-6">
-					
-					<div class="alert alert-warning fade in text-center">
-							<h4>Select session associated with the lesson*</h4>
-						
-						</div>
-					<div id="html1">
-						<ul>
-							<li id="none" data-jstree='{"opened":true, "disabled":true}'>All Courses
-								<ul>
-									<%	
-										int course_sno = 0;
-										CourseDAO dao = new CourseDAO();
-										for (Course course : (List<Course>) dao.findAll()) {
-											course_sno++;
-									%>
-										<li id="course_<%=course.getId()%>"
-											data-jstree='{"opened":false, "disabled":true}'><%=course_sno%>. <%=course.getCourseName()%>
+				<div class="col-md-6">
+					<div class="col-md-12">
+						<div class="panel panel-sea">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<i class="fa fa-tasks"></i>Select session associated with the
+									lesson*
+								</h3>
+							</div>
+							<div class="panel-body">
+								<div id="course_tree">
+									<ul>
+										<li id="none" data-jstree='{"opened":true, "disabled":true}'>All
+											Courses
 											<ul>
 												<%
-													int cmsession_sno = 0;
-													
-													String hql = "from Module as model where model.course=:sid order by order_id";
-													Query q = (new IstarUserDAO()).getSession().createQuery(hql);
-													q.setInteger("sid", course.getId());
-													List<Module> moduleList = q.list();
-	
-													for (Module module : moduleList) {
+													int course_sno = 0;
+													CourseDAO dao = new CourseDAO();
+													for (Course course : (List<Course>) dao.findAll()) {
+														course_sno++;
 												%>
-													<li id="module_<%=module.getId()%>"
-														data-jstree='{"opened":true, "disabled":true}'><%=module.getModuleName()%>
-														<ul>
-															<%
-																hql = "from Cmsession as model where model.module=:sid  order by order_id";
-																q = (new IstarUserDAO()).getSession().createQuery(hql);
-																q.setInteger("sid", module.getId());
-																List<Cmsession> sessionList = q.list();	
-																
-																for (Cmsession session1 : sessionList) {
-																	cmsession_sno++;
-															%>
+												<li id="course_<%=course.getId()%>"
+													data-jstree='{"opened":false, "disabled":true}'><%=course_sno%>.
+													<%=course.getCourseName()%>
+													<ul>
+														<%
+															int cmsession_sno = 0;
+
+																String hql = "from Module as model where model.course=:sid order by order_id";
+																Query q = (new IstarUserDAO()).getSession().createQuery(hql);
+																q.setInteger("sid", course.getId());
+																List<Module> moduleList = q.list();
+
+																for (Module module : moduleList) {
+														%>
+														<li id="module_<%=module.getId()%>"
+															data-jstree='{"opened":true, "disabled":true}'><%=module.getModuleName()%>
+															<ul>
+																<%
+																	hql = "from Cmsession as model where model.module=:sid  order by order_id";
+																			q = (new IstarUserDAO()).getSession().createQuery(hql);
+																			q.setInteger("sid", module.getId());
+																			List<Cmsession> sessionList = q.list();
+
+																			for (Cmsession session1 : sessionList) {
+																				cmsession_sno++;
+																%>
 																<li id="session_<%=session1.getId()%>"
-																	data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
-																</li>
-															<%}%>
-														</ul>
-													</li>
-												<%}%>
+																	data-jstree='{"opened":true}'><%=cmsession_sno%>.
+																	<%=session1.getTitle()%></li>
+																<%
+																	}
+																%>
+															</ul></li>
+														<%
+															}
+														%>
+													</ul></li>
+												<%
+													}
+												%>
 											</ul>
 										</li>
-									<%}%>
-								</ul>
-							</li>
-						</ul>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
+				</div>
 			</div>
-			</form>
-
 		</div>
-	</div>
-	</div>
-	</div>
-	<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
-	</div>
 
-
+		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>
+	</div>
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
@@ -218,7 +227,8 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"
 		type="text/javascript" charset="utf-8"></script>
-	<script src="<%=baseURL %>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script
+		src="<%=baseURL%>assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
@@ -226,26 +236,26 @@
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="<%=baseURL%>assets/js/app.js"></script>
-	<script type="text/javascript" src="<%=baseURL %>assets/js/plugins/validation.js"></script>
+	<script type="text/javascript"
+		src="<%=baseURL%>assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
 		function myFunction() {
-			var selectedElmsIds = $('#html1').jstree("get_selected");
-			if (selectedElmsIds == ""){
+			var selectedElmsIds = $('#course_tree').jstree("get_selected");
+			if (selectedElmsIds == "") {
 				event.preventDefault();
-				document.getElementById("err").innerHTML = "Please select the session and try again";
-				return false; 
-				}
-			else {
+				document.getElementById("err").innerHTML = "Please select the session and try again!";
+				return false;
+			} else {
 				document.getElementById("err").innerHTML = "";
+				$('#selected_items').val(selectedElmsIds);
+				$('#new_lesson_form').submit();
 			}
-			$('#selected_items').val(selectedElmsIds);
-			console.log(selectedElmsIds);
-
 		}
+
 		jQuery(document).ready(function() {
 			App.init();
 			Validation.lessonValidation();
-			$('#html1').jstree({
+			$('#course_tree').jstree({
 				"core" : {
 					"multiple" : false,
 					"themes" : {
