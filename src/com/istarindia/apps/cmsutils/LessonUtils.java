@@ -1537,6 +1537,7 @@ public class LessonUtils {
 	            log.put("comment", object.get("comments").toString());
 	            log.put("changed_status", object.get("changed_status").toString());
 	            log.put("created_at", object.get("created_at").toString());
+	            log.put("actor_id", object.get("actor_id").toString());
 	            log.put("actor_name", dao.findById(Integer.parseInt( object.get("actor_id").toString())).getName());
 	            logs.add(log);
         	}

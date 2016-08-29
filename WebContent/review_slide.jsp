@@ -38,10 +38,7 @@
 	List<HashMap<String, String>> logs = lessonUtils.getSlideComments(slide_id);
 
 	Lesson lesson = ppt.getLesson();
-	Task task = new Task();
-	task.setItemId(lesson.getId());
-	task.setItemType("LESSON");
-	task = new TaskDAO().findByExample(task).get(0);
+	Task task = lesson.getTask();
 
 	if (task.getStatus().equalsIgnoreCase("PUBLISHED")) {
 		request.setAttribute("message_failure", "This lesson is already published and cannot be accessed!");
@@ -188,21 +185,29 @@
 									<%
 										for(HashMap<String, String> log : logs){
 											try {
-												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-												PrettyTime p = new PrettyTime();
+												SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+												PrettyTime prettyTime = new PrettyTime();
 												String typeStatus = log.get("changed_status").toString();
 												String desc = log.get("comment").toString();
 												if (desc.length() > 100) {
 													desc = desc.substring(0, 250);
 												}
+												
 												String name = log.get("actor_name").toString();
+
+												int userID = Integer.parseInt(log.get("actor_id").toString());
+												IstarUser actor = new IstarUserDAO().findById(userID);
+												String imageURL = actor.getImageUrl();
+												if(imageURL == null) {
+													imageURL = actor.getUserType().toLowerCase() + ".png" ; 
+												}
 									%>
 		
 									<div class="alert-blocks alert-blocks-pending alert-dismissable">
-										<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
+										<img  src="/video/img/user_images/<%=imageURL %>" alt="<%=name %>">
 										<div>
-											<strong class="color-yellow"><%=name %>
-											<small class="pull-right"><em><%=p.format(ft.parse(log.get("created_at").toString()))%></em></small></strong>
+											<strong class="color-yellow"><a href='<%=baseURL%>task/profile.jsp?id=<%=userID %>'><%=name %></a>
+											<small class="pull-right"><em><%=prettyTime.format(simpleDateFormat.parse(log.get("created_at").toString()))%></em></small></strong>
 											<p><%=desc%></p>
 										</div>
 									</div>

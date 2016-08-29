@@ -112,13 +112,13 @@ var Validation = function () {
         			{
         				required: true,
         				rangelength: [1, 200]
-        			},
+        			}/*,
         			
 		        	title2:
 					{
 						required: true,
 						rangelength: [1, 200]
-					}
+					}*/
 	            },
 	                                
 	            // Messages for form validation
@@ -128,13 +128,13 @@ var Validation = function () {
 	            	{
 	            		required: 'Note: Please enter title / Use another template without title',
 	            		rangelength: 'Title should be less than 200 characters long'
-	            	},
+	            	}/*,
 	            	
 	            	title2:
 	            	{
 	            		required: 'Note: Please enter title 2 / Use another template without title 2',
 	            		rangelength: 'Title 2 should be less than 200 characters long'
-	            	}
+	            	}*/
 	            },                  
 	            
 	            // Do not change code below

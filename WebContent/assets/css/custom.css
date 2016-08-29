@@ -522,3 +522,11 @@ h2.warning-medium {
     background-color: #1abc9c;
     color: white;
 }
+
+
+@media (min-width: 768px) {
+  .custom-container{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}

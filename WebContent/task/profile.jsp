@@ -10,7 +10,17 @@
 	String baseURL = url.substring(0, url.length() - request.getRequestURI().length())
 			+ request.getContextPath() + "/";
 	
-	IstarUser user =  (new IstarUserDAO()).findById(Integer.parseInt(request.getParameter("id")));
+	IstarUser user = new IstarUser();
+	if(request.getParameterMap().containsKey("id")) {
+		user = (new IstarUserDAO()).findById(Integer.parseInt(request.getParameter("id")));
+	} else {
+		user = (IstarUser)request.getSession().getAttribute("user");
+	}
+ 
+	String imageURL = user.getImageUrl();
+	if(imageURL == null) {
+		imageURL = user.getUserType().toLowerCase() + ".png" ; 
+	}
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -50,7 +60,6 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/css/app.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/business.style.css">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/global.css">
-<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/profile.css">
 	<link rel="stylesheet" href="<%=baseURL%>assets/css/pages/shortcode_timeline2.css">
 
 
@@ -61,12 +70,7 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
 </head>
-<% 
-String imageURL = user.getImageUrl();
-										if(imageURL == null) {
-											imageURL = user.getUserType().toLowerCase() + ".png" ; 
-										}
-										%>
+
 <body>
 
 	<div class="wrapper">
@@ -76,13 +80,11 @@ String imageURL = user.getImageUrl();
 				<h1 class="pull-left"><%=user.getName() %>'s Profile</h1>
 			</div>
 		</div>
-		<div class="container-fluid content profile">
+		<div class="container-fluid content profile custom-container">
 			<div class="row">
 				<!--Left Sidebar-->
 				<div class="col-md-3 md-margin-bottom-40">
 					<img style="width: 100%" class="img-responsive profile-img margin-bottom-20" src="/video/img/user_images/<%=imageURL %>" alt="<%=user.getName() %>">
-
-					
 
 					<div class="panel-heading-v2 overflow-h">
 						<h2 class="heading-xs pull-left"><i class="fa fa-bar-chart-o"></i> Work Progress</h2>
@@ -146,6 +148,9 @@ String imageURL = user.getImageUrl();
 										
 										if (desc.length() > 100) {
 											desc = desc.substring(0, 250);
+										}
+										if(desc.contains("New text")) {
+											desc = desc.split("New text")[0];
 										}
 										
 										int userID = Integer.parseInt(row.get("actor_id").toString());

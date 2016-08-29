@@ -105,16 +105,11 @@
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">Edit Lesson</h1>
-				<!-- <ul class="pull-right breadcrumb">
-                                <li><a href="/">Home</a></li>
-                                <li><a href="">Content Admin </a></li>
-                                <li class="active">Edit Lesson</li>
-                        </ul> -->
 			</div>
 			<%
-                    Lesson lesson = (Lesson) request.getAttribute("lesson");
-                    int task_id = lesson.getTask().getId();//Integer.parseInt(request.getAttribute("task_id").toString());
-                %>
+	            Lesson lesson = (Lesson) request.getAttribute("lesson");
+	            int task_id = lesson.getTask().getId();//Integer.parseInt(request.getAttribute("task_id").toString());
+            %>
 		</div>
 		<BR />
 		<div class="container-fluid height-1000"

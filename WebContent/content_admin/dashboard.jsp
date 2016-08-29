@@ -99,6 +99,9 @@
 										if (desc.length() > 100) {
 											desc = desc.substring(0, 250);
 										}
+										if(desc.contains("New text")) {
+											desc = desc.split("New text")[0];
+										}
 										
 										int userID = Integer.parseInt(row.get("actor_id").toString());
 										IstarUser istarUser = new IstarUserDAO().findById(userID);

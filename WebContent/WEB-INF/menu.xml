@@ -47,7 +47,7 @@
    
     
     <parent_links display_name="My Account">
-        <child_links display_name="View Profile" url="" valid_roles="content_admin,content_creator,content_reviewer"/>
+        <child_links display_name="View Profile" url="/content/task/profile.jsp" valid_roles="content_admin,content_creator,content_reviewer"/>
         <child_links display_name="Dashboard" url="/content/content_admin/dashboard.jsp" valid_roles="content_admin"/>	
         <child_links display_name="Dashboard" url="/content/content_creator/dashboard.jsp" valid_roles="content_creator"/>	
         <child_links display_name="Dashboard" url="/content/content_reviewer/dashboard.jsp" valid_roles="content_reviewer"/>	

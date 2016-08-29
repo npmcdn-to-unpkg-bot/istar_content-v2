@@ -405,12 +405,19 @@
 													desc = desc.substring(0, 250);
 												}
 												String name = log.get("actor_name").toString();
+
+												int userID = Integer.parseInt(log.get("actor_id").toString());
+												IstarUser actor = new IstarUserDAO().findById(userID);
+												String imageURL = actor.getImageUrl();
+												if(imageURL == null) {
+													imageURL = actor.getUserType().toLowerCase() + ".png" ; 
+												}
 									%>
 		
 									<div class="alert-blocks alert-blocks-pending alert-dismissable">
-										<img  src="<%=baseURL%>assets/img/typo.png" alt="X">
+										<img  src="/video/img/user_images/<%=imageURL %>" alt="<%=name %>">
 										<div>
-											<strong class="color-yellow"><%=name %>
+											<strong class="color-yellow"><a href='<%=baseURL%>task/profile.jsp?id=<%=userID %>'><%=name %></a>
 											<small class="pull-right"><em><%=prettyTime.format(simpleDateFormat.parse(log.get("created_at").toString()))%></em></small></strong>
 											<p><%=desc%></p>
 										</div>

@@ -102,11 +102,13 @@ if(request.getSession().getAttribute("user")!=null) {
 		
 	</div>
 	
-	<% if(request.getParameterMap().containsKey("jsession_id")) { 
+	<% 
+		List<TaskLog> logs = new ArrayList<>();
+		if(request.getParameterMap().containsKey("jsession_id")) { 
 		String jsession_id = request.getParameter("jsession_id").toString();
 		TaskLog example = new TaskLog();
 		example.setSessionID(jsession_id);
-		List<TaskLog> logs = new TaskLogDAO().findByExample(example);
+		logs = new TaskLogDAO().findByExample(example);
 	%>
 	
 	<div class="modal fade" id="session-log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -152,14 +154,18 @@ if(request.getSession().getAttribute("user")!=null) {
 	<!-- JS Page Level -->
 	<script src="<%=baseURL%>assets/js/app.js"></script>
 	<script>
-	if (!window.console) window.console = {};
-	if (!window.console.log) window.console.log = function () { };
-	
-	jQuery(document).ready(function() {
+		if (!window.console) window.console = {};
+		if (!window.console.log) window.console.log = function () { };
+		
+		jQuery(document).ready(function() {
 			App.init();
-			<% if(request.getParameterMap().containsKey("jsession_id")) { %>
-			$("#session-log-modal").modal('show');
+			
+			<% if(request.getParameterMap().containsKey("jsession_id") && logs.size() > 0) { %>
+			
+				$("#session-log-modal").modal('show');
+			
 			<% } %>
+			
 		});
 	</script>
 	<script>
