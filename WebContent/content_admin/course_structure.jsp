@@ -187,7 +187,80 @@
 													<li id="session_<%=session1.getId()%>"
 														data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
 														<ul>
-														
+														<%
+															try {	
+
+																hql = "from Lesson as model where model.cmsession=:sid  order by order_id";
+																q = (new IstarUserDAO()).getSession().createQuery(hql);
+																q.setInteger("sid", session1.getId());
+																List<Lesson> lessonList = q.list();	
+																
+																for (Lesson lesson : lessonList) {
+																	Task task = lesson.getTask();
+																
+																	if(!task.getStatus().equalsIgnoreCase("DELETED")) {
+																		String reviewers = "label rounded label-sea";
+																		String assigned = "label label-purple rounded-2x";
+																		String statusLabel = "label rounded label-yellow";
+																		
+																		if (task.fetchReviewersAsString().equalsIgnoreCase("reviewer not assigned")) {
+																			reviewers = "label label-default ";
+																		}
+	
+																		if (lesson.getStatus().equalsIgnoreCase("CREATED")) {
+																			statusLabel = "label label-default ";
+																		}
+	
+																		String email = ((IstarUser) request.getSession().getAttribute("user")).getEmail();
+	
+																		//boolean is_unassigned_lesson = (new ContentAdminDAO()).findById(lesson.getTask().getActorId());
+																		boolean is_content_admin = !(new ContentAdminDAO()).findByEmail(email).isEmpty();
+																		boolean is_publishable = is_content_admin && 
+																								 (task.getStatus().equalsIgnoreCase(StatusTypes.REQUEST_FOR_PUBLISH) || task.getStatus().equalsIgnoreCase(StatusTypes.APPROVED));
+																		boolean is_nonreplicable = (lesson.getPresentaion()==null);
+																		
+																		int task_id = task.getId();
+															%>
+
+															<%
+																if (is_publishable && task_id != 0) {
+															%>
+															<li style="margin-bottom: 4px"
+																id="lesson_<%=lesson.getId()%>"
+																data-task-id="<%=task_id%>"
+																data-jstree='{"opened":true}' class="context-menu-previliged"><%=lesson.getId()%>-> <%=lesson.getTitle()%>
+															<%
+																} else if (is_nonreplicable){
+															%>	
+															<li style="margin-bottom: 4px" data-task-id="<%=task.getId()%>"
+																id="lesson_<%=lesson.getId()%>"
+																data-jstree='{"opened":true}' class="context-menu-nonreplicable"> <%=lesson.getId()%>-> <%=lesson.getTitle()%>
+															<% 
+																} else {
+															%>
+															<li style="margin-bottom: 4px" data-task-id="<%=task.getId()%>"
+																id="lesson_<%=lesson.getId()%>"  data-lesson-id = "<%=lesson.getId()%>" 
+																data-jstree='{"opened":true}' class="context-menu"> <%=lesson.getId()%>-> <%=lesson.getTitle()%>
+															<% 
+																} 
+															%>  
+																<span class="<%=assigned%> "> Assigned to - <%=(new IstarUserDAO()).findById(task.getActorId()).getEmail()%></span>
+																<span>&nbsp;&nbsp;&nbsp;</span> 
+																<span class="<%=reviewers%>"> Reviewer - <%=task.fetchReviewersAsString()%></span>
+																<span>&nbsp;&nbsp;&nbsp;</span> 
+																<span class="<%=statusLabel%>"> Status - <%=task.getStatus()%></span>
+															</li>
+
+															<%
+																		}
+															}
+																		}
+																catch (Exception e) {
+																	System.out.println(session1.getId());
+																}
+																	
+															
+															%>
 														</ul></li>
 
 													<%
@@ -217,7 +290,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close"
-						type="button">×</button>
+						type="button">ï¿½</button>
 					<h4 id="myModalLabel1" class="modal-title">Session Assignment</h4>
 				</div>
 				<div class="modal-body">
