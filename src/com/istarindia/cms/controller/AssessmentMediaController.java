@@ -29,14 +29,14 @@ import com.istarindia.apps.services.controllers.IStarBaseServelet;
  * Servlet implementation class BackgroundUploader
  */
 
-public class HandoutMediaController extends IStarBaseServelet {
+public class AssessmentMediaController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
 	public static File fileUploadPath;
 
 	
 	@Override
     public void init(ServletConfig config) {
-    	String folder =config.getInitParameter("handout_media_upload_path");
+    	String folder =config.getInitParameter("assessment_media_upload_path");
     	fileUploadPath = new File(folder);
     	
     }
@@ -45,7 +45,7 @@ public class HandoutMediaController extends IStarBaseServelet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HandoutMediaController() {
+    public AssessmentMediaController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -91,7 +91,7 @@ public class HandoutMediaController extends IStarBaseServelet {
 		}
 
 		request.setAttribute("list", getBgImageList());
-		request.getRequestDispatcher("/handout_media_gallery.jsp").forward(request, response);
+		request.getRequestDispatcher("/assessment_media_gallery.jsp").forward(request, response);
 
 	}
 
@@ -123,7 +123,7 @@ public class HandoutMediaController extends IStarBaseServelet {
 			
 		} else { //Show the list of images
 			request.setAttribute("list", getBgImageList());
-			request.getRequestDispatcher("/handout_media_gallery.jsp").forward(request, response);
+			request.getRequestDispatcher("/assessment_media_gallery.jsp").forward(request, response);
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class HandoutMediaController extends IStarBaseServelet {
 		Files.walk(Paths.get(fileUploadPath.getAbsolutePath())).forEach(filePath -> {
 			if (Files.isRegularFile(filePath)) {
 				Image img = new Image();
-				img.setUrl("/video/handout_media/" + filePath.toFile().getName());
+				img.setUrl("/video/assessment_media/" + filePath.toFile().getName());
 				img.setTitle(filePath.toFile().getName());
 				img.setId((new Random().nextInt(100000)));
 				list.add(img);

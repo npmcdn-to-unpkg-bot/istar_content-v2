@@ -563,6 +563,7 @@
 	<script src="<%=baseURL%>assets/plugins/tagz/bootstrap-tagsinput.js"
 		type="text/javascript" charset="utf-8"></script>
 
+	<script src="<%=baseURL%>assets/plugins/ckeditor/ckeditor.js"></script>
 	<!-- JS Page Level -->
 	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/datatables/dataTables.colVis.min.js"></script>
@@ -595,7 +596,9 @@
             jQuery(document).ready(function () {
                 App.init();
                 Validation.lessonValidation();
-
+				
+                InitTextAreaForAssessment();
+                
                 //Slide list is sortable
                 $( "#slidess_ord" ).sortable();
                 $( "#update_order" ).submit(function( event ) {
@@ -709,6 +712,22 @@
 			myWindow = window.open(url, "", "width=1024, height=768"); // Opens a new window
 
 			return false;
+		}
+		
+		function InitTextAreaForAssessment() {
+			$('.init_textarea').each(function(i, obj) {
+				var elemId = $(obj).attr('id');
+				console.log(elemId);
+				try {
+					CKEDITOR.replace(elemId, { 
+						"extraPlugins" : 'imagebrowser',
+						"imageBrowser_listUrl" : "/content/GalleryJsonController"
+					});
+				} catch (err) {
+					console.log("CKEditor faced issue while initializing-" + err);
+				}
+			});
+			
 		}
 		
 	</script>

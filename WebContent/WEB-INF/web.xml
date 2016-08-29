@@ -17,7 +17,7 @@
     <init-param>
       <description>Define storage path for image uploads</description>
       <param-name>upload_path</param-name>
-      <param-value>C:/Users/Vaibhav/Pictures/Camera Roll</param-value>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -32,7 +32,7 @@
     <init-param>
       <description>Define storage path for background image uploads</description>
       <param-name>bg_upload_path</param-name>
-      <param-value>C:/Users/Vaibhav/Pictures/Camera Roll/backgrounds</param-value>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll/backgrounds</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -41,18 +41,18 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>HandoutMediaController</display-name>
-    <servlet-name>HandoutMediaController</servlet-name>
-    <servlet-class>com.istarindia.cms.controller.HandoutMediaController</servlet-class>
+    <display-name>AssessmentMediaController</display-name>
+    <servlet-name>AssessmentMediaController</servlet-name>
+    <servlet-class>com.istarindia.cms.controller.AssessmentMediaController</servlet-class>
     <init-param>
       <description>Define storage path for background image uploads</description>
-      <param-name>handout_media_upload_path</param-name>
-      <param-value>C:/Users/Vaibhav/Pictures/Camera Roll/handout_media</param-value>
+      <param-name>assessment_media_upload_path</param-name>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll/assessment_media</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HandoutMediaController</servlet-name>
-    <url-pattern>/handout_media_controller</url-pattern>
+    <servlet-name>AssessmentMediaController</servlet-name>
+    <url-pattern>/assessment_media_controller</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>ImageFilter</filter-name>

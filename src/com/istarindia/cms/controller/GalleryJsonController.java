@@ -45,16 +45,13 @@ public class GalleryJsonController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("application/json");
-		String sql = "select I.url, I.thumbnail_url from image I, task T where T.item_type='IMAGE' and T.status='COMPLETED' and T.item_id=I.id and I.url IS NOT NULL";
-		IstarUserDAO dao = new IstarUserDAO();
-        Session session = dao.getSession();
-        SQLQuery query = session.createSQLQuery(sql);
-        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        DBUTILS util = new DBUTILS();
-		List<HashMap<String, Object>> results = util.executeQuery(sql);
-        JSONObject json = null;
+		JSONObject json = null;
         JSONArray arr = new JSONArray();
-		for (HashMap<String, Object> object : results) {
+		
+		/*String sql = "SELECT 	I.url, 	I.thumbnail_url FROM 	image I, 	image_task T WHERE T .item_id = I. ID AND I.url IS NOT NULL";
+		DBUTILS util = new DBUTILS();
+		List<HashMap<String, Object>> results = util.executeQuery(sql);
+        for (HashMap<String, Object> object : results) {
         	json = new JSONObject();
 			try {
 				json.put("image", object.get("url").toString());
@@ -65,11 +62,10 @@ public class GalleryJsonController extends HttpServlet {
 				//e.printStackTrace();
 			}
 			arr.put(json);
-		}
+		}*/
 
 		MediaUtils mediaUtils = new MediaUtils();
-		ArrayList<Image> list = mediaUtils.findAllHandoutMedia();
-		System.err.println("wqrwqrqwr "+list.size());
+		ArrayList<Image> list = mediaUtils.findAllAssessmentMedia();
 		for (Image image : list) {
 			json = new JSONObject();
 			try {

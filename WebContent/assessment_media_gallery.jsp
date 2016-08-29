@@ -21,7 +21,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>Media Gallery | iStar CMS</title>
+<title>Assessment Media Gallery | iStar CMS</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -88,7 +88,7 @@
 		
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
-				<h1 class="pull-left">Backgrounds</h1>
+				<h1 class="pull-left">Assessment media</h1>
 			</div>
 		</div>
 		
@@ -96,11 +96,11 @@
 			<div class="panel panel-orange" style="margin-left: 100px; margin-right: 100px">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="fa fa-tasks"></i> Upload new background
+						<i class="fa fa-tasks"></i> Upload new Image
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="<%=baseURL%>handout_media_controller" class="sky-form" method="post"
+					<form action="<%=baseURL%>assessment_media_controller" class="sky-form" method="post"
 						enctype="multipart/form-data">
 						
 						<fieldset>
@@ -127,7 +127,7 @@
 			<br>
 			
 			<div class="text-center margin-bottom-50">
-				<h2 class="title-v2 title-center">Background Image Gallery</h2>
+				<h2 class="title-v2 title-center">Assessment Media Gallery</h2>
 			</div>
 			
 			<div class="col-md-12">
