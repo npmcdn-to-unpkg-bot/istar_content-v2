@@ -52,7 +52,7 @@ public class CreateAssesmentController extends HttpServlet {
 			Lesson lesson = task.getLesson();
 			int lesson_id = lesson.getId();
 			
-			if(lesson.getAssessment()!=null && lesson.getPresentaion()!=null) {
+			if(lesson.getAssessment()==null && lesson.getPresentaion()==null) {
 				Assessment assessment = new Assessment();
 				assessment.setLesson(lesson);
 				assessment.setAssessmentdurationminutes(lesson.getDuration());
@@ -83,7 +83,7 @@ public class CreateAssesmentController extends HttpServlet {
 				String comments = "New assessment(ID " + assessment.getId() + ") " + " for lesson: " + lesson.getTitle() + "(TaskID " + task_id + ") is created by " + ((IstarUser)request.getSession().getAttribute("user")).getEmail();
 				CMSRegistry.addTaskLogEntry(request, task.getStatus(), comments, task_id, "LESSON", lesson_id, "New Assessment is created");
 				
-				request.setAttribute("message_failure", "New assessment has been created. Please provide necessary details for the assessment before proceeding to add questions");
+				request.setAttribute("message_success", "New assessment has been created. Please provide necessary details for the assessment before proceeding to add questions");
 			}
 			request.getRequestDispatcher("/edit_lesson?task_id="+task_id).forward(request, response);
 			
