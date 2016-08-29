@@ -47,7 +47,7 @@ lesson_theme may have a string in place
 lesson_theme may have a theme_id which doesnt have an entry in ui_theme table
  -->
 <%
-int themeID =43;
+int themeID = 43;
 try {
 themeID = Integer.parseInt(lesson_theme);
 if ((new UiThemeDAO()).findById(themeID) != null) {

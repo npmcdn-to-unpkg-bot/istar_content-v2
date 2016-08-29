@@ -82,6 +82,7 @@ public class CourseAsssignmentController extends IStarBaseServelet {
 				}
 			}
 		}
+		
 		request.getRequestDispatcher("/content_admin/course_structure.jsp").forward(request, response);
 	}
 

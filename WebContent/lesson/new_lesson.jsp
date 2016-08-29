@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%><%@ page import="java.util.*"%>
 <%@ page import="com.istarindia.apps.dao.*"%>
+<%@page import="org.hibernate.Query"%>
 
 <%
 	String url = request.getRequestURL().toString();
@@ -81,54 +82,55 @@
 		<div class="breadcrumbs">
 			<div class="container-fluid ">
 				<h1 class="pull-left">Create Lesson</h1>
-				<!-- <ul class="pull-right breadcrumb">
-					<li><a href="/">Home</a></li>
-					<li><a href="">Content Admin </a></li>
-					<li class="active">Create Lesson</li>
-				</ul> -->
 			</div>
-
 		</div>
+		<br>
 		<div class="container-fluid height-1000"
 			style="padding: 0px !important">
 			<div class="row">
 				<form action="/content/create_lesson" id="sky-form4" class="sky-form" onsubmit="myFunction()">
 					<input type="hidden" id="selected_items" name="selected_items" />
 					<div class="col-md-6">
-					<div class="alert alert-warning fade in text-center">
-						<fieldset>
-							<section>
-								<label>Title of Lesson</label> <label class="input" > <input
-									value="" type="text" name="title" placeholder="Title of Lesson">
-									<b class="tooltip tooltip-bottom-right">The title of the
-										lesson*</b>
-								</label>
-							</section>
-							<section>
-								<label>Duration of Lesson*</label> <label class="input">
-									<input value="" type="number" name="duration"
-									placeholder="Duration of Lesson"> <b
-									class="tooltip tooltip-bottom-right">The duration of the
-										lesson</b>
-								</label>
-							</section>
-							<section>
-								<label> Tags</label> <label class="input"> <input
-									data-role="tagsinput" value="" type="text" name="Tags"
-									class="tagcontainer" placeholder="Tags of Lesson"> <b
-									class="tooltip tooltip-bottom-right">The tags of the lesson</b>
-								</label>
-							</section>
-
-						</fieldset>
+					<div class="col-md-12">
+					<div class="panel panel-sea">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-tasks"></i>Lesson Details
+							</h3>
+						</div>
+						<div class="panel-body row">
+							<fieldset>
+								<section class="col col-md-6">
+									<label>Title of Lesson*</label> <label class="input" > <input
+										value="" type="text" name="title" placeholder="Title of Lesson">
+										<b class="tooltip tooltip-bottom-right">The title of the
+											lesson*</b>
+									</label>
+								</section>
+								<section class="col col-md-6">
+									<label>Duration of Lesson*</label> <label class="input">
+										<input value="" type="number" name="duration"
+										placeholder="Duration of Lesson"> <b
+										class="tooltip tooltip-bottom-right">The duration of the
+											lesson</b>
+									</label>
+								</section>
+								<section class="col col-md-6">
+									<label> Tags</label> <label class="input"> <input
+										data-role="tagsinput" value="" type="text" name="Tags"
+										class="tagcontainer" placeholder="Tags of Lesson"> <b
+										class="tooltip tooltip-bottom-right">The tags of the lesson</b>
+									</label>
+								</section>
+							</fieldset>
+						</div>
 						<footer>
-							<button type="submit" class="btn-u"  >Create Lesson</button>
-							<label id="err" style="display: block;color:#ee9393"></label>
-							
-							
+							<button type="submit" class="btn-u"  style="float:right">Create Lesson</button>
+							<label id="err" style="display: block; color:#ee9393; float:right"></label>
 						</footer>
 					
 
+					</div>
 					</div>
 				</div>
 					<div class="col-md-6">
@@ -141,25 +143,46 @@
 						<ul>
 							<li id="none" data-jstree='{"opened":true, "disabled":true}'>All Courses
 								<ul>
-									<%CourseDAO dao = new CourseDAO();
-							for (Course course : (List<Course>) dao.findAll()) {%>
-									<li id="course_<%=course.getId()%>"
-										data-jstree='{"opened":true, "disabled":true}'><%=course.getCourseName()%>
-										<ul>
-											<%for (Module module : course.getModules()) {%>
-											<li id="module_<%=module.getId()%>"
-												data-jstree='{"opened":true, "disabled":true}'><%=module.getModuleName()%>
-												<ul>
-													<%for (Cmsession session1 : module.getCmsessions()) {%>
-													<li id="session_<%=session1.getId()%>"
-														data-jstree='{"opened":true}'><%=session1.getTitle()%>
-
+									<%	
+										int course_sno = 0;
+										CourseDAO dao = new CourseDAO();
+										for (Course course : (List<Course>) dao.findAll()) {
+											course_sno++;
+									%>
+										<li id="course_<%=course.getId()%>"
+											data-jstree='{"opened":false, "disabled":true}'><%=course_sno%>. <%=course.getCourseName()%>
+											<ul>
+												<%
+													int cmsession_sno = 0;
+													
+													String hql = "from Module as model where model.course=:sid order by order_id";
+													Query q = (new IstarUserDAO()).getSession().createQuery(hql);
+													q.setInteger("sid", course.getId());
+													List<Module> moduleList = q.list();
+	
+													for (Module module : moduleList) {
+												%>
+													<li id="module_<%=module.getId()%>"
+														data-jstree='{"opened":true, "disabled":true}'><%=module.getModuleName()%>
+														<ul>
+															<%
+																hql = "from Cmsession as model where model.module=:sid  order by order_id";
+																q = (new IstarUserDAO()).getSession().createQuery(hql);
+																q.setInteger("sid", module.getId());
+																List<Cmsession> sessionList = q.list();	
+																
+																for (Cmsession session1 : sessionList) {
+																	cmsession_sno++;
+															%>
+																<li id="session_<%=session1.getId()%>"
+																	data-jstree='{"opened":true}'><%=cmsession_sno%>. <%=session1.getTitle()%>
+																</li>
+															<%}%>
+														</ul>
 													</li>
-
-													<%}%>
-												</ul></li>
-											<%}%>
-										</ul></li>
+												<%}%>
+											</ul>
+										</li>
 									<%}%>
 								</ul>
 							</li>
