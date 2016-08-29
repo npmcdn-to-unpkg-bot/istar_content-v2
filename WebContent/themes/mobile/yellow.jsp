@@ -413,6 +413,61 @@ body {
 	background: #e0e0e0;
 }
 
+
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE  table {
+	list-style: none !important;
+	margin: auto;
+	border-collapse: collapse;
+	vertical-align: baseline;
+	display: table;
+	margin-top: 5%;
+	font-size: 4vh;
+	color: <%=theme.get("paragraph_____font_color")%>;
+	line-height: <%=theme.get("paragraph_____line_height")%>;
+	text-align: <%=theme.get("paragraph_____text_alignment")%>;
+	font-family:
+		'<%=theme.get("paragraph_____font_family").replaceAll(".ttf", "").replaceAll("-Regular", "")%>',
+		serif;
+	width: 100%;
+	font-weight: 400;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE  thead {
+	display: table-header-group;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	border: 3px solid black;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	color: #333333;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE   td {
+	text-align: left;
+	padding: 8px;
+	border: 3px solid black;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE  th {
+	text-align: left;
+	padding: 8px;
+	border: 3px solid black;
+	font-weight: bold;
+	background: #e0e0e0;
+}
+
+.reveal .ONLY_TITLE_PARAGRAPH_IMAGE  tr {
+	display: table-row;
+	margin: 0;
+	padding: 0;
+	border: 3px solid black;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
 .reveal .ONLY_TITLE_PARAGRAPH  tr {
 	display: table-row;
 	margin: 0;
