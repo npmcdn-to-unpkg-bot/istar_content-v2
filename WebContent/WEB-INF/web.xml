@@ -17,7 +17,7 @@
     <init-param>
       <description>Define storage path for image uploads</description>
       <param-name>upload_path</param-name>
-      <param-value>/root/Camera Roll</param-value>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -32,7 +32,7 @@
     <init-param>
       <description>Define storage path for background image uploads</description>
       <param-name>bg_upload_path</param-name>
-      <param-value>/root/Camera Roll/backgrounds</param-value>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll/backgrounds</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -47,7 +47,7 @@
     <init-param>
       <description>Define storage path for assessment image uploads</description>
       <param-name>assessment_media_upload_path</param-name>
-      <param-value>/root/assessment_media</param-value>
+      <param-value>C:/Users/ayrus/Pictures/Camera Roll/assessment_media</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

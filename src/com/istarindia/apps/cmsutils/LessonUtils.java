@@ -1239,23 +1239,33 @@ public class LessonUtils {
         ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         ve.init();
         VelocityContext context = new VelocityContext();
-
-        Image selected_image = null;
-        Video selected_video = null;
-        if(slide.getImage() != null) {
-	        String selected_image_url = slide.getImage().getUrl();
-	        ImageDAO imageDAO = new ImageDAO();
-	        if (!imageDAO.findByUrl(selected_image_url).isEmpty()) {
-	        	selected_image = imageDAO.findByUrl(selected_image_url).get(0);
-	        }
-        }
-        if(slide.getVideo() != null) {
-        	String selected_video_url = slide.getVideo().getUrl();
-            VideoDAO videoDAO = new VideoDAO();
-            if (!videoDAO.findByUrl(selected_video_url).isEmpty()) {
-            	selected_video =  videoDAO.findByUrl(selected_video_url).get(0);
-            };
-        }
+       
+        ImageDAO imageDAO = new ImageDAO();
+        VideoDAO videoDAO = new VideoDAO();
+        
+        Image selected_image = imageDAO.findById(0);
+        Video selected_video = videoDAO.findById(0);
+        
+        try {
+			if(slide.getImage() != null) {
+			    String selected_image_url = slide.getImage().getUrl();
+			    if (!imageDAO.findByUrl(selected_image_url).isEmpty()) {
+			    	selected_image = imageDAO.findByUrl(selected_image_url).get(0);
+			    }
+			}
+		} catch (Exception e1) {
+		}
+        
+        try {
+			if(slide.getVideo() != null) {
+				String selected_video_url = slide.getVideo().getUrl();
+			    if (!videoDAO.findByUrl(selected_video_url).isEmpty()) {
+			    	selected_video =  videoDAO.findByUrl(selected_video_url).get(0);
+			    };
+			}
+		} catch (Exception e1) {
+		}
+        
         context.put("selected_image", selected_image);
         context.put("selected_video", selected_video);
         context.put("slide", slide);
