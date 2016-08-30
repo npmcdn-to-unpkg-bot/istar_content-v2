@@ -13,24 +13,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.istarindia.apps.dao.Image;
-import com.istarindia.apps.dao.ImageDAO;
-import com.istarindia.apps.dao.Presentaion;
-import com.istarindia.apps.dao.PresentaionDAO;
-import com.istarindia.apps.dao.Slide;
-import com.istarindia.apps.dao.SlideDAO;
-import com.istarindia.apps.dao.SlideVersion;
-import com.istarindia.apps.dao.SlideVersionDAO;
-import com.istarindia.apps.dao.Video;
-import com.istarindia.apps.dao.VideoDAO;
+import com.istarindia.apps.dao.*;
 import com.istarindia.apps.dao.utils.HibernateSessionFactory;
 import com.istarindia.apps.services.CMSRegistry;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
-import com.istarindia.cms.lessons.CMSImage;
-import com.istarindia.cms.lessons.CMSList;
-import com.istarindia.cms.lessons.CMSTextItem;
-import com.istarindia.cms.lessons.CMSVideo;
-import com.istarindia.cms.lessons.SlideService;
+
+import com.istarindia.cms.lessons.*;
 
 /**
  * Servlet implementation class CreateSlideController
@@ -82,7 +70,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				String title = request.getParameter("title");
 
 				slide_id = service.addTextParagraphSlideToLesson(request.getParameter("paragraph"), image,
-						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, title,
+						request.getParameter("teacher_notes").trim(), request.getParameter("student_notes").trim(), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
@@ -100,7 +88,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				service.addTextParagraphSlideToLessonUpdate(request.getParameter("paragraph"), image,
-						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt, title,
+						request.getParameter("teacher_notes").trim(), request.getParameter("student_notes").trim(), ppt, title,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
@@ -125,7 +113,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setDescription(img.getDescription());
 
 				slide_id = service.addImageParagraphSlideToLesson(request.getParameter("paragraph"), image,
-						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt,
+						request.getParameter("teacher_notes").trim(), request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
@@ -142,7 +130,7 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
 				service.addImageParagraphSlideToLessonUpdate(request.getParameter("paragraph"), image,
-						request.getParameter("teacher_notes"), request.getParameter("student_notes"), ppt,
+						request.getParameter("teacher_notes").trim(), request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
@@ -152,13 +140,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_TITLE":
 
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.addTextSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addTextSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
-				service.addTextSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addTextSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
@@ -166,14 +154,14 @@ public class CreateSlideController extends IStarBaseServelet {
 			break;
 		case "ONLY_TITLE_PARAGRAPH":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_TITLE_PARAGRAPH");
 
 			} else {
-				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
 						request.getParameter("slide_id"), "ONLY_TITLE_PARAGRAPH");
@@ -185,14 +173,14 @@ public class CreateSlideController extends IStarBaseServelet {
 			
 		case "ONLY_TITLE_PARAGRAPH_cells_fragemented":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_TITLE_PARAGRAPH_cells_fragemented");
 
 			} else {
-				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
 						request.getParameter("slide_id"), "ONLY_TITLE_PARAGRAPH_cells_fragemented");
@@ -204,14 +192,14 @@ public class CreateSlideController extends IStarBaseServelet {
 
 		case "ONLY_TITLE_TABLE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_TITLE_TABLE");
 
 			} else {
-				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
 						request.getParameter("slide_id"), "ONLY_TITLE_TABLE");
@@ -225,15 +213,15 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				slide_id = service.addTextListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addTextListSlideToLesson(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, is_numbered);
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addTextListSlideToLessonUpdate(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), is_numbered);
 			}
@@ -245,16 +233,16 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt,
+				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, is_numbered);
 
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt,
+				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), is_numbered);
 			}
@@ -266,16 +254,16 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt,
+				slide_id = service.addListSlideToLesson(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, is_numbered);
 
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt,
+				service.addListSlideToLessonUpdate(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), is_numbered);
 			}
@@ -285,16 +273,16 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type("SIMPLE_LIST");
-				slide_id = service.addListAssessment2ColumnSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addListAssessment2ColumnSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type("SIMPLE_LIST");
-				service.addListAssessment2ColumnSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addListAssessment2ColumnSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
 			}
@@ -306,16 +294,16 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type("SIMPLE_LIST");
-				slide_id = service.addListAssessment5ColumnSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addListAssessment5ColumnSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type("SIMPLE_LIST");
-				service.addListAssessment5ColumnSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addListAssessment5ColumnSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
 			}
@@ -325,16 +313,16 @@ public class CreateSlideController extends IStarBaseServelet {
               if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
                       CMSList list = getNewList(request);
                       list.setList_type(request.getParameter("list_type"));
-                      slide_id = service.add2TextTableSlideToLesson(request.getParameter("teacher_notes"),
-                                      request.getParameter("student_notes"), ppt, request.getParameter("title"),request.getParameter("title2"),
+                      slide_id = service.add2TextTableSlideToLesson(request.getParameter("teacher_notes").trim(),
+                                      request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),request.getParameter("title2"),
                                       request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
                                       request.getParameter("backgroundTransition"), list);
 
               } else {
                       CMSList list = getNewList(request);
                       list.setList_type(request.getParameter("list_type"));
-                      service.add2TextTableSlideToLessonUpdate(request.getParameter("teacher_notes"),
-                                      request.getParameter("student_notes"), ppt, request.getParameter("title"),request.getParameter("title2"),
+                      service.add2TextTableSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+                                      request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),request.getParameter("title2"),
                                       request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
                                       request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
               }
@@ -344,16 +332,16 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("SIMPLE_LIST"));
-				slide_id = service.add2BoxSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				slide_id = service.add2BoxSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list,request.getParameter("image_bg"));
 
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("SIMPLE_LIST"));
-				service.add2BoxSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				service.add2BoxSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"),request.getParameter("image_bg"));
 			}
@@ -374,8 +362,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				slide_id = service.addTextImageSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addTextImageSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), image,request.getParameter("image_bg"));
 			} else {
@@ -391,8 +379,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				service.addTextImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addTextImageSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"),request.getParameter("image_bg"));
 
@@ -414,8 +402,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				slide_id = service.add2TextImageSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt,
+				slide_id = service.add2TextImageSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), image,request.getParameter("title"),request.getParameter("title2"));
 			} else {
@@ -431,8 +419,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				service.add2TextImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt,
+				service.add2TextImageSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), image, request.getParameter("slide_id"), request.getParameter("title"),request.getParameter("title2"));
 
@@ -453,8 +441,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				cmsVideo.setUrl(video.getUrl());
 				cmsVideo.setTitle(video.getTitle());
 				cmsVideo.setDescription(video.getDescription());
-				slide_id = service.addTextVideoSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addTextVideoSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), cmsVideo);
 			} else {
@@ -470,8 +458,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				cmsVideo.setUrl(video.getUrl());
 				cmsVideo.setTitle(video.getTitle());
 				cmsVideo.setDescription(video.getDescription());
-				service.addTextVideoSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addTextVideoSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), cmsVideo, request.getParameter("slide_id"));
 
@@ -492,8 +480,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				cmsVideo.setUrl(video.getUrl());
 				cmsVideo.setTitle(video.getTitle());
 				cmsVideo.setDescription(video.getDescription());
-				slide_id = service.addVideoSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt,
+				slide_id = service.addVideoSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), cmsVideo);
 			} else {
@@ -509,8 +497,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				cmsVideo.setUrl(video.getUrl());
 				cmsVideo.setTitle(video.getTitle());
 				cmsVideo.setDescription(video.getDescription());
-				service.addVideoSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt,
+				service.addVideoSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt,
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), cmsVideo, request.getParameter("slide_id"));
 
@@ -519,15 +507,15 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_TITLE_TREE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewTree(request);
-				slide_id = service.addTextTreeSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addTextTreeSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("image_bg"));
 
 			} else {
 				CMSList list = getNewTree(request);
-				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addTextTreeSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
@@ -536,15 +524,15 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_2TITLE_2TABLE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewTree(request);
-				slide_id = service.add2Text2TableSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				slide_id = service.add2Text2TableSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewTree(request);
-				service.add2Text2TableSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				service.add2Text2TableSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
 			}
@@ -553,15 +541,15 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_2TITLE_5TABLE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewTree(request);
-				slide_id = service.add2Text5TableSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				slide_id = service.add2Text5TableSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewTree(request);
-				service.add2Text5TableSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				service.add2Text5TableSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
 			}
@@ -570,15 +558,15 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "ONLY_2TITLE_TREE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewTree(request);
-				slide_id = service.add2TextTreeSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				slide_id = service.add2TextTreeSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("image_bg"),
 						request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewTree(request);
-				service.add2TextTreeSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				service.add2TextTreeSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"), request.getParameter("image_bg"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id"));
 			}
@@ -586,15 +574,15 @@ public class CreateSlideController extends IStarBaseServelet {
 			break;
 		case "ONLY_PARAGRAPH":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-								slide_id = service.addParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"),
+								slide_id = service.addParaGraphSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("slideTransition"),
 
 						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
 						request.getParameter("paragraph"), request.getParameter("image_bg"));
 
 			} else {
-				 service.addParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("slideTransition"),
+				 service.addParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("slideTransition"),
 						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"),
 						request.getParameter("paragraph"), request.getParameter("slide_id"),
 						request.getParameter("image_bg"));
@@ -616,8 +604,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				slide_id = service.addImageSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, "NO_TITLE", request.getParameter("slideTransition"),
+				slide_id = service.addImageSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, "NO_TITLE", request.getParameter("slideTransition"),
 						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image,
 						request.getParameter("image_bg"));
 			} else {
@@ -633,8 +621,8 @@ public class CreateSlideController extends IStarBaseServelet {
 				image.setUrl(img.getUrl());
 				image.setTitle(img.getTitle());
 				image.setDescription(img.getDescription());
-				service.addImageSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, "NO_TITLE", request.getParameter("slideTransition"),
+				service.addImageSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, "NO_TITLE", request.getParameter("slideTransition"),
 						request.getParameter("backgroundColor"), request.getParameter("backgroundTransition"), image,
 						request.getParameter("slide_id"), request.getParameter("image_bg"));
 
@@ -644,13 +632,13 @@ public class CreateSlideController extends IStarBaseServelet {
 		case "NO_CONTENT":
 			//image_bg=%2Fcontent%2Fbackgrounds%2F6.png&slideTransition=Zoom&background
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.addNOTextSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.addNOTextSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("image_bg"));
 			} else {
-				service.addNOTextSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.addNOTextSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"));
 			}
@@ -658,13 +646,13 @@ public class CreateSlideController extends IStarBaseServelet {
 			
 		case "ONLY_2TITLE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.add2TitleSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				slide_id = service.add2TitleSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("image_bg"),  request.getParameter("title2"));
 			} else {
-				service.add2TitleSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"),
+				service.add2TitleSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("slide_id"), request.getParameter("image_bg"),  request.getParameter("title2"));
 			}
@@ -673,14 +661,14 @@ public class CreateSlideController extends IStarBaseServelet {
 		
 		case "ONLY_PARAGRAPH_TITLE":
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
-				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+				slide_id = service.addTextAndParaGraphSlideToLesson(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"), "ONLY_PARAGRAPH_TITLE");
 
 			} else {
-					service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("image_bg"),
+					service.addTextAndParaGraphSlideToLessonUpdate(request.getParameter("teacher_notes").trim(),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("image_bg"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), request.getParameter("paragraph"),
 						request.getParameter("slide_id"), "ONLY_PARAGRAPH_TITLE");
@@ -694,16 +682,16 @@ public class CreateSlideController extends IStarBaseServelet {
 			if (request.getParameter("is_edit").equalsIgnoreCase("false")) {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				slide_id = service.addListToLesson(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				slide_id = service.addListToLesson(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list);
 
 			} else {
 				CMSList list = getNewList(request);
 				list.setList_type(request.getParameter("list_type"));
-				service.addListToLessonUpdate(request.getParameter("teacher_notes"), request.getParameter("image_bg"),
-						request.getParameter("student_notes"), ppt, request.getParameter("title"), request.getParameter("title2"),
+				service.addListToLessonUpdate(request.getParameter("teacher_notes").trim(), request.getParameter("image_bg"),
+						request.getParameter("student_notes").trim(), ppt, request.getParameter("title"), request.getParameter("title2"),
 						request.getParameter("slideTransition"), request.getParameter("backgroundColor"),
 						request.getParameter("backgroundTransition"), list, request.getParameter("slide_id") );
 			}

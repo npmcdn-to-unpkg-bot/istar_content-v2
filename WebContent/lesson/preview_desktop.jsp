@@ -1,22 +1,25 @@
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%><!doctype html>
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-PresentaionDAO dao = new PresentaionDAO();
-int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
-Presentaion ppt =  dao.findById(lessonID);
-String status = ppt.getLesson().getTask().getStatus();
+<%
+	response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+	response.setHeader("Pragma","no-cache"); //HTTP 1.0
+	response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 
-String lesson_theme = ppt.getLesson().getLesson_theme_desktop();
+<!doctype html>
 
-String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
-
-String style_body = "background-size: cover;";
-
+<% 
+	String url = request.getRequestURL().toString();
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+	PresentaionDAO dao = new PresentaionDAO();
+	int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
+	Presentaion ppt =  dao.findById(lessonID);
+	String status = ppt.getLesson().getTask().getStatus();
+	String lesson_theme = ppt.getLesson().getLesson_theme_desktop();
+	String style_body = "background-size: cover;";
 %>
 
 
@@ -91,26 +94,23 @@ try {
     
     if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
 	    <% if(!status.equalsIgnoreCase("PUBLISHED")) { %>
-			<button  data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+			<button class="btn" data-toggle="modal" data-target="#reviewCommentModal" style="zoom: 80%; padding: 0px; margin: -1%; position: absolute; top: 1%;  right: 1%;  z-index: 999; background: none;">
 			<img src="http://i.stack.imgur.com/8BVKM.png"></button>
 	    <%  } %>
-		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
-		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
-
+		<button class="btn" onclick="Reveal.slide(0)" style="position: absolute; top: 1%;  left: 1%; z-index: 999">First Slide </button>
+		<button class="btn" onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute; top: 1%;  left: 10%; z-index: 999">Speaker Notes</button>
 	<% } else { %>
 	    <% if(!status.equalsIgnoreCase("PUBLISHED")) { %>
-			<button onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="position: absolute;bottom: 10%; right: 10%; z-index: 999">
+			<button class="btn" onclick="add_edit()" data-toggle="modal" data-target="#reviewCommentModal" style="zoom: 80%; padding: 0px; margin: -1%; position: absolute; top: 1%;  right: 1%;  z-index: 999; background: none;">
 			<img src="http://i.stack.imgur.com/8BVKM.png"></button>
 	    <%  } %>
-		<button onclick="Reveal.slide(0)" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 20%; z-index: 999">Go to First Slide </button>
-		<button onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute;bottom: 10%; right: 30%; z-index: 999">Speaker Notes</button>
+		<button class="btn" onclick="Reveal.slide(0)" style="position: absolute; top: 1%;  left: 1%; z-index: 999">First Slide </button>
+		<button class="btn" onclick="view_teacher_notes()" data-toggle="modal" data-target="#myModal" style="position: absolute; top: 1%;  left: 10%; z-index: 999">Speaker Notes</button>
 	<% } } %>
 
-
 	<% if(!request.getParameterMap().containsKey("demo")) { 
-		IstarUser user = (IstarUser) request.getSession().getAttribute("user");
-
-		if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
+			IstarUser user = (IstarUser) request.getSession().getAttribute("user");
+			if(user.getUserType().equalsIgnoreCase("CONTENT_REVIEWER")) { %>
 	<div class='modal fade' id='reviewCommentModal' tabindex='-1'  role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 		<div class="modal-dialog">
 			<div class="modal-content">

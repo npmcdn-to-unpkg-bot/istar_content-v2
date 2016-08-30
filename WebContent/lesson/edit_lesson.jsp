@@ -114,7 +114,6 @@
 		<BR />
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="col-md-3">
-				<div class="col-md-12">
 					<div class=" col-md-12 ">
 						<div class="panel panel-sea">
 							<div class="panel-heading">
@@ -305,10 +304,11 @@
 							</section>
 
 							</fieldset>
-
 									<footer >
-										<button type="submit" class="btn-u" style="float:left">Update </button>
-										<button class="btn-u"  id="send-for-review" data-toggle="modal" style="float:right"
+										<button type="submit" class="btn-u" style="float:left">Update Lesson details</button>
+									</footer>
+									<footer >
+										<button class="btn-u"  id="send-for-review" data-toggle="modal" style="float:left"
 											data-target="#confirm-send-for-review-modal" type="button">Send for Review</button>
 									</footer>
 								</form>
@@ -382,8 +382,6 @@
 						</div>
 					</div>
 
-				</div>
-				
 				<% if(lesson.getPresentaion() != null) { %>
 				
 				 <div class="col-sm-12">

@@ -1,27 +1,23 @@
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-	<!doctype html>
+<!doctype html>
+
 <%
-response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-response.setHeader("Pragma","no-cache"); //HTTP 1.0
-response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+	response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+	response.setHeader("Pragma","no-cache"); //HTTP 1.0
+	response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
-<% String url = request.getRequestURL().toString();
-String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
-
-PresentaionDAO dao = new PresentaionDAO();
-int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
-Presentaion ppt =  dao.findById(lessonID);
-String lesson_theme = ppt.getLesson().getLesson_theme();
-
-String nuetral = url.substring(0, url.length() - request.getRequestURI().length()) +"/";
-
-String style_body = "background-size: cover;";
-
+<% 
+	String url = request.getRequestURL().toString();
+	String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+	PresentaionDAO dao = new PresentaionDAO();
+	int lessonID = Integer.parseInt(request.getParameter("ppt_id").replaceAll("/", ""));
+	Presentaion ppt =  dao.findById(lessonID);
+	String lesson_theme = ppt.getLesson().getLesson_theme();
+	String style_body = "background-size: cover;";
 %>
 
 <html lang="en">
@@ -65,7 +61,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=nuetral%>student/css/print/pdf.css' : '<%=nuetral%>student/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL%>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL%>assets/plugins/reveal/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 

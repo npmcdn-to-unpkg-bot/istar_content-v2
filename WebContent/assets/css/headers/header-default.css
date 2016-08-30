@@ -668,7 +668,7 @@ body.header-fixed-space-default {
 
 .header .mega-menu .navbar-inner,
 .header .mega-menu .container {
-	min-width: 1500px;
+	min-width: 98%;
   	position: relative;
 }
 

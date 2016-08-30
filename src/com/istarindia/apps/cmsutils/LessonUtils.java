@@ -489,16 +489,23 @@ public class LessonUtils {
             
             out.append("<div class='form-group'  style='margin-right: 0px'>");
             out.append("<button type='submit' class='btn-u btn-u-default'style='margin-left: 10px'>Add Slide</button>");
-            out.append("</div>");
+            out.append("</div></form>");
             out.append(" </td><td>");
-            out.append("<div class='checkbox'  style='margin-right: 0px'>");
-            out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
-                    + "\")'  href='#' class='btn-u btn-u-default'style='margin-left: 10px'>Mobile Preview</a>");
-            out.append("</div>");
-            out.append(" </td><td>");
-            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' "
-            		+ " class='btn-u btn-u-default'style='margin-left: 10px'>Speaker Preview</a>");
-            out.append("</form>");
+///            out.append("<div class='checkbox'  style='margin-right: 0px'>");
+            //out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId()
+            //        + "\")'  href='#' class='btn-u btn-u-default'style='margin-left: 10px'>Mobile Preview</a>");
+///            out.append("</div>");
+///            out.append(" </td><td>");
+           // out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' "
+           // 		+ " class='btn-u btn-u-default'style='margin-left: 10px'>Speaker Preview</a>");
+            //out.append("");
+
+            out.append("<div class='btn-group '>  <button style='width: 100%;' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='true'> Preview Lesson <i class='fa fa-angle-down'></i> </button>  <ul class='dropdown-menu' role='menu'><li>");
+            out.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "\")'  href='#' >Mobile Preview</a>");
+            out.append("</li>  <li>");
+            out.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' >Speaker Preview</a>");
+            out.append("</li> </ul> </div>");
+
             out.append(" </td><td>");
             out.append("<form id='update_order' action='/content/update_course?ppt_id="+ ppt.getId()+"'>"
             		+ "<input id='action' name='action' type='hidden' value='reorder'> "
@@ -517,7 +524,7 @@ public class LessonUtils {
 	            out.append("<a style='float: none; margin-right: 0px;' target='_blank' "
 	            		+ ""
 	            		+ "href='/content/creative_admin/edit_theme.jsp?theme_id="+themeID+"&ppt_id="+lesson.getPresentaion().getId()+"' "
-	            		+ " class='btn-u btn-u-default'>Edit Visualize Theme</a>");
+	            		+ " class='btn-u btn-u-default'>Edit Theme</a>");
 	            out.append("</div>");
 	            out.append(" </td></tr>");
 	            out.append(" </tbody>");

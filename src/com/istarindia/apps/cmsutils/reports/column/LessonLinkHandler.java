@@ -21,7 +21,7 @@ public class LessonLinkHandler extends ColumnHandler {
 			Presentaion ppt = (Presentaion)new PresentaionDAO().findByProperty("lesson", l).get(0);
 			
 			StringBuffer button = new StringBuffer();
-			button.append("<div class='btn-group '>  <button style='width: 115%;' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='true'> Choose Preview <i class='fa fa-angle-down'></i> </button>  <ul class='dropdown-menu' role='menu'><li>");
+			button.append("<div class='btn-group '>  <button style='width: 115%;' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='true'> Preview Lesson<i class='fa fa-angle-down'></i> </button>  <ul class='dropdown-menu' role='menu'><li>");
 			button.append("<a onclick='openWin(\"/content/lesson/preview.jsp?ppt_id=" + ppt.getId() + "\")'  href='#' >Mobile Preview</a>");
 			button.append("</li>  <li>");
 			button.append("<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=" + ppt.getId()+"' >Speaker Preview</a>");
