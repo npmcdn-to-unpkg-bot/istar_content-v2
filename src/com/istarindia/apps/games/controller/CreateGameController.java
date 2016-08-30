@@ -58,7 +58,7 @@ public class CreateGameController extends HttpServlet {
 				session.close();
 			}
 			Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
-			CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A Game for the lesson was created.");
+			//CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A Game for the lesson was created.");
 			
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));
@@ -85,7 +85,7 @@ public class CreateGameController extends HttpServlet {
 				session.close();
 			}
 			Lesson lesson = (new LessonDAO()).findById(Integer.parseInt(request.getParameter("lesson_id")));
-			CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A Game for the lesson was created.");
+			//CreateLessonTaskManager.pushTaskNotification(lesson, (IstarUser) request.getSession().getAttribute("user"), "A Game for the lesson was created.");
 			
 			request.setAttribute("lesson", lesson);
 			request.setAttribute("task_id", Integer.parseInt(request.getParameter("task_id")));
