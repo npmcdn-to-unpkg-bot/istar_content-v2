@@ -194,7 +194,7 @@ try {
 			center : false,
 			controls : true, 
 			showNotes: false,
-		    slideNumber: true,
+		    slideNumber: 'c/t',
 			height: window_height,
 			width: window_size,
 			transition: 'slide', 
