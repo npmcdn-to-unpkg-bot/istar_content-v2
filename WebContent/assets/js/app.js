@@ -245,7 +245,7 @@ var App = function () {
 	
 	function handleTables() {
 		try {
-		
+		console.log('kamini');
 		var otable =  $('#datatable_fixed_column').DataTable({
 			 initComplete: function () {
 		            this.api().columns().every( function () {
@@ -275,8 +275,13 @@ var App = function () {
 		console.log(err);
 	}
 	
+	
+	
 	$('.datatable_report').each(function(i, obj) {
 		var tableID  = $(this).attr('id');
+		var typeOfReport = $("#"+tableID).data('graph_type');
+		console.log('typeOfReport->'+ typeOfReport);
+		if(typeOfReport == 'table') {
 		$('#'+tableID).DataTable({
 			"pageLength": 16, 
 			initComplete: function () {
@@ -303,6 +308,7 @@ var App = function () {
 			 stateSave: true, 
 			 "pageLength": 50
 			 });
+	}
 	});
 	
 	}
