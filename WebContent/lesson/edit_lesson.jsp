@@ -114,279 +114,279 @@
 		<BR />
 		<div class="container-fluid height-1000" style="padding: 0px !important">
 			<div class="col-md-3">
-					<div class=" col-md-12 ">
-						<div class="panel panel-sea">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<i class="fa fa-tasks"></i>Lesson Details
-								</h3>
-							</div>
-							<div class="panel-body">
-								<form action="/content/update_lesson" id="sky-form4"
-									class="sky-form">
-									<input type="hidden" name="lesson_id"
-										value="<%=lesson.getId()%>" /> <input type="hidden"
-										name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
-									<fieldset>
+				<div class=" col-md-12 ">
+					<div class="panel panel-sea">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-tasks"></i>Lesson Details
+							</h3>
+						</div>
+						<div class="panel-body">
+							<form action="/content/update_lesson" id="sky-form4"
+								class="sky-form">
+								<input type="hidden" name="lesson_id"
+									value="<%=lesson.getId()%>" /> <input type="hidden"
+									name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+								<fieldset>
 
-										<section>
-											<label>Title of Lesson</label> <label class="input">
-												<input value="<%=lesson.getTitle()%>" type="text" spellcheck="true"
-												name="title" placeholder="Title of Lesson"> <b
-												class="tooltip tooltip-bottom-right">The title of the
-													lesson</b>
-											</label>
-										</section>
+									<section>
+										<label>Title of Lesson</label> <label class="input">
+											<input value="<%=lesson.getTitle()%>" type="text" spellcheck="true"
+											name="title" placeholder="Title of Lesson"> <b
+											class="tooltip tooltip-bottom-right">The title of the
+												lesson</b>
+										</label>
+									</section>
 
-										<section>
-											<label>Duration of Lesson</label> <label class="input">
-												<input value="<%=lesson.getDuration()%>" type="number"
-												name="duration" placeholder="Duration of Lesson"> <b
-												class="tooltip tooltip-bottom-right">The duration of the
-													lesson</b>
-											</label>
-										</section>
-										<section>
-											<label> Tags</label> <label class="input"> <input
-												data-role="tagsinput" value="<%=lesson.getTags()%>"
-												type="text" name="Tags" class="tagcontainer"
-												placeholder="Tags of Lesson"> <b
-												class="tooltip tooltip-bottom-right">The tags of the
-													lesson</b>
-											</label>
-										</section>
-										<section>
-											<label>Mobile Lesson Themes</label>
-											<select class="form-control input-lg" name="lesson_theme">
-												<%
-													boolean flag = false;
-												List thes = (new UiThemeDAO()).findAll();
-												 Collections.sort(thes);
+									<section>
+										<label>Duration of Lesson</label> <label class="input">
+											<input value="<%=lesson.getDuration()%>" type="number"
+											name="duration" placeholder="Duration of Lesson"> <b
+											class="tooltip tooltip-bottom-right">The duration of the
+												lesson</b>
+										</label>
+									</section>
+									<section>
+										<label> Tags</label> <label class="input"> <input
+											data-role="tagsinput" value="<%=lesson.getTags()%>"
+											type="text" name="Tags" class="tagcontainer"
+											placeholder="Tags of Lesson"> <b
+											class="tooltip tooltip-bottom-right">The tags of the
+												lesson</b>
+										</label>
+									</section>
+									<section>
+										<label>Mobile Lesson Themes</label>
+										<select class="form-control input-lg" name="lesson_theme">
+											<%
+												boolean flag = false;
+											List thes = (new UiThemeDAO()).findAll();
+											 Collections.sort(thes);
 
-													for (UiTheme themeName : (List<UiTheme>)thes) {
+												for (UiTheme themeName : (List<UiTheme>)thes) {
+											%>
+											<%
+													if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getId().toString())) {
+															flag = true;
 												%>
-												<%
-														if (lesson.getLesson_theme().equalsIgnoreCase(themeName.getId().toString())) {
-																flag = true;
-													%>
-													
-													<option value="<%=themeName.getId() %>" selected='selected'><%=themeName.getName() %></option>
-												<% } else {  %>
-													<option value="<%=themeName.getId() %>"><%=themeName.getName() %></option>
 												
-												<% } } %>
-											</select>
-										</section>
-										<section>
-											<label>Desktop Lesson Themes</label>
-											<select class="form-control input-lg" name="lesson_desktop_theme">
-												<%
-												
+												<option value="<%=themeName.getId() %>" selected='selected'><%=themeName.getName() %></option>
+											<% } else {  %>
+												<option value="<%=themeName.getId() %>"><%=themeName.getName() %></option>
+											
+											<% } } %>
+										</select>
+									</section>
+									<section>
+										<label>Desktop Lesson Themes</label>
+										<select class="form-control input-lg" name="lesson_desktop_theme">
+											<%
+											
 
-													for (UiTheme themeName : (List<UiTheme>)thes) {
+												for (UiTheme themeName : (List<UiTheme>)thes) {
+											%>
+											<%
+													if (lesson.getLesson_theme_desktop().equalsIgnoreCase(themeName.getId().toString())) {
+															flag = true;
 												%>
-												<%
-														if (lesson.getLesson_theme_desktop().equalsIgnoreCase(themeName.getId().toString())) {
-																flag = true;
-													%>
-													<option value="<%=themeName.getId() %>" selected='selected'><%=themeName.getName() %></option>
-												<% } else {  %>
-													<option value="<%=themeName.getId() %>"><%=themeName.getName() %></option>
-												
-												<% } } %>
-											</select>
-										</section>
-							<section>
-								<label>Subject </label>
-								<div class="row">
+												<option value="<%=themeName.getId() %>" selected='selected'><%=themeName.getName() %></option>
+											<% } else {  %>
+												<option value="<%=themeName.getId() %>"><%=themeName.getName() %></option>
+											
+											<% } } %>
+										</select>
+									</section>
+						<section>
+							<label>Subject </label>
+							<div class="row">
+								<%
+									flag = false;
+									for (String subject : Themes.subjects) {
+								%>
+								<div class="col col-4">
 									<%
-										flag = false;
-										for (String subject : Themes.subjects) {
+										if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
+												flag = true;
 									%>
-									<div class="col col-4">
-										<%
-											if (lesson.getLesson_subject().equalsIgnoreCase(subject)) {
-													flag = true;
-										%>
-										<label class="radio"><input type="radio"
-											name="lesson_subject" checked="checked" value="<%=subject%>">
-											<i class="rounded-x"></i><%=subject%></label>
-										<%
-											} else {
-										%>
-										<label class="radio"><input type="radio"
-											name="lesson_subject" value="<%=subject%>"> <i
-											class="rounded-x"></i><%=subject%></label>
-										<%
-											}
-
-												if (flag == false) {
-										%>
-										<label class="radio"><input type="radio"
-											checked="checked" name="lesson_subject" value="none">
-											<i class="rounded-x"></i>None</label>
-									</div>
+									<label class="radio"><input type="radio"
+										name="lesson_subject" checked="checked" value="<%=subject%>">
+										<i class="rounded-x"></i><%=subject%></label>
+									<%
+										} else {
+									%>
+									<label class="radio"><input type="radio"
+										name="lesson_subject" value="<%=subject%>"> <i
+										class="rounded-x"></i><%=subject%></label>
 									<%
 										}
-										}
+
+											if (flag == false) {
 									%>
+									<label class="radio"><input type="radio"
+										checked="checked" name="lesson_subject" value="none">
+										<i class="rounded-x"></i>None</label>
 								</div>
-							</section>
+								<%
+									}
+									}
+								%>
+							</div>
+						</section>
 
-							<section>
+						<section>
+
+							<%
+								LessonUtils lessonUtils = new LessonUtils();
+								ArrayList<LearningObjective> lesson_lo_list = lessonUtils.getSelectedLOsOftheLesson(lesson.getId());
+								ArrayList<LearningObjective> session_lo_list = lessonUtils.getUnselectedLOsInTheSameSession(lesson.getId());
+							%>
+
+							<label>List of Selected Learning Objectives</label>
+							<div class="row">
 
 								<%
-									LessonUtils lessonUtils = new LessonUtils();
-									ArrayList<LearningObjective> lesson_lo_list = lessonUtils.getSelectedLOsOftheLesson(lesson.getId());
-									ArrayList<LearningObjective> session_lo_list = lessonUtils.getUnselectedLOsInTheSameSession(lesson.getId());
+									if (!lesson_lo_list.isEmpty()) {
+										for (LearningObjective lesson_lo : lesson_lo_list) {
 								%>
 
-								<label>List of Selected Learning Objectives</label>
-								<div class="row">
-
-									<%
-										if (!lesson_lo_list.isEmpty()) {
-											for (LearningObjective lesson_lo : lesson_lo_list) {
-									%>
-
-									<div class="col col-12">
-										<label class="checkbox"><input type="checkbox"
-											name="learningObjectives" checked="checked"
-											value="<%=lesson_lo.getId()%>"> <i></i><%=lesson_lo.getTitle()%></label>
-									</div>
-
-									<%
-										}
-										} else {
-									%>
-
-									<div class="col col-12">
-										<label><i class="fa fa-exclamation"></i>
-											None</label>
-									</div>
-
-									<%
-										}
-									%>
+								<div class="col col-12">
+									<label class="checkbox"><input type="checkbox"
+										name="learningObjectives" checked="checked"
+										value="<%=lesson_lo.getId()%>"> <i></i><%=lesson_lo.getTitle()%></label>
 								</div>
-								<br> <label>List of Learning Objectives to choose from Session</label>
-								<div class="row">
 
-									<%
-										if (!session_lo_list.isEmpty()) {
-											for (LearningObjective session_lo : session_lo_list) {
-									%>
+								<%
+									}
+									} else {
+								%>
 
-									<div class="col col-12">
-										<label class="checkbox"><input type="checkbox"
-											name="learningObjectives" value="<%=session_lo.getId()%>">
-											<i></i><%=session_lo.getTitle()%></label>
-									</div>
-
-									<%
-										}
-										} else {
-									%>
-
-									<div class="col col-12">
-										<label class='label'><i class="fa fa-exclamation"></i> None</label>
-									</div>
-
-									<%
-										}
-									%>
-									
+								<div class="col col-12">
+									<label><i class="fa fa-exclamation"></i>
+										None</label>
 								</div>
-							</section>
-							
-							<section>
-								<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button>
-							</section>
 
-							</fieldset>
-									<footer >
-										<button type="submit" class="btn-u" style="float:left">Update Lesson details</button>
-									</footer>
-									<footer >
-										<button class="btn-u"  id="send-for-review" data-toggle="modal" style="float:left"
-											data-target="#confirm-send-for-review-modal" type="button">Send for Review</button>
-									</footer>
-								</form>
-
+								<%
+									}
+								%>
 							</div>
-							
-							<div class="modal fade" id="confirm-send-for-review-modal"
-								tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">Confirm Submit</div>
-										<div class="modal-body">Are you sure you want to send the lesson for review?</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-											<button id="confirm-send-for-review-btn" type="submit" class="btn btn-success success">Send for review</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
-								aria-labelledby='myModalLabel' aria-hidden='true'>
-								<div id='lo-modal-dialog' class='modal-dialog'>
-									<div id='lo-modal-content' class='modal-content'>
-										<div class='modal-header'>
-											<button aria-hidden='true' data-dismiss='modal' class='close'
-												type='button'>×</button>
-											<h4 id='myModalLabel1' class='modal-title'>Choose
-												Learning Objectives</h4>
-										</div>
-										<div class='modal-body'>
-											<form id='lo_form' class='form-horizontal' role='form'
-												action='/content/update_lesson' method='POST'>
-												<input type="hidden" name="lesson_id"
-										value="<%=lesson.getId()%>" /> <input type="hidden"
-										name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
-										<input type='hidden' name='lesson_id'
-													value=" <%=lesson.getId()%>"> <input
-													type='hidden' id='learningObjectives' name='learningObjectives' />
-												<input type='hidden' id='only_learning_objectives'
-													value='true' name='only_learning_objectives' />
-												<div class='form-group'>
-													<label style='margin-left: 1%; color: gray'>[NOTE:
-														Select learning objectives and submit]</label><label id='errLO'
-														style='color: red'></label>
-													<button type='submit' id='loBtn' class='btn-u'
-														style='float: right; margin-right: 1%;'>Proceed</button>
-													<div class='col-lg-offset-2 col-lg-10'
-														style='margin: 0% !important; width: 100%'>
+							<br> <label>List of Learning Objectives to choose from Session</label>
+							<div class="row">
 
-														<%
-															HashMap<String, String> conditions = new HashMap();
-															conditions.put("lesson_id",lesson.getId().toString());
-														
-														%>
-														<%=(new ReportUtils()).getReport(91, conditions, ((IstarUser) request.getSession().getAttribute("user")), "LESSON").toString()%>
+								<%
+									if (!session_lo_list.isEmpty()) {
+										for (LearningObjective session_lo : session_lo_list) {
+								%>
 
-													</div>
-												</div>
-											</form>
-										</div>
-										<div class='modal-footer'>
-											<button data-dismiss='modal' class='btn-u btn-u-default'
-												type='button'>Close</button>
-										</div>
-									</div>
+								<div class="col col-12">
+									<label class="checkbox"><input type="checkbox"
+										name="learningObjectives" value="<%=session_lo.getId()%>">
+										<i></i><%=session_lo.getTitle()%></label>
 								</div>
+
+								<%
+									}
+									} else {
+								%>
+
+								<div class="col col-12">
+									<label class='label'><i class="fa fa-exclamation"></i> None</label>
+								</div>
+
+								<%
+									}
+								%>
+								
 							</div>
+						</section>
+						
+						<section>
+							<button type='button'  class='btn-u' data-target='#myModal' data-toggle='modal' >Choose more</button>
+						</section>
+
+						</fieldset>
+								<footer >
+									<button type="submit" class="btn-u" style="float:left">Update Lesson details</button>
+								</footer>
+								<footer >
+									<button class="btn-u"  id="send-for-review" data-toggle="modal" style="float:left"
+										data-target="#confirm-send-for-review-modal" type="button">Send for Review</button>
+								</footer>
+							</form>
 
 						</div>
+						
+						<div class="modal fade" id="confirm-send-for-review-modal"
+							tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">Confirm Submit</div>
+									<div class="modal-body">Are you sure you want to send the lesson for review?</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+										<button id="confirm-send-for-review-btn" type="submit" class="btn btn-success success">Send for review</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class='modal fade' id='myModal' tabindex='-1' role='dialog'
+							aria-labelledby='myModalLabel' aria-hidden='true'>
+							<div id='lo-modal-dialog' class='modal-dialog'>
+								<div id='lo-modal-content' class='modal-content'>
+									<div class='modal-header'>
+										<button aria-hidden='true' data-dismiss='modal' class='close'
+											type='button'>×</button>
+										<h4 id='myModalLabel1' class='modal-title'>Choose
+											Learning Objectives</h4>
+									</div>
+									<div class='modal-body'>
+										<form id='lo_form' class='form-horizontal' role='form'
+											action='/content/update_lesson' method='POST'>
+											<input type="hidden" name="lesson_id"
+									value="<%=lesson.getId()%>" /> <input type="hidden"
+									name="cmsession_id" value="<%=lesson.getCmsession().getId()%>" />
+									<input type='hidden' name='lesson_id'
+												value=" <%=lesson.getId()%>"> <input
+												type='hidden' id='learningObjectives' name='learningObjectives' />
+											<input type='hidden' id='only_learning_objectives'
+												value='true' name='only_learning_objectives' />
+											<div class='form-group'>
+												<label style='margin-left: 1%; color: gray'>[NOTE:
+													Select learning objectives and submit]</label><label id='errLO'
+													style='color: red'></label>
+												<button type='submit' id='loBtn' class='btn-u'
+													style='float: right; margin-right: 1%;'>Proceed</button>
+												<div class='col-lg-offset-2 col-lg-10'
+													style='margin: 0% !important; width: 100%'>
+
+													<%
+														HashMap<String, String> conditions = new HashMap();
+														conditions.put("lesson_id",lesson.getId().toString());
+													
+													%>
+													<%=(new ReportUtils()).getReport(91, conditions, ((IstarUser) request.getSession().getAttribute("user")), "LESSON").toString()%>
+
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class='modal-footer'>
+										<button data-dismiss='modal' class='btn-u btn-u-default'
+											type='button'>Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
+				</div>
 
 				<% if(lesson.getPresentaion() != null) { %>
 				
 				 <div class="col-sm-12">
 
-					<div class=" col-md-12 ">
+					
 						<div class="panel panel-sea profile">
 
 							<div class="panel-heading overflow-h">
@@ -488,24 +488,23 @@
 						</div>
 
 						</div>
-					</div>
 				</div> 
 				<% } %>
 				
 			</div>
 
 			<div class="col-md-9">
-				<%
-                            if (LessonService.isEmptyLesson(lesson)) {
-                        %>
-				<div class="alert alert-warning fade in text-center">
-					<h4>Please Create a Presentation/Assessment/Game</h4>
-					<p>
-						<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?task_id=<%=task_id%>">Create a Presentation</a> 
-						<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?task_id=<%=task_id%>">Create a Assessment</a> 
-						<a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
-					</p>
-				</div>
+				<%  if (LessonService.isEmptyLesson(lesson)) {   %>
+				
+					<div class="alert alert-warning fade in text-center">
+						<h4>Please Create a Presentation/Assessment/Game</h4>
+						<p>
+							<a class="btn-u btn-u-xs btn-u-red" href="/content/create_ppt?task_id=<%=task_id%>">Create a Presentation</a> 
+							<a class="btn-u btn-u-xs btn-u-sea" href="/content/create_assesment?task_id=<%=task_id%>">Create a Assessment</a> 
+							<a class="btn-u btn-u-xs btn-u-orange" href="#" style="margin-top: 20px">Create a Game</a>
+						</p>
+					</div>
+				
 				<%
                       } else {
                           if (request.getParameterMap().containsKey("question_id")) {
@@ -517,6 +516,7 @@
                           }
                       }
                 %>
+                
 			</div>
 		</div>
 		<jsp:include page="../content_admin/includes/footer.jsp"></jsp:include>

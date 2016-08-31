@@ -451,7 +451,7 @@
 				
 				<div class=" col-md-3 ">
 					<div style="margin-bottom: 12%;">	
-						<button id="submit-form" type="button" class="btn-u submit-slide-button" style="float:right">Update Slide</button>
+						<button id="submit-form" type="button" class="btn-u submit-slide-button" style="float:right">UPDATE SLIDE</button>
 					</div>
 					<div class="panel panel-sea" >
 						<div class="panel-heading">
