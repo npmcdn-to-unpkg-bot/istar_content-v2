@@ -174,7 +174,7 @@ public class ReportUtils {
 			data = getReportData(report.getSql(), report.getColumns(), conditions);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("reportID===============>>>" + reportID);
+			//System.err.println("reportID===============>>>" + reportID);
 		}
 
 		String style = "style='margin: 10px;    margin: 10px;border: 3px solid #1ABC9C;'";
