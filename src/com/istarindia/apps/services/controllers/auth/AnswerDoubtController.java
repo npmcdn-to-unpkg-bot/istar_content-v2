@@ -1,6 +1,12 @@
 package com.istarindia.apps.services.controllers.auth;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +18,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.istarindia.apps.dao.Doubt;
 import com.istarindia.apps.dao.DoubtDAO;
 import com.istarindia.apps.dao.IstarUser;
@@ -42,7 +52,8 @@ public class AnswerDoubtController extends IStarBaseServelet {
 		DoubtDAO dao1 = new DoubtDAO();
 		Doubt d = dao1.findById(doubt_id);
 		d.setAnswer(request.getParameter("answer"));
-		d.setAnsweredBy(((IstarUser)request.getSession().getAttribute("user")).getId());
+		IstarUser userAnsweredBy =((IstarUser)request.getSession().getAttribute("user")); 
+		d.setAnsweredBy(userAnsweredBy.getId());
 		Session session = dao1.getSession();
 		Transaction tx = null;
 		
@@ -59,6 +70,32 @@ public class AnswerDoubtController extends IStarBaseServelet {
 			session.close();
 		}
 		
+		//For sending notification to the students
+		try {
+			InputStream targetStream = getClass().getClassLoader().getResourceAsStream("istarNotification-a99cf1d1dd05.json");
+			FirebaseOptions options = new FirebaseOptions.Builder().setDatabaseUrl("https://istarnotification.firebaseio.com/").setServiceAccount( targetStream).build();
+			
+			FirebaseApp.initializeApp(options);
+			DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+			 
+			Map<String, Object> hopperUpdates = new HashMap<String, Object>();
+				
+			Doubt doubt = new Doubt(d.getStudentId(), d.getAnswer(), d.getQuestion(), userAnsweredBy.getName());
+			hopperUpdates.put("doubt",doubt);
+			ref.setValue(hopperUpdates);
+				
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			//Failed to send the notification 
+			System.err.println("Failed to send the notification to student ---------> ");
+			e.printStackTrace();
+		}
+			
 		response.sendRedirect("/content/content_admin/doubt_list.jsp");
 	}
 
