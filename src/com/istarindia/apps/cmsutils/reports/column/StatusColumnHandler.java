@@ -59,6 +59,8 @@ public class StatusColumnHandler extends ColumnHandler {
 			}
 		}
 		
+		items.put("<li><a href='/content/task/task_history.jsp?task_id="+taskID+"'>TASK HISTORY</a></li> ", "<li><a href='/content/task/task_history.jsp?task_id="+taskID+"'>TASK HISTORY</a></li> ");
+
 		out.append("<div class='btn-group'> <button type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='true'> Change Task State <i class='fa fa-angle-down'></i> </button> <ul class='dropdown-menu' role='menu'>");
 
 		for (String iterable_element : items.keySet()) {
@@ -66,7 +68,7 @@ public class StatusColumnHandler extends ColumnHandler {
 		}
 		
 		out.append("</ul> </div>");
-		out.append("<br/><br/><a href='/content/task/task_history.jsp?task_id="+taskID+"'><span class='label label-info'>View Task History</span></a>");
+		//out.append("<br/><br/><a href='/content/task/task_history.jsp?task_id="+taskID+"'><span class='label label-info'>View Task History</span></a>");
 		
 		return out;
 	}		
