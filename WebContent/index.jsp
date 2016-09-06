@@ -26,7 +26,7 @@ if(request.getSession().getAttribute("user")!=null) {
 <meta name="author" content="">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="<%=baseURL%>assets/img/talentify_logo_fav_48x48.png" />
 
 <!-- Web Fonts -->
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
@@ -60,9 +60,12 @@ if(request.getSession().getAttribute("user")!=null) {
 	<div class="container">
 		<!--Reg Block-->
 		<div class="reg-block">
+			 
 			<div class="reg-block-header">
 				<h2>Sign In</h2>
+				<!--
 				<p>Problem Signing In? Click <a class="color-green" href="<%=baseURL%>forgot_password.jsp">here</a> to reset password.</p>
+			 	-->
 			</div>
 			<form action="<%=baseURL %>auth/login" name="login_form">
 			

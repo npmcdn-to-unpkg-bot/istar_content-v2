@@ -26,6 +26,7 @@
 <meta charset="utf-8">
 
 <title>TALENTIFY</title>
+<link rel="shortcut icon" href="<%=baseURL%>assets/img/talentify_logo_fav_48x48.png" />
 
 <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 <meta name="author" content="Hakim El Hattab">

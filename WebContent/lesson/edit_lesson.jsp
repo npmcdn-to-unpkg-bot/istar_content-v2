@@ -43,7 +43,7 @@
 <meta name="author" content="">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="<%=baseURL%>assets/img/talentify_logo_fav_48x48.png" />
 
 <!-- Web Fonts -->
 <link rel='stylesheet' type='text/css'
