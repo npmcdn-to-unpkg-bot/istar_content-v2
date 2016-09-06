@@ -104,7 +104,7 @@
 									<input type="hidden" id="status" name="review" value="none" />
 									<fieldset>
 										<section>
-											<label>Title of Lesson</label> <label class="input">
+											<label>Title</label> <label class="input">
 												<input readonly="readonly" value="<%=lesson.getTitle()%>"
 												type="text" name="title" placeholder="Title of Lesson">
 												<b class="tooltip tooltip-bottom-right">The title of the lesson</b>
@@ -112,36 +112,106 @@
 										</section>
 
 										<section>
-											<label>Duration of Lesson</label> 
+											<label>Duration</label> 
 											<label class="input">
 												<input readonly="readonly" value="<%=lesson.getDuration()%>" type="number" name="duration" placeholder="Duration of Lesson"> 
 												<b class="tooltip tooltip-bottom-right">The duration of the lesson</b>
 											</label>
 										</section>
+										
 										<section>
-											<label> Tags</label> 
+											<label>Tags</label> 
 											<label class="input"> 
 												<input readonly="readonly" data-role="tagsinput" value="<%=lesson.getTags()%>" type="text" name="Tags" class="tagcontainer" placeholder="Tags of Lesson"> 
 												<b class="tooltip tooltip-bottom-right">The tags of the lesson</b>
 											</label>
 										</section>
-
+										
+										<% try { 
+											if(lesson.getPresentaion()!=null) {
+												int mobile_theme_id =  Integer.parseInt(lesson.getLesson_theme());
+												String mobile_theme_name = new UiThemeDAO().findById(mobile_theme_id).getName();
+										%>
+										<section>
+											<label>Mobile Theme</label> 
+											<label class="input"> 
+												<input readonly="readonly"  value="<%=mobile_theme_name%>" type="text" name="mobile_theme"  placeholder="Mobile theme"> 
+												<b class="tooltip tooltip-bottom-right">Mobile theme of the lesson</b>
+											</label>
+										</section>
+										<% } } catch (Exception e) { } %>
+										
+										<% try { 
+											if(lesson.getPresentaion()!=null) {
+												int desktop_theme_id =  Integer.parseInt(lesson.getLesson_theme_desktop());
+												String desktop_theme_name = new UiThemeDAO().findById(desktop_theme_id).getName();
+										%>
+										<section>
+											<label>Desktop Theme</label> 
+											<label class="input"> 
+												<input readonly="readonly"  value="<%=desktop_theme_name%>" type="text" name="desktop_theme"  placeholder="Desktop theme"> 
+												<b class="tooltip tooltip-bottom-right">Desktop theme of the lesson</b>
+											</label>
+										</section>
+										<% } } catch (Exception e) { } %>
+										
+										<% try { %>
+										<section>
+											<label>Subject</label> <label class="input">
+												<input readonly="readonly" value="<%=lesson.getLesson_subject()%>"
+												type="text" name="title" placeholder="Subject of Lesson">
+												<b class="tooltip tooltip-bottom-right">The subject of the lesson</b>
+											</label>
+										</section>
+										<% } catch (Exception e) { } %>
+										
+										<%
+											LessonUtils lessonUtils = new LessonUtils();
+											ArrayList<LearningObjective> lesson_lo_list = lessonUtils.getSelectedLOsOftheLesson(lesson.getId());
+										%>
+										<section>
+											<label>List of Selected Learning Objectives</label>
+											<div class="row">
+				
+												<%
+													if (!lesson_lo_list.isEmpty()) {
+														for (LearningObjective lesson_lo : lesson_lo_list) {
+												%>
+				
+												<div class="col col-12">
+													<label class="checkbox"><input type="checkbox"
+														name="learningObjectives" checked="checked" disabled="disabled"
+														value="<%=lesson_lo.getId()%>"> <i></i><%=lesson_lo.getTitle()%></label>
+												</div>
+				
+												<% } } else { %>
+				
+												<div class="col col-12">
+													<label><i class="fa fa-exclamation"></i> Learning objectives were not chosen for the lesson! </label>
+												</div>
+				
+												<% } %>
+											</div>
+										</section>
+										
 										<section>
 											<label> Review Comments</label> <label class="input">
-												<textarea rows="3" name="review_notes" placeholder=" Please enter text" id="teacher_notes"></textarea>
+												<textarea rows="3" name="review_notes" placeholder=" Please enter text" id="review_notes"></textarea>
 											</label>
 										</section>
 									</fieldset>
 
 									<footer>
-										<a class="btn-u" id="approved-slide-btn" data-toggle="modal" data-value="APPROVED" data-target="#confirm-lesson-review-modal">Approved</a>
-										<a class="btn-u"  id="disapprove-slide-btn" data-toggle="modal"  data-value="DIS_APPROVED" data-target="#confirm-lesson-review-modal">Dis Approve</a>
+									<section class="row col-md-12">
+										<button id="approved-slide-btn" type="button" class="col-xs-4 btn-u"  data-toggle="modal" data-value="APPROVED" data-target="#confirm-lesson-review-modal">Approve</button>
+										<% if(lesson.getPresentaion() != null) { %>
+											<div class="btn-group col-xs-4 ">  <button style="width: 100%;" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Preview <i class="fa fa-angle-down"></i> </button>  <ul class="dropdown-menu" role="menu"><li><a onclick="openWin(&quot;/content/lesson/preview.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&quot;)" href="#">Mobile Preview</a></li>  <li><a target="_blank" href="/content/lesson/preview_desktop.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>">Speaker Preview</a></li> </ul> </div>
+										<% } %>
+										<button id="disapprove-slide-btn" type="button" class="col-xs-4 btn-u" data-toggle="modal"  data-value="DIS_APPROVED" data-target="#confirm-lesson-review-modal">Disapprove</button>
+									</section>
 									</footer>
 									
-									<%if(lesson.getPresentaion() != null) { %>
-										<a target='_blank' href='/content/lesson/preview_desktop.jsp?ppt_id=<%= lesson.getPresentaion().getId()%> ' class='btn-u btn-u-default'>Speaker Preview</a> 
-										<a onclick="openWin('/content/lesson/preview.jsp?ppt_id=<%= lesson.getPresentaion().getId()%>')" href="#" class="btn-u btn-u-default">Mobile Preview</a>
-									<% } %>
+									
 								</form>
 							</div>
 							

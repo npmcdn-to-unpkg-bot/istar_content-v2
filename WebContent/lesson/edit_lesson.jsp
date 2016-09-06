@@ -130,7 +130,7 @@
 								<fieldset>
 
 									<section>
-										<label>Title of Lesson</label> <label class="input">
+										<label>Title</label> <label class="input">
 											<input value="<%=lesson.getTitle()%>" type="text" spellcheck="true"
 											name="title" placeholder="Title of Lesson"> <b
 											class="tooltip tooltip-bottom-right">The title of the
@@ -139,7 +139,7 @@
 									</section>
 
 									<section>
-										<label>Duration of Lesson</label> <label class="input">
+										<label>Duration</label> <label class="input">
 											<input value="<%=lesson.getDuration()%>" type="number"
 											name="duration" placeholder="Duration of Lesson"> <b
 											class="tooltip tooltip-bottom-right">The duration of the
@@ -147,7 +147,7 @@
 										</label>
 									</section>
 									<section>
-										<label> Tags</label> <label class="input"> <input
+										<label>Tags</label> <label class="input"> <input
 											data-role="tagsinput" value="<%=lesson.getTags()%>"
 											type="text" name="Tags" class="tagcontainer"
 											placeholder="Tags of Lesson"> <b
