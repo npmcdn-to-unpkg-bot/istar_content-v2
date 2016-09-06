@@ -585,7 +585,7 @@
                 App.init();
                 Validation.lessonValidation();
 				
-                InitTextAreaForAssessment();
+               InitTextAreaForAssessment();
                 
                 //Slide list is sortable
                 $( "#slidess_ord" ).sortable();

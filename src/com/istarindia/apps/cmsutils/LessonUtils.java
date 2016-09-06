@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -116,20 +117,9 @@ public class LessonUtils {
         			+ "<section class='col-md-2'><button type='submit'  style='margin-top: 12%;' class='btn-u'>Update assessment Details</button></section> "
         			+ "<section class='col-md-3'><a type='button' href='/content/edit_lesson?task_id="+assessment.getLesson().getTask().getId()+"' style='margin-top: 7%; float:right' class='btn-u'>Add new question</a></section> </fieldset>  </form> </div> </div> </div>");
 
-            //if (number_of_questions < assessment.getNumber_of_questions()) {
-            	
                 //Fix upload-assessment part anad  uncomment the below part
-            	/*out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> "
-                		+ "<div class='panel-heading'> <h3 class='panel-title'> "
-                		+ "<i class='fa fa-tasks'></i>Upload Questions </h3> </div>  <div class='panel-body'>"
-                		+ "<form action='assessment_upload' class='sky-form' method='post' enctype='multipart/form-data'>  "
-                		+ "<fieldset> <section><p>File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample format from"
-                		+ "<a href='assets/excel/format.xls' style='color: RED'> here</a> )</p>"
-						+ "<label for='file' class='input input-file'> <div class='button'>"
-                		+ "<input type='file' id='file' name='file' onchange='DisplayFilePath()'>Browse</div> "
-                		+ "<input type='text' id='formfield' readonly> </label> </section> </fieldset> <footer> "
-                		+ "<button type='submit' class='btn-u'>Submit</button> </footer> </form> </div> </div></div>");
-            	*/
+            	//out.append("<div class=' col-md-12 '> <div class='panel panel-sea'> " + "<div class='panel-heading'> <h3 class='panel-title'> " + "<i class='fa fa-tasks'></i>Upload Questions </h3> </div> <div class='panel-body'>" + "<form action='assessment_upload' class='sky-form' method='post' enctype='multipart/form-data'> " + "<fieldset> <section><p>File input &nbsp;&nbsp;&nbsp;&nbsp; (Download sample format from" + "<a href='assets/excel/format.xls' style='color: RED'> here</a> )</p>" 				+ "<label for='file' class='input input-file'> <div class='button'>" + "<input type='file' id='file' name='file' onchange='DisplayFilePath()'>Browse</div> " + "<input type='text' id='formfield' readonly> </label> </section> </fieldset> <footer> " + "<button type='submit' class='btn-u'>Submit</button> </footer> </form> </div> </div></div>");
+            	
             	
                 out.append("<div class=' col-md-12 '>"
                         + "<div class='panel panel-sea'>"
@@ -201,23 +191,19 @@ public class LessonUtils {
                         + "Duration to Attempt Question</b>"
                         + "</label> </section>"
                         
-                        /*  + "<section class='col col-md-4'><label>Depth</label> <label class='input'> "
-                         + "<select class='form-control valid' name='specifier' style='margin-right: 50px'>"
-                         + "<option value='1'>1</option><option value='2'>2</option></select></label></section>"*/ //Add this later for tree type assessment
-
                         + "</div>"
                         + "<section><label>Question Text</label> "
-                        + "<label class='input'> <TEXTAREA class='init_textarea' id='question_text' NAME='question_text' ROWS='5' cols='75' value='"+question.getQuestionText()+"'>"+question.getQuestionText()+"</TEXTAREA> </label> </section> "
+                        + "<label class='input'> <TEXTAREA class='init_textarea' id='question_text' NAME='question_text' ROWS='5' cols='75' >"+ StringEscapeUtils.escapeHtml4(question.getQuestionText()) +"</TEXTAREA> </label> </section> "
                         + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='1' "+markingScheme[0]+"><i></i>Option 1</label><label class='input'> "
-                        + "<TEXTAREA class='init_textarea' id='option1' NAME='option1' ROWS='2' cols='25' value='"+options.get(0)+"'>"+options.get(0).getText()+"</TEXTAREA> </label> </section> "
+                        + "<TEXTAREA class='init_textarea' id='option1' NAME='option1' ROWS='2' cols='25' value='"+options.get(0)+"'>"+StringEscapeUtils.escapeHtml4(options.get(0).getText())+"</TEXTAREA> </label> </section> "
                         + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='2' "+markingScheme[1]+"><i></i>Option 2</label><label class='input'> "
-                        + "<TEXTAREA class='init_textarea' id='option2' NAME='option2' ROWS='2' cols='25' value='"+options.get(1)+"'>"+options.get(1).getText()+"</TEXTAREA> </label> </section> "
+                        + "<TEXTAREA class='init_textarea' id='option2' NAME='option2' ROWS='2' cols='25' value='"+options.get(1)+"'>"+StringEscapeUtils.escapeHtml4(options.get(1).getText())+"</TEXTAREA> </label> </section> "
                         + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='3' "+markingScheme[2]+"><i></i>Option 3</label> <label class='input'> "
-                        + "<TEXTAREA class='init_textarea' id='option3' NAME='option3' ROWS='2' cols='25' value='"+options.get(2)+"'>"+options.get(2).getText()+"</TEXTAREA> </label> </section> "
+                        + "<TEXTAREA class='init_textarea' id='option3' NAME='option3' ROWS='2' cols='25' value='"+options.get(2)+"'>"+StringEscapeUtils.escapeHtml4(options.get(2).getText())+"</TEXTAREA> </label> </section> "
                         + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='4' "+markingScheme[3]+"><i></i>Option 4</label> <label class='input'> "
-                        + "<TEXTAREA class='init_textarea' id='option4' NAME='option4' ROWS='2' cols='25' value='"+options.get(3)+"'>"+options.get(3).getText()+"</TEXTAREA> </label> </section> "
+                        + "<TEXTAREA class='init_textarea' id='option4' NAME='option4' ROWS='2' cols='25' value='"+options.get(3)+"'>"+StringEscapeUtils.escapeHtml4(options.get(3).getText())+"</TEXTAREA> </label> </section> "
                         + "<section> <label class='checkbox'><input class='correctOption' type='checkbox' name='answers'  value='5' "+markingScheme[4]+"><i></i>Option 5</label> <label class='input'> "
-                        + "<TEXTAREA class='init_textarea' id='option5' NAME='option5' ROWS='2' cols='25' value='"+options.get(4)+"'>"+options.get(4).getText()+"</TEXTAREA> </label> </section> "
+                        + "<TEXTAREA class='init_textarea' id='option5' NAME='option5' ROWS='2' cols='25' value='"+options.get(4)+"'>"+StringEscapeUtils.escapeHtml4(options.get(4).getText())+"</TEXTAREA> </label> </section> "
                         + "<input type='hidden' name='option1_id' value=" + options.get(0).getId() + "> "
                         + "<input type='hidden' name='option2_id' value=" + options.get(1).getId() + "> "
                         + "<input type='hidden' name='option3_id' value=" + options.get(2).getId() + "> "
@@ -225,30 +211,7 @@ public class LessonUtils {
                         + "<input type='hidden' name='option5_id' value=" + options.get(4).getId() + "> "
                         + "</fieldset> "
                         + "<footer> <button type='submit' id='checkBtn' class='btn-u'>Proceed</button> <label id='err' style='color:red'></label></footer></form></div></div></div>");
-                //}
-                /*
-                out.append("<div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'> "
-                		+ "<div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'> "
-                		+ "<button aria-hidden='true' data-dismiss='modal' class='close' type='button'>×</button> "
-                		+ "<h4 id='myModalLabel1' class='modal-title'>Choose Learning Objectives</h4> </div> "
-                		+ "<div class='modal-body'> "
-                		+ "<form id='lo_form' class='form-horizontal' role='form' action='/content/edit_question' method='POST'> "
-                        + "<input type='hidden' name='assessment_id' value=" + assessment_id + "> "
-                        + "<input type='hidden' name='question_id' value=" + question_id + "> "
-                		+ "<input type='hidden' id='selected_items' name='selected_items' />"
-                		+ "<input type='hidden' id='only_learning_objevtives' value='true' name='only_learning_objevtives' /> <div class='form-group'> "
-                		+ "<label style='margin-left: 1%;color: gray'>[NOTE: Select learning objectves and submit]</label><label id='errLO' style='color:red'></label> "
-                		+ "<button type='submit' id='loBtn' class='btn-u' style='float: right;margin-right: 1%;'>Proceed</button>"
-                		+ "<div class='col-lg-offset-2 col-lg-10' style='margin:0% !important; width:100%'>");
-                
-               HashMap<String, String> conditions = new HashMap();
-				conditions.put("question_id", ((Integer)question_id).toString());
-			
-				out.append((new ReportUtils()).getReport(92, conditions, ((IstarUser)request.getSession().getAttribute("user")), "LESSON").toString()); 
-                out.append(" </div>  </div></form> </div> "
-                		+ "<div class='modal-footer'> <button data-dismiss='modal' class='btn-u btn-u-default' type='button'>Close"
-                		+ "</button> </div> </div> </div> </div>");
-                */
+               
             out.append("<div class=' col-md-12 '>");
             out.append("<div class='panel panel-sea margin-bottom-40'>");
             out.append("<div class='panel-heading'>");
