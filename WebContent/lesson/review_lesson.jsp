@@ -187,7 +187,7 @@
 												<% } } else { %>
 				
 												<div class="col col-12">
-													<label><i class="fa fa-exclamation"></i> Learning objectives were not chosen for the lesson! </label>
+													<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; Learning objectives were not chosen for the lesson
 												</div>
 				
 												<% } %>
