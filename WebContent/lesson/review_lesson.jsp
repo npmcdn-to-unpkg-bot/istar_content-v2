@@ -200,15 +200,25 @@
 											</label>
 										</section>
 									</fieldset>
-
+									
 									<footer>
-									<section class="row col-md-12">
-										<button id="approved-slide-btn" type="button" class="col-xs-4 btn-u"  data-toggle="modal" data-value="APPROVED" data-target="#confirm-lesson-review-modal">Approve</button>
-										<% if(lesson.getPresentaion() != null) { %>
-											<div class="btn-group col-xs-4 ">  <button style="width: 100%;" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Preview <i class="fa fa-angle-down"></i> </button>  <ul class="dropdown-menu" role="menu"><li><a onclick="openWin(&quot;/content/lesson/preview.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&quot;)" href="#">Mobile Preview</a></li>  <li><a target="_blank" href="/content/lesson/preview_desktop.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>">Speaker Preview</a></li> </ul> </div>
-										<% } %>
-										<button id="disapprove-slide-btn" type="button" class="col-xs-4 btn-u" data-toggle="modal"  data-value="DIS_APPROVED" data-target="#confirm-lesson-review-modal">Disapprove</button>
-									</section>
+										<div class="row">
+											<section class=" col-md-12">
+												<button id="disapprove-slide-btn" style="float: left" type="button" class="btn-u-red col-xs-4 btn-u" data-toggle="modal"  data-value="DIS_APPROVED" data-target="#confirm-lesson-review-modal"><i class="fa fa-ban" aria-hidden="true"></i> &nbsp; Disapprove</button>
+												
+												<% if(lesson.getPresentaion() != null) { %>
+													<div class="btn-group col-xs-4 ">  
+														<button style="width: 100%;" type="button" class="btn btn-u-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Preview &nbsp; <i class="fa fa-play" aria-hidden="true"></i> </button>  
+															<ul class="dropdown-menu" role="menu">
+																<li><a onclick="openWin(&quot;/content/lesson/preview.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>&quot;)" href="#">Mobile Preview &nbsp; <i class="fa fa-mobile" aria-hidden="true"></i></a></li>  
+																<li><a target="_blank" href="/content/lesson/preview_desktop.jsp?ppt_id=<%=lesson.getPresentaion().getId() %>">Speaker Preview &nbsp; <i class="fa fa-desktop" aria-hidden="true"></i> </a></li> 
+															</ul> 
+													</div>
+												<% } %>
+												
+												<button id="approved-slide-btn" style="float: right" type="button" class="btn-u btn-u-green col-xs-4 btn-u"  data-toggle="modal" data-value="APPROVED" data-target="#confirm-lesson-review-modal">Approve &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
+											</section>
+										</div>
 									</footer>
 									
 									
