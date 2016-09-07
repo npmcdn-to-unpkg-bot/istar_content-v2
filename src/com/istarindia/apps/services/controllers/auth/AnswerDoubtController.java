@@ -26,6 +26,7 @@ import com.istarindia.apps.dao.Doubt;
 import com.istarindia.apps.dao.DoubtDAO;
 import com.istarindia.apps.dao.IstarUser;
 import com.istarindia.apps.services.controllers.IStarBaseServelet;
+import com.istarindia.notification.pojo.NotificationDoubt;
 
 /**
  * Servlet implementation class AnswerDoubtController
@@ -33,31 +34,32 @@ import com.istarindia.apps.services.controllers.IStarBaseServelet;
 @WebServlet("/answer_doubt")
 public class AnswerDoubtController extends IStarBaseServelet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AnswerDoubtController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public AnswerDoubtController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		int doubt_id = Integer.parseInt(request.getParameter("doubt_id"));
-		//doubt_id=3&answer=AAAAA#
+		// doubt_id=3&answer=AAAAA#
 		DoubtDAO dao1 = new DoubtDAO();
 		Doubt d = dao1.findById(doubt_id);
 		d.setAnswer(request.getParameter("answer"));
-		IstarUser userAnsweredBy =((IstarUser)request.getSession().getAttribute("user")); 
+		IstarUser userAnsweredBy = ((IstarUser) request.getSession().getAttribute("user"));
 		d.setAnsweredBy(userAnsweredBy.getId());
 		Session session = dao1.getSession();
 		Transaction tx = null;
-		
-		
+
 		try {
 			tx = session.beginTransaction();
 			dao1.attachDirty(d);
@@ -69,21 +71,20 @@ public class AnswerDoubtController extends IStarBaseServelet {
 		} finally {
 			session.close();
 		}
-		
-		//For sending notification to the students
+
+		// For sending notification to the students
 		try {
-			InputStream targetStream = getClass().getClassLoader().getResourceAsStream("istarNotification-a99cf1d1dd05.json");
-			FirebaseOptions options = new FirebaseOptions.Builder().setDatabaseUrl("https://istarnotification.firebaseio.com/").setServiceAccount( targetStream).build();
-			
-			FirebaseApp.initializeApp(options);
-			DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-			 
+					
+			DatabaseReference ref = FirebaseDatabase.getInstance().getReference("doubt");
 			Map<String, Object> hopperUpdates = new HashMap<String, Object>();
-				
-			Doubt doubt = new Doubt(d.getStudentId(), d.getAnswer(), d.getQuestion(), userAnsweredBy.getName());
-			hopperUpdates.put("doubt",doubt);
-			ref.setValue(hopperUpdates);
-				
+			HashMap<String, String> id = new HashMap<>();
+			id.put(d.getStudentId() + "", "false");
+			
+			NotificationDoubt doubt = new NotificationDoubt(d.getAnswer(), d.getQuestion(), id,
+					userAnsweredBy.getName());
+			hopperUpdates.put("doubtlist", doubt);
+			ref.push().setValue(hopperUpdates);
+
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -91,18 +92,20 @@ public class AnswerDoubtController extends IStarBaseServelet {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
-			//Failed to send the notification 
+			// Failed to send the notification
 			System.err.println("Failed to send the notification to student ---------> ");
 			e.printStackTrace();
 		}
-			
+
 		response.sendRedirect("/content/content_admin/doubt_list.jsp");
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
