@@ -752,8 +752,7 @@ public class LessonUtils {
         
         try {
 			if(slide.getTemplateName().toUpperCase().contains("IMAGE")) {
-				
-			    ImageDAO imageDAO = new ImageDAO();
+				ImageDAO imageDAO = new ImageDAO();
 			    Image selected_image = new Image();
 			    MediaUtils mediaUtils = new MediaUtils();
 			    ArrayList<Image> images = mediaUtils.findAllPublishedImagesInSessin(ppt.getLesson().getCmsession().getId());
@@ -767,11 +766,11 @@ public class LessonUtils {
 			        context.put("selected_image", selected_image);
 			    } catch (Exception e ) {
 			    	//No selected-image record in the slide
+					e.printStackTrace();
 			    }
 			    
-			} else if(slide.getTemplateName().toUpperCase().contains("VIDEO")) {
-				
-			    VideoDAO videoDAO = new VideoDAO();
+			} else if (slide.getTemplateName().toUpperCase().contains("VIDEO")) {
+				VideoDAO videoDAO = new VideoDAO();
 			    Video selected_video = new Video();
 			    MediaUtils mediaUtils = new MediaUtils();
 			    ArrayList<Video> videos = mediaUtils.findAllPublishedVideosInSessin(ppt.getLesson().getCmsession().getId());
@@ -785,11 +784,13 @@ public class LessonUtils {
 			        context.put("selected_video", selected_video);
 			    } catch (Exception e ) {
 			    	//No selected-video record in the slide
+					//ex.printStackTrace();
 			    }
 			    
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//New slide
+			//ex.printStackTrace();
 		}
         
         context.put("slide", slide);
@@ -818,11 +819,7 @@ public class LessonUtils {
     public CMSSlide convertSlide(Slide slide) {
 		CMSSlide cMSlide = new CMSSlide();
 		
-    	IstarUserDAO dao = new IstarUserDAO();
-		Session session = dao.getSession();
-		String sql = "select * from slide where id=" + slide.getId() ;
-		SQLQuery query = session.createSQLQuery(sql);
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+    	String sql = "select * from slide where id=" + slide.getId() ;
 		DBUTILS util = new DBUTILS();
 		HashMap<String, Object> slide_version = util.executeQuery(sql).get(0);	
         
@@ -848,7 +845,6 @@ public class LessonUtils {
         }
 
         return cMSlide;
-
     }
 
     public CMSSlide convertSlide(int version_id) {

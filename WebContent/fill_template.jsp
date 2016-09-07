@@ -144,6 +144,7 @@
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL%>assets/css/theme-colors/orange.css" id="style_color">
 <link rel="stylesheet" href="<%=baseURL%>assets/plugins/select2-4.0.3/dist/css/select2.css">
+<link rel="stylesheet" href="<%=baseURL%>assets/plugins/image-picker/image-picker.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="<%=baseURL%>assets/css/custom.css">
@@ -563,7 +564,7 @@
 	<script type="text/javascript" src="<%=baseURL%>assets/plugins/smoothScroll.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="http://rvera.github.io/image-picker/image-picker/image-picker.js" type="text/javascript"></script>
+	<script src="<%=baseURL%>assets/plugins/image-picker/image-picker.js" type="text/javascript"></script>
     <script src="<%=baseURL%>assets/plugins/jquery-contextmenu/src/jquery.contextMenu.js" type="text/javascript"></script>
 
 	<script type="text/javascript" src="<%=baseURL%>assets/js/custom.js"></script>
@@ -590,7 +591,8 @@
 	    
 		function initTextArea() {
 			try {
-				$("#image-picker").imagepicker();
+				$("#image-picker").imagepicker({
+				      show_label:   true,});
 				///CKEDITOR.replace('paragraph', {
 				//	height : 100
 				//});
@@ -725,7 +727,7 @@
 			});
 			
 			$.contextMenu({
-	            selector: '.thumbnail', 
+	            selector: '.thumbnail:not(\'.selected\')', 
 	            callback: function(key, options) {
 	                var mediaUrl = $(this).find('img').first().attr('src');
 	                $.ajax({
