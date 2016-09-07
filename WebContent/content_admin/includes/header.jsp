@@ -21,9 +21,10 @@
     String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
 
 %><div class="header">
-    <div class="container-fluid ">
+    <div class="container-fluid " style="  min-height: 70px;">
         <!-- Logo -->
-        <a class="logo" href="/content/index.jsp"> <img src="<%=baseURL%>assets/img/logo1-default.png" alt="Logo">
+        <a class="logo" href="/content/index.jsp" style="position: absolute;   margin-top: 15px; margin-left: 2%;"> 
+        		<img src="<%=baseURL%>assets/img/istar_logo_drawer.png" alt="Logo">
         </a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
             <span class="sr-only">Toggle navigation</span> <span class="fa fa-bars"></span>

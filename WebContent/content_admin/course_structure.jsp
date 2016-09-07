@@ -1,7 +1,8 @@
 <%@page import="com.istarindia.apps.services.CourseService"%>
 <%@page import="com.istarindia.apps.services.CMSRegistry"%>
 <%@page import="com.istarindia.apps.*"%>
-<%@page import="com.istarindia.apps.dao.*"%><%@page import="java.util.*"%>
+<%@page import="com.istarindia.apps.dao.*"%>
+<%@page import="java.util.*"%>
 <%@page import="org.hibernate.Query"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -28,8 +29,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="<%=baseURL%>assets/img/talentify_logo_fav_48x48.png" />
 
 <!-- Web Fonts -->
 <link rel='stylesheet' type='text/css'

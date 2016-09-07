@@ -16,7 +16,8 @@ String nuetral = url.substring(0, url.length() - request.getRequestURI().length(
 <head>
 <meta charset="utf-8">
 
-<title>reveal.js The HTML Presentation Framework</title>
+<link rel="shortcut icon" href="<%=baseURL%>assets/img/talentify_logo_fav_48x48.png" />
+<title>TALENTIFY</title>
 
 <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 <meta name="author" content="Hakim El Hattab">
