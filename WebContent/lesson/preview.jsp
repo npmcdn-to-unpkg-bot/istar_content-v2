@@ -83,7 +83,8 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		Reveal.initialize({
 			center : false,
 			controls : false,
-		    slideNumber:  'c/t'
+		    slideNumber:  'c/t'//, 
+		    //autoSlide: 5000
 		});
 
 		var orgBgColor = '#ffffff';			

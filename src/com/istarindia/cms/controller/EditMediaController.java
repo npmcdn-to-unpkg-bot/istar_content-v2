@@ -31,7 +31,7 @@ public class EditMediaController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {/*
 		// TODO Auto-generated method stub
 		TaskDAO dao = new TaskDAO();
 		Task task = dao.findById(Integer.parseInt(request.getParameter("task_id")));
@@ -47,7 +47,7 @@ public class EditMediaController extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher("/creative_creator/upload_media.jsp").forward(request, response);
-	}
+	*/}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

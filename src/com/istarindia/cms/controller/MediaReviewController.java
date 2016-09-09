@@ -37,7 +37,7 @@ public class MediaReviewController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {/*
 		int task_id = Integer.parseInt(request.getParameter("task_id"));
 		Task task = new TaskDAO().findById(task_id);
 		ArrayList<String> details = new ArrayList<String>();
@@ -85,7 +85,7 @@ public class MediaReviewController extends HttpServlet {
 		
 		request.setAttribute("media_details", details);
 		request.getRequestDispatcher("/creative_admin/review.jsp").forward(request, response);
-	}
+	*/}
 	
 
 	/**

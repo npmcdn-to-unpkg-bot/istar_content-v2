@@ -23,6 +23,8 @@
 	String next_slide_url ="#";
 	String slide_type = "";
 	String bgImage = "none";
+	String selected_audio_url = "/video/audio/ ";
+	int slide_duration = 0;
 	int ppt_id = Integer.parseInt(request.getParameter("ppt_id"));
 	Presentaion ppt = (new PresentaionDAO()).findById(ppt_id);
 	Lesson lesson = ppt.getLesson();
@@ -43,6 +45,7 @@
 	Slide slide = new Slide();
 	ArrayList<SlideVersion> versions = new ArrayList<SlideVersion>();
 	ArrayList<Image> bgImages = (ArrayList<Image>) mediaUtils.findAllBackgrounds(request);
+	ArrayList<String> audio_urls = (ArrayList<String>) mediaUtils.findAllAudios(request);
 	List<HashMap<String, String>> logs = null;  
 
 	if(task.getStatus().equalsIgnoreCase("PUBLISHED"))
@@ -68,6 +71,8 @@
 				} else {
 					cMSSlide = (new LessonUtils()).convertSlide(slide);
 				}
+				selected_audio_url = cMSSlide.getAudioUrl();
+				slide_duration = cMSSlide.getSlideDuration();
 				
 				if(request.getParameterMap().containsKey("slide_type")) {
 					slide_type = request.getParameter("slide_type");
@@ -348,6 +353,31 @@
 													</label>
 												</section>
 											</div>
+											<div class="row">
+												<section class="col col-md-6">
+													<label class="label">Select Audio URL</label> 
+													<label class="select"> 
+														<select name="audio_url" id="audio_url" value="<%=selected_audio_url%>">
+															<option selected="selected" value="none">None</option>
+															
+															<% for (String audio_url : audio_urls) { %>													
+																<option value="<%=audio_url%>"><%=audio_url.split("/video/audio/")[1]%></option>
+															<% } %>
+															<% try { %>
+															<option selected="selected" value="<%=selected_audio_url%>"><%=selected_audio_url.split("/video/audio/")[1]%></option>
+															<% } catch (Exception e) { } %>
+														</select> 
+														<i></i> 
+													</label>
+												</section>
+												
+												<section class="col col-md-6">
+													<label>Duration</label> <label class="input">
+														<input value="<%=slide_duration%>" type="number" name="duration" placeholder="Duration of Slide"> 
+														<b class="tooltip tooltip-bottom-right">The duration of the slide</b>
+													</label>
+												</section>
+											</div>
 										</fieldset>
 										
 										<footer>
@@ -585,167 +615,184 @@
 	<![endif]-->
 	<script type="text/javascript">
 
-	    $('#submit-form').click(function(e){
-	    	$('#slide-form').submit();
-	    })
-	    
-		function initTextArea() {
-			try {
-				$("#image-picker").imagepicker({
-				      show_label:   true,});
-				///CKEDITOR.replace('paragraph', {
-				//	height : 100
-				//});
-			} catch (err) {
-				console.log(err);
-			}
-			
-			try {
-				var bodyEditor = CKEDITOR.replace('slide_paragraph', {
-					readOnly : false
-				});
-				bodyEditor.on('mode', function() {
-					if (this.mode == 'source') {
-						var editable = bodyEditor.editable();
-						editable.attachListener(editable, 'input', function() {
-							var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml();
-							$('.dynamic-preview > iframe').each(function(index, value) {
-								$(this).contents().find('#slide_paragraph').html(text1);
-							});
-						});
-					}
-				});
-				
-				bodyEditor.on('change', function() {
-					var text1 = bodyEditor.document.getBody().getHtml()
-					$('.dynamic-preview > iframe').each(function(index, value) {
-						$(this).contents().find('#data_slide_paragraph').html(text1);
-					});
-				});
-			} catch (err) {
-				console.log(err);
-			}
+
+    $('#submit-form').click(function(e){
+    	$('#slide-form').submit();
+    })
+    
+	function initTextArea() {
+		try {
+			$("#image-picker").imagepicker();
+			///CKEDITOR.replace('paragraph', {
+			//	height : 100
+			//});
+		} catch (err) {
+			console.log(err);
 		}
 		
-		function initHooks() {
-			$(".updateble").each( function(index, listItem) {
-				var id = $(this).attr('id');
-				if ($("#" + id).is("input")) {
-					$('#' + id).keyup( function() {
+		try {
+			var bodyEditor = CKEDITOR.replace('slide_paragraph', {
+				readOnly : false
+			});
+			bodyEditor.on('mode', function() {
+				if (this.mode == 'source') {
+					var editable = bodyEditor.editable();
+					editable.attachListener(editable, 'input', function() {
+						var text1 = CKEDITOR.instances.Editor.document.getBody().getHtml();
 						$('.dynamic-preview > iframe').each(function(index, value) {
-							$(this).contents().find('#data_' + id).html($('#' + id).val());
+							$(this).contents().find('#slide_paragraph').html(text1);
 						});
 					});
-				} else {
-					console.log(id);
 				}
 			});
 			
-			$('#image-picker').on( 'change', function() {
-				var id = $(this).find(":checked").attr('id');
+			bodyEditor.on('change', function() {
+				var text1 = bodyEditor.document.getBody().getHtml()
 				$('.dynamic-preview > iframe').each(function(index, value) {
-					$(this).contents().find('#data_image_url').attr( "src", $('#' + id).data('img-src'));
+					$(this).contents().find('#data_slide_paragraph').html(text1);
 				});
 			});
-			$('#image-bg-picker').on( 'change', function() {
-				var bgurl = $(this).find(":checked").val();
-				var bgurl_desktop =  bgurl.replace(".png", "_desktop.png");
-				$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl + ")");
-				$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl_desktop + ")");
-			});
+		} catch (err) {
+			console.log(err);
 		}
-		
-		function initColorChange() {
-			$('#slide_color').on( 'change', function() {
-				$('.dynamic-preview > iframe').each(function(index, value) {
-					$(this).contents().find('.slide-background').css( 'background-color', $('#slide_color').val());
-				});
-			});
-		}
-		
-		function setupFrames() {
-			var dWidth = $("#desktop_area").width() * 0.96 ;
-			var dHeight = dWidth * 768 / 1024 ;
-			var dScale =  dWidth / 1024 ;
-			var dUrl = "/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>";
-			var dLocation = dUrl + "&scale=" + dScale;
-			$("#d-preview").attr("src", dLocation);
-			$("#d-preview").css("width", dWidth);
-			$("#d-preview").css("height", dHeight);
-			
-			var mWidth = $("#mobile_area").width() * 0.91 ;
-			var mHeight = mWidth * 1650 / 900 ;
-			var mScale =  mWidth / 900 ;
-			var mUrl = "/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=ppt.getLesson().getLesson_theme()%>";
-			var mLocation = mUrl + "&scale=" + mScale;
-			$("#m-preview").attr("src", mLocation);
-			$("#m-preview").css("width", mWidth);
-			$("#m-preview").css("height", mHeight);
-		}
-		
-		function initBgImage() {
+	}
+	
+	function initHooks() {
+		$(".updateble").each( function(index, listItem) {
 			try {
-				var mobile_bg = "<%=cMSSlide.getImage_BG()%>";
-				var desktop_bg = mobile_bg.replace(".png", "_desktop.png");
-				
-				$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+mobile_bg+')');
-				$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+desktop_bg+')');
-			} catch (err) {
-				console.log(err);
-			}
-		}
-		
-		$(document).ready(function() {
-			setupFrames();
-			$("#image-bg-picker").select2({
-			    placeholder: "Select slide background image",
-			    allowClear: true
-			});
-			initTextArea();
-			initHooks();
-			initColorChange();
-			initBgImage();
-			$('.mobile-preview-frame .slides').css('top','75%');
-
-			$("#slidy_type_id").change(function() {
-				var slideId = <%=request.getParameter("slide_id")%> ;
-				if(slideId != null) {
-					var url = "	<%=baseURL%>fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&slide_type="+$(this).val();
-	 			} else {
-					var url = "	<%=baseURL%>fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_type="+$(this).val();
-				}
-				window.location.href=url;
-			});
-
-			$("#version_id").change(function() {
-				var slideId = <%=request.getParameter("slide_id")%> ;
-				var version_id = $(this).val();
-				if(version_id != "NONE") {
-					var url = "	<%=baseURL%>fill_template.jsp?ppt_id=<%=request.getParameter("ppt_id")%>&slide_id=<%=request.getParameter("slide_id")%>&version_id="+$(this).val();
-					window.location.href=url;
-				}
-			});
-			
-			$.contextMenu({
-	            selector: '.thumbnail:not(\'.selected\')', 
-	            callback: function(key, options) {
-	                var mediaUrl = $(this).find('img').first().attr('src');
-	                $.ajax({
-	                	type: "GET",
-	                	url: "/content/media_upload?delfile="+mediaUrl, 
-	                });    
-                    location.reload(); 
-	            },
-	            
-	            items: {
-	                "delete": {name: "Delete", icon: "delete"}
-	            }
-	        });
-			
-
-            Validation.slideValidation();
-
+                var id = $(this).attr('id');
+                if ($("#" + id).is("input")) {
+                    $('#' + id).keyup( function() {
+                        $('.dynamic-preview > iframe').each(function(index, value) {
+                            $(this).contents().find('#data_' + id).html($('#' + id).val());
+                        });
+                    });
+                } else {
+                    console.log(id);
+                }
+            } catch (err) {
+                console.log(err);
+            }
 		});
+		
+		$('#image-picker').on( 'change', function() {
+            try {
+                var id = $(this).find(":checked").attr('id');
+                $('.dynamic-preview > iframe').each(function(index, value) {
+                    $(this).contents().find('#data_image_url').attr( "src", $('#' + id).data('img-src'));
+                });
+            } catch (err) {
+                console.log(err);
+            }
+		});
+		$('#image-bg-picker').on( 'change', function() {
+            try {
+                var bgurl = $(this).find(":checked").val();
+                var bgurl_desktop =  bgurl.replace(".png", "_desktop.png");
+                $('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl + ")");
+                $('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', "url(" + bgurl_desktop + ")");
+            } catch (err) {
+                console.log(err);
+            }
+		});
+	}
+	
+	function initColorChange() {
+        try {
+            $('#slide_color').on( 'change', function() {
+                $('.dynamic-preview > iframe').each(function(index, value) {
+                    $(this).contents().find('.slide-background').css( 'background-color', $('#slide_color').val());
+                });
+            });
+        } catch (err) {
+            console.log(err);
+        }
+	}
+	
+	function setupFrames() {
+		var dWidth = $("#desktop_area").width() * 0.96 ;
+		var dHeight = dWidth * 768 / 1024 ;
+		var dScale =  dWidth / 1024 ;
+		var dUrl = "/content/desktop_preview.jsp?ppt_id=33&template_name=ONLY_TITLE_PARAGRAPH_IMAGE&slide_id=687&lesson_theme=43";
+		var dLocation = dUrl + "&scale=" + dScale;
+		$("#d-preview").attr("src", dLocation);
+		$("#d-preview").css("width", dWidth);
+		$("#d-preview").css("height", dHeight);
+		
+		var mWidth = $("#mobile_area").width() * 0.91 ;
+		var mHeight = mWidth * 1650 / 900 ;
+		var mScale =  mWidth / 900 ;
+		var mUrl = "/content/mobile_preview.jsp?ppt_id=33&template_name=ONLY_TITLE_PARAGRAPH_IMAGE&slide_id=687&lesson_theme=43";
+		var mLocation = mUrl + "&scale=" + mScale;
+		$("#m-preview").attr("src", mLocation);
+		$("#m-preview").css("width", mWidth);
+		$("#m-preview").css("height", mHeight);
+	}
+	
+	function initBgImage() {
+		try {
+			var mobile_bg = "null";
+			var desktop_bg = mobile_bg.replace(".png", "_desktop.png");
+			
+			$('.mobile-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+mobile_bg+')');
+			$('.desktop-preview-frame').contents().find('.slide-background').css( 'background-image', 'url('+desktop_bg+')');
+		} catch (err) {
+			console.log(err);
+		}
+	}
+	
+	$(document).ready(function() {
+		setupFrames();
+		$("#image-bg-picker").select2({
+		    placeholder: "Select slide background image",
+		    allowClear: true
+		});
+		initTextArea();
+		initHooks();
+		initColorChange();
+		initBgImage();
+		$('.mobile-preview-frame .slides').css('top','75%');
+
+		$("#slidy_type_id").change(function() {
+			var slideId = 687 ;
+			if(slideId != null) {
+				var url = "	http://api.talentify.in:8080/content/fill_template.jsp?ppt_id=33&slide_id=687&slide_type="+$(this).val();
+ 			} else {
+				var url = "	http://api.talentify.in:8080/content/fill_template.jsp?ppt_id=33&slide_type="+$(this).val();
+			}
+			window.location.href=url;
+		});
+
+		$("#version_id").change(function() {
+			var slideId = 687 ;
+			var version_id = $(this).val();
+			if(version_id != "NONE") {
+				var url = "	http://api.talentify.in:8080/content/fill_template.jsp?ppt_id=33&slide_id=687&version_id="+$(this).val();
+				window.location.href=url;
+			}
+		});
+		
+		$.contextMenu({
+            selector: '.thumbnail', 
+            callback: function(key, options) {
+                var mediaUrl = $(this).find('img').first().attr('src');
+                $.ajax({
+                	type: "GET",
+                	url: "/content/media_upload?delfile="+mediaUrl, 
+                });    
+                location.reload(); 
+            },
+            
+            items: {
+                "delete": {name: "Delete", icon: "delete"}
+            }
+        });
+		
+
+        Validation.slideValidation();
+
+	});
+
 	</script>
 </body>
 </html>
