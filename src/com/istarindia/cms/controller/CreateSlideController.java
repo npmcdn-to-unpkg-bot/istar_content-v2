@@ -46,6 +46,7 @@ public class CreateSlideController extends IStarBaseServelet {
 		String template = request.getParameter("template");
 		SlideService service = new SlideService();
 		Presentaion ppt = (new PresentaionDAO()).findById(Integer.parseInt(request.getParameter("ppt_id")));
+		int task_id = Integer.parseInt(request.getParameter("task_id").toString());
 		
 		if (request.getParameter("is_edit").equalsIgnoreCase("true")) {
 			service.saveCopy(Integer.parseInt(request.getParameter("slide_id").toString()));
@@ -748,8 +749,7 @@ public class CreateSlideController extends IStarBaseServelet {
 			CMSRegistry.addTaskLogEntry(request, "DRAFT", comments, ppt.getLesson().getTask().getId(), "LESSON", ppt.getLesson().getId(), "Slide is edited");
 		}
 		
-	
-		response.sendRedirect("/content/edit_lesson?task_id=" + slide.getPresentaion().getLesson().getTask().getId());
+		response.sendRedirect("/content/edit_lesson?task_id=" + task_id);
 	}
 
 	private CMSList getNewTree(HttpServletRequest request) {

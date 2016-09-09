@@ -1,6 +1,10 @@
 <%@page import="com.istarindia.apps.dao.*"%>
 <%@page import="com.istarindia.apps.dao.PresentaionDAO"%>
 <%@page import="com.istarindia.apps.dao.Presentaion"%>
+<%@page import="java.util.Properties"%>
+<%@page import="java.io.FileNotFoundException"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.InputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!doctype html>
@@ -58,13 +62,13 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 %>
 	
 <!-- Code syntax highlighting -->
-<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL%>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL%>assets/plugins/reveal/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '<%=baseURL%>assets/plugins/reveal/css/print/pdf.css' : '<%=baseURL%>assets/plugins/reveal/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
 
 </head>
 <body style="<%=style_body%>">
@@ -72,19 +76,37 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		<div class="slides">
 		<%=ppt.outputSlides() %>
 		</div>
-
 	</div>
 <script type="text/javascript"
 		src="<%=baseURL%>assets/plugins/jquery/jquery.min.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/js/reveal.js"></script>
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 
+<%
+		int auto_slide_duration = 5000;
+
+		try {
+			Properties properties = new Properties();
+			String propertyFileName = "app.properties";
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFileName);
+			if (inputStream != null) {
+				properties.load(inputStream);
+			} else {
+				throw new FileNotFoundException("property file '" + propertyFileName + "' not found in the classpath");
+			}
+			
+			auto_slide_duration = Integer.parseInt(properties.getProperty("auto_slide_duration"));
+		} catch (Exception e ) {
+			e.printStackTrace();
+		}
+%>
+
 	<script>
 		Reveal.initialize({
 			center : false,
 			controls : false,
-		    slideNumber:  'c/t'//, 
-		    //autoSlide: 5000
+		    slideNumber:  'c/t', 
+		    autoSlide: <%=auto_slide_duration%>
 		});
 
 		var orgBgColor = '#ffffff';			
@@ -92,9 +114,7 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		$(document).ready(function(){
 			orgBgColor = '<%=(new UiThemeDAO()).findById(themeID).getBackgroundColor()%>';
 			updateSlideBgColor();
-			
 		});
-
 
 		function updateSlideBgColor() {
 			if ($('.present').data("bgcolor") == "none") {
@@ -103,29 +123,22 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 				document.body.style.background = $('.present').data("bgcolor");
 			}
 		}
-				
 
-
-		(document.getElementsByClassName('controls')[0]).style.display = 'none';
+		function updateURL() {
+			var currentURL = window.location.href; 
+			var res = currentURL.split("#");
+			currentURL = res[0];
+			history.pushState({}, "URL Rewrite Example", currentURL + "#" + event.currentSlide.id);
+		}
 
 		Reveal.addEventListener('slidechanged', function(event) {
 			updateSlideBgColor();
-			var currentURL = window.location.href; //currentURL+"#/"+ 
-			var res = currentURL.split("#");
-			currentURL = res[0] ///#1001
-			console.log(currentURL + "#/" + event.currentSlide.id);
-			history.pushState({}, "URL Rewrite Example", currentURL + "#"
-					+ event.currentSlide.id);
-			
-			///console.log(event.currentSlide.id);
-			$('.slide-number-a').text('event.currentSlide.id');
-
+			updateURL();
 		});
 		
-
-		Reveal.addEventListener( 'ready', function( event ) {
-		    try{
-		    	var slide_id = window.location.href.split("#")[1];
+		function restoreHistory() {
+			try{
+				var slide_id = window.location.href.split("#")[1];
 				if(slide_id > 0) {
 				    var slide_number = 0;
 					var temp = -1;
@@ -149,7 +162,10 @@ if ((new UiThemeDAO()).findById(themeID) != null) {
 		    } catch(err) {
 		    	console.log(err);
 		    }
-			
+		}
+
+		Reveal.addEventListener( 'ready', function( event ) {
+			restoreHistory() ;
 		} );
 		
 	</script>

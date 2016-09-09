@@ -206,6 +206,7 @@
 					<input name="is_edit" value="<%=!newSlide%>" type="hidden"> 
 					<input name="slide_id" value="<%=slide_id%>" type="hidden">
 					<input name="order_id" value="<%=order_id%>" type="hidden">
+					<input name="task_id" value="<%=task.getId()%>" type="hidden">
 					
 					<div class="tab-content">
 						<div id="template" class="tab-pane fade in ">
@@ -373,7 +374,7 @@
 												
 												<section class="col col-md-6">
 													<label>Duration</label> <label class="input">
-														<input value="<%=slide_duration%>" type="number" name="duration" placeholder="Duration of Slide"> 
+														<input value="<%=slide_duration%>" type="number" name="duration" placeholder="Duration of Slide in milliseconds"> 
 														<b class="tooltip tooltip-bottom-right">The duration of the slide</b>
 													</label>
 												</section>
@@ -713,7 +714,7 @@
 		var dWidth = $("#desktop_area").width() * 0.96 ;
 		var dHeight = dWidth * 768 / 1024 ;
 		var dScale =  dWidth / 1024 ;
-		var dUrl = "/content/desktop_preview.jsp?ppt_id=33&template_name=ONLY_TITLE_PARAGRAPH_IMAGE&slide_id=687&lesson_theme=43";
+		var dUrl = "/content/desktop_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=themeID%>";
 		var dLocation = dUrl + "&scale=" + dScale;
 		$("#d-preview").attr("src", dLocation);
 		$("#d-preview").css("width", dWidth);
@@ -722,7 +723,7 @@
 		var mWidth = $("#mobile_area").width() * 0.91 ;
 		var mHeight = mWidth * 1650 / 900 ;
 		var mScale =  mWidth / 900 ;
-		var mUrl = "/content/mobile_preview.jsp?ppt_id=33&template_name=ONLY_TITLE_PARAGRAPH_IMAGE&slide_id=687&lesson_theme=43";
+		var mUrl = "/content/mobile_preview.jsp?ppt_id=<%=ppt_id%>&template_name=<%=slide_type%>&slide_id=<%=slide_id%>&lesson_theme=<%=themeID%>";
 		var mLocation = mUrl + "&scale=" + mScale;
 		$("#m-preview").attr("src", mLocation);
 		$("#m-preview").css("width", mWidth);
