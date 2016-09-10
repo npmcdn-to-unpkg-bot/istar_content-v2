@@ -174,7 +174,7 @@ try {
 	<script src="<%=baseURL%>assets/plugins/reveal/plugin/zoom-js/zoom.js"></script>
 	<script type="text/javascript"  integrity="" src="<%=baseURL%>assets/plugins/typed-js/js/typed.js"></script>
 	<script type="text/javascript"  integrity="" src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-	<script type="text/javascript"  integrity="" src="https://npmcdn.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
+	<script type="text/javascript"  integrity="" src="https://unpkg.com/masonry-layout@4.0.0/dist/masonry.pkgd.min.js"></script>
 	
 	<script>
 		var window_size = $(window).width();
